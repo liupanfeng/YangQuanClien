@@ -15,14 +15,17 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.SplashActivity"
-            android:theme="@style/NoTitleStyle">
+            android:screenOrientation="portrait"
+            android:theme="@style/StartTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"></activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

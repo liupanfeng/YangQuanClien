@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     tools:context=".activity.SplashActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="羊圈欢迎你"
+    <ImageView
+        android:id="@+id/iv_welcome"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_centerInParent="true"
-        android:textSize="25dp"
-        android:textColor="#ff000000"
+        android:background="@mipmap/ic_welcome"
+        android:scaleType="fitXY"
         />
 
 </RelativeLayout>

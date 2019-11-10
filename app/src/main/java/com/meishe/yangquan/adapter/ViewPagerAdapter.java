@@ -10,13 +10,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
-public class ViewpagerAdapter extends FragmentPagerAdapter {
+public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private Context context;
     private List<Fragment> fragmentList;
     private List<String> list_Title;
 
-    public ViewpagerAdapter(@NonNull FragmentManager fm, int behavior, Context context, List<Fragment> fragmentList, List<String> list_Title) {
+    public ViewPagerAdapter(@NonNull FragmentManager fm, int behavior, Context context, List<Fragment> fragmentList, List<String> list_Title) {
         super(fm);
         this.context = context;
         this.fragmentList = fragmentList;

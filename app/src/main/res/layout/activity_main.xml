@@ -1,32 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-   >
+    android:orientation="vertical">
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewpager"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="0px"
-        android:layout_weight="1"
-        android:background="@android:color/white" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0.5px"
-        android:background="#333333"></LinearLayout>
+        <com.meishe.yangquan.view.MViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
-    <TableLayout
-        android:id="@+id/tablayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="#00ff00"
-        app:tabMode="fixed"
-        app:tabSelectedTextColor="#ff00ff"
-        app:tabTextColor="#000000" />
+        <LinearLayout
+            android:id="@+id/tab_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tabTabBarLineSize"
+            android:layout_gravity="bottom"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@mipmap/ic_maintab_showndow_line" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout"
+                style="@style/MWidget.Design.TabLayout.Home"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/tabBarSize" />
+        </LinearLayout>
+    </FrameLayout>
+
 
 </LinearLayout>

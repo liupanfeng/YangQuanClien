@@ -10,6 +10,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public abstract class BaseCallBack<T> {
+
     public Type mType;
 
     protected abstract void OnRequestBefore(Request request);

@@ -16,6 +16,43 @@
 
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!--底部tab样式-->
+    <style name="MWidget.Design.TabLayout.Home" parent="Widget.Design.TabLayout">
+        <item name="android:theme">@style/AppTheme</item>
+        <item name="tabBackground">@color/tab_bg_color</item>
+        <item name="tabIndicatorColor">@color/transparent</item>
+        <item name="tabIndicatorHeight">0dp</item>
+        <item name="tabPaddingStart">0dp</item>
+        <item name="tabPaddingEnd">0dp</item>
+    </style>
+
+    <style name="MWidget.TextView" parent="@android:style/Widget.TextView">
+        <item name="android:textColor">@color/text_title</item>
+        <item name="android:textSize">@dimen/text_size_20px</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
+    <style name="MWidget.TextView.Tab">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/color_tab</item>
+        <item name="android:textSize">@dimen/text_size_16px</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">1dp</item>
+    </style>
+
+
+    <style name="StartTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@mipmap/ic_welcome</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
 
 

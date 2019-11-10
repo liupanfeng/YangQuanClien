@@ -1,6 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="white">#ffffffff</color>
+    <color name="colorPrimary">@color/white</color>
+    <color name="colorPrimaryDark">#39AA58</color>
     <color name="colorAccent">#D81B60</color>
+
+    <color name="mainColor">#39AA58</color>
+
+    <!--tab bg-->
+    <color name="tab_bg_color">#E5ffffff</color>
+    <color name="transparent">#00000000</color>
+
+
+    <!--tab上面文字，未选中的颜色-->
+    <color name="tab_color_normal">#a1a1a1</color>
+    <!--tab被选中的颜色-->
+    <color name="tab_color_selected">#39AA58</color>
+    <!--顶部导航栏，下划线的颜色-->
+    <color name="tab_bottom_color">#39AA58</color>
+
+
+    <color name="text_title">#333333</color>
+
 </resources>
