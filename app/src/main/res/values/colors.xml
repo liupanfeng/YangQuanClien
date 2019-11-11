@@ -22,4 +22,13 @@
 
     <color name="text_title">#333333</color>
 
+    <color name="red">#ff0000</color>
+    <color name="green">#00ff00</color>
+
+
+    <color name="black66">#ff666666</color>
+
+    <!--spinner-->
+    <color name="bg_spinner">#44ffffff</color>
+
 </resources>

@@ -23,4 +23,10 @@
     <dimen name="text_size_25sp">25sp</dimen>
     <dimen name="text_size_mine">14sp</dimen>
 
+
+    <!--title text size-->
+    <dimen name="title_text_size">18sp</dimen>
+
+    <dimen name="login_margin">3dp</dimen>
+
 </resources>

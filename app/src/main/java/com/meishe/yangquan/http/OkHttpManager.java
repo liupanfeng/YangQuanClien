@@ -2,6 +2,7 @@ package com.meishe.yangquan.http;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -60,7 +61,7 @@ public class OkHttpManager {
         doRequest(request, callBack);
     }
 
-    public void postRequest(String url, final BaseCallBack callBack, Map<String, String> params) {
+    public void postRequest(String url, final BaseCallBack callBack, Map<String, Object> params) {
         Request request = buildRequest(url, params, HttpMethodType.POST);
         doRequest(request, callBack);
     }
@@ -270,7 +271,7 @@ public class OkHttpManager {
     }
 
     //创建 Request对象
-    private Request buildRequest(String url, Map<String, String> params, HttpMethodType methodType) {
+    private Request buildRequest(String url, Map<String, Object> params, HttpMethodType methodType) {
 
         Request.Builder builder = new Request.Builder();
         builder.url(url);
@@ -284,14 +285,14 @@ public class OkHttpManager {
     }
 
     //构建请求所需的参数表单
-    private RequestBody buildFormData(Map<String, String> params) {
+    private RequestBody buildFormData(Map<String, Object> params) {
         FormBody.Builder builder = new FormBody.Builder();
         builder.add("platform", "android");
         builder.add("version", "1.0");
         builder.add("key", "123456");
         if (params != null) {
-            for (Map.Entry<String, String> entry : params.entrySet()) {
-                builder.add(entry.getKey(), entry.getValue());
+            for (Map.Entry<String, Object> entry : params.entrySet()) {
+                builder.add(entry.getKey(), String.valueOf(entry.getValue()));
             }
         }
         return builder.build();

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="user_type_spinner_values">
+
+        <item>请选择身份</item>
+
+        <item>养殖户</item>
+
+        <item>经纪人</item>
+
+        <item>售卖饲料</item>
+
+        <item>售卖兽药</item>
+
+        <item>羊五金</item>
+
+        <item>羊粪对</item>
+
+        <item>羊车队</item>
+
+        <item>剪羊毛</item>
+
+        <item>疫苗对</item>
+
+        <item>贷款服务</item>
+
+
+
+    </string-array>
+</resources>

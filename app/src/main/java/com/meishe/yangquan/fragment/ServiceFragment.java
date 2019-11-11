@@ -1,37 +1,33 @@
 package com.meishe.yangquan.fragment;
 
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.ServiceNotifyInfo;
+import com.meishe.yangquan.view.AutoPollRecyclerView;
 
-public class ServiceFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class ServiceFragment extends BaseRecyclerFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    // The request code must be 0 or greater.
     private static final int PLUS_ONE_REQUEST_CODE = 0;
-    // The URL to +1.  Must be a valid URL.
-    private final String PLUS_ONE_URL = "http://developer.android.com";
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
+    private AutoPollRecyclerView mRecyclerView;
+    private RecyclerView mServiceTypeRecycler;
 
     public ServiceFragment() {
-        // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
     public static ServiceFragment newInstance(String param1, String param2) {
         ServiceFragment fragment = new ServiceFragment();
         Bundle args = new Bundle();
@@ -51,26 +47,56 @@ public class ServiceFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_service, container, false);
-
-
+        mRecyclerView=view.findViewById(R.id.recycler);
+        mServiceTypeRecycler=view.findViewById(R.id.service_type_recycler);
         return view;
     }
+
+    @Override
+    protected void initListener() {
+
+    }
+
+    @Override
+    protected void initData() {
+        initTopNotifyRecyclerView();
+        initServiceTypeRecyclerView();
+    }
+
+
+
+    private void initTopNotifyRecyclerView() {
+        LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
+        mRecyclerView.setLayoutManager(layoutManager);
+        MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mRecyclerView);
+        mRecyclerView.setAdapter(adapter);
+        int index=6;
+        mList.clear();
+        for (int i = 0; i < index; i++) {
+            ServiceNotifyInfo notifyInfo=new ServiceNotifyInfo();
+            notifyInfo.setContent("* 羊肉大涨价"+i);
+            mList.add(notifyInfo);
+        }
+        adapter.setNeedAutoScroll(true);
+        adapter.addAll(mList);
+        mRecyclerView.start();
+    }
+
+    private void initServiceTypeRecyclerView() {
+        GridLayoutManager layoutManager=new GridLayoutManager(mContext, 5);
+        mServiceTypeRecycler.setLayoutManager(layoutManager);
+        MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mServiceTypeRecycler);
+        mServiceTypeRecycler.setAdapter(adapter);
+    }
+
 
     @Override
     public void onResume() {
         super.onResume();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
 
     @Override
     public void onAttach(Context context) {
@@ -80,12 +106,9 @@ public class ServiceFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        mRecyclerView.stop();
+        mRecyclerView=null;
     }
 
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
 
 }
