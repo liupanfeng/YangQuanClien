@@ -18,10 +18,11 @@
    </com.meishe.yangquan.view.AutoPollRecyclerView>
 </LinearLayout>
 
-   <androidx.recyclerview.widget.RecyclerView
+   <android.support.v7.widget.RecyclerView
        android:id="@+id/service_type_recycler"
        android:layout_width="match_parent"
        android:layout_below="@+id/ll_top_notify"
+       android:background="@color/white"
        android:layout_height="160dp"/>
 
 </RelativeLayout>

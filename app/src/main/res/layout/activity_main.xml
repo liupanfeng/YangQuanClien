@@ -26,7 +26,7 @@
                 android:layout_height="4dp"
                 android:background="@mipmap/ic_maintab_showndow_line" />
 
-            <com.google.android.material.tabs.TabLayout
+            <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
                 style="@style/MWidget.Design.TabLayout.Home"
                 android:layout_width="match_parent"

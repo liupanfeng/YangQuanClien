@@ -3,10 +3,10 @@ package com.meishe.yangquan.fragment;
 import android.content.Context;
 import android.os.Bundle;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.ServiceNotifyInfo;
+import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.view.AutoPollRecyclerView;
 
 public class ServiceFragment extends BaseRecyclerFragment {
@@ -37,14 +38,6 @@ public class ServiceFragment extends BaseRecyclerFragment {
         return fragment;
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -66,7 +59,9 @@ public class ServiceFragment extends BaseRecyclerFragment {
     }
 
 
-
+    /**
+     * 头部系统通知
+     */
     private void initTopNotifyRecyclerView() {
         LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
         mRecyclerView.setLayoutManager(layoutManager);
@@ -84,18 +79,26 @@ public class ServiceFragment extends BaseRecyclerFragment {
         mRecyclerView.start();
     }
 
+    /**
+     * 服务类型
+     */
     private void initServiceTypeRecyclerView() {
         GridLayoutManager layoutManager=new GridLayoutManager(mContext, 5);
         mServiceTypeRecycler.setLayoutManager(layoutManager);
         MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mServiceTypeRecycler);
         mServiceTypeRecycler.setAdapter(adapter);
+        adapter.setFragment(this);
+        int index=10;
+        mList.clear();
+        for (int i = 0; i < index; i++) {
+            ServiceTypeInfo typeInfo=new ServiceTypeInfo();
+            typeInfo.setName("剪羊毛");
+            mList.add(typeInfo);
+        }
+        adapter.addAll(mList);
     }
 
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
 
 
     @Override
@@ -110,5 +113,17 @@ public class ServiceFragment extends BaseRecyclerFragment {
         mRecyclerView=null;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        mRecyclerView.stop();
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (mRecyclerView!=null){
+            mRecyclerView.start();
+        }
+    }
 }

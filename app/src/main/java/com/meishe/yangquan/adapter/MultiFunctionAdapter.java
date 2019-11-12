@@ -1,17 +1,19 @@
 package com.meishe.yangquan.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServiceNotifyInfo;
+import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.ServiceNotifyHolder;
+import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
 
 public class MultiFunctionAdapter extends BaseRecyclerAdapter {
 
@@ -28,6 +30,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             case VIEW_SERVICE_NOTIFY:
                 view=mLayoutInflater.inflate(R.layout.item_service_notify,parent,false);
                 viewHolder=new ServiceNotifyHolder(view,this);
+                break;
+            case VIEW_SERVICE_TYPE:
+                view=mLayoutInflater.inflate(R.layout.item_service_type,parent,false);
+                viewHolder=new ServiceTypeHolder(view,this);
                 break;
         }
         return viewHolder;
@@ -48,6 +54,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
         }
         if (baseInfo instanceof ServiceNotifyInfo){
             return VIEW_SERVICE_NOTIFY;
+        }else if (baseInfo instanceof ServiceTypeInfo){
+            return VIEW_SERVICE_TYPE;
         }
         return super.getItemViewType(position);
     }

@@ -1,15 +1,18 @@
 package com.meishe.yangquan.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
+import com.meishe.yangquan.activity.ServiceTypeListActivity;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 
 import java.util.ArrayList;
@@ -20,7 +23,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected BaseRecyclerFragment mFragment;
 
     private static final int VIEW_TYPE_BASE=100;
-    protected static final int VIEW_SERVICE_NOTIFY=VIEW_TYPE_BASE+1;
+    protected static final int VIEW_SERVICE_NOTIFY=VIEW_TYPE_BASE+1;                                //顶部系统通知
+    protected static final int VIEW_SERVICE_TYPE=VIEW_TYPE_BASE+2;                                  //服务类型
 
     public BaseRecyclerFragment getFragment() {
         return mFragment;
@@ -81,7 +85,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
      * @param v
      */
     protected void onItemClick(View v) {
-
+        BaseInfo info= (BaseInfo) v.getTag();
+        if (info instanceof ServiceTypeInfo){
+            AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class);
+        }
     }
 
     /**
