@@ -1,6 +1,6 @@
 package com.meishe.yangquan.bean;
 
-public class ServerCustomer {
+public class ServerCustomer extends BaseInfo{
     private Integer id;
 
     private Long userId;

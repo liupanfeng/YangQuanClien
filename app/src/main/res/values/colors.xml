@@ -31,4 +31,6 @@
     <!--spinner-->
     <color name="bg_spinner">#44ffffff</color>
 
+    <!--text content color-->
+    <color name="text_content_color">#989797</color>
 </resources>
