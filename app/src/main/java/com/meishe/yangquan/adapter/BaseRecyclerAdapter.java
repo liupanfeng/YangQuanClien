@@ -1,6 +1,7 @@
 package com.meishe.yangquan.adapter;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_SERVICE_NOTIFY=VIEW_TYPE_BASE+1;                                //顶部系统通知
     protected static final int VIEW_SERVICE_TYPE=VIEW_TYPE_BASE+2;                                  //服务类型
     protected static final int VIEW_SERVICE_TYPE_LIST=VIEW_TYPE_BASE+3;                                  //服务类型
+    protected static final int VIEW_MINE_TYPE_LIST=VIEW_TYPE_BASE+4;                                  //我的中间菜单
 
     public BaseRecyclerFragment getFragment() {
         return mFragment;
@@ -88,7 +90,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected void onItemClick(View v) {
         BaseInfo info= (BaseInfo) v.getTag();
         if (info instanceof ServiceTypeInfo){
-            AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString("type",((ServiceTypeInfo) info).getName());
+            AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class,bundle);
         }
     }
 

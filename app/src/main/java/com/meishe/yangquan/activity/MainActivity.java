@@ -132,24 +132,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     private void getDataAsync() {
-//        OkHttpClient client = new OkHttpClient();
-//        Request request = new Request.Builder()
-//                .url("http://192.168.10.55:8080/YangQuan/ServletTest")
-//                .build();
-//        client.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                Log.d(TAG,"error");
-//            }
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                if(response.isSuccessful()){//回调的方法执行在子线程。
-//                    Log.d(TAG,"response.code()=="+response.code());
-//                    Log.d(TAG,"response.message()=="+response.message());
-//                    Log.d(TAG,"res=="+response.body().string());
-//                }
-//            }
-//        });
 
         OkHttpManager.getInstance().getRequest(url, new BaseCallBack<String>() {
             @Override

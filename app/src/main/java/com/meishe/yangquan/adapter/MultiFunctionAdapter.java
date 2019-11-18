@@ -9,10 +9,12 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServiceNotifyInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
+import com.meishe.yangquan.viewhoder.MineTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceNotifyHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeListHolder;
@@ -41,6 +43,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view=mLayoutInflater.inflate(R.layout.item_service_type_list,parent,false);
                 viewHolder=new ServiceTypeListHolder(view,this);
                 break;
+            case VIEW_MINE_TYPE_LIST:
+                view=mLayoutInflater.inflate(R.layout.item_mine_type,parent,false);
+                viewHolder=new MineTypeHolder(view,this);
+                break;
         }
         return viewHolder;
     }
@@ -64,6 +70,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_SERVICE_TYPE;
         }else if (baseInfo instanceof ServerCustomer){
             return VIEW_SERVICE_TYPE_LIST;
+        }else if (baseInfo instanceof MineTypeInfo){
+            return VIEW_MINE_TYPE_LIST;
         }
         return super.getItemViewType(position);
     }

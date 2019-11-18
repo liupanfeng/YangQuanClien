@@ -2,7 +2,10 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
-public class Message {
+/**
+ * 用户发的状态
+ */
+public class Message extends BaseInfo{
     private Integer id;
 
     private Long userId;

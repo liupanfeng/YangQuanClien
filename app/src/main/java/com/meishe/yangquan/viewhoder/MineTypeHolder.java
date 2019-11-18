@@ -7,35 +7,35 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 
-public class ServiceTypeHolder extends BaseViewHolder {
+public class MineTypeHolder extends BaseViewHolder {
 
     private TextView mTvServiceType;
     private ImageView mIvServiceType;
     private LinearLayout mLlServiceType;
 
-    public ServiceTypeHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
+    public MineTypeHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter=adapter;
     }
 
     @Override
     protected void initViewHolder(View view, Object ...obj) {
-        mTvServiceType=view.findViewById(R.id.tv_service_type);
-        mIvServiceType=view.findViewById(R.id.iv_service_type);
-        mLlServiceType=view.findViewById(R.id.ll_service_type);
+        mTvServiceType=view.findViewById(R.id.tv_mine_type);
+        mIvServiceType=view.findViewById(R.id.iv_mine_type);
+        mLlServiceType=view.findViewById(R.id.ll_mine_type);
     }
 
     @Override
     public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
-        ServiceTypeInfo serviceTypeInfo= (ServiceTypeInfo) info;
-        mTvServiceType.setText(serviceTypeInfo.getName());
-        mIvServiceType.setBackgroundResource(serviceTypeInfo.getIcon());
+        MineTypeInfo mineTypeInfo= (MineTypeInfo) info;
+        mTvServiceType.setText(mineTypeInfo.getName());
+        mIvServiceType.setBackgroundResource(mineTypeInfo.getIcon());
         mLlServiceType.setOnClickListener(listener);
         mLlServiceType.setTag(info);
     }

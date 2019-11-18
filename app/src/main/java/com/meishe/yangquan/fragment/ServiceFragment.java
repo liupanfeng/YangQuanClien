@@ -15,6 +15,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.ServiceNotifyInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
+import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.AutoPollRecyclerView;
 
 public class ServiceFragment extends BaseRecyclerFragment {
@@ -92,7 +93,8 @@ public class ServiceFragment extends BaseRecyclerFragment {
         mList.clear();
         for (int i = 0; i < index; i++) {
             ServiceTypeInfo typeInfo=new ServiceTypeInfo();
-            typeInfo.setName("剪羊毛");
+            typeInfo.setName(UserType.getUserTypeName().get(9-i));
+            typeInfo.setIcon(UserType.getUserTypeIcon().get(i));
             mList.add(typeInfo);
         }
         adapter.addAll(mList);

@@ -33,4 +33,7 @@
 
     <!--text content color-->
     <color name="text_content_color">#989797</color>
+
+    <!--分割线-->
+    <color name="divide">#f6f6f6</color>
 </resources>

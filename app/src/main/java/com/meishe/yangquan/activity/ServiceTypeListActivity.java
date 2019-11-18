@@ -1,4 +1,5 @@
 package com.meishe.yangquan.activity;
+import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
@@ -12,6 +13,7 @@ public class ServiceTypeListActivity extends BaseActivity {
 
 
     private Toolbar mToolbar;
+    private String mTitle;
 
     @Override
     protected int initRootView() {
@@ -25,6 +27,8 @@ public class ServiceTypeListActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        Bundle bundle=getIntent().getExtras();
+        mTitle=bundle.getString("type");
         setToolBarReplaceActionBar();
         ServiceTypeListFragment listFragment=ServiceTypeListFragment.newInstance("","");
         getSupportFragmentManager().beginTransaction().replace(R.id.service_type_container, listFragment).commit();
@@ -39,7 +43,7 @@ public class ServiceTypeListActivity extends BaseActivity {
      * 设置toolbar
      */
     private void setToolBarReplaceActionBar() {
-        mToolbar.setTitle("剪羊毛");
+        mToolbar.setTitle(mTitle);
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
