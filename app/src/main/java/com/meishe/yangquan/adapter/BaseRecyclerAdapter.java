@@ -9,7 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.meishe.yangquan.activity.BusinessOpportunityActivity;
+import com.meishe.yangquan.activity.ContactUsActivity;
+import com.meishe.yangquan.activity.MessageCenterActivity;
+import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
+import com.meishe.yangquan.activity.VersionUpdateActivity;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
@@ -98,14 +103,19 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         }else if(info instanceof MineTypeInfo){
             switch (((MineTypeInfo) info).getName()){
                 case "完善资料":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
                     break;
                 case "消息中心":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MessageCenterActivity.class);
                     break;
                 case "我的商机":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), BusinessOpportunityActivity.class);
                     break;
                 case "版本更新":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), VersionUpdateActivity.class);
                     break;
                 case "联系我们":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), ContactUsActivity.class);
                     break;
 
             }

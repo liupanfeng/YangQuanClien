@@ -65,4 +65,9 @@ public class ServiceTypeListActivity extends BaseActivity {
     public void release() {
 
     }
+
+    @Override
+    public void onClick(View v) {
+
+    }
 }

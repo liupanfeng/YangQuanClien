@@ -74,6 +74,7 @@ public class MineFragment extends BaseRecyclerFragment {
         mRecyclerView.setLayoutManager(manager);
         MultiFunctionAdapter adapter = new MultiFunctionAdapter(mContext, mRecyclerView);
         mRecyclerView.setAdapter(adapter);
+        adapter.setFragment(this);
         mList.clear();
         for (int i = 0; i < 5; i++) {
             MineTypeInfo info = new MineTypeInfo();

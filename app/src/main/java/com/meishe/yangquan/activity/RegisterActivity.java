@@ -33,7 +33,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseActivity  {
     private String TAG = RegisterActivity.class.getSimpleName();
 
 

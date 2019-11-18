@@ -116,7 +116,7 @@ public class CustomToolbar extends Toolbar {
         toolbar_title.setText(resId);
     }
 
-    public void setTitleVisible(int visible){
+    public void setMyTitleVisible(int visible){
         toolbar_title.setVisibility(visible);
     }
 

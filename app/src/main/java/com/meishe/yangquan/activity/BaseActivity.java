@@ -4,16 +4,20 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.TitleBar;
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     protected Context mContext;
 
     protected TitleBar mTitleBar;
+
+    protected CustomToolbar mToolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

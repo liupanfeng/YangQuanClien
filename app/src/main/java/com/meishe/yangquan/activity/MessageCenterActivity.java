@@ -2,6 +2,7 @@ package com.meishe.yangquan.activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.meishe.yangquan.R;
 
@@ -37,6 +38,11 @@ public class MessageCenterActivity extends BaseActivity {
 
     @Override
     public void release() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }

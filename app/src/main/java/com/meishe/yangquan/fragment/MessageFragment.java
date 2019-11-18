@@ -2,7 +2,6 @@ package com.meishe.yangquan.fragment;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 
 import android.support.design.widget.TabLayout;
@@ -10,17 +9,11 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.TabInfo;
-import com.meishe.yangquan.bean.User;
-import com.meishe.yangquan.utils.PageId;
 import com.meishe.yangquan.utils.UserType;
-import com.meishe.yangquan.view.BrandTextView;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.CustomToolbar;
 
@@ -116,7 +109,7 @@ public class MessageFragment extends BaseRecyclerFragment {
         toolBar.setMyTitle("消息");
         toolBar.setMyTitleColor(R.color.text_content_color);
         toolBar.setMyTitleColor(Color.BLACK);
-        toolBar.setTitleVisible(View.VISIBLE);
+        toolBar.setMyTitleVisible(View.VISIBLE);
         toolBar.setRightButtonVisible(View.VISIBLE);
         toolBar.setRightButton(R.mipmap.ic_message_publish);
     }

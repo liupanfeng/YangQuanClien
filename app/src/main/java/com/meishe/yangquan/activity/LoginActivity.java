@@ -26,7 +26,7 @@ import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginActivity extends BaseActivity  {
     private String TAG=LoginActivity.class.getSimpleName();
 
     private MaterialProgress mMaterialProgress;

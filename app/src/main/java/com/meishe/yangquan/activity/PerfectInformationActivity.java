@@ -1,6 +1,7 @@
 package com.meishe.yangquan.activity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.meishe.yangquan.R;
 
@@ -41,6 +42,11 @@ public class PerfectInformationActivity extends BaseActivity {
 
     @Override
     public void release() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
 
     }
 }
