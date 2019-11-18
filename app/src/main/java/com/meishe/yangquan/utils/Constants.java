@@ -45,4 +45,10 @@ public  class Constants {
 
     public static String autograph="autograph";
 
+    public static String MINE_WAN_SHAN_ZI_LIAO="完善资料";
+    public static String MINE_MESSAGE_CENTER="消息中心";
+    public static String MINE_WO_DE_SHANG_JI="我的商机";
+    public static String MINE_VERSION_UPDATE="版本更新";
+    public static String MINE_CONTACT_US="联系我们";
+
 }

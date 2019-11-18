@@ -19,14 +19,45 @@ public class UserType {
         userType=new HashMap<>();
         userType.put("养殖户",1);
         userType.put("经纪人",2);
-        userType.put("售卖饲料",3);
-        userType.put("售卖兽药",4);
+        userType.put("售饲料",3);
+        userType.put("售兽药",4);
         userType.put("羊五金",5);
-        userType.put("羊粪对",6);
-        userType.put("羊车队",7);
+        userType.put("羊粪队",6);
+        userType.put("羊车服务",7);
         userType.put("剪羊毛",8);
-        userType.put("疫苗对",9);
+        userType.put("疫苗服务",9);
         userType.put("贷款服务",10);
+    }
+
+    public static List<String> getServiceTypeName(){
+        List<String> list=new ArrayList<>();
+        list.add("羊崽儿经纪人");
+        list.add("经纪人");
+        list.add("售饲料");
+        list.add("售兽药");
+        list.add("羊五金");
+        list.add("羊粪队");
+        list.add("羊车服务");
+        list.add("剪羊毛");
+        list.add("疫苗服务");
+        list.add("贷款服务");
+        return list;
+    }
+
+
+    public static List<String> getMessageTypeName(){
+        List<String> list=new ArrayList<>();
+        list.add("卖羊");
+        list.add("买羊");
+        list.add("售饲料");
+        list.add("售兽药");
+        list.add("羊五金");
+        list.add("羊粪队");
+        list.add("羊车队");
+        list.add("剪羊毛");
+        list.add("疫苗");
+        list.add("贷款");
+        return list;
     }
 
     public static List<String> getUserTypeName(){

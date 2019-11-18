@@ -64,6 +64,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         mTitleBar.setTextCenter(R.string.str_login_title);
     }
 
+    @Override
+    public void initTitle() {
+
+    }
 
 
     @Override

@@ -76,6 +76,11 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     }
 
     @Override
+    public void initTitle() {
+
+    }
+
+    @Override
     public void initListener() {
 
         mGetCheckCode.setOnClickListener(this);

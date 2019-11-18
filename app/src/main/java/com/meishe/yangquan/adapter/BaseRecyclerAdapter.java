@@ -11,9 +11,11 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 
 import java.util.ArrayList;
@@ -93,6 +95,20 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             Bundle bundle=new Bundle();
             bundle.putString("type",((ServiceTypeInfo) info).getName());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class,bundle);
+        }else if(info instanceof MineTypeInfo){
+            switch (((MineTypeInfo) info).getName()){
+                case "完善资料":
+                    break;
+                case "消息中心":
+                    break;
+                case "我的商机":
+                    break;
+                case "版本更新":
+                    break;
+                case "联系我们":
+                    break;
+
+            }
         }
     }
 

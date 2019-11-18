@@ -88,13 +88,11 @@ public class MessageFragment extends BaseRecyclerFragment {
 
     @Override
     protected void initData() {
-        // 添加多个tab
-        for (int i = 0; i < UserType.getUserTypeName().size(); i++) {
+        for (int i = 0; i < UserType.getMessageTypeName().size(); i++) {
             TabLayout.Tab tab = mTabLayout.newTab();
-            tab.setText(UserType.getUserTypeName().get(UserType.getUserTypeName().size()-i-1));
+            tab.setText(UserType.getMessageTypeName().get(i));
             mTabLayout.addTab(tab);
         }
-        // 给tab设置点击事件
         mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

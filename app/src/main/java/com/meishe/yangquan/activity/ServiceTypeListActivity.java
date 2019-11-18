@@ -35,6 +35,11 @@ public class ServiceTypeListActivity extends BaseActivity {
     }
 
     @Override
+    public void initTitle() {
+
+    }
+
+    @Override
     public void initListener() {
 
     }

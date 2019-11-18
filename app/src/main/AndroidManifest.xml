@@ -13,8 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle">
-        <activity android:name=".activity.ServiceTypeListActivity"
-           />
+        <activity android:name=".activity.ContactUsActivity"></activity>
+        <activity android:name=".activity.VersionUpdateActivity" />
+        <activity android:name=".activity.BusinessOpportunityActivity" />
+        <activity android:name=".activity.MessageCenterActivity" />
+        <activity android:name=".activity.PerfectInformationActivity" />
+        <activity android:name=".activity.ServiceTypeListActivity" />
         <activity
             android:name=".activity.RegisterActivity"
             android:theme="@style/NoTitleStyle" />

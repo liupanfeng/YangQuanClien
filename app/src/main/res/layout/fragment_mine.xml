@@ -32,8 +32,8 @@
 
                 <ImageView
                     android:id="@+id/iv_mine_photo"
-                    android:layout_width="65dp"
-                    android:layout_height="65dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:background="@mipmap/ic_mine_default_photo" />

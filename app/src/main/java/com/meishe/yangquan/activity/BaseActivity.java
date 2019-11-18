@@ -25,6 +25,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext=this;
         initView();
         initData();
+        initTitle();
         initListener();
     }
 
@@ -41,6 +42,8 @@ public abstract class BaseActivity extends AppCompatActivity {
     public abstract void initView();
 
     public abstract void initData();
+
+    public abstract void initTitle();
 
     public abstract void initListener();
 
