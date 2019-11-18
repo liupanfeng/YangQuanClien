@@ -27,7 +27,6 @@ public class ContactUsActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mToolbar.setMyTitleColor(Color.BLACK);
         mToolbar.setMyTitle("联系我们");
         mToolbar.setMyTitleVisible(View.VISIBLE);
         mToolbar.setLeftButtonVisible(View.VISIBLE);

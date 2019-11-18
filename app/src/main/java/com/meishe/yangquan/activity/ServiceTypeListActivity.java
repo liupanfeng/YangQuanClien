@@ -1,10 +1,10 @@
 package com.meishe.yangquan.activity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.fragment.ServiceTypeListFragment;
+import com.meishe.yangquan.wiget.CustomToolbar;
 
 /**
  * 服务列表界面
@@ -12,7 +12,6 @@ import com.meishe.yangquan.fragment.ServiceTypeListFragment;
 public class ServiceTypeListActivity extends BaseActivity {
 
 
-    private Toolbar mToolbar;
     private String mTitle;
 
     @Override
@@ -29,14 +28,16 @@ public class ServiceTypeListActivity extends BaseActivity {
     public void initData() {
         Bundle bundle=getIntent().getExtras();
         mTitle=bundle.getString("type");
-        setToolBarReplaceActionBar();
         ServiceTypeListFragment listFragment=ServiceTypeListFragment.newInstance("","");
         getSupportFragmentManager().beginTransaction().replace(R.id.service_type_container, listFragment).commit();
     }
 
     @Override
     public void initTitle() {
-
+        mToolbar.setMyTitle(mTitle);
+        mToolbar.setMyTitleVisible(View.VISIBLE);
+        mToolbar.setLeftButtonVisible(View.VISIBLE);
+        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
     }
 
     @Override
@@ -44,20 +45,6 @@ public class ServiceTypeListActivity extends BaseActivity {
 
     }
 
-    /**
-     * 设置toolbar
-     */
-    private void setToolBarReplaceActionBar() {
-        mToolbar.setTitle(mTitle);
-        setSupportActionBar(mToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
-    }
 
 
 
@@ -69,5 +56,12 @@ public class ServiceTypeListActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
 
+    }
+
+    private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
+        @Override
+        public void onClick() {
+            finish();
+        }
     }
 }

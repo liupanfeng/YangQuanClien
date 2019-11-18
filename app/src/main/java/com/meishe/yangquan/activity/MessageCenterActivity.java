@@ -30,7 +30,6 @@ public class MessageCenterActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mToolbar.setMyTitleColor(Color.BLACK);
         mToolbar.setMyTitle("消息中心");
         mToolbar.setMyTitleVisible(View.VISIBLE);
         mToolbar.setLeftButtonVisible(View.VISIBLE);

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meishe.yangquan.activity.VersionUpdateActivity">
+
+    <include layout="@layout/custom_toolbar_layout" />
+
+    <EditText
+        android:id="@+id/et_input_publish_content"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="28dp"
+        android:layout_marginLeft="28dp"
+        android:maxLength="100"
+        android:background="@null"
+        android:hint="编辑您需要发布的内容"
+        />
+
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@mipmap/ic_upload_pic"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="28dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="20dp"
+        android:text="请选择您出售羊的种类："
+        android:textSize="17sp" />
+
+    <RadioGroup
+        android:id="@+id/rg_sheep_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp">
+
+        <RadioButton
+            android:id="@+id/radio_big_sheep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:text="成品羊"
+            android:textColor="@color/black66"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/radio_small_sheep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="11dp"
+            android:text="羊崽儿"
+            android:textColor="@color/black66"
+            android:textSize="18sp" />
+
+    </RadioGroup>
+
+
+
+
+</LinearLayout>

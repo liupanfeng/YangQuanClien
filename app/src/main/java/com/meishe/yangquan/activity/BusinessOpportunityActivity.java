@@ -28,7 +28,6 @@ public class BusinessOpportunityActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mToolbar.setMyTitleColor(Color.BLACK);
         mToolbar.setMyTitle("我的商机");
         mToolbar.setMyTitleVisible(View.VISIBLE);
         mToolbar.setLeftButtonVisible(View.VISIBLE);

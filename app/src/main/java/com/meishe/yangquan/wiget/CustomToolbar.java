@@ -2,11 +2,13 @@ package com.meishe.yangquan.wiget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +19,7 @@ public class CustomToolbar extends Toolbar {
 
     private TextView toolbar_title;
     private ImageView toolbar_leftButton;
-    private ImageView toolbar_rightButton;
+    private Button toolbar_rightButton;
     private View mChildView;
     private Drawable left_button_icon;
     private Drawable right_button_icon;
@@ -97,7 +99,7 @@ public class CustomToolbar extends Toolbar {
                 toolbar_leftButton.setImageDrawable(left_button_icon);
             }
             if (right_button_icon != null) {
-                toolbar_rightButton.setImageDrawable(right_button_icon);
+                toolbar_rightButton.setBackground(right_button_icon);
             }
             if(toolbar_title != null) {
                 toolbar_title.setText(title);
@@ -124,6 +126,14 @@ public class CustomToolbar extends Toolbar {
         toolbar_rightButton.setVisibility(visible);
     }
 
+    public void setRightButtonText(String text){
+        toolbar_rightButton.setText(text);
+    }
+
+    public void setRightButtonBackground(int color){
+        toolbar_rightButton.setBackgroundColor(color);
+    }
+
     public void setLeftButtonVisible(int visible){
         toolbar_leftButton.setVisibility(visible);
     }
@@ -147,7 +157,7 @@ public class CustomToolbar extends Toolbar {
     }
 
     public void setRightButtonIconDrawable(Drawable d) {
-        toolbar_rightButton.setImageDrawable(d);
+        toolbar_rightButton.setBackground(d);
     }
 
 }

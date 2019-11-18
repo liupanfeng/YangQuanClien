@@ -7,7 +7,51 @@
     android:orientation="vertical"
     tools:context=".fragment.MessageFragment">
 
-    <include layout="@layout/custom_toolbar_layout" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="48dp">
+        <RelativeLayout
+            android:id="@+id/backLayout"
+            android:layout_width="64dp"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="15dp"
+                android:src="@mipmap/login_close"
+                android:visibility="gone"
+                android:layout_centerVertical="true"/>
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/text_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="信息"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <RelativeLayout
+            android:id="@+id/rl_publish_port"
+            android:layout_width="90dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginRight="16dp"
+                android:background="@mipmap/ic_message_publish"/>
+        </RelativeLayout>
+    </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.3dp"
+        android:background="@color/black66"></View>
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -32,6 +76,8 @@
                 android:layout_height="@dimen/tabBarSize"
                 android:background="@color/white"
                 app:tabIndicatorColor="@color/mainColor"
+                app:tabSelectedTextColor="@color/mainColor"
+                app:tabTextColor="@color/black"
                 app:tabIndicatorHeight="1dp"
                 app:tabMode="scrollable" />
 

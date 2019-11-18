@@ -27,6 +27,7 @@
 
 
     <color name="black66">#ff666666</color>
+    <color name="black">#ff000000</color>
 
     <!--spinner-->
     <color name="bg_spinner">#44ffffff</color>
@@ -36,4 +37,6 @@
 
     <!--分割线-->
     <color name="divide">#f6f6f6</color>
+
+    <color name="gray">#333333</color>
 </resources>

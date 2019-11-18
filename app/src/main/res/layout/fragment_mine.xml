@@ -36,7 +36,7 @@
                     android:layout_height="50dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
-                    android:background="@mipmap/ic_mine_default_photo" />
+                    android:background="@mipmap/ic_mine_photo_default_daikuang" />
 
                 <LinearLayout
                     android:id="@+id/ll_no_login"

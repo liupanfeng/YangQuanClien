@@ -9,10 +9,14 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.MessagePublishActivity;
 import com.meishe.yangquan.bean.TabInfo;
+import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.CustomToolbar;
@@ -20,7 +24,7 @@ import com.meishe.yangquan.wiget.CustomToolbar;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MessageFragment extends BaseRecyclerFragment {
+public class MessageFragment extends BaseRecyclerFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -34,8 +38,7 @@ public class MessageFragment extends BaseRecyclerFragment {
     private Context mContext;
     private ArrayList<TabInfo> mTabList;
     private int defaultTab;
-    private CustomToolbar toolBar;
-
+    private RelativeLayout mRlPublish;
 
     public MessageFragment() {
     }
@@ -66,17 +69,16 @@ public class MessageFragment extends BaseRecyclerFragment {
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
-        View view=inflater.inflate(R.layout.fragment_message, container, false);
-        toolBar=view.findViewById(R.id.toolbar);
-        mTabLayout =  view.findViewById(R.id.tab_layout);
-        mTabLayout.setTabTextColors(R.color.white, R.color.mainColor);
+        View view = inflater.inflate(R.layout.fragment_message, container, false);
+        mTabLayout = view.findViewById(R.id.tab_layout);
+        mRlPublish = view.findViewById(R.id.rl_publish_port);
         mViewPager = (MViewPager) view.findViewById(R.id.viewpager);
         return view;
     }
 
     @Override
     protected void initListener() {
-
+        mRlPublish.setOnClickListener(this);
     }
 
     @Override
@@ -102,16 +104,6 @@ public class MessageFragment extends BaseRecyclerFragment {
 
             }
         });
-        initTitle();
-    }
-
-    private void initTitle() {
-        toolBar.setMyTitle("消息");
-        toolBar.setMyTitleColor(R.color.text_content_color);
-        toolBar.setMyTitleColor(Color.BLACK);
-        toolBar.setMyTitleVisible(View.VISIBLE);
-        toolBar.setRightButtonVisible(View.VISIBLE);
-        toolBar.setRightButton(R.mipmap.ic_message_publish);
     }
 
 
@@ -120,4 +112,8 @@ public class MessageFragment extends BaseRecyclerFragment {
         super.onDetach();
     }
 
+    @Override
+    public void onClick(View v) {
+        AppManager.getInstance().jumpActivity(getActivity(), MessagePublishActivity.class);
+    }
 }

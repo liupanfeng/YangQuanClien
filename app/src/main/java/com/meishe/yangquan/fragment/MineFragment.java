@@ -14,9 +14,6 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MineTypeInfo;
 
-import java.util.ArrayList;
-import java.util.List;
-
 
 public class MineFragment extends BaseRecyclerFragment {
     private static final String ARG_PARAM1 = "param1";

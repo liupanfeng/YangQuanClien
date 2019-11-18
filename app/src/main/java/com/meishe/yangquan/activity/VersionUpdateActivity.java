@@ -34,11 +34,10 @@ public class VersionUpdateActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mToolbar.setMyTitleColor(Color.BLACK);
         mToolbar.setMyTitle("版本更新");
         mToolbar.setMyTitleVisible(View.VISIBLE);
-        mToolbar.setLeftButtonVisible(View.VISIBLE);
         mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
+        mToolbar.setLeftButtonVisible(View.VISIBLE);
     }
 
     @Override
