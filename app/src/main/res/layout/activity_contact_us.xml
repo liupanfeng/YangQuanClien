@@ -1,9 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.meishe.yangquan.activity.ContactUsActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/custom_toolbar_layout" />
+
+    <RelativeLayout
+        android:layout_width="260dp"
+        android:layout_height="351dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        android:layout_marginTop="82dp">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="51dp"
+            android:layout_height="51dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="18dp"
+            android:background="@mipmap/logo" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="86dp"
+            android:layout_toRightOf="@+id/iv_logo"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="羊圈官方客服"
+                android:textColor="#ff383838"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8.5dp"
+                android:text="河北  保定"
+                android:textColor="#ff858585"
+                android:textSize="10sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="198dp"
+            android:layout_height="198dp"
+            android:layout_marginTop="115dp"
+            android:layout_centerHorizontal="true"
+            android:background="@mipmap/ic_contact_us"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="扫码添加官方客服"
+        android:textColor="#ff383838"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15sp"
+        android:layout_marginTop="13.5dp"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="服务电话：0312-4568324"
+            android:textColor="#ff383838"
+            android:layout_centerHorizontal="true"
+            android:textSize="14sp"
+            android:layout_above="@+id/tv_name"
+            android:layout_marginBottom="11.5dp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="唐县生态农业有限公司"
+            android:textColor="#ff383838"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="15sp"
+            android:layout_marginBottom="25dp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

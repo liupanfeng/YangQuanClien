@@ -1,10 +1,12 @@
 package com.meishe.yangquan.activity;
 
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.wiget.CustomToolbar;
 
 /**
  * 消息中心
@@ -18,7 +20,7 @@ public class MessageCenterActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        mToolbar = findViewById(R.id.toolbar);
     }
 
     @Override
@@ -28,7 +30,11 @@ public class MessageCenterActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-
+        mToolbar.setMyTitleColor(Color.BLACK);
+        mToolbar.setMyTitle("消息中心");
+        mToolbar.setMyTitleVisible(View.VISIBLE);
+        mToolbar.setLeftButtonVisible(View.VISIBLE);
+        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
     }
 
     @Override
@@ -44,5 +50,12 @@ public class MessageCenterActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
 
+    }
+
+    private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
+        @Override
+        public void onClick() {
+            finish();
+        }
     }
 }

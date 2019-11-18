@@ -1,7 +1,9 @@
 package com.meishe.yangquan.activity;
+import android.graphics.Color;
 import android.view.View;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.wiget.CustomToolbar;
 
 /**
  * 我的商机
@@ -16,7 +18,7 @@ public class BusinessOpportunityActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        mToolbar = findViewById(R.id.toolbar);
     }
 
     @Override
@@ -26,7 +28,11 @@ public class BusinessOpportunityActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-
+        mToolbar.setMyTitleColor(Color.BLACK);
+        mToolbar.setMyTitle("我的商机");
+        mToolbar.setMyTitleVisible(View.VISIBLE);
+        mToolbar.setLeftButtonVisible(View.VISIBLE);
+        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
     }
 
     @Override
@@ -42,5 +48,12 @@ public class BusinessOpportunityActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
 
+    }
+
+    private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
+        @Override
+        public void onClick() {
+            finish();
+        }
     }
 }
