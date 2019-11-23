@@ -26,12 +26,11 @@ public class UserType {
         userType.put("羊车服务",7);
         userType.put("剪羊毛",8);
         userType.put("疫苗服务",9);
-        userType.put("贷款服务",10);
+        userType.put("幼崽经纪人",10);
     }
 
     public static List<String> getServiceTypeName(){
         List<String> list=new ArrayList<>();
-        list.add("羊崽儿经纪人");
         list.add("经纪人");
         list.add("售饲料");
         list.add("售兽药");
@@ -40,7 +39,7 @@ public class UserType {
         list.add("羊车服务");
         list.add("剪羊毛");
         list.add("疫苗服务");
-        list.add("贷款服务");
+        list.add("羊崽儿");
         return list;
     }
 
@@ -56,23 +55,26 @@ public class UserType {
         list.add("羊车队");
         list.add("剪羊毛");
         list.add("疫苗");
-        list.add("贷款");
         return list;
     }
 
     public static List<String> getUserTypeName(){
         List<String> list=new ArrayList<>();
-        Iterator<Map.Entry<String, Integer>> iterator = userType.entrySet().iterator();
-        while (iterator.hasNext()){
-            Map.Entry<String, Integer> next = iterator.next();
-            list.add(next.getKey());
-        }
+        list.add("经纪人");
+        list.add("售饲料");
+        list.add("售兽药");
+        list.add("羊五金");
+        list.add("羊粪队");
+        list.add("羊车服务");
+        list.add("剪羊毛");
+        list.add("疫苗服务");
+        list.add("幼崽经纪人");
         return list;
     }
 
     public static List<Integer> getUserTypeIcon(){
         List<Integer> list=new ArrayList<>();
-        list.add(R.mipmap.ic_service_type_yangzhihu);
+//        list.add(R.mipmap.ic_service_type_yangzhihu);
         list.add(R.mipmap.ic_service_type_jingjiren);
         list.add(R.mipmap.ic_service_type_maisiliao);
         list.add(R.mipmap.ic_service_type_maishouyao);
@@ -81,7 +83,7 @@ public class UserType {
         list.add(R.mipmap.ic_service_type_chedui);
         list.add(R.mipmap.ic_service_type_jianyangmao);
         list.add(R.mipmap.ic_service_type_yimiao);
-        list.add(R.mipmap.ic_service_type_daikuan);
+        list.add(R.mipmap.ic_service_type_youzaijingjiren);
         return list;
     }
 

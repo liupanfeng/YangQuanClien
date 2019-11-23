@@ -89,11 +89,10 @@ public class ServiceFragment extends BaseRecyclerFragment {
         MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mServiceTypeRecycler);
         mServiceTypeRecycler.setAdapter(adapter);
         adapter.setFragment(this);
-        int index=10;
         mList.clear();
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < UserType.getServiceTypeName().size(); i++) {
             ServiceTypeInfo typeInfo=new ServiceTypeInfo();
-            typeInfo.setName(UserType.getUserTypeName().get(9-i));
+            typeInfo.setName(UserType.getServiceTypeName().get(i));
             typeInfo.setIcon(UserType.getUserTypeIcon().get(i));
             mList.add(typeInfo);
         }

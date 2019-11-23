@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">YangQuan</string>
+    <string name="app_name">羊圈</string>
 
     <string name="tab_service">服务</string>
     <string name="tab_message">消息</string>

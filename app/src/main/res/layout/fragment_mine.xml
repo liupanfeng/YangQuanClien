@@ -32,8 +32,8 @@
 
                 <ImageView
                     android:id="@+id/iv_mine_photo"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="15dp"
                     android:background="@mipmap/ic_mine_photo_default_daikuang" />
@@ -49,7 +49,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="15dp"
+                        android:layout_marginLeft="10dp"
                         android:text="请先登录查看更多"
                         android:textColor="@color/text_content_color"
                         android:textSize="18sp" />
@@ -61,7 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@+id/iv_mine_photo"
                     android:orientation="vertical">
 
@@ -71,16 +71,16 @@
                         android:layout_height="wrap_content"
                         android:text="牧羊人1881076"
                         android:textColor="@color/text_content_color"
-                        android:textSize="16sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/tv_number"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:text="18810765302"
                         android:textColor="@color/text_content_color"
-                        android:textSize="14sp" />
+                        android:textSize="13sp" />
 
                 </LinearLayout>
 
