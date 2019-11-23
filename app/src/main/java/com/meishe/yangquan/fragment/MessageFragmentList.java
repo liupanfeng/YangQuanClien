@@ -1,26 +1,31 @@
 package com.meishe.yangquan.fragment;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.Message;
 
 public class MessageFragmentList extends BaseRecyclerFragment{
 
     private static final String TYPE = "type";
 
-    private String type;
+    private int type;
+    private RecyclerView mRecyclerView;
 
     public MessageFragmentList() {
     }
 
-    public static MessageFragmentList newInstance(String type) {
+    public static MessageFragmentList newInstance(int type) {
         MessageFragmentList fragment = new MessageFragmentList();
         Bundle args = new Bundle();
-        args.putString(TYPE, type);
+        args.putInt(TYPE, type);
         fragment.setArguments(args);
         return fragment;
     }
@@ -29,16 +34,14 @@ public class MessageFragmentList extends BaseRecyclerFragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            type = getArguments().getString(TYPE);
+            type = getArguments().getInt(TYPE);
         }
     }
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view=inflater.inflate(R.layout.fragment_message_fragment_list_layout,container,false);
-        TextView textView=view.findViewById(R.id.tv_content);
-        textView.setText(type);
-
+        mRecyclerView=view.findViewById(R.id.recycler);
         return view;
     }
 
@@ -49,6 +52,18 @@ public class MessageFragmentList extends BaseRecyclerFragment{
 
     @Override
     protected void initData() {
+        LinearLayoutManager manager=new LinearLayoutManager(mContext,RecyclerView.VERTICAL,false);
+        MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mRecyclerView);
+        mRecyclerView.setLayoutManager(manager);
+        mRecyclerView.setAdapter(adapter);
 
+        for (int i = 0; i < 10; i++) {
+            Message message=new Message();
+            message.setNickname("牧羊人"+i);
+            message.setMessage("羊大又肥"+i);
+            mList.add(message);
+        }
+
+        adapter.addAll(mList);
     }
 }
