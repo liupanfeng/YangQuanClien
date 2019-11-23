@@ -29,16 +29,19 @@
         />
 
     <TextView
+        android:id="@+id/tv_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp"
         android:layout_marginTop="20dp"
+        android:visibility="gone"
         android:text="请选择您出售羊的种类："
         android:textSize="17sp" />
 
     <RadioGroup
         android:id="@+id/rg_sheep_type"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_marginLeft="28dp">
 

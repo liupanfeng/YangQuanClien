@@ -1,8 +1,11 @@
 package com.meishe.yangquan.activity;
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -15,6 +18,9 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
 
 
     private RadioGroup mRadioGroup;
+    private int mCurrentPosition;
+    private TextView mTvType;
+
     @Override
     protected int initRootView() {
         return R.layout.activity_message_publish;
@@ -23,12 +29,25 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     @Override
     public void initView() {
         mToolbar = findViewById(R.id.toolbar);
-        mRadioGroup=findViewById(R.id.rg_sheep_type);
+        mRadioGroup = findViewById(R.id.rg_sheep_type);
+        mTvType = findViewById(R.id.tv_type);
     }
 
     @Override
     public void initData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle bundle = intent.getExtras();
+            mCurrentPosition = bundle.getInt("currentPosition");
+        }
 
+        if (mCurrentPosition == 0 || mCurrentPosition == 1) {
+            mTvType.setVisibility(View.VISIBLE);
+            mRadioGroup.setVisibility(View.VISIBLE);
+        } else {
+            mTvType.setVisibility(View.GONE);
+            mRadioGroup.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -63,7 +82,7 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         RadioButton rb = findViewById(checkedId);
         CharSequence text = rb.getText();
-        ToastUtil.showToast(mContext,""+text);
+        ToastUtil.showToast(mContext, "" + text);
     }
 
     private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
@@ -76,7 +95,7 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     private class OnRightButtonListener implements CustomToolbar.OnRightButtonClickListener {
         @Override
         public void onClick() {
-            ToastUtil.showToast(mContext,"发布消息");
+            ToastUtil.showToast(mContext, "发布消息");
         }
     }
 }

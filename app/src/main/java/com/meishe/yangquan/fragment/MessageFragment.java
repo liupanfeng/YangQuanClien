@@ -42,6 +42,7 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
     private ArrayList<TabInfo> mTabList;
     private int defaultTab;
     private RelativeLayout mRlPublish;
+    private int mCurrentPosition=0;
 
     private List<Fragment> list;
 
@@ -99,6 +100,7 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
         mTabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                mCurrentPosition=tab.getPosition();
                mViewPager.setCurrentItem(tab.getPosition());
             }
 
@@ -157,6 +159,8 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        AppManager.getInstance().jumpActivity(getActivity(), MessagePublishActivity.class);
+        Bundle bundle=new Bundle();
+        bundle.putInt("currentPosition",mCurrentPosition);
+        AppManager.getInstance().jumpActivity(getActivity(), MessagePublishActivity.class,bundle);
     }
 }

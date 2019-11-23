@@ -8,4 +8,9 @@ public class HttpUrl {
     public static final String  USER_LOGIN =URL+"user/login";
     /*注册*/
     public static final String  USER_REGISTER =URL+ "user/register";
+    /*获取开屏广告*/
+    public static final String  URL_GET_AD =URL+ "ad/select";
+
+
+
 }

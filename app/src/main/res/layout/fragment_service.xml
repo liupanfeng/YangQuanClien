@@ -1,28 +1,45 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-<LinearLayout
-    android:id="@+id/ll_top_notify"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:gravity="center_vertical"
-    android:background="@mipmap/ic_service_notification_bg"
-   >
+    android:layout_height="match_parent">
 
-   <com.meishe.yangquan.view.AutoPollRecyclerView
-       android:id="@+id/recycler"
-       android:layout_width="match_parent"
-       android:layout_height="90dp">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/ll_top_notify"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:background="@mipmap/ic_service_notification_bg"
+                android:gravity="center_vertical">
 
-   </com.meishe.yangquan.view.AutoPollRecyclerView>
-</LinearLayout>
+                <com.meishe.yangquan.view.AutoPollRecyclerView
+                    android:id="@+id/recycler"
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp">
 
-   <android.support.v7.widget.RecyclerView
-       android:id="@+id/service_type_recycler"
-       android:layout_width="match_parent"
-       android:layout_below="@+id/ll_top_notify"
-       android:background="@color/white"
-       android:layout_height="160dp"/>
+                </com.meishe.yangquan.view.AutoPollRecyclerView>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/service_type_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="160dp"
+                android:layout_below="@+id/ll_top_notify"
+                android:background="@color/white" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/service_news_recycler"
+                android:layout_below="@+id/service_type_recycler"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
 
 </RelativeLayout>

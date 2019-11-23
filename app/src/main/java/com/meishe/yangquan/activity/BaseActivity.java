@@ -7,11 +7,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 
+import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.TitleBar;
 
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener , OnResponseListener {
 
     protected Context mContext;
 
@@ -27,6 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         //设置视图
         setContentView(initRootView());
         mContext=this;
+        HttpRequestUtil.getInstance().setListener(this);
         initView();
         initData();
         initTitle();

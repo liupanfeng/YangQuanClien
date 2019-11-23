@@ -5,12 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.ADOpenScreenResult;
+import com.meishe.yangquan.utils.HttpRequestUtil;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
 
     private Handler mHandler=new Handler();
     @Override
@@ -22,6 +25,7 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_splash);
 
+        HttpRequestUtil.getInstance().getADFromServer();
         mHandler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -41,5 +45,53 @@ public class SplashActivity extends AppCompatActivity {
             mHandler.removeCallbacksAndMessages(null);
             mHandler=null;
         }
+    }
+
+    @Override
+    protected int initRootView() {
+        return 0;
+    }
+
+    @Override
+    public void initView() {
+
+    }
+
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initTitle() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void release() {
+
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onSuccess(Object object) {
+        if (object instanceof ADOpenScreenResult){
+            ADOpenScreenResult result= (ADOpenScreenResult) object;
+
+        }
+    }
+
+    @Override
+    public void onError(Object obj) {
+
     }
 }

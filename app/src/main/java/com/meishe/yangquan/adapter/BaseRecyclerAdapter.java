@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.BusinessOpportunityActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
@@ -16,12 +17,16 @@ import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
 import com.meishe.yangquan.activity.VersionUpdateActivity;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.EndInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.view.ListLoadingView;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
+import com.meishe.yangquan.viewhoder.EmptyHolder;
+import com.meishe.yangquan.viewhoder.FooterHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +35,20 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
     protected BaseRecyclerFragment mFragment;
 
-    private static final int VIEW_TYPE_BASE=100;
-    protected static final int VIEW_SERVICE_NOTIFY=VIEW_TYPE_BASE+1;                                //顶部系统通知
-    protected static final int VIEW_SERVICE_TYPE=VIEW_TYPE_BASE+2;                                  //服务类型
-    protected static final int VIEW_SERVICE_TYPE_LIST=VIEW_TYPE_BASE+3;                                  //服务类型
-    protected static final int VIEW_MINE_TYPE_LIST=VIEW_TYPE_BASE+4;                                  //我的中间菜单
-    protected static final int VIEW_MESSAGE_TYPE_LIST=VIEW_TYPE_BASE+5;                                  //信息页面List列表
+    private static final int VIEW_TYPE_BASE = 100;
+    protected final int VIEW_TYPE_EMPTY = VIEW_TYPE_BASE;                                               //上滑正在加载
+    protected final int VIEW_TYPE_LOADING = VIEW_TYPE_BASE + 1;                                         //上滑正在加载
+    protected final int VIEW_TYPE_END = VIEW_TYPE_BASE + 2;                                             //分页结束
+    protected static final int VIEW_SERVICE_NOTIFY = VIEW_TYPE_BASE + 3;                                //顶部系统通知
+    protected static final int VIEW_SERVICE_TYPE = VIEW_TYPE_BASE + 4;                                  //服务类型
+    protected static final int VIEW_SERVICE_TYPE_LIST = VIEW_TYPE_BASE + 5;                             //服务类型
+    protected static final int VIEW_MINE_TYPE_LIST = VIEW_TYPE_BASE + 6;                                //我的中间菜单
+    protected static final int VIEW_MESSAGE_TYPE_LIST = VIEW_TYPE_BASE + 7 ;                            //信息页面List列表
+    protected static final int VIEW_SERVICE_NEWS_TYPE_LIST = VIEW_TYPE_BASE + 8;                        //服务咨询新闻列表
+
+
+
+
 
     public BaseRecyclerFragment getFragment() {
         return mFragment;
@@ -49,7 +62,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected LayoutInflater mLayoutInflater;
     protected List<BaseInfo> mList;
     protected RecyclerView mRecyclerView;
-    protected boolean isNeedAutoScroll=false;
+    protected boolean isNeedAutoScroll = false;
 
     public BaseRecyclerAdapter(final Context context, RecyclerView recyclerView) {
         mContext = context;
@@ -62,25 +75,47 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     @NonNull
     @Override
     public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        BaseViewHolder holder = null;
+        int height = 50;
+        switch (viewType) {
+            case VIEW_TYPE_LOADING:
+                holder = new FooterHolder(new ListLoadingView(mContext, height, R.string.list_loading_normal));
+                break;
+            case VIEW_TYPE_EMPTY:
+                holder = new EmptyHolder(new View(mContext));
+                break;
+            case VIEW_TYPE_END:
+                holder = new EmptyHolder(new ListLoadingView(mContext, height, R.string.list_end));
+                break;
+        }
+        return holder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         holder.setIsRecyclable(true);
-        BaseInfo info=getItem(position);
-        if (isNeedAutoScroll){
-            holder.bindViewHolder(mContext,mList.get(position%mList.size()),this);
-        }else {
-            holder.bindViewHolder(mContext,mList.get(position),this);
+        if (isNeedAutoScroll) {
+            holder.bindViewHolder(mContext, mList.get(position % mList.size()), this);
+        } else {
+            holder.bindViewHolder(mContext, mList.get(position), this);
         }
+    }
+
+
+    @Override
+    public int getItemViewType(int position) {
+        BaseInfo baseInfo=getItem(position);
+        if (baseInfo instanceof EndInfo){
+            return VIEW_TYPE_END;
+        }
+        return 0;
     }
 
     @Override
     public int getItemCount() {
-        if (isNeedAutoScroll){
+        if (isNeedAutoScroll) {
             return Integer.MAX_VALUE;
-        }else{
+        } else {
             return mList == null ? 0 : mList.size();
         }
     }
@@ -96,13 +131,13 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
      * @param v
      */
     protected void onItemClick(View v) {
-        BaseInfo info= (BaseInfo) v.getTag();
-        if (info instanceof ServiceTypeInfo){
-            Bundle bundle=new Bundle();
-            bundle.putString("type",((ServiceTypeInfo) info).getName());
-            AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class,bundle);
-        }else if(info instanceof MineTypeInfo){
-            switch (((MineTypeInfo) info).getName()){
+        BaseInfo info = (BaseInfo) v.getTag();
+        if (info instanceof ServiceTypeInfo) {
+            Bundle bundle = new Bundle();
+            bundle.putString("type", ((ServiceTypeInfo) info).getName());
+            AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
+        } else if (info instanceof MineTypeInfo) {
+            switch (((MineTypeInfo) info).getName()) {
                 case "完善资料":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
                     break;
@@ -170,7 +205,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     public void addItems(int position, List<BaseInfo> infos) {
         if (infos != null && position < mList.size()) {
             mList.addAll(position, infos);
-            notifyItemRangeChanged(position-1, position + infos.size() - 1);
+            notifyItemRangeChanged(position - 1, position + infos.size() - 1);
         }
     }
 

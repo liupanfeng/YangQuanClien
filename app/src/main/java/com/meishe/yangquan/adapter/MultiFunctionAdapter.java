@@ -14,9 +14,11 @@ import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServiceNotifyInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
+import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
+import com.meishe.yangquan.viewhoder.ServiceNewsHolder;
 import com.meishe.yangquan.viewhoder.ServiceNotifyHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeListHolder;
@@ -53,6 +55,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view=mLayoutInflater.inflate(R.layout.item_message_type_list,parent,false);
                 viewHolder=new MessageListHolder(view,this);
                 break;
+            case VIEW_SERVICE_NEWS_TYPE_LIST:
+                view=mLayoutInflater.inflate(R.layout.item_service_news_type,parent,false);
+                viewHolder=new ServiceNewsHolder(view,this);
+                break;
         }
         return viewHolder;
     }
@@ -80,6 +86,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_TYPE_LIST;
         }else if (baseInfo instanceof Message){
             return VIEW_MESSAGE_TYPE_LIST;
+        }else if (baseInfo instanceof SheepNews){
+            return VIEW_SERVICE_NEWS_TYPE_LIST;
         }
         return super.getItemViewType(position);
     }

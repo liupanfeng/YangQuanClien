@@ -39,4 +39,8 @@
     <color name="divide">#f6f6f6</color>
 
     <color name="gray">#333333</color>
+
+    <!--footer no data-->
+    <color name="text_nodata">#afb1b0</color>
+
 </resources>

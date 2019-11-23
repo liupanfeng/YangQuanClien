@@ -13,8 +13,10 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.EndInfo;
 import com.meishe.yangquan.bean.ServiceNotifyInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
+import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.AutoPollRecyclerView;
 
@@ -26,6 +28,7 @@ public class ServiceFragment extends BaseRecyclerFragment {
     private String mParam2;
     private AutoPollRecyclerView mRecyclerView;
     private RecyclerView mServiceTypeRecycler;
+    private RecyclerView mServiceNewsRecycler;
 
     public ServiceFragment() {
     }
@@ -45,6 +48,7 @@ public class ServiceFragment extends BaseRecyclerFragment {
         View view = inflater.inflate(R.layout.fragment_service, container, false);
         mRecyclerView=view.findViewById(R.id.recycler);
         mServiceTypeRecycler=view.findViewById(R.id.service_type_recycler);
+        mServiceNewsRecycler=view.findViewById(R.id.service_news_recycler);
         return view;
     }
 
@@ -57,6 +61,24 @@ public class ServiceFragment extends BaseRecyclerFragment {
     protected void initData() {
         initTopNotifyRecyclerView();
         initServiceTypeRecyclerView();
+        initServiceNewsRecyclerView();
+    }
+
+    private void initServiceNewsRecyclerView() {
+        LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
+        mServiceNewsRecycler.setLayoutManager(layoutManager);
+        MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mServiceNewsRecycler);
+        mServiceNewsRecycler.setAdapter(adapter);
+        int index=4;
+        mList.clear();
+        for (int i = 0; i <index ; i++) {
+            SheepNews sheepNews=new SheepNews();
+            sheepNews.setSheepName("东北羊");
+            sheepNews.setSheepPrice("30.5");
+            mList.add(sheepNews);
+        }
+        mList.add(new EndInfo());
+        adapter.addAll(mList);
     }
 
 

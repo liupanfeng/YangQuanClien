@@ -2,7 +2,10 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
-public class SheepNews {
+/**
+ * 咨询新闻
+ */
+public class SheepNews extends BaseInfo{
     private Integer id;
 
     private String sheepType;

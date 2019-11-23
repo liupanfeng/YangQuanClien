@@ -11,4 +11,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="list_loading_normal">走心加载中...</string>
+    <string name="list_end">亲，到底啦La！</string>
+
 </resources>
