@@ -16,6 +16,7 @@ import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CountDownTimerUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.MaterialProgress;
 import com.meishe.yangquan.wiget.TitleBar;
 
@@ -136,7 +137,7 @@ public class LoginActivity extends BaseActivity  {
     private void userLogin() {
         mMaterialProgress.show();
         final HashMap<String,Object> requestParam=new HashMap<>();
-        requestParam.put("phone_num",phoneNumber);
+        requestParam.put("phoneNum",phoneNumber);
         OkHttpManager.getInstance().postRequest(HttpUrl.USER_LOGIN, new BaseCallBack<UserResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -155,13 +156,16 @@ public class LoginActivity extends BaseActivity  {
                     ToastUtil.showToast(mContext,"请先注册再登录");
                     return;
                 }
-                if (result!=null){
+                if (result!=null&&result.getStatus()==200){
                     User user= result.getData();
-                    String nickName=user.getNickname();
-                    Log.e(TAG,nickName);
-                    //TODO 登录成功
-                    AppManager.getInstance().jumpActivity(LoginActivity.this,MainActivity.class);
-                    LoginActivity.this.finish();
+                    if (user!=null){
+                        UserManager.getInstance(mContext).setUser(user);
+                        String token=user.getTokenId();
+                        UserManager.getInstance(mContext).setToken(token);
+                        AppManager.getInstance().jumpActivity(LoginActivity.this,MainActivity.class);
+                        LoginActivity.this.finish();
+                        ToastUtil.showToast(mContext,"登录成功");
+                    }
                 }
             }
 
@@ -183,5 +187,13 @@ public class LoginActivity extends BaseActivity  {
     }
 
 
+    @Override
+    public void onSuccess(Object object) {
 
+    }
+
+    @Override
+    public void onError(Object obj) {
+
+    }
 }

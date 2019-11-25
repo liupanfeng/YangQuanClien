@@ -172,9 +172,15 @@ public class RegisterActivity extends BaseActivity  {
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
                 if (result != null) {
-                    User user = result.getData();
-//                    String nickName=user.getNickname();
-                    Log.e(TAG, "注册成功");
+                    int code=result.getStatus();
+                    if (code==200){
+                        ToastUtil.showToast(mContext,"注册成功请登录");
+                        return;
+                    }
+                    if (code==401){
+                        ToastUtil.showToast(mContext,"改手机号已经注册，请登录");
+                        return;
+                    }
                 }
             }
 
@@ -218,4 +224,13 @@ public class RegisterActivity extends BaseActivity  {
     }
 
 
+    @Override
+    public void onSuccess(Object object) {
+
+    }
+
+    @Override
+    public void onError(Object obj) {
+
+    }
 }

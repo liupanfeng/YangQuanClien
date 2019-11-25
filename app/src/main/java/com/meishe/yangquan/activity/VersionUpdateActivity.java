@@ -55,6 +55,16 @@ public class VersionUpdateActivity extends BaseActivity {
         ToastUtil.showToast(mContext, "当前已经是最新版本");
     }
 
+    @Override
+    public void onSuccess(Object object) {
+
+    }
+
+    @Override
+    public void onError(Object obj) {
+
+    }
+
     private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
         @Override
         public void onClick() {

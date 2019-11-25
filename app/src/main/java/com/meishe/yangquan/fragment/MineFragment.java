@@ -9,13 +9,19 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MineTypeInfo;
+import com.meishe.yangquan.bean.User;
+import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.UserManager;
 
 
-public class MineFragment extends BaseRecyclerFragment {
+public class MineFragment extends BaseRecyclerFragment implements View.OnClickListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -25,6 +31,9 @@ public class MineFragment extends BaseRecyclerFragment {
 
     private String[] mSettingInfo = {"完善资料", "消息中心", "我的商机", "版本更新", "联系我们"};
     private int[] mSettingIcon = {R.mipmap.ic_mine_wanshanziliao, R.mipmap.ic_mine_xiaoxizhongxin, R.mipmap.ic_mine_wodeshangji, R.mipmap.ic_mine_banbengegnxin, R.mipmap.ic_mine_lianxiwomen};
+    private LinearLayout mLLNoLogin;
+    private LinearLayout mLLLogin;
+    private TextView mTvNumber;
 
     public MineFragment() {
     }
@@ -57,12 +66,15 @@ public class MineFragment extends BaseRecyclerFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         mRecyclerView = view.findViewById(R.id.mine_recycler);
+        mLLNoLogin = view.findViewById(R.id.ll_no_login);
+        mLLLogin = view.findViewById(R.id.ll_login);
+        mTvNumber = view.findViewById(R.id.tv_number);
         return view;
     }
 
     @Override
     protected void initListener() {
-
+        mLLNoLogin.setOnClickListener(this);
     }
 
     @Override
@@ -80,11 +92,32 @@ public class MineFragment extends BaseRecyclerFragment {
             mList.add(info);
         }
         adapter.addAll(mList);
+
+        if (UserManager.getInstance(getContext()).isNeedLogin()){
+            mLLNoLogin.setVisibility(View.VISIBLE);
+            mLLLogin.setVisibility(View.GONE);
+        }else {
+            mLLLogin.setVisibility(View.VISIBLE);
+            mLLNoLogin.setVisibility(View.GONE);
+        }
+
+        User user=UserManager.getInstance(getContext()).getUser();
+        if (user!=null){
+            mTvNumber.setText(user.getPhoneNumber());
+        }else{
+            mTvNumber.setText("");
+        }
+
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    @Override
+    public void onClick(View v) {
+        AppManager.getInstance().jumpActivity(getActivity(), LoginActivity.class);
     }
 
 }

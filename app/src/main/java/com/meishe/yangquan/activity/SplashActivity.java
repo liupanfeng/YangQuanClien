@@ -13,7 +13,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.ADOpenScreenResult;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 
-public class SplashActivity extends BaseActivity {
+public class SplashActivity extends AppCompatActivity {
 
     private Handler mHandler=new Handler();
     @Override
@@ -47,51 +47,5 @@ public class SplashActivity extends BaseActivity {
         }
     }
 
-    @Override
-    protected int initRootView() {
-        return 0;
-    }
 
-    @Override
-    public void initView() {
-
-    }
-
-    @Override
-    public void initData() {
-
-    }
-
-    @Override
-    public void initTitle() {
-
-    }
-
-    @Override
-    public void initListener() {
-
-    }
-
-    @Override
-    public void release() {
-
-    }
-
-    @Override
-    public void onClick(View v) {
-
-    }
-
-    @Override
-    public void onSuccess(Object object) {
-        if (object instanceof ADOpenScreenResult){
-            ADOpenScreenResult result= (ADOpenScreenResult) object;
-
-        }
-    }
-
-    @Override
-    public void onError(Object obj) {
-
-    }
 }

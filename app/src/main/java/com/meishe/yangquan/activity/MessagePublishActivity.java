@@ -85,6 +85,16 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
         ToastUtil.showToast(mContext, "" + text);
     }
 
+    @Override
+    public void onSuccess(Object object) {
+
+    }
+
+    @Override
+    public void onError(Object obj) {
+
+    }
+
     private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
         @Override
         public void onClick() {

@@ -1,9 +1,13 @@
 package com.meishe.yangquan.utils;
 
+import android.content.Context;
 import android.util.Log;
 
+import com.googlecode.openbeans.PropertyDescriptor;
 import com.meishe.yangquan.bean.ADOpenScreenResult;
 import com.meishe.yangquan.bean.AdOpenScreen;
+import com.meishe.yangquan.bean.ServerCustomerResult;
+import com.meishe.yangquan.bean.SheepNewsResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -16,7 +20,8 @@ import java.util.HashMap;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
-
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 public class HttpRequestUtil {
 
     private static final String TAG=HttpRequestUtil.class.getSimpleName();
@@ -85,7 +90,9 @@ public class HttpRequestUtil {
         }, requestParam);
     }
 
-
+    /**
+     * 获取开屏广告
+     */
     public void getADFromServer(){
         HashMap<String, Object> requestParam = new HashMap<>();
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_AD, new BaseCallBack<ADOpenScreenResult>() {
@@ -124,6 +131,237 @@ public class HttpRequestUtil {
             }
         }, requestParam);
     }
+
+    /**
+     * 服务滚动消息
+     */
+    public  void  getServiceMessageFromServer(){
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_MESSAGE, new BaseCallBack<ADOpenScreenResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ADOpenScreenResult result) {
+                if (result != null||result.getStatus()==200) {
+                    if (listener!=null){
+                        listener.onSuccess(result);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
+    /**
+     * 服务列表消息
+     */
+    public  void  getServiceListFromServer(int userType){
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("userType",userType);
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_LIST, new BaseCallBack<ServerCustomerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerCustomerResult result) {
+                if (result != null||result.getStatus()==200) {
+                    if (listener!=null){
+                        listener.onSuccess(result);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
+    /**
+     * 咨询新闻
+     */
+    public  void  getServiceNewsFromServer(){
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_SHEEP_NEWS, new BaseCallBack<SheepNewsResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, SheepNewsResult result) {
+                if (result != null||result.getStatus()==200) {
+                    if (listener!=null){
+                        listener.onSuccess(result);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
+    /**
+     * 信息列表
+     */
+    public  void  getMessageListFromServer(int userType){
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("userType",userType);
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_MESSAGE_LIST, new BaseCallBack<SheepNewsResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, SheepNewsResult result) {
+                if (result != null||result.getStatus()==200) {
+                    if (listener!=null){
+                        listener.onSuccess(result);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+    /**
+     * 完善个人信息
+     */
+    public  void  updateUserFromServer(Context context) throws Exception{
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        User user=UserManager.getInstance(context).getUser();
+        Field[] fields = user.getClass().getDeclaredFields();
+        for (int i = 0, len = fields.length; i < len; i++) {
+            PropertyDescriptor pd = new PropertyDescriptor(fields[i].getName(), user.getClass());
+            Method getMethod = pd.getReadMethod();     //获得get方法
+//            getMethod.invoke(user);    //此处为执行该Object对象的get方法
+            String varName = fields[i].getName();
+            requestParam.put(varName, getMethod.invoke(user));
+//            System.out.println(varName + "---" + getMethod.getName());
+        }
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_USER_UPDATE, new BaseCallBack<SheepNewsResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, SheepNewsResult result) {
+                if (result != null||result.getStatus()==200) {
+                    if (listener!=null){
+                        listener.onSuccess(result);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
 
 
 }

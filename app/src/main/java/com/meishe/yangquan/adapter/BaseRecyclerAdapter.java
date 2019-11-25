@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.BusinessOpportunityActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
+import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
 import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
@@ -23,6 +24,8 @@ import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.ListLoadingView;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.EmptyHolder;
@@ -139,7 +142,13 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         } else if (info instanceof MineTypeInfo) {
             switch (((MineTypeInfo) info).getName()) {
                 case "完善资料":
-                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
+                    boolean isNeedLogin=UserManager.getInstance(mContext).isNeedLogin();
+                    if (isNeedLogin){
+                        AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
+                        return;
+                    }
+                    ToastUtil.showToast(mContext,"研发中敬请期待");
+//                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
                     break;
                 case "消息中心":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MessageCenterActivity.class);

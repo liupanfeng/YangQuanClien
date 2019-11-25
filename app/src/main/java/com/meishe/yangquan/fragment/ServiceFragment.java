@@ -17,6 +17,7 @@ import com.meishe.yangquan.bean.EndInfo;
 import com.meishe.yangquan.bean.ServiceNotifyInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
+import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.AutoPollRecyclerView;
 
@@ -59,6 +60,7 @@ public class ServiceFragment extends BaseRecyclerFragment {
 
     @Override
     protected void initData() {
+        HttpRequestUtil.getInstance().getServiceMessageFromServer();
         initTopNotifyRecyclerView();
         initServiceTypeRecyclerView();
         initServiceNewsRecyclerView();

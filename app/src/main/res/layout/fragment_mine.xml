@@ -50,7 +50,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
-                        android:text="请先登录查看更多"
+                        android:text="登录之后更精彩"
                         android:textColor="@color/text_content_color"
                         android:textSize="18sp" />
 
