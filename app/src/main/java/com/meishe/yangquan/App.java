@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
 
+import cn.jpush.android.api.JPushInterface;
+
 public class App extends Application {
     private Typeface typeface;
     private static App app;
@@ -17,6 +19,10 @@ public class App extends Application {
         super.onCreate();
         app=this;
         mContext = getApplicationContext();
+
+        JPushInterface.setDebugMode(true);
+        JPushInterface.init(this);
+
     }
 
 
