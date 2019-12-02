@@ -42,11 +42,12 @@
                 <ImageView
                     android:layout_width="10dp"
                     android:layout_height="10dp"
-                    android:background="@mipmap/ic_service_type_jianyangmao" />
+                    android:background="@mipmap/ic_start" />
 
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_order"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_alignParentRight="true"

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
@@ -17,7 +18,7 @@ public class MineTypeHolder extends BaseViewHolder {
 
     private TextView mTvServiceType;
     private ImageView mIvServiceType;
-    private LinearLayout mLlServiceType;
+    private RelativeLayout mRlServiceType;
 
     public MineTypeHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -28,7 +29,7 @@ public class MineTypeHolder extends BaseViewHolder {
     protected void initViewHolder(View view, Object ...obj) {
         mTvServiceType=view.findViewById(R.id.tv_mine_type);
         mIvServiceType=view.findViewById(R.id.iv_mine_type);
-        mLlServiceType=view.findViewById(R.id.ll_mine_type);
+        mRlServiceType=view.findViewById(R.id.ll_mine_type);
     }
 
     @Override
@@ -36,8 +37,8 @@ public class MineTypeHolder extends BaseViewHolder {
         MineTypeInfo mineTypeInfo= (MineTypeInfo) info;
         mTvServiceType.setText(mineTypeInfo.getName());
         mIvServiceType.setBackgroundResource(mineTypeInfo.getIcon());
-        mLlServiceType.setOnClickListener(listener);
-        mLlServiceType.setTag(info);
+        mRlServiceType.setOnClickListener(listener);
+        mRlServiceType.setTag(info);
     }
 
 

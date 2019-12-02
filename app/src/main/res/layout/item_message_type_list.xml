@@ -77,7 +77,7 @@
             android:layout_below="@+id/tv_message_type_description"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:background="@mipmap/logo" />
+            android:background="@mipmap/girl" />
 
         <RelativeLayout
             android:layout_marginLeft="10dp"

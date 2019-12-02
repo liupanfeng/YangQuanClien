@@ -3,10 +3,12 @@ package com.meishe.yangquan.viewhoder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 
@@ -18,6 +20,9 @@ public class MessageListHolder extends BaseViewHolder {
     private TextView mTvServiceType;
     private ImageView mIvServiceType;
     private LinearLayout mLlServiceType;
+    private Button mBtnMessageStartConnect;
+    private TextView mTvMessageComment;
+    private ImageView mIvMessageComment;
 
     public MessageListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -26,17 +31,21 @@ public class MessageListHolder extends BaseViewHolder {
 
     @Override
     protected void initViewHolder(View view, Object ...obj) {
-//        mTvServiceType=view.findViewById(R.id.tv_service_type);
-//        mIvServiceType=view.findViewById(R.id.iv_service_type);
-//        mLlServiceType=view.findViewById(R.id.ll_service_type);
+        mIvMessageComment=view.findViewById(R.id.iv_message_comment);
+        mTvMessageComment=view.findViewById(R.id.tv_message_comment);
+        mBtnMessageStartConnect=view.findViewById(R.id.btn_message_start_connect);
     }
 
     @Override
     public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
 //        ServerCustomer serverCustomer= (ServerCustomer) info;
 //        mTvServiceType.setText(serverCustomer.getDescription());
-//        mLlServiceType.setOnClickListener(listener);
-//        mLlServiceType.setTag(info);
+        mBtnMessageStartConnect.setOnClickListener(listener);
+        mTvMessageComment.setOnClickListener(listener);
+        mIvMessageComment.setOnClickListener(listener);
+        mBtnMessageStartConnect.setTag(info);
+        mTvMessageComment.setTag(info);
+        mIvMessageComment.setTag(info);
     }
 
 

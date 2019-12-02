@@ -7,14 +7,15 @@
     <RelativeLayout
         android:id="@+id/backLayout"
         android:layout_width="64dp"
+        android:visibility="gone"
         android:layout_height="match_parent">
 
         <ImageView
-            android:layout_width="12dp"
-            android:layout_height="22dp"
-            android:layout_marginLeft="15dp"
-            android:src="@mipmap/login_close"
-            android:visibility="gone"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginLeft="25dp"
+            android:padding="5dp"
+            android:background="@mipmap/login_close"
             android:layout_centerVertical="true"/>
 
     </RelativeLayout>

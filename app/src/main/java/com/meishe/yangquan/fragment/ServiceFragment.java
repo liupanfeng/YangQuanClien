@@ -71,7 +71,7 @@ public class ServiceFragment extends BaseRecyclerFragment {
         mServiceNewsRecycler.setLayoutManager(layoutManager);
         MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mServiceNewsRecycler);
         mServiceNewsRecycler.setAdapter(adapter);
-        int index=4;
+        int index=12;
         mList.clear();
         for (int i = 0; i <index ; i++) {
             SheepNews sheepNews=new SheepNews();
@@ -79,7 +79,7 @@ public class ServiceFragment extends BaseRecyclerFragment {
             sheepNews.setSheepPrice("30.5");
             mList.add(sheepNews);
         }
-        mList.add(new EndInfo());
+//        mList.add(new EndInfo());
         adapter.addAll(mList);
     }
 
@@ -96,7 +96,7 @@ public class ServiceFragment extends BaseRecyclerFragment {
         mList.clear();
         for (int i = 0; i < index; i++) {
             ServiceNotifyInfo notifyInfo=new ServiceNotifyInfo();
-            notifyInfo.setContent("* 羊肉大涨价"+i);
+            notifyInfo.setContent("*羊肉大涨价快来买啊，快来买快来买快来买……" +i);
             mList.add(notifyInfo);
         }
         adapter.setNeedAutoScroll(true);

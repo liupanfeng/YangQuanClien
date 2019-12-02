@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.ServerCustomer;
+import com.meishe.yangquan.wiget.MaterialProgress;
 
 public class ServiceTypeListFragment extends BaseRecyclerFragment {
 
@@ -17,6 +18,7 @@ public class ServiceTypeListFragment extends BaseRecyclerFragment {
     private static final String ARG_PARAM2 = "param2";
 
     private RecyclerView mRecyclerView;
+    private MaterialProgress mMpProgress;
 
     public ServiceTypeListFragment() {
     }
@@ -34,6 +36,8 @@ public class ServiceTypeListFragment extends BaseRecyclerFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view=inflater.inflate(R.layout.fragment_service_type_list,container,false);
         mRecyclerView=view.findViewById(R.id.service_type_list_recycler);
+        mMpProgress=view.findViewById(R.id.mp_progress);
+
         return view;
     }
 
@@ -48,6 +52,7 @@ public class ServiceTypeListFragment extends BaseRecyclerFragment {
         mRecyclerView.setLayoutManager(layoutManager);
         MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mRecyclerView);
         adapter.setFragment(this);
+        adapter.setMaterialProgress(mMpProgress);
         mRecyclerView.setAdapter(adapter);
         mList.clear();
         int index=12;

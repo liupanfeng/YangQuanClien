@@ -63,6 +63,7 @@ public class LoginActivity extends BaseActivity  {
     @Override
     public void initData() {
         mTitleBar.setTextCenter(R.string.str_login_title);
+        mTitleBar.setBackImageVisible(View.VISIBLE);
     }
 
     @Override

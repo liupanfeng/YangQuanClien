@@ -43,4 +43,7 @@
     <!--footer no data-->
     <color name="text_nodata">#afb1b0</color>
 
+
+    <color name="jdy_background_color">#181A21</color>
+
 </resources>

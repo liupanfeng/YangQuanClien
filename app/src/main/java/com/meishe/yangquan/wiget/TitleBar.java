@@ -78,6 +78,8 @@ public class TitleBar extends LinearLayout implements View.OnClickListener {
         }
     }
 
+
+
     public void setBackImageVisible(int visible) {
         backLayout.setVisibility(visible);
     }

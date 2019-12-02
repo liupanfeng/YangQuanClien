@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@null">
+
+
+    <RelativeLayout
+        android:id="@+id/dialog_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bottom_sheet_dialog_style"
+        android:layout_alignParentBottom="true">
+
+
+        <RelativeLayout
+            android:id="@+id/bottom_sheet_dialog_close_btn"
+            android:layout_width="150dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true">
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="13dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="11dp"
+                android:layout_marginTop="11dp"
+                android:background="@mipmap/login_close"/>
+        </RelativeLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:layout_below="@id/bottom_sheet_dialog_close_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/edit_text"
+            android:id="@+id/refresh_layout"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="49dp"
+            app:srlEnableRefresh="false"
+            app:srlEnableAutoLoadMore="false"
+            app:srlEnableLoadMore="true"
+            app:srlEnableFooterTranslationContent="false"
+            app:srlEnableHeaderTranslationContent="false"
+            app:srlEnableNestedScrolling="false">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/common_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <TextView
+            android:id="@+id/edit_text"
+            android:layout_width="match_parent"
+            android:layout_height="49dp"
+            android:hint="@string/comment_tips"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="14sp"
+            android:background="@null"
+            android:layout_alignParentBottom="true"
+            android:paddingLeft="11dp"
+            android:inputType="text"
+            android:imeOptions="actionSend"
+            android:enabled="true"/>
+
+        <com.meishe.yangquan.wiget.MaterialProgress
+            android:id="@+id/loading"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/no_data_tip"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data_tip"
+        android:textSize="16sp"
+        android:textColor="@color/white"
+        android:layout_centerInParent="true"/>
+</RelativeLayout>

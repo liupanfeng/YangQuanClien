@@ -56,7 +56,7 @@ public class MessageFragmentList extends BaseRecyclerFragment{
         MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mRecyclerView);
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(adapter);
-
+        adapter.setFragment(this);
         for (int i = 0; i < 10; i++) {
             Message message=new Message();
             message.setNickname("牧羊人"+i);

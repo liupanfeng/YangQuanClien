@@ -2,6 +2,7 @@ package com.meishe.yangquan.adapter;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -19,9 +20,13 @@ import com.meishe.yangquan.activity.ServiceTypeListActivity;
 import com.meishe.yangquan.activity.VersionUpdateActivity;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.EndInfo;
+import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
+import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
+import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
+import com.meishe.yangquan.fragment.CommentBottomSheetDialogFragment;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -30,6 +35,7 @@ import com.meishe.yangquan.view.ListLoadingView;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.EmptyHolder;
 import com.meishe.yangquan.viewhoder.FooterHolder;
+import com.meishe.yangquan.wiget.MaterialProgress;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +43,8 @@ import java.util.List;
 public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewHolder> implements View.OnClickListener {
 
     protected BaseRecyclerFragment mFragment;
+
+    protected MaterialProgress materialProgress;
 
     private static final int VIEW_TYPE_BASE = 100;
     protected final int VIEW_TYPE_EMPTY = VIEW_TYPE_BASE;                                               //上滑正在加载
@@ -128,6 +136,14 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         onItemClick(v);
     }
 
+    public void setMaterialProgress(MaterialProgress materialProgress) {
+        this.materialProgress = materialProgress;
+    }
+
+    public MaterialProgress getMaterialProgress() {
+        return materialProgress;
+    }
+
     /**
      * 处理点击事件
      *
@@ -164,7 +180,45 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     break;
 
             }
+        }else if (info instanceof SheepNews){
+            ToastUtil.showToast(mContext,"暂无历史数据");
+        }else if (info instanceof ServerCustomer){
+            switch (v.getId()){
+                case R.id.btn_order:
+                    ToastUtil.showToast(mContext,"预约推送研发中");
+                    break;
+                case R.id.iv_service_zan:
+                    final MaterialProgress materialProgress=getMaterialProgress();
+                    if (materialProgress!=null){
+                        materialProgress.show();
+                    }
+
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            materialProgress.hide();
+                            ToastUtil.showToast(mContext,"点赞成功");
+                        }
+                    },2000);
+
+                    break;
+            }
+
+        }else if (info instanceof Message){
+
+            switch (v.getId()){
+                case R.id.iv_message_comment:
+                case R.id.tv_message_comment:
+                    CommentBottomSheetDialogFragment fragment = new CommentBottomSheetDialogFragment();
+                    fragment.show(mFragment.getFragmentManager(),"dialog");
+                    break;
+                case R.id.btn_message_start_connect:
+                    ToastUtil.showToast(mContext,"系统繁忙，稍后再联系！");
+                    break;
+            }
+
         }
+
     }
 
     /**

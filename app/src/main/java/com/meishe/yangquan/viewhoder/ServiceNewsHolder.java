@@ -3,6 +3,7 @@ package com.meishe.yangquan.viewhoder;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +20,7 @@ public class ServiceNewsHolder extends BaseViewHolder {
 
     private TextView mTvServiceType;
     private ImageView mIvServiceType;
-    private LinearLayout mLlServiceType;
+    private Button mBtnCheckHistory;
 
     public ServiceNewsHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -30,7 +31,7 @@ public class ServiceNewsHolder extends BaseViewHolder {
     protected void initViewHolder(View view, Object ...obj) {
         mTvServiceType=view.findViewById(R.id.tv_service_type);
         mIvServiceType=view.findViewById(R.id.iv_service_type);
-        mLlServiceType=view.findViewById(R.id.ll_service_type);
+        mBtnCheckHistory=view.findViewById(R.id.btn_check_history);
     }
 
     @Override
@@ -38,8 +39,8 @@ public class ServiceNewsHolder extends BaseViewHolder {
 //        ServiceTypeInfo serviceTypeInfo= (ServiceTypeInfo) info;
 //        mTvServiceType.setText(serviceTypeInfo.getName());
 //        mIvServiceType.setBackgroundResource(serviceTypeInfo.getIcon());
-//        mLlServiceType.setOnClickListener(listener);
-//        mLlServiceType.setTag(info);
+        mBtnCheckHistory.setOnClickListener(listener);
+        mBtnCheckHistory.setTag(info);
     }
 
 

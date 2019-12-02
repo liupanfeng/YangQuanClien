@@ -72,6 +72,7 @@ public class RegisterActivity extends BaseActivity  {
     @Override
     public void initData() {
         mTitleBar.setTextCenter("注册");
+        mTitleBar.setBackImageVisible(View.VISIBLE);
         mUserTypeArray = getResources().getStringArray(R.array.user_type_spinner_values);
     }
 

@@ -36,7 +36,7 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
 
     private List mFragmentList;
     private List mListTitle;
-    private ViewPager mViewPager;
+    private MViewPager mViewPager;
     private TabLayout mTabLayout;
     private Context mContext;
     private ArrayList<TabInfo> mTabList;
@@ -90,6 +90,7 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
 
     @Override
     protected void initData() {
+
 
         for (int i = 0; i < UserType.getMessageTypeName().size(); i++) {
             TabLayout.Tab tab = mTabLayout.newTab();
@@ -149,6 +150,7 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),0,mContext, list,UserType.getMessageTypeName()));
         mViewPager.setCurrentItem(0);
         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setScroll(true);
     }
 
 
