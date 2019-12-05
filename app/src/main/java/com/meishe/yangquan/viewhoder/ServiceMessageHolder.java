@@ -9,24 +9,30 @@ import android.widget.TextView;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.ServiceNotifyInfo;
+import com.meishe.yangquan.bean.ServiceMessage;
 
-public class ServiceNotifyHolder extends BaseViewHolder {
+/**
+ * 服务 无线循环消息
+ */
+public class ServiceMessageHolder extends BaseViewHolder {
     private TextView mTvContent;
-    public ServiceNotifyHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
+    public ServiceMessageHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter=adapter;
     }
 
     @Override
     protected void initViewHolder(View view, Object ...obj) {
-        mTvContent=view.findViewById(R.id.tv_notify_content);
+        mTvContent=view.findViewById(R.id.tv_message_content);
     }
 
     @Override
     public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
-        ServiceNotifyInfo notifyInfo= (ServiceNotifyInfo) info;
-        mTvContent.setText(notifyInfo.getContent());
+        if (info instanceof ServiceMessage){
+            ServiceMessage serviceMessage= (ServiceMessage) info;
+            mTvContent.setText(serviceMessage.getContent());
+        }
+
     }
 
 

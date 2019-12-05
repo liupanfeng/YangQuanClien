@@ -13,15 +13,19 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.bean.EndInfo;
+import com.meishe.yangquan.bean.ServiceMessage;
+import com.meishe.yangquan.bean.ServiceMessageResult;
 import com.meishe.yangquan.bean.ServiceNotifyInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
+import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.AutoPollRecyclerView;
 
-public class ServiceFragment extends BaseRecyclerFragment {
+import java.util.List;
+
+public class ServiceFragment extends BaseRecyclerFragment implements OnResponseListener {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final int PLUS_ONE_REQUEST_CODE = 0;
@@ -30,6 +34,9 @@ public class ServiceFragment extends BaseRecyclerFragment {
     private AutoPollRecyclerView mRecyclerView;
     private RecyclerView mServiceTypeRecycler;
     private RecyclerView mServiceNewsRecycler;
+    private static final int SERVICE_FLOW_MESSAGE=1;
+    private static final int SERVICE_SHEEEP_NEWS=2;
+    private MultiFunctionAdapter mServiceMessageAdapter;
 
     public ServiceFragment() {
     }
@@ -60,10 +67,31 @@ public class ServiceFragment extends BaseRecyclerFragment {
 
     @Override
     protected void initData() {
-        HttpRequestUtil.getInstance().getServiceMessageFromServer();
+
         initTopNotifyRecyclerView();
         initServiceTypeRecyclerView();
         initServiceNewsRecyclerView();
+        HttpRequestUtil.getInstance().getServiceMessageFromServer(SERVICE_FLOW_MESSAGE);
+        HttpRequestUtil.getInstance().setListener(this);
+    }
+
+
+    /**
+     * 头部系统通知
+     */
+    private void initTopNotifyRecyclerView() {
+        LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mServiceMessageAdapter=new MultiFunctionAdapter(mContext,mRecyclerView);
+        mRecyclerView.setAdapter(mServiceMessageAdapter);
+//        int index=6;
+//        mList.clear();
+//        for (int i = 0; i < index; i++) {
+//            ServiceNotifyInfo notifyInfo=new ServiceNotifyInfo();
+//            notifyInfo.setContent("*羊肉大涨价快来买啊，快来买快来买快来买……" +i);
+//            mList.add(notifyInfo);
+//        }
+
     }
 
     private void initServiceNewsRecyclerView() {
@@ -84,25 +112,7 @@ public class ServiceFragment extends BaseRecyclerFragment {
     }
 
 
-    /**
-     * 头部系统通知
-     */
-    private void initTopNotifyRecyclerView() {
-        LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
-        mRecyclerView.setLayoutManager(layoutManager);
-        MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mRecyclerView);
-        mRecyclerView.setAdapter(adapter);
-        int index=6;
-        mList.clear();
-        for (int i = 0; i < index; i++) {
-            ServiceNotifyInfo notifyInfo=new ServiceNotifyInfo();
-            notifyInfo.setContent("*羊肉大涨价快来买啊，快来买快来买快来买……" +i);
-            mList.add(notifyInfo);
-        }
-        adapter.setNeedAutoScroll(true);
-        adapter.addAll(mList);
-        mRecyclerView.start();
-    }
+
 
     /**
      * 服务类型
@@ -150,5 +160,39 @@ public class ServiceFragment extends BaseRecyclerFragment {
         if (mRecyclerView!=null){
             mRecyclerView.start();
         }
+    }
+
+    @Override
+    public void onSuccess(Object object) {
+
+    }
+
+    @Override
+    public void onSuccess(int type, Object object) {
+        switch (type){
+            case SERVICE_FLOW_MESSAGE:
+                if (object instanceof ServiceMessageResult){
+                    List<ServiceMessage> messageList = ((ServiceMessageResult) object).getData();
+                    if (messageList!=null&&messageList.size()>0){
+                        mServiceMessageAdapter.setNeedAutoScroll(true);
+                        mServiceMessageAdapter.addAll(messageList);
+                        mRecyclerView.start();
+                    }
+                }
+                break;
+            case SERVICE_SHEEEP_NEWS:
+
+                break;
+        }
+    }
+
+    @Override
+    public void onError(Object obj) {
+
+    }
+
+    @Override
+    public void onError(int type, Object obj) {
+
     }
 }

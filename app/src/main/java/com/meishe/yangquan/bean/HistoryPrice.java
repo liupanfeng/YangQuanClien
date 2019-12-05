@@ -11,7 +11,7 @@ public class HistoryPrice {
 
     private String sheepPrice;
 
-    private Date newsTime;
+    private Date createTime;
 
     private String remarks;
 
@@ -47,12 +47,12 @@ public class HistoryPrice {
         this.sheepPrice = sheepPrice == null ? null : sheepPrice.trim();
     }
 
-    public Date getNewsTime() {
-        return newsTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setNewsTime(Date newsTime) {
-        this.newsTime = newsTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getRemarks() {

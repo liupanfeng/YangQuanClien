@@ -13,9 +13,9 @@ public class Comment {
 
     private String nickName;
 
-    private Date time;
-
     private String content;
+
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -57,19 +57,19 @@ public class Comment {
         this.nickName = nickName == null ? null : nickName.trim();
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

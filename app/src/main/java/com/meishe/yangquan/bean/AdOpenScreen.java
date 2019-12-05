@@ -1,11 +1,15 @@
 package com.meishe.yangquan.bean;
 
+import java.util.Date;
+
 public class AdOpenScreen {
     private Integer id;
 
     private String adUrl;
 
     private String adDescription;
+
+    private Date time;
 
     public Integer getId() {
         return id;
@@ -29,5 +33,13 @@ public class AdOpenScreen {
 
     public void setAdDescription(String adDescription) {
         this.adDescription = adDescription == null ? null : adDescription.trim();
+    }
+
+    public Date getTime() {
+        return time;
+    }
+
+    public void setTime(Date time) {
+        this.time = time;
     }
 }

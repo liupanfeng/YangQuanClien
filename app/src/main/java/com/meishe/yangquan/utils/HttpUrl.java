@@ -2,7 +2,7 @@ package com.meishe.yangquan.utils;
 
 public class HttpUrl {
 
-    private static final String URL = "http://59.110.142.42:8080/yangquan-server/";
+    private static final String URL = "http://59.110.142.42:8080/";
 
     /*登录*/
     public static final String  USER_LOGIN =URL+"user/login";

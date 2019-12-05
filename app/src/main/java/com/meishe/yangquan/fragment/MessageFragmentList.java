@@ -60,7 +60,7 @@ public class MessageFragmentList extends BaseRecyclerFragment{
         for (int i = 0; i < 10; i++) {
             Message message=new Message();
             message.setNickname("牧羊人"+i);
-            message.setMessage("羊大又肥"+i);
+            message.setContent("羊大又肥"+i);
             mList.add(message);
         }
 

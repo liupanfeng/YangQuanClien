@@ -9,7 +9,9 @@ public class UserToken {
 
     private Date createTime;
 
-    private String nickname;
+    private Long userId;
+
+    private String phoneNumber;
 
     public Integer getId() {
         return id;
@@ -35,11 +37,19 @@ public class UserToken {
         this.createTime = createTime;
     }
 
-    public String getNickname() {
-        return nickname;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname == null ? null : nickname.trim();
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber == null ? null : phoneNumber.trim();
     }
 }

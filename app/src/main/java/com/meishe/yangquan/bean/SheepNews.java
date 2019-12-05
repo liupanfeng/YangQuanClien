@@ -2,9 +2,6 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
-/**
- * 咨询新闻
- */
 public class SheepNews extends BaseInfo{
     private Integer id;
 
@@ -14,7 +11,7 @@ public class SheepNews extends BaseInfo{
 
     private String sheepPrice;
 
-    private Date publishTime;
+    private Date createTime;
 
     private String remarks;
 
@@ -50,12 +47,12 @@ public class SheepNews extends BaseInfo{
         this.sheepPrice = sheepPrice == null ? null : sheepPrice.trim();
     }
 
-    public Date getPublishTime() {
-        return publishTime;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setPublishTime(Date publishTime) {
-        this.publishTime = publishTime;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 
     public String getRemarks() {

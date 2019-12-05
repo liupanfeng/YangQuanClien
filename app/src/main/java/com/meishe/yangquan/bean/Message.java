@@ -2,13 +2,12 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
-/**
- * 用户发的状态
- */
 public class Message extends BaseInfo{
     private Integer id;
 
     private Long userId;
+
+    private Integer userType;
 
     private Long messageId;
 
@@ -16,13 +15,13 @@ public class Message extends BaseInfo{
 
     private String nickname;
 
-    private Integer start;
+    private Integer star;
 
-    private String message;
+    private String content;
 
-    private String messagUrl;
+    private String contentUrl;
 
-    private Date time;
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -38,6 +37,14 @@ public class Message extends BaseInfo{
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
     }
 
     public Long getMessageId() {
@@ -64,35 +71,35 @@ public class Message extends BaseInfo{
         this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public Integer getStart() {
-        return start;
+    public Integer getStar() {
+        return star;
     }
 
-    public void setStart(Integer start) {
-        this.start = start;
+    public void setStar(Integer star) {
+        this.star = star;
     }
 
-    public String getMessage() {
-        return message;
+    public String getContent() {
+        return content;
     }
 
-    public void setMessage(String message) {
-        this.message = message == null ? null : message.trim();
+    public void setContent(String content) {
+        this.content = content == null ? null : content.trim();
     }
 
-    public String getMessagUrl() {
-        return messagUrl;
+    public String getContentUrl() {
+        return contentUrl;
     }
 
-    public void setMessagUrl(String messagUrl) {
-        this.messagUrl = messagUrl == null ? null : messagUrl.trim();
+    public void setContentUrl(String contentUrl) {
+        this.contentUrl = contentUrl == null ? null : contentUrl.trim();
     }
 
-    public Date getTime() {
-        return time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setTime(Date time) {
-        this.time = time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

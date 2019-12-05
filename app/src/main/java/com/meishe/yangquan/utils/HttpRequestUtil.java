@@ -4,9 +4,12 @@ import android.content.Context;
 import android.util.Log;
 
 import com.googlecode.openbeans.PropertyDescriptor;
+import com.meishe.yangquan.App;
+import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.ADOpenScreenResult;
 import com.meishe.yangquan.bean.AdOpenScreen;
 import com.meishe.yangquan.bean.ServerCustomerResult;
+import com.meishe.yangquan.bean.ServiceMessageResult;
 import com.meishe.yangquan.bean.SheepNewsResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.bean.UserResult;
@@ -28,6 +31,7 @@ public class HttpRequestUtil {
 
     private static final HttpRequestUtil ourInstance = new HttpRequestUtil();
 
+
     public OnResponseListener getListener() {
         return listener;
     }
@@ -37,8 +41,9 @@ public class HttpRequestUtil {
     }
 
     private  OnResponseListener listener;
-
+    private static Context mContext;
     public static HttpRequestUtil getInstance() {
+        mContext= App.getContext();
         return ourInstance;
     }
 
@@ -133,12 +138,13 @@ public class HttpRequestUtil {
     }
 
     /**
-     * 服务滚动消息
+     * 服务循环消息
+     * type 1 ：头部循环消息  2. 咨询消息
      */
-    public  void  getServiceMessageFromServer(){
+    public  void  getServiceMessageFromServer(final int type){
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_MESSAGE, new BaseCallBack<ADOpenScreenResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_MESSAGE, new BaseCallBack<ServiceMessageResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -150,10 +156,10 @@ public class HttpRequestUtil {
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, ADOpenScreenResult result) {
+            protected void onSuccess(Call call, Response response, ServiceMessageResult result) {
                 if (result != null||result.getStatus()==200) {
                     if (listener!=null){
-                        listener.onSuccess(result);
+                        listener.onSuccess(type,result);
                     }
                 }
             }
@@ -165,7 +171,9 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
             }
 
             @Override
@@ -223,8 +231,9 @@ public class HttpRequestUtil {
 
     /**
      * 咨询新闻
+     * type :2 表示咨询新闻
      */
-    public  void  getServiceNewsFromServer(){
+    public  void  getServiceNewsFromServer(final int type){
 
         HashMap<String, Object> requestParam = new HashMap<>();
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_SHEEP_NEWS, new BaseCallBack<SheepNewsResult>() {
@@ -242,7 +251,7 @@ public class HttpRequestUtil {
             protected void onSuccess(Call call, Response response, SheepNewsResult result) {
                 if (result != null||result.getStatus()==200) {
                     if (listener!=null){
-                        listener.onSuccess(result);
+                        listener.onSuccess(type,result);
                     }
                 }
             }

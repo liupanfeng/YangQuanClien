@@ -2,8 +2,7 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
-public class User extends BaseInfo{
-
+public class User {
     private Integer id;
 
     private Long userId;
@@ -22,7 +21,11 @@ public class User extends BaseInfo{
 
     private Integer sex;
 
+    private Integer star;
+
     private Date birthday;
+
+    private String autograph;
 
     private Date startWork;
 
@@ -44,7 +47,7 @@ public class User extends BaseInfo{
 
     private String dockingFinance;
 
-    private String autograph;
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -118,12 +121,28 @@ public class User extends BaseInfo{
         this.sex = sex;
     }
 
+    public Integer getStar() {
+        return star;
+    }
+
+    public void setStar(Integer star) {
+        this.star = star;
+    }
+
     public Date getBirthday() {
         return birthday;
     }
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public String getAutograph() {
+        return autograph;
+    }
+
+    public void setAutograph(String autograph) {
+        this.autograph = autograph == null ? null : autograph.trim();
     }
 
     public Date getStartWork() {
@@ -206,13 +225,11 @@ public class User extends BaseInfo{
         this.dockingFinance = dockingFinance == null ? null : dockingFinance.trim();
     }
 
-    public String getAutograph() {
-        return autograph;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setAutograph(String autograph) {
-        this.autograph = autograph == null ? null : autograph.trim();
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
-
-
 }

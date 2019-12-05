@@ -1,5 +1,7 @@
 package com.meishe.yangquan.bean;
 
+import java.util.Date;
+
 public class ServerCustomer extends BaseInfo{
     private Integer id;
 
@@ -9,9 +11,15 @@ public class ServerCustomer extends BaseInfo{
 
     private String photoUrl;
 
-    private String title;
+    private String nickname;
 
-    private String description;
+    private String autograph;
+
+    private Integer userType;
+
+    private Integer star;
+
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -45,19 +53,43 @@ public class ServerCustomer extends BaseInfo{
         this.photoUrl = photoUrl == null ? null : photoUrl.trim();
     }
 
-    public String getTitle() {
-        return title;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setTitle(String title) {
-        this.title = title == null ? null : title.trim();
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
     }
 
-    public String getDescription() {
-        return description;
+    public String getAutograph() {
+        return autograph;
     }
 
-    public void setDescription(String description) {
-        this.description = description == null ? null : description.trim();
+    public void setAutograph(String autograph) {
+        this.autograph = autograph == null ? null : autograph.trim();
+    }
+
+    public Integer getUserType() {
+        return userType;
+    }
+
+    public void setUserType(Integer userType) {
+        this.userType = userType;
+    }
+
+    public Integer getStar() {
+        return star;
+    }
+
+    public void setStar(Integer star) {
+        this.star = star;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

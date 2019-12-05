@@ -58,7 +58,7 @@ public class ServiceTypeListFragment extends BaseRecyclerFragment {
         int index=12;
         for (int i = 0; i <index ; i++) {
             ServerCustomer serverCustomer=new ServerCustomer();
-            serverCustomer.setDescription("服务信息"+i);
+            serverCustomer.setAutograph("服务信息"+i);
             mList.add(serverCustomer);
         }
         adapter.addAll(mList);

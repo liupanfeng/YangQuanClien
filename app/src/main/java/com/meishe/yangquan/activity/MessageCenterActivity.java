@@ -57,7 +57,17 @@ public class MessageCenterActivity extends BaseActivity {
     }
 
     @Override
+    public void onSuccess(int type, Object object) {
+
+    }
+
+    @Override
     public void onError(Object obj) {
+
+    }
+
+    @Override
+    public void onError(int type, Object obj) {
 
     }
 

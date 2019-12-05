@@ -12,14 +12,14 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
-import com.meishe.yangquan.bean.ServiceNotifyInfo;
+import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceNewsHolder;
-import com.meishe.yangquan.viewhoder.ServiceNotifyHolder;
+import com.meishe.yangquan.viewhoder.ServiceMessageHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeListHolder;
 
@@ -35,9 +35,9 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
         View view=null;
         BaseViewHolder viewHolder =super.onCreateViewHolder(parent,viewType);
         switch (viewType){
-            case VIEW_SERVICE_NOTIFY:
-                view=mLayoutInflater.inflate(R.layout.item_service_notify,parent,false);
-                viewHolder=new ServiceNotifyHolder(view,this);
+            case VIEW_SERVICE_MESSAGE:
+                view=mLayoutInflater.inflate(R.layout.item_service_message,parent,false);
+                viewHolder=new ServiceMessageHolder(view,this);
                 break;
             case VIEW_SERVICE_TYPE:
                 view=mLayoutInflater.inflate(R.layout.item_service_type,parent,false);
@@ -76,8 +76,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
         }else{
             baseInfo=getItem(position);
         }
-        if (baseInfo instanceof ServiceNotifyInfo){
-            return VIEW_SERVICE_NOTIFY;
+        if (baseInfo instanceof ServiceMessage){
+            return VIEW_SERVICE_MESSAGE;
         }else if (baseInfo instanceof ServiceTypeInfo){
             return VIEW_SERVICE_TYPE;
         }else if (baseInfo instanceof ServerCustomer){

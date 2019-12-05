@@ -7,11 +7,13 @@ public class BusinessOpportunity {
 
     private Long fromUserId;
 
+    private String fromPhoneNumber;
+
     private Long toUserId;
 
-    private Date time;
-
     private String content;
+
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -29,6 +31,14 @@ public class BusinessOpportunity {
         this.fromUserId = fromUserId;
     }
 
+    public String getFromPhoneNumber() {
+        return fromPhoneNumber;
+    }
+
+    public void setFromPhoneNumber(String fromPhoneNumber) {
+        this.fromPhoneNumber = fromPhoneNumber == null ? null : fromPhoneNumber.trim();
+    }
+
     public Long getToUserId() {
         return toUserId;
     }
@@ -37,19 +47,19 @@ public class BusinessOpportunity {
         this.toUserId = toUserId;
     }
 
-    public Date getTime() {
-        return time;
-    }
-
-    public void setTime(Date time) {
-        this.time = time;
-    }
-
     public String getContent() {
         return content;
     }
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

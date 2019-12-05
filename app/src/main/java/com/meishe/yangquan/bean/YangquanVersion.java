@@ -2,12 +2,12 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
-public class SystemMessage {
+public class YangquanVersion {
     private Integer id;
 
-    private Long fromUserId;
+    private Integer versionCode;
 
-    private Long toUserId;
+    private String versionName;
 
     private String content;
 
@@ -21,20 +21,20 @@ public class SystemMessage {
         this.id = id;
     }
 
-    public Long getFromUserId() {
-        return fromUserId;
+    public Integer getVersionCode() {
+        return versionCode;
     }
 
-    public void setFromUserId(Long fromUserId) {
-        this.fromUserId = fromUserId;
+    public void setVersionCode(Integer versionCode) {
+        this.versionCode = versionCode;
     }
 
-    public Long getToUserId() {
-        return toUserId;
+    public String getVersionName() {
+        return versionName;
     }
 
-    public void setToUserId(Long toUserId) {
-        this.toUserId = toUserId;
+    public void setVersionName(String versionName) {
+        this.versionName = versionName == null ? null : versionName.trim();
     }
 
     public String getContent() {

@@ -1,5 +1,7 @@
 package com.meishe.yangquan.bean;
 
+import java.util.Date;
+
 public class ServerZan {
     private Integer id;
 
@@ -10,6 +12,8 @@ public class ServerZan {
     private String serverId;
 
     private Long userId;
+
+    private Date createTime;
 
     public Integer getId() {
         return id;
@@ -49,5 +53,13 @@ public class ServerZan {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

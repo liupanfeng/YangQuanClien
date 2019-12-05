@@ -50,7 +50,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected final int VIEW_TYPE_EMPTY = VIEW_TYPE_BASE;                                               //上滑正在加载
     protected final int VIEW_TYPE_LOADING = VIEW_TYPE_BASE + 1;                                         //上滑正在加载
     protected final int VIEW_TYPE_END = VIEW_TYPE_BASE + 2;                                             //分页结束
-    protected static final int VIEW_SERVICE_NOTIFY = VIEW_TYPE_BASE + 3;                                //顶部系统通知
+    protected static final int VIEW_SERVICE_MESSAGE = VIEW_TYPE_BASE + 3;                               //顶部无线循环消息
     protected static final int VIEW_SERVICE_TYPE = VIEW_TYPE_BASE + 4;                                  //服务类型
     protected static final int VIEW_SERVICE_TYPE_LIST = VIEW_TYPE_BASE + 5;                             //服务类型
     protected static final int VIEW_MINE_TYPE_LIST = VIEW_TYPE_BASE + 6;                                //我的中间菜单
