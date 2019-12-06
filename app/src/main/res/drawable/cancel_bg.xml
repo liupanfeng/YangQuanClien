@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@color/white" />
+    <corners android:topLeftRadius="@dimen/share_bottom_menu_corner"
+        android:topRightRadius="@dimen/share_bottom_menu_corner"
+        android:bottomRightRadius="@dimen/share_bottom_menu_corner"
+        android:bottomLeftRadius="@dimen/share_bottom_menu_corner"/>
+</shape>

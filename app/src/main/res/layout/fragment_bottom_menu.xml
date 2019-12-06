@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:background="#00000000"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ListView
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:id="@+id/lv_menu"
+            android:layout_width="match_parent"
+            android:divider="#7B7D8A"
+            android:dividerHeight="1dp"
+            android:layout_height="wrap_content">
+
+        </ListView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_menu_layout_color"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_menu_btn_height"
+            android:layout_margin="@dimen/bottom_menu_btn_margin"
+            android:background="@drawable/bottom_menu_cancal_selector"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/bottom_menu_btn_text_stress_color"
+            android:textSize="@dimen/bottom_menu_btn_text_size"
+            tools:text="取消">
+
+        </TextView>
+    </LinearLayout>
+
+
+</LinearLayout>

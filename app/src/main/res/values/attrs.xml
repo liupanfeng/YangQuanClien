@@ -19,6 +19,14 @@
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="CropCircleView">
+        <!--遮罩颜色-->
+        <attr name="maskColor" format="color" />
+        <attr name="borderColor" format="color" />
+        <attr name="radius" format="dimension" />
+        <attr name="maxScale" format="float" />
+        <attr name="doubleClickScale" format="float" />
 
+    </declare-styleable>
 
 </resources>

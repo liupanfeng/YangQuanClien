@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:tag="menu_item">
+
+    <TextView
+        android:id="@+id/menu_item"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_menu_btn_height"
+        android:background="@drawable/bottom_menu_cancal_selector"
+        android:gravity="center"
+        android:textColor="@color/bottom_menu_btn_text_stress_color"
+        android:textSize="@dimen/bottom_menu_btn_text_size" />
+
+
+</LinearLayout>

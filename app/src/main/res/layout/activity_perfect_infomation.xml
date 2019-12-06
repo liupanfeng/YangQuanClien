@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.meishe.yangquan.activity.VersionUpdateActivity">
 
@@ -11,24 +12,34 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
+            android:id="@+id/ll_photo"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:layout_width="65dp"
-                android:layout_height="65dp"
+            <com.meishe.yangquan.wiget.CustomRoundView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="27.5dp"
-                android:background="@mipmap/ic_mine_photo_default_daikuang"
+                app:corner_radius="40dp">
 
-                />
+                <com.meishe.yangquan.view.CircleImageView
+                    android:id="@+id/iv_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@mipmap/ic_little_sheep"
+                    android:scaleType="centerCrop"
+                    />
+
+            </com.meishe.yangquan.wiget.CustomRoundView>
+
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10.5dp"
-                android:text="点击上传头像"
+                android:text="点击更改头像"
                 android:textColor="#ff858585"
                 android:textSize="14sp" />
 
