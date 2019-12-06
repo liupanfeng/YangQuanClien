@@ -29,7 +29,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
         //设置视图
         setContentView(initRootView());
         mContext=this;
-        HttpRequestUtil.getInstance().setListener(this);
+        HttpRequestUtil.getInstance(mContext).setListener(this);
         initView();
         initData();
         initTitle();

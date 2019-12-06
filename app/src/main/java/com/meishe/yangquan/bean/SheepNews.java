@@ -11,9 +11,11 @@ public class SheepNews extends BaseInfo{
 
     private String sheepPrice;
 
-    private Date createTime;
+    private long createTime;
 
     private String remarks;
+
+    private boolean isNeedShowLabel=false;
 
     public Integer getId() {
         return id;
@@ -47,11 +49,11 @@ public class SheepNews extends BaseInfo{
         this.sheepPrice = sheepPrice == null ? null : sheepPrice.trim();
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 
@@ -62,4 +64,13 @@ public class SheepNews extends BaseInfo{
     public void setRemarks(String remarks) {
         this.remarks = remarks == null ? null : remarks.trim();
     }
+
+    public boolean isNeedShowLabel() {
+        return isNeedShowLabel;
+    }
+
+    public void setNeedShowLabel(boolean needShowLabel) {
+        isNeedShowLabel = needShowLabel;
+    }
+
 }

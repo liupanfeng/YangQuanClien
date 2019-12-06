@@ -56,6 +56,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_MINE_TYPE_LIST = VIEW_TYPE_BASE + 6;                                //我的中间菜单
     protected static final int VIEW_MESSAGE_TYPE_LIST = VIEW_TYPE_BASE + 7 ;                            //信息页面List列表
     protected static final int VIEW_SERVICE_NEWS_TYPE_LIST = VIEW_TYPE_BASE + 8;                        //服务咨询新闻列表
+    protected static final int VIEW_SERVICE_LABEL = VIEW_TYPE_BASE + 9;                        //服务标签
 
 
 

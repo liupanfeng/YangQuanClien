@@ -7,6 +7,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         android:clipChildren="false"
         android:clipToPadding="false">
 
@@ -28,63 +29,54 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
 
-                    <LinearLayout
-                        android:id="@+id/ll_top_notify"
-                        android:layout_width="match_parent"
-                        android:layout_height="200dp"
-                        android:background="@mipmap/ic_service_notification_bg"
-                        android:gravity="center_vertical">
 
-                        <com.meishe.yangquan.view.AutoPollRecyclerView
-                            android:id="@+id/recycler"
-                            android:layout_width="match_parent"
-                            android:layout_height="90dp">
-
-                        </com.meishe.yangquan.view.AutoPollRecyclerView>
-                    </LinearLayout>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/service_type_recycler"
-                        android:layout_width="match_parent"
-                        android:layout_height="160dp"
-                        android:layout_below="@+id/ll_top_notify"
-                        android:background="@color/white" />
-
-                </RelativeLayout>
 
 
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
 
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
-            android:id="@+id/refreshLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srlEnableAutoLoadMore="false"
-            app:srlEnableFooterTranslationContent="false"
-            app:srlEnableHeaderTranslationContent="false"
-            app:srlEnableScrollContentWhenLoaded="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <com.scwang.smartrefresh.header.MaterialHeader
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-            </com.scwang.smartrefresh.header.MaterialHeader>
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/service_news_recycler"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
 
     </android.support.design.widget.CoordinatorLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/ll_top_notify"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="@mipmap/ic_service_notification_bg"
+            android:gravity="center_vertical">
+
+            <com.meishe.yangquan.view.AutoPollRecyclerView
+                android:id="@+id/recycler"
+                android:layout_width="match_parent"
+                android:layout_height="90dp">
+
+            </com.meishe.yangquan.view.AutoPollRecyclerView>
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/service_type_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_below="@+id/ll_top_notify"
+            android:background="@color/white" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/service_news_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/service_type_recycler"
+            />
+
+    </RelativeLayout>
+
+
 
 
 </RelativeLayout>

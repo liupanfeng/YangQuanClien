@@ -39,6 +39,12 @@ public abstract class BaseRecyclerFragment extends Fragment {
         mContext=context;
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mContext=null;
+    }
+
     protected abstract View initView(LayoutInflater inflater, ViewGroup container);
     protected abstract void initListener();
     protected abstract void initData();

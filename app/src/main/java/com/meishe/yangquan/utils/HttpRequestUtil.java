@@ -42,8 +42,8 @@ public class HttpRequestUtil {
 
     private  OnResponseListener listener;
     private static Context mContext;
-    public static HttpRequestUtil getInstance() {
-        mContext= App.getContext();
+    public static HttpRequestUtil getInstance(Context context) {
+        mContext= context;
         return ourInstance;
     }
 
@@ -218,7 +218,9 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
             }
 
             @Override
@@ -263,7 +265,9 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
             }
 
             @Override

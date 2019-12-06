@@ -13,16 +13,19 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceMessageResult;
-import com.meishe.yangquan.bean.ServiceNotifyInfo;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
+import com.meishe.yangquan.bean.SheepNewsResult;
 import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.AutoPollRecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceFragment extends BaseRecyclerFragment implements OnResponseListener {
@@ -35,8 +38,9 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
     private RecyclerView mServiceTypeRecycler;
     private RecyclerView mServiceNewsRecycler;
     private static final int SERVICE_FLOW_MESSAGE=1;
-    private static final int SERVICE_SHEEEP_NEWS=2;
+    private static final int SERVICE_SHEEP_NEWS =2;
     private MultiFunctionAdapter mServiceMessageAdapter;
+    private MultiFunctionAdapter mSheepNewsAdapter;
 
     public ServiceFragment() {
     }
@@ -71,8 +75,9 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
         initTopNotifyRecyclerView();
         initServiceTypeRecyclerView();
         initServiceNewsRecyclerView();
-        HttpRequestUtil.getInstance().getServiceMessageFromServer(SERVICE_FLOW_MESSAGE);
-        HttpRequestUtil.getInstance().setListener(this);
+        HttpRequestUtil.getInstance(mContext).getServiceMessageFromServer(SERVICE_FLOW_MESSAGE);
+        HttpRequestUtil.getInstance(mContext).getServiceNewsFromServer(SERVICE_SHEEP_NEWS);
+        HttpRequestUtil.getInstance(mContext).setListener(this);
     }
 
 
@@ -84,31 +89,24 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
         mRecyclerView.setLayoutManager(layoutManager);
         mServiceMessageAdapter=new MultiFunctionAdapter(mContext,mRecyclerView);
         mRecyclerView.setAdapter(mServiceMessageAdapter);
-//        int index=6;
-//        mList.clear();
-//        for (int i = 0; i < index; i++) {
-//            ServiceNotifyInfo notifyInfo=new ServiceNotifyInfo();
-//            notifyInfo.setContent("*羊肉大涨价快来买啊，快来买快来买快来买……" +i);
-//            mList.add(notifyInfo);
-//        }
 
     }
 
     private void initServiceNewsRecyclerView() {
         LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
         mServiceNewsRecycler.setLayoutManager(layoutManager);
-        MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mServiceNewsRecycler);
-        mServiceNewsRecycler.setAdapter(adapter);
-        int index=12;
-        mList.clear();
-        for (int i = 0; i <index ; i++) {
-            SheepNews sheepNews=new SheepNews();
-            sheepNews.setSheepName("东北羊");
-            sheepNews.setSheepPrice("30.5");
-            mList.add(sheepNews);
-        }
+        mSheepNewsAdapter=new MultiFunctionAdapter(mContext,mServiceNewsRecycler);
+        mServiceNewsRecycler.setAdapter(mSheepNewsAdapter);
+//        int index=12;
+//        mList.clear();
+//        for (int i = 0; i <index ; i++) {
+//            SheepNews sheepNews=new SheepNews();
+//            sheepNews.setSheepName("东北羊");
+//            sheepNews.setSheepPrice("30.5");
+//            mList.add(sheepNews);
+//        }
 //        mList.add(new EndInfo());
-        adapter.addAll(mList);
+
     }
 
 
@@ -180,7 +178,14 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
                     }
                 }
                 break;
-            case SERVICE_SHEEEP_NEWS:
+            case SERVICE_SHEEP_NEWS:
+                if (object instanceof SheepNewsResult){
+                    List<SheepNews> sheepNews = ((SheepNewsResult) object).getData();
+                    if (sheepNews!=null&&sheepNews.size()>0){
+                        sheepNews.get(0).setNeedShowLabel(true);
+                        mSheepNewsAdapter.addAll(sheepNews);
+                    }
+                }
 
                 break;
         }

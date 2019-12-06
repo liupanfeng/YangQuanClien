@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
@@ -18,7 +19,8 @@ import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
-import com.meishe.yangquan.viewhoder.ServiceNewsHolder;
+import com.meishe.yangquan.viewhoder.ServiceLabelHolder;
+import com.meishe.yangquan.viewhoder.ServiceSheepNewsHolder;
 import com.meishe.yangquan.viewhoder.ServiceMessageHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeListHolder;
@@ -57,7 +59,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 break;
             case VIEW_SERVICE_NEWS_TYPE_LIST:
                 view=mLayoutInflater.inflate(R.layout.item_service_news_type,parent,false);
-                viewHolder=new ServiceNewsHolder(view,this);
+                viewHolder=new ServiceSheepNewsHolder(view,this);
+                break;
+            case VIEW_SERVICE_LABEL:
+                view=mLayoutInflater.inflate(R.layout.item_label_server,parent,false);
+                viewHolder=new ServiceLabelHolder(view,this);
                 break;
         }
         return viewHolder;
@@ -88,6 +94,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MESSAGE_TYPE_LIST;
         }else if (baseInfo instanceof SheepNews){
             return VIEW_SERVICE_NEWS_TYPE_LIST;
+        }else if (baseInfo instanceof Label){
+            return VIEW_SERVICE_LABEL;
         }
         return super.getItemViewType(position);
     }
