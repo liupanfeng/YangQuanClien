@@ -153,7 +153,7 @@ public class LoginActivity extends BaseActivity  {
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
                 mMaterialProgress.hide();
-                if (response.code()!=200){
+                if (result.getStatus()!=200){
                     ToastUtil.showToast(mContext,"请先注册再登录");
                     return;
                 }

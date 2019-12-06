@@ -103,7 +103,6 @@ public class MaterialProgress extends RelativeLayout {
                 public void onAnimationEnd(Animator animation) {
                     super.onAnimationEnd(animation);
                     mIsVisible = true;
-
                     start();
 
                 }

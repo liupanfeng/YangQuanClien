@@ -1,4 +1,4 @@
-package com.meishe.yangquan.wiget;
+package com.meishe.yangquan.view;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;

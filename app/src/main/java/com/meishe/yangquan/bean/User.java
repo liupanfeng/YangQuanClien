@@ -47,7 +47,7 @@ public class User {
 
     private String dockingFinance;
 
-    private Date createTime;
+    private long createTime;
 
     public Integer getId() {
         return id;
@@ -225,11 +225,11 @@ public class User {
         this.dockingFinance = dockingFinance == null ? null : dockingFinance.trim();
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 }

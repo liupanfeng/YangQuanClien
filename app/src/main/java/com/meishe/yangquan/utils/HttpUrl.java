@@ -2,10 +2,19 @@ package com.meishe.yangquan.utils;
 
 public class HttpUrl {
 
-    private static final String URL = "http://59.110.142.42:8080/";
+    public static final String URL = "http://59.110.142.42:8080/";
+
+//    public static final String URL = "http://192.168.10.26:8080/";
+
 
     /*登录*/
     public static final String  USER_LOGIN =URL+"user/login";
+    /*获取用户信息*/
+    public static final String  URL_GET_USER =URL+"user/get/token";
+
+    /*完善用户信息*/
+    public static final String  URL_UPDATE_USER =URL+"user/update";
+
     /*注册*/
     public static final String  USER_REGISTER =URL+ "user/register";
 
@@ -37,9 +46,8 @@ public class HttpUrl {
     /*获取版本数据*/
     public static final String  URL_MINE_VERSION=URL+ "version/select";
 
-
-
-
+    /*上传图片*/
+    public static final String  URL_PHOTO_UPLOAD=URL+ "photo/upload";
 
 
 

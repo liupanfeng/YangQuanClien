@@ -164,8 +164,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                         AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
                         return;
                     }
-                    ToastUtil.showToast(mContext,"研发中敬请期待");
-//                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
+//                    ToastUtil.showToast(mContext,"研发中敬请期待");
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
                     break;
                 case "消息中心":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MessageCenterActivity.class);

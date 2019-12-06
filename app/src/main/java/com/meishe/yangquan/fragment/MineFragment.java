@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.UserManager;
 
 
@@ -39,6 +41,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
     private LinearLayout mLLLogin;
     private TextView mTvNumber;
     private ImageView mIvMinePhoto;
+    private TextView mTvNickname;
 
     public MineFragment() {
     }
@@ -75,6 +78,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         mLLLogin = view.findViewById(R.id.ll_login);
         mIvMinePhoto = view.findViewById(R.id.iv_mine_photo);
         mTvNumber = view.findViewById(R.id.tv_number);
+        mTvNickname = view.findViewById(R.id.tv_nickname);
         return view;
     }
 
@@ -110,20 +114,31 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         User user=UserManager.getInstance(getContext()).getUser();
         if (user!=null){
             mTvNumber.setText(user.getPhoneNumber());
+            mTvNickname.setText(user.getNickname());
+            String photoUrl=user.getPhotoUrl();
+            RequestOptions options = new RequestOptions();
+            options.diskCacheStrategy(DiskCacheStrategy.ALL);
+            options.circleCrop();
+            options.placeholder(R.mipmap.ic_little_sheep);
+            Glide.with(mContext)
+                    .asBitmap()
+                    .load(HttpUrl.URL+photoUrl)
+                    .apply(options)
+                    .into(mIvMinePhoto);
         }else{
-            mTvNumber.setText("");
+            RequestOptions options = new RequestOptions();
+            options.diskCacheStrategy(DiskCacheStrategy.ALL);
+            options.circleCrop();
+            options.placeholder(R.mipmap.ic_little_sheep);
+            Glide.with(mContext)
+                    .asBitmap()
+                    .load("")
+                    .apply(options)
+                    .into(mIvMinePhoto);
         }
 
 
-        RequestOptions options = new RequestOptions();
-        options.diskCacheStrategy(DiskCacheStrategy.ALL);
-        options.circleCrop();
-        options.placeholder(R.mipmap.girl);
-        Glide.with(mContext)
-                .asBitmap()
-                .load("")
-                .apply(options)
-                .into(mIvMinePhoto);
+
 
 
 

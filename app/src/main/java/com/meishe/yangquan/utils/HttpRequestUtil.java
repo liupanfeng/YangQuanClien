@@ -95,6 +95,143 @@ public class HttpRequestUtil {
         }, requestParam);
     }
 
+
+    public void getUserByToken(String token) {
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put(Constants.token, token);
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_USER, new BaseCallBack<UserResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UserResult result) {
+                if (result != null) {
+                    User user=result.getData();
+                    if (user!=null){
+                        UserManager.getInstance(App.getContext()).setUser(user);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+    public void uploadUserPhoto(long userId,String key,String content) {
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("key", key);
+        requestParam.put("conetnt", content);
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_PHOTO_UPLOAD, new BaseCallBack<UserResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UserResult result) {
+                if (result != null) {
+                    User user=result.getData();
+                    if (user!=null){
+                        UserManager.getInstance(App.getContext()).setUser(user);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
+    public void uploadUserInfo(long userId,String type,String content) {
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("userId", userId);
+        requestParam.put("type", type);
+        requestParam.put("conetnt", content);
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_UPDATE_USER, new BaseCallBack<UserResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UserResult result) {
+                if (result != null) {
+                    User user=result.getData();
+                    if (user!=null){
+                        UserManager.getInstance(App.getContext()).setUser(user);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
     /**
      * 获取开屏广告
      */

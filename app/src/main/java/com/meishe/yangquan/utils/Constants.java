@@ -11,6 +11,8 @@ public  class Constants {
 
     public static String phoneNumber="phoneNumber";
 
+    public static String token="token";
+
     public static String nickname="nickname";
 
     public static String photoUrl="photoUrl";
