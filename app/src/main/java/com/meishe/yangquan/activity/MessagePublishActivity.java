@@ -150,22 +150,24 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
 
     @Override
     public void onSuccess(Object object) {
-
+        ToastUtil.showToast(mContext,"发布成功");
+        finish();
     }
 
     @Override
     public void onSuccess(int type, Object object) {
-
+        ToastUtil.showToast(mContext,"发布成功");
+        finish();
     }
 
     @Override
     public void onError(Object obj) {
-
+        ToastUtil.showToast(mContext,"发布失败");
     }
 
     @Override
     public void onError(int type, Object obj) {
-
+        ToastUtil.showToast(mContext,"发布失败");
     }
 
     private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {

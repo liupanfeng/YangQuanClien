@@ -13,8 +13,6 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceMessageResult;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
@@ -25,7 +23,6 @@ import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.AutoPollRecyclerView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ServiceFragment extends BaseRecyclerFragment implements OnResponseListener {
