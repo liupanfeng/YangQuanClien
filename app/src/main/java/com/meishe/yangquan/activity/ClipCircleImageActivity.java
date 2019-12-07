@@ -15,8 +15,6 @@ import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CaptureAndEditUtil;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.view.CropCircleView;
-import com.meishe.yangquan.wiget.MaterialProgress;
-
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -38,7 +36,6 @@ public class ClipCircleImageActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            mloadingView.hide();
             switch (msg.what){
                 case COVER_SUCCESS:
                     if (msg.obj!=null){
@@ -57,7 +54,6 @@ public class ClipCircleImageActivity extends AppCompatActivity {
             }
         }
     };
-    private MaterialProgress mloadingView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +77,6 @@ public class ClipCircleImageActivity extends AppCompatActivity {
         mComplete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mloadingView.show();
                 new Thread(){
                     @Override
                     public void run() {
@@ -130,7 +125,6 @@ public class ClipCircleImageActivity extends AppCompatActivity {
 
     private void initView() {
         mClipImage = (CropCircleView) findViewById(R.id.clip_image);
-        mloadingView = (MaterialProgress) findViewById(R.id.loading);
         mCancel = (TextView) findViewById(R.id.cancel);
         mComplete = (TextView) findViewById(R.id.complete);
     }

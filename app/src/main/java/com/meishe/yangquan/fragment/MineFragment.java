@@ -117,8 +117,8 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             mTvNickname.setText(user.getNickname());
             String photoUrl=user.getPhotoUrl();
             RequestOptions options = new RequestOptions();
-            options.diskCacheStrategy(DiskCacheStrategy.ALL);
             options.circleCrop();
+            options .skipMemoryCache(true) ;// 不使用内存缓存
             options.placeholder(R.mipmap.ic_little_sheep);
             Glide.with(mContext)
                     .asBitmap()

@@ -8,6 +8,7 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.ADOpenScreenResult;
 import com.meishe.yangquan.bean.AdOpenScreen;
+import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.bean.ServerCustomerResult;
 import com.meishe.yangquan.bean.ServiceMessageResult;
 import com.meishe.yangquan.bean.SheepNewsResult;
@@ -210,6 +211,9 @@ public class HttpRequestUtil {
                     User user=result.getData();
                     if (user!=null){
                         UserManager.getInstance(App.getContext()).setUser(user);
+                        if (listener!=null){
+                            listener.onSuccess(user);
+                        }
                     }
                 }
             }
@@ -224,6 +228,10 @@ public class HttpRequestUtil {
                 if (e instanceof com.google.gson.JsonParseException) {
                     ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
                 }
+                if (listener!=null){
+                    listener.onError(e);
+                }
+
             }
 
             @Override
@@ -414,6 +422,66 @@ public class HttpRequestUtil {
             }
         }, requestParam);
     }
+
+
+    /**
+     * 发布消息
+     */
+    public  void  publishMessage(String token, int sheepType, String content, String iconBase64){
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("token",token);
+        requestParam.put("sheepType",sheepType);
+        requestParam.put("content",content);
+        requestParam.put("iconBase64",iconBase64);
+        OkHttpManager.getInstance().postRequest(HttpUrl.MESSAGE_PUBLISH, new BaseCallBack<MessageResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (listener!=null){
+                    listener.onError(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, MessageResult result) {
+                if (result!=null) {
+                    if (result.getStatus()!=200){
+                        ToastUtil.showToast(mContext,result.getMsg());
+                        return;
+                    }
+                    if (listener!=null){
+                        listener.onSuccess(result.getData());
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
+                if (listener!=null){
+                    listener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
 
 
     /**

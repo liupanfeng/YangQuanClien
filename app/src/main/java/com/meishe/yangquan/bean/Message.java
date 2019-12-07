@@ -21,7 +21,7 @@ public class Message extends BaseInfo{
 
     private String contentUrl;
 
-    private Date createTime;
+    private long createTime;
 
     public Integer getId() {
         return id;
@@ -95,11 +95,11 @@ public class Message extends BaseInfo{
         this.contentUrl = contentUrl == null ? null : contentUrl.trim();
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 }

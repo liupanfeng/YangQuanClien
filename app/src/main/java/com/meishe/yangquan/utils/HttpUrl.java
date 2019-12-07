@@ -53,6 +53,10 @@ public class HttpUrl {
     public static final String  TEST_UPLOAD=URL+ "fileUpload";
 
 
+    /*发布消息*/
+    public static final String  MESSAGE_PUBLISH=URL+ "message/add";
+
+
 
 
 

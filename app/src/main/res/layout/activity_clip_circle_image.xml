@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
     android:layout_height="match_parent">
 
@@ -34,47 +35,52 @@
 
     <RelativeLayout
         android:id="@+id/bottom_layout"
-        android:background="#313142"
         android:layout_width="match_parent"
         android:layout_alignParentBottom="true"
+        android:layout_marginBottom="15dp"
         android:layout_height="50dp">
 
-        <Button
-            android:id="@+id/cancel"
-            android:layout_centerVertical="true"
+        <com.meishe.yangquan.wiget.CustomRoundView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="15dp"
-            android:text="取消"
-            android:textColor="#067AFE"
-            android:background="@color/white"
-            android:textSize="18sp" />
+            app:corner_radius="5dp"
+            android:layout_marginLeft="15dp">
 
-        <Button
-            android:id="@+id/complete"
-            android:layout_centerVertical="true"
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:textColor="#067AFE"
+                android:background="@color/white"
+                android:textSize="18sp" />
+
+        </com.meishe.yangquan.wiget.CustomRoundView>
+
+        <com.meishe.yangquan.wiget.CustomRoundView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
             android:layout_marginRight="15dp"
-            android:text="确定"
-            android:background="@color/white"
-            android:textColor="#067AFE"
-            android:textSize="18sp" />
+            app:corner_radius="5dp"
+            android:layout_marginLeft="15dp">
 
+            <Button
+                android:id="@+id/complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="确定"
+                android:background="@color/white"
+                android:textColor="#067AFE"
+                android:textSize="18sp" />
 
-
+        </com.meishe.yangquan.wiget.CustomRoundView>
 
 
     </RelativeLayout>
-
-
-    <com.meishe.yangquan.wiget.MaterialProgress
-        android:id="@+id/loading"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true" />
 
 
 </RelativeLayout>

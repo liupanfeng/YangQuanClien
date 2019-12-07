@@ -14,12 +14,14 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessagePublishActivity;
 import com.meishe.yangquan.adapter.MessageViewPagerAdapter;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.TabInfo;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.CustomToolbar;
@@ -161,8 +163,12 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        Bundle bundle=new Bundle();
-        bundle.putInt("currentPosition",mCurrentPosition);
-        AppManager.getInstance().jumpActivity(getActivity(), MessagePublishActivity.class,bundle);
+        if (!UserManager.getInstance(mContext).isNeedLogin()){
+            Bundle bundle=new Bundle();
+            bundle.putInt("currentPosition",mCurrentPosition);
+            AppManager.getInstance().jumpActivity(getActivity(), MessagePublishActivity.class,bundle);
+        }else{
+            AppManager.getInstance().jumpActivity(getActivity(), LoginActivity.class);
+        }
     }
 }

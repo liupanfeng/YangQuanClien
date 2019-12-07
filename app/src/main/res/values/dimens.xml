@@ -38,4 +38,10 @@
     <dimen name="bottom_menu_btn_text_size">18sp</dimen>
     <dimen name="bottom_menu_layout_margin">8dp</dimen>
 
+
+    <dimen name="dialog_downLoadMusic_buttonHeight">30dp</dimen>
+    <dimen name="dialog_downLoadMusic_buttonWeight">100dp</dimen>
+    <dimen name="dialog_downLoadMusic_buttonRoundCorner">15dp</dimen>
+
+
 </resources>

@@ -20,13 +20,30 @@
         android:hint="编辑您需要发布的内容"
         />
 
-    <ImageView
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@mipmap/ic_upload_pic"
+    <RelativeLayout
+        android:layout_width="140dp"
         android:layout_marginTop="40dp"
         android:layout_marginLeft="28dp"
-        />
+        android:layout_height="140dp">
+        <ImageView
+            android:id="@+id/iv_select_icon"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:scaleType="centerCrop"
+            android:background="@mipmap/ic_upload_pic"
+            android:layout_centerInParent="true"
+            />
+
+        <ImageView
+            android:id="@+id/iv_show_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            />
+
+    </RelativeLayout>
+
+
 
     <TextView
         android:id="@+id/tv_type"
@@ -67,6 +84,17 @@
 
     </RadioGroup>
 
+    <com.meishe.yangquan.view.CropCircleView
+        android:id="@+id/clip_image"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="80dp"
+        android:layout_centerInParent="true"
+        android:background="@color/black"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
 

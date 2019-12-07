@@ -777,8 +777,13 @@ public class CropCircleView extends View {
         }
 
     }
+    private boolean needPerformTouch=true;
+    public void needPerformTouchEvent(boolean need){
+        needPerformTouch=need;
+    }
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (!needPerformTouch)return false;
         scaleGestureDetector.onTouchEvent(event);
         gestureDetector.onTouchEvent(event);
         switch (event.getAction()){

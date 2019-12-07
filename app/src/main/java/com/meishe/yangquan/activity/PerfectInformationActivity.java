@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +18,7 @@ import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -31,14 +31,15 @@ import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
-import com.meishe.yangquan.utils.UploadUtil;
+import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.wiget.CustomToolbar;
+import com.meishe.yangquan.wiget.IosDialog;
+import com.meishe.yangquan.wiget.MaterialProgress;
 
 import java.io.File;
-import java.io.IOException;
 
 /**
  * 完善资料
@@ -59,6 +60,14 @@ public class PerfectInformationActivity extends BaseActivity {
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 201;
     public static final String IMAGE_PATH_ORIGINAL = "original_image";
     private User mUser;
+    private MaterialProgress mMpLoading;
+    private TextView mTvChangePhoto;
+    private RelativeLayout mRlNickName;
+    private TextView mTvNickNameContent;                                        //显示签名
+    private IosDialog mDialog;
+    private String mNickname;
+    private TextView mTvPhoneNumber;
+    private RelativeLayout mRlPhoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,23 +82,32 @@ public class PerfectInformationActivity extends BaseActivity {
     @Override
     public void initView() {
         mToolbar = findViewById(R.id.toolbar);
-        mllPhoto = findViewById(R.id.ll_photo);
         mIvPhoto = findViewById(R.id.iv_photo);
+        mTvChangePhoto = findViewById(R.id.tv_change_photo);
+        mRlNickName = findViewById(R.id.rl_nickname);
+        mTvPhoneNumber = findViewById(R.id.tv_phone_number_content);
+        mMpLoading = findViewById(R.id.mp_loading);
+        mTvNickNameContent = findViewById(R.id.tv_nickname_content);
+        mRlPhoneNumber = findViewById(R.id.rl_phone_number);
     }
 
     @Override
     public void initData() {
-        mUser=UserManager.getInstance(this).getUser();
-        if (mUser!=null){
-            String photoUrl=mUser.getPhotoUrl();
-            if (!TextUtils.isEmpty(photoUrl)){
+        HttpRequestUtil.getInstance(PerfectInformationActivity.this).setListener(this);
+        mUser = UserManager.getInstance(this).getUser();
+        if (mUser != null) {
+
+            mTvPhoneNumber.setText(mUser.getPhoneNumber());
+            mTvNickNameContent.setText(mUser.getNickname());
+
+            String photoUrl = mUser.getPhotoUrl();
+            if (!TextUtils.isEmpty(photoUrl)) {
                 RequestOptions options = new RequestOptions();
-                options.diskCacheStrategy(DiskCacheStrategy.ALL);
                 options.circleCrop();
+                options .skipMemoryCache(true) ;
                 options.placeholder(R.mipmap.ic_little_sheep);
                 Glide.with(mContext)
-                        .asBitmap()
-                        .load(HttpUrl.URL+photoUrl)
+                        .load(HttpUrl.URL + photoUrl)
                         .apply(options)
                         .into(mIvPhoto);
             }
@@ -107,7 +125,10 @@ public class PerfectInformationActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        mllPhoto.setOnClickListener(this);
+        mTvChangePhoto.setOnClickListener(this);
+        mIvPhoto.setOnClickListener(this);
+        mRlNickName.setOnClickListener(this);
+        mRlPhoneNumber.setOnClickListener(this);
     }
 
     @Override
@@ -117,15 +138,21 @@ public class PerfectInformationActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.ll_photo:
+        switch (v.getId()) {
+            case R.id.tv_change_photo:
+            case R.id.iv_photo:
                 changePhoto();
+                break;
+            case R.id.rl_nickname:
+                showDialog();
+                break;
+            case R.id.rl_phone_number:
+                ToastUtil.showToast(mContext,"手机号不可更改");
                 break;
         }
     }
 
     private void changePhoto() {
-
         new BottomMenuFragment(PerfectInformationActivity.this)
                 .addMenuItems(new MenuItem("拍照"))
                 .addMenuItems(new MenuItem("相册"))
@@ -204,22 +231,25 @@ public class PerfectInformationActivity extends BaseActivity {
 
     @Override
     public void onSuccess(Object object) {
-
+        hideLoading();
+        if (object instanceof User){
+            mUser= (User) object;
+        }
     }
 
     @Override
     public void onSuccess(int type, Object object) {
-
+        hideLoading();
     }
 
     @Override
     public void onError(Object obj) {
-
+        hideLoading();
     }
 
     @Override
     public void onError(int type, Object obj) {
-
+        hideLoading();
     }
 
     private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
@@ -237,7 +267,7 @@ public class PerfectInformationActivity extends BaseActivity {
         if (cursor != null) {
             if (cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
-                if (columnIndex >= 0){
+                if (columnIndex >= 0) {
                     path = cursor.getString(columnIndex);
                 }
             }
@@ -245,7 +275,6 @@ public class PerfectInformationActivity extends BaseActivity {
         }
         return path;
     }
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -287,7 +316,6 @@ public class PerfectInformationActivity extends BaseActivity {
                     }
                     if (imagePath != null) {
                         tempFile = new File(imagePath);
-//                        uploadFile(tempFile);
                         startPhotoZoom();
                     }
                 }
@@ -300,10 +328,11 @@ public class PerfectInformationActivity extends BaseActivity {
                         return;
                     File tempCoverFile = new File(PathUtils.getPersonalCoverImageDirectory(), PathUtils.getTempCoverImageName(mContext));
                     Bitmap bitMap = BitmapFactory.decodeFile(tempCoverFile.getAbsolutePath());
-                    if (bitMap!=null){
+                    if (bitMap != null) {
                         mIvPhoto.setImageBitmap(bitMap);
                     }
-                    uploadUserPhoto("icon", Util.bitmaptoString(bitMap));
+                    showLoading();
+                    uploadUserInfo("icon", Util.bitmaptoString(bitMap));
                 }
         }
     }
@@ -318,13 +347,57 @@ public class PerfectInformationActivity extends BaseActivity {
 
     }
 
+    public void showLoading() {
+        if (mMpLoading != null) {
+            mMpLoading.show();
+        }
+    }
 
-    private void uploadUserPhoto(String type, String bitmapString) {
-        if (mUser!=null){
-            long userId=mUser.getUserId();
-            HttpRequestUtil.getInstance(PerfectInformationActivity.this).uploadUserInfo(userId,type,bitmapString);
+
+    public void hideLoading() {
+        if (mMpLoading != null) {
+            mMpLoading.hide();
+        }
+    }
+
+
+    private void uploadUserInfo(String type, String content) {
+        if (mUser != null) {
+            long userId = mUser.getUserId();
+            HttpRequestUtil.getInstance(PerfectInformationActivity.this).uploadUserInfo(userId, type, content);
         }
 
     }
+
+    private void showDialog() {
+        if (mUser!=null){
+            mNickname = mUser.getNickname();
+        }
+        mDialog = new IosDialog.DialogBuilder(this)
+                .setInputContent(mNickname)
+                //.setDialogSize(Util.dip2px(MainActivity.this,189),Util.dip2px(MainActivity.this,117))
+                .addListener(new IosDialog.OnButtonClickListener() {
+                    @Override
+                    public void onAsureClick() {
+                        String newNickname=mDialog.getmEtInputContent().getText().toString().trim();
+                        if (TextUtils.isEmpty(newNickname)){
+                            ToastUtil.showToast(mContext,"请输入您想要修改的昵称");
+                        }else{
+                            mTvNickNameContent.setText(newNickname);
+                            uploadUserInfo("nickname",newNickname);
+                            showLoading();
+                            mDialog.dismiss();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+                        mDialog.dismiss();
+                    }
+                }).create();
+    }
+
+
 
 }

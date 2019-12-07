@@ -56,4 +56,9 @@
 
     <color name="titlewhite">#F2F7FD</color>
 
+
+    <!-- 音乐下载dialog -->
+    <color name="dialog_downLoadMusic_button_nomal">#FFFFFFFF</color>
+    <color name="dialog_downLoadMusic_button_click">#0078FF</color>
+
 </resources>

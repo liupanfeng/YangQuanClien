@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,8 +7,11 @@
     android:orientation="vertical"
     tools:context="com.meishe.yangquan.activity.VersionUpdateActivity">
 
-    <include layout="@layout/custom_toolbar_layout" />
+    <include
+        android:id="@+id/include"
+        layout="@layout/custom_toolbar_layout" />
     <android.support.v4.widget.NestedScrollView
+        android:layout_below="@+id/include"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <LinearLayout
@@ -35,6 +38,7 @@
 
 
             <TextView
+                android:id="@+id/tv_change_photo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
@@ -84,6 +88,8 @@
                     android:layout_marginRight="13dip"
                     android:text="牧羊人"
                     android:layout_centerVertical="true"
+                    android:singleLine="true"
+                    android:ellipsize="end"
                     android:gravity="left"
                     android:textSize="12sp"
                     android:clickable="false"
@@ -130,7 +136,6 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@id/iv_phone_number"
                     android:layout_marginRight="13dip"
-                    android:text="18810765555"
                     android:layout_centerVertical="true"
                     android:gravity="left"
                     android:textSize="12sp"
@@ -244,7 +249,11 @@
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
+    <com.meishe.yangquan.wiget.MaterialProgress
+        android:id="@+id/mp_loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true" />
 
 
-
-</LinearLayout>
+</RelativeLayout>
