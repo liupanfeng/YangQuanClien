@@ -17,6 +17,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.inter.OnResponseListener;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -513,5 +514,38 @@ public class HttpRequestUtil {
     }
 
 
+    public void uploadFile(File tempFile, String s) {
+        HashMap<String, String> requestParam = new HashMap<>();
+        OkHttpManager.getInstance().postUploadSingleImage(HttpUrl.TEST_UPLOAD, new BaseCallBack<String>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
 
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, String o) {
+                Log.d("lpf","onSuccess");
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                Log.d("lpf","onEror");
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        },tempFile,s,requestParam);
+    }
 }

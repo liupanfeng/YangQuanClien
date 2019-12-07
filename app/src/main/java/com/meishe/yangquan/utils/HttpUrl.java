@@ -4,7 +4,7 @@ public class HttpUrl {
 
     public static final String URL = "http://59.110.142.42:8080/";
 
-//    public static final String URL = "http://192.168.10.26:8080/";
+   // public static final String URL = "http://192.168.10.26:8080/";
 
 
     /*登录*/
@@ -48,6 +48,9 @@ public class HttpUrl {
 
     /*上传图片*/
     public static final String  URL_PHOTO_UPLOAD=URL+ "photo/upload";
+
+    /*Test 上传图片*/
+    public static final String  TEST_UPLOAD=URL+ "fileUpload";
 
 
 

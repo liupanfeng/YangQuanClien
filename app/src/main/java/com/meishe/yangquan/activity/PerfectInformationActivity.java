@@ -31,12 +31,14 @@ import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
+import com.meishe.yangquan.utils.UploadUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.wiget.CustomToolbar;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * 完善资料
@@ -78,20 +80,20 @@ public class PerfectInformationActivity extends BaseActivity {
     @Override
     public void initData() {
         mUser=UserManager.getInstance(this).getUser();
-//        if (mUser!=null){
-//            String photoUrl=mUser.getPhotoUrl();
-//            if (TextUtils.isEmpty(photoUrl)){
-//                RequestOptions options = new RequestOptions();
-//                options.diskCacheStrategy(DiskCacheStrategy.ALL);
-//                options.circleCrop();
-//                options.placeholder(R.mipmap.ic_little_sheep);
-//                Glide.with(mContext)
-//                        .asBitmap()
-//                        .load(HttpUrl.URL+photoUrl)
-//                        .apply(options)
-//                        .into(mIvPhoto);
-//            }
-//        }
+        if (mUser!=null){
+            String photoUrl=mUser.getPhotoUrl();
+            if (!TextUtils.isEmpty(photoUrl)){
+                RequestOptions options = new RequestOptions();
+                options.diskCacheStrategy(DiskCacheStrategy.ALL);
+                options.circleCrop();
+                options.placeholder(R.mipmap.ic_little_sheep);
+                Glide.with(mContext)
+                        .asBitmap()
+                        .load(HttpUrl.URL+photoUrl)
+                        .apply(options)
+                        .into(mIvPhoto);
+            }
+        }
 
     }
 
@@ -194,7 +196,6 @@ public class PerfectInformationActivity extends BaseActivity {
      * 相册
      */
     private void setLocalPhoto() {
-
         Intent albumIntent = new Intent(Intent.ACTION_PICK, null);
         albumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         startActivityForResult(albumIntent, ALBUM_REQUEST_CODE);
@@ -286,6 +287,7 @@ public class PerfectInformationActivity extends BaseActivity {
                     }
                     if (imagePath != null) {
                         tempFile = new File(imagePath);
+//                        uploadFile(tempFile);
                         startPhotoZoom();
                     }
                 }
@@ -301,7 +303,7 @@ public class PerfectInformationActivity extends BaseActivity {
                     if (bitMap!=null){
                         mIvPhoto.setImageBitmap(bitMap);
                     }
-                    uploadUserPhoto("photo", Util.bitmaptoString(bitMap));
+                    uploadUserPhoto("icon", Util.bitmaptoString(bitMap));
                 }
         }
     }
