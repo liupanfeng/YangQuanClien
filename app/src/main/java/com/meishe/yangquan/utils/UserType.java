@@ -42,8 +42,8 @@ public class UserType {
 
     public static List<String> getMessageTypeName(){
         List<String> list=new ArrayList<>();
-        list.add("卖羊");
-        list.add("买羊");
+        list.add("出售羊");
+        list.add("购买羊");
         list.add("售饲料");
         list.add("售兽药");
         list.add("羊五金");

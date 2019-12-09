@@ -4,7 +4,7 @@ public class HttpUrl {
 
     public static final String URL = "http://59.110.142.42:8080/";
 
-   // public static final String URL = "http://192.168.10.26:8080/";
+//    public static final String URL = "http://192.168.10.14:8080/";
 
 
     /*登录*/

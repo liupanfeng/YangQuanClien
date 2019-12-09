@@ -8,6 +8,7 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.ADOpenScreenResult;
 import com.meishe.yangquan.bean.AdOpenScreen;
+import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.bean.ServerCustomerResult;
 import com.meishe.yangquan.bean.ServiceMessageResult;
@@ -27,6 +28,8 @@ import okhttp3.Request;
 import okhttp3.Response;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
+
 public class HttpRequestUtil {
 
     private static final String TAG=HttpRequestUtil.class.getSimpleName();
@@ -504,7 +507,7 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, MessageResult result) {
-                if (result != null&&result.getStatus()==200) {
+                if (response != null&&response.code()==200) {
                     if (listener!=null){
                         listener.onSuccess(result);
                     }
@@ -518,7 +521,6 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-
                 if (listener!=null){
                     listener.onError(e);
                 }

@@ -25,14 +25,16 @@
             android:layout_height="60dp"
             android:orientation="vertical">
 
-            <ImageView
+            <com.meishe.yangquan.view.RoundAngleImageView
                 android:id="@+id/iv_message_top_part"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@mipmap/ic_service_type_chedui" />
+                app:roundWidth="5dp"
+                app:roundHeight="5dp"
+                android:background="@mipmap/ic_photo_default" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -52,6 +54,7 @@
                     android:id="@+id/iv_message_star"
                     android:layout_width="10dp"
                     android:layout_height="10dp"
+                    android:visibility="gone"
                     android:background="@mipmap/ic_start" />
 
             </LinearLayout>
@@ -77,16 +80,18 @@
             android:layout_below="@+id/rl_top_part"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:text="车队服务，车队服务车队服务，车队服务车队服务，车队服务车队服务，车队服务……" />
+            android:text="" />
 
-        <ImageView
+        <com.meishe.yangquan.view.RoundAngleImageView
             android:id="@+id/iv_message"
             android:layout_width="115dp"
             android:layout_height="118dp"
             android:layout_below="@+id/tv_message_type_description"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
-            android:background="@mipmap/girl" />
+            app:roundHeight="6dp"
+            app:roundWidth="6dp"
+           />
 
         <RelativeLayout
             android:layout_marginLeft="10dp"

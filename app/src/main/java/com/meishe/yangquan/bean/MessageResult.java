@@ -1,6 +1,8 @@
 package com.meishe.yangquan.bean;
 
 
+import java.util.List;
+
 public class MessageResult {
 
     // 响应业务状态
@@ -9,8 +11,7 @@ public class MessageResult {
     // 响应消息
     private String msg;
 
-    //暂时先用单个对象 稍后改成list
-    private Message data;
+    private List<Message> data;
 
     public int getStatus() {
         return status;
@@ -28,12 +29,11 @@ public class MessageResult {
         this.msg = msg;
     }
 
-    public Message getData() {
+    public List<Message> getData() {
         return data;
     }
 
-    public void setData(Message data) {
+    public void setData(List<Message> data) {
         this.data = data;
     }
-
 }

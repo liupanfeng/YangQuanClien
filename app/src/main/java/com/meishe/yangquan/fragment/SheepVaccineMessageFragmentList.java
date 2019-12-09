@@ -6,27 +6,33 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.Message;
+import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.HttpRequestUtil;
-import com.meishe.yangquan.utils.ToastUtil;
 
-public class MessageFragmentList extends BaseRecyclerFragment implements OnResponseListener {
+import java.util.List;
+
+/**
+ * 羊车队伍
+ */
+public class SheepVaccineMessageFragmentList extends BaseRecyclerFragment implements OnResponseListener {
 
     private static final String TYPE = "type";
 
     private int type;
     private RecyclerView mRecyclerView;
+    private View mNoDate;
+    private MultiFunctionAdapter mAdapter;
 
-    public MessageFragmentList() {
+    public SheepVaccineMessageFragmentList() {
     }
 
-    public static MessageFragmentList newInstance(int type) {
-        MessageFragmentList fragment = new MessageFragmentList();
+    public static SheepVaccineMessageFragmentList newInstance(int type) {
+        SheepVaccineMessageFragmentList fragment = new SheepVaccineMessageFragmentList();
         Bundle args = new Bundle();
         args.putInt(TYPE, type);
         fragment.setArguments(args);
@@ -45,6 +51,7 @@ public class MessageFragmentList extends BaseRecyclerFragment implements OnRespo
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view=inflater.inflate(R.layout.fragment_message_fragment_list_layout,container,false);
         mRecyclerView=view.findViewById(R.id.recycler);
+        mNoDate=view.findViewById(R.id.view_no_data);
         return view;
     }
 
@@ -56,25 +63,28 @@ public class MessageFragmentList extends BaseRecyclerFragment implements OnRespo
     @Override
     protected void initData() {
         LinearLayoutManager manager=new LinearLayoutManager(mContext,RecyclerView.VERTICAL,false);
-        MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mRecyclerView);
+        mAdapter=new MultiFunctionAdapter(mContext,mRecyclerView);
         mRecyclerView.setLayoutManager(manager);
-        mRecyclerView.setAdapter(adapter);
-        adapter.setFragment(this);
-//        for (int i = 0; i < 10; i++) {
-//            Message message=new Message();
-//            message.setNickname("牧羊人"+i);
-//            message.setContent("羊大又肥"+i);
-//            mList.add(message);
-//        }
-//
-//        adapter.addAll(mList);
-//
-//        HttpRequestUtil.getInstance(getContext()).getMessageListFromServer(type);
-//        HttpRequestUtil.getInstance(getContext()).setListener(this);
+        mRecyclerView.setAdapter(mAdapter);
+        mAdapter.setFragment(this);
+        HttpRequestUtil.getInstance(getContext()).getMessageListFromServer(type);
+        HttpRequestUtil.getInstance(getContext()).setListener(this);
     }
 
     @Override
     public void onSuccess(Object object) {
+        MessageResult result= (MessageResult) object;
+        if (result==null&&result.getStatus()!=200){
+            setNoDataVisible(View.VISIBLE);
+            return;
+        }
+        List<Message> list=result.getData();
+        if (list!=null&&list.size()>0){
+            mAdapter.addAll(list);
+            setNoDataVisible(View.GONE);
+        }else{
+            setNoDataVisible(View.VISIBLE);
+        }
 
     }
 
@@ -85,11 +95,18 @@ public class MessageFragmentList extends BaseRecyclerFragment implements OnRespo
 
     @Override
     public void onError(Object obj) {
-        ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+        setNoDataVisible(View.VISIBLE);
     }
 
     @Override
     public void onError(int type, Object obj) {
 
+    }
+
+
+    public void setNoDataVisible(int visible){
+        if (mNoDate!=null){
+            mNoDate.setVisibility(visible);
+        }
     }
 }

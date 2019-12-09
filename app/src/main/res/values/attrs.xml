@@ -7,7 +7,7 @@
     </declare-styleable>
 
     <declare-styleable name="CustomRoundView">
-        <attr name="corner_radius"/>
+        <attr name="corner_radius" />
     </declare-styleable>
 
 
@@ -28,5 +28,14 @@
         <attr name="doubleClickScale" format="float" />
 
     </declare-styleable>
+
+
+    <declare-styleable name="RoundAngleImageView">  
+          <attr name="roundWidth" format="dimension" />  
+          <attr name="roundHeight" format="dimension" />  
+            
+    </declare-styleable>
+     
+
 
 </resources>
