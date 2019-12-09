@@ -9,6 +9,8 @@ public class ServiceTypeInfo extends BaseInfo{
 
     private int icon;
 
+    private int type;
+
     public String getName() {
         return name;
     }
@@ -23,5 +25,14 @@ public class ServiceTypeInfo extends BaseInfo{
 
     public void setIcon(int icon) {
         this.icon = icon;
+    }
+
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
+    public int getType() {
+        return type;
     }
 }

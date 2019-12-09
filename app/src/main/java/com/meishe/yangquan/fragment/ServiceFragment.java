@@ -123,6 +123,7 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
             ServiceTypeInfo typeInfo=new ServiceTypeInfo();
             typeInfo.setName(UserType.getServiceTypeName().get(i));
             typeInfo.setIcon(UserType.getUserTypeIcon().get(i));
+            typeInfo.setType(UserType.getUserType().get(i));
             mList.add(typeInfo);
         }
         adapter.addAll(mList);

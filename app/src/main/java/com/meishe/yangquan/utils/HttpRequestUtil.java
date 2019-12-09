@@ -350,7 +350,7 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, ServerCustomerResult result) {
-                if (result != null||result.getStatus()==200) {
+                if (result != null&&result.getStatus()==200) {
                     if (listener!=null){
                         listener.onSuccess(result);
                     }
@@ -487,11 +487,11 @@ public class HttpRequestUtil {
     /**
      * 信息列表
      */
-    public  void  getMessageListFromServer(int userType){
+    public void getMessageListFromServer(int userType){
 
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("userType",userType);
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_MESSAGE_LIST, new BaseCallBack<SheepNewsResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_MESSAGE_LIST, new BaseCallBack<MessageResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -503,8 +503,8 @@ public class HttpRequestUtil {
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, SheepNewsResult result) {
-                if (result != null||result.getStatus()==200) {
+            protected void onSuccess(Call call, Response response, MessageResult result) {
+                if (result != null&&result.getStatus()==200) {
                     if (listener!=null){
                         listener.onSuccess(result);
                     }
@@ -518,6 +518,10 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
+
+                if (listener!=null){
+                    listener.onError(e);
+                }
 
             }
 

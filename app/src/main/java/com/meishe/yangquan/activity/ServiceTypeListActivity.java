@@ -13,6 +13,7 @@ public class ServiceTypeListActivity extends BaseActivity {
 
 
     private String mTitle;
+    private int mUserType;
 
     @Override
     protected int initRootView() {
@@ -27,8 +28,10 @@ public class ServiceTypeListActivity extends BaseActivity {
     @Override
     public void initData() {
         Bundle bundle=getIntent().getExtras();
-        mTitle=bundle.getString("type");
-        ServiceTypeListFragment listFragment=ServiceTypeListFragment.newInstance("","");
+        mTitle=bundle.getString("name");
+        mUserType=bundle.getInt("type");
+
+        ServiceTypeListFragment listFragment=ServiceTypeListFragment.newInstance(mUserType);
         getSupportFragmentManager().beginTransaction().replace(R.id.service_type_container, listFragment).commit();
     }
 

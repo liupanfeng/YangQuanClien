@@ -154,7 +154,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         BaseInfo info = (BaseInfo) v.getTag();
         if (info instanceof ServiceTypeInfo) {
             Bundle bundle = new Bundle();
-            bundle.putString("type", ((ServiceTypeInfo) info).getName());
+            bundle.putString("name", ((ServiceTypeInfo) info).getName());
+            bundle.putInt("type", ((ServiceTypeInfo) info).getType());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
         } else if (info instanceof MineTypeInfo) {
             switch (((MineTypeInfo) info).getName()) {

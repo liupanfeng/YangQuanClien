@@ -176,6 +176,7 @@ public class RegisterActivity extends BaseActivity  {
                     int code=result.getStatus();
                     if (code==200){
                         ToastUtil.showToast(mContext,"注册成功请登录");
+                        finish();
                         return;
                     }
                     if (code==401){

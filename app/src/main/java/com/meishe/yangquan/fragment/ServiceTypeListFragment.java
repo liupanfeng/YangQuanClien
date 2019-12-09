@@ -10,27 +10,38 @@ import android.view.ViewGroup;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.ServerCustomer;
+import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
 public class ServiceTypeListFragment extends BaseRecyclerFragment {
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String USER_TYPE = "user_type";
 
     private RecyclerView mRecyclerView;
     private MaterialProgress mMpProgress;
 
+    private int mUserType;
+
     public ServiceTypeListFragment() {
+
     }
 
-    public static ServiceTypeListFragment newInstance(String param1, String param2) {
+    public static ServiceTypeListFragment newInstance( int userType) {
         ServiceTypeListFragment fragment = new ServiceTypeListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putInt(USER_TYPE, userType);
         fragment.setArguments(args);
         return fragment;
     }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            mUserType = getArguments().getInt(USER_TYPE);
+        }
+    }
+
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -54,14 +65,16 @@ public class ServiceTypeListFragment extends BaseRecyclerFragment {
         adapter.setFragment(this);
         adapter.setMaterialProgress(mMpProgress);
         mRecyclerView.setAdapter(adapter);
-        mList.clear();
-        int index=12;
-        for (int i = 0; i <index ; i++) {
-            ServerCustomer serverCustomer=new ServerCustomer();
-            serverCustomer.setAutograph("服务信息"+i);
-            mList.add(serverCustomer);
-        }
-        adapter.addAll(mList);
+
+        HttpRequestUtil.getInstance(getContext()).getServiceListFromServer(mUserType);
+//        mList.clear();
+//        int index=12;
+//        for (int i = 0; i <index ; i++) {
+//            ServerCustomer serverCustomer=new ServerCustomer();
+//            serverCustomer.setAutograph("服务信息"+i);
+//            mList.add(serverCustomer);
+//        }
+//        adapter.addAll(mList);
     }
 
 

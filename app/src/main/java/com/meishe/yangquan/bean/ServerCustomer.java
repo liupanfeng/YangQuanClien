@@ -19,7 +19,7 @@ public class ServerCustomer extends BaseInfo{
 
     private Integer star;
 
-    private Date createTime;
+    private long createTime;
 
     public Integer getId() {
         return id;
@@ -85,11 +85,13 @@ public class ServerCustomer extends BaseInfo{
         this.star = star;
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
+
+
 }
