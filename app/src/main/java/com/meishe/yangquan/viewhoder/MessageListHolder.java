@@ -63,7 +63,7 @@ public class MessageListHolder extends BaseViewHolder {
             String photoUrl=message.getPhotoUrl();
             Glide.with(context)
                     .asBitmap()
-                    .load(HttpUrl.URL+photoUrl)
+                    .load(HttpUrl.URL_IMAGE+photoUrl)
                     .apply(options)
                     .into(mIvMessageTopPart);
             mTvMessageNickName.setText(message.getNickname());
@@ -82,7 +82,7 @@ public class MessageListHolder extends BaseViewHolder {
             String contentUrl=message.getContentUrl();
             Glide.with(context)
                     .asBitmap()
-                    .load(HttpUrl.URL+contentUrl)
+                    .load(HttpUrl.URL_IMAGE+contentUrl)
                     .apply(options)
                     .into(mIvMessage);
 

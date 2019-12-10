@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class DateUtil {
 
-
+    public static final String FORMAT_TYPE="yyyy-MM-dd HH:mm:ss";
     // formatType格式为yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日 HH时mm分ss秒
     // data Date类型的时间
     public static String dateToString(Date data, String formatType) {

@@ -2,9 +2,12 @@ package com.meishe.yangquan.utils;
 
 public class HttpUrl {
 
-    public static final String URL = "http://59.110.142.42:8080/";
+     public static final String URL = "http://59.110.142.42:8080/";
 
 //    public static final String URL = "http://192.168.10.14:8080/";
+
+
+    public static final String URL_IMAGE = "http://59.110.142.42:8080";
 
 
     /*登录*/
@@ -35,6 +38,9 @@ public class HttpUrl {
 
     /*完善用户信息*/
     public static final String  URL_USER_UPDATE =URL+ "user/update";
+
+    /*获取消息中的数据*/
+    public static final String  URL_MESSAGE_CENTER_LIST =URL+ "notification/select";
 
 
     /*获取消息中心数据*/

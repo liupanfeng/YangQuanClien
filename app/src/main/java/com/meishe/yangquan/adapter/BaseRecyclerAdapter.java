@@ -57,6 +57,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_MESSAGE_TYPE_LIST = VIEW_TYPE_BASE + 7 ;                            //信息页面List列表
     protected static final int VIEW_SERVICE_NEWS_TYPE_LIST = VIEW_TYPE_BASE + 8;                        //服务咨询新闻列表
     protected static final int VIEW_SERVICE_LABEL = VIEW_TYPE_BASE + 9;                        //服务标签
+    protected static final int VIEW_MESSAGE_CENTER_LIST = VIEW_TYPE_BASE + 10;                        //消息中心
 
 
 
@@ -158,9 +159,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             bundle.putInt("type", ((ServiceTypeInfo) info).getType());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
         } else if (info instanceof MineTypeInfo) {
+            boolean isNeedLogin=UserManager.getInstance(mContext).isNeedLogin();
             switch (((MineTypeInfo) info).getName()) {
                 case "完善资料":
-                    boolean isNeedLogin=UserManager.getInstance(mContext).isNeedLogin();
                     if (isNeedLogin){
                         AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
                         return;
@@ -169,9 +170,17 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
                     break;
                 case "消息中心":
+                    if (isNeedLogin){
+                        AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
+                        return;
+                    }
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MessageCenterActivity.class);
                     break;
                 case "我的商机":
+                    if (isNeedLogin){
+                        AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
+                        return;
+                    }
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), BusinessOpportunityActivity.class);
                     break;
                 case "版本更新":

@@ -11,6 +11,9 @@ public class UserType {
 
     public static HashMap<String,Integer> userType;
 
+    /**
+     * 这个注册的时候用
+     */
     static {
         userType=new HashMap<>();
         userType.put("养殖户",1);
@@ -19,7 +22,7 @@ public class UserType {
         userType.put("售兽药",4);
         userType.put("羊五金",5);
         userType.put("羊粪队",6);
-        userType.put("羊车服务",7);
+        userType.put("羊车队",7);
         userType.put("剪羊毛",8);
         userType.put("疫苗服务",9);
         userType.put("幼崽经纪人",10);
@@ -32,7 +35,7 @@ public class UserType {
         list.add("售兽药");
         list.add("羊五金");
         list.add("羊粪队");
-        list.add("羊车服务");
+        list.add("羊车队");
         list.add("剪羊毛");
         list.add("疫苗服务");
         list.add("羊崽儿");

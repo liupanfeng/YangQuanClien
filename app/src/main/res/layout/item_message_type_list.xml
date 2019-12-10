@@ -34,7 +34,7 @@
                 android:layout_marginLeft="10dp"
                 app:roundWidth="5dp"
                 app:roundHeight="5dp"
-                android:background="@mipmap/ic_photo_default" />
+                 />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -48,6 +48,8 @@
                     android:id="@+id/tv_message_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textColor="@color/black"
                     android:text="牧羊人" />
 
                 <ImageView
@@ -80,6 +82,8 @@
             android:layout_below="@+id/rl_top_part"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:textColor="@color/black66"
+            android:textSize="14sp"
             android:text="" />
 
         <com.meishe.yangquan.view.RoundAngleImageView

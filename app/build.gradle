@@ -39,6 +39,9 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:28.0.0'
     implementation files('src/libs/openbeans-1.0.jar')
 
+    implementation 'org.greenrobot:eventbus:3.0.0'
+
+
     //推送
     implementation files('src/libs/jcore-android-2.2.2.jar')
     implementation files('src/libs/jpush-android-3.4.0.jar')

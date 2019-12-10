@@ -470,9 +470,6 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (e instanceof com.google.gson.JsonParseException) {
-                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
-                }
                 if (listener!=null){
                     listener.onError(e);
                 }

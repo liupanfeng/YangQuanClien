@@ -2,14 +2,17 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
-public class SystemNotification {
+/**
+ * 系统通知，展现在我的消息里边 包含一些系统推送的消息
+ */
+public class SystemNotification extends BaseInfo{
     private Integer id;
 
     private String content;
 
     private Integer userType;
 
-    private Date createTime;
+    private long createTime;
 
     public Integer getId() {
         return id;
@@ -35,11 +38,11 @@ public class SystemNotification {
         this.userType = userType;
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 }

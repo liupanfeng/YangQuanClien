@@ -53,4 +53,8 @@ public  class Constants {
     public static String MINE_VERSION_UPDATE="版本更新";
     public static String MINE_CONTACT_US="联系我们";
 
+
+
+    public static final String MESSAGE_EVENT_UPDATE_USER_UI = "update_user_ui";
+
 }

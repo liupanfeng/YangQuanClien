@@ -25,18 +25,29 @@ import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.MenuItem;
+import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.utils.HttpRequestUtil;
+import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.CropCircleView;
 import com.meishe.yangquan.wiget.CustomToolbar;
+import com.meishe.yangquan.wiget.MaterialProgress;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 信息发布
@@ -64,8 +75,9 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     private File tempFile;
     private ImageView mIvShowIcon;
 
-    private int mSheepType=0;
+    private int mSheepType = 0;
     private Bitmap showBitmap;
+    private MaterialProgress mp_loading;
 
 
     @Override
@@ -81,6 +93,7 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
         mEtInput = findViewById(R.id.et_input_publish_content);
         mIvSelectIcon = findViewById(R.id.iv_select_icon);
         mIvShowIcon = findViewById(R.id.iv_show_icon);
+        mp_loading = findViewById(R.id.mp_loading);
     }
 
     @Override
@@ -91,13 +104,13 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
             mCurrentPosition = bundle.getInt("currentPosition");
         }
 
-        mUser= UserManager.getInstance(this).getUser();
-        if (mUser!=null){
-            int userType=mUser.getUserType();
-            if (userType==1||userType==2||userType==10){
+        mUser = UserManager.getInstance(this).getUser();
+        if (mUser != null) {
+            int userType = mUser.getUserType();
+            if (userType == 1 || userType == 2 || userType == 10) {
                 mTvType.setVisibility(View.VISIBLE);
                 mRadioGroup.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 mTvType.setVisibility(View.GONE);
                 mRadioGroup.setVisibility(View.GONE);
             }
@@ -130,10 +143,10 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-           case  R.id.iv_select_icon:
-               showPictureSelectItem();
-            break;
+        switch (v.getId()) {
+            case R.id.iv_select_icon:
+                showPictureSelectItem();
+                break;
         }
     }
 
@@ -141,33 +154,89 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         RadioButton rb = findViewById(checkedId);
         CharSequence text = rb.getText();
-        if ("成品羊".equals(text)){
-            mSheepType=1;
-        }else if("羊崽儿".equals(text)){
-            mSheepType=2;
+        if ("成品羊".equals(text)) {
+            mSheepType = 1;
+        } else if ("羊崽儿".equals(text)) {
+            mSheepType = 2;
         }
     }
 
+
+    /**
+     * 发布消息
+     */
+    public void publishMessage(String token, int sheepType, String content, String iconBase64) {
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("token", token);
+        requestParam.put("sheepType", sheepType);
+        requestParam.put("content", content);
+        requestParam.put("iconBase64", iconBase64);
+        OkHttpManager.getInstance().postRequest(HttpUrl.MESSAGE_PUBLISH, new BaseCallBack<String>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mp_loading.hide();
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, String result) {
+                if (result != null&&response.code()==200) {
+                    ToastUtil.showToast(mContext, "发布成功");
+                    mp_loading.hide();
+                    finish();
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mp_loading.hide();
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
     @Override
     public void onSuccess(Object object) {
-        ToastUtil.showToast(mContext,"发布成功");
-        finish();
     }
 
     @Override
     public void onSuccess(int type, Object object) {
-        ToastUtil.showToast(mContext,"发布成功");
-        finish();
     }
 
     @Override
     public void onError(Object obj) {
-        ToastUtil.showToast(mContext,"发布失败");
     }
 
     @Override
     public void onError(int type, Object obj) {
-        ToastUtil.showToast(mContext,"发布失败");
     }
 
     private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
@@ -180,17 +249,18 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     private class OnRightButtonListener implements CustomToolbar.OnRightButtonClickListener {
         @Override
         public void onClick() {
-            String content=mEtInput.getText().toString().trim();
-            if (showBitmap==null){
-                ToastUtil.showToast(mContext,"请选择图片！");
+            mp_loading.show();
+            String content = mEtInput.getText().toString().trim();
+            if (showBitmap == null) {
+                ToastUtil.showToast(mContext, "请选择图片！");
                 return;
             }
-            if (TextUtils.isEmpty(content)){
-                ToastUtil.showToast(mContext,"请输入内容！");
+            if (TextUtils.isEmpty(content)) {
+                ToastUtil.showToast(mContext, "请输入内容！");
                 return;
             }
 
-            HttpRequestUtil.getInstance(mContext).publishMessage(mUser.getTokenId(),mSheepType,content, Util.bitmaptoString(showBitmap));
+            publishMessage(mUser.getTokenId(), mSheepType, content, Util.bitmaptoString(showBitmap));
         }
     }
 
@@ -276,8 +346,8 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
         super.onActivityResult(requestCode, resultCode, intent);
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
-                if (tempFile!=null){
-                    showBitmap= CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(),1080);
+                if (tempFile != null) {
+                    showBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
                     mIvSelectIcon.setVisibility(View.GONE);
                     mIvShowIcon.setImageBitmap(showBitmap);
                 }
@@ -311,7 +381,7 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
                     }
                     if (imagePath != null) {
                         tempFile = new File(imagePath);
-                        showBitmap= CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(),1080);
+                        showBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
                         mIvSelectIcon.setVisibility(View.GONE);
                         mIvShowIcon.setImageBitmap(showBitmap);
                     }

@@ -10,12 +10,6 @@
         android:id="@+id/title"
         layout="@layout/custom_toolbar_layout" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_no_data"
-        android:layout_centerInParent="true"
-        />
 
 
     <android.support.v7.widget.RecyclerView
@@ -23,5 +17,10 @@
         android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/view_no_data"
+        layout="@layout/layout_no_data"
+        android:visibility="gone"/>
 
 </RelativeLayout>

@@ -41,4 +41,9 @@
         android:layout_width="60dp"
         android:layout_height="60dp"/>
 
+    <include
+        android:id="@+id/view_no_data"
+        layout="@layout/layout_no_data"
+        android:visibility="gone"/>
+
 </RelativeLayout>

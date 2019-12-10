@@ -95,41 +95,23 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
 
         list=new ArrayList<>();
         //出售羊
-        SellSheepMessageFragmentList shushouyang= SellSheepMessageFragmentList.newInstance(1);
+        MessageListFragmentList shushouyang= MessageListFragmentList.newInstance(1);
         //购买羊
-        SellSheepMessageFragmentList goumaiyang= SellSheepMessageFragmentList.newInstance(2);
+        MessageListFragmentList goumaiyang= MessageListFragmentList.newInstance(2);
         //出售饲料
-        SellSheepMessageFragmentList shushousiliao= SellSheepMessageFragmentList.newInstance(3);
+        MessageListFragmentList shushousiliao= MessageListFragmentList.newInstance(3);
         //出售兽药
-        SellSheepMessageFragmentList chushoushouyao= SellSheepMessageFragmentList.newInstance(4);
+        MessageListFragmentList chushoushouyao= MessageListFragmentList.newInstance(4);
         //羊五金
-        SellSheepMessageFragmentList yangwujin= SellSheepMessageFragmentList.newInstance(5);
+        MessageListFragmentList yangwujin= MessageListFragmentList.newInstance(5);
         //羊粪队伍
-        SellSheepMessageFragmentList yangfendui= SellSheepMessageFragmentList.newInstance(6);
+        MessageListFragmentList yangfendui= MessageListFragmentList.newInstance(6);
         //羊车队
-        SellSheepMessageFragmentList yangchedui= SellSheepMessageFragmentList.newInstance(7);
+        MessageListFragmentList yangchedui= MessageListFragmentList.newInstance(7);
         //剪羊毛
-        SellSheepMessageFragmentList jianyangmao= SellSheepMessageFragmentList.newInstance(8);
+        MessageListFragmentList jianyangmao= MessageListFragmentList.newInstance(8);
         //疫苗
-        SellSheepMessageFragmentList yimiao= SellSheepMessageFragmentList.newInstance(9);
-//        //出售羊
-//        SellSheepMessageFragmentList shushouyang= SellSheepMessageFragmentList.newInstance(1);
-//        //购买羊
-//        BuySheepMessageFragmentList goumaiyang= BuySheepMessageFragmentList.newInstance(2);
-//        //出售饲料
-//        SellFeedMessageFragmentList shushousiliao= SellFeedMessageFragmentList.newInstance(3);
-//        //出售兽药
-//        SellAnimalDrugsMessageFragmentList chushoushouyao= SellAnimalDrugsMessageFragmentList.newInstance(4);
-//        //羊五金
-//        SellSheepHardwareMessageFragmentList yangwujin= SellSheepHardwareMessageFragmentList.newInstance(5);
-//        //羊粪队伍
-//        SheepDungTeamMessageFragmentList yangfendui= SheepDungTeamMessageFragmentList.newInstance(6);
-//        //羊车队
-//        SheepCarMessageFragmentList yangchedui= SheepCarMessageFragmentList.newInstance(7);
-//        //剪羊毛
-//        CutWoolMessageFragmentList jianyangmao= CutWoolMessageFragmentList.newInstance(8);
-//        //疫苗
-//        SheepVaccineMessageFragmentList yimiao= SheepVaccineMessageFragmentList.newInstance(9);
+        MessageListFragmentList yimiao= MessageListFragmentList.newInstance(9);
 
         list.add(shushouyang);
         list.add(goumaiyang);

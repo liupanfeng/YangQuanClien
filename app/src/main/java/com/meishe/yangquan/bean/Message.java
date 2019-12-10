@@ -1,7 +1,5 @@
 package com.meishe.yangquan.bean;
 
-import java.util.Date;
-
 public class Message extends BaseInfo{
     private Integer id;
 
@@ -16,6 +14,8 @@ public class Message extends BaseInfo{
     private String nickname;
 
     private Integer star;
+
+    private Integer sheepType;
 
     private String content;
 
@@ -77,6 +77,14 @@ public class Message extends BaseInfo{
 
     public void setStar(Integer star) {
         this.star = star;
+    }
+
+    public Integer getSheepType() {
+        return sheepType;
+    }
+
+    public void setSheepType(Integer sheepType) {
+        this.sheepType = sheepType;
     }
 
     public String getContent() {

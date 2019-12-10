@@ -8,21 +8,21 @@
 
         <item>经纪人</item>
 
-        <item>售卖饲料</item>
+        <item>售饲料</item>        <!--名称不能随便修改 如果需要修改 连带UserType 一起修改，否则会引起崩溃-->
 
-        <item>售卖兽药</item>
+        <item>售兽药</item>
 
         <item>羊五金</item>
 
-        <item>羊粪对</item>
+        <item>羊粪队</item>
 
         <item>羊车队</item>
 
         <item>剪羊毛</item>
 
-        <item>疫苗对</item>
+        <item>疫苗服务</item>
 
-        <item>贷款服务</item>
+        <item>幼崽经纪人</item>
 
 
 

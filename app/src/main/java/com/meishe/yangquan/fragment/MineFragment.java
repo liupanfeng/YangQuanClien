@@ -1,9 +1,12 @@
 package com.meishe.yangquan.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -24,7 +27,15 @@ import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.MsgEvent;
+import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
+import static com.meishe.yangquan.utils.Constants.MESSAGE_EVENT_UPDATE_USER_UI;
 
 
 public class MineFragment extends BaseRecyclerFragment implements View.OnClickListener {
@@ -82,6 +93,8 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         return view;
     }
 
+
+
     @Override
     protected void initListener() {
         mLLNoLogin.setOnClickListener(this);
@@ -103,6 +116,11 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         }
         adapter.addAll(mList);
 
+        updateUserUI();
+
+    }
+
+    private void updateUserUI() {
         if (UserManager.getInstance(getContext()).isNeedLogin()){
             mLLNoLogin.setVisibility(View.VISIBLE);
             mLLLogin.setVisibility(View.GONE);
@@ -122,7 +140,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             options.placeholder(R.mipmap.ic_little_sheep);
             Glide.with(mContext)
                     .asBitmap()
-                    .load(HttpUrl.URL+photoUrl)
+                    .load(HttpUrl.URL_IMAGE+photoUrl)
                     .apply(options)
                     .into(mIvMinePhoto);
         }else{
@@ -136,17 +154,30 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
                     .apply(options)
                     .into(mIvMinePhoto);
         }
+    }
 
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void handleEvent(MsgEvent carrier) {
+        String content = carrier.getEventMessage();
+        switch (content){
+            case MESSAGE_EVENT_UPDATE_USER_UI:
+                ToastUtil.showToast(mContext,"更新用户数据");
+                updateUserUI();
+                break;
+        }
+    }
 
-
-
-
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        EventBus.getDefault().register(this);
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
+        EventBus.getDefault().unregister(this); //解除注册
     }
 
     @Override

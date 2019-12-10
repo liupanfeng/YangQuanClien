@@ -24,12 +24,17 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
+import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.User;
+import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.MsgEvent;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -39,7 +44,17 @@ import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.IosDialog;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.meishe.yangquan.utils.Constants.MESSAGE_EVENT_UPDATE_USER_UI;
 
 /**
  * 完善资料
@@ -104,10 +119,10 @@ public class PerfectInformationActivity extends BaseActivity {
             if (!TextUtils.isEmpty(photoUrl)) {
                 RequestOptions options = new RequestOptions();
                 options.circleCrop();
-                options .skipMemoryCache(true) ;
+                options.skipMemoryCache(true);
                 options.placeholder(R.mipmap.ic_little_sheep);
                 Glide.with(mContext)
-                        .load(HttpUrl.URL + photoUrl)
+                        .load(HttpUrl.URL_IMAGE + photoUrl)
                         .apply(options)
                         .into(mIvPhoto);
             }
@@ -147,7 +162,7 @@ public class PerfectInformationActivity extends BaseActivity {
                 showDialog();
                 break;
             case R.id.rl_phone_number:
-                ToastUtil.showToast(mContext,"手机号不可更改");
+                ToastUtil.showToast(mContext, "手机号不可更改");
                 break;
         }
     }
@@ -232,8 +247,8 @@ public class PerfectInformationActivity extends BaseActivity {
     @Override
     public void onSuccess(Object object) {
         hideLoading();
-        if (object instanceof User){
-            mUser= (User) object;
+        if (object instanceof User) {
+            mUser = (User) object;
         }
     }
 
@@ -364,13 +379,13 @@ public class PerfectInformationActivity extends BaseActivity {
     private void uploadUserInfo(String type, String content) {
         if (mUser != null) {
             long userId = mUser.getUserId();
-            HttpRequestUtil.getInstance(PerfectInformationActivity.this).uploadUserInfo(userId, type, content);
+            uploadUserInfo(userId, type, content);
         }
 
     }
 
     private void showDialog() {
-        if (mUser!=null){
+        if (mUser != null) {
             mNickname = mUser.getNickname();
         }
         mDialog = new IosDialog.DialogBuilder(this)
@@ -379,12 +394,12 @@ public class PerfectInformationActivity extends BaseActivity {
                 .addListener(new IosDialog.OnButtonClickListener() {
                     @Override
                     public void onAsureClick() {
-                        String newNickname=mDialog.getmEtInputContent().getText().toString().trim();
-                        if (TextUtils.isEmpty(newNickname)){
-                            ToastUtil.showToast(mContext,"请输入您想要修改的昵称");
-                        }else{
+                        String newNickname = mDialog.getmEtInputContent().getText().toString().trim();
+                        if (TextUtils.isEmpty(newNickname)) {
+                            ToastUtil.showToast(mContext, "请输入您想要修改的昵称");
+                        } else {
                             mTvNickNameContent.setText(newNickname);
-                            uploadUserInfo("nickname",newNickname);
+                            uploadUserInfo("nickname", newNickname);
                             showLoading();
                             mDialog.dismiss();
                         }
@@ -398,6 +413,56 @@ public class PerfectInformationActivity extends BaseActivity {
                 }).create();
     }
 
+
+    public void uploadUserInfo(long userId, String type, String content) {
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("userId", userId);
+        requestParam.put("type", type);
+        requestParam.put("conetnt", content);
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_UPDATE_USER, new BaseCallBack<UserResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                hideLoading();
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UserResult result) {
+                hideLoading();
+                if (result != null) {
+                    User user = result.getData();
+                    if (user != null) {
+                        mUser=user;
+                        UserManager.getInstance(App.getContext()).setUser(user);
+                        EventBus.getDefault().post(new MsgEvent("", MESSAGE_EVENT_UPDATE_USER_UI));
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                hideLoading();
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
 
 
 }

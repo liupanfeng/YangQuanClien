@@ -14,7 +14,6 @@ import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.inter.OnResponseListener;
-import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 
 import java.io.IOException;
@@ -26,9 +25,9 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 剪羊毛
+ *  message list
  */
-public class CutWoolMessageFragmentList extends BaseRecyclerFragment {
+public class MessageListFragmentList extends BaseRecyclerFragment implements OnResponseListener {
 
     private static final String TYPE = "type";
 
@@ -37,11 +36,11 @@ public class CutWoolMessageFragmentList extends BaseRecyclerFragment {
     private View mNoDate;
     private MultiFunctionAdapter mAdapter;
 
-    public CutWoolMessageFragmentList() {
+    public MessageListFragmentList() {
     }
 
-    public static CutWoolMessageFragmentList newInstance(int type) {
-        CutWoolMessageFragmentList fragment = new CutWoolMessageFragmentList();
+    public static MessageListFragmentList newInstance(int type) {
+        MessageListFragmentList fragment = new MessageListFragmentList();
         Bundle args = new Bundle();
         args.putInt(TYPE, type);
         fragment.setArguments(args);
@@ -79,13 +78,14 @@ public class CutWoolMessageFragmentList extends BaseRecyclerFragment {
         getMessageListFromServer(type);
     }
 
+
     /**
      * 信息列表
      */
-    public void getMessageListFromServer(int userType) {
+    public void getMessageListFromServer(int userType){
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("userType", userType);
+        requestParam.put("userType",userType);
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_MESSAGE_LIST, new BaseCallBack<MessageResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -94,21 +94,20 @@ public class CutWoolMessageFragmentList extends BaseRecyclerFragment {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                setNoDataVisible(View.VISIBLE);
             }
 
             @Override
             protected void onSuccess(Call call, Response response, MessageResult result) {
-                if (response != null && response.code() == 200) {
-                    if (result == null && result.getStatus() != 200) {
+                if (response != null&&response.code()==200) {
+                    if (result==null&&result.getStatus()!=200){
                         setNoDataVisible(View.VISIBLE);
                         return;
                     }
-                    List<Message> list = result.getData();
-                    if (list != null && list.size() > 0) {
+                    List<Message> list=result.getData();
+                    if (list!=null&&list.size()>0){
                         mAdapter.addAll(list);
                         setNoDataVisible(View.GONE);
-                    } else {
+                    }else{
                         setNoDataVisible(View.VISIBLE);
                     }
                 }
@@ -131,6 +130,25 @@ public class CutWoolMessageFragmentList extends BaseRecyclerFragment {
         }, requestParam);
     }
 
+
+    @Override
+    public void onSuccess(Object object) {
+
+    }
+
+    @Override
+    public void onSuccess(int type, Object object) {
+
+    }
+
+    @Override
+    public void onError(Object obj) {
+    }
+
+    @Override
+    public void onError(int type, Object obj) {
+
+    }
 
 
     public void setNoDataVisible(int visible){
