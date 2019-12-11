@@ -137,7 +137,7 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="44dp"
         android:layout_marginRight="20dp"
-        app:cardElevation="5dp">
+        app:cardElevation="2dp">
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/mine_recycler"

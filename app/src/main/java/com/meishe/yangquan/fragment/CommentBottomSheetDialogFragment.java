@@ -62,6 +62,7 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
     private long mMessageId;
     private String mCurCommentContent;
     private User mUser;
+    private View mBtnClose;
 
     @Override
     public void onAttach(Context context) {
@@ -121,6 +122,7 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
         mLoading = view.findViewById(R.id.loading);
         mNoDate=view.findViewById(R.id.view_no_data);
         mEditText=view.findViewById(R.id.edit_text);
+        mBtnClose=view.findViewById(R.id.bottom_sheet_dialog_close_btn);
         mLoading.show();
     }
 
@@ -143,7 +145,7 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
                     return;
                 }
 
-                if(!UserManager.getInstance(mContext).isNeedLogin()){
+                if(UserManager.getInstance(mContext).isNeedLogin()){
                     //未登陆提示用户登陆
                     AppManager.getInstance().jumpActivity(getActivity(), LoginActivity.class);
                     return;
@@ -163,6 +165,14 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
                 // 弹出评论输入框
                 showCommentInputDialog();
 
+            }
+        });
+
+
+        mBtnClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
             }
         });
     }

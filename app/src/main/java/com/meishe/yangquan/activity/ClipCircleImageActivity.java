@@ -70,7 +70,7 @@ public class ClipCircleImageActivity extends AppCompatActivity {
         mCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finishActivity();
+                finish();
             }
         });
 

@@ -276,12 +276,12 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 .setTitle(title)
                 .setAsureText(sureText)
                 .setCancelText("取消")
-                //.setDialogSize(Util.dip2px(MainActivity.this,189),Util.dip2px(MainActivity.this,117))
                 .addListener(new IosDialog.OnButtonClickListener() {
                     @Override
                     public void onAsureClick() {
                         getMaterialProgress().show();
                         addBusinessOpportunity(fromUserId,fromPhoneNumber,userId,content);
+                        mDialog.dismiss();
                     }
 
                     @Override
