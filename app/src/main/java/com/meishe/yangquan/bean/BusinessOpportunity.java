@@ -2,7 +2,7 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
-public class BusinessOpportunity {
+public class BusinessOpportunity extends BaseInfo{
     private Integer id;
 
     private Long fromUserId;
@@ -13,7 +13,7 @@ public class BusinessOpportunity {
 
     private String content;
 
-    private Date createTime;
+    private long createTime;
 
     public Integer getId() {
         return id;
@@ -55,11 +55,11 @@ public class BusinessOpportunity {
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 }

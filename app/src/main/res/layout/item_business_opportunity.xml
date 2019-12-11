@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_opportunity_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:text="05/06  12:21"
+                android:textColor="#ff858585"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tv_opportunity_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="#ff383838"
+                android:textSize="14sp"
+                android:layout_marginStart="10dp" />
+
+            <TextView
+                android:id="@+id/tv_opportunity_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="10dp"
+                android:ellipsize="end"
+                android:maxLines="4"
+                android:text="        羊圈平台经济人某某（手机号：12445678234）
+已发起对您的联系。祝您此圈大卖，羊业兴隆。
+如有对经纪人投诉或建议，请致电12345678912。"
+                android:textColor="#ff383838"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

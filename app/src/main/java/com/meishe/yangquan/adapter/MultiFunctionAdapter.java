@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
@@ -18,6 +19,7 @@ import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
+import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
 import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
@@ -71,6 +73,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view=mLayoutInflater.inflate(R.layout.item_message_center,parent,false);
                 viewHolder=new MessageCenterListHolder(view,this);
                 break;
+            case VIEW_BUSINESS_CENTER_LIST:
+                view=mLayoutInflater.inflate(R.layout.item_business_opportunity,parent,false);
+                viewHolder=new BusinessOpportunityListHolder(view,this);
+                break;
         }
         return viewHolder;
     }
@@ -104,6 +110,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_SERVICE_LABEL;
         }else if (baseInfo instanceof SystemNotification){
             return VIEW_MESSAGE_CENTER_LIST;
+        }else if (baseInfo instanceof BusinessOpportunity){
+            return VIEW_BUSINESS_CENTER_LIST;
         }
         return super.getItemViewType(position);
     }
