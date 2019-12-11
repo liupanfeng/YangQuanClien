@@ -121,14 +121,12 @@ public class IosDialog extends Dialog {
             @Override
             public void onClick(View v) {
                 if (listener != null) listener.onCancelClick();
-                dismiss();
             }
         });
         asureButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null) listener.onAsureClick();
-                dismiss();
             }
         });
 

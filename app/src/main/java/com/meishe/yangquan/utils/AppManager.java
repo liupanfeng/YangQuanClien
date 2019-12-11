@@ -1,6 +1,7 @@
 package com.meishe.yangquan.utils;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -139,6 +140,30 @@ public class AppManager {
         if (bundle != null) {
             intent.putExtras(bundle);
         }
+        activity.startActivity(intent);
+    }
+
+    /**
+     * 用于跳转
+     *
+     * @param activity
+     * @param cls
+     * @param bundle
+     */
+    public void jumpActivity(Context activity, Class<? extends Activity> cls, Bundle bundle) {
+        Intent intent = new Intent(activity, cls);
+        if (bundle != null) {
+            intent.putExtras(bundle);
+        }
+        activity.startActivity(intent);
+    }
+    /**
+     * 用于跳转
+     *  @param activity
+     * @param cls
+     */
+    public void jumpActivity(Context activity, Class<? extends Activity> cls) {
+        Intent intent = new Intent(activity, cls);
         activity.startActivity(intent);
     }
 

@@ -15,6 +15,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.wiget.MaterialProgress;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -35,6 +36,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
     private RecyclerView mRecyclerView;
     private View mNoDate;
     private MultiFunctionAdapter mAdapter;
+    private MaterialProgress mp_loading;
 
     public MessageListFragmentList() {
     }
@@ -60,6 +62,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
         View view=inflater.inflate(R.layout.fragment_message_fragment_list_layout,container,false);
         mRecyclerView=view.findViewById(R.id.recycler);
         mNoDate=view.findViewById(R.id.view_no_data);
+        mp_loading=view.findViewById(R.id.mp_loading);
         return view;
     }
 
@@ -75,6 +78,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
         mRecyclerView.setLayoutManager(manager);
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setFragment(this);
+        mAdapter.setMaterialProgress(mp_loading);
         getMessageListFromServer(type);
     }
 

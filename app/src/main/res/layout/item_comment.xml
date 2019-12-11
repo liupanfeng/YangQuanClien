@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="75dp"
+    android:orientation="horizontal">
+
+    <com.meishe.yangquan.view.RoundAngleImageView
+        android:id="@+id/iv_comment_photo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="22.5dp"
+        app:roundHeight="5dp"
+        app:roundWidth="5dp" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="15dp">
+
+        <LinearLayout
+            android:layout_toLeftOf="@id/tv_comment_time"
+            android:layout_marginRight="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_comment_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="河北养羊户"
+                android:textColor="#ff8ad77a"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tv_comment_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="我这里有羊，都是上等好羊羔"
+                android:textColor="#ff383838"
+                android:textSize="14sp"
+                />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_comment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="21.5dp"
+            android:text="15:22"
+            android:textColor="#ff979797"
+            android:textSize="11sp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

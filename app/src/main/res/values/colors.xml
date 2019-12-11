@@ -61,4 +61,8 @@
     <color name="dialog_downLoadMusic_button_nomal">#FFFFFFFF</color>
     <color name="dialog_downLoadMusic_button_click">#0078FF</color>
 
+
+    <color name="input_pop_font_color">#BEBEBE</color>
+
+
 </resources>

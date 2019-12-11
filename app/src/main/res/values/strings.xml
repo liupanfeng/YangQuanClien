@@ -15,10 +15,12 @@
     <string name="list_end">亲，到底啦La！</string>
 
 
-    <string name="comment_tips">和TA说点好听的</string>
+    <string name="comment_tips">发表评论</string>
 
     <string name="no_data_tip">暂无数据</string>
 
     <string name="data_analysis_error">数据解析错误</string>
+
+
 
 </resources>

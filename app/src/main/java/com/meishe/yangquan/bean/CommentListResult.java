@@ -1,11 +1,12 @@
 package com.meishe.yangquan.bean;
 
 
+import java.util.List;
 
 /**
- * 我的商机数据结果
+ *  评论数据结果
  */
-public class BusinessOpportunityResult {
+public class CommentListResult {
 
     // 响应业务状态
     private int status;
@@ -13,13 +14,13 @@ public class BusinessOpportunityResult {
     // 响应消息
     private String msg;
 
-    private BusinessOpportunity data;
+    private List<Comment> data;
 
-    public  BusinessOpportunity  getData() {
+    public List<Comment> getData() {
         return data;
     }
 
-    public void setData( BusinessOpportunity  data) {
+    public void setData(List<Comment> data) {
         this.data = data;
     }
 

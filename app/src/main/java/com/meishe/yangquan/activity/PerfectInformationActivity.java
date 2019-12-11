@@ -119,7 +119,6 @@ public class PerfectInformationActivity extends BaseActivity {
             if (!TextUtils.isEmpty(photoUrl)) {
                 RequestOptions options = new RequestOptions();
                 options.circleCrop();
-                options.skipMemoryCache(true);
                 options.placeholder(R.mipmap.ic_little_sheep);
                 Glide.with(mContext)
                         .load(HttpUrl.URL_IMAGE + photoUrl)
@@ -343,9 +342,9 @@ public class PerfectInformationActivity extends BaseActivity {
                         return;
                     File tempCoverFile = new File(PathUtils.getPersonalCoverImageDirectory(), PathUtils.getTempCoverImageName(mContext));
                     Bitmap bitMap = BitmapFactory.decodeFile(tempCoverFile.getAbsolutePath());
-                    if (bitMap != null) {
-                        mIvPhoto.setImageBitmap(bitMap);
-                    }
+//                    if (bitMap != null) {
+//                        mIvPhoto.setImageBitmap(bitMap);
+//                    }
                     showLoading();
                     uploadUserInfo("icon", Util.bitmaptoString(bitMap));
                 }
@@ -389,7 +388,10 @@ public class PerfectInformationActivity extends BaseActivity {
             mNickname = mUser.getNickname();
         }
         mDialog = new IosDialog.DialogBuilder(this)
+                .setTitle("编辑昵称")
                 .setInputContent(mNickname)
+                .setAsureText("修改")
+                .setCancelText("取消")
                 //.setDialogSize(Util.dip2px(MainActivity.this,189),Util.dip2px(MainActivity.this,117))
                 .addListener(new IosDialog.OnButtonClickListener() {
                     @Override
@@ -397,12 +399,17 @@ public class PerfectInformationActivity extends BaseActivity {
                         String newNickname = mDialog.getmEtInputContent().getText().toString().trim();
                         if (TextUtils.isEmpty(newNickname)) {
                             ToastUtil.showToast(mContext, "请输入您想要修改的昵称");
-                        } else {
-                            mTvNickNameContent.setText(newNickname);
-                            uploadUserInfo("nickname", newNickname);
-                            showLoading();
                             mDialog.dismiss();
+                            return;
                         }
+                        if (mNickname.equals(newNickname)) {
+                            ToastUtil.showToast(mContext, "请编辑新昵称");
+                            return;
+                        }
+                        mTvNickNameContent.setText(newNickname);
+                        uploadUserInfo("nickname", newNickname);
+                        showLoading();
+                        mDialog.dismiss();
 
                     }
 
@@ -437,7 +444,16 @@ public class PerfectInformationActivity extends BaseActivity {
                 if (result != null) {
                     User user = result.getData();
                     if (user != null) {
-                        mUser=user;
+                        mUser = user;
+                        String photoUrl = mUser.getPhotoUrl();
+                        RequestOptions options = new RequestOptions();
+                        options.circleCrop();
+                        options.placeholder(R.mipmap.ic_little_sheep);
+                        Glide.with(mContext)
+                                .load(HttpUrl.URL_IMAGE + photoUrl)
+                                .apply(options)
+                                .into(mIvPhoto);
+                        ToastUtil.showToast(mContext, "更新数据成功");
                         UserManager.getInstance(App.getContext()).setUser(user);
                         EventBus.getDefault().post(new MsgEvent("", MESSAGE_EVENT_UPDATE_USER_UI));
                     }

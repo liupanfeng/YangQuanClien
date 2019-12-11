@@ -23,7 +23,6 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:text="05/06  12:21"
                 android:textColor="#ff858585"
                 android:textSize="12sp" />
 

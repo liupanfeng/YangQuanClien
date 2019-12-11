@@ -49,6 +49,15 @@ public class HttpUrl {
     /*获取我的商机的数据*/
     public static final String  URL_MINE_BUSIJNESS =URL+ "business_opportunity/select";
 
+    /*获取评论数据*/
+    public static final String  URL_COMMENT_LIST =URL+ "comment/select";
+
+    /*添加评论数据*/
+    public static final String  URL_ADD_COMMENT =URL+ "comment/add";
+
+    /*添加商机的数据*/
+    public static final String  URL_MINE_ADD_BUSIJNESS =URL+ "business_opportunity/add";
+
     /*获取版本数据*/
     public static final String  URL_MINE_VERSION=URL+ "version/select";
 

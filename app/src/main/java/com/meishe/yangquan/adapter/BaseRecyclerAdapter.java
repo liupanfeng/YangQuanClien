@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,26 +20,40 @@ import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
 import com.meishe.yangquan.activity.VersionUpdateActivity;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.BusinessOpportunity;
+import com.meishe.yangquan.bean.BusinessOpportunityResult;
 import com.meishe.yangquan.bean.EndInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
+import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.fragment.CommentBottomSheetDialogFragment;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.PerformClickAction;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.ListLoadingView;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.EmptyHolder;
 import com.meishe.yangquan.viewhoder.FooterHolder;
+import com.meishe.yangquan.wiget.IosDialog;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewHolder> implements View.OnClickListener {
 
@@ -54,14 +69,13 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_SERVICE_TYPE = VIEW_TYPE_BASE + 4;                                  //服务类型
     protected static final int VIEW_SERVICE_TYPE_LIST = VIEW_TYPE_BASE + 5;                             //服务类型
     protected static final int VIEW_MINE_TYPE_LIST = VIEW_TYPE_BASE + 6;                                //我的中间菜单
-    protected static final int VIEW_MESSAGE_TYPE_LIST = VIEW_TYPE_BASE + 7 ;                            //信息页面List列表
+    protected static final int VIEW_MESSAGE_TYPE_LIST = VIEW_TYPE_BASE + 7;                            //信息页面List列表
     protected static final int VIEW_SERVICE_NEWS_TYPE_LIST = VIEW_TYPE_BASE + 8;                        //服务咨询新闻列表
-    protected static final int VIEW_SERVICE_LABEL = VIEW_TYPE_BASE + 9;                        //服务标签
+    protected static final int VIEW_SERVICE_LABEL = VIEW_TYPE_BASE + 9;                               //服务标签
     protected static final int VIEW_MESSAGE_CENTER_LIST = VIEW_TYPE_BASE + 10;                        //消息中心
     protected static final int VIEW_BUSINESS_CENTER_LIST = VIEW_TYPE_BASE + 11;                        //我的商机
-
-
-
+    protected static final int VIEW_COMMENT_LIST = VIEW_TYPE_BASE + 13;                                //评论
+    private IosDialog mDialog;
 
 
     public BaseRecyclerFragment getFragment() {
@@ -118,8 +132,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
     @Override
     public int getItemViewType(int position) {
-        BaseInfo baseInfo=getItem(position);
-        if (baseInfo instanceof EndInfo){
+        BaseInfo baseInfo = getItem(position);
+        if (baseInfo instanceof EndInfo) {
             return VIEW_TYPE_END;
         }
         return 0;
@@ -160,10 +174,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             bundle.putInt("type", ((ServiceTypeInfo) info).getType());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
         } else if (info instanceof MineTypeInfo) {
-            boolean isNeedLogin=UserManager.getInstance(mContext).isNeedLogin();
+            boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             switch (((MineTypeInfo) info).getName()) {
                 case "完善资料":
-                    if (isNeedLogin){
+                    if (isNeedLogin) {
                         AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
                         return;
                     }
@@ -171,14 +185,14 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
                     break;
                 case "消息中心":
-                    if (isNeedLogin){
+                    if (isNeedLogin) {
                         AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
                         return;
                     }
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MessageCenterActivity.class);
                     break;
                 case "我的商机":
-                    if (isNeedLogin){
+                    if (isNeedLogin) {
                         AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
                         return;
                     }
@@ -192,16 +206,26 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     break;
 
             }
-        }else if (info instanceof SheepNews){
-            ToastUtil.showToast(mContext,"暂无历史数据");
-        }else if (info instanceof ServerCustomer){
-            switch (v.getId()){
+        } else if (info instanceof SheepNews) {
+            ToastUtil.showToast(mContext, "暂无历史数据");
+        } else if (info instanceof ServerCustomer) {
+            switch (v.getId()) {
                 case R.id.btn_order:
-                    ToastUtil.showToast(mContext,"预约推送研发中");
+                    User user=UserManager.getInstance(mContext).getUser();
+                    if (user!=null){
+                        String phoneNum=user.getPhoneNumber();
+                        long fromUserId=user.getUserId();
+                        long toUserId=((ServerCustomer) info).getUserId();
+                        if (fromUserId==toUserId){
+                            ToastUtil.showToast(mContext,"不能预约自己");
+                            return;
+                        }
+                        showDialog(user.getUserId(),user.getPhoneNumber(),((ServerCustomer) info).getUserId(),"商机信息","预约信息","将把您的联系方式"+phoneNum+"发送给对方","确定预约");
+                    }
                     break;
                 case R.id.iv_service_zan:
-                    final MaterialProgress materialProgress=getMaterialProgress();
-                    if (materialProgress!=null){
+                    final MaterialProgress materialProgress = getMaterialProgress();
+                    if (materialProgress != null) {
                         materialProgress.show();
                     }
 
@@ -209,29 +233,129 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                         @Override
                         public void run() {
                             materialProgress.hide();
-                            ToastUtil.showToast(mContext,"点赞成功");
+                            ToastUtil.showToast(mContext, "点赞成功");
                         }
-                    },2000);
+                    }, 2000);
 
                     break;
             }
 
-        }else if (info instanceof Message){
+        } else if (info instanceof Message) {
 
-            switch (v.getId()){
+            switch (v.getId()) {
                 case R.id.iv_message_comment:
                 case R.id.tv_message_comment:
                     CommentBottomSheetDialogFragment fragment = new CommentBottomSheetDialogFragment();
-                    fragment.show(mFragment.getFragmentManager(),"dialog");
+                    fragment.setmMessageId(((Message) info).getMessageId());
+                    fragment.show(mFragment.getFragmentManager(), "dialog");
                     break;
-                case R.id.btn_message_start_connect:
-                    ToastUtil.showToast(mContext,"系统繁忙，稍后再联系！");
+                case R.id.btn_message_start_connect:    //我要联系
+                    User user=UserManager.getInstance(mContext).getUser();
+                    if (user!=null){
+                        String phoneNum=user.getPhoneNumber();
+                        long fromUserId=user.getUserId();
+                        long toUserId=((Message) info).getUserId();
+                        if (fromUserId==toUserId){
+                            ToastUtil.showToast(mContext,"不能联系自己");
+                            return;
+                        }
+                        showDialog(fromUserId,user.getPhoneNumber(),toUserId,"商机信息","联系信息","将把您的联系方式"+phoneNum+"发送给对方","确定联系");
+                    }
+
                     break;
             }
 
         }
 
     }
+
+
+    private void showDialog(final long fromUserId, final String fromPhoneNumber, final long userId, final String content, String title, String diaContent, String sureText) {
+        mDialog = new IosDialog.DialogBuilder(mContext)
+                .setInputContent(diaContent)
+                .setTitle(title)
+                .setAsureText(sureText)
+                .setCancelText("取消")
+                //.setDialogSize(Util.dip2px(MainActivity.this,189),Util.dip2px(MainActivity.this,117))
+                .addListener(new IosDialog.OnButtonClickListener() {
+                    @Override
+                    public void onAsureClick() {
+                        getMaterialProgress().show();
+                        addBusinessOpportunity(fromUserId,fromPhoneNumber,userId,content);
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+                        mDialog.dismiss();
+                    }
+                }).create();
+    }
+
+
+    private void addBusinessOpportunity(Long fromUserId,String fromPhoneNumber,Long toUserId,String content) {
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("fromUserId", fromUserId);
+        requestParam.put("fromPhoneNumber", fromPhoneNumber);
+        requestParam.put("toUserId", toUserId);
+        requestParam.put("content", content);
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_MINE_ADD_BUSIJNESS, new BaseCallBack<BusinessOpportunityResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                getFragment().getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext,"商机信息发送失败");
+                        getMaterialProgress().hide();
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, BusinessOpportunityResult result) {
+                getMaterialProgress().hide();
+                if (response != null && response.code() == 200) {
+                    if (result == null && result.getStatus() != 200) {
+                        return;
+                    }
+                    BusinessOpportunity businessOpportunity = result.getData();
+                    if (businessOpportunity != null ) {
+                        ToastUtil.showToast(mContext,"商机信息已发送");
+                    } else {
+                        ToastUtil.showToast(mContext,"商机信息发送失败");
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+//                setNoDataVisible(View.VISIBLE);
+                getFragment().getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext,"商机信息发送失败");
+                        getMaterialProgress().hide();
+                    }
+                });
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
 
     /**
      * 获得素材元素

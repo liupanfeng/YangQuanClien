@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
+import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
@@ -20,6 +21,7 @@ import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
+import com.meishe.yangquan.viewhoder.CommentListHolder;
 import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
@@ -77,6 +79,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view=mLayoutInflater.inflate(R.layout.item_business_opportunity,parent,false);
                 viewHolder=new BusinessOpportunityListHolder(view,this);
                 break;
+            case VIEW_COMMENT_LIST:
+                view=mLayoutInflater.inflate(R.layout.item_comment,parent,false);
+                viewHolder=new CommentListHolder(view,this);
+                break;
         }
         return viewHolder;
     }
@@ -112,6 +118,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MESSAGE_CENTER_LIST;
         }else if (baseInfo instanceof BusinessOpportunity){
             return VIEW_BUSINESS_CENTER_LIST;
+        }else if (baseInfo instanceof Comment){
+            return VIEW_COMMENT_LIST;
         }
         return super.getItemViewType(position);
     }

@@ -4,6 +4,8 @@ import java.util.Date;
 
 public  class Constants {
 
+    //评论
+    public static final String COMMENT_CONTENT = "commentContent";
 
     public static String userId="userId";
 

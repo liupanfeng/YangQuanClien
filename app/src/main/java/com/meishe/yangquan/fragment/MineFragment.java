@@ -136,7 +136,6 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             String photoUrl=user.getPhotoUrl();
             RequestOptions options = new RequestOptions();
             options.circleCrop();
-            options .skipMemoryCache(true) ;// 不使用内存缓存
             options.placeholder(R.mipmap.ic_little_sheep);
             Glide.with(mContext)
                     .asBitmap()
@@ -162,7 +161,6 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         String content = carrier.getEventMessage();
         switch (content){
             case MESSAGE_EVENT_UPDATE_USER_UI:
-                ToastUtil.showToast(mContext,"更新用户数据");
                 updateUserUI();
                 break;
         }

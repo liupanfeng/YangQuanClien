@@ -15,5 +15,11 @@
         layout="@layout/layout_no_data"
         android:visibility="gone"/>
 
+    <com.meishe.yangquan.wiget.MaterialProgress
+        android:id="@+id/mp_loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true" />
+
 
 </RelativeLayout>

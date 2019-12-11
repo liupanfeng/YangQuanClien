@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@null">
 
 
@@ -61,8 +61,8 @@
             android:layout_height="49dp"
             android:hint="@string/comment_tips"
             android:gravity="center_vertical"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black66"
             android:textSize="14sp"
             android:background="@null"
             android:layout_alignParentBottom="true"
@@ -79,13 +79,27 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/no_data_tip"
-        android:visibility="gone"
+
+    <LinearLayout
+        android:id="@+id/view_no_data"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_data_tip"
-        android:textSize="16sp"
-        android:textColor="@color/white"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:background="@mipmap/ic_no_data" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="6dp"
+            android:text="暂无数据"
+            android:textColor="@color/black66" />
+    </LinearLayout>
+
 </RelativeLayout>

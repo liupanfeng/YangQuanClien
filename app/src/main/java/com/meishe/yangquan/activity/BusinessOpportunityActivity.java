@@ -6,6 +6,7 @@ import android.view.View;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BusinessOpportunity;
+import com.meishe.yangquan.bean.BusinessOpportunityListResult;
 import com.meishe.yangquan.bean.BusinessOpportunityResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -63,7 +64,7 @@ public class BusinessOpportunityActivity extends BaseActivity {
 
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("userId", userId);
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_MINE_BUSIJNESS, new BaseCallBack<BusinessOpportunityResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_MINE_BUSIJNESS, new BaseCallBack<BusinessOpportunityListResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -74,7 +75,7 @@ public class BusinessOpportunityActivity extends BaseActivity {
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, BusinessOpportunityResult result) {
+            protected void onSuccess(Call call, Response response, BusinessOpportunityListResult result) {
                 if (response != null && response.code() == 200) {
                     if (result == null && result.getStatus() != 200) {
                         setNoDataVisible(View.VISIBLE);
