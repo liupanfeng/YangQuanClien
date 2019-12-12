@@ -10,11 +10,6 @@
         android:layout_alignParentTop="true"
         android:layout_height="48dp"/>
 
-    <com.meishe.yangquan.wiget.MaterialProgress
-        android:id="@+id/loading"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_centerInParent="true" />
 
 
     <LinearLayout
@@ -120,5 +115,10 @@
 
     </LinearLayout>
 
+    <com.meishe.yangquan.wiget.MaterialProgress
+        android:id="@+id/loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true" />
 
 </RelativeLayout>

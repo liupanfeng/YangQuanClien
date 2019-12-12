@@ -119,7 +119,7 @@ public class PerfectInformationActivity extends BaseActivity {
             if (!TextUtils.isEmpty(photoUrl)) {
                 RequestOptions options = new RequestOptions();
                 options.circleCrop();
-                options.placeholder(R.mipmap.ic_little_sheep);
+                options.placeholder(R.mipmap.ic_photo_default);
                 Glide.with(mContext)
                         .load(HttpUrl.URL_IMAGE + photoUrl)
                         .apply(options)
@@ -448,7 +448,7 @@ public class PerfectInformationActivity extends BaseActivity {
                         String photoUrl = mUser.getPhotoUrl();
                         RequestOptions options = new RequestOptions();
                         options.circleCrop();
-                        options.placeholder(R.mipmap.ic_little_sheep);
+                        options.placeholder(R.mipmap.ic_photo_default);
                         Glide.with(mContext)
                                 .load(HttpUrl.URL_IMAGE + photoUrl)
                                 .apply(options)

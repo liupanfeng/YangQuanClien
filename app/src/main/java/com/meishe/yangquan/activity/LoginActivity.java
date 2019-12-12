@@ -11,12 +11,14 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.CheckNetwork;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CountDownTimerUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.wiget.MaterialProgress;
 import com.meishe.yangquan.wiget.TitleBar;
 
@@ -27,8 +29,8 @@ import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LoginActivity extends BaseActivity  {
-    private String TAG=LoginActivity.class.getSimpleName();
+public class LoginActivity extends BaseActivity {
+    private String TAG = LoginActivity.class.getSimpleName();
 
     private MaterialProgress mMaterialProgress;
     private EditText mInputPhoneNum;
@@ -41,6 +43,7 @@ public class LoginActivity extends BaseActivity  {
     private TextView mUserPrivacy;      //隐私协议
 
     private String phoneNumber;
+    private String smsCode;
 
     @Override
     protected int initRootView() {
@@ -49,15 +52,15 @@ public class LoginActivity extends BaseActivity  {
 
     @Override
     public void initView() {
-        mMaterialProgress=findViewById(R.id.loading);
-        mInputPhoneNum=findViewById(R.id.input_phonenumber);
-        mInputCheckCode=findViewById(R.id.input_checkcode);
-        mGetCheckCode=findViewById(R.id.getcheckcode);
-        mBtnLogin=findViewById(R.id.btn_login);
-        mBtnRegister=findViewById(R.id.btn_register);
-        mUserAgreement =findViewById(R.id.user_agreement);
-        mUserPrivacy=findViewById(R.id.privacy);
-        mTitleBar=findViewById(R.id.titleBar);
+        mMaterialProgress = findViewById(R.id.loading);
+        mInputPhoneNum = findViewById(R.id.input_phonenumber);
+        mInputCheckCode = findViewById(R.id.input_checkcode);
+        mGetCheckCode = findViewById(R.id.getcheckcode);
+        mBtnLogin = findViewById(R.id.btn_login);
+        mBtnRegister = findViewById(R.id.btn_register);
+        mUserAgreement = findViewById(R.id.user_agreement);
+        mUserPrivacy = findViewById(R.id.privacy);
+        mTitleBar = findViewById(R.id.titleBar);
     }
 
     @Override
@@ -104,28 +107,62 @@ public class LoginActivity extends BaseActivity  {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.getcheckcode:
-                CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
-                countDownTimer.start();
+//                CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
+//                countDownTimer.start();
+//                mInputCheckCode.setFocusable(true);
+//                mInputCheckCode.setFocusableInTouchMode(true);
+//                mInputCheckCode.requestFocus();
+                phoneNumber=mInputPhoneNum.getText().toString().trim();
+                if (TextUtils.isEmpty(phoneNumber)) {
+                    ToastUtil.showToast(mContext, "手机号不能为空");
+                    return;
+                }
+
+                if (!Util.isMobileNO(phoneNumber)) {
+                    ToastUtil.showToast(mContext, "请输入正确的手机号码");
+                    return;
+                }
+
+                if (!CheckNetwork.checkNetWork(mContext)) {
+                    //无网络
+                    ToastUtil.showToast(mContext, "当前网络不可用，请检查网络设置");
+                    return;
+                }
+
+//                if (TextUtils.isEmpty(inputCheckimage.getText().toString().trim())) {
+//                    ToastUtil.showToast(mContext, "图片验证码不能为空");
+//                    return;
+//                }
+
                 mInputCheckCode.setFocusable(true);
                 mInputCheckCode.setFocusableInTouchMode(true);
                 mInputCheckCode.requestFocus();
+                mGetCheckCode.setEnabled(false);
+                getMessageCode();
+
                 break;
             case R.id.btn_login:
-                phoneNumber=mInputPhoneNum.getText().toString();
-                if (TextUtils.isEmpty(phoneNumber)){
-                    ToastUtil.showToast(mContext,"请输入手机号再进行登录");
+                phoneNumber = mInputPhoneNum.getText().toString();
+                smsCode=mInputCheckCode.getText().toString().trim();
+                if (TextUtils.isEmpty(phoneNumber)) {
+                    ToastUtil.showToast(mContext, "请输入手机号再进行登录");
                     return;
                 }
-                if (phoneNumber.length()!=11){
-                    ToastUtil.showToast(mContext,"请输入正确的手机号");
+                if (TextUtils.isEmpty(smsCode)) {
+                    ToastUtil.showToast(mContext, "请输入短信验证码");
+                    return;
+                }
+
+                if (!Util.isMobileNO(phoneNumber)) {
+                    ToastUtil.showToast(mContext, "请输入正确的手机号码");
                     return;
                 }
                 userLogin();
                 break;
             case R.id.btn_register:
-                AppManager.getInstance().jumpActivity(LoginActivity.this,RegisterActivity.class);
+                AppManager.getInstance().jumpActivity(LoginActivity.this, RegisterActivity.class);
 //                userRegister();
                 break;
             case R.id.user_agreement:
@@ -135,10 +172,60 @@ public class LoginActivity extends BaseActivity  {
         }
     }
 
+    private void getMessageCode() {
+        mMaterialProgress.show();
+        final HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("phoneNumber", phoneNumber);
+        OkHttpManager.getInstance().postRequest(HttpUrl.USER_SEND_CODE, new BaseCallBack<UserResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                mMaterialProgress.hide();
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UserResult result) {
+                mMaterialProgress.hide();
+                if (result.getStatus() != 200) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+                if (result != null && result.getStatus() == 200) {
+                    ToastUtil.showToast(mContext, "验证码已发送");
+                    CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
+                countDownTimer.start();
+                mInputCheckCode.setFocusable(true);
+                mInputCheckCode.setFocusableInTouchMode(true);
+                mInputCheckCode.requestFocus();
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                mMaterialProgress.hide();
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
     private void userLogin() {
         mMaterialProgress.show();
-        final HashMap<String,Object> requestParam=new HashMap<>();
-        requestParam.put("phoneNum",phoneNumber);
+        final HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("phoneNum", phoneNumber);
+        requestParam.put("smsCode", smsCode);
         OkHttpManager.getInstance().postRequest(HttpUrl.USER_LOGIN, new BaseCallBack<UserResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -153,19 +240,19 @@ public class LoginActivity extends BaseActivity  {
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
                 mMaterialProgress.hide();
-                if (result.getStatus()!=200){
-                    ToastUtil.showToast(mContext,"请先注册再登录");
+                if (result.getStatus() != 200) {
+                    ToastUtil.showToast(mContext, "请先注册再登录");
                     return;
                 }
-                if (result!=null&&result.getStatus()==200){
-                    User user= result.getData();
-                    if (user!=null){
+                if (result != null && result.getStatus() == 200) {
+                    User user = result.getData();
+                    if (user != null) {
                         UserManager.getInstance(mContext).setUser(user);
-                        String token=user.getTokenId();
+                        String token = user.getTokenId();
                         UserManager.getInstance(mContext).setToken(token);
-                        AppManager.getInstance().jumpActivity(LoginActivity.this,MainActivity.class);
+                        AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);
                         LoginActivity.this.finish();
-                        ToastUtil.showToast(mContext,"登录成功");
+                        ToastUtil.showToast(mContext, "登录成功");
                     }
                 }
             }
@@ -184,7 +271,7 @@ public class LoginActivity extends BaseActivity  {
             protected void inProgress(int progress, long total, int id) {
 
             }
-        },requestParam);
+        }, requestParam);
     }
 
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path
+        path="com.meishe.yangquan"  name="files_root" />
+    <root-path
+        name="external_storage_root"
+        path="." />
+
+    <external-cache-path name="yangquan_apk_download_path" path="yangquan/jdy_apk/" />
+</paths>

@@ -136,7 +136,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             String photoUrl=user.getPhotoUrl();
             RequestOptions options = new RequestOptions();
             options.circleCrop();
-            options.placeholder(R.mipmap.ic_little_sheep);
+            options.placeholder(R.mipmap.ic_photo_default);
             Glide.with(mContext)
                     .asBitmap()
                     .load(HttpUrl.URL_IMAGE+photoUrl)
@@ -146,7 +146,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             RequestOptions options = new RequestOptions();
             options.diskCacheStrategy(DiskCacheStrategy.ALL);
             options.circleCrop();
-            options.placeholder(R.mipmap.ic_little_sheep);
+            options.placeholder(R.mipmap.ic_photo_default);
             Glide.with(mContext)
                     .asBitmap()
                     .load("")

@@ -23,6 +23,7 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.utils.Util;
+import com.meishe.yangquan.wiget.MaterialProgress;
 import com.meishe.yangquan.wiget.TitleBar;
 
 import java.io.IOException;
@@ -50,6 +51,9 @@ public class RegisterActivity extends BaseActivity  {
     private int mUserType = 0;
 
     private String mInputPhoneNumber;
+    private MaterialProgress mLoading;
+    private String phoneNumber;
+    private String smsCode;
 
 
     @Override
@@ -66,6 +70,7 @@ public class RegisterActivity extends BaseActivity  {
         mInputPhoneNum = findViewById(R.id.input_phonenumber);
         mInputCheckCode = findViewById(R.id.input_checkcode);
         mGetCheckCode = findViewById(R.id.getcheckcode);
+        mLoading = findViewById(R.id.loading);
 
     }
 
@@ -124,13 +129,20 @@ public class RegisterActivity extends BaseActivity  {
         }
 
         mInputPhoneNumber = mInputPhoneNum.getText().toString();
-        if (TextUtils.isEmpty(mInputPhoneNumber)) {
-            ToastUtil.showToast(mContext, "请输入手机号再进行登录");
+        smsCode=mInputCheckCode.getText().toString().trim();
+        if (TextUtils.isEmpty(smsCode)) {
+            ToastUtil.showToast(mContext, "请输入短信验证码");
             return;
         }
 
-        if (mInputPhoneNumber.length() != 11) {
-            ToastUtil.showToast(mContext, "请输入正确的手机号");
+        if (TextUtils.isEmpty(mInputPhoneNumber)) {
+            ToastUtil.showToast(mContext, "请输入手机号再进行注册");
+            return;
+        }
+
+
+        if (!Util.isMobileNO(mInputPhoneNumber)) {
+            ToastUtil.showToast(mContext, "请输入正确的手机号码");
             return;
         }
 
@@ -159,6 +171,7 @@ public class RegisterActivity extends BaseActivity  {
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put(Constants.phoneNumber, mInputPhoneNumber);
         requestParam.put(Constants.userType, mUserType);
+        requestParam.put("smsCode", smsCode);
         OkHttpManager.getInstance().postRequest(HttpUrl.USER_REGISTER, new BaseCallBack<UserResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -207,11 +220,33 @@ public class RegisterActivity extends BaseActivity  {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.getcheckcode:
-                CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
-                countDownTimer.start();
+                phoneNumber=mInputPhoneNum.getText().toString().trim();
+                if (TextUtils.isEmpty(phoneNumber)) {
+                    ToastUtil.showToast(mContext, "手机号不能为空");
+                    return;
+                }
+
+                if (!Util.isMobileNO(phoneNumber)) {
+                    ToastUtil.showToast(mContext, "请输入正确的手机号码");
+                    return;
+                }
+
+                if (!CheckNetwork.checkNetWork(mContext)) {
+                    //无网络
+                    ToastUtil.showToast(mContext, "当前网络不可用，请检查网络设置");
+                    return;
+                }
+
+//                if (TextUtils.isEmpty(inputCheckimage.getText().toString().trim())) {
+//                    ToastUtil.showToast(mContext, "图片验证码不能为空");
+//                    return;
+//                }
+
                 mInputCheckCode.setFocusable(true);
                 mInputCheckCode.setFocusableInTouchMode(true);
                 mInputCheckCode.requestFocus();
+                mGetCheckCode.setEnabled(false);
+                getMessageCode();
 
                 break;
             case R.id.btn_register:
@@ -219,6 +254,69 @@ public class RegisterActivity extends BaseActivity  {
                 break;
         }
     }
+
+
+    private void getMessageCode() {
+        mLoading.show();
+        final HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("phoneNumber", phoneNumber);
+        OkHttpManager.getInstance().postRequest(HttpUrl.USER_SEND_CODE, new BaseCallBack<UserResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+               runOnUiThread(new Runnable() {
+                   @Override
+                   public void run() {
+                       mLoading.hide();
+                   }
+               });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UserResult result) {
+                mLoading.hide();
+                if (result.getStatus() != 200) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+                if (result != null && result.getStatus() == 200) {
+                    ToastUtil.showToast(mContext, "验证码已发送");
+                    CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
+                    countDownTimer.start();
+                    mInputCheckCode.setFocusable(true);
+                    mInputCheckCode.setFocusableInTouchMode(true);
+                    mInputCheckCode.requestFocus();
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mLoading.hide();
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
 
     @Override
     public void release() {

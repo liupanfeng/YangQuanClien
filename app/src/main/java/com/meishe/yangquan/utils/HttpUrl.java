@@ -12,6 +12,8 @@ public class HttpUrl {
 
     /*登录*/
     public static final String  USER_LOGIN =URL+"user/login";
+    /*发送短信验证码*/
+    public static final String  USER_SEND_CODE =URL+"user/send";
     /*获取用户信息*/
     public static final String  URL_GET_USER =URL+"user/get/token";
 
