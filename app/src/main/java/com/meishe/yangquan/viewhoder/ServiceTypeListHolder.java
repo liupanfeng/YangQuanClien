@@ -15,9 +15,12 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
+import com.meishe.yangquan.bean.ServerZan;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.RoundAngleImageView;
+
+import java.util.List;
 
 public class ServiceTypeListHolder extends BaseViewHolder {
 
@@ -29,6 +32,7 @@ public class ServiceTypeListHolder extends BaseViewHolder {
     private RoundAngleImageView mIvServicePhoto;
     private TextView mTvServiceNickname;
     private TextView mTvServiceDesc;
+    private TextView mTvZanNumber;
 
     public ServiceTypeListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -45,6 +49,7 @@ public class ServiceTypeListHolder extends BaseViewHolder {
         mIvServicePhoto=view.findViewById(R.id.iv_service_photo);
         mTvServiceNickname=view.findViewById(R.id.tv_service_nickname);
         mTvServiceDesc=view.findViewById(R.id.tv_service_type_description);
+        mTvZanNumber=view.findViewById(R.id.tv_zan_number);
     }
 
     @Override
@@ -71,6 +76,11 @@ public class ServiceTypeListHolder extends BaseViewHolder {
 
             mIvServiceType.setOnClickListener(listener);
             mIvServiceType.setTag(info);
+
+            List<ServerZan> zans = ((ServerCustomer) info).getZans();
+            if (zans!=null&&zans.size()>0){
+                mTvZanNumber.setText(zans.size()+"赞");
+            }
         }
 
     }
