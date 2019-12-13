@@ -1,5 +1,6 @@
 package com.meishe.yangquan.activity;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.SendSmsResult;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -114,7 +116,7 @@ public class LoginActivity extends BaseActivity {
 //                mInputCheckCode.setFocusable(true);
 //                mInputCheckCode.setFocusableInTouchMode(true);
 //                mInputCheckCode.requestFocus();
-                phoneNumber=mInputPhoneNum.getText().toString().trim();
+                phoneNumber = mInputPhoneNum.getText().toString().trim();
                 if (TextUtils.isEmpty(phoneNumber)) {
                     ToastUtil.showToast(mContext, "手机号不能为空");
                     return;
@@ -145,7 +147,7 @@ public class LoginActivity extends BaseActivity {
                 break;
             case R.id.btn_login:
                 phoneNumber = mInputPhoneNum.getText().toString();
-                smsCode=mInputCheckCode.getText().toString().trim();
+                smsCode = mInputCheckCode.getText().toString().trim();
                 if (TextUtils.isEmpty(phoneNumber)) {
                     ToastUtil.showToast(mContext, "请输入手机号再进行登录");
                     return;
@@ -162,7 +164,9 @@ public class LoginActivity extends BaseActivity {
                 userLogin();
                 break;
             case R.id.btn_register:
-                AppManager.getInstance().jumpActivity(LoginActivity.this, RegisterActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putString("phoneNumber",mInputPhoneNum.getText().toString().trim());
+                AppManager.getInstance().jumpActivity(LoginActivity.this, RegisterActivity.class,bundle);
 //                userRegister();
                 break;
             case R.id.user_agreement:
@@ -176,7 +180,7 @@ public class LoginActivity extends BaseActivity {
         mMaterialProgress.show();
         final HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("phoneNumber", phoneNumber);
-        OkHttpManager.getInstance().postRequest(HttpUrl.USER_SEND_CODE, new BaseCallBack<UserResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.USER_SEND_CODE, new BaseCallBack<SendSmsResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -188,7 +192,7 @@ public class LoginActivity extends BaseActivity {
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, UserResult result) {
+            protected void onSuccess(Call call, Response response, SendSmsResult result) {
                 mMaterialProgress.hide();
                 if (result.getStatus() != 200) {
                     ToastUtil.showToast(mContext, result.getMsg());
@@ -197,10 +201,10 @@ public class LoginActivity extends BaseActivity {
                 if (result != null && result.getStatus() == 200) {
                     ToastUtil.showToast(mContext, "验证码已发送");
                     CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
-                countDownTimer.start();
-                mInputCheckCode.setFocusable(true);
-                mInputCheckCode.setFocusableInTouchMode(true);
-                mInputCheckCode.requestFocus();
+                    countDownTimer.start();
+                    mInputCheckCode.setFocusable(true);
+                    mInputCheckCode.setFocusableInTouchMode(true);
+                    mInputCheckCode.requestFocus();
                 }
             }
 
@@ -241,7 +245,7 @@ public class LoginActivity extends BaseActivity {
             protected void onSuccess(Call call, Response response, UserResult result) {
                 mMaterialProgress.hide();
                 if (result.getStatus() != 200) {
-                    ToastUtil.showToast(mContext, "请先注册再登录");
+                    ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
                 if (result != null && result.getStatus() == 200) {

@@ -1,6 +1,8 @@
 package com.meishe.yangquan.activity;
 
 
+import android.content.Intent;
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.SendSmsResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -76,6 +79,14 @@ public class RegisterActivity extends BaseActivity  {
 
     @Override
     public void initData() {
+        Intent intent=getIntent();
+        if (intent!=null){
+            Bundle bundle=intent.getExtras();
+            if (bundle!=null){
+                String phoneNumber=bundle.getString("phoneNumber");
+                mInputPhoneNum.setText(phoneNumber);
+            }
+        }
         mTitleBar.setTextCenter("注册");
         mTitleBar.setBackImageVisible(View.VISIBLE);
         mUserTypeArray = getResources().getStringArray(R.array.user_type_spinner_values);
@@ -187,15 +198,16 @@ public class RegisterActivity extends BaseActivity  {
             protected void onSuccess(Call call, Response response, UserResult result) {
                 if (result != null) {
                     int code=result.getStatus();
+                    if (code!=200){
+                        ToastUtil.showToast(mContext,result.getMsg());
+                        return;
+                    }
                     if (code==200){
                         ToastUtil.showToast(mContext,"注册成功请登录");
                         finish();
                         return;
                     }
-                    if (code==401){
-                        ToastUtil.showToast(mContext,"改手机号已经注册，请登录");
-                        return;
-                    }
+
                 }
             }
 
@@ -260,7 +272,7 @@ public class RegisterActivity extends BaseActivity  {
         mLoading.show();
         final HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("phoneNumber", phoneNumber);
-        OkHttpManager.getInstance().postRequest(HttpUrl.USER_SEND_CODE, new BaseCallBack<UserResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.USER_SEND_CODE, new BaseCallBack<SendSmsResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -277,7 +289,7 @@ public class RegisterActivity extends BaseActivity  {
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, UserResult result) {
+            protected void onSuccess(Call call, Response response, SendSmsResult result) {
                 mLoading.hide();
                 if (result.getStatus() != 200) {
                     ToastUtil.showToast(mContext, result.getMsg());

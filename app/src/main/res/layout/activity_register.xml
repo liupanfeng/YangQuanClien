@@ -64,10 +64,10 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="40dp"
-                android:background="@drawable/login_shape"
+                android:background="@drawable/main_color_shape"
                 android:gravity="center"
                 android:text="获取验证码"
-                android:textColor="#BCBCBC"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
         </LinearLayout>
