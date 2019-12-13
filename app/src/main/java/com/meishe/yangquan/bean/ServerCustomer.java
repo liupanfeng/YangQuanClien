@@ -1,6 +1,7 @@
 package com.meishe.yangquan.bean;
 
 import java.util.Date;
+import java.util.List;
 
 public class ServerCustomer extends BaseInfo{
     private Integer id;
@@ -20,6 +21,8 @@ public class ServerCustomer extends BaseInfo{
     private Integer star;
 
     private long createTime;
+
+    private List<ServerZan> zans;
 
     public Integer getId() {
         return id;
@@ -93,5 +96,11 @@ public class ServerCustomer extends BaseInfo{
         this.createTime = createTime;
     }
 
+    public List<ServerZan> getZans() {
+        return zans;
+    }
 
+    public void setZans(List<ServerZan> zans) {
+        this.zans = zans;
+    }
 }

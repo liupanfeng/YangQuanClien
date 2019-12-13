@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.SendSmsResult;
+import com.meishe.yangquan.bean.UpdateDeviceAliasResult;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -27,6 +28,7 @@ import com.meishe.yangquan.wiget.TitleBar;
 import java.io.IOException;
 import java.util.HashMap;
 
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -167,7 +169,6 @@ public class LoginActivity extends BaseActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("phoneNumber",mInputPhoneNum.getText().toString().trim());
                 AppManager.getInstance().jumpActivity(LoginActivity.this, RegisterActivity.class,bundle);
-//                userRegister();
                 break;
             case R.id.user_agreement:
                 break;
@@ -175,6 +176,56 @@ public class LoginActivity extends BaseActivity {
                 break;
         }
     }
+
+
+        public void updateDeviceAlias(){
+            User user=UserManager.getInstance(mContext).getUser();
+            if(user==null){
+                return;
+            }
+            String userId=user.getUserId()+"";
+//            String userId="15896";
+            String registrationID= JPushInterface.getRegistrationID(mContext);
+            final HashMap<String, Object> requestParam = new HashMap<>();
+            requestParam.put("registrationId", registrationID);
+            requestParam.put("userId", userId);
+            OkHttpManager.getInstance().postRequest(HttpUrl.PUSH_UPDATE_DEVICE_ALIAS, new BaseCallBack<UpdateDeviceAliasResult>() {
+                @Override
+                protected void OnRequestBefore(Request request) {
+
+                }
+
+                @Override
+                protected void onFailure(Call call, IOException e) {
+                }
+
+                @Override
+                protected void onSuccess(Call call, Response response, UpdateDeviceAliasResult result) {
+                    if (result.getStatus() != 200) {
+                        ToastUtil.showToast(mContext, result.getMsg());
+                        return;
+                    }
+                    if (result != null && result.getStatus() == 200) {
+                       Log.d("LoginActivity","绑定成功");
+                    }
+                }
+
+                @Override
+                protected void onResponse(Response response) {
+
+                }
+
+                @Override
+                protected void onEror(Call call, int statusCode, Exception e) {
+                }
+
+                @Override
+                protected void inProgress(int progress, long total, int id) {
+
+                }
+            }, requestParam);
+        }
+
 
     private void getMessageCode() {
         mMaterialProgress.show();
@@ -255,6 +306,7 @@ public class LoginActivity extends BaseActivity {
                         String token = user.getTokenId();
                         UserManager.getInstance(mContext).setToken(token);
                         AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);
+                        updateDeviceAlias();
                         LoginActivity.this.finish();
                         ToastUtil.showToast(mContext, "登录成功");
                     }

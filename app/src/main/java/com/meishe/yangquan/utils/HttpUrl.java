@@ -73,6 +73,9 @@ public class HttpUrl {
     /*发布消息*/
     public static final String  MESSAGE_PUBLISH=URL+ "message/add";
 
+    /*push 绑定设备id*/
+    public static final String  PUSH_UPDATE_DEVICE_ALIAS=URL+ "push/updateDeviceAlias";
+
 
 
 
