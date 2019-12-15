@@ -432,7 +432,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     public synchronized void addItem(int position, BaseInfo info) {
         if (info != null) {
             mList.add(position, info);
-            notifyItemRangeChanged(position, 2);
+            notifyDataSetChanged();
         }
     }
 

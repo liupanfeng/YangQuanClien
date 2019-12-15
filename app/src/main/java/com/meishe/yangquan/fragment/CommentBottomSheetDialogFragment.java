@@ -14,6 +14,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +42,7 @@ import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -205,12 +207,13 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
     }
 
     private void addComment(long messageId, String commentContent) {
+        String str_count=  Base64.encodeToString(commentContent.getBytes(), Base64.DEFAULT);
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("messageId", messageId);
         requestParam.put("userId", mUser.getUserId());
         requestParam.put("photoUrl", mUser.getPhotoUrl());
         requestParam.put("nickName", mUser.getNickname());
-        requestParam.put("content", commentContent);
+        requestParam.put("content", str_count);
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_ADD_COMMENT, new BaseCallBack<CommentResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -237,10 +240,8 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
                     }
                    Comment comment = result.getData();
                     if (comment!=null){
-                        mAdapter.addItem(comment);
+                        mAdapter.addItem(0,comment);
                         setNoDataVisible(View.GONE);
-                    }else {
-                        setNoDataVisible(View.VISIBLE);
                     }
 
                 }
@@ -298,6 +299,7 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
                     }
                     mList = result.getData();
                     if (mList != null && mList.size() > 0) {
+                        Collections.reverse(mList);
                         mAdapter.addAll(mList);
                         setNoDataVisible(View.GONE);
                     } else {

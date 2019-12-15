@@ -2,6 +2,7 @@ package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Base64;
 import android.view.View;
 import android.widget.TextView;
 
@@ -61,7 +62,8 @@ public class CommentListHolder extends BaseViewHolder {
                     .into(iv_comment_photo);
 
             tv_comment_nickname.setText(comment.getNickName());
-            tv_comment_content.setText(comment.getContent());
+            byte[] bytes=Base64.decode(comment.getContent(), Base64.DEFAULT);
+            tv_comment_content.setText(new String(bytes));
             tv_comment_time.setText(FormatCurrentData.getTimeRange(comment.getCreateTime()+""));
 
         }
