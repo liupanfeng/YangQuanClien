@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.meishe.yangquan.activity.ContactUsActivity">
 
@@ -14,6 +15,17 @@
         android:layout_gravity="center_horizontal"
         android:background="@color/white"
         android:layout_marginTop="82dp">
+
+        <com.meishe.yangquan.view.RoundAngleImageView
+            android:id="@+id/iv_message_top_part"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            app:roundWidth="5dp"
+            app:roundHeight="5dp"
+            />
 
         <ImageView
             android:id="@+id/iv_logo"
@@ -63,7 +75,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="扫码添加官方客服"
+        android:text="扫码关注官方客服"
         android:textColor="#ff383838"
         android:layout_gravity="center_horizontal"
         android:textSize="15sp"
@@ -89,7 +101,7 @@
             android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="唐县生态农业有限公司"
+            android:text="河北汉田唐羊农业开发有限公司"
             android:textColor="#ff383838"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"

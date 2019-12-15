@@ -124,6 +124,14 @@ public class PerfectInformationActivity extends BaseActivity {
                         .load(HttpUrl.URL_IMAGE + photoUrl)
                         .apply(options)
                         .into(mIvPhoto);
+            }else{
+                RequestOptions options = new RequestOptions();
+                options.circleCrop();
+                options.placeholder(R.mipmap.ic_photo_default);
+                Glide.with(mContext)
+                        .load("")
+                        .apply(options)
+                        .into(mIvPhoto);
             }
         }
 

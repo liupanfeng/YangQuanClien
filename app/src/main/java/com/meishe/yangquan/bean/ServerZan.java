@@ -13,7 +13,7 @@ public class ServerZan {
 
     private Long userId;
 
-    private Date createTime;
+    private long createTime;
 
     public Integer getId() {
         return id;
@@ -55,11 +55,11 @@ public class ServerZan {
         this.userId = userId;
     }
 
-    public Date getCreateTime() {
+    public long getCreateTime() {
         return createTime;
     }
 
-    public void setCreateTime(Date createTime) {
+    public void setCreateTime(long createTime) {
         this.createTime = createTime;
     }
 }

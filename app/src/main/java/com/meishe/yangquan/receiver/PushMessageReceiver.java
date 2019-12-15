@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.meishe.yangquan.activity.BusinessOpportunityActivity;
 import com.meishe.yangquan.activity.MainActivity;
 
 import org.json.JSONException;
@@ -28,19 +29,37 @@ public class PushMessageReceiver extends JPushMessageReceiver{
     @Override
     public void onNotifyMessageOpened(Context context, NotificationMessage message) {
         Log.e(TAG,"[onNotifyMessageOpened] "+message);
-        try{
-            //打开自定义的Activity
-            Intent i = new Intent(context, MainActivity.class);
-            Bundle bundle = new Bundle();
-            bundle.putString(JPushInterface.EXTRA_NOTIFICATION_TITLE,message.notificationTitle);
-            bundle.putString(JPushInterface.EXTRA_ALERT,message.notificationContent);
-            i.putExtras(bundle);
-            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
-            context.startActivity(i);
-        }catch (Throwable throwable){
-
+        String messageExtras=message.notificationExtras;
+        try {
+            JSONObject jsonObject=new JSONObject(messageExtras);
+            String pushType=jsonObject.getString("pushType");
+            switch (pushType){
+                case "1": //商机类型推送
+                    Intent i = new Intent(context, BusinessOpportunityActivity.class);
+                    Bundle bundle = new Bundle();
+                    bundle.putString(JPushInterface.EXTRA_NOTIFICATION_TITLE,message.notificationTitle);
+                    bundle.putString(JPushInterface.EXTRA_ALERT,message.notificationContent);
+                    i.putExtras(bundle);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                    context.startActivity(i);
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+//        try{
+//            //打开自定义的Activity
+//            Intent i = new Intent(context, MainActivity.class);
+//            Bundle bundle = new Bundle();
+//            bundle.putString(JPushInterface.EXTRA_NOTIFICATION_TITLE,message.notificationTitle);
+//            bundle.putString(JPushInterface.EXTRA_ALERT,message.notificationContent);
+//            i.putExtras(bundle);
+//            //i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP );
+//            context.startActivity(i);
+//        }catch (Throwable throwable){
+//
+//        }
     }
 
     @Override

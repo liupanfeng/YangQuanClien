@@ -24,6 +24,8 @@ public class ServerCustomer extends BaseInfo{
 
     private List<ServerZan> zans;
 
+    private boolean ischecked=false;
+
     public Integer getId() {
         return id;
     }
@@ -102,5 +104,13 @@ public class ServerCustomer extends BaseInfo{
 
     public void setZans(List<ServerZan> zans) {
         this.zans = zans;
+    }
+
+    public void setIschecked(boolean ischecked) {
+        this.ischecked = ischecked;
+    }
+
+    public boolean isIschecked() {
+        return ischecked;
     }
 }

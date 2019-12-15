@@ -30,7 +30,6 @@
                     android:id="@+id/iv_photo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@mipmap/ic_little_sheep"
                     android:scaleType="centerCrop"
                     />
 

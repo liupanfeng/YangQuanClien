@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServerZan;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.view.LikesView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.util.List;
@@ -25,14 +27,13 @@ import java.util.List;
 public class ServiceTypeListHolder extends BaseViewHolder {
 
     private final RequestOptions options;
-    private TextView mTvServiceType;
-    private ImageView mIvServiceType;
-    private LinearLayout mLlServiceType;
     private Button mBtnOrder;                       //马上预约
     private RoundAngleImageView mIvServicePhoto;
     private TextView mTvServiceNickname;
     private TextView mTvServiceDesc;
     private TextView mTvZanNumber;
+    private LikesView mLikeView;
+    private CheckBox mCbServiceZan;
 
     public ServiceTypeListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -44,12 +45,13 @@ public class ServiceTypeListHolder extends BaseViewHolder {
 
     @Override
     protected void initViewHolder(View view, Object ...obj) {
-        mIvServiceType=view.findViewById(R.id.iv_service_zan);
+        mCbServiceZan=view.findViewById(R.id.cb_service_zan);
         mBtnOrder=view.findViewById(R.id.btn_order);
         mIvServicePhoto=view.findViewById(R.id.iv_service_photo);
         mTvServiceNickname=view.findViewById(R.id.tv_service_nickname);
         mTvServiceDesc=view.findViewById(R.id.tv_service_type_description);
         mTvZanNumber=view.findViewById(R.id.tv_zan_number);
+        mLikeView =view.findViewById(R.id.lv_zan);
     }
 
     @Override
@@ -74,13 +76,18 @@ public class ServiceTypeListHolder extends BaseViewHolder {
             mBtnOrder.setOnClickListener(listener);
             mBtnOrder.setTag(info);
 
-            mIvServiceType.setOnClickListener(listener);
-            mIvServiceType.setTag(info);
 
             List<ServerZan> zans = ((ServerCustomer) info).getZans();
             if (zans!=null&&zans.size()>0){
-                mTvZanNumber.setText(zans.size()+"赞");
+//                mTvZanNumber.setText(zans.size()+"赞");
+                mLikeView.setList(zans);
+                mLikeView.notifyDataSetChanged();
             }
+
+            mCbServiceZan.setChecked(((ServerCustomer) info).isIschecked());
+
+            mCbServiceZan.setOnClickListener(listener);
+            mCbServiceZan.setTag(info);
         }
 
     }

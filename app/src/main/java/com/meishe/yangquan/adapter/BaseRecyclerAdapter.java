@@ -220,22 +220,38 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                             ToastUtil.showToast(mContext,"不能预约自己");
                             return;
                         }
-                        showDialog(user.getUserId(),user.getPhoneNumber(),((ServerCustomer) info).getUserId(),"商机信息","预约信息","将把您的联系方式"+phoneNum+"发送给对方","确定预约");
+                        showDialog(user.getUserId(),user.getPhoneNumber(),((ServerCustomer) info).getUserId(),"您收到羊圈的新商机已将您的联系方式发送给对方，请注意接听电话！","预约信息","稍后将会把"+((ServerCustomer) info).getNickname()+"的联系方式发送到您的消息中心，请查收！","确定预约");
                     }
                     break;
-                case R.id.iv_service_zan:
-                    final MaterialProgress materialProgress = getMaterialProgress();
-                    if (materialProgress != null) {
-                        materialProgress.show();
+                case R.id.cb_service_zan:
+
+                    boolean isOldCheckedStatus=((ServerCustomer) info).isIschecked();
+                    if (isOldCheckedStatus){//取消点赞
+                        ToastUtil.showToast(mContext, "取消点赞");
+                        ((ServerCustomer) info).setIschecked(false);
+                    }else{//点赞
+                        ToastUtil.showToast(mContext, "点赞成功");
+//                        final MaterialProgress materialProgress = getMaterialProgress();
+//                        if (materialProgress != null) {
+//                            materialProgress.show();
+//                        }
+//
+//
+//
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                materialProgress.hide();
+//                                ToastUtil.showToast(mContext, "点赞成功");
+//                            }
+//                        }, 2000);
+
+                        ((ServerCustomer) info).setIschecked(true);
+
                     }
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            materialProgress.hide();
-                            ToastUtil.showToast(mContext, "点赞成功");
-                        }
-                    }, 2000);
+//                    notifyItemChanged(getItemPosition(info));
+                    notifyDataSetChanged();
 
                     break;
             }
@@ -259,7 +275,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                             ToastUtil.showToast(mContext,"不能联系自己");
                             return;
                         }
-                        showDialog(fromUserId,user.getPhoneNumber(),toUserId,"商机信息","联系信息","将把您的联系方式"+phoneNum+"发送给对方","确定联系");
+                        showDialog(fromUserId,user.getPhoneNumber(),toUserId,"您有新的商机，"+user.getNickname()+"，电话："+user.getPhoneNumber()+"想与您联系,请您把握商机，及时回复！","联系信息","将把您的联系方式"+phoneNum+"发送给对方","确定联系");
                     }
 
                     break;
@@ -309,7 +325,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 getFragment().getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(mContext,"商机信息发送失败");
+                        ToastUtil.showToast(mContext,"预约失败");
                         getMaterialProgress().hide();
                     }
                 });
@@ -324,9 +340,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     }
                     BusinessOpportunity businessOpportunity = result.getData();
                     if (businessOpportunity != null ) {
-                        ToastUtil.showToast(mContext,"商机信息已发送");
+                        ToastUtil.showToast(mContext,"已成功预约");
                     } else {
-                        ToastUtil.showToast(mContext,"商机信息发送失败");
+                        ToastUtil.showToast(mContext,"预约失败");
                     }
                 }
             }
@@ -342,7 +358,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 getFragment().getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(mContext,"商机信息发送失败");
+                        ToastUtil.showToast(mContext,"预约失败");
                         getMaterialProgress().hide();
                     }
                 });

@@ -64,5 +64,7 @@
 
     <color name="input_pop_font_color">#BEBEBE</color>
 
+    <color name="default_clickable_color">#cccccc</color>
+
 
 </resources>
