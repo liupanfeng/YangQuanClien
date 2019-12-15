@@ -28,6 +28,7 @@ import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.BusinessOpportunityListResult;
 import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.CommentListResult;
+import com.meishe.yangquan.bean.CommentResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -63,6 +64,8 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
     private String mCurCommentContent;
     private User mUser;
     private View mBtnClose;
+
+    private List<Comment> mList;
 
     @Override
     public void onAttach(Context context) {
@@ -208,7 +211,7 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
         requestParam.put("photoUrl", mUser.getPhotoUrl());
         requestParam.put("nickName", mUser.getNickname());
         requestParam.put("content", commentContent);
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_ADD_COMMENT, new BaseCallBack<CommentListResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_ADD_COMMENT, new BaseCallBack<CommentResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -219,27 +222,27 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        setNoDataVisible(View.VISIBLE);
                         mLoading.hide();
                     }
                 });
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, CommentListResult result) {
+            protected void onSuccess(Call call, Response response, CommentResult result) {
                 mLoading.hide();
                 if (response != null && response.code() == 200) {
                     if (result == null && result.getStatus() != 200) {
                         setNoDataVisible(View.VISIBLE);
                         return;
                     }
-                    List<Comment> list = result.getData();
-                    if (list != null && list.size() > 0) {
-                        mAdapter.addAll(list);
+                   Comment comment = result.getData();
+                    if (comment!=null){
+                        mAdapter.addItem(comment);
                         setNoDataVisible(View.GONE);
-                    } else {
+                    }else {
                         setNoDataVisible(View.VISIBLE);
                     }
+
                 }
             }
 
@@ -254,7 +257,6 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
                     @Override
                     public void run() {
                         mLoading.hide();
-                        setNoDataVisible(View.VISIBLE);
                     }
                 });
             }
@@ -294,9 +296,9 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
                         setNoDataVisible(View.VISIBLE);
                         return;
                     }
-                    List<Comment> list = result.getData();
-                    if (list != null && list.size() > 0) {
-                        mAdapter.addAll(list);
+                    mList = result.getData();
+                    if (mList != null && mList.size() > 0) {
+                        mAdapter.addAll(mList);
                         setNoDataVisible(View.GONE);
                     } else {
                         setNoDataVisible(View.VISIBLE);
