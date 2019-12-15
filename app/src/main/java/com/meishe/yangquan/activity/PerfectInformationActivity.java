@@ -392,12 +392,19 @@ public class PerfectInformationActivity extends BaseActivity {
     }
 
     private void showDialog() {
+        String substring="";
+        String startSubstring="";
         if (mUser != null) {
             mNickname = mUser.getNickname();
+            if (!TextUtils.isEmpty(mNickname)){
+                substring = mNickname.substring(mNickname.indexOf("_")+1,mNickname.length());
+                startSubstring = mNickname.substring(0,mNickname.indexOf("_")+1);
+            }
         }
+        final String finalStartSubstring = startSubstring;
         mDialog = new IosDialog.DialogBuilder(this)
                 .setTitle("编辑昵称")
-                .setInputContent(mNickname)
+                .setInputContent(substring)
                 .setAsureText("修改")
                 .setCancelText("取消")
                 //.setDialogSize(Util.dip2px(MainActivity.this,189),Util.dip2px(MainActivity.this,117))
@@ -415,7 +422,7 @@ public class PerfectInformationActivity extends BaseActivity {
                             return;
                         }
                         mTvNickNameContent.setText(newNickname);
-                        uploadUserInfo("nickname", newNickname);
+                        uploadUserInfo("nickname", finalStartSubstring +newNickname);
                         showLoading();
                         mDialog.dismiss();
 
