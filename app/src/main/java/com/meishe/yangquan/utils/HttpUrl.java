@@ -77,6 +77,10 @@ public class HttpUrl {
     public static final String  PUSH_UPDATE_DEVICE_ALIAS=URL+ "push/updateDeviceAlias";
 
 
+    /*服务列表点赞*/
+    public static final String  SERVICE_LIST_ZAN=URL+ "zan/add";
+
+
 
 
 

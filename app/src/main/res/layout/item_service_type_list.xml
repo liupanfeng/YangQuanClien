@@ -66,6 +66,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="10dp"
+                    android:visibility="gone"
                     android:background="@drawable/button_mine_color_shape"
                     android:text="马上预约"
                     android:textColor="@color/white" />

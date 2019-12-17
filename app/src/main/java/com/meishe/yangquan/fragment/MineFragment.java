@@ -46,8 +46,9 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
     private String mParam2;
     private RecyclerView mRecyclerView;
 
-    private String[] mSettingInfo = {"完善资料", "消息中心", "我的商机", "版本更新", "联系我们"};
-    private int[] mSettingIcon = {R.mipmap.ic_mine_wanshanziliao, R.mipmap.ic_mine_xiaoxizhongxin, R.mipmap.ic_mine_wodeshangji, R.mipmap.ic_mine_banbengegnxin, R.mipmap.ic_mine_lianxiwomen};
+    private String[] mSettingInfo = {"完善资料", "消息中心", "我的商机", "版本更新", "联系我们","关于"};
+    private int[] mSettingIcon = {R.mipmap.ic_mine_wanshanziliao, R.mipmap.ic_mine_xiaoxizhongxin, R.mipmap.ic_mine_wodeshangji, R.mipmap.ic_mine_banbengegnxin,
+            R.mipmap.ic_mine_lianxiwomen,R.mipmap.ic_about};
     private LinearLayout mLLNoLogin;
     private LinearLayout mLLLogin;
     private TextView mTvNumber;

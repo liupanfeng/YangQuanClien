@@ -15,8 +15,10 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.Message;
+import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.utils.DateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
@@ -76,6 +78,36 @@ public class MessageListHolder extends BaseViewHolder {
             long createTime=message.getCreateTime();
             if (createTime>0){
                 mTvMessageTime.setText(DateUtil.longToString(createTime,"yyyy-MM-dd HH:mm:ss"));
+            }
+
+
+            User user= UserManager.getInstance(context).getUser();
+            if (user!=null) {
+                int userType = user.getUserType();
+                switch (userType){
+                    case 1:     //养殖户
+                        if (((Message) info).getUserType()==1){ //如果是出售羊
+                            mBtnMessageStartConnect.setVisibility(View.GONE);
+                        }else {
+                            mBtnMessageStartConnect.setVisibility(View.VISIBLE);
+                        }
+                        break;
+                    case 2: //经纪人
+                    case 3://出售饲料
+                    case 4://出售兽药
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8:
+                    case 9:
+                    case 10:
+                        if (((Message) info).getUserType()==1){ //卖羊的这部分可以联系，其他的都不显示联系按钮
+                            mBtnMessageStartConnect.setVisibility(View.VISIBLE);
+                        }else {
+                            mBtnMessageStartConnect.setVisibility(View.GONE);
+                        }
+                        break;
+                }
             }
 
 

@@ -18,7 +18,9 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServerZan;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
+import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.LikesView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
@@ -83,6 +85,25 @@ public class ServiceTypeListHolder extends BaseViewHolder {
                 mLikeView.setList(zans);
                 mLikeView.notifyDataSetChanged();
             }
+
+            //默认的点赞状态
+            User user= UserManager.getInstance(context).getUser();
+            if (user!=null){
+                int userType=user.getUserType();
+                if (userType==1){
+                    mBtnOrder.setVisibility(View.VISIBLE);
+                }else{
+                    mBtnOrder.setVisibility(View.GONE);
+                }
+                long userId=user.getUserId();
+                for (ServerZan serverZan:zans){
+                    if (userId==serverZan.getUserId()){
+                        ((ServerCustomer) info).setIschecked(true);
+                        break;
+                    }
+                }
+            }
+
 
             mCbServiceZan.setChecked(((ServerCustomer) info).isIschecked());
 

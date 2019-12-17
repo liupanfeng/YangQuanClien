@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.AboutActivity;
 import com.meishe.yangquan.activity.BusinessOpportunityActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.LoginActivity;
@@ -203,6 +204,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     break;
                 case "联系我们":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), ContactUsActivity.class);
+                    break;
+                case "关于":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), AboutActivity.class);
                     break;
 
             }
