@@ -280,12 +280,15 @@ public class RegisterActivity extends BaseActivity  {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-               runOnUiThread(new Runnable() {
-                   @Override
-                   public void run() {
-                       mLoading.hide();
-                   }
-               });
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mLoading.hide();
+                        mInputCheckCode.setFocusable(true);
+                        mInputCheckCode.setFocusableInTouchMode(true);
+                        mInputCheckCode.requestFocus();
+                    }
+                });
             }
 
             @Override
@@ -293,6 +296,9 @@ public class RegisterActivity extends BaseActivity  {
                 mLoading.hide();
                 if (result.getStatus() != 200) {
                     ToastUtil.showToast(mContext, result.getMsg());
+                    mInputCheckCode.setFocusable(true);
+                    mInputCheckCode.setFocusableInTouchMode(true);
+                    mInputCheckCode.requestFocus();
                     return;
                 }
                 if (result != null && result.getStatus() == 200) {
@@ -316,6 +322,9 @@ public class RegisterActivity extends BaseActivity  {
                     @Override
                     public void run() {
                         mLoading.hide();
+                        mInputCheckCode.setFocusable(true);
+                        mInputCheckCode.setFocusableInTouchMode(true);
+                        mInputCheckCode.requestFocus();
                     }
                 });
 

@@ -27,6 +27,8 @@ import com.meishe.yangquan.bean.EndInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
+import com.meishe.yangquan.bean.ServerZan;
+import com.meishe.yangquan.bean.ServerZanResult;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.User;
@@ -213,28 +215,33 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         } else if (info instanceof SheepNews) {
             ToastUtil.showToast(mContext, "暂无历史数据");
         } else if (info instanceof ServerCustomer) {
+            boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
+            if (isNeedLogin) {
+                AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
+                return;
+            }
+            User user = UserManager.getInstance(mContext).getUser();
             switch (v.getId()) {
                 case R.id.btn_order:
-                    User user=UserManager.getInstance(mContext).getUser();
-                    if (user!=null){
-                        String phoneNum=user.getPhoneNumber();
-                        long fromUserId=user.getUserId();
-                        long toUserId=((ServerCustomer) info).getUserId();
-                        if (fromUserId==toUserId){
-                            ToastUtil.showToast(mContext,"不能预约自己");
+                    if (user != null) {
+                        String phoneNum = user.getPhoneNumber();
+                        long fromUserId = user.getUserId();
+                        long toUserId = ((ServerCustomer) info).getUserId();
+                        if (fromUserId == toUserId) {
+                            ToastUtil.showToast(mContext, "不能预约自己");
                             return;
                         }
-                        showDialog(user.getUserId(),user.getPhoneNumber(),((ServerCustomer) info).getUserId(),"您收到羊圈的新商机已将您的联系方式发送给对方，请注意接听电话！","预约信息","稍后将会把"+((ServerCustomer) info).getNickname()+"的联系方式发送到您的消息中心，请查收！","确定预约");
+                        showDialog(user.getUserId(), user.getPhoneNumber(), ((ServerCustomer) info).getUserId(), "您收到羊圈的新商机已将您的联系方式发送给对方，请注意接听电话！", "预约信息", "稍后将会把" + ((ServerCustomer) info).getNickname() + "的联系方式发送到您的消息中心，请查收！", "确定预约");
                     }
                     break;
                 case R.id.cb_service_zan:
 
-                    boolean isOldCheckedStatus=((ServerCustomer) info).isIschecked();
-                    if (isOldCheckedStatus){//取消点赞
+                    boolean isOldCheckedStatus = ((ServerCustomer) info).isIschecked();
+                    if (isOldCheckedStatus) {//取消点赞
                         ToastUtil.showToast(mContext, "取消点赞");
                         ((ServerCustomer) info).setIschecked(false);
-                    }else{//点赞
-                        ToastUtil.showToast(mContext, "点赞成功");
+                    } else {//点赞
+//                        ToastUtil.showToast(mContext, "点赞成功");
 //                        final MaterialProgress materialProgress = getMaterialProgress();
 //                        if (materialProgress != null) {
 //                            materialProgress.show();
@@ -249,13 +256,20 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 //                                ToastUtil.showToast(mContext, "点赞成功");
 //                            }
 //                        }, 2000);
-
-                        ((ServerCustomer) info).setIschecked(true);
-
+                        if (user != null) {
+                            final MaterialProgress materialProgress = getMaterialProgress();
+                            if (materialProgress != null) {
+                                materialProgress.show();
+                            }
+                            long userId = user.getUserId();
+                            String nickName = user.getNickname();
+                            String photoUrl = user.getPhotoUrl();
+                            long serverId = ((ServerCustomer) info).getServerId();
+                            addZan(userId, nickName, photoUrl, serverId + "", (ServerCustomer) info);
+                        }else{
+                            ToastUtil.showToast(mContext, "用户信息异常，请重新登陆再点赞");
+                        }
                     }
-
-//                    notifyItemChanged(getItemPosition(info));
-                    notifyDataSetChanged();
 
                     break;
             }
@@ -270,16 +284,16 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     fragment.show(mFragment.getFragmentManager(), "dialog");
                     break;
                 case R.id.btn_message_start_connect:    //我要联系
-                    User user=UserManager.getInstance(mContext).getUser();
-                    if (user!=null){
-                        String phoneNum=user.getPhoneNumber();
-                        long fromUserId=user.getUserId();
-                        long toUserId=((Message) info).getUserId();
-                        if (fromUserId==toUserId){
-                            ToastUtil.showToast(mContext,"不能联系自己");
+                    User user = UserManager.getInstance(mContext).getUser();
+                    if (user != null) {
+                        String phoneNum = user.getPhoneNumber();
+                        long fromUserId = user.getUserId();
+                        long toUserId = ((Message) info).getUserId();
+                        if (fromUserId == toUserId) {
+                            ToastUtil.showToast(mContext, "不能联系自己");
                             return;
                         }
-                        showDialog(fromUserId,user.getPhoneNumber(),toUserId,"您有新的商机，"+user.getNickname()+"，电话："+user.getPhoneNumber()+"想与您联系,请您把握商机，及时回复！","联系信息","将把您的联系方式"+phoneNum+"发送给对方","确定联系");
+                        showDialog(fromUserId, user.getPhoneNumber(), toUserId, "您有新的商机，" + user.getNickname() + "，电话：" + user.getPhoneNumber() + "想与您联系,请您把握商机，及时回复！", "联系信息", "将把您的联系方式" + phoneNum + "发送给对方", "确定联系");
                     }
 
                     break;
@@ -300,7 +314,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     @Override
                     public void onAsureClick() {
                         getMaterialProgress().show();
-                        addBusinessOpportunity(fromUserId,fromPhoneNumber,userId,content);
+                        addBusinessOpportunity(fromUserId, fromPhoneNumber, userId, content);
                         mDialog.dismiss();
                     }
 
@@ -312,7 +326,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     }
 
 
-    private void addBusinessOpportunity(Long fromUserId,String fromPhoneNumber,Long toUserId,String content) {
+    private void addBusinessOpportunity(Long fromUserId, String fromPhoneNumber, Long toUserId, String content) {
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("fromUserId", fromUserId);
         requestParam.put("fromPhoneNumber", fromPhoneNumber);
@@ -329,7 +343,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 getFragment().getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(mContext,"预约失败");
+                        ToastUtil.showToast(mContext, "预约失败");
                         getMaterialProgress().hide();
                     }
                 });
@@ -343,10 +357,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                         return;
                     }
                     BusinessOpportunity businessOpportunity = result.getData();
-                    if (businessOpportunity != null ) {
-                        ToastUtil.showToast(mContext,"已成功预约");
+                    if (businessOpportunity != null) {
+                        ToastUtil.showToast(mContext, "已成功预约");
                     } else {
-                        ToastUtil.showToast(mContext,"预约失败");
+                        ToastUtil.showToast(mContext, "预约失败");
                     }
                 }
             }
@@ -362,7 +376,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 getFragment().getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(mContext,"预约失败");
+                        ToastUtil.showToast(mContext, "预约失败");
                         getMaterialProgress().hide();
                     }
                 });
@@ -375,6 +389,143 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         }, requestParam);
     }
 
+    /**
+     * @param userId
+     * @param nickName
+     * @param photoUrl
+     */
+    private void addZan(Long userId, String nickName, String photoUrl, String serverId, final ServerCustomer serverCustomer) {
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("userId", userId);
+        requestParam.put("nickName", nickName);
+        requestParam.put("photoUrl", photoUrl);
+        requestParam.put("serverId", serverId);
+        OkHttpManager.getInstance().postRequest(HttpUrl.SERVICE_LIST_ADD_ZAN, new BaseCallBack<ServerZanResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                getFragment().getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "点赞失败");
+                        getMaterialProgress().hide();
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerZanResult result) {
+                getMaterialProgress().hide();
+                if (response != null && response.code() == 200) {
+                    if (result == null && result.getStatus() != 200) {
+                        return;
+                    }
+                    ServerZan serverZan = result.getData();
+                    if (serverZan != null) {
+                        ToastUtil.showToast(mContext, "点赞成功");
+                        serverCustomer.setIschecked(true);
+                        List<ServerZan> zans = serverCustomer.getZans();
+                        if (zans!=null){
+                            zans.add(serverZan);
+                        }
+                        notifyDataSetChanged();
+                    } else {
+                        ToastUtil.showToast(mContext, "点赞失败");
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+//                setNoDataVisible(View.VISIBLE);
+                getFragment().getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "点赞失败");
+                        getMaterialProgress().hide();
+                    }
+                });
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
+    /**
+     * 取消点赞
+     */
+    private void deleteZan(long userId) {
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("userId", userId);
+        OkHttpManager.getInstance().postRequest(HttpUrl.SERVICE_LIST_DELETE_ZAN, new BaseCallBack<BusinessOpportunityResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                getFragment().getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "取消赞失败");
+                        getMaterialProgress().hide();
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, BusinessOpportunityResult result) {
+                getMaterialProgress().hide();
+                if (response != null && response.code() == 200) {
+                    if (result == null && result.getStatus() != 200) {
+                        return;
+                    }
+                    BusinessOpportunity businessOpportunity = result.getData();
+                    if (businessOpportunity != null) {
+//                        ToastUtil.showToast(mContext,"点赞成功");
+                    } else {
+                        ToastUtil.showToast(mContext, "取消赞失败");
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+//                setNoDataVisible(View.VISIBLE);
+                getFragment().getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "取消赞失败");
+                        getMaterialProgress().hide();
+                    }
+                });
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
 
 
     /**

@@ -239,7 +239,15 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                mMaterialProgress.hide();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mMaterialProgress.hide();
+                        mInputCheckCode.setFocusable(true);
+                        mInputCheckCode.setFocusableInTouchMode(true);
+                        mInputCheckCode.requestFocus();
+                    }
+                });
             }
 
             @Override
@@ -247,6 +255,9 @@ public class LoginActivity extends BaseActivity {
                 mMaterialProgress.hide();
                 if (result.getStatus() != 200) {
                     ToastUtil.showToast(mContext, result.getMsg());
+                    mInputCheckCode.setFocusable(true);
+                    mInputCheckCode.setFocusableInTouchMode(true);
+                    mInputCheckCode.requestFocus();
                     return;
                 }
                 if (result != null && result.getStatus() == 200) {
@@ -266,7 +277,15 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                mMaterialProgress.hide();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mMaterialProgress.hide();
+                        mInputCheckCode.setFocusable(true);
+                        mInputCheckCode.setFocusableInTouchMode(true);
+                        mInputCheckCode.requestFocus();
+                    }
+                });
             }
 
             @Override
