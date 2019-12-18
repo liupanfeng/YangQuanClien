@@ -40,6 +40,7 @@ import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.CropCircleView;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.MaterialProgress;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;
 import java.io.IOException;
@@ -418,6 +419,19 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
             cursor.close();
         }
         return path;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 }

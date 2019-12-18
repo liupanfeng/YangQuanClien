@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.CustomToolbar;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 版本更新
@@ -80,5 +81,17 @@ public class VersionUpdateActivity extends BaseActivity {
         public void onClick() {
             finish();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

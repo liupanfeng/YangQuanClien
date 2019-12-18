@@ -3,6 +3,7 @@ import android.view.View;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.wiget.CustomToolbar;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 联系我们
@@ -72,5 +73,17 @@ public class ContactUsActivity extends BaseActivity {
         public void onClick() {
             finish();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

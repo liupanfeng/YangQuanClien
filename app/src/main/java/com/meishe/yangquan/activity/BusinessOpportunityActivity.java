@@ -14,6 +14,7 @@ import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.CustomToolbar;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -163,5 +164,17 @@ public class BusinessOpportunityActivity extends BaseActivity {
         if (mNoDate!=null){
             mNoDate.setVisibility(visible);
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

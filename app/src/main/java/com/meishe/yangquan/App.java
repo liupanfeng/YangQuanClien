@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
 
+import com.umeng.commonsdk.UMConfigure;
+
 import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
@@ -23,6 +25,10 @@ public class App extends Application {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
 
+        //友盟初始化 Push推送业务的secret,没有为空
+        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
+        // 打开统计SDK调试模式
+        UMConfigure.setLogEnabled(true);
     }
 
 

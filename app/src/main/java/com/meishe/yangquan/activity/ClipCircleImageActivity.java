@@ -15,6 +15,8 @@ import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CaptureAndEditUtil;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.view.CropCircleView;
+import com.umeng.analytics.MobclickAgent;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -141,5 +143,18 @@ public class ClipCircleImageActivity extends AppCompatActivity {
         if (!isFinishing()){
             AppManager.getInstance().finishActivity();
         }
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

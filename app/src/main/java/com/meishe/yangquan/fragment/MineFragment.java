@@ -109,7 +109,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         mRecyclerView.setAdapter(adapter);
         adapter.setFragment(this);
         mList.clear();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < mSettingInfo.length; i++) {
             MineTypeInfo info = new MineTypeInfo();
             info.setName(mSettingInfo[i]);
             info.setIcon(mSettingIcon[i]);

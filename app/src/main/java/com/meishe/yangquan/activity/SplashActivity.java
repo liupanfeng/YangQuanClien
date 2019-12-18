@@ -14,6 +14,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.ADOpenScreenResult;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserManager;
+import com.umeng.analytics.MobclickAgent;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -51,6 +52,18 @@ public class SplashActivity extends AppCompatActivity {
             mHandler.removeCallbacksAndMessages(null);
             mHandler=null;
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 
 

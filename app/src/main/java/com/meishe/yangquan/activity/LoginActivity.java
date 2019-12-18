@@ -24,6 +24,7 @@ import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.wiget.MaterialProgress;
 import com.meishe.yangquan.wiget.TitleBar;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -368,5 +369,17 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void onError(int type, Object obj) {
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

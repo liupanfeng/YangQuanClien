@@ -5,6 +5,7 @@ import android.view.View;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.fragment.ServiceTypeListFragment;
 import com.meishe.yangquan.wiget.CustomToolbar;
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * 服务列表界面
@@ -86,5 +87,17 @@ public class ServiceTypeListActivity extends BaseActivity {
         public void onClick() {
             finish();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }

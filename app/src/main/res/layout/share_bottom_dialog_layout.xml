@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="283dp"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_above="@id/cancel"
+        android:background="@drawable/cancel_bg"
+        android:layout_marginBottom="6dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="112dp"
+            android:orientation="horizontal">
+
+
+            <LinearLayout
+                android:id="@+id/wechat"
+                android:layout_width="0dp"
+                android:layout_weight= "1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="53dp"
+                    android:layout_height="53dp"
+                    android:background="@mipmap/wechet"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="微信"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/friends"
+                android:layout_width="0dp"
+                android:layout_weight= "1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="53dp"
+                    android:layout_height="53dp"
+                    android:background="@mipmap/circle_of_friends"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="朋友圈"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:layout_gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/sina"
+                android:layout_width="0dp"
+                android:layout_weight= "1"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="53dp"
+                    android:layout_height="53dp"
+                    android:background="@mipmap/sina"
+                    android:layout_gravity="center"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="微博"
+                    android:textColor="@color/black"
+                    android:layout_gravity="center"
+                    android:textSize="13sp"
+                    android:layout_centerVertical="true"/>
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bottom_menu_layout_color"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_menu_btn_height"
+            android:background="@drawable/bottom_menu_cancal_selector"
+            android:gravity="center"
+            android:text="取消"
+            android:textColor="@color/black"
+            android:textSize="@dimen/bottom_menu_btn_text_size">
+        </TextView>
+    </RelativeLayout>
+</RelativeLayout>

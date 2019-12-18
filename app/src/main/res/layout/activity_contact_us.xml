@@ -17,24 +17,16 @@
         android:layout_marginTop="82dp">
 
         <com.meishe.yangquan.view.RoundAngleImageView
-            android:id="@+id/iv_message_top_part"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            app:roundWidth="5dp"
-            app:roundHeight="5dp"
-            />
-
-        <ImageView
             android:id="@+id/iv_logo"
             android:layout_width="51dp"
             android:layout_height="51dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="18dp"
-            android:background="@mipmap/logo" />
+            android:background="@mipmap/logo"
+            app:roundWidth="5dp"
+            app:roundHeight="5dp"
+            />
 
         <LinearLayout
             android:layout_width="wrap_content"

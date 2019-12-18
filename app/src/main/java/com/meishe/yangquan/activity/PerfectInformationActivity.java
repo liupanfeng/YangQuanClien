@@ -43,6 +43,7 @@ import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.IosDialog;
 import com.meishe.yangquan.wiget.MaterialProgress;
+import com.umeng.analytics.MobclickAgent;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -495,5 +496,17 @@ public class PerfectInformationActivity extends BaseActivity {
         }, requestParam);
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
+    }
 
 }

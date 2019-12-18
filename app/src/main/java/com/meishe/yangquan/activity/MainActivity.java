@@ -22,6 +22,7 @@ import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.PageId;
 import com.meishe.yangquan.view.BrandTextView;
 import com.meishe.yangquan.view.MViewPager;
+import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -177,5 +178,18 @@ public class MainActivity extends AppCompatActivity {
                getDataAsync();
            }
        }.start();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        MobclickAgent.onResume(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        MobclickAgent.onPause(this);
     }
 }
