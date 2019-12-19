@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.SendSmsResult;
+import com.meishe.yangquan.bean.UpdateDeviceAliasResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -24,6 +25,7 @@ import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.CountDownTimerUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.wiget.MaterialProgress;
@@ -33,6 +35,7 @@ import com.umeng.analytics.MobclickAgent;
 import java.io.IOException;
 import java.util.HashMap;
 
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -179,7 +182,7 @@ public class RegisterActivity extends BaseActivity  {
 
 
     private void registerFromServer() {
-
+        mLoading.show();
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put(Constants.phoneNumber, mInputPhoneNumber);
         requestParam.put(Constants.userType, mUserType);
@@ -192,11 +195,20 @@ public class RegisterActivity extends BaseActivity  {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mLoading.hide();
+                        mInputCheckCode.setFocusable(true);
+                        mInputCheckCode.setFocusableInTouchMode(true);
+                        mInputCheckCode.requestFocus();
+                    }
+                });
             }
 
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
+                mLoading.hide();
                 if (result != null) {
                     int code=result.getStatus();
                     if (code!=200){
@@ -204,8 +216,16 @@ public class RegisterActivity extends BaseActivity  {
                         return;
                     }
                     if (code==200){
-                        ToastUtil.showToast(mContext,"注册成功请登录");
-                        finish();
+                        User user=result.getData();
+                        if (user!=null){
+                            String token = user.getTokenId();
+                            UserManager.getInstance(mContext).setToken(token);
+                            AppManager.getInstance().jumpActivity(RegisterActivity.this, MainActivity.class);
+                            updateDeviceAlias();
+                            finish();
+                            ToastUtil.showToast(mContext,"注册成功并自动登录");
+                        }
+
                         return;
                     }
 
@@ -219,7 +239,63 @@ public class RegisterActivity extends BaseActivity  {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mLoading.hide();
+                        mInputCheckCode.setFocusable(true);
+                        mInputCheckCode.setFocusableInTouchMode(true);
+                        mInputCheckCode.requestFocus();
+                    }
+                });
+            }
 
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
+    public void updateDeviceAlias(){
+        User user=UserManager.getInstance(mContext).getUser();
+        if(user==null){
+            return;
+        }
+        String userId=user.getUserId()+"";
+        String registrationID= JPushInterface.getRegistrationID(mContext);
+        final HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("registrationId", registrationID);
+        requestParam.put("userId", userId);
+        OkHttpManager.getInstance().postRequest(HttpUrl.PUSH_UPDATE_DEVICE_ALIAS, new BaseCallBack<UpdateDeviceAliasResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UpdateDeviceAliasResult result) {
+                if (result.getStatus() != 200) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+                if (result != null && result.getStatus() == 200) {
+                    Log.d("LoginActivity","绑定成功");
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
             }
 
             @Override
