@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
-import android.support.v4.app.FragmentActivity;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -127,7 +125,6 @@ public class ShareBottomSheetDialogFragment extends BottomSheetDialogFragment im
 
     public interface DownloadAndJumpListeners{
         void onJumpTo(int type);
-        void onDeleteVideo();
     }
 
     private void initViews(View rootView){
