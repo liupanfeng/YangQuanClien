@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="180dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="4dp"
@@ -85,51 +85,56 @@
                 android:textSize="14sp" />
 
 
-            <com.meishe.yangquan.view.LikesView
-                android:id="@+id/lv_zan"
-                android:layout_toLeftOf="@+id/rl_zan_root"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_service_type_description"
-                android:layout_margin="10dp"
-                android:textSize="12sp"
-                />
+                android:layout_below="@+id/tv_service_type_description">
 
-
-            <RelativeLayout
-                android:id="@+id/rl_zan_root"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="5dp"
-                android:layout_width="50dp"
-                android:layout_height="50dp">
-
-
-                <TextView
-                    android:id="@+id/tv_zan_number"
-                    android:layout_width="wrap_content"
+                <com.meishe.yangquan.view.LikesView
+                    android:id="@+id/lv_zan"
+                    android:layout_toLeftOf="@+id/rl_zan_root"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_marginRight="8dp"
-                    android:layout_toLeftOf="@+id/cb_service_zan"
-                    android:text="赞"
-                    android:textColor="@color/text_content_color"
-                    android:textSize="15sp" />
 
-                <CheckBox
-                    android:id="@+id/cb_service_zan"
-                    android:layout_width="14dp"
-                    android:layout_height="14dp"
-                    android:layout_alignParentRight="true"
+                    android:layout_margin="10dp"
+                    android:textSize="12sp"
+                    />
+
+
+                <RelativeLayout
+                    android:id="@+id/rl_zan_root"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="3dp"
-                    android:button="@null"
-                    android:background="@drawable/btn_zan_selector" />
+                    android:layout_alignParentRight="true"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp">
+
+
+                    <TextView
+                        android:id="@+id/tv_zan_number"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="8dp"
+                        android:layout_toLeftOf="@+id/cb_service_zan"
+                        android:text="赞"
+                        android:textColor="@color/text_content_color"
+                        android:textSize="15sp" />
+
+                    <CheckBox
+                        android:id="@+id/cb_service_zan"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="3dp"
+                        android:button="@null"
+                        android:background="@drawable/btn_zan_selector" />
+
+                </RelativeLayout>
 
             </RelativeLayout>
-
-
 
 
         </RelativeLayout>

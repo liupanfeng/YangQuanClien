@@ -51,11 +51,14 @@ public class LikesView extends android.support.v7.widget.AppCompatTextView {
      * 刷新点赞列表
      */
     public void notifyDataSetChanged() {
-        if (list == null || list.size() <= 0) {
+        if (list == null || list.size() < 0) {
             return;
         }
         SpannableStringBuilder builder = new SpannableStringBuilder();
-        builder.append(setImageSpan());
+        if (list.size()>0){
+            builder.append(setImageSpan());
+        }
+
         for (int i = 0; i < list.size(); i++) {
             ServerZan item = list.get(i);
             builder.append(setClickableSpan(item.getNickName(), item));

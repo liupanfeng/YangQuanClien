@@ -39,39 +39,39 @@ public class ServiceTypeListHolder extends BaseViewHolder {
 
     public ServiceTypeListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
-        mAdapter=adapter;
+        mAdapter = adapter;
         options = new RequestOptions();
         options.centerCrop();
         options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
-    protected void initViewHolder(View view, Object ...obj) {
-        mCbServiceZan=view.findViewById(R.id.cb_service_zan);
-        mBtnOrder=view.findViewById(R.id.btn_order);
-        mIvServicePhoto=view.findViewById(R.id.iv_service_photo);
-        mTvServiceNickname=view.findViewById(R.id.tv_service_nickname);
-        mTvServiceDesc=view.findViewById(R.id.tv_service_type_description);
-        mTvZanNumber=view.findViewById(R.id.tv_zan_number);
-        mLikeView =view.findViewById(R.id.lv_zan);
+    protected void initViewHolder(View view, Object... obj) {
+        mCbServiceZan = view.findViewById(R.id.cb_service_zan);
+        mBtnOrder = view.findViewById(R.id.btn_order);
+        mIvServicePhoto = view.findViewById(R.id.iv_service_photo);
+        mTvServiceNickname = view.findViewById(R.id.tv_service_nickname);
+        mTvServiceDesc = view.findViewById(R.id.tv_service_type_description);
+        mTvZanNumber = view.findViewById(R.id.tv_zan_number);
+        mLikeView = view.findViewById(R.id.lv_zan);
     }
 
     @Override
     public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
-        if (info instanceof ServerCustomer){
-            ServerCustomer serverCustomer= (ServerCustomer) info;
-            String desc=serverCustomer.getAutograph();
-            if (TextUtils.isEmpty(desc)){
+        if (info instanceof ServerCustomer) {
+            ServerCustomer serverCustomer = (ServerCustomer) info;
+            String desc = serverCustomer.getAutograph();
+            if (TextUtils.isEmpty(desc)) {
                 mTvServiceDesc.setText("签名暂未添加，请到完善资料里边去完善签名信息！");
-            }else {
+            } else {
                 mTvServiceDesc.setText(desc);
             }
             mTvServiceNickname.setText(serverCustomer.getNickname());
 
-            String photoUrl=serverCustomer.getPhotoUrl();
+            String photoUrl = serverCustomer.getPhotoUrl();
             Glide.with(context)
                     .asBitmap()
-                    .load(HttpUrl.URL_IMAGE+photoUrl)
+                    .load(HttpUrl.URL_IMAGE + photoUrl)
                     .apply(options)
                     .into(mIvServicePhoto);
 
@@ -80,24 +80,21 @@ public class ServiceTypeListHolder extends BaseViewHolder {
 
 
             List<ServerZan> zans = ((ServerCustomer) info).getZans();
-            if (zans!=null&&zans.size()>0){
-//                mTvZanNumber.setText(zans.size()+"赞");
-                mLikeView.setList(zans);
-                mLikeView.notifyDataSetChanged();
-            }
+            mLikeView.setList(zans);
+            mLikeView.notifyDataSetChanged();
 
             //默认的点赞状态
-            User user= UserManager.getInstance(context).getUser();
-            if (user!=null){
-                int userType=user.getUserType();
-                if (userType==1){
+            User user = UserManager.getInstance(context).getUser();
+            if (user != null) {
+                int userType = user.getUserType();
+                if (userType == 1) {
                     mBtnOrder.setVisibility(View.VISIBLE);
-                }else{
+                } else {
                     mBtnOrder.setVisibility(View.GONE);
                 }
-                long userId=user.getUserId();
-                for (ServerZan serverZan:zans){
-                    if (userId==serverZan.getUserId()){
+                long userId = user.getUserId();
+                for (ServerZan serverZan : zans) {
+                    if (userId == serverZan.getUserId()) {
                         ((ServerCustomer) info).setIschecked(true);
                         break;
                     }

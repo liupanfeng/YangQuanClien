@@ -238,7 +238,16 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
                     boolean isOldCheckedStatus = ((ServerCustomer) info).isIschecked();
                     if (isOldCheckedStatus) {//取消点赞
-                        deleteZan(user.getUserId(),(ServerCustomer) info);
+                        if (user!=null){
+                            final MaterialProgress materialProgress = getMaterialProgress();
+                            if (materialProgress != null) {
+                                materialProgress.show();
+                            }
+                            deleteZan(user.getUserId(),(ServerCustomer) info);
+                        }else{
+                            ToastUtil.showToast(mContext, "用户信息异常，请重新登陆再取消赞");
+                        }
+
                     } else {//点赞
                         if (user != null) {
                             final MaterialProgress materialProgress = getMaterialProgress();
@@ -483,9 +492,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                         List<ServerZan> zans = serverCustomer.getZans();
                         if (zans!=null){
                             for (ServerZan zan:zans){
-                                if (zan.getUserId()==serverZan.getUserId()){
+                                if (zan.getUserId().longValue()==serverZan.getUserId().longValue()){
                                     zans.remove(zan);
-                                    serverCustomer.setIschecked(true);
+                                    serverCustomer.setIschecked(false);
                                     notifyDataSetChanged();
                                 }
                             }

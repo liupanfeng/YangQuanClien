@@ -1,6 +1,7 @@
 package com.meishe.yangquan.fragment;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -16,8 +18,13 @@ import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.wiget.MaterialProgress;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -37,6 +44,11 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
     private View mNoDate;
     private MultiFunctionAdapter mAdapter;
     private MaterialProgress mp_loading;
+    protected SmartRefreshLayout mRefreshLayout;
+    private List<BaseInfo> mList=new ArrayList<>();
+
+    private static final int rows=3;     //默认一页请求的个数
+    private int mPageNum =1;   //默认请求第一页
 
     public MessageListFragmentList() {
     }
@@ -60,6 +72,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view=inflater.inflate(R.layout.fragment_message_fragment_list_layout,container,false);
+        mRefreshLayout = (SmartRefreshLayout) view.findViewById(R.id.refreshLayout);
         mRecyclerView=view.findViewById(R.id.recycler);
         mNoDate=view.findViewById(R.id.view_no_data);
         mp_loading=view.findViewById(R.id.mp_loading);
@@ -68,7 +81,21 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
 
     @Override
     protected void initListener() {
+        mRefreshLayout.setFooterTriggerRate(0.5f);
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mList.clear();
+                mPageNum = 1;
+            }
+        });
 
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+//                getSearchList(mSearchKeyWord);
+            }
+        });
     }
 
     @Override

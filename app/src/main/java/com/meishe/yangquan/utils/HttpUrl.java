@@ -38,6 +38,9 @@ public class HttpUrl {
     /*信息页面列表数据*/
     public static final String  URL_MESSAGE_LIST =URL+ "message/select";
 
+    /*分页的方式获取 信息页面列表数据*/
+    public static final String  URL_GET_MESSAGE_LIST =URL+ "get/select";
+
     /*完善用户信息*/
     public static final String  URL_USER_UPDATE =URL+ "user/update";
 
