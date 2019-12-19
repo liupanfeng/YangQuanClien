@@ -238,24 +238,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
                     boolean isOldCheckedStatus = ((ServerCustomer) info).isIschecked();
                     if (isOldCheckedStatus) {//取消点赞
-                        ToastUtil.showToast(mContext, "取消点赞");
-                        ((ServerCustomer) info).setIschecked(false);
+                        deleteZan(user.getUserId(),(ServerCustomer) info);
                     } else {//点赞
-//                        ToastUtil.showToast(mContext, "点赞成功");
-//                        final MaterialProgress materialProgress = getMaterialProgress();
-//                        if (materialProgress != null) {
-//                            materialProgress.show();
-//                        }
-//
-//
-//
-//                        new Handler().postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                materialProgress.hide();
-//                                ToastUtil.showToast(mContext, "点赞成功");
-//                            }
-//                        }, 2000);
                         if (user != null) {
                             final MaterialProgress materialProgress = getMaterialProgress();
                             if (materialProgress != null) {
@@ -467,10 +451,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     /**
      * 取消点赞
      */
-    private void deleteZan(long userId) {
+    private void deleteZan(long userId,final ServerCustomer serverCustomer) {
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("userId", userId);
-        OkHttpManager.getInstance().postRequest(HttpUrl.SERVICE_LIST_DELETE_ZAN, new BaseCallBack<BusinessOpportunityResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.SERVICE_LIST_DELETE_ZAN, new BaseCallBack<ServerZanResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -488,17 +472,24 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, BusinessOpportunityResult result) {
+            protected void onSuccess(Call call, Response response, ServerZanResult result) {
                 getMaterialProgress().hide();
                 if (response != null && response.code() == 200) {
                     if (result == null && result.getStatus() != 200) {
                         return;
                     }
-                    BusinessOpportunity businessOpportunity = result.getData();
-                    if (businessOpportunity != null) {
-//                        ToastUtil.showToast(mContext,"点赞成功");
-                    } else {
-                        ToastUtil.showToast(mContext, "取消赞失败");
+                    ServerZan serverZan = result.getData();
+                    if (serverZan != null) {
+                        List<ServerZan> zans = serverCustomer.getZans();
+                        if (zans!=null){
+                            for (ServerZan zan:zans){
+                                if (zan.getUserId()==serverZan.getUserId()){
+                                    zans.remove(zan);
+                                    serverCustomer.setIschecked(true);
+                                    notifyDataSetChanged();
+                                }
+                            }
+                        }
                     }
                 }
             }

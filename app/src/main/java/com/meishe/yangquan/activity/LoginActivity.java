@@ -170,6 +170,7 @@ public class LoginActivity extends BaseActivity {
                 Bundle bundle=new Bundle();
                 bundle.putString("phoneNumber",mInputPhoneNum.getText().toString().trim());
                 AppManager.getInstance().jumpActivity(LoginActivity.this, RegisterActivity.class,bundle);
+                finish();
                 break;
             case R.id.user_agreement:
                 break;
@@ -185,7 +186,6 @@ public class LoginActivity extends BaseActivity {
                 return;
             }
             String userId=user.getUserId()+"";
-//            String userId="15896";
             String registrationID= JPushInterface.getRegistrationID(mContext);
             final HashMap<String, Object> requestParam = new HashMap<>();
             requestParam.put("registrationId", registrationID);
