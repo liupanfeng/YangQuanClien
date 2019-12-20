@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -354,8 +355,12 @@ public class PerfectInformationActivity extends BaseActivity {
 //                    if (bitMap != null) {
 //                        mIvPhoto.setImageBitmap(bitMap);
 //                    }
+                    Matrix matrix = new Matrix();
+                    matrix.setScale(0.3f, 0.3f);
+                    Bitmap resultBitmap = Bitmap.createBitmap(bitMap, 0, 0, bitMap.getWidth(),
+                            bitMap.getHeight(), matrix, true);
                     showLoading();
-                    uploadUserInfo("icon", Util.bitmaptoString(bitMap));
+                    uploadUserInfo("icon", Util.bitmaptoString(resultBitmap));
                 }
         }
     }
