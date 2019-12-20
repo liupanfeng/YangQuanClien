@@ -108,6 +108,27 @@ public class Util {
         return flag;
     }
 
+
+    /**
+     * 处理上传服务器内容中包含图片不能识别的问题
+     * @param content
+     * @return
+     */
+    public static String encodeString(String content){
+        String str_count=  Base64.encodeToString(content.getBytes(), Base64.DEFAULT);
+        return str_count;
+    }
+
+    /**
+     * 解码数据
+     * @param content
+     * @return
+     */
+    public static String decodeString(String content){
+        byte[] bytes=Base64.decode(content, Base64.DEFAULT);
+       return new String(bytes);
+    }
+
     public static boolean isBackground(Context context) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         String packageName = context.getPackageName();

@@ -52,6 +52,7 @@ import com.meishe.yangquan.wiget.MaterialProgress;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import okhttp3.Call;
@@ -491,12 +492,17 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     if (serverZan != null) {
                         List<ServerZan> zans = serverCustomer.getZans();
                         if (zans!=null){
-                            for (ServerZan zan:zans){
+                            Iterator<ServerZan> iterator = zans.iterator();
+                            while (iterator.hasNext()){
+                                ServerZan zan=iterator.next();
                                 if (zan.getUserId().longValue()==serverZan.getUserId().longValue()){
-                                    zans.remove(zan);
+                                    iterator.remove();
                                     serverCustomer.setIschecked(false);
                                     notifyDataSetChanged();
                                 }
+                            }
+                            for (ServerZan zan:zans){
+
                             }
                         }
                     }
