@@ -47,7 +47,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
     protected SmartRefreshLayout mRefreshLayout;
     private List<BaseInfo> mList=new ArrayList<>();
 
-    private static final int rows=3;     //默认一页请求的个数
+    private static final int rows=4;     //默认一页请求的个数
     private int mPageNum =1;   //默认请求第一页
 
     public MessageListFragmentList() {
@@ -87,6 +87,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
             public void onRefresh(@NonNull RefreshLayout refreshLayout) {
                 mList.clear();
                 mPageNum = 1;
+                getMessageListFromServer(type);
             }
         });
 
@@ -94,6 +95,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
 //                getSearchList(mSearchKeyWord);
+                getMessageListFromServer(type);
             }
         });
     }
@@ -117,6 +119,8 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
 
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("userType",userType);
+        requestParam.put("page",mPageNum);
+        requestParam.put("rows",rows);
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_MESSAGE_LIST, new BaseCallBack<MessageResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -129,6 +133,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
 
             @Override
             protected void onSuccess(Call call, Response response, MessageResult result) {
+                setRefreshFinish();
                 if (response != null&&response.code()==200) {
                     if (result==null&&result.getStatus()!=200){
                         setNoDataVisible(View.VISIBLE);
@@ -136,7 +141,9 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
                     }
                     List<Message> list=result.getData();
                     if (list!=null&&list.size()>0){
-                        mAdapter.addAll(list);
+                        mPageNum++;
+                        mList.addAll(list);
+                        mAdapter.addAll(mList);
                         setNoDataVisible(View.GONE);
                     }else{
                         setNoDataVisible(View.VISIBLE);
@@ -185,6 +192,13 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
     public void setNoDataVisible(int visible){
         if (mNoDate!=null){
             mNoDate.setVisibility(visible);
+        }
+    }
+
+    public void setRefreshFinish(){
+        if(mRefreshLayout != null){
+            mRefreshLayout.finishRefresh();
+            mRefreshLayout.finishLoadMore();
         }
     }
 }
