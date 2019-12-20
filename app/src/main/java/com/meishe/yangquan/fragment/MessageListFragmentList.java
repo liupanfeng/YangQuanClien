@@ -47,7 +47,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
     protected SmartRefreshLayout mRefreshLayout;
     private List<BaseInfo> mList=new ArrayList<>();
 
-    private static final int rows=4;     //默认一页请求的个数
+    private static final int rows=2;     //默认一页请求的个数
     private int mPageNum =1;   //默认请求第一页
 
     public MessageListFragmentList() {
@@ -121,7 +121,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
         requestParam.put("userType",userType);
         requestParam.put("page",mPageNum);
         requestParam.put("rows",rows);
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_MESSAGE_LIST, new BaseCallBack<MessageResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_MESSAGE_LIST, new BaseCallBack<MessageResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -129,6 +129,12 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
 
             @Override
             protected void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setNoDataVisible(View.VISIBLE);
+                    }
+                });
             }
 
             @Override
@@ -140,13 +146,18 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
                         return;
                     }
                     List<Message> list=result.getData();
+
+                    if((mList.size() == 0)
+                            && (list == null || list.isEmpty())){
+                        setNoDataVisible(View.VISIBLE);
+                        return;
+                    }
+
                     if (list!=null&&list.size()>0){
                         mPageNum++;
                         mList.addAll(list);
                         mAdapter.addAll(mList);
                         setNoDataVisible(View.GONE);
-                    }else{
-                        setNoDataVisible(View.VISIBLE);
                     }
                 }
             }
@@ -158,7 +169,14 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                setNoDataVisible(View.VISIBLE);
+
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        setNoDataVisible(View.VISIBLE);
+                    }
+                });
+
             }
 
             @Override

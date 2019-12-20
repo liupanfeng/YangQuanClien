@@ -39,7 +39,7 @@ public class HttpUrl {
     public static final String  URL_MESSAGE_LIST =URL+ "message/select";
 
     /*分页的方式获取 信息页面列表数据*/
-    public static final String  URL_GET_MESSAGE_LIST =URL+ "get/select";
+    public static final String  URL_GET_MESSAGE_LIST =URL+ "message/get";
 
     /*完善用户信息*/
     public static final String  URL_USER_UPDATE =URL+ "user/update";
@@ -74,7 +74,15 @@ public class HttpUrl {
 
 
     /*发布消息*/
-    public static final String  MESSAGE_PUBLISH=URL+ "message/add";
+    public static final String  MESSAGE_ADD=URL+ "message/add";
+
+
+    /*发布消息*/
+    public static final String  MESSAGE_PUBLISH=URL+ "message/publish";
+
+    /*token 一直传递不过去 */
+    public static final String  MESSAGE_TEST=URL+ "message/ytest";
+
 
     /*push 绑定设备id*/
     public static final String  PUSH_UPDATE_DEVICE_ALIAS=URL+ "push/updateDeviceAlias";

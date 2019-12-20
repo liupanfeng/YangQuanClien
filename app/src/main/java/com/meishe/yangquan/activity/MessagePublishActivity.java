@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import android.widget.TextView;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.MessageResult;
+import com.meishe.yangquan.bean.MsgResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -47,6 +49,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -163,17 +168,67 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     }
 
 
+    private void addMessage(String userToken, String sheepType, String msgContent, String iconBase64) {
+        OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
+        FormBody.Builder formBody = new FormBody.Builder();//创建表单请求体
+        formBody.add("userToken",userToken);
+        formBody.add("sheepType",sheepType);
+        formBody.add("msgContent",msgContent);
+        formBody.add("iconBase64",iconBase64);
+        Request request = new Request.Builder()//创建Request 对象。
+                .url(HttpUrl.MESSAGE_ADD)
+                .post(formBody.build())//传递请求体
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, final IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, e.getMessage());
+                        mp_loading.hide();
+                    }
+                });
+
+            }
+
+            @Override
+            public void onResponse(Call call, final Response response) throws IOException {
+                if (response != null&&response.code()==200) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtil.showToast(mContext, "发布成功");
+                            mp_loading.hide();
+                            finish();
+                        }
+                    });
+
+                }else{
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtil.showToast(mContext, response.message());
+                            mp_loading.hide();
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+
     /**
-     * 发布消息
+     * 发临时测试
      */
-    public void publishMessage(String token, int sheepType, String content, String iconBase64) {
+    public void testMessage(String yqtoken, String sheepType, String msgContent, String iconBase64) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("token", token);
+        requestParam.put("yqtoken", yqtoken);
         requestParam.put("sheepType", sheepType);
-        requestParam.put("content", content);
+        requestParam.put("msgContent", msgContent);
         requestParam.put("iconBase64", iconBase64);
-        OkHttpManager.getInstance().postRequest(HttpUrl.MESSAGE_PUBLISH, new BaseCallBack<String>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.MESSAGE_TEST, new BaseCallBack<MsgResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -191,11 +246,78 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, String result) {
-                if (result != null&&response.code()==200) {
+            protected void onSuccess(Call call, Response response, MsgResult result) {
+                if (result != null&&result.getStatus()==200) {
                     ToastUtil.showToast(mContext, "发布成功");
                     mp_loading.hide();
                     finish();
+                }else{
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    mp_loading.hide();
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mp_loading.hide();
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
+
+
+    /**
+     * 发布消息
+     */
+    public void publishMessage(String yqtoken, String sheepType, String msgContent, String iconBase64) {
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("yqtoken", yqtoken);
+        requestParam.put("sheepType", sheepType);
+        requestParam.put("msgContent", msgContent);
+        requestParam.put("iconBase64", iconBase64);
+        OkHttpManager.getInstance().postRequest(HttpUrl.MESSAGE_ADD, new BaseCallBack<MsgResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mp_loading.hide();
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, MsgResult result) {
+                if (result != null&&result.getStatus()==200) {
+                    ToastUtil.showToast(mContext, "发布成功");
+                    mp_loading.hide();
+                    finish();
+                }else{
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    mp_loading.hide();
                 }
             }
 
@@ -250,7 +372,6 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     private class OnRightButtonListener implements CustomToolbar.OnRightButtonClickListener {
         @Override
         public void onClick() {
-            mp_loading.show();
             String content = mEtInput.getText().toString().trim();
             if (showBitmap == null) {
                 ToastUtil.showToast(mContext, "请选择图片！");
@@ -260,8 +381,10 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
                 ToastUtil.showToast(mContext, "请输入内容！");
                 return;
             }
+            mp_loading.show();
+//            publishMessage(mUser.getTokenId(),String.valueOf(mSheepType),content, Util.bitmaptoString(showBitmap));
+            publishMessage(mUser.getTokenId(),String.valueOf(mSheepType),content, Util.bitmaptoString(showBitmap));
 
-            publishMessage(mUser.getTokenId(), mSheepType, content, Util.bitmaptoString(showBitmap));
         }
     }
 
@@ -348,8 +471,14 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (tempFile != null) {
-                    showBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
+                    Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
                     mIvSelectIcon.setVisibility(View.GONE);
+                    Matrix matrix = new Matrix();
+                    matrix.setScale(0.2f, 0.2f);
+                    showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
+                            tmpBitmap.getHeight(), matrix, true);
+
+
                     mIvShowIcon.setImageBitmap(showBitmap);
                 }
                 break;
@@ -382,7 +511,11 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
                     }
                     if (imagePath != null) {
                         tempFile = new File(imagePath);
-                        showBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
+                        Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
+                        Matrix matrix = new Matrix();
+                        matrix.setScale(0.2f, 0.2f);
+                        showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
+                                tmpBitmap.getHeight(), matrix, true);
                         mIvSelectIcon.setVisibility(View.GONE);
                         mIvShowIcon.setImageBitmap(showBitmap);
                     }
