@@ -235,6 +235,24 @@
                     android:focusableInTouchMode="false" />
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_sex"
+                android:background="@drawable/spinner_shape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginTop="29dp">
+                <Spinner
+                    android:id="@+id/spinner_simple"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:scrollbars="none"
+                    android:entries="@array/user_sex_spinner_values" />
+            </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/rl_address"
                 android:layout_height="50dp"
@@ -296,6 +314,7 @@
                 />
 
             <ImageView
+                android:id="@+id/iv_business_license"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginTop="25dp"

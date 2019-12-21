@@ -18,12 +18,14 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
@@ -85,6 +87,16 @@ public class PerfectInformationActivity extends BaseActivity {
     private String mNickname;
     private TextView mTvPhoneNumber;
     private RelativeLayout mRlPhoneNumber;
+    private RelativeLayout rl_autograph;
+    private TextView tv_autograph_content;
+    private RelativeLayout rl_sex;
+    private TextView tv_sex_content;
+    private LinearLayout ll_sex;
+    private String[] mUserSexArray;
+    private Spinner mSpinnerSimple;
+    private String mUserSex;
+    private String mAutograph;
+    private ImageView iv_business_license;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,16 +118,52 @@ public class PerfectInformationActivity extends BaseActivity {
         mMpLoading = findViewById(R.id.mp_loading);
         mTvNickNameContent = findViewById(R.id.tv_nickname_content);
         mRlPhoneNumber = findViewById(R.id.rl_phone_number);
+        rl_autograph = findViewById(R.id.rl_autograph);
+        tv_autograph_content = findViewById(R.id.tv_autograph_content);
+        rl_sex = findViewById(R.id.rl_sex);
+        ll_sex = findViewById(R.id.ll_sex);
+        tv_sex_content = findViewById(R.id.tv_sex_content);
+        mSpinnerSimple = findViewById(R.id.spinner_simple);
+        iv_business_license = findViewById(R.id.iv_business_license);
+
     }
 
     @Override
     public void initData() {
         HttpRequestUtil.getInstance(PerfectInformationActivity.this).setListener(this);
         mUser = UserManager.getInstance(this).getUser();
-        if (mUser != null) {
+        mUserSexArray = getResources().getStringArray(R.array.user_sex_spinner_values);
+        updateUI();
 
+    }
+
+    private void updateUI() {
+        if (mUser != null) {
             mTvPhoneNumber.setText(mUser.getPhoneNumber());
             mTvNickNameContent.setText(mUser.getNickname());
+            String autograph = mUser.getAutograph();
+            Integer sex = mUser.getSex();
+            if(TextUtils.isEmpty(autograph)){
+                tv_autograph_content.setText("暂无签名，请添加");
+            }else{
+                tv_autograph_content.setText(Util.decodeString(autograph));
+            }
+
+            if (sex==null){
+                tv_sex_content.setText("");
+            }else{
+                switch (sex){
+                    case 1:
+                        tv_sex_content.setText("男");
+                        break;
+                    case 2:
+                        tv_sex_content.setText("女");
+                        break;
+                    case 3:
+                        tv_sex_content.setText("人妖");
+                        break;
+                }
+            }
 
             String photoUrl = mUser.getPhotoUrl();
             if (!TextUtils.isEmpty(photoUrl)) {
@@ -136,7 +184,6 @@ public class PerfectInformationActivity extends BaseActivity {
                         .into(mIvPhoto);
             }
         }
-
     }
 
     @Override
@@ -153,6 +200,34 @@ public class PerfectInformationActivity extends BaseActivity {
         mIvPhoto.setOnClickListener(this);
         mRlNickName.setOnClickListener(this);
         mRlPhoneNumber.setOnClickListener(this);
+        rl_autograph.setOnClickListener(this);
+        rl_sex.setOnClickListener(this);
+        iv_business_license.setOnClickListener(this);
+        mSpinnerSimple.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                mUserSex = mUserSexArray[position];
+                switch (mUserSex){
+                    case "男":
+                        uploadUserInfo("sex","1");
+                        ll_sex.setVisibility(View.GONE);
+                        break;
+                    case "女":
+                        uploadUserInfo("sex","2");
+                        ll_sex.setVisibility(View.GONE);
+                        break;
+                    case "人妖":
+                        uploadUserInfo("sex","3");
+                        ll_sex.setVisibility(View.GONE);
+                        break;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     @Override
@@ -172,6 +247,15 @@ public class PerfectInformationActivity extends BaseActivity {
                 break;
             case R.id.rl_phone_number:
                 ToastUtil.showToast(mContext, "手机号不可更改");
+                break;
+            case R.id.rl_autograph:
+                modifyAutograph();
+                break;
+            case R.id.rl_sex:
+                ll_sex.setVisibility(View.VISIBLE);
+                break;
+            case R.id.iv_business_license:
+                ToastUtil.showToast(mContext, "上传营业执照研发中……");
                 break;
         }
     }
@@ -427,7 +511,6 @@ public class PerfectInformationActivity extends BaseActivity {
                             ToastUtil.showToast(mContext, "请编辑新昵称");
                             return;
                         }
-                        mTvNickNameContent.setText(newNickname);
                         uploadUserInfo("nickname", finalStartSubstring +newNickname);
                         showLoading();
                         mDialog.dismiss();
@@ -440,6 +523,44 @@ public class PerfectInformationActivity extends BaseActivity {
                     }
                 }).create();
     }
+
+
+    private void modifyAutograph() {
+        if (mUser != null) {
+            mAutograph = tv_autograph_content.getText().toString().trim();
+        }
+        mDialog = new IosDialog.DialogBuilder(this)
+                .setTitle("编辑签名")
+                .setInputContent(mAutograph)
+                .setAsureText("修改")
+                .setCancelText("取消")
+                //.setDialogSize(Util.dip2px(MainActivity.this,189),Util.dip2px(MainActivity.this,117))
+                .addListener(new IosDialog.OnButtonClickListener() {
+                    @Override
+                    public void onAsureClick() {
+                        String autograph = mDialog.getmEtInputContent().getText().toString().trim();
+                        if (TextUtils.isEmpty(autograph)) {
+                            ToastUtil.showToast(mContext, "请输入您想要修改的签名");
+                            mDialog.dismiss();
+                            return;
+                        }
+                        if (mAutograph.equals(autograph)) {
+                            ToastUtil.showToast(mContext, "请编辑新签名");
+                            return;
+                        }
+                        uploadUserInfo("autograph", Util.encodeString(autograph));
+                        showLoading();
+                        mDialog.dismiss();
+
+                    }
+
+                    @Override
+                    public void onCancelClick() {
+                        mDialog.dismiss();
+                    }
+                }).create();
+    }
+
 
 
     public void uploadUserInfo(long userId, String type, String content) {
@@ -466,14 +587,15 @@ public class PerfectInformationActivity extends BaseActivity {
                     User user = result.getData();
                     if (user != null) {
                         mUser = user;
-                        String photoUrl = mUser.getPhotoUrl();
-                        RequestOptions options = new RequestOptions();
-                        options.circleCrop();
-                        options.placeholder(R.mipmap.ic_photo_default);
-                        Glide.with(mContext)
-                                .load(HttpUrl.URL_IMAGE + photoUrl)
-                                .apply(options)
-                                .into(mIvPhoto);
+//                        String photoUrl = mUser.getPhotoUrl();
+//                        RequestOptions options = new RequestOptions();
+//                        options.circleCrop();
+//                        options.placeholder(R.mipmap.ic_photo_default);
+//                        Glide.with(mContext)
+//                                .load(HttpUrl.URL_IMAGE + photoUrl)
+//                                .apply(options)
+//                                .into(mIvPhoto);
+                        updateUI();
                         ToastUtil.showToast(mContext, "更新数据成功");
                         UserManager.getInstance(App.getContext()).setUser(user);
                         EventBus.getDefault().post(new MsgEvent("", MESSAGE_EVENT_UPDATE_USER_UI));

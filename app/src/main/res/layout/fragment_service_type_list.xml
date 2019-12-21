@@ -16,6 +16,7 @@
         app:srlEnableScrollContentWhenLoaded="false">
 
     <com.scwang.smartrefresh.header.MaterialHeader
+        android:id="@+id/mh_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -28,6 +29,7 @@
 
 
         <com.scwang.smartrefresh.header.MaterialHeader
+            android:id="@+id/mh_footer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
         </com.scwang.smartrefresh.header.MaterialHeader>

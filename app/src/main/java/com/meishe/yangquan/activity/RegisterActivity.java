@@ -220,6 +220,7 @@ public class RegisterActivity extends BaseActivity  {
                         if (user!=null){
                             String token = user.getTokenId();
                             UserManager.getInstance(mContext).setToken(token);
+                            UserManager.getInstance(mContext).setUser(user);
                             AppManager.getInstance().jumpActivity(RegisterActivity.this, MainActivity.class);
                             updateDeviceAlias();
                             finish();

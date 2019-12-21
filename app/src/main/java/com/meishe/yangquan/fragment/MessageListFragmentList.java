@@ -47,7 +47,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
     protected SmartRefreshLayout mRefreshLayout;
     private List<BaseInfo> mList=new ArrayList<>();
 
-    private static final int rows=2;     //默认一页请求的个数
+    private static final int rows=3;     //默认一页请求的个数
     private int mPageNum =1;   //默认请求第一页
 
     public MessageListFragmentList() {
@@ -108,6 +108,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
         mRecyclerView.setAdapter(mAdapter);
         mAdapter.setFragment(this);
         mAdapter.setMaterialProgress(mp_loading);
+        mp_loading.show();
         getMessageListFromServer(type);
     }
 
@@ -133,12 +134,14 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
                     @Override
                     public void run() {
                         setNoDataVisible(View.VISIBLE);
+                        mp_loading.hide();
                     }
                 });
             }
 
             @Override
             protected void onSuccess(Call call, Response response, MessageResult result) {
+                mp_loading.hide();
                 setRefreshFinish();
                 if (response != null&&response.code()==200) {
                     if (result==null&&result.getStatus()!=200){
@@ -174,6 +177,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
                     @Override
                     public void run() {
                         setNoDataVisible(View.VISIBLE);
+                        mp_loading.hide();
                     }
                 });
 
@@ -218,5 +222,15 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
             mRefreshLayout.finishRefresh();
             mRefreshLayout.finishLoadMore();
         }
+    }
+
+    public void clearData(){
+        if(mList != null){
+            mList.clear();
+        }
+        if(mAdapter != null){
+            mAdapter.notifyDataSetChanged();
+        }
+        mPageNum = 1;
     }
 }

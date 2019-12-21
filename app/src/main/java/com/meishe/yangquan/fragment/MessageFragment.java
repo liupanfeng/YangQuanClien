@@ -132,6 +132,11 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 mCurrentPosition=tab.getPosition();
+                if (list!=null&&list.size()>mCurrentPosition){
+                    MessageListFragmentList fragment = (MessageListFragmentList) list.get(mCurrentPosition);
+                    fragment.clearData();
+
+                }
                 mViewPager.setCurrentItem(tab.getPosition());
             }
 

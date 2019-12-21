@@ -18,6 +18,7 @@ import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.MaterialProgress;
+import com.scwang.smartrefresh.header.MaterialHeader;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -38,7 +39,8 @@ public class ServiceTypeListFragment extends BaseRecyclerFragment {
 
     private View mNoDate;
     private MultiFunctionAdapter mAdapter;
-
+    private MaterialHeader mh_header;
+    private MaterialHeader mh_footer;
     public ServiceTypeListFragment() {
 
     }
@@ -64,8 +66,18 @@ public class ServiceTypeListFragment extends BaseRecyclerFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view=inflater.inflate(R.layout.fragment_service_type_list,container,false);
         mRecyclerView=view.findViewById(R.id.service_type_list_recycler);
+
+        mh_header=view.findViewById(R.id.mh_header);
+        mh_footer=view.findViewById(R.id.mh_footer);
+        mRecyclerView=view.findViewById(R.id.service_type_list_recycler);
+
         mMpProgress=view.findViewById(R.id.mp_progress);
         mNoDate=view.findViewById(R.id.view_no_data);
+
+        if (mUserType==2){
+            mh_header.setVisibility(View.GONE);
+            mh_footer.setVisibility(View.GONE);
+        }
         return view;
     }
 

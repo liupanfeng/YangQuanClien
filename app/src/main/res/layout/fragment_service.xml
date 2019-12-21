@@ -76,5 +76,9 @@
 
     </android.support.v4.widget.NestedScrollView>
 
-
+    <com.meishe.yangquan.wiget.MaterialProgress
+        android:id="@+id/mp_loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true" />
 </RelativeLayout>

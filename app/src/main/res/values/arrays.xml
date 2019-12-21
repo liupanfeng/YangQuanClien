@@ -27,4 +27,16 @@
 
 
     </string-array>
+
+    <string-array name="user_sex_spinner_values">
+
+        <item>请选择性别</item>
+
+        <item>男</item>
+
+        <item>女</item>
+
+        <item>人妖</item>        <!--名称不能随便修改 如果需要修改 连带UserType 一起修改，否则会引起崩溃-->
+
+    </string-array>
 </resources>

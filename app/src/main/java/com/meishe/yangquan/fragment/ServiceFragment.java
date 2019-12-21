@@ -22,6 +22,7 @@ import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserType;
 import com.meishe.yangquan.view.AutoPollRecyclerView;
+import com.meishe.yangquan.wiget.MaterialProgress;
 
 import java.util.List;
 
@@ -38,6 +39,7 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
     private static final int SERVICE_SHEEP_NEWS =2;
     private MultiFunctionAdapter mServiceMessageAdapter;
     private MultiFunctionAdapter mSheepNewsAdapter;
+    private MaterialProgress mp_loading;
 
     public ServiceFragment() {
     }
@@ -56,6 +58,8 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_service, container, false);
         mRecyclerView=view.findViewById(R.id.recycler);
+        mp_loading=view.findViewById(R.id.mp_loading);
+
         mServiceTypeRecycler=view.findViewById(R.id.service_type_recycler);
         mServiceNewsRecycler=view.findViewById(R.id.service_news_recycler);
         return view;
@@ -72,6 +76,7 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
         initTopNotifyRecyclerView();
         initServiceTypeRecyclerView();
         initServiceNewsRecyclerView();
+        mp_loading.show();
         HttpRequestUtil.getInstance(mContext).getServiceMessageFromServer(SERVICE_FLOW_MESSAGE);
         HttpRequestUtil.getInstance(mContext).getServiceNewsFromServer(SERVICE_SHEEP_NEWS);
         HttpRequestUtil.getInstance(mContext).setListener(this);
@@ -160,11 +165,17 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
 
     @Override
     public void onSuccess(Object object) {
-
+        if (mp_loading!=null){
+            mp_loading.hide();
+        }
     }
 
     @Override
     public void onSuccess(int type, Object object) {
+        if (mp_loading!=null){
+            mp_loading.hide();
+        }
+
         switch (type){
             case SERVICE_FLOW_MESSAGE:
                 if (object instanceof ServiceMessageResult){
@@ -191,11 +202,15 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
 
     @Override
     public void onError(Object obj) {
-
+        if (mp_loading!=null){
+            mp_loading.hide();
+        }
     }
 
     @Override
     public void onError(int type, Object obj) {
-
+        if (mp_loading!=null){
+            mp_loading.hide();
+        }
     }
 }
