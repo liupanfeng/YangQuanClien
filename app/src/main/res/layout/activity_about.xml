@@ -34,7 +34,7 @@
         android:id="@+id/iv_qr_code"
         android:layout_width="123dp"
         android:layout_height="122dp"
-        android:background="@mipmap/ic_contact_us"
+        android:background="@mipmap/ic_yangquan"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="40dp"
         />
