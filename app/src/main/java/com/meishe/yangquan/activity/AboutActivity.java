@@ -2,20 +2,17 @@ package com.meishe.yangquan.activity;
 
 import android.content.Intent;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.fragment.ShareBottomSheetDialogFragment;
-import com.meishe.yangquan.utils.ShareUtil;
+import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.umeng.analytics.MobclickAgent;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
 import com.umeng.socialize.bean.SHARE_MEDIA;
-
-import static com.meishe.yangquan.fragment.ShareBottomSheetDialogFragment.SHARE_TO_FRIENDS;
-import static com.meishe.yangquan.fragment.ShareBottomSheetDialogFragment.SHARE_TO_SINA;
-import static com.meishe.yangquan.fragment.ShareBottomSheetDialogFragment.SHARE_TO_WECHAT;
 
 /**
  * 关于页面
@@ -24,6 +21,9 @@ public class AboutActivity extends BaseActivity {
 
 
     private ShareBottomSheetDialogFragment mShareBottomSheetDialog;
+    private RelativeLayout rl_user_agreement;
+    private RelativeLayout rl_privacy_policy;
+
 
     @Override
     protected int initRootView() {
@@ -33,6 +33,9 @@ public class AboutActivity extends BaseActivity {
     @Override
     public void initView() {
         mToolbar = findViewById(R.id.toolbar);
+        rl_user_agreement = findViewById(R.id.rl_user_agreement);
+        rl_privacy_policy = findViewById(R.id.rl_privacy_policy);
+
     }
 
     @Override
@@ -42,18 +45,18 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mToolbar.setMyTitle("关于");
+        mToolbar.setMyTitle("关于羊圈APP");
         mToolbar.setMyTitleVisible(View.VISIBLE);
         mToolbar.setLeftButtonVisible(View.VISIBLE);
-        mToolbar.setRightButtonVisible(View.VISIBLE);
-        mToolbar.setRightButton(R.mipmap.ic_go_next);
+        mToolbar.setRightImageVisible(View.VISIBLE);
         mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
-        mToolbar.setOnRightButtonClickListener(new OnRightButtonListener());
+        mToolbar.setOnRightImageClickListener(new OnRightImageListener());
     }
 
     @Override
     public void initListener() {
-
+        rl_user_agreement.setOnClickListener(this);
+        rl_privacy_policy.setOnClickListener(this);
     }
 
     @Override
@@ -63,7 +66,14 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.rl_privacy_policy:
+                ToastUtil.showToast(this,"隐私政策研发中");
+                break;
+            case R.id.rl_user_agreement:
+                ToastUtil.showToast(this,"用户协议研发中");
+                break;
+        }
     }
 
     @Override
@@ -94,10 +104,10 @@ public class AboutActivity extends BaseActivity {
         }
     }
 
-    private class OnRightButtonListener implements CustomToolbar.OnRightButtonClickListener {
+    private class OnRightImageListener implements CustomToolbar.OnRightButtonClickListener {
         @Override
         public void onClick() {
-            new ShareAction(AboutActivity.this).withText("hello").setDisplayList(SHARE_MEDIA.SINA,SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
+            new ShareAction(AboutActivity.this).withText("hello").setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
                     .setCallback(new UMShareListener() {
                         @Override
                         public void onStart(SHARE_MEDIA share_media) {

@@ -24,6 +24,7 @@ public class CustomToolbar extends Toolbar {
     private Drawable left_button_icon;
     private Drawable right_button_icon;
     private String title;
+    private ImageView toolbar_rightImageView;
 
 
     public interface OnLeftButtonClickListener {
@@ -32,11 +33,12 @@ public class CustomToolbar extends Toolbar {
 
     public interface OnRightButtonClickListener {
         void onClick();
-
     }
 
     private OnLeftButtonClickListener onLeftButtonClickListener;
     private OnRightButtonClickListener onRightButtonClickListener;
+
+    private OnRightButtonClickListener onRightImageClickListener;
 
     public void setOnLeftButtonClickListener(OnLeftButtonClickListener listener) {
         onLeftButtonClickListener = listener;
@@ -44,6 +46,10 @@ public class CustomToolbar extends Toolbar {
 
     public void setOnRightButtonClickListener(OnRightButtonClickListener listener) {
         onRightButtonClickListener = listener;
+    }
+
+    public void setOnRightImageClickListener(OnRightButtonClickListener onRightImageClickListener) {
+        this.onRightImageClickListener = onRightImageClickListener;
     }
 
     public CustomToolbar(Context context) {
@@ -84,6 +90,15 @@ public class CustomToolbar extends Toolbar {
                 }
             }
         });
+
+        toolbar_rightImageView.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(onRightImageClickListener!=null){
+                    onRightImageClickListener.onClick();
+                }
+            }
+        });
     }
 
 
@@ -93,6 +108,7 @@ public class CustomToolbar extends Toolbar {
             mChildView = View.inflate(getContext(), R.layout.custom_toobar, null);
             toolbar_leftButton = mChildView.findViewById(R.id.toolbar_leftButton);
             toolbar_rightButton = mChildView.findViewById(R.id.toolbar_rightButton);
+            toolbar_rightImageView = mChildView.findViewById(R.id.toolbar_rightImageView);
             toolbar_title = mChildView.findViewById(R.id.toolbar_title);
             addView(mChildView);
             if (left_button_icon != null) {
@@ -146,6 +162,9 @@ public class CustomToolbar extends Toolbar {
         toolbar_leftButton.setBackgroundResource(backgroundResource);
     }
 
+    public void setRightImageVisible(int visible){
+        toolbar_rightImageView.setVisibility(visible);
+    }
 
     /**
      * 设置左右按钮的图标
