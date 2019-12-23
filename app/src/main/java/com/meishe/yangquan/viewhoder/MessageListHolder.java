@@ -1,6 +1,7 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.ShowPicActivity;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.Message;
@@ -59,7 +61,7 @@ public class MessageListHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
+    public void bindViewHolder(final Context context, final BaseInfo info, View.OnClickListener listener) {
         if (info instanceof Message){
             Message message= (Message) info;
             String photoUrl=message.getPhotoUrl();
@@ -121,11 +123,30 @@ public class MessageListHolder extends BaseViewHolder {
             mBtnMessageStartConnect.setOnClickListener(listener);
             mTvMessageComment.setOnClickListener(listener);
             mIvMessageComment.setOnClickListener(listener);
+
+//            mIvMessage.setOnClickListener(listener);
+            mIvMessage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent=new Intent(context, ShowPicActivity.class);
+                    intent.putExtra("imageUrl",((Message) info).getContentUrl());
+                    context.startActivity(intent);
+                }
+            });
             mBtnMessageStartConnect.setTag(info);
             mTvMessageComment.setTag(info);
             mIvMessageComment.setTag(info);
+//            mIvMessage.setTag(info);
         }
 
+        mIvMessageTopPart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(context, ShowPicActivity.class);
+                intent.putExtra("imageUrl",((Message) info).getPhotoUrl());
+                context.startActivity(intent);
+            }
+        });
     }
 
 

@@ -21,6 +21,7 @@ import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.UserManager;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.LikesView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
@@ -64,7 +65,7 @@ public class ServiceTypeListHolder extends BaseViewHolder {
             if (TextUtils.isEmpty(desc)) {
                 mTvServiceDesc.setText("签名暂未添加，请到完善资料里边去完善签名信息！");
             } else {
-                mTvServiceDesc.setText(desc);
+                mTvServiceDesc.setText(Util.decodeString(desc));
             }
             mTvServiceNickname.setText(serverCustomer.getNickname());
 

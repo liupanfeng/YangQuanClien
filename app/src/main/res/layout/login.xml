@@ -76,13 +76,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="29dp"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
             <Button
                 android:id="@+id/btn_login"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="45dp"
-                android:layout_weight="1"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/login_yellow_shape"
@@ -90,20 +89,6 @@
                 android:text="登录"
                 android:textColor="@color/white"
                 android:textSize="21sp" />
-
-            <Button
-                android:id="@+id/btn_register"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_weight="1"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/login_yellow_shape"
-                android:gravity="center"
-                android:text="注册"
-                android:textColor="@color/white"
-                android:textSize="21sp" />
-
 
         </LinearLayout>
 
@@ -148,6 +133,19 @@
                 android:textColor="#FFCC00"
                 android:textSize="11sp" />
 
+
+            <Button
+                android:id="@+id/btn_register"
+                android:layout_width="80dp"
+                android:layout_height="45dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/login_yellow_shape"
+                android:gravity="center"
+                android:layout_gravity="bottom"
+                android:text="新用户注册"
+                android:textColor="@color/white"
+                android:textSize="21sp" />
 
         </LinearLayout>
 

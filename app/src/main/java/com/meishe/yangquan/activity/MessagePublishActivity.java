@@ -513,7 +513,7 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
                         tempFile = new File(imagePath);
                         Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
                         Matrix matrix = new Matrix();
-                        matrix.setScale(0.2f, 0.2f);
+                        matrix.setScale(0.4f, 0.4f);
                         showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
                                 tmpBitmap.getHeight(), matrix, true);
                         mIvSelectIcon.setVisibility(View.GONE);

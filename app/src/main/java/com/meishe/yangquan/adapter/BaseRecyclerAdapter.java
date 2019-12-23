@@ -1,6 +1,7 @@
 package com.meishe.yangquan.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
@@ -19,6 +20,7 @@ import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
 import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
+import com.meishe.yangquan.activity.ShowPicActivity;
 import com.meishe.yangquan.activity.VersionUpdateActivity;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
@@ -289,6 +291,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                         }
                         showDialog(fromUserId, user.getPhoneNumber(), toUserId, "您有新的商机，" + user.getNickname() + "，电话：" + user.getPhoneNumber() + "想与您联系,请您把握商机，及时回复！", "联系信息", "将把您的联系方式" + phoneNum + "发送给对方", "确定联系");
                     }
+
+                    break;
+
+                case R.id.iv_message:   //点击图片的响应
 
                     break;
             }
