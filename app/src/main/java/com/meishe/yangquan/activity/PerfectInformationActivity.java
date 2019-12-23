@@ -440,7 +440,7 @@ public class PerfectInformationActivity extends BaseActivity {
 //                        mIvPhoto.setImageBitmap(bitMap);
 //                    }
                     Matrix matrix = new Matrix();
-                    matrix.setScale(0.4f, 0.4f);
+                    matrix.setScale(0.3f, 0.3f);
                     Bitmap resultBitmap = Bitmap.createBitmap(bitMap, 0, 0, bitMap.getWidth(),
                             bitMap.getHeight(), matrix, true);
                     showLoading();
