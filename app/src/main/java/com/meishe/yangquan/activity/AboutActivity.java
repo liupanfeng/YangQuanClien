@@ -103,11 +103,11 @@ public class AboutActivity extends BaseActivity {
             finish();
         }
     }
-
+//    SHARE_MEDIA.SINA, SHARE_MEDIA.QQ,
     private class OnRightImageListener implements CustomToolbar.OnRightButtonClickListener {
         @Override
         public void onClick() {
-            new ShareAction(AboutActivity.this).withText("hello").setDisplayList(SHARE_MEDIA.SINA, SHARE_MEDIA.QQ, SHARE_MEDIA.WEIXIN)
+            new ShareAction(AboutActivity.this).withText("羊圈App下载地址："+"http://59.110.142.42:8080/images/yangquan-release.apk").setDisplayList( SHARE_MEDIA.WEIXIN)
                     .setCallback(new UMShareListener() {
                         @Override
                         public void onStart(SHARE_MEDIA share_media) {
