@@ -19,6 +19,7 @@ import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
 import com.meishe.yangquan.activity.PerfectInformationActivity;
+import com.meishe.yangquan.activity.ServiceMessageListActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
 import com.meishe.yangquan.activity.ShowPicActivity;
 import com.meishe.yangquan.activity.VersionUpdateActivity;
@@ -31,6 +32,7 @@ import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServerZan;
 import com.meishe.yangquan.bean.ServerZanResult;
+import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.User;
@@ -83,6 +85,15 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_COMMENT_LIST = VIEW_TYPE_BASE + 13;                                //评论
     private IosDialog mDialog;
 
+    protected  int pageType;
+
+    public void setPageType(int pageType) {
+        this.pageType = pageType;
+    }
+
+    public int getPageType() {
+        return pageType;
+    }
 
     public BaseRecyclerFragment getFragment() {
         return mFragment;
@@ -299,6 +310,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     break;
             }
 
+        }else if(info instanceof ServiceMessage){
+            Intent intent=new Intent(mContext, ServiceMessageListActivity.class);
+            mContext.startActivity(intent);
         }
 
     }

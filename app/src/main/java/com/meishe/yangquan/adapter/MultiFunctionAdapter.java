@@ -26,6 +26,7 @@ import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceLabelHolder;
+import com.meishe.yangquan.viewhoder.ServiceMessageListHolder;
 import com.meishe.yangquan.viewhoder.ServiceSheepNewsHolder;
 import com.meishe.yangquan.viewhoder.ServiceMessageHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
@@ -44,8 +45,14 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
         BaseViewHolder viewHolder =super.onCreateViewHolder(parent,viewType);
         switch (viewType){
             case VIEW_SERVICE_MESSAGE:
-                view=mLayoutInflater.inflate(R.layout.item_service_message,parent,false);
-                viewHolder=new ServiceMessageHolder(view,this);
+                if (pageType==1){
+                    view=mLayoutInflater.inflate(R.layout.item_service_message,parent,false);
+                    viewHolder=new ServiceMessageHolder(view,this);
+                }else if (pageType==2){
+                    view=mLayoutInflater.inflate(R.layout.item_service_message_lsit,parent,false);
+                    viewHolder=new ServiceMessageListHolder(view,this);
+                }
+
                 break;
             case VIEW_SERVICE_TYPE:
                 view=mLayoutInflater.inflate(R.layout.item_service_type,parent,false);

@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 
-
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
@@ -14,9 +13,9 @@ import com.meishe.yangquan.bean.ServiceMessage;
 /**
  * 服务 无线循环消息
  */
-public class ServiceMessageHolder extends BaseViewHolder {
+public class ServiceMessageListHolder extends BaseViewHolder {
     private TextView mTvContent;
-    public ServiceMessageHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
+    public ServiceMessageListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter=adapter;
     }
@@ -31,8 +30,6 @@ public class ServiceMessageHolder extends BaseViewHolder {
         if (info instanceof ServiceMessage){
             ServiceMessage serviceMessage= (ServiceMessage) info;
             mTvContent.setText(serviceMessage.getContent());
-            mTvContent.setOnClickListener(listener);
-            mTvContent.setTag(info);
         }
 
     }

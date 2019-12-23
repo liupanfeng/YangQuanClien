@@ -1,6 +1,7 @@
 package com.meishe.yangquan.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.ServiceMessageListActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceMessageResult;
@@ -90,8 +92,8 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
         LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
         mRecyclerView.setLayoutManager(layoutManager);
         mServiceMessageAdapter=new MultiFunctionAdapter(mContext,mRecyclerView);
+        mServiceMessageAdapter.setPageType(1);
         mRecyclerView.setAdapter(mServiceMessageAdapter);
-
     }
 
     private void initServiceNewsRecyclerView() {
