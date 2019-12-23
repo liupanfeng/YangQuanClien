@@ -3,16 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".activity.ShowPicActivity">
+    <include layout="@layout/custom_toolbar_layout" />
 
-    <ImageView
+    <com.meishe.yangquan.view.RoundAngleImageView
         android:id="@+id/iv_show_pic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="30dp"
         android:layout_centerInParent="true"
         android:scaleType="centerCrop"
-        />
+        android:layout_margin="20dp"
+        app:roundHeight="5dp"
+        app:roundWidth="5dp" />
 
 </RelativeLayout>

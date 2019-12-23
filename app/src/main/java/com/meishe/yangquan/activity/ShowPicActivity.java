@@ -13,21 +13,32 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.view.RoundAngleImageView;
+import com.meishe.yangquan.wiget.CustomToolbar;
 
 public class ShowPicActivity extends AppCompatActivity {
 
-    private ImageView iv_show_pic;
+    private RoundAngleImageView iv_show_pic;
     private RequestOptions options;
-
+    protected CustomToolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_pic);
         initView();
         initData();
+        initTitle();
+    }
+
+    private void initTitle() {
+        mToolbar.setMyTitle("大图展示");
+        mToolbar.setMyTitleVisible(View.VISIBLE);
+        mToolbar.setLeftButtonVisible(View.VISIBLE);
+        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
     }
 
     private void initView() {
+        mToolbar = findViewById(R.id.toolbar);
         iv_show_pic=findViewById(R.id.iv_show_pic);
         RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) iv_show_pic.getLayoutParams();
         Display display = getWindowManager().getDefaultDisplay();
@@ -55,4 +66,11 @@ public class ShowPicActivity extends AppCompatActivity {
     }
 
 
+    private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
+
+        @Override
+        public void onClick() {
+            finish();
+        }
+    }
 }
