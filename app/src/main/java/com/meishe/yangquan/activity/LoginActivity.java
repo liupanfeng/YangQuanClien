@@ -136,11 +136,6 @@ public class LoginActivity extends BaseActivity {
                     return;
                 }
 
-//                if (TextUtils.isEmpty(inputCheckimage.getText().toString().trim())) {
-//                    ToastUtil.showToast(mContext, "图片验证码不能为空");
-//                    return;
-//                }
-
                 mInputCheckCode.setFocusable(true);
                 mInputCheckCode.setFocusableInTouchMode(true);
                 mInputCheckCode.requestFocus();
