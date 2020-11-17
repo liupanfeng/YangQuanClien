@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/half_main_color"
    >
 
     <com.meishe.yangquan.wiget.TitleBar
@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_alignParentTop="true"
         android:layout_height="48dp"/>
-
 
 
     <LinearLayout
@@ -104,6 +103,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
+                android:visibility="gone"
                 android:orientation="horizontal">
 
                 <TextView

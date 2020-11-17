@@ -22,4 +22,12 @@
     <string name="data_analysis_error">数据解析错误</string>
 
 
+    <string name="privacy_statement">服务协议及隐私声明</string>
+    <string name="not_used">暂不使用</string>
+    <string name="agree">同意</string>
+    <string name="statement_content">请您务必审慎阅读并充分理解“服 务协议”和“隐私政策”的各项条款及说明，美摄仅提供视频后期编辑及拍摄等服务，不会收集您的个人信息。\n您可阅读《服务协议》和《隐私政策》 了解详细信息。如果您同意，请点击“同意”开始接受我们的服务。</string>
+    <string name="service_agreement">服务协议</string>
+    <string name="privacy_policy">隐私政策</string>
+
+
 </resources>

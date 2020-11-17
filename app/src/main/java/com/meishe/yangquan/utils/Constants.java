@@ -59,4 +59,25 @@ public  class Constants {
 
     public static final String MESSAGE_EVENT_UPDATE_USER_UI = "update_user_ui";
 
+
+    /**
+     * 隐私对话框首次同意标识
+     * Privacy dialog consent sign for the first time
+     */
+    public static final String KEY_AGREE_PRIVACY = "isAgreePrivacy";
+
+    /**
+     * h5页面
+     */
+
+//    public static final String USER_AGREEMENTS = "https://vsapi.meishesdk.com/app/privacy/my/service-agreement.html";
+//
+//    public static final String USER_AGREEMENTS_EN = "https://vsapi.meishesdk.com/app/privacy/my/en/service-agreement.html";
+//
+//    public static final String PRIVACY_POLICY_URL = "https://vsapi.meishesdk.com/app/privacy/my/privacy-policy.html";
+//
+//    public static final String PRIVACY_POLICY_URL_EN = "https://vsapi.meishesdk.com/app/privacy/my/en/privacy-policy.html";
+
+
+
 }

@@ -7,6 +7,8 @@
 
     <color name="mainColor">#39AA58</color>
 
+    <color name="half_main_color">#5539AA58</color>
+
     <!--tab bg-->
     <color name="tab_bg_color">#E5ffffff</color>
     <color name="transparent">#00000000</color>
@@ -66,5 +68,7 @@
 
     <color name="default_clickable_color">#cccccc</color>
 
+    <color name="btn_agree">#FC2B55</color>
+    <color name="colorTranslucent">#00000000</color>
 
 </resources>

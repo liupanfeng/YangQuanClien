@@ -114,11 +114,6 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.getcheckcode:
-//                CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
-//                countDownTimer.start();
-//                mInputCheckCode.setFocusable(true);
-//                mInputCheckCode.setFocusableInTouchMode(true);
-//                mInputCheckCode.requestFocus();
                 phoneNumber = mInputPhoneNum.getText().toString().trim();
                 if (TextUtils.isEmpty(phoneNumber)) {
                     ToastUtil.showToast(mContext, "手机号不能为空");

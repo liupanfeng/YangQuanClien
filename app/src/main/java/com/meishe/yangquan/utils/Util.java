@@ -109,6 +109,8 @@ public class Util {
     }
 
 
+
+
     /**
      * 处理上传服务器内容中包含图片不能识别的问题
      * @param content
@@ -819,5 +821,18 @@ public class Util {
                 Log.d(TAG,"fail to clear clipboard:" + e.getMessage());
             }
         }
+    }
+
+
+    /**
+     * 获取所有权限列表(相机权限，麦克风权限，存储权限) 动态申请的权限内容
+     * @return
+     */
+    public static List<String> getAllPermissionsList() {
+        ArrayList<String> newList = new ArrayList<>();
+        newList.add(Manifest.permission.CAMERA);
+        newList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        newList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        return newList;
     }
 }

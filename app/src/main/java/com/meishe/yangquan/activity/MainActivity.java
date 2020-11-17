@@ -2,10 +2,14 @@ package com.meishe.yangquan.activity;
 
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,9 +23,14 @@ import com.meishe.yangquan.fragment.MineFragment;
 import com.meishe.yangquan.fragment.ServiceFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.PageId;
+import com.meishe.yangquan.utils.SpUtil;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BrandTextView;
 import com.meishe.yangquan.view.MViewPager;
+import com.meishe.yangquan.wiget.PrivacyPolicyDialog;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;
@@ -32,7 +41,7 @@ import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BasePermissionActivity {
 
     private static final String TAG="MainActivity";
     private String url="http://192.168.10.55:8080/YangQuan/servlet/ServletDemo03";
@@ -47,14 +56,58 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mContext=this;
-        defaultTab=0;
-        initView();
-        initData();
+//        setContentView(R.layout.activity_main);
+//        mContext=this;
+//        defaultTab=0;
+//        initView();
+//        initData();
     }
 
-    private void initData() {
+    @Override
+    protected int initRootView() {
+        return R.layout.activity_main;
+    }
+
+    @Override
+    protected List<String> initPermissions() {
+        return Util.getAllPermissionsList();
+    }
+
+    @Override
+    protected void hasPermission() {
+        showPrivacyDialog();
+    }
+
+    @Override
+    protected void nonePermission() {
+
+    }
+
+    /**
+     * 用户选择了不再提示
+     */
+    @Override
+    protected void noPromptPermission() {
+        startAppSettings();
+    }
+
+
+    // 启动应用的设置
+    public void startAppSettings() {
+        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+        intent.setData(Uri.parse("package:" + getPackageName()));
+        startActivity(intent);
+    }
+
+    @Override
+    public void initData() {
+        if (hasAllPermission()) {
+            //有了权限需要处理的事情
+            showPrivacyDialog();
+        } else {
+            //检测权限
+            checkPermissions();
+        }
         mFragmentList = new ArrayList<>();
         mListTitle = new ArrayList<>();
         mTabList = new ArrayList<>();
@@ -67,7 +120,23 @@ public class MainActivity extends AppCompatActivity {
         setupTabWithIcons(mTabList);
     }
 
-    private void initView() {
+    @Override
+    public void initTitle() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void release() {
+
+    }
+
+    @Override
+    public void initView() {
         mTabLayout =  findViewById(R.id.tab_layout);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
@@ -87,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 App.getInstance().getString(R.string.tab_mine),
                 R.drawable.bg_tab_mine));
     }
+
 
     private void setupTabWithIcons(List<TabInfo> tabList) {
         if (tabList == null || tabList.size() == 0) return;
@@ -127,6 +197,46 @@ public class MainActivity extends AppCompatActivity {
                 mFragmentList.add(mineFragment);
                 break;
 
+        }
+    }
+
+
+    /**
+     * 展示隐私权限
+     */
+    private void showPrivacyDialog() {
+        final SpUtil spUtil = SpUtil.getInstance(getApplicationContext());
+        boolean isAgreePrivacy = spUtil.getBoolean(Constants.KEY_AGREE_PRIVACY, false);
+        if (!isAgreePrivacy) {
+            PrivacyPolicyDialog privacyPolicyDialog = new PrivacyPolicyDialog(MainActivity.this, R.style.dialog);
+            privacyPolicyDialog.setOnButtonClickListener(new PrivacyPolicyDialog.OnPrivacyClickListener() {
+                @Override
+                public void onButtonClick(boolean isAgree) {
+                    spUtil.putBoolean(Constants.KEY_AGREE_PRIVACY, isAgree);
+                    if (!isAgree) {
+                        AppManager.getInstance().finishActivity();
+                    }
+                }
+
+                @Override
+                public void pageJumpToWeb(String clickTextContent) {
+                    String serviceAgreement = getString(R.string.service_agreement);
+                    String privacyPolicy = getString(R.string.privacy_policy);
+                    String visitUrl = "";
+                    if (clickTextContent.contains(serviceAgreement)) {
+                        visitUrl = Constants.USER_AGREEMENTS;
+                    } else if (clickTextContent.contains(privacyPolicy)) {
+                        visitUrl = Constants.PRIVACY_POLICY_URL;
+                    }
+                    if (TextUtils.isEmpty(visitUrl)) {
+                        return;
+                    }
+                    Bundle bundle = new Bundle();
+                    bundle.putString("URL", visitUrl);
+                    AppManager.getInstance().jumpActivity(MainActivity.this, MainWebViewActivity.class, bundle);
+                }
+            });
+            privacyPolicyDialog.show();
         }
     }
 
@@ -191,5 +301,30 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {
         super.onPause();
         MobclickAgent.onPause(this);
+    }
+
+    @Override
+    public void onClick(View v) {
+
+    }
+
+    @Override
+    public void onSuccess(Object object) {
+
+    }
+
+    @Override
+    public void onSuccess(int type, Object object) {
+
+    }
+
+    @Override
+    public void onError(Object obj) {
+
+    }
+
+    @Override
+    public void onError(int type, Object obj) {
+
     }
 }
