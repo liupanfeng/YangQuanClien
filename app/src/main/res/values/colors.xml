@@ -70,5 +70,6 @@
 
     <color name="btn_agree">#FC2B55</color>
     <color name="colorTranslucent">#00000000</color>
+    <color name="app_main_color">#ff3ba786</color>
 
 </resources>

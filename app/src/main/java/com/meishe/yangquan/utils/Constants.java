@@ -78,6 +78,11 @@ public  class Constants {
 //
 //    public static final String PRIVACY_POLICY_URL_EN = "https://vsapi.meishesdk.com/app/privacy/my/en/privacy-policy.html";
 
+    public static final String USER_AGREEMENTS="https://www.baidu.com/";
 
+    public static final String USER_AGREEMENTS_EN="https://www.baidu.com/";
 
+    public static final String PRIVACY_POLICY_URL="https://www.baidu.com/";
+
+    public static final String PRIVACY_POLICY_URL_EN="https://www.baidu.com/";
 }

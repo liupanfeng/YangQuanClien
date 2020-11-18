@@ -66,5 +66,4 @@ public class SplashActivity extends AppCompatActivity {
         MobclickAgent.onPause(this);
     }
 
-
 }

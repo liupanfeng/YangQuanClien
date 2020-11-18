@@ -22,6 +22,7 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
+import com.meishe.yangquan.view.ChangeIdentityView;
 import com.meishe.yangquan.wiget.MaterialProgress;
 import com.meishe.yangquan.wiget.TitleBar;
 import com.umeng.analytics.MobclickAgent;
@@ -49,6 +50,7 @@ public class LoginActivity extends BaseActivity {
 
     private String phoneNumber;
     private String smsCode;
+    private ChangeIdentityView mChangeIdentity;
 
     @Override
     protected int initRootView() {
@@ -64,14 +66,16 @@ public class LoginActivity extends BaseActivity {
         mBtnLogin = findViewById(R.id.btn_login);
         mBtnRegister = findViewById(R.id.btn_register);
         mUserAgreement = findViewById(R.id.user_agreement);
-        mUserPrivacy = findViewById(R.id.privacy);
-        mTitleBar = findViewById(R.id.titleBar);
+//        mUserPrivacy = findViewById(R.id.privacy);
+        mChangeIdentity = findViewById(R.id.civ_change_identity);
+//        mTitleBar = findViewById(R.id.titleBar);
     }
 
     @Override
     public void initData() {
-        mTitleBar.setTextCenter(R.string.str_login_title);
-        mTitleBar.setBackImageVisible(View.VISIBLE);
+//        mTitleBar.setTextCenter(R.string.str_login_title);
+//        mTitleBar.setBackImageVisible(View.VISIBLE);
+
     }
 
     @Override
@@ -82,27 +86,38 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        mTitleBar.setOnTitleBarClickListener(new TitleBar.OnTitleBarClickListener() {
+        /**
+         * 切换身份
+         */
+        mChangeIdentity.setOnChangeIdentityListener(new ChangeIdentityView.OnChangeIdentityListener() {
             @Override
-            public void OnBackImageClick() {
-                finish();
-            }
-
-            @Override
-            public void OnCenterTextClick() {
-
-            }
-
-            @Override
-            public void OnRightTextClick() {
+            public void onChangeIdentity(int type) {
 
             }
         });
+
+//        mTitleBar.setOnTitleBarClickListener(new TitleBar.OnTitleBarClickListener() {
+//            @Override
+//            public void OnBackImageClick() {
+//                finish();
+//            }
+//
+//            @Override
+//            public void OnCenterTextClick() {
+//
+//            }
+//
+//            @Override
+//            public void OnRightTextClick() {
+//
+//            }
+//        });
+
         mGetCheckCode.setOnClickListener(this);
         mBtnLogin.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
         mUserAgreement.setOnClickListener(this);
-        mUserPrivacy.setOnClickListener(this);
+//        mUserPrivacy.setOnClickListener(this);
     }
 
     @Override
@@ -139,83 +154,84 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.btn_login:
-                phoneNumber = mInputPhoneNum.getText().toString();
-                smsCode = mInputCheckCode.getText().toString().trim();
-                if (TextUtils.isEmpty(phoneNumber)) {
-                    ToastUtil.showToast(mContext, "请输入手机号再进行登录");
-                    return;
-                }
-                if (TextUtils.isEmpty(smsCode)) {
-                    ToastUtil.showToast(mContext, "请输入短信验证码");
-                    return;
-                }
-
-                if (!Util.isMobileNO(phoneNumber)) {
-                    ToastUtil.showToast(mContext, "请输入正确的手机号码");
-                    return;
-                }
-                userLogin();
+//                phoneNumber = mInputPhoneNum.getText().toString();
+//                smsCode = mInputCheckCode.getText().toString().trim();
+//                if (TextUtils.isEmpty(phoneNumber)) {
+//                    ToastUtil.showToast(mContext, "请输入手机号再进行登录");
+//                    return;
+//                }
+//                if (TextUtils.isEmpty(smsCode)) {
+//                    ToastUtil.showToast(mContext, "请输入短信验证码");
+//                    return;
+//                }
+//
+//                if (!Util.isMobileNO(phoneNumber)) {
+//                    ToastUtil.showToast(mContext, "请输入正确的手机号码");
+//                    return;
+//                }
+//                userLogin();
+                AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);
                 break;
             case R.id.btn_register:
-                Bundle bundle=new Bundle();
-                bundle.putString("phoneNumber",mInputPhoneNum.getText().toString().trim());
-                AppManager.getInstance().jumpActivity(LoginActivity.this, RegisterActivity.class,bundle);
+                Bundle bundle = new Bundle();
+                bundle.putString("phoneNumber", mInputPhoneNum.getText().toString().trim());
+                AppManager.getInstance().jumpActivity(LoginActivity.this, RegisterActivity.class, bundle);
                 finish();
                 break;
             case R.id.user_agreement:
                 break;
-            case R.id.privacy:
-                break;
+//            case R.id.privacy:
+//                break;
         }
     }
 
 
-        public void updateDeviceAlias(){
-            User user=UserManager.getInstance(mContext).getUser();
-            if(user==null){
-                return;
-            }
-            String userId=user.getUserId()+"";
-            String registrationID= JPushInterface.getRegistrationID(mContext);
-            final HashMap<String, Object> requestParam = new HashMap<>();
-            requestParam.put("registrationId", registrationID);
-            requestParam.put("userId", userId);
-            OkHttpManager.getInstance().postRequest(HttpUrl.PUSH_UPDATE_DEVICE_ALIAS, new BaseCallBack<UpdateDeviceAliasResult>() {
-                @Override
-                protected void OnRequestBefore(Request request) {
-
-                }
-
-                @Override
-                protected void onFailure(Call call, IOException e) {
-                }
-
-                @Override
-                protected void onSuccess(Call call, Response response, UpdateDeviceAliasResult result) {
-                    if (result.getStatus() != 200) {
-                        ToastUtil.showToast(mContext, result.getMsg());
-                        return;
-                    }
-                    if (result != null && result.getStatus() == 200) {
-                       Log.d("LoginActivity","绑定成功");
-                    }
-                }
-
-                @Override
-                protected void onResponse(Response response) {
-
-                }
-
-                @Override
-                protected void onEror(Call call, int statusCode, Exception e) {
-                }
-
-                @Override
-                protected void inProgress(int progress, long total, int id) {
-
-                }
-            }, requestParam);
+    public void updateDeviceAlias() {
+        User user = UserManager.getInstance(mContext).getUser();
+        if (user == null) {
+            return;
         }
+        String userId = user.getUserId() + "";
+        String registrationID = JPushInterface.getRegistrationID(mContext);
+        final HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("registrationId", registrationID);
+        requestParam.put("userId", userId);
+        OkHttpManager.getInstance().postRequest(HttpUrl.PUSH_UPDATE_DEVICE_ALIAS, new BaseCallBack<UpdateDeviceAliasResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UpdateDeviceAliasResult result) {
+                if (result.getStatus() != 200) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+                if (result != null && result.getStatus() == 200) {
+                    Log.d("LoginActivity", "绑定成功");
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
+    }
 
 
     private void getMessageCode() {

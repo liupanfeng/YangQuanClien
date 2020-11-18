@@ -6,10 +6,10 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/icon_logo"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_config"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle">
         <activity android:name=".utils.permission.PermissionsActivity"
@@ -79,16 +79,17 @@
             android:theme="@style/NoTitleStyle" />
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/NoTitleStyle" />
-        <activity
-            android:name=".activity.SplashActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/StartTheme">
+            android:theme="@style/NoTitleStyle" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/StartTheme">
         </activity>
         <activity
             android:name=".activity.MainActivity"
