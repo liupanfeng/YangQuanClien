@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -146,14 +145,24 @@ public class MainActivity extends BasePermissionActivity {
     }
 
     private void initTabList() {
-        mTabList.add(new TabInfo(PageId.PAGE_SERVICE,
-                App.getInstance().getString(R.string.tab_service),
-                R.drawable.bg_tab_service));
-        mTabList.add(new TabInfo(PageId.PAGE_MESSAGE,
-                App.getInstance().getString(R.string.tab_message),
-                R.drawable.bg_tab_message));
+        mTabList.add(new TabInfo(PageId.PAGE_HOME_PAGE,
+                App.getInstance().getString(R.string.tab_home_page),
+                R.drawable.bg_tab_home_page));
+
+        mTabList.add(new TabInfo(PageId.PAGE_FEED_PAGE,
+                App.getInstance().getString(R.string.tab_feed_page),
+                R.drawable.bg_tab_feed_page));
+
+        mTabList.add(new TabInfo(PageId.PAGE_SHEEP_HOUSE_KEEP,
+                App.getInstance().getString(R.string.tab_sheep_house_keeper_page),
+                R.drawable.bg_tab_sheep_house_keeper));
+
+        mTabList.add(new TabInfo(PageId.PAGE_SHEEP_BAR_PAGE,
+                App.getInstance().getString(R.string.tab_sheep_bar_page),
+                R.drawable.bg_tab_sheep_bar));
+
         mTabList.add(new TabInfo(PageId.PAGE_MINE,
-                App.getInstance().getString(R.string.tab_mine),
+                App.getInstance().getString(R.string.tab_mine_page),
                 R.drawable.bg_tab_mine));
     }
 
@@ -184,11 +193,11 @@ public class MainActivity extends BasePermissionActivity {
     private void setupChildView(TabInfo tabInfo) {
         int tabId = tabInfo.getTabId();
         switch (tabId) {
-            case PageId.PAGE_SERVICE:
+            case PageId.PAGE_HOME_PAGE:
                 ServiceFragment serviceFragment =  ServiceFragment.newInstance("", "");
                 mFragmentList.add(serviceFragment);
                 break;
-            case PageId.PAGE_MESSAGE:
+            case PageId.PAGE_FEED_PAGE:
                 MessageFragment messageFragment = MessageFragment.newInstance("", "");
                 mFragmentList.add(messageFragment);
                 break;

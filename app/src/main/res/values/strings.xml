@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">羊圈</string>
 
-    <string name="tab_service">服务</string>
-    <string name="tab_message">消息</string>
-    <string name="tab_mine">我的</string>
+    <string name="tab_home_page">首页</string>
+    <string name="tab_feed_page">饲料</string>
+    <string name="tab_sheep_house_keeper_page">羊管家</string>
+    <string name="tab_sheep_bar_page">羊吧</string>
+    <string name="tab_mine_page">羊吧</string>
 
 
     <string name="str_login_title">登录</string>
