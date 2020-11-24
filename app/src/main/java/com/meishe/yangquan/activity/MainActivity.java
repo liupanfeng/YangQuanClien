@@ -17,6 +17,7 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.TabInfo;
+import com.meishe.yangquan.fragment.HomeFragment;
 import com.meishe.yangquan.fragment.MessageFragment;
 import com.meishe.yangquan.fragment.MineFragment;
 import com.meishe.yangquan.fragment.ServiceFragment;
@@ -55,11 +56,11 @@ public class MainActivity extends BasePermissionActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//        mContext=this;
-//        defaultTab=0;
-//        initView();
-//        initData();
+        setContentView(R.layout.activity_main);
+        mContext=this;
+        defaultTab=0;
+        initView();
+        initData();
     }
 
     @Override
@@ -194,11 +195,19 @@ public class MainActivity extends BasePermissionActivity {
         int tabId = tabInfo.getTabId();
         switch (tabId) {
             case PageId.PAGE_HOME_PAGE:
-                ServiceFragment serviceFragment =  ServiceFragment.newInstance("", "");
+                HomeFragment serviceFragment =  HomeFragment.newInstance("", "");
                 mFragmentList.add(serviceFragment);
                 break;
             case PageId.PAGE_FEED_PAGE:
                 MessageFragment messageFragment = MessageFragment.newInstance("", "");
+                mFragmentList.add(messageFragment);
+                break;
+            case PageId.PAGE_SHEEP_HOUSE_KEEP:
+                 messageFragment = MessageFragment.newInstance("", "");
+                mFragmentList.add(messageFragment);
+                break;
+            case PageId.PAGE_SHEEP_BAR_PAGE:
+                 messageFragment = MessageFragment.newInstance("", "");
                 mFragmentList.add(messageFragment);
                 break;
             case PageId.PAGE_MINE:
