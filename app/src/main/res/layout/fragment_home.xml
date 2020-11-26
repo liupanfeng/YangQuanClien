@@ -3,6 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp48"
+        app:tabIndicatorColor="@color/mainColor"
+        app:tabSelectedTextColor="@color/mainColor"
+        app:tabTextColor="@color/black"
+        app:tabIndicatorHeight="1dp"
+        app:tabMode="scrollable"
+        />
+
+    <com.meishe.yangquan.view.MViewPager
+        android:id="@+id/viewpager"
+        android:layout_below="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
 
     <com.meishe.yangquan.wiget.MaterialProgress
@@ -10,4 +26,5 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true" />
+
 </RelativeLayout>

@@ -6,6 +6,9 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 
+/**
+ * @author 86188
+ */
 public class MViewPager extends ViewPager {
 
     private boolean noScroll = true;
@@ -22,18 +25,20 @@ public class MViewPager extends ViewPager {
 
     @Override
     public boolean onTouchEvent(MotionEvent arg0) {
-        if (noScroll)
+        if (noScroll) {
             return false;
-        else
+        } else {
             return super.onTouchEvent(arg0);
+        }
     }
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent arg0) {
-        if (noScroll)
+        if (noScroll) {
             return false;
-        else
+        } else {
             return super.onInterceptTouchEvent(arg0);
+        }
     }
 
     public void setScroll(boolean noScroll) {

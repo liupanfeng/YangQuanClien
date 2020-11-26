@@ -5,9 +5,9 @@
     <color name="colorPrimaryDark">#39AA58</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="mainColor">#39AA58</color>
+    <color name="mainColor">#3BA786</color>
 
-    <color name="half_main_color">#5539AA58</color>
+    <color name="half_main_color">#553BA786</color>
 
     <!--tab bg-->
     <color name="tab_bg_color">#E5ffffff</color>

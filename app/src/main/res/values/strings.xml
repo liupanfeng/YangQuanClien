@@ -35,4 +35,10 @@
     <string name="tv_content_business">商户登录</string>
 
 
+    <string name="top_tab_quotation">行情</string>
+    <string name="top_tab_market">市场</string>
+    <string name="top_tab_service">服务</string>
+    <string name="top_tab_industry_information">行业资讯</string>
+
+
 </resources>
