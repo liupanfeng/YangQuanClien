@@ -57,4 +57,5 @@ dependencies {
     implementation files('src/libs/umeng-share-wechat-simplify-6.9.6.jar')
     implementation files('src/libs/umeng-share-sina-simplify-6.9.6.jar')
     implementation files('src/libs/umeng-share-QQ-simplify-6.9.6.jar')
+
 }

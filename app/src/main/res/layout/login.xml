@@ -11,22 +11,6 @@
         android:orientation="vertical"
         android:visibility="gone">
 
-        <EditText
-            android:id="@+id/input_phonenumber"
-            android:layout_width="fill_parent"
-            android:layout_height="45dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginLeft="40dp"
-            android:layout_marginRight="40dp"
-            android:background="@drawable/login_shape"
-            android:gravity="center_vertical"
-            android:hint="输入手机号码"
-            android:inputType="number"
-            android:maxLines="1"
-            android:paddingLeft="13dp"
-            android:textColor="#000000"
-            android:textColorHint="#D4D4D4"
-            android:textSize="17sp" />
 
 
         <LinearLayout
@@ -36,7 +20,6 @@
             android:orientation="horizontal">
 
             <EditText
-                android:id="@+id/input_checkcode"
                 android:layout_width="175dp"
                 android:layout_height="45dp"
                 android:layout_centerHorizontal="true"
@@ -52,7 +35,7 @@
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/getcheckcode"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="8dp"
@@ -212,6 +195,7 @@
             android:background="#C2C2C2" />
 
         <EditText
+            android:id="@+id/input_phonenumber"
             android:layout_toRightOf="@+id/view_vertical_line"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
@@ -245,6 +229,7 @@
             android:background="#C2C2C2" />
 
         <EditText
+            android:id="@+id/et_image_code"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:layout_marginLeft="13dp"
@@ -253,7 +238,6 @@
             android:gravity="center_vertical"
             android:layout_marginBottom="@dimen/dp17"
             android:hint="请输入图形码"
-            android:inputType="number"
             android:maxLines="1"
             android:textColor="#000000"
             android:textColorHint="#D4D4D4"
@@ -265,7 +249,6 @@
             android:layout_height="34dp"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="@dimen/dp8"
-            android:background="@mipmap/test"
             />
 
     </RelativeLayout>
@@ -287,6 +270,7 @@
             android:background="#C2C2C2" />
 
         <EditText
+            android:id="@+id/input_checkcode"
             android:layout_width="fill_parent"
             android:layout_height="45dp"
             android:layout_marginLeft="13dp"
@@ -302,7 +286,7 @@
             android:textSize="17sp" />
 
         <TextView
-            android:id="@+id/tv_get_phone_number"
+            android:id="@+id/getcheckcode"
             android:layout_width="70dp"
             android:layout_height="20dp"
             android:text="获取验证码"

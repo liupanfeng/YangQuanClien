@@ -384,6 +384,23 @@ public class Util {
     }
 
 
+    /**
+     * 这个是完整的格式
+     * @param string
+     * @return
+     */
+    public static Bitmap stringToBitmap(String string) {
+        Bitmap bitmap = null;
+        try {
+            byte[] bitmapArray = Base64.decode(string.split(",")[1], Base64.DEFAULT);
+            bitmap = BitmapFactory.decodeByteArray(bitmapArray, 0, bitmapArray.length);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bitmap;
+    }
+
+
     public static String bitmaptoString(Bitmap bitmap) {
         //将Bitmap转换成字符串
         ByteArrayOutputStream bStream = new ByteArrayOutputStream();

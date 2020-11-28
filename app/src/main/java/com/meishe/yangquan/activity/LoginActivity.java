@@ -1,14 +1,20 @@
 package com.meishe.yangquan.activity;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.ImageCodeInfo;
+import com.meishe.yangquan.bean.ImageCodeResult;
+import com.meishe.yangquan.bean.LoginInfo;
+import com.meishe.yangquan.bean.LoginResult;
 import com.meishe.yangquan.bean.SendSmsResult;
 import com.meishe.yangquan.bean.UpdateDeviceAliasResult;
 import com.meishe.yangquan.bean.UserResult;
@@ -19,6 +25,7 @@ import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CountDownTimerUtils;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.Logger;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
@@ -51,6 +58,10 @@ public class LoginActivity extends BaseActivity {
     private String phoneNumber;
     private String smsCode;
     private ChangeIdentityView mChangeIdentity;
+    private ImageView mIvVerification;
+    private String mUuid;
+    private EditText mEtImageCode;
+    private String mImageCode;
 
     @Override
     protected int initRootView() {
@@ -62,20 +73,20 @@ public class LoginActivity extends BaseActivity {
         mMaterialProgress = findViewById(R.id.loading);
         mInputPhoneNum = findViewById(R.id.input_phonenumber);
         mInputCheckCode = findViewById(R.id.input_checkcode);
+        mEtImageCode = findViewById(R.id.et_image_code);
         mGetCheckCode = findViewById(R.id.getcheckcode);
         mBtnLogin = findViewById(R.id.btn_login);
         mBtnRegister = findViewById(R.id.btn_register);
         mUserAgreement = findViewById(R.id.user_agreement);
 //        mUserPrivacy = findViewById(R.id.privacy);
         mChangeIdentity = findViewById(R.id.civ_change_identity);
+        mIvVerification = findViewById(R.id.iv_verification);
 //        mTitleBar = findViewById(R.id.titleBar);
     }
 
     @Override
     public void initData() {
-//        mTitleBar.setTextCenter(R.string.str_login_title);
-//        mTitleBar.setBackImageVisible(View.VISIBLE);
-
+        getImageCode();
     }
 
     @Override
@@ -117,6 +128,8 @@ public class LoginActivity extends BaseActivity {
         mBtnLogin.setOnClickListener(this);
         mBtnRegister.setOnClickListener(this);
         mUserAgreement.setOnClickListener(this);
+        mIvVerification.setOnClickListener(this);
+        mGetCheckCode.setOnClickListener(this);
 //        mUserPrivacy.setOnClickListener(this);
     }
 
@@ -130,6 +143,7 @@ public class LoginActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.getcheckcode:
                 phoneNumber = mInputPhoneNum.getText().toString().trim();
+                mImageCode = mEtImageCode.getText().toString().trim();
                 if (TextUtils.isEmpty(phoneNumber)) {
                     ToastUtil.showToast(mContext, "手机号不能为空");
                     return;
@@ -137,6 +151,11 @@ public class LoginActivity extends BaseActivity {
 
                 if (!Util.isMobileNO(phoneNumber)) {
                     ToastUtil.showToast(mContext, "请输入正确的手机号码");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mImageCode)) {
+                    ToastUtil.showToast(mContext, "请输入图形码");
                     return;
                 }
 
@@ -154,23 +173,22 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.btn_login:
-//                phoneNumber = mInputPhoneNum.getText().toString();
-//                smsCode = mInputCheckCode.getText().toString().trim();
-//                if (TextUtils.isEmpty(phoneNumber)) {
-//                    ToastUtil.showToast(mContext, "请输入手机号再进行登录");
-//                    return;
-//                }
-//                if (TextUtils.isEmpty(smsCode)) {
-//                    ToastUtil.showToast(mContext, "请输入短信验证码");
-//                    return;
-//                }
-//
-//                if (!Util.isMobileNO(phoneNumber)) {
-//                    ToastUtil.showToast(mContext, "请输入正确的手机号码");
-//                    return;
-//                }
-//                userLogin();
-                AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);
+                phoneNumber = mInputPhoneNum.getText().toString();
+                smsCode = mInputCheckCode.getText().toString().trim();
+                if (TextUtils.isEmpty(phoneNumber)) {
+                    ToastUtil.showToast(mContext, "请输入手机号再进行登录");
+                    return;
+                }
+                if (TextUtils.isEmpty(smsCode)) {
+                    ToastUtil.showToast(mContext, "请输入短信验证码");
+                    return;
+                }
+
+                if (!Util.isMobileNO(phoneNumber)) {
+                    ToastUtil.showToast(mContext, "请输入正确的手机号码");
+                    return;
+                }
+                userLogin();
                 break;
             case R.id.btn_register:
                 Bundle bundle = new Bundle();
@@ -178,11 +196,76 @@ public class LoginActivity extends BaseActivity {
                 AppManager.getInstance().jumpActivity(LoginActivity.this, RegisterActivity.class, bundle);
                 finish();
                 break;
-            case R.id.user_agreement:
+            case R.id.iv_verification:
+                //获取图片验证码
+                getImageCode();
                 break;
 //            case R.id.privacy:
 //                break;
         }
+    }
+
+    /**
+     * 获取图片验证码
+     */
+    private void getImageCode() {
+        final HashMap<String, Object> requestParam = new HashMap<>();
+        OkHttpManager.getInstance().postRequest(HttpUrl.USER_GET_IMAGE, new BaseCallBack<ImageCodeResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ImageCodeResult imageCodeResult) {
+                if (imageCodeResult == null) {
+                    Logger.e(TAG, "getImageCode imageCodeResult is null");
+                    return;
+                }
+
+                if (imageCodeResult.getCode() != 1) {
+                    return;
+                }
+
+                ImageCodeInfo imageCodeInfo = imageCodeResult.getData();
+                if (imageCodeInfo == null) {
+                    return;
+                }
+
+                String base64 = imageCodeInfo.getBase64();
+                if (TextUtils.isEmpty(base64)) {
+                    return;
+                }
+
+                Bitmap bitmap = Util.stringToBitmap(base64);
+                if (bitmap == null) {
+                    return;
+                }
+
+                mIvVerification.setImageBitmap(bitmap);
+                mUuid = imageCodeInfo.getUuid();
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam);
     }
 
 
@@ -237,7 +320,10 @@ public class LoginActivity extends BaseActivity {
     private void getMessageCode() {
         mMaterialProgress.show();
         final HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("phoneNumber", phoneNumber);
+        requestParam.put("uuid", mUuid);
+        requestParam.put("verifyCode", mImageCode);
+        requestParam.put("phone", phoneNumber);
+        requestParam.put("mode", "register");
         OkHttpManager.getInstance().postRequest(HttpUrl.USER_SEND_CODE, new BaseCallBack<SendSmsResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -260,14 +346,14 @@ public class LoginActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, SendSmsResult result) {
                 mMaterialProgress.hide();
-                if (result.getStatus() != 200) {
+                if (result.getStatus() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     mInputCheckCode.setFocusable(true);
                     mInputCheckCode.setFocusableInTouchMode(true);
                     mInputCheckCode.requestFocus();
                     return;
                 }
-                if (result != null && result.getStatus() == 200) {
+                if (result != null && result.getStatus() == 1) {
                     ToastUtil.showToast(mContext, "验证码已发送");
                     CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
                     countDownTimer.start();
@@ -305,9 +391,9 @@ public class LoginActivity extends BaseActivity {
     private void userLogin() {
         mMaterialProgress.show();
         final HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("phoneNum", phoneNumber);
-        requestParam.put("smsCode", smsCode);
-        OkHttpManager.getInstance().postRequest(HttpUrl.USER_LOGIN, new BaseCallBack<UserResult>() {
+        requestParam.put("phone", phoneNumber);
+        requestParam.put("verifyCode", smsCode);
+        OkHttpManager.getInstance().postRequest(HttpUrl.USER_LOGIN, new BaseCallBack<LoginResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -319,20 +405,21 @@ public class LoginActivity extends BaseActivity {
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, UserResult result) {
+            protected void onSuccess(Call call, Response response, LoginResult result) {
                 mMaterialProgress.hide();
-                if (result.getStatus() != 200) {
+                if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
-                if (result != null && result.getStatus() == 200) {
-                    User user = result.getData();
-                    if (user != null) {
-                        UserManager.getInstance(mContext).setUser(user);
-                        String token = user.getTokenId();
+                if (result != null && result.getCode() == 1) {
+                    LoginInfo loginInfo = result.getData();
+                    if (loginInfo != null) {
+//                        UserManager.getInstance(mContext).setUser(user);
+//                        String token = user.getTokenId();
+                        String token = loginInfo.getToken();
                         UserManager.getInstance(mContext).setToken(token);
                         AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);
-                        updateDeviceAlias();
+//                        updateDeviceAlias();
                         LoginActivity.this.finish();
                         ToastUtil.showToast(mContext, "登录成功");
                     }
