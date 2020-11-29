@@ -1,10 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginTop="@dimen/dp15"
+        android:layout_marginRight="@dimen/dp5"
+        android:orientation="horizontal">
+
+        <com.meishe.yangquan.wiget.CustomButton
+            android:id="@+id/btn_sell_little_sheep"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp35"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="出售羊苗"
+            android:textSize="@dimen/sp13" />
+
+        <com.meishe.yangquan.wiget.CustomButton
+            android:id="@+id/btn_buy_little_sheep"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp35"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="购买羊苗"
+            android:textSize="@dimen/sp13" />
+
+        <com.meishe.yangquan.wiget.CustomButton
+            android:id="@+id/btn_sell_big_sheep"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp35"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="出售成品羊"
+            android:textSize="@dimen/sp13" />
+
+        <com.meishe.yangquan.wiget.CustomButton
+            android:id="@+id/btn_buy_big_sheep"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp35"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="收购成品羊"
+            android:textSize="@dimen/sp13" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="市场"
-        />
+        android:layout_marginTop="@dimen/dp12"
+        android:background="#f5f5f5">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp40">
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
 </LinearLayout>

@@ -21,7 +21,6 @@ public class RoundAngleImageView extends ImageView {
     private Paint paint;
     /**
      * 个人理解是
-     *
      * 这两个都是画圆的半径
      */
     private int roundWidth = 20;

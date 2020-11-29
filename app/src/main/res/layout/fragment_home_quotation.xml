@@ -1,78 +1,144 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.meishe.yangquan.view.BannerLayout
-        android:id="@+id/banner"
-        android:layout_width="match_parent"
-        android:layout_height="210dp"
-        app:scrollDuration="1000"
-        app:autoPlayDuration="3000"
-        app:unSelectedIndicatorHeight="10dp"
-        app:unSelectedIndicatorWidth="10dp"
-        app:selectedIndicatorHeight="10dp"
-        app:selectedIndicatorWidth="10dp"
-        app:unSelectedIndicatorColor="@color/white"
-        app:selectedIndicatorColor="@color/mainColor"
-        app:isAutoPlay="true"/>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="今日行情 2020-09-03"
-        android:layout_marginTop="@dimen/dp15"
-        android:textColor="#ff303030"
-        android:layout_marginLeft="@dimen/dp10"
-        android:textSize="17sp" />
-
-
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp15"
-        android:layout_marginLeft="@dimen/dp5"
-        android:layout_marginRight="@dimen/dp5"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <com.meishe.yangquan.view.BannerLayout
+            android:id="@+id/banner"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            app:scrollDuration="1000"
+            app:autoPlayDuration="3000"
+            app:unSelectedIndicatorHeight="10dp"
+            app:unSelectedIndicatorWidth="10dp"
+            app:selectedIndicatorHeight="10dp"
+            app:selectedIndicatorWidth="10dp"
+            app:unSelectedIndicatorColor="@color/white"
+            app:selectedIndicatorColor="@color/mainColor"
+            app:isAutoPlay="true"/>
 
-        <com.meishe.yangquan.wiget.CustomButton
-            android:id="@+id/btn_little_sheep"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp35"
-            android:layout_margin="5dp"
-            android:text="羊苗"
-            android:textSize="@dimen/sp13"
-            android:layout_weight="1" />
+        <TextView
+            android:id="@+id/tv_today_quotation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="今日行情 2020-09-03"
+            android:layout_marginTop="@dimen/dp15"
+            android:textColor="#ff303030"
+            android:layout_marginLeft="@dimen/dp10"
+            android:textSize="17sp" />
 
-        <com.meishe.yangquan.wiget.CustomButton
-            android:id="@+id/btn_big_sheep"
-            android:layout_width="0dp"
-            android:layout_margin="5dp"
-            android:layout_height="@dimen/dp35"
-            android:text="成品羊"
-            android:textSize="@dimen/sp13"
-            android:layout_weight="1" />
-        <com.meishe.yangquan.wiget.CustomButton
-            android:id="@+id/btn_die_sheep"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp35"
-            android:textSize="@dimen/sp13"
-            android:layout_margin="5dp"
-            android:text="羊腔"
-            android:layout_weight="1" />
-        <com.meishe.yangquan.wiget.CustomButton
-            android:id="@+id/btn_forage_grass"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/dp35"
-            android:text="饲草"
-            android:layout_margin="5dp"
-            android:textSize="@dimen/sp13"
-            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_marginLeft="@dimen/dp5"
+            android:layout_marginRight="@dimen/dp5"
+            android:orientation="horizontal">
+
+            <com.meishe.yangquan.wiget.CustomButton
+                android:id="@+id/btn_little_sheep"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp35"
+                android:layout_margin="5dp"
+                android:text="羊苗"
+                android:textSize="@dimen/sp13"
+                android:layout_weight="1" />
+
+            <com.meishe.yangquan.wiget.CustomButton
+                android:id="@+id/btn_big_sheep"
+                android:layout_width="0dp"
+                android:layout_margin="5dp"
+                android:layout_height="@dimen/dp35"
+                android:text="成品羊"
+                android:textSize="@dimen/sp13"
+                android:layout_weight="1" />
+            <com.meishe.yangquan.wiget.CustomButton
+                android:id="@+id/btn_die_sheep"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp35"
+                android:textSize="@dimen/sp13"
+                android:layout_margin="5dp"
+                android:text="羊腔"
+                android:layout_weight="1" />
+            <com.meishe.yangquan.wiget.CustomButton
+                android:id="@+id/btn_forage_grass"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/dp35"
+                android:text="饲草"
+                android:layout_margin="5dp"
+                android:textSize="@dimen/sp13"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="@dimen/dp70"
+                android:layout_height="18dp"
+                android:layout_marginLeft="@dimen/dp15"
+                android:textColor="#303030"
+                android:text="品种"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_address"
+                android:layout_width="@dimen/dp70"
+                android:layout_height="18dp"
+                android:layout_marginLeft="@dimen/dp20"
+                android:textColor="#303030"
+                android:text="产地"
+                android:textSize="13sp" />
+
+
+            <TextView
+                android:id="@+id/tv_specification"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:textColor="#303030"
+                android:text="规格(斤)"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="18dp"
+                android:layout_marginLeft="@dimen/dp10"
+                android:textColor="#303030"
+                android:text="价格（元）"
+                android:textSize="13sp" />
+
+        </LinearLayout>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 
 
+    <com.meishe.yangquan.wiget.MaterialProgress
+        android:id="@+id/loading"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true" />
 
-</LinearLayout>
+
+</RelativeLayout>

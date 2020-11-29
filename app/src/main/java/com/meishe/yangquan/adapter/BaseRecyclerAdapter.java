@@ -83,6 +83,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_MESSAGE_CENTER_LIST = VIEW_TYPE_BASE + 10;                        //消息中心
     protected static final int VIEW_BUSINESS_CENTER_LIST = VIEW_TYPE_BASE + 11;                        //我的商机
     protected static final int VIEW_COMMENT_LIST = VIEW_TYPE_BASE + 13;                                //评论
+    protected static final int VIEW_QUOTATION_LIST = VIEW_TYPE_BASE + 14;                                //行情列表
+    protected static final int VIEW_MARKET_LIST = VIEW_TYPE_BASE + 15;                                //市场列表
     private IosDialog mDialog;
 
     protected  int pageType;

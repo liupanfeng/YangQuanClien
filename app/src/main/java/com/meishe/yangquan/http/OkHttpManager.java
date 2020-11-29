@@ -66,6 +66,11 @@ public class OkHttpManager {
         doRequest(request, callBack);
     }
 
+    public void postRequest(String url, final BaseCallBack callBack, Map<String, Object> params,String token) {
+        Request request = buildRequest(url, params, HttpMethodType.POST,token);
+        doRequest(request, callBack);
+    }
+
     public void postUploadSingleImage(String url, final BaseCallBack callback, File file, String fileKey, Map<String, String> params) {
         Param[] paramsArr = fromMapToParams(params);
 
@@ -283,6 +288,22 @@ public class OkHttpManager {
         }
         return builder.build();
     }
+
+    //创建 Request对象
+    private Request buildRequest(String url, Map<String, Object> params, HttpMethodType methodType,String token) {
+
+        Request.Builder builder = new Request.Builder();
+        builder.url(url);
+        builder.addHeader("Token",token);
+        if (methodType == HttpMethodType.GET) {
+            builder.get();
+        } else if (methodType == HttpMethodType.POST) {
+            RequestBody requestBody = buildFormData(params);
+            builder.post(requestBody);
+        }
+        return builder.build();
+    }
+
 
     //构建请求所需的参数表单
     private RequestBody buildFormData(Map<String, Object> params) {

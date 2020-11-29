@@ -18,6 +18,17 @@ public class HttpUrl {
      */
     public static final String USER_GET_IMAGE = URL + "app/verify/code/image";
 
+    /**
+     * 请求行情数据
+     */
+    public static final String HOME_PAGE_GET_QUOTATION = URL + "app/quotation/list";
+
+    /**
+     * 请求广告条数据
+     */
+    public static final String HOME_PAGE_GET_BANNER = URL + "app/home/banner";
+
+
     /*发送短信验证码*/
     public static final String USER_SEND_CODE = URL + "app/verify/code/msg";
 

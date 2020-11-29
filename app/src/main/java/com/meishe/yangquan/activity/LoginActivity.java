@@ -86,7 +86,14 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        getImageCode();
+        String token = UserManager.getInstance(mContext).getToken();
+        if (!TextUtils.isEmpty(token)){
+            AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);
+            finish();
+        }else{
+            getImageCode();
+        }
+
     }
 
     @Override
@@ -229,6 +236,7 @@ public class LoginActivity extends BaseActivity {
                 }
 
                 if (imageCodeResult.getCode() != 1) {
+                    ToastUtil.showToast(mContext, imageCodeResult.getMsg());
                     return;
                 }
 
