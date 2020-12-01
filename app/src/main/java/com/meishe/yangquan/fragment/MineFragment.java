@@ -86,10 +86,10 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_mine, container, false);
         mRecyclerView = view.findViewById(R.id.mine_recycler);
-        mLLNoLogin = view.findViewById(R.id.ll_no_login);
-        mLLLogin = view.findViewById(R.id.ll_login);
-        mIvMinePhoto = view.findViewById(R.id.iv_mine_photo);
-        mTvNumber = view.findViewById(R.id.tv_number);
+//        mLLNoLogin = view.findViewById(R.id.ll_no_login);
+//        mLLLogin = view.findViewById(R.id.ll_login);
+//        mIvMinePhoto = view.findViewById(R.id.iv_mine_photo);
+//        mTvNumber = view.findViewById(R.id.tv_number);
         mTvNickname = view.findViewById(R.id.tv_nickname);
         return view;
     }
@@ -98,26 +98,26 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
 
     @Override
     protected void initListener() {
-        mLLNoLogin.setOnClickListener(this);
+//        mLLNoLogin.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
-        LinearLayoutManager manager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
-        mRecyclerView.setLayoutManager(manager);
-        MultiFunctionAdapter adapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.setAdapter(adapter);
-        adapter.setFragment(this);
-        mList.clear();
-        for (int i = 0; i < mSettingInfo.length; i++) {
-            MineTypeInfo info = new MineTypeInfo();
-            info.setName(mSettingInfo[i]);
-            info.setIcon(mSettingIcon[i]);
-            mList.add(info);
-        }
-        adapter.addAll(mList);
-
-        updateUserUI();
+//        LinearLayoutManager manager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
+//        mRecyclerView.setLayoutManager(manager);
+//        MultiFunctionAdapter adapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+//        mRecyclerView.setAdapter(adapter);
+//        adapter.setFragment(this);
+//        mList.clear();
+//        for (int i = 0; i < mSettingInfo.length; i++) {
+//            MineTypeInfo info = new MineTypeInfo();
+//            info.setName(mSettingInfo[i]);
+//            info.setIcon(mSettingIcon[i]);
+//            mList.add(info);
+//        }
+//        adapter.addAll(mList);
+//
+//        updateUserUI();
 
     }
 
