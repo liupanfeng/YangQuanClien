@@ -13,39 +13,39 @@
         android:orientation="horizontal">
 
         <com.meishe.yangquan.wiget.CustomButton
-            android:id="@+id/btn_sell_little_sheep"
+            android:id="@+id/btn_cut_wool"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp35"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="出售羊苗"
+            android:text="剪羊毛"
             android:textSize="@dimen/sp13" />
 
         <com.meishe.yangquan.wiget.CustomButton
-            android:id="@+id/btn_buy_little_sheep"
+            android:id="@+id/btn_vaccine"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp35"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="购买羊苗"
+            android:text="打疫苗"
             android:textSize="@dimen/sp13" />
 
         <com.meishe.yangquan.wiget.CustomButton
-            android:id="@+id/btn_sell_big_sheep"
+            android:id="@+id/btn_sheep_dung"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp35"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="出售成品羊"
+            android:text="拉羊粪"
             android:textSize="@dimen/sp13" />
 
         <com.meishe.yangquan.wiget.CustomButton
-            android:id="@+id/btn_buy_big_sheep"
+            android:id="@+id/btn_look_car"
             android:layout_width="0dp"
             android:layout_height="@dimen/dp35"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="收购成品羊"
+            android:text="找车辆"
             android:textSize="@dimen/sp13" />
 
     </LinearLayout>
