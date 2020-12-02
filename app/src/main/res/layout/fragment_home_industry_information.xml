@@ -1,12 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <com.meishe.yangquan.view.BannerLayout
+        android:id="@+id/banner"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="行业资讯"
+        android:layout_height="210dp"
+        app:scrollDuration="1000"
+        app:autoPlayDuration="3000"
+        app:unSelectedIndicatorHeight="10dp"
+        app:unSelectedIndicatorWidth="10dp"
+        app:selectedIndicatorHeight="10dp"
+        app:selectedIndicatorWidth="10dp"
+        app:unSelectedIndicatorColor="@color/white"
+        app:selectedIndicatorColor="@color/mainColor"
+        app:isAutoPlay="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="23dp"
+        android:layout_marginLeft="@dimen/dp11"
+        android:layout_marginTop="@dimen/dp18"
+        android:text="历史行业资讯"
+        android:textColor="#ff303030"
+        android:textSize="17sp"
         />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_marginLeft="@dimen/dp11"
+        android:layout_marginRight="@dimen/dp11"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
 
 </LinearLayout>

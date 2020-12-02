@@ -54,15 +54,35 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp12"
-        android:background="#f5f5f5">
+        android:background="#f5f5f5"
+        android:orientation="vertical">
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_marginRight="@dimen/dp11"
             android:layout_height="@dimen/dp40">
-
+            <com.meishe.yangquan.wiget.CustomTextView
+                android:id="@+id/tv_market_newest"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="最新"
+                />
+            <com.meishe.yangquan.wiget.CustomTextView
+                android:id="@+id/tv_market_command"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/dp24"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="推荐"
+                />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_marginRight="@dimen/dp11"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

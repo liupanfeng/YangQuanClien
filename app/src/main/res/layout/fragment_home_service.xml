@@ -1,11 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_marginTop="@dimen/dp15"
+        android:layout_marginRight="@dimen/dp5"
+        android:orientation="horizontal">
+
+        <com.meishe.yangquan.wiget.CustomButton
+            android:id="@+id/btn_cut_wool"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp35"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="剪羊毛"
+            android:textSize="@dimen/sp13" />
+
+        <com.meishe.yangquan.wiget.CustomButton
+            android:id="@+id/btn_vaccine"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp35"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="打疫苗"
+            android:textSize="@dimen/sp13" />
+
+        <com.meishe.yangquan.wiget.CustomButton
+            android:id="@+id/btn_sheep_dung"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp35"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="拉羊粪"
+            android:textSize="@dimen/sp13" />
+
+        <com.meishe.yangquan.wiget.CustomButton
+            android:id="@+id/btn_look_car"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dp35"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="找车辆"
+            android:textSize="@dimen/sp13" />
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="服务"
-        />
+        android:layout_marginTop="@dimen/dp12"
+        android:background="#f5f5f5"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_marginRight="@dimen/dp11"
+            android:layout_height="@dimen/dp40">
+            <com.meishe.yangquan.wiget.CustomTextView
+                android:id="@+id/tv_service_newest"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="最新"
+                />
+            <com.meishe.yangquan.wiget.CustomTextView
+                android:id="@+id/tv_service_command"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/dp24"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="推荐"
+                />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_marginRight="@dimen/dp11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
 </LinearLayout>

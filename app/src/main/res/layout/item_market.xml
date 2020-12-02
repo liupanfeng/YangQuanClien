@@ -193,10 +193,11 @@
                     </LinearLayout>
                     <ImageView
                         android:id="@+id/iv_market_phone"
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:layout_marginLeft="@dimen/dp10"
-                        android:src="@mipmap/ic_market_default"
+                        android:layout_width="47dp"
+                        android:layout_height="47dp"
+                        android:layout_marginLeft="@dimen/dp12"
+                        android:layout_marginTop="@dimen/dp22"
+                        android:src="@mipmap/ic_market_phone"
                         />
                 </LinearLayout>
 

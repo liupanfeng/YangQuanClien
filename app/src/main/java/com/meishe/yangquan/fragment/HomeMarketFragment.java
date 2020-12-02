@@ -18,6 +18,7 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.CustomButton;
+import com.meishe.yangquan.wiget.CustomTextView;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -50,6 +51,11 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
     private CustomButton mSellBigSheep;
     private CustomButton mBuyBigSheep;
     private MultiFunctionAdapter mMarketAdapter;
+    private CustomTextView mTvMarketNewest;
+    private CustomTextView mTvMarketCommand;
+
+    private int mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
+    private int mMarketType = TYPE_MARKET_SELL_LITTLE_SHEEP;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -59,6 +65,8 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mSellBigSheep = view.findViewById(R.id.btn_sell_big_sheep);
         mBuyBigSheep = view.findViewById(R.id.btn_buy_big_sheep);
         mRecyclerView = view.findViewById(R.id.recycler);
+        mTvMarketNewest = view.findViewById(R.id.tv_market_newest);
+        mTvMarketCommand = view.findViewById(R.id.tv_market_command);
         return view;
     }
 
@@ -68,10 +76,13 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mBuyLittleSheep.setOnClickListener(this);
         mSellBigSheep.setOnClickListener(this);
         mBuyBigSheep.setOnClickListener(this);
+        mTvMarketNewest.setOnClickListener(this);
+        mTvMarketCommand.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
+        mTvMarketNewest.setSelected(true);
         initRecyclerView();
         selectSellLittleSheep();
         getMarketDataFromServer(TYPE_MARKET_SELL_LITTLE_SHEEP, TYPE_MARKET_LIST_TYPE_NEWEST);
@@ -88,20 +99,38 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sell_little_sheep:
+                mMarketType = TYPE_MARKET_SELL_LITTLE_SHEEP;
                 selectSellLittleSheep();
-                getMarketDataFromServer(TYPE_MARKET_SELL_LITTLE_SHEEP, TYPE_MARKET_LIST_TYPE_NEWEST);
+                getMarketDataFromServer(mMarketType, mListType);
                 break;
             case R.id.btn_buy_little_sheep:
+                mMarketType = TYPE_MARKET_BUY_LITTLE_SHEEP;
                 selectBuyLittleSheep();
-                getMarketDataFromServer(TYPE_MARKET_BUY_LITTLE_SHEEP, TYPE_MARKET_LIST_TYPE_NEWEST);
+                getMarketDataFromServer(mMarketType, mListType);
                 break;
             case R.id.btn_sell_big_sheep:
+                mMarketType = TYPE_MARKET_SELL_BIG_SHEEP;
                 selectSellBigSheep();
-                getMarketDataFromServer(TYPE_MARKET_SELL_BIG_SHEEP, TYPE_MARKET_LIST_TYPE_NEWEST);
+                getMarketDataFromServer(mMarketType, mListType);
                 break;
             case R.id.btn_buy_big_sheep:
+                mMarketType = TYPE_MARKET_BUY_BIG_SHEEP;
                 selectBuyBigSheep();
-                getMarketDataFromServer(TYPE_MARKET_BUY_BIG_SHEEP, TYPE_MARKET_LIST_TYPE_NEWEST);
+                getMarketDataFromServer(mMarketType, mListType);
+                break;
+            case R.id.tv_market_newest:
+                mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
+                mTvMarketNewest.setSelected(true);
+                mTvMarketCommand.setSelected(false);
+                getMarketDataFromServer(mMarketType, mListType);
+                break;
+            case R.id.tv_market_command:
+                mListType = TYPE_MARKET_LIST_TYPE_RECOMMEND;
+                mTvMarketCommand.setSelected(true);
+                mTvMarketNewest.setSelected(false);
+                getMarketDataFromServer(mMarketType, mListType);
+                break;
+            default:
                 break;
         }
     }
