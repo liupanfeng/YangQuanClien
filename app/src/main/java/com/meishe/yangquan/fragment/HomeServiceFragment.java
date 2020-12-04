@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
@@ -59,6 +60,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
     private int mServiceType = TYPE_SERVICE_CUT_WOOL;
 
     private MultiFunctionAdapter mServiceAdapter;
+    private ImageView mIvPublishService;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -71,6 +73,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mRecyclerView = view.findViewById(R.id.recycler);
         mTvMarketNewest = view.findViewById(R.id.tv_service_newest);
         mTvMarketCommand = view.findViewById(R.id.tv_service_command);
+        mIvPublishService = view.findViewById(R.id.iv_publish_service);
         return view;
     }
 
@@ -82,6 +85,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mLookCar.setOnClickListener(this);
         mTvMarketNewest.setOnClickListener(this);
         mTvMarketCommand.setOnClickListener(this);
+        mIvPublishService.setOnClickListener(this);
     }
 
     @Override
@@ -133,6 +137,9 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
                 mTvMarketCommand.setSelected(true);
                 mTvMarketNewest.setSelected(false);
                 getServiceDataFromServer(mServiceType, mListType);
+                break;
+            case R.id.iv_publish_service:
+                //发布服务
                 break;
             default:
                 break;
