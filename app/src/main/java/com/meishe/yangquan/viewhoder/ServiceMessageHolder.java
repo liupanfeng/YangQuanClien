@@ -27,7 +27,7 @@ public class ServiceMessageHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
+    public void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener) {
         if (info instanceof ServiceMessage){
             ServiceMessage serviceMessage= (ServiceMessage) info;
             mTvContent.setText(serviceMessage.getContent());

@@ -19,7 +19,7 @@ public abstract class BaseViewHolder extends RecyclerView.ViewHolder {
 
     protected abstract void initViewHolder(View view, Object... obj);
 
-    public abstract void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener);
+    public abstract void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener);
 
 
     public void onHolderDestroy() {

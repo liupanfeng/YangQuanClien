@@ -28,6 +28,11 @@ public class HttpUrl {
      */
     public static final String HOME_PAGE_GET_BANNER = URL + "app/home/banner";
 
+    /**
+     * 请求行业资讯数据
+     */
+    public static final String HOME_PAGE_GET_NEWS_LIST = URL + "app/news/list";
+
 
     /*发送短信验证码*/
     public static final String USER_SEND_CODE = URL + "app/verify/code/msg";

@@ -11,6 +11,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
+import com.meishe.yangquan.bean.IndustryInfo;
 import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.MarketResult;
@@ -25,6 +26,7 @@ import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
 import com.meishe.yangquan.viewhoder.CommentListHolder;
+import com.meishe.yangquan.viewhoder.IndustryListHolder;
 import com.meishe.yangquan.viewhoder.MarketListHolder;
 import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
@@ -106,6 +108,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_market, parent, false);
                 viewHolder = new MarketListHolder(view, this);
                 break;
+            /*行业资讯列表*/
+            case VIEW_INDUSTRY_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_industry, parent, false);
+                viewHolder = new IndustryListHolder(view, this);
+                break;
         }
         return viewHolder;
     }
@@ -147,6 +154,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_QUOTATION_LIST;
         } else if (baseInfo instanceof MarketInfo) {
             return VIEW_MARKET_LIST;
+        } else if (baseInfo instanceof IndustryInfo) {
+            return VIEW_INDUSTRY_LIST;
         }
         return super.getItemViewType(position);
     }

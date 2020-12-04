@@ -11,6 +11,8 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BannerInfo;
 import com.meishe.yangquan.bean.BannerResult;
+import com.meishe.yangquan.bean.IndustryInfo;
+import com.meishe.yangquan.bean.IndustryResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpUrl;
@@ -53,7 +55,55 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
     @Override
     protected void initData() {
         initRecyclerView();
-        getBannerDataFromServer();
+//        getBannerDataFromServer();
+        initTopBanner(null);
+        getIndustryInfoFromServer();
+    }
+
+    private void getIndustryInfoFromServer() {
+        HashMap<String, Object> param = new HashMap<>();
+        String token = UserManager.getInstance(mContext).getToken();
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_NEWS_LIST, new BaseCallBack<IndustryResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+//                mLoading.hide();
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, IndustryResult result) {
+//                mLoading.hide();
+                if (result.getCode() != 1) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+                List<IndustryInfo> data = result.getData();
+                if (data == null || data.size() == 0) {
+                    return;
+                }
+//                initTopBanner(data);
+                mAdapter.addAll(data);
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
     }
 
     private void initRecyclerView() {
@@ -74,12 +124,12 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                mLoading.hide();
+//                mLoading.hide();
             }
 
             @Override
             protected void onSuccess(Call call, Response response, BannerResult result) {
-                mLoading.hide();
+//                mLoading.hide();
                 if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;

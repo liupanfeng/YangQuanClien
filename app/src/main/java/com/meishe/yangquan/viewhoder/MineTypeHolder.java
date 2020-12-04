@@ -33,7 +33,7 @@ public class MineTypeHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
+    public void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener) {
         MineTypeInfo mineTypeInfo= (MineTypeInfo) info;
         mTvServiceType.setText(mineTypeInfo.getName());
         mIvServiceType.setBackgroundResource(mineTypeInfo.getIcon());

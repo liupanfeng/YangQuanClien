@@ -69,8 +69,8 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mLookCar = view.findViewById(R.id.btn_look_car);
 
         mRecyclerView = view.findViewById(R.id.recycler);
-        mTvMarketNewest = view.findViewById(R.id.tv_market_newest);
-        mTvMarketCommand = view.findViewById(R.id.tv_market_command);
+        mTvMarketNewest = view.findViewById(R.id.tv_service_newest);
+        mTvMarketCommand = view.findViewById(R.id.tv_service_command);
         return view;
     }
 

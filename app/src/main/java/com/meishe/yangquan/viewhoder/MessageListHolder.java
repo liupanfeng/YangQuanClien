@@ -61,7 +61,7 @@ public class MessageListHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindViewHolder(final Context context, final BaseInfo info, View.OnClickListener listener) {
+    public void bindViewHolder(final Context context, final BaseInfo info, int position,View.OnClickListener listener) {
         if (info instanceof Message){
             Message message= (Message) info;
             String photoUrl=message.getPhotoUrl();

@@ -35,7 +35,7 @@ public class BusinessOpportunityListHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
+    public void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener) {
         if (info instanceof BusinessOpportunity){
             BusinessOpportunity businessOpportunity= (BusinessOpportunity) info;
             long createTime=businessOpportunity.getCreateTime();

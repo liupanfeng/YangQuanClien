@@ -85,6 +85,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_COMMENT_LIST = VIEW_TYPE_BASE + 13;                                //评论
     protected static final int VIEW_QUOTATION_LIST = VIEW_TYPE_BASE + 14;                                //行情列表
     protected static final int VIEW_MARKET_LIST = VIEW_TYPE_BASE + 15;                                //市场列表
+    protected static final int VIEW_INDUSTRY_LIST = VIEW_TYPE_BASE + 16;                                //行业资讯
     private IosDialog mDialog;
 
     protected  int pageType;
@@ -142,9 +143,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         holder.setIsRecyclable(true);
         if (isNeedAutoScroll) {
-            holder.bindViewHolder(mContext, mList.get(position % mList.size()), this);
+            holder.bindViewHolder(mContext, mList.get(position % mList.size()), position,this);
         } else {
-            holder.bindViewHolder(mContext, mList.get(position), this);
+            holder.bindViewHolder(mContext, mList.get(position), position,this);
         }
     }
 

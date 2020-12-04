@@ -80,7 +80,8 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
         mTvTodayQuotation.setText(String.format("今日行情 %s", DateUtil.dateToString(new Date(), DateUtil.FORMAT_TYPE_YEAR_MONTH_DAY)));
         initRecyclerView();
         selectLittleSheep();
-        getBannerDataFromServer();
+//        getBannerDataFromServer();
+        initTopBanner(null);
         getQuotationDataFromServer(5);
     }
 

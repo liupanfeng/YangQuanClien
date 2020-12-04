@@ -30,7 +30,7 @@ public class ServiceLabelHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, View.OnClickListener listener) {
+    public void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener) {
         if (info instanceof Label){
             Label label= (Label) info;
             mTvServiceLabelName.setText(label.getContent());
