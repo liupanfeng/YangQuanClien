@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.MineMyPointsActivity">
+
+    <include layout="@layout/custom_title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5"
+        />
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@mipmap/ic_my_points_bg"
+        android:layout_height="97dp">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="19dp"
+            android:text="已获得积分:"
+            android:textColor="#ffffffff"
+            android:textSize="13sp"
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_marginLeft="@dimen/dp16"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_my_points"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="130"
+            android:textColor="#ffffffff"
+            android:textSize="27sp"
+            android:layout_centerInParent="true"
+            />
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="积分记录"
+        android:textColor="#ff3ba786"
+        android:textSize="13sp"
+        android:layout_marginTop="@dimen/dp16"
+        android:layout_marginLeft="@dimen/dp16"
+        />
+
+
+
+
+</LinearLayout>

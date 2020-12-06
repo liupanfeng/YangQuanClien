@@ -3,6 +3,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.meishe.yangquan">
 
+    <uses-sdk tools:overrideLibrary="com.minminaya" />
+
+    <permission
+        android:name="com.meishe.yangquan.permission.JPUSH_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- Required -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Required  一些系统要求的权限，如访问网络等 -->
+    <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Optional. Required for location feature -->
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在 6.0 系统上的层叠窗口权限 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -12,10 +40,14 @@
         android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle">
-        <activity android:name=".utils.permission.PermissionsActivity"
+        <activity android:name=".activity.MineMyPointsActivity"></activity>
+        <activity android:name=".activity.MineMyMessageActivity" />
+        <activity android:name=".activity.MineFeedGoldActivity" />
+        <activity android:name=".activity.MinePersonalInfoActivity" />
+        <activity
+            android:name=".utils.permission.PermissionsActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme"
-            ></activity>
+            android:theme="@style/FullScreenTheme" />
         <activity android:name=".activity.MainWebViewActivity" />
         <activity android:name=".activity.ServiceMessageListActivity" />
         <activity android:name=".activity.ShowPicActivity" />
@@ -79,7 +111,7 @@
             android:theme="@style/NoTitleStyle" />
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/NoTitleStyle" >
+            android:theme="@style/NoTitleStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -89,8 +121,7 @@
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/StartTheme">
-        </activity>
+            android:theme="@style/StartTheme" />
         <activity
             android:name=".activity.MainActivity"
             android:screenOrientation="portrait"
@@ -216,33 +247,5 @@
             </intent-filter>
         </service>
     </application>
-
-    <permission
-        android:name="com.meishe.yangquan.permission.JPUSH_MESSAGE"
-        android:protectionLevel="signature" />
-
-    <uses-permission android:name="android.permission.INTERNET" /> <!-- Required -->
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Required  一些系统要求的权限，如访问网络等 -->
-    <uses-permission android:name="${applicationId}.permission.JPUSH_MESSAGE" />
-    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- Optional. Required for location feature -->
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!-- 用于开启 debug 版本的应用在 6.0 系统上的层叠窗口权限 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.GET_TASKS" />
-    <uses-permission android:name="android.permission.VIBRATE" />
-
-    <uses-sdk tools:overrideLibrary="com.minminaya" />
 
 </manifest>

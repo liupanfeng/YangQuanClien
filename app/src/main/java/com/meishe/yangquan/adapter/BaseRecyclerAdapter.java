@@ -18,6 +18,9 @@ import com.meishe.yangquan.activity.BusinessOpportunityActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
+import com.meishe.yangquan.activity.MineFeedGoldActivity;
+import com.meishe.yangquan.activity.MineMyMessageActivity;
+import com.meishe.yangquan.activity.MinePersonalInfoActivity;
 import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceMessageListActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
@@ -194,7 +197,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             bundle.putInt("type", ((ServiceTypeInfo) info).getType());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
         } else if (info instanceof MineTypeInfo) {
-            boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
+//            boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
+            boolean isNeedLogin = true;
             switch (((MineTypeInfo) info).getName()) {
                 case "完善资料":
                     if (isNeedLogin) {
@@ -227,7 +231,17 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 case "关于":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), AboutActivity.class);
                     break;
+                //第二版
+                case "个人信息":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MinePersonalInfoActivity.class);
+                    break;
 
+                case "我的饲料金":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineFeedGoldActivity.class);
+                    break;
+                case "我的消息":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyMessageActivity.class);
+                    break;
             }
         } else if (info instanceof SheepNews) {
             ToastUtil.showToast(mContext, "暂无历史数据");
