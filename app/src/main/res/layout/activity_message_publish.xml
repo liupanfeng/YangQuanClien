@@ -7,102 +7,247 @@
     tools:context="com.meishe.yangquan.activity.VersionUpdateActivity">
 
     <LinearLayout
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#fff5f5f5"
+        android:orientation="vertical">
 
         <include layout="@layout/custom_toolbar_layout" />
 
-        <EditText
-            android:id="@+id/et_input_publish_content"
+        <RelativeLayout
+            android:id="@+id/rl_title"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="28dp"
-            android:layout_marginLeft="28dp"
-            android:maxLength="100"
-            android:background="@null"
-            android:hint="编辑您需要发布的内容"
-            />
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="标题"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_service_input_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入标题"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
 
         <RelativeLayout
-            android:layout_width="140dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginLeft="28dp"
-            android:layout_height="140dp">
-            <ImageView
-                android:id="@+id/iv_select_icon"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:scaleType="centerCrop"
-                android:background="@mipmap/ic_upload_pic"
-                android:layout_centerInParent="true"
-                />
+            android:id="@+id/rl_breed"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
 
-            <ImageView
-                android:id="@+id/iv_show_icon"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="品种"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_service_input_breed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入品种"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="centerCrop"
-                />
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rl_weight"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="重量"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_service_input_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入重量"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
         </RelativeLayout>
 
 
+        <RelativeLayout
+            android:id="@+id/rl_number"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="数量"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_service_input_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入数量"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_price"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="价格"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+
+            <EditText
+                android:id="@+id/et_service_input_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入价格"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="电话"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_service_input_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入电话"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
 
         <TextView
-            android:id="@+id/tv_type"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp"
-            android:layout_marginTop="20dp"
-            android:visibility="gone"
-            android:text="请选择您出售羊的种类："
-            android:textSize="17sp" />
+            android:layout_width="53dp"
+            android:layout_height="19dp"
+            android:text="上传照片"
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp17"
+            />
 
-        <RadioGroup
-            android:id="@+id/rg_sheep_type"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="28dp">
-
-            <RadioButton
-                android:id="@+id/radio_big_sheep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:text="成品羊"
-                android:textColor="@color/black66"
-                android:textSize="18sp" />
-
-            <RadioButton
-                android:id="@+id/radio_small_sheep"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="11dp"
-                android:text="羊崽儿"
-                android:textColor="@color/black66"
-                android:textSize="18sp" />
-
-        </RadioGroup>
-
-        <com.meishe.yangquan.view.CropCircleView
-            android:id="@+id/clip_image"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="80dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="80dp"
-            android:layout_centerInParent="true"
-            android:background="@color/black"
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
-
 
 
     <com.meishe.yangquan.wiget.MaterialProgress

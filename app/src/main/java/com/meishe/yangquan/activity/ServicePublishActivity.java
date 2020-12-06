@@ -16,6 +16,9 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
@@ -25,21 +28,19 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MenuItem;
-import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.bean.MsgResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.CropViewUtils;
-import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
-import com.meishe.yangquan.view.CropCircleView;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.MaterialProgress;
 import com.umeng.analytics.MobclickAgent;
@@ -56,18 +57,10 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 /**
- * 信息发布
+ * 服务发布页面
  */
-public class MessagePublishActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class ServicePublishActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
-
-    private RadioGroup mRadioGroup;
-    private int mCurrentPosition;
-    private TextView mTvType;
-
-    private User mUser;
-    private EditText mEtInput;
-    private ImageView mIvSelectIcon;
 
     //相册请求码
     private static final int ALBUM_REQUEST_CODE = 1;
@@ -84,6 +77,16 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     private int mSheepType = 0;
     private Bitmap showBitmap;
     private MaterialProgress mp_loading;
+    private EditText mEtServiceInputTitle;
+    private EditText mEtServiceInputBreed;
+    private EditText mEtServiceInputWeight;
+
+    private EditText mEtServiceInputCount;
+    private EditText mEtServiceInputPrice;
+    private EditText mEtServiceInputPhoneNumber;
+
+    private RecyclerView mRecyclerView;
+    private MultiFunctionAdapter mAdapter;
 
 
     @Override
@@ -94,38 +97,33 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     @Override
     public void initView() {
         mToolbar = findViewById(R.id.toolbar);
-        mRadioGroup = findViewById(R.id.rg_sheep_type);
-        mTvType = findViewById(R.id.tv_type);
-        mEtInput = findViewById(R.id.et_input_publish_content);
-        mIvSelectIcon = findViewById(R.id.iv_select_icon);
-        mIvShowIcon = findViewById(R.id.iv_show_icon);
-        mp_loading = findViewById(R.id.mp_loading);
+        mEtServiceInputTitle = findViewById(R.id.et_service_input_title);
+        mEtServiceInputBreed = findViewById(R.id.et_service_input_breed);
+        mEtServiceInputWeight = findViewById(R.id.et_service_input_weight);
+
+        mEtServiceInputCount = findViewById(R.id.et_service_input_count);
+        mEtServiceInputPrice = findViewById(R.id.et_service_input_price);
+        mEtServiceInputPhoneNumber = findViewById(R.id.et_service_input_phone_number);
+        mRecyclerView = findViewById(R.id.recycler);
+
+        initRecyclerView();
+
+    }
+
+    private void initRecyclerView() {
+        GridLayoutManager layoutManager = new GridLayoutManager(mContext, 4);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
     public void initData() {
-        Intent intent = getIntent();
-        if (intent != null) {
-            Bundle bundle = intent.getExtras();
-            mCurrentPosition = bundle.getInt("currentPosition");
-        }
-
-        mUser = UserManager.getInstance(this).getUser();
-        if (mUser != null) {
-            int userType = mUser.getUserType();
-            if (userType == 1 || userType == 2 || userType == 10) {
-                mTvType.setVisibility(View.VISIBLE);
-                mRadioGroup.setVisibility(View.VISIBLE);
-            } else {
-                mTvType.setVisibility(View.GONE);
-                mRadioGroup.setVisibility(View.GONE);
-            }
-        }
     }
 
     @Override
     public void initTitle() {
-        mToolbar.setMyTitle("信息发布");
+        mToolbar.setMyTitle("服务发布");
         mToolbar.setMyTitleVisible(View.VISIBLE);
         mToolbar.setLeftButtonVisible(View.VISIBLE);
         mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
@@ -138,8 +136,8 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
 
     @Override
     public void initListener() {
-        mRadioGroup.setOnCheckedChangeListener(this);
-        mIvSelectIcon.setOnClickListener(this);
+//        mRadioGroup.setOnCheckedChangeListener(this);
+//        mIvSelectIcon.setOnClickListener(this);
     }
 
     @Override
@@ -150,9 +148,9 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_select_icon:
-                showPictureSelectItem();
-                break;
+//            case R.id.iv_select_icon:
+//                showPictureSelectItem();
+//                break;
         }
     }
 
@@ -372,25 +370,25 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
     private class OnRightButtonListener implements CustomToolbar.OnRightButtonClickListener {
         @Override
         public void onClick() {
-            String content = mEtInput.getText().toString().trim();
-            if (showBitmap == null) {
-                ToastUtil.showToast(mContext, "请选择图片！");
-                return;
-            }
-            if (TextUtils.isEmpty(content)) {
-                ToastUtil.showToast(mContext, "请输入内容！");
-                return;
-            }
+//            String content = mEtInput.getText().toString().trim();
+//            if (showBitmap == null) {
+//                ToastUtil.showToast(mContext, "请选择图片！");
+//                return;
+//            }
+//            if (TextUtils.isEmpty(content)) {
+//                ToastUtil.showToast(mContext, "请输入内容！");
+//                return;
+//            }
             mp_loading.show();
 //            publishMessage(mUser.getTokenId(),String.valueOf(mSheepType),content, Util.bitmaptoString(showBitmap));
-            publishMessage(mUser.getTokenId(),String.valueOf(mSheepType),content, Util.bitmaptoString(showBitmap));
+//            publishMessage(mUser.getTokenId(),String.valueOf(mSheepType),content, Util.bitmaptoString(showBitmap));
 
         }
     }
 
 
     private void showPictureSelectItem() {
-        new BottomMenuFragment(MessagePublishActivity.this)
+        new BottomMenuFragment(ServicePublishActivity.this)
                 .addMenuItems(new MenuItem("拍照"))
                 .addMenuItems(new MenuItem("相册"))
                 .setOnItemClickListener(new BottomMenuFragment.OnItemClickListener() {
@@ -472,7 +470,7 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (tempFile != null) {
                     Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
-                    mIvSelectIcon.setVisibility(View.GONE);
+//                    mIvSelectIcon.setVisibility(View.GONE);
                     Matrix matrix = new Matrix();
                     matrix.setScale(0.2f, 0.2f);
                     showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
@@ -516,7 +514,7 @@ public class MessagePublishActivity extends BaseActivity implements RadioGroup.O
                         matrix.setScale(0.4f, 0.4f);
                         showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
                                 tmpBitmap.getHeight(), matrix, true);
-                        mIvSelectIcon.setVisibility(View.GONE);
+//                        mIvSelectIcon.setVisibility(View.GONE);
                         mIvShowIcon.setImageBitmap(showBitmap);
                     }
                 }

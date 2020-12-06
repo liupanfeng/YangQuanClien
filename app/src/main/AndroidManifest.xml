@@ -67,7 +67,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.ClipCircleImageActivity" />
-        <activity android:name=".activity.MessagePublishActivity" />
+        <activity android:name=".activity.ServicePublishActivity" />
         <activity android:name=".activity.ContactUsActivity" />
         <activity android:name=".activity.VersionUpdateActivity" />
         <activity android:name=".activity.BusinessOpportunityActivity" />

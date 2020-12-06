@@ -8,11 +8,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.ServicePublishActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.MarketResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -140,6 +142,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
                 break;
             case R.id.iv_publish_service:
                 //发布服务
+                AppManager.getInstance().jumpActivity(getActivity(), ServicePublishActivity.class);
                 break;
             default:
                 break;
