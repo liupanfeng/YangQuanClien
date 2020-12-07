@@ -18,9 +18,13 @@ import com.meishe.yangquan.activity.BusinessOpportunityActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
+import com.meishe.yangquan.activity.MineBreedingArchivesActivity;
 import com.meishe.yangquan.activity.MineFeedGoldActivity;
+import com.meishe.yangquan.activity.MineMyCollectionActivity;
 import com.meishe.yangquan.activity.MineMyMessageActivity;
+import com.meishe.yangquan.activity.MinePayPasswordActivity;
 import com.meishe.yangquan.activity.MinePersonalInfoActivity;
+import com.meishe.yangquan.activity.MineSystemMessageActivity;
 import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceMessageListActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
@@ -236,11 +240,26 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MinePersonalInfoActivity.class);
                     break;
 
-                case "我的饲料金":
+                case "饲料金":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineFeedGoldActivity.class);
                     break;
                 case "我的消息":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyMessageActivity.class);
+                    break;
+                case "我的积分":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineFeedGoldActivity.class);
+                    break;
+                case "养殖档案":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineBreedingArchivesActivity.class);
+                    break;
+                case "我的收藏":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyCollectionActivity.class);
+                    break;
+                case "系统消息":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineSystemMessageActivity.class);
+                    break;
+                case "支付密码":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MinePayPasswordActivity.class);
                     break;
             }
         } else if (info instanceof SheepNews) {
