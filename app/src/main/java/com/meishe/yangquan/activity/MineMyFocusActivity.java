@@ -1,23 +1,28 @@
 package com.meishe.yangquan.activity;
 
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 
 /**
- * 我的积分页面
+ * 我的-我的关注
  */
-public class MineMyPointsActivity extends BaseActivity{
+public class MineMyFocusActivity extends BaseActivity {
 
+    private TextView mTvTitle;
+    private ImageView mIvBack;
 
     @Override
     protected int initRootView() {
-        return R.layout.activity_mine_my_points;
+        return R.layout.activity_mine_my_focus;
     }
 
     @Override
     public void initView() {
-
+        mTvTitle = findViewById(R.id.tv_title);
+        mIvBack = findViewById(R.id.iv_back);
     }
 
     @Override
@@ -27,11 +32,17 @@ public class MineMyPointsActivity extends BaseActivity{
 
     @Override
     public void initTitle() {
-
+        mTvTitle.setText("我的关注");
     }
 
     @Override
     public void initListener() {
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
     }
 

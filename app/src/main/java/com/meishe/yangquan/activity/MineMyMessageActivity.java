@@ -3,6 +3,7 @@ package com.meishe.yangquan.activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
@@ -15,6 +16,7 @@ public class MineMyMessageActivity extends BaseActivity {
 
 
     private TextView mTvTitle;
+    private ImageView mIvBack;
     private RecyclerView mRecyclerView;
     private MultiFunctionAdapter mAdapter;
 
@@ -27,6 +29,7 @@ public class MineMyMessageActivity extends BaseActivity {
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mRecyclerView = findViewById(R.id.recycler);
+        mIvBack = findViewById(R.id.iv_back);
         initRecyclerView();
     }
 
@@ -49,7 +52,12 @@ public class MineMyMessageActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override

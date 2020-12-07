@@ -21,7 +21,9 @@ import com.meishe.yangquan.activity.MessageCenterActivity;
 import com.meishe.yangquan.activity.MineBreedingArchivesActivity;
 import com.meishe.yangquan.activity.MineFeedGoldActivity;
 import com.meishe.yangquan.activity.MineMyCollectionActivity;
+import com.meishe.yangquan.activity.MineMyFocusActivity;
 import com.meishe.yangquan.activity.MineMyMessageActivity;
+import com.meishe.yangquan.activity.MineMyPointsActivity;
 import com.meishe.yangquan.activity.MinePayPasswordActivity;
 import com.meishe.yangquan.activity.MinePersonalInfoActivity;
 import com.meishe.yangquan.activity.MineSystemMessageActivity;
@@ -247,7 +249,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyMessageActivity.class);
                     break;
                 case "我的积分":
-                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineFeedGoldActivity.class);
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyPointsActivity.class);
+                    break;
+                case "我的关注":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyFocusActivity.class);
                     break;
                 case "养殖档案":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineBreedingArchivesActivity.class);

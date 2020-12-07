@@ -6,4 +6,13 @@
     android:orientation="vertical"
     tools:context=".activity.MineBreedingArchivesActivity">
 
+    <include layout="@layout/custom_title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5"
+        />
+
+
 </LinearLayout>
