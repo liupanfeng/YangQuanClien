@@ -33,7 +33,8 @@ public class MineMyMessageActivity extends BaseActivity {
         initRecyclerView();
     }
 
-    private void initRecyclerView() {
+    @Override
+    public void initRecyclerView() {
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);

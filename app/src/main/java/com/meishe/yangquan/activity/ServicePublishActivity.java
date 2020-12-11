@@ -110,7 +110,8 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
 
     }
 
-    private void initRecyclerView() {
+    @Override
+    public void initRecyclerView() {
         GridLayoutManager layoutManager = new GridLayoutManager(mContext, 4);
         mRecyclerView.setLayoutManager(layoutManager);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);

@@ -5,12 +5,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
@@ -23,6 +25,7 @@ public abstract class BaseRecyclerFragment extends Fragment {
     protected List<BaseInfo> mList=new ArrayList<>();
     protected MaterialProgress mLoading;
     protected RecyclerView mRecyclerView;
+    protected MultiFunctionAdapter mAdapter;
 
     @Nullable
     @Override
@@ -52,5 +55,13 @@ public abstract class BaseRecyclerFragment extends Fragment {
     protected abstract View initView(LayoutInflater inflater, ViewGroup container);
     protected abstract void initListener();
     protected abstract void initData();
+
+
+    protected void initRecyclerView() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
 
 }

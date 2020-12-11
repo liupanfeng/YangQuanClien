@@ -21,6 +21,7 @@ import com.meishe.yangquan.fragment.HomeFragment;
 import com.meishe.yangquan.fragment.MessageFragment;
 import com.meishe.yangquan.fragment.MineFragment;
 import com.meishe.yangquan.fragment.ServiceFragment;
+import com.meishe.yangquan.fragment.SheepHouseKeepFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
@@ -203,8 +204,8 @@ public class MainActivity extends BasePermissionActivity {
                 mFragmentList.add(messageFragment);
                 break;
             case PageId.PAGE_SHEEP_HOUSE_KEEP:
-                 messageFragment = MessageFragment.newInstance("", "");
-                mFragmentList.add(messageFragment);
+                SheepHouseKeepFragment sheepHouseKeepFragment = SheepHouseKeepFragment.newInstance("", "");
+                mFragmentList.add(sheepHouseKeepFragment);
                 break;
             case PageId.PAGE_SHEEP_BAR_PAGE:
                  messageFragment = MessageFragment.newInstance("", "");

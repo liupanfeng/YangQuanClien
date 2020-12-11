@@ -4,9 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 
+import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpRequestUtil;
@@ -20,6 +23,8 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected TitleBar mTitleBar;
 
     protected CustomToolbar mToolbar;
+    protected MultiFunctionAdapter mAdapter;
+    protected RecyclerView mRecyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,5 +61,12 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     public abstract void release();
 
+    protected void initRecyclerView(){
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
 
 }
