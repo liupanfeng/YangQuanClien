@@ -88,12 +88,12 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         getMarketDataFromServer(TYPE_MARKET_SELL_LITTLE_SHEEP, TYPE_MARKET_LIST_TYPE_NEWEST);
     }
 
-    private void initRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mMarketAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.setAdapter(mMarketAdapter);
-    }
+//    private void initRecyclerView() {
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mMarketAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+//        mRecyclerView.setAdapter(mMarketAdapter);
+//    }
 
     @Override
     public void onClick(View v) {

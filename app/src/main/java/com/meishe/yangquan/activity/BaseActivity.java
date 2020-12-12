@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
@@ -25,6 +27,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     protected CustomToolbar mToolbar;
     protected MultiFunctionAdapter mAdapter;
     protected RecyclerView mRecyclerView;
+
+    protected TextView mTvTitle;
+    protected ImageView mIvBack;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -98,12 +98,12 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         getServiceDataFromServer(TYPE_SERVICE_CUT_WOOL, TYPE_MARKET_LIST_TYPE_NEWEST);
     }
 
-    private void initRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mServiceAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.setAdapter(mServiceAdapter);
-    }
+//    private void initRecyclerView() {
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mServiceAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+//        mRecyclerView.setAdapter(mServiceAdapter);
+//    }
 
     @Override
     public void onClick(View v) {

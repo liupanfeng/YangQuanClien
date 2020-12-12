@@ -162,7 +162,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
                 if (data == null || data.size() == 0) {
                     return;
                 }
-                mQuotationAdapter.addAll(data);
+                mAdapter.addAll(data);
             }
 
             @Override
@@ -182,12 +182,6 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
         }, param, token);
     }
 
-    private void initRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mQuotationAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.setAdapter(mQuotationAdapter);
-    }
 
     private void initTopBanner(List<BannerInfo> data) {
         mUrlList = new ArrayList<>();

@@ -40,7 +40,12 @@
         android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle">
-        <activity android:name=".activity.MineMyFocusActivity"></activity>
+        <activity android:name=".activity.SheepMyBusinessActivity"></activity>
+        <activity android:name=".activity.SheepApplyIntroduceActivity" />
+        <activity android:name=".activity.SheepApplyServiceResultActivity" />
+        <activity android:name=".activity.SheepApplyServiceActivity" />
+        <activity android:name=".activity.SheepBreedServerActivity" />
+        <activity android:name=".activity.MineMyFocusActivity" />
         <activity android:name=".activity.MinePayPasswordActivity" />
         <activity android:name=".activity.MineSystemMessageActivity" />
         <activity android:name=".activity.MineMyCollectionActivity" />

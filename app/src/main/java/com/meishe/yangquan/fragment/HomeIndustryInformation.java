@@ -106,12 +106,12 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
         }, param, token);
     }
 
-    private void initRecyclerView() {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.setAdapter(mAdapter);
-    }
+//    protected void initRecyclerView() {
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
+//        mRecyclerView.setLayoutManager(layoutManager);
+//        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+//        mRecyclerView.setAdapter(mAdapter);
+//    }
 
     private void getBannerDataFromServer() {
         HashMap<String, Object> param = new HashMap<>();

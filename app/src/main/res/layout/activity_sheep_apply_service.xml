@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.SheepApplyServiceActivity">
+
+    <include layout="@layout/custom_title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="申请信息"
+        android:textColor="#ff303030"
+        android:textSize="17sp"
+        android:layout_marginTop="@dimen/dp13"
+        android:layout_marginLeft="@dimen/dp16"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_height="@dimen/dp52">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="姓名："
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            android:layout_centerVertical="true"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="借款人姓名与身份证请保持一致"
+            android:textColorHint="#ffc2c2c2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/sp13"
+            android:background="@null"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#E5E5E5"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_height="@dimen/dp52">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="电话："
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            android:layout_centerVertical="true"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入借款人的电话"
+            android:textColorHint="#ffc2c2c2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/sp13"
+            android:background="@null"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#E5E5E5"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_height="@dimen/dp52">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="身份证号："
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            android:layout_centerVertical="true"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入借款人的身份证号"
+            android:textColorHint="#ffc2c2c2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/sp13"
+            android:background="@null"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#E5E5E5"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_height="@dimen/dp52">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="养殖地址："
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            android:layout_centerVertical="true"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入羊场地址"
+            android:textColorHint="#ffc2c2c2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textSize="@dimen/sp13"
+            android:background="@null"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#E5E5E5"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_height="@dimen/dp52">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="养殖年限："
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            android:layout_centerVertical="true"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入从事养殖行业时长"
+            android:textColorHint="#ffc2c2c2"
+            android:layout_alignParentRight="true"
+            android:textSize="@dimen/sp13"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#E5E5E5"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_height="@dimen/dp52">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="存量数量："
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            android:layout_centerVertical="true"
+            />
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="请输入羊场目前实际存量只数"
+            android:textColorHint="#ffc2c2c2"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@null"
+            android:textSize="@dimen/sp13"
+            />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#E5E5E5"
+            android:layout_alignParentBottom="true"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp43"
+        android:layout_marginRight="@dimen/dp40"
+        android:layout_marginLeft="@dimen/dp40"
+        android:background="@drawable/btn_apply_service_bg"
+        android:layout_marginTop="@dimen/dp45"
+        android:text="提交"
+        android:textColor="@color/white"
+        />
+
+</LinearLayout>

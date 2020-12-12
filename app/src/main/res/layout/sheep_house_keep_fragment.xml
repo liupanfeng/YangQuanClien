@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include layout="@layout/custom_title"/>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp8"
@@ -11,24 +13,73 @@
         />
 
     <LinearLayout
+        android:id="@+id/ll_breed_helper"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp100"
+        android:orientation="vertical"
         android:background="@mipmap/ic_keep_helper"
         android:layout_marginTop="@dimen/dp14"
         android:layout_marginLeft="@dimen/dp15"
         android:layout_marginRight="@dimen/dp15"
         >
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp25"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="养殖助手"
+            android:textColor="#ffffffff"
+            android:textSize="22sp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="功能介绍"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp2"
+            android:textColor="#ffffffff"
+            android:textSize="13sp"
+            />
+
+
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/ll_breed_server"
         android:layout_width="match_parent"
+        android:orientation="vertical"
         android:layout_height="@dimen/dp100"
         android:layout_marginTop="@dimen/dp14"
         android:layout_marginLeft="@dimen/dp15"
         android:layout_marginRight="@dimen/dp15"
         android:background="@drawable/sheep_house_keep_bg"
         >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp25"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="养殖服务"
+            android:textColor="#ffffffff"
+            android:textSize="22sp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="功能介绍"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp2"
+            android:textColor="#ffffffff"
+            android:textSize="13sp"
+            />
+
+
 
     </LinearLayout>
 

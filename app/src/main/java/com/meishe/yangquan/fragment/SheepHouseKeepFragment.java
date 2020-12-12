@@ -4,15 +4,26 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.SheepBreedServerActivity;
+import com.meishe.yangquan.utils.AppManager;
 
 /**
  * @author liupanfeng
  * @desc 羊管家
  * @date 2020/12/11 15:34
  */
-public class SheepHouseKeepFragment extends BaseRecyclerFragment{
+public class SheepHouseKeepFragment extends BaseRecyclerFragment implements View.OnClickListener {
+
+    private TextView mTvTitle;
+    private ImageView mIvBack;
+
+    private LinearLayout mLlBreedHelper;
+    private LinearLayout mLlBreedServer;
 
     public static SheepHouseKeepFragment newInstance(String param1, String param2) {
         SheepHouseKeepFragment fragment = new SheepHouseKeepFragment();
@@ -37,18 +48,40 @@ public class SheepHouseKeepFragment extends BaseRecyclerFragment{
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.sheep_house_keep_fragment, container, false);
-        mRecyclerView = view.findViewById(R.id.recyclerView);
-        initRecyclerView();
+        mTvTitle = view.findViewById(R.id.tv_title);
+        mIvBack = view.findViewById(R.id.iv_back);
+        mLlBreedHelper = view.findViewById(R.id.ll_breed_helper);
+        mLlBreedServer = view.findViewById(R.id.ll_breed_server);
+        initTitle();
         return view;
+    }
+
+    private void initTitle() {
+        mTvTitle.setText("羊管家");
+        mIvBack.setVisibility(View.GONE);
     }
 
     @Override
     protected void initListener() {
-
+        mLlBreedHelper.setOnClickListener(this);
+        mLlBreedServer.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.ll_breed_helper:
+                break;
+            case R.id.ll_breed_server:
+                AppManager.getInstance().jumpActivity(getActivity(), SheepBreedServerActivity.class);
+                break;
+            default:
+                break;
+        }
     }
 }
