@@ -86,6 +86,16 @@ public class SheepBreedHelperActivity extends BaseActivity {
                     ToastUtil.showToast(mContext,"请更改自己档案名称");
                     return;
                 }
+
+                if (title.length()>4){
+                    ToastUtil.showToast(mContext,"档案名称最多四个字");
+                    return;
+                }
+
+                if (title.length()<2){
+                    ToastUtil.showToast(mContext,"档案名称最少2个字");
+                    return;
+                }
                 App.getInstance().setTitleList(title);
                 initTabLayout(App.getInstance().getTitleList());
                 mIosDialog.hide();
