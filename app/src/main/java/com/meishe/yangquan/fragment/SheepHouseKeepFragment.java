@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.SheepBreedHelperActivity;
 import com.meishe.yangquan.activity.SheepBreedServerActivity;
 import com.meishe.yangquan.utils.AppManager;
 
@@ -76,6 +77,7 @@ public class SheepHouseKeepFragment extends BaseRecyclerFragment implements View
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_breed_helper:
+                AppManager.getInstance().jumpActivity(getActivity(), SheepBreedHelperActivity.class);
                 break;
             case R.id.ll_breed_server:
                 AppManager.getInstance().jumpActivity(getActivity(), SheepBreedServerActivity.class);
