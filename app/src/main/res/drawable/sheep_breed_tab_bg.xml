@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--android:drawable="@drawable/sheep_breed_tab_bg_selected"-->
+    <item android:state_selected="true" >
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@android:color/transparent"/>
+                </shape>
+            </item>
+            <item android:left="5dp" android:right="5dp">
+                <shape android:shape="rectangle">
+                    <gradient
+                        android:angle="270"
+                        android:endColor="#00AD8A"
+                        android:startColor="#4AECC6"
+                        android:type="linear"
+                        android:useLevel="true" />
+                    <corners android:radius="2dp" />
+                </shape>
+            </item>
+        </layer-list>
+    </item>
+     <!--android:drawable="@drawable/sheep_breed_tab_bg_unselected"-->
+    <item android:state_selected="false" >
+        <layer-list>
+        <item>
+            <shape>
+                <solid android:color="@android:color/transparent"/>
+            </shape>
+        </item>
+        <item android:left="5dp" android:right="5dp">
+            <shape android:shape="rectangle">
+                <gradient
+                    android:angle="270"
+                    android:endColor="#a600AD8A"
+                    android:startColor="#a64AECC6"
+                    android:type="linear"
+                    android:useLevel="true" />
+                <corners android:radius="2dp" />
+            </shape>
+        </item>
+        </layer-list>
+    </item>
+</selector>

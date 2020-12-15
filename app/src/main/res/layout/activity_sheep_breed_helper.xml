@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".activity.SheepBreedHelperActivity">
 
@@ -13,6 +14,38 @@
         android:layout_height="@dimen/dp8"
         android:background="#fff5f5f5"
         />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        >
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tabBarSize"
+            app:tabIndicatorColor="#00ffffff"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/white"
+            app:tabIndicatorHeight="1dp"
+            app:tabRippleColor="@color/transparent"
+            app:tabBackground="@drawable/sheep_breed_tab_bg"
+            app:tabMode="scrollable" />
+
+        <Button
+            android:id="@+id/btn_create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="创建"
+            />
+    </LinearLayout>
+
+
+    <com.meishe.yangquan.view.MViewPager
+        android:id="@+id/viewpager"
+        android:layout_above="@+id/tab_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 
 </LinearLayout>

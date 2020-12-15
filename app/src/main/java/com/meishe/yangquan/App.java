@@ -7,12 +7,16 @@ import android.graphics.Typeface;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import cn.jpush.android.api.JPushInterface;
 
 public class App extends Application {
     private Typeface typeface;
     private static App app;
     private static Context mContext;
+    private List<String> mTitleList=new ArrayList<>();
     public static Context getContext() {
         return mContext;
     }
@@ -48,4 +52,12 @@ public class App extends Application {
         return typeface;
     }
 
+
+    public List<String> getTitleList() {
+        return mTitleList;
+    }
+
+    public void setTitleList(String title) {
+        this.mTitleList.add(title);
+    }
 }

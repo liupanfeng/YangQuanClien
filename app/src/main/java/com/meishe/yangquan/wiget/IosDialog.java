@@ -95,8 +95,8 @@ public class IosDialog extends Dialog {
         mEtInputContent = (EditText) view.findViewById(R.id.et_input_content);
         if (!TextUtils.isEmpty(inputContent)){
             mEtInputContent.setVisibility(View.VISIBLE);
-            mEtInputContent.setText(inputContent);
-            mEtInputContent.setSelection(inputContent.length());
+            mEtInputContent.setHint(inputContent);
+//            mEtInputContent.setSelection(inputContent.length());
         }
         contentTextView = (TextView) view.findViewById(R.id.content_textview);
         cancelButton = (Button) view.findViewById(R.id.cancel_button);
@@ -405,6 +405,7 @@ public class IosDialog extends Dialog {
         public IosDialog create() {
             return dialog.createDialog();
         }
+
     }
 }
 

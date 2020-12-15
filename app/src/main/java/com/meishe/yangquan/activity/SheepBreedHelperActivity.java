@@ -1,13 +1,33 @@
 package com.meishe.yangquan.activity;
 
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 
+import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.ViewPagerAdapter;
+import com.meishe.yangquan.fragment.SheepBreedHelperFragment;
+import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.view.MViewPager;
+import com.meishe.yangquan.wiget.IosDialog;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- *羊管家-养殖助手
+ * 羊管家-养殖助手
  */
 public class SheepBreedHelperActivity extends BaseActivity {
+
+
+    private MViewPager mViewPage;
+    private TabLayout mTabLayout;
+    private List<Fragment> mFragments;
+    private IosDialog mIosDialog;
+    private Button mBtnCreate;
 
 
     @Override
@@ -19,11 +39,66 @@ public class SheepBreedHelperActivity extends BaseActivity {
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
+        mBtnCreate = findViewById(R.id.btn_create);
+        mViewPage = findViewById(R.id.viewpager);
+        mTabLayout = findViewById(R.id.tab_layout);
     }
 
     @Override
     public void initData() {
+        if (App.getInstance().getTitleList().size()==0){
+            showCreateDialog();
+            return;
+        }
+        initTabLayout(App.getInstance().getTitleList());
+    }
 
+    private void initTabLayout(List<String> titleList) {
+        mFragments =new ArrayList<>();
+        for (int i = 0; i < titleList.size(); i++) {
+            String title = titleList.get(i);
+            TabLayout.Tab tab = mTabLayout.newTab();
+            tab.setText(title);
+            mTabLayout.addTab(tab);
+            SheepBreedHelperFragment sheepBreedHelperFragment=SheepBreedHelperFragment.newInstance(title);
+            mFragments.add(sheepBreedHelperFragment);
+        }
+        mViewPage.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),0,mContext,mFragments,titleList));
+        mTabLayout.setupWithViewPager(mViewPage);
+    }
+
+    private void showCreateDialog() {
+        final IosDialog.DialogBuilder builder=new IosDialog.DialogBuilder(mContext);
+        builder.setTitle("创建养殖档案");
+        builder.setAsureText("确定");
+        builder.setCancelText("取消");
+        builder.setInputContent("请输入档案的名称");
+        builder.addListener(new IosDialog.OnButtonClickListener() {
+            @Override
+            public void onAsureClick() {
+                String title = mIosDialog.getmEtInputContent().getText().toString().trim();
+                if (TextUtils.isEmpty(title)){
+                    ToastUtil.showToast(mContext,"请输入档案名称");
+                    return;
+                }
+                if (title.equals("请输入档案的名称")){
+                    ToastUtil.showToast(mContext,"请更改自己档案名称");
+                    return;
+                }
+                App.getInstance().setTitleList(title);
+                initTabLayout(App.getInstance().getTitleList());
+                mIosDialog.hide();
+            }
+
+            @Override
+            public void onCancelClick() {
+                mIosDialog.hide();
+                if (App.getInstance().getTitleList().size()==0){
+                    SheepBreedHelperActivity.this.finish();
+                }
+            }
+        });
+         mIosDialog = builder.create();
     }
 
     @Override
@@ -33,7 +108,7 @@ public class SheepBreedHelperActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        mBtnCreate.setOnClickListener(this);
     }
 
     @Override
@@ -43,7 +118,13 @@ public class SheepBreedHelperActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()){
+            case R.id.btn_create:
+                showCreateDialog();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
