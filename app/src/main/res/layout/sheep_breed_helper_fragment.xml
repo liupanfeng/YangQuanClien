@@ -16,16 +16,17 @@
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tabBarSize"
-        android:layout_marginTop="@dimen/dp10"
         android:background="@color/white"
         app:tabIndicatorColor="@color/mainColor"
         app:tabSelectedTextColor="@color/mainColor"
-        app:tabTextColor="@color/mainColor"
+        app:tabTextColor="#656565"
+        app:tabRippleColor="@color/transparent"
         app:tabIndicatorHeight="1dp"
         app:tabMode="fixed" />
 
     <com.meishe.yangquan.view.MViewPager
         android:id="@+id/viewpager"
+        android:layout_marginTop="@dimen/dp24"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

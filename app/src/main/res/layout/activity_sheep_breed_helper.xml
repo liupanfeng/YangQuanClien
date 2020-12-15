@@ -23,7 +23,7 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp36"
+            android:layout_height="@dimen/dp30"
             app:tabIndicatorColor="#00ffffff"
             app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/white"
@@ -32,18 +32,40 @@
             app:tabBackground="@drawable/sheep_breed_tab_bg"
             app:tabMode="scrollable" />
 
-        <Button
-            android:id="@+id/btn_create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="创建"
-            />
+        <LinearLayout
+            android:id="@+id/ll_create"
+            android:layout_width="73dp"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:background="@mipmap/ic_sheep_create_bg"
+            >
+
+            <ImageView
+                android:layout_width="@dimen/dp14"
+                android:layout_height="@dimen/dp14"
+                android:background="@mipmap/ic_sheep_add"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp15"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="新建"
+                android:textColor="#ff656565"
+                android:layout_marginLeft="@dimen/dp5"
+                android:layout_gravity="center_vertical"
+                android:textSize="13sp"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 
     <com.meishe.yangquan.view.MViewPager
         android:id="@+id/viewpager"
         android:layout_above="@+id/tab_container"
+        android:layout_marginTop="@dimen/dp17"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

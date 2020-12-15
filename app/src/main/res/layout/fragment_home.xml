@@ -10,6 +10,7 @@
         app:tabIndicatorColor="@color/mainColor"
         app:tabSelectedTextColor="@color/mainColor"
         app:tabTextColor="@color/black"
+        app:tabRippleColor="@color/transparent"
         app:tabIndicatorHeight="1dp"
         app:tabMode="scrollable"
         />

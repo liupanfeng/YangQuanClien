@@ -8,7 +8,7 @@
                     <solid android:color="@android:color/transparent"/>
                 </shape>
             </item>
-            <item android:left="5dp" android:right="5dp">
+            <item android:left="7dp" android:right="7dp">
                 <shape android:shape="rectangle">
                     <gradient
                         android:angle="270"
@@ -29,7 +29,7 @@
                 <solid android:color="@android:color/transparent"/>
             </shape>
         </item>
-        <item android:left="5dp" android:right="5dp">
+        <item android:left="7dp" android:right="7dp">
             <shape android:shape="rectangle">
                 <gradient
                     android:angle="270"

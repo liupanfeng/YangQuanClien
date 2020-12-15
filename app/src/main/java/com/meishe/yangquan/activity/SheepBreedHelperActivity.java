@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
@@ -27,7 +28,7 @@ public class SheepBreedHelperActivity extends BaseActivity {
     private TabLayout mTabLayout;
     private List<Fragment> mFragments;
     private IosDialog mIosDialog;
-    private Button mBtnCreate;
+    private LinearLayout mLlCreate;
 
 
     @Override
@@ -39,7 +40,7 @@ public class SheepBreedHelperActivity extends BaseActivity {
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
-        mBtnCreate = findViewById(R.id.btn_create);
+        mLlCreate = findViewById(R.id.ll_create);
         mViewPage = findViewById(R.id.viewpager);
         mTabLayout = findViewById(R.id.tab_layout);
     }
@@ -108,7 +109,7 @@ public class SheepBreedHelperActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-        mBtnCreate.setOnClickListener(this);
+        mLlCreate.setOnClickListener(this);
     }
 
     @Override
@@ -119,7 +120,7 @@ public class SheepBreedHelperActivity extends BaseActivity {
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.btn_create:
+            case R.id.ll_create:
                 showCreateDialog();
                 break;
             default:
