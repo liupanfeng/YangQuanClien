@@ -1,10 +1,652 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:scrollbars="none"
     android:layout_height="match_parent">
-    <TextView
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="效益分析"
-        />
-</LinearLayout>
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl_benefit_analysis_open"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp38"
+            android:background="@mipmap/ic_sheep_message_bg">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="效益分析"
+                    android:textColor="#ff656565"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp10"
+                    android:layout_height="@dimen/dp6"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp8"
+                    android:background="@mipmap/ic_sheep_down" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_benefit_analysis_close"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp36"
+            android:background="@drawable/sheep_breed_base_massage_top_bg">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="效益分析"
+                    android:textColor="#ffffffff"
+                    android:textSize="13sp" />
+
+                <ImageView
+                    android:layout_width="@dimen/dp11"
+                    android:layout_height="7.5dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="5.3dp"
+                    android:background="@mipmap/ic_sheep_breed_up" />
+            </LinearLayout>
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:id="@+id/ll_benefit_content"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="47dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="明细"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                android:gravity="center"
+                android:layout_gravity="center"
+                />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="批次"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="单只"
+                    android:layout_weight="1"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#000000"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="总收入"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="3000元"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="400元"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="羊苗费用支出"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="3000元"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="400元"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="羊毛费用支出"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="3000元"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="400元"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="饲料费用支出"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="3000元"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="400元"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="疫苗费用支出"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="3000元"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="400元"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="总费用支出"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="3000元"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="400元"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="总利润"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="3000元"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="400元"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="日增重"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="1斤"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="出腔率"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="30%"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="料肉比（成品羊）"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="30元/斤"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="料肉比（羊腔）"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:text="30元/斤"
+                    android:textColor="#ff303030"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textSize="13sp"
+                    />
+
+
+            </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5"
+                />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
