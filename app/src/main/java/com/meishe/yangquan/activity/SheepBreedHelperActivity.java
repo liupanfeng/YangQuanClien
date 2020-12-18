@@ -11,6 +11,7 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.fragment.SheepBreedHelperFragment;
+import com.meishe.yangquan.utils.SheepBreedHelper;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.IosDialog;
@@ -47,11 +48,11 @@ public class SheepBreedHelperActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        if (App.getInstance().getTitleList().size()==0){
+        if (SheepBreedHelper.getInstance(mContext).getTitleList()==null||SheepBreedHelper.getInstance(mContext).getTitleList().size()==0){
             showCreateDialog();
             return;
         }
-        initTabLayout(App.getInstance().getTitleList());
+        initTabLayout(SheepBreedHelper.getInstance(mContext).getTitleList());
     }
 
     private void initTabLayout(List<String> titleList) {
@@ -96,15 +97,15 @@ public class SheepBreedHelperActivity extends BaseActivity {
                     ToastUtil.showToast(mContext,"档案名称最少2个字");
                     return;
                 }
-                App.getInstance().setTitleList(title);
-                initTabLayout(App.getInstance().getTitleList());
+                SheepBreedHelper.getInstance(mContext).setTitleList(title);
+                initTabLayout(SheepBreedHelper.getInstance(mContext).getTitleList());
                 mIosDialog.hide();
             }
 
             @Override
             public void onCancelClick() {
                 mIosDialog.hide();
-                if (App.getInstance().getTitleList().size()==0){
+                if (SheepBreedHelper.getInstance(mContext).getTitleList().size()==0){
                     SheepBreedHelperActivity.this.finish();
                 }
             }

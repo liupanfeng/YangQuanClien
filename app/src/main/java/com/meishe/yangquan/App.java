@@ -4,9 +4,17 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.reflect.TypeToken;
+import com.meishe.yangquan.utils.GetGson;
+import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
+import org.json.JSONArray;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,10 +24,11 @@ public class App extends Application {
     private Typeface typeface;
     private static App app;
     private static Context mContext;
-    private List<String> mTitleList=new ArrayList<>();
+
     public static Context getContext() {
         return mContext;
     }
+
 
     @Override
     public void onCreate() {
@@ -53,11 +62,4 @@ public class App extends Application {
     }
 
 
-    public List<String> getTitleList() {
-        return mTitleList;
-    }
-
-    public void setTitleList(String title) {
-        this.mTitleList.add(title);
-    }
 }

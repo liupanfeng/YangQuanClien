@@ -1,0 +1,501 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_vaccine_record_open"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp38"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="@mipmap/ic_sheep_message_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="疫苗记录"
+                android:textColor="#ff656565"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp6"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp8"
+                android:background="@mipmap/ic_sheep_down" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_vaccine_record_close"
+        android:layout_width="match_parent"
+        android:background="@drawable/sheep_breed_base_massage_top_bg"
+        android:layout_marginTop="@dimen/dp20"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_height="@dimen/dp36">
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="疫苗记录"
+                android:textColor="#ffffffff"
+                android:textSize="13sp"
+                />
+            <ImageView
+                android:layout_width="@dimen/dp11"
+                android:layout_height="7.5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5.3dp"
+                android:background="@mipmap/ic_sheep_breed_up"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_vaccine_record_content"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="47dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="时间"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="防疫内容"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="数量"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="总价（元）"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="10.16"
+                android:textColor="#ff3ba786"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="防生病"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="20支"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16.8"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/dp5"
+                    android:drawableRight="@mipmap/ic_sheep_breed_editor"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:background="#e5e5e5"
+            />
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="10.16"
+                android:textColor="#ff3ba786"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="防生病"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="20支"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16.8"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/dp5"
+                    android:drawableRight="@mipmap/ic_sheep_breed_editor"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:background="#e5e5e5"
+            />
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="10.16"
+                android:textColor="#ff3ba786"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="防生病"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="20支"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16.8"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/dp5"
+                    android:drawableRight="@mipmap/ic_sheep_breed_editor"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:background="#e5e5e5"
+            />
+
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="10.16"
+                android:textColor="#ff3ba786"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="防生病"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="20支"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16.8"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/dp5"
+                    android:drawableRight="@mipmap/ic_sheep_breed_editor"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:background="#e5e5e5"
+            />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="10.16"
+                android:textColor="#ff3ba786"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="防生病"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="20支"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16.8"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/dp5"
+                    android:drawableRight="@mipmap/ic_sheep_breed_editor"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:background="#e5e5e5"
+            />
+
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="10.16"
+                android:textColor="#ff3ba786"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="防生病"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="20支"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="16.8"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    android:layout_centerInParent="true"
+                    android:drawablePadding="@dimen/dp5"
+                    android:drawableRight="@mipmap/ic_sheep_breed_editor"
+                    />
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:background="#e5e5e5"
+            />
+
+
+    </LinearLayout>
+
+</merge>

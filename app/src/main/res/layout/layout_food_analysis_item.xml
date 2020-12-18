@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/rl_food_analysis_open"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp38"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:background="@mipmap/ic_sheep_message_bg">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="配料分析"
+                android:textColor="#ff656565"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:layout_width="@dimen/dp10"
+                android:layout_height="@dimen/dp6"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="@dimen/dp8"
+                android:background="@mipmap/ic_sheep_down" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl_food_analysis_close"
+        android:layout_width="match_parent"
+        android:background="@drawable/sheep_breed_base_massage_top_bg"
+        android:layout_height="@dimen/dp36">
+        <LinearLayout
+            android:layout_centerInParent="true"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="配料分析"
+                android:textColor="#ffffffff"
+                android:textSize="13sp"
+                />
+            <ImageView
+                android:layout_width="@dimen/dp11"
+                android:layout_height="7.5dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="5.3dp"
+                android:background="@mipmap/ic_sheep_breed_up"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_food_analysis_content"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp33"
+            android:layout_marginTop="@dimen/dp10"
+            >
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/dp12"
+                android:layout_marginRight="@dimen/dp10"
+                android:background="@mipmap/ic_sheep_create_bg"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="当前估重:"
+                    android:textColor="#ff656565"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="13sp"
+                    />
+
+                <EditText
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:hint="编辑"
+                    android:textColorHint="#ff3ba786"
+                    android:textSize="13sp"
+                    android:background="@null"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:orientation="horizontal"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_marginRight="@dimen/dp12"
+                android:background="@mipmap/ic_sheep_create_bg"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="喂养天数:"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="#ff656565"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:hint="10"
+                    android:textColorHint="#ff3ba786"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="13sp"
+                    android:background="@null"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="饲料配方"
+            android:layout_gravity="center_horizontal"
+            android:textColor="#ff3ba786"
+            android:layout_marginTop="@dimen/dp18"
+            android:textSize="13sp"
+            />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="21dp"
+            android:layout_height="@dimen/dp38">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="饲料名称"
+                android:layout_weight="1"
+                android:textColor="#ff303030"
+                android:gravity="center"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:text="日配料\n（斤）"
+                android:layout_weight="1"
+                android:textColor="#ff303030"
+                android:gravity="center"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="日配比\n（%）"
+                android:gravity="center"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="单价\n（元/斤）"
+                android:gravity="center"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:text="总价\n（元）"
+                android:gravity="center"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+</merge>
