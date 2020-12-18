@@ -44,6 +44,7 @@
         android:background="@mipmap/ic_sheep_message_bg">
 
         <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true">
@@ -74,69 +75,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp33"
-            android:layout_marginTop="@dimen/dp10">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp12"
-                android:layout_marginRight="@dimen/dp10"
-                android:layout_weight="1"
-                android:background="@mipmap/ic_sheep_create_bg"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="当前估重:"
-                    android:textColor="#ff656565"
-                    android:textSize="13sp" />
-
-                <EditText
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@null"
-                    android:hint="编辑"
-                    android:textColorHint="#ff3ba786"
-                    android:textSize="13sp" />
-
-
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp10"
-                android:layout_marginRight="@dimen/dp12"
-                android:layout_weight="1"
-                android:background="@mipmap/ic_sheep_create_bg"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="喂养天数:"
-                    android:textColor="#ff656565"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:background="@null"
-                    android:hint="10"
-                    android:textColorHint="#ff3ba786"
-                    android:textSize="13sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
