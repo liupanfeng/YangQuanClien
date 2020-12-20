@@ -20,12 +20,16 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
+import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.utils.PathUtils;
+import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.CustomToolbar;
 
 import java.io.File;
@@ -48,7 +52,7 @@ public class BarSheepPublishActivity extends BaseActivity {
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 201;
     private File tempFile;
 
-    private List<SheepBarMessageInfo> mData=new ArrayList<>();
+    private List<SheepBarMessageInfo> mData = new ArrayList<>();
 
     @Override
     protected int initRootView() {
@@ -66,6 +70,8 @@ public class BarSheepPublishActivity extends BaseActivity {
         GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(mContext, 3);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+        CustomGridItemDecoration customGridItemDecoration = new CustomGridItemDecoration(15);
+        mRecyclerView.addItemDecoration(customGridItemDecoration);
         mRecyclerView.setLayoutManager(gridLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
@@ -73,7 +79,7 @@ public class BarSheepPublishActivity extends BaseActivity {
     @Override
     public void initData() {
         mData.clear();
-        SheepBarMessageInfo sheepBarMessageInfo=new SheepBarMessageInfo();
+        SheepBarMessageInfo sheepBarMessageInfo = new SheepBarMessageInfo();
         sheepBarMessageInfo.setFilePath(String.valueOf(R.mipmap.ic_sheep_bar_add));
         sheepBarMessageInfo.setType(SheepBarMessageInfo.TYPE_ADD_PIC);
         mData.add(sheepBarMessageInfo);
@@ -95,7 +101,20 @@ public class BarSheepPublishActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, BaseInfo baseInfo) {
+                if (baseInfo instanceof SheepBarMessageInfo) {
+                    if (((SheepBarMessageInfo) baseInfo).getType() == SheepBarMessageInfo.TYPE_ADD_PIC) {
+                        if (mData != null && mData.size() > 9) {
+                            ToastUtil.showToast(mContext, "最多添加9张图片");
+                            return;
+                        }
+                        showPictureSelectItem();
+                    }
+                }
+            }
+        });
     }
 
     @Override
@@ -153,7 +172,6 @@ public class BarSheepPublishActivity extends BaseActivity {
 
         }
     }
-
 
 
     private void showPictureSelectItem() {
@@ -238,15 +256,21 @@ public class BarSheepPublishActivity extends BaseActivity {
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (tempFile != null) {
-                    Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
-//                    mIvSelectIcon.setVisibility(View.GONE);
-                    Matrix matrix = new Matrix();
-                    matrix.setScale(0.2f, 0.2f);
+//                    Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
+////                    mIvSelectIcon.setVisibility(View.GONE);
+//                    Matrix matrix = new Matrix();
+//                    matrix.setScale(0.2f, 0.2f);
 //                    showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
 //                            tmpBitmap.getHeight(), matrix, true);
 //
 //
 //                    mIvShowIcon.setImageBitmap(showBitmap);
+
+                    SheepBarMessageInfo sheepBarMessageInfo = new SheepBarMessageInfo();
+                    sheepBarMessageInfo.setFilePath(tempFile.getAbsolutePath());
+                    sheepBarMessageInfo.setType(SheepBarMessageInfo.TYPE_CAPTURE_PIC);
+                    mData.add(0, sheepBarMessageInfo);
+                    mAdapter.addAll(mData);
                 }
                 break;
 
@@ -277,7 +301,7 @@ public class BarSheepPublishActivity extends BaseActivity {
                         imagePath = uri.getPath();
                     }
                     if (imagePath != null) {
-                        tempFile = new File(imagePath);
+//                        tempFile = new File(imagePath);
 //                        Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
 //                        Matrix matrix = new Matrix();
 //                        matrix.setScale(0.4f, 0.4f);
@@ -285,6 +309,12 @@ public class BarSheepPublishActivity extends BaseActivity {
 //                                tmpBitmap.getHeight(), matrix, true);
 ////                        mIvSelectIcon.setVisibility(View.GONE);
 //                        mIvShowIcon.setImageBitmap(showBitmap);
+
+                        SheepBarMessageInfo sheepBarMessageInfo = new SheepBarMessageInfo();
+                        sheepBarMessageInfo.setFilePath(imagePath);
+                        sheepBarMessageInfo.setType(SheepBarMessageInfo.TYPE_CAPTURE_PIC);
+                        mData.add(0, sheepBarMessageInfo);
+                        mAdapter.addAll(mData);
                     }
                 }
                 break;
@@ -320,7 +350,6 @@ public class BarSheepPublishActivity extends BaseActivity {
         }
         return path;
     }
-
 
 
 }

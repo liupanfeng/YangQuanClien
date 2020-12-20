@@ -8,7 +8,6 @@ import android.widget.ImageView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.BarSheepPublishActivity;
-import com.meishe.yangquan.activity.ServicePublishActivity;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.wiget.CustomTextView;
 
@@ -52,9 +51,10 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_bar_sheep, container, false);
-        mTvMarketNewest = view.findViewById(R.id.tv_service_newest);
-        mTvMarketCommand = view.findViewById(R.id.tv_service_command);
+        mTvMarketNewest = view.findViewById(R.id.tv_bar_sheep_newest);
+        mTvMarketCommand = view.findViewById(R.id.tv_bar_sheep_command);
         mIvPublishSheepBar = view.findViewById(R.id.iv_publish_sheep_bar);
+        mRecyclerView = view.findViewById(R.id.recycler);
         return view;
     }
 
@@ -67,23 +67,18 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
 
     @Override
     protected void initData() {
-
+        selectNewest();
+        initRecyclerView();
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.tv_market_newest:
-                mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
-                mTvMarketNewest.setSelected(true);
-                mTvMarketCommand.setSelected(false);
-                getSheepBarDataFromServer( mListType);
+            case R.id.tv_bar_sheep_newest:
+                selectNewest();
                 break;
-            case R.id.tv_market_command:
-                mListType = TYPE_MARKET_LIST_TYPE_RECOMMEND;
-                mTvMarketCommand.setSelected(true);
-                mTvMarketNewest.setSelected(false);
-                getSheepBarDataFromServer(mListType);
+            case R.id.tv_bar_sheep_command:
+                selectCommand();
                 break;
             case R.id.iv_publish_sheep_bar:
                 //发布羊吧
@@ -92,6 +87,20 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
                 default:
                     break;
         }
+    }
+
+    private void selectCommand() {
+        mListType = TYPE_MARKET_LIST_TYPE_RECOMMEND;
+        mTvMarketCommand.setSelected(true);
+        mTvMarketNewest.setSelected(false);
+        getSheepBarDataFromServer(mListType);
+    }
+
+    private void selectNewest() {
+        mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
+        mTvMarketNewest.setSelected(true);
+        mTvMarketCommand.setSelected(false);
+        getSheepBarDataFromServer( mListType);
     }
 
     /**

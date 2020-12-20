@@ -122,6 +122,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected RecyclerView mRecyclerView;
     protected boolean isNeedAutoScroll = false;
 
+    private OnItemClickListener onItemClickListener;
+
+
     public BaseRecyclerAdapter(final Context context, RecyclerView recyclerView) {
         mContext = context;
         mLayoutInflater = LayoutInflater.from(context);
@@ -198,6 +201,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
      */
     protected void onItemClick(View v) {
         BaseInfo info = (BaseInfo) v.getTag();
+        if (onItemClickListener!=null){
+            onItemClickListener.onItemClick(v,getItemPosition(info),info);
+        }
         if (info instanceof ServiceTypeInfo) {
             Bundle bundle = new Bundle();
             bundle.putString("name", ((ServiceTypeInfo) info).getName());
@@ -603,7 +609,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
      * @return
      */
     public BaseInfo getItem(int position) {
-        if (position < 0 || mList == null || position >= mList.size()) return new BaseInfo();
+        if (position < 0 || mList == null || position >= mList.size()){
+            return new BaseInfo();
+        }
         return mList.get(position);
     }
 
@@ -678,5 +686,18 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
     public void setNeedAutoScroll(boolean needAutoScroll) {
         isNeedAutoScroll = needAutoScroll;
+    }
+
+    public OnItemClickListener getOnItemClickListener() {
+        return onItemClickListener;
+    }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
+    }
+
+    public interface OnItemClickListener{
+
+        void onItemClick(View view,int position,BaseInfo baseInfo);
     }
 }

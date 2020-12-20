@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -21,13 +22,14 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="4dp"
+                android:layout_height="2dp"
                 android:background="@mipmap/ic_maintab_showndow_line" />
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
                 style="@style/MWidget.Design.TabLayout.Home"
                 android:layout_width="match_parent"
+                app:tabRippleColor="@color/transparent"
                 android:layout_height="@dimen/tabBarSize" />
         </LinearLayout>
 

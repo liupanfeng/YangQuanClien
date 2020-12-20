@@ -16,7 +16,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <EditText
             android:id="@+id/et_input_sheep_bar_message"
@@ -32,8 +32,9 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_marginTop="176dp"
+            android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 
     </RelativeLayout>
 
