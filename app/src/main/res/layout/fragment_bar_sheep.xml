@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="190dp"
+        android:background="@mipmap/ic_sheep_bar_top_bg"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="羊吧"
+            android:textColor="#ffffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:textSize="17sp"
+            />
+        
+        <ImageView
+            android:layout_width="@dimen/dp18"
+            android:layout_height="@dimen/dp18"
+            android:layout_marginTop="@dimen/dp21"
+            android:layout_marginRight="@dimen/dp18"
+            android:background="@mipmap/ic_sheep_bar_search"
+            android:layout_alignParentRight="true"
+            />
+
+        <RelativeLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginTop="@dimen/dp87"
+            android:layout_marginLeft="@dimen/dp15"
+            android:layout_height="@dimen/dp55">
+
+            <ImageView
+                android:id="@+id/iv_bar_sheep_photo"
+                android:layout_width="@dimen/dp55"
+                android:layout_height="@dimen/dp55"
+                android:background="@mipmap/ic_sheep_bar_default_photo"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/iv_bar_sheep_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="羊吧"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp12"
+                android:textColor="#ffffffff"
+                android:textSize="20sp"
+                />
+
+
+            <LinearLayout
+                android:background="@drawable/bg_sheep_bar_sign_in"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/dp15"
+                android:layout_centerVertical="true"
+                android:layout_width="@dimen/dp65"
+                android:layout_height="@dimen/dp30">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="签到"
+                    android:gravity="center"
+                    android:textColor="#ff3ba786"
+                    android:textSize="15sp"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_sign_up"
+        android:layout_width="match_parent"
+        android:layout_height="102dp"
+        android:background="@drawable/mine_middle_bg"
+        android:layout_marginTop="155dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp16"
+            android:layout_height="@dimen/dp43">
+
+            <ImageView
+                android:layout_width="@dimen/dp46"
+                android:layout_height="@dimen/dp17"
+                android:background="@mipmap/ic_sheep_bar_to_top"
+                android:layout_gravity="center_vertical"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp10"
+                android:text="天青色等烟雨而我在等你，月色被打捞起晕开了结局,月色被打捞起晕开了结局"
+                android:layout_gravity="center_vertical"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="#ff656565"
+                android:textSize="14sp"
+                />
+
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:background="#e5e5e5"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp16"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp16"
+            android:layout_height="@dimen/dp42">
+
+            <ImageView
+                android:layout_width="@dimen/dp46"
+                android:layout_height="@dimen/dp17"
+                android:background="@mipmap/ic_sheep_bar_to_top"
+                android:layout_gravity="center_vertical"
+                />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp10"
+                android:text="天青色等烟雨而我在等你，月色被打捞起晕开了结局,月色被打捞起晕开了结局"
+                android:layout_gravity="center_vertical"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:textColor="#ff656565"
+                android:textSize="14sp"
+                />
+
+        </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:background="#e5e5e5"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp16"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ll_sign_up"
+        android:layout_marginTop="@dimen/dp20"
+        android:background="#f5f5f5"
+        android:orientation="vertical">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_marginRight="@dimen/dp11"
+            android:layout_height="@dimen/dp40">
+            <com.meishe.yangquan.wiget.CustomTextView
+                android:layout_width="wrap_content"
+                android:id="@+id/tv_service_newest"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="最新"
+                />
+            <com.meishe.yangquan.wiget.CustomTextView
+                android:id="@+id/tv_service_command"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="@dimen/dp24"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="推荐"
+                />
+        </LinearLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_marginRight="@dimen/dp11"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/iv_publish_sheep_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_home_service_publish"
+        android:layout_marginBottom="@dimen/dp19"
+        android:layout_marginRight="@dimen/dp22"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
+</RelativeLayout>

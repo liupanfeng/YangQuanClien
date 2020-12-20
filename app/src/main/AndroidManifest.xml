@@ -40,7 +40,8 @@
         android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle">
-        <activity android:name=".activity.SheepBreedHelperActivity"></activity>
+        <activity android:name=".activity.BarSheepPublishActivity"></activity>
+        <activity android:name=".activity.SheepBreedHelperActivity" />
         <activity android:name=".activity.SheepMyBusinessActivity" />
         <activity android:name=".activity.SheepApplyIntroduceActivity" />
         <activity android:name=".activity.SheepApplyServiceResultActivity" />

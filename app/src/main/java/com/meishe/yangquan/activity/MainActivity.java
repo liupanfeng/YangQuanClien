@@ -17,6 +17,7 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.TabInfo;
+import com.meishe.yangquan.fragment.BarSheepFragment;
 import com.meishe.yangquan.fragment.HomeFragment;
 import com.meishe.yangquan.fragment.MessageFragment;
 import com.meishe.yangquan.fragment.MineFragment;
@@ -53,6 +54,7 @@ public class MainActivity extends BasePermissionActivity {
     private Context mContext;
     private ArrayList<TabInfo> mTabList;
     private int defaultTab;
+    private PrivacyPolicyDialog privacyPolicyDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -208,8 +210,8 @@ public class MainActivity extends BasePermissionActivity {
                 mFragmentList.add(sheepHouseKeepFragment);
                 break;
             case PageId.PAGE_SHEEP_BAR_PAGE:
-                 messageFragment = MessageFragment.newInstance("", "");
-                mFragmentList.add(messageFragment);
+                BarSheepFragment barSheepFragment = BarSheepFragment.newInstance("", "");
+                mFragmentList.add(barSheepFragment);
                 break;
             case PageId.PAGE_MINE:
                 MineFragment mineFragment=MineFragment.newInstance("","");
@@ -227,7 +229,10 @@ public class MainActivity extends BasePermissionActivity {
         final SpUtil spUtil = SpUtil.getInstance(getApplicationContext());
         boolean isAgreePrivacy = spUtil.getBoolean(Constants.KEY_AGREE_PRIVACY, false);
         if (!isAgreePrivacy) {
-            PrivacyPolicyDialog privacyPolicyDialog = new PrivacyPolicyDialog(MainActivity.this, R.style.dialog);
+            if (privacyPolicyDialog!=null&&privacyPolicyDialog.isShowing()){
+                return;
+            }
+            privacyPolicyDialog = new PrivacyPolicyDialog(MainActivity.this, R.style.dialog);
             privacyPolicyDialog.setOnButtonClickListener(new PrivacyPolicyDialog.OnPrivacyClickListener() {
                 @Override
                 public void onButtonClick(boolean isAgree) {
