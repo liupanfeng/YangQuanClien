@@ -14,7 +14,6 @@ import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.IndustryInfo;
 import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.MarketInfo;
-import com.meishe.yangquan.bean.MarketResult;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
@@ -22,6 +21,7 @@ import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
+import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
@@ -39,7 +39,8 @@ import com.meishe.yangquan.viewhoder.ServiceSheepNewsHolder;
 import com.meishe.yangquan.viewhoder.ServiceMessageHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeListHolder;
-import com.meishe.yangquan.viewhoder.SheepBarListHolder;
+import com.meishe.yangquan.viewhoder.SheepBarMessageListHolder;
+import com.meishe.yangquan.viewhoder.SheepBarPictureListHolder;
 
 public class MultiFunctionAdapter extends BaseRecyclerAdapter {
 
@@ -117,8 +118,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 break;
                 /*羊吧信息发布*/
             case VIEW_SHEEP_BAR_ADD_PIC:
-                view = mLayoutInflater.inflate(R.layout.item_sheep_bar, parent, false);
-                viewHolder = new SheepBarListHolder(view, this);
+                view = mLayoutInflater.inflate(R.layout.item_sheep_bar_message, parent, false);
+                viewHolder = new SheepBarMessageListHolder(view, this);
                 break;
         }
         return viewHolder;
@@ -163,8 +164,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MARKET_LIST;
         } else if (baseInfo instanceof IndustryInfo) {
             return VIEW_INDUSTRY_LIST;
-        } else if (baseInfo instanceof SheepBarMessageInfo) {
+        } else if (baseInfo instanceof SheepBarPictureInfo) {
             return VIEW_SHEEP_BAR_ADD_PIC;
+        } else if (baseInfo instanceof SheepBarMessageInfo) {
+            return VIEW_SHEEP_BAR_MESSAGE;
         }
         return super.getItemViewType(position);
     }

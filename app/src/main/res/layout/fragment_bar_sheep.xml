@@ -173,8 +173,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginLeft="@dimen/dp11"
-            android:layout_marginRight="@dimen/dp11"
+            android:layout_marginLeft="@dimen/dp20"
+            android:layout_marginRight="@dimen/dp20"
             android:layout_height="@dimen/dp40">
             <com.meishe.yangquan.wiget.CustomTextView
                 android:layout_width="wrap_content"

@@ -8,8 +8,12 @@ import android.widget.ImageView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.BarSheepPublishActivity;
+import com.meishe.yangquan.bean.SheepBarMessageInfo;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.wiget.CustomTextView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 羊吧页面
@@ -28,6 +32,8 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
     private ImageView mIvPublishSheepBar;
 
     private int mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
+
+    private List<SheepBarMessageInfo> mData = new ArrayList<>();
 
 
     public static BarSheepFragment newInstance(String param1, String param2) {
@@ -69,11 +75,17 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
     protected void initData() {
         selectNewest();
         initRecyclerView();
+        SheepBarMessageInfo sheepBarMessageInfo = new SheepBarMessageInfo();
+        mData.add(sheepBarMessageInfo);
+        SheepBarMessageInfo sheepBarMessageInfo1 = new SheepBarMessageInfo();
+        mData.add(sheepBarMessageInfo1);
+        mAdapter.addAll(mData);
+
     }
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.tv_bar_sheep_newest:
                 selectNewest();
                 break;
@@ -84,8 +96,8 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
                 //发布羊吧
                 AppManager.getInstance().jumpActivity(getActivity(), BarSheepPublishActivity.class);
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
     }
 
@@ -100,11 +112,12 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
         mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
         mTvMarketNewest.setSelected(true);
         mTvMarketCommand.setSelected(false);
-        getSheepBarDataFromServer( mListType);
+        getSheepBarDataFromServer(mListType);
     }
 
     /**
      * 获取羊吧数据
+     *
      * @param listType 列表类型
      */
     private void getSheepBarDataFromServer(int listType) {

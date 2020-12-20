@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -24,10 +23,9 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MenuItem;
-import com.meishe.yangquan.bean.SheepBarMessageInfo;
+import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
-import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.CustomToolbar;
@@ -52,7 +50,7 @@ public class BarSheepPublishActivity extends BaseActivity {
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 201;
     private File tempFile;
 
-    private List<SheepBarMessageInfo> mData = new ArrayList<>();
+    private List<SheepBarPictureInfo> mData = new ArrayList<>();
 
     @Override
     protected int initRootView() {
@@ -79,9 +77,9 @@ public class BarSheepPublishActivity extends BaseActivity {
     @Override
     public void initData() {
         mData.clear();
-        SheepBarMessageInfo sheepBarMessageInfo = new SheepBarMessageInfo();
+        SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
         sheepBarMessageInfo.setFilePath(String.valueOf(R.mipmap.ic_sheep_bar_add));
-        sheepBarMessageInfo.setType(SheepBarMessageInfo.TYPE_ADD_PIC);
+        sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_ADD_PIC);
         mData.add(sheepBarMessageInfo);
         mAdapter.addAll(mData);
     }
@@ -104,8 +102,8 @@ public class BarSheepPublishActivity extends BaseActivity {
         mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
-                if (baseInfo instanceof SheepBarMessageInfo) {
-                    if (((SheepBarMessageInfo) baseInfo).getType() == SheepBarMessageInfo.TYPE_ADD_PIC) {
+                if (baseInfo instanceof SheepBarPictureInfo) {
+                    if (((SheepBarPictureInfo) baseInfo).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
                         if (mData != null && mData.size() > 9) {
                             ToastUtil.showToast(mContext, "最多添加9张图片");
                             return;
@@ -266,9 +264,9 @@ public class BarSheepPublishActivity extends BaseActivity {
 //
 //                    mIvShowIcon.setImageBitmap(showBitmap);
 
-                    SheepBarMessageInfo sheepBarMessageInfo = new SheepBarMessageInfo();
+                    SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
                     sheepBarMessageInfo.setFilePath(tempFile.getAbsolutePath());
-                    sheepBarMessageInfo.setType(SheepBarMessageInfo.TYPE_CAPTURE_PIC);
+                    sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_CAPTURE_PIC);
                     mData.add(0, sheepBarMessageInfo);
                     mAdapter.addAll(mData);
                 }
@@ -310,9 +308,9 @@ public class BarSheepPublishActivity extends BaseActivity {
 ////                        mIvSelectIcon.setVisibility(View.GONE);
 //                        mIvShowIcon.setImageBitmap(showBitmap);
 
-                        SheepBarMessageInfo sheepBarMessageInfo = new SheepBarMessageInfo();
+                        SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
                         sheepBarMessageInfo.setFilePath(imagePath);
-                        sheepBarMessageInfo.setType(SheepBarMessageInfo.TYPE_CAPTURE_PIC);
+                        sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_CAPTURE_PIC);
                         mData.add(0, sheepBarMessageInfo);
                         mAdapter.addAll(mData);
                     }

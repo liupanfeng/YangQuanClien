@@ -1,32 +1,31 @@
 package com.meishe.yangquan.bean;
 
+import java.util.List;
+
 /**
- * 羊吧信息发布
+ * @author liupanfeng
+ * @desc  羊吧列表
+ * @date 2020/12/20 17:10
  */
-public class SheepBarMessageInfo extends BaseInfo {
+public class SheepBarMessageInfo extends BaseInfo{
 
-    public static final int TYPE_ADD_PIC = 1;                   //增加
+    private String photoPath;
 
-    public static final int TYPE_CAPTURE_PIC = 2;               //相机的图片
+    private String nickName;
+
+    private String time;
+
+    private String content;
+    /*评论数量*/
+    private int commentNumber;
+    /*点赞数量*/
+    private int priseNumber;
+    /*羊吧图片列表*/
+    private List<String> imageList;
+    /*是否已经关注*/
+    private boolean isFocus;
 
 
-    private int type;
 
-    private String filePath;
 
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public int getType() {
-        return type;
-    }
-
-    public void setType(int type) {
-        this.type = type;
-    }
 }
