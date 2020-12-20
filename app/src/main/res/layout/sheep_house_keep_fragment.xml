@@ -55,7 +55,7 @@
         android:layout_marginTop="@dimen/dp14"
         android:layout_marginLeft="@dimen/dp15"
         android:layout_marginRight="@dimen/dp15"
-        android:background="@drawable/sheep_house_keep_bg"
+        android:background="@mipmap/sheep_house_keep_bg"
         >
 
         <TextView
