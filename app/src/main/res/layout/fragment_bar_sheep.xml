@@ -198,7 +198,7 @@
             android:layout_marginLeft="@dimen/dp11"
             android:layout_marginRight="@dimen/dp11"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"/>
 
     </LinearLayout>
 

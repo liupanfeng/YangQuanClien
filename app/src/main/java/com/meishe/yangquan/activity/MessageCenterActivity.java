@@ -1,14 +1,11 @@
 package com.meishe.yangquan.activity;
 
-import android.app.MediaRouteButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.bean.Message;
-import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.bean.SystemNotificationResult;
 import com.meishe.yangquan.bean.User;

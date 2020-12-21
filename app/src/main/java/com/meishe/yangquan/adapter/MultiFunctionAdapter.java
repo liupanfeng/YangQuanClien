@@ -116,8 +116,13 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_industry, parent, false);
                 viewHolder = new IndustryListHolder(view, this);
                 break;
-                /*羊吧信息发布*/
+                /*羊吧图片*/
             case VIEW_SHEEP_BAR_ADD_PIC:
+                view = mLayoutInflater.inflate(R.layout.item_sheep_bar, parent, false);
+                viewHolder = new SheepBarPictureListHolder(view, this);
+                break;
+            /*羊吧信息发布*/
+            case VIEW_SHEEP_BAR_MESSAGE:
                 view = mLayoutInflater.inflate(R.layout.item_sheep_bar_message, parent, false);
                 viewHolder = new SheepBarMessageListHolder(view, this);
                 break;

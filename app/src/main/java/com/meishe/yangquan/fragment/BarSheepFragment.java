@@ -8,6 +8,9 @@ import android.widget.ImageView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.BarSheepPublishActivity;
+import com.meishe.yangquan.activity.SheepBarDetailActivity;
+import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.wiget.CustomTextView;
@@ -69,6 +72,14 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
         mTvMarketNewest.setOnClickListener(this);
         mTvMarketCommand.setOnClickListener(this);
         mIvPublishSheepBar.setOnClickListener(this);
+        mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, BaseInfo baseInfo) {
+                if (baseInfo instanceof SheepBarMessageInfo){
+                    AppManager.getInstance().jumpActivity(getActivity(), SheepBarDetailActivity.class);
+                }
+            }
+        });
     }
 
     @Override
@@ -79,6 +90,8 @@ public class BarSheepFragment extends BaseRecyclerFragment implements View.OnCli
         mData.add(sheepBarMessageInfo);
         SheepBarMessageInfo sheepBarMessageInfo1 = new SheepBarMessageInfo();
         mData.add(sheepBarMessageInfo1);
+        SheepBarMessageInfo sheepBarMessageInfo2 = new SheepBarMessageInfo();
+        mData.add(sheepBarMessageInfo2);
         mAdapter.addAll(mData);
 
     }

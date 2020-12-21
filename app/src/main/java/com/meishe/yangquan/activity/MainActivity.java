@@ -18,6 +18,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.TabInfo;
 import com.meishe.yangquan.fragment.BarSheepFragment;
+import com.meishe.yangquan.fragment.FeedFragment;
 import com.meishe.yangquan.fragment.HomeFragment;
 import com.meishe.yangquan.fragment.MessageFragment;
 import com.meishe.yangquan.fragment.MineFragment;
@@ -202,8 +203,8 @@ public class MainActivity extends BasePermissionActivity {
                 mFragmentList.add(serviceFragment);
                 break;
             case PageId.PAGE_FEED_PAGE:
-                MessageFragment messageFragment = MessageFragment.newInstance("", "");
-                mFragmentList.add(messageFragment);
+                FeedFragment feedFragment = FeedFragment.newInstance("", "");
+                mFragmentList.add(feedFragment);
                 break;
             case PageId.PAGE_SHEEP_HOUSE_KEEP:
                 SheepHouseKeepFragment sheepHouseKeepFragment = SheepHouseKeepFragment.newInstance("", "");
