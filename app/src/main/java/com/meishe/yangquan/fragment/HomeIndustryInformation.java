@@ -1,7 +1,5 @@
 package com.meishe.yangquan.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,15 +53,15 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
     @Override
     protected void initData() {
         initRecyclerView();
-//        getBannerDataFromServer();
-        initTopBanner(null);
+        getBannerDataFromServer();
+//        initTopBanner(null);
         getIndustryInfoFromServer();
     }
 
     private void getIndustryInfoFromServer() {
         HashMap<String, Object> param = new HashMap<>();
         String token = UserManager.getInstance(mContext).getToken();
-        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_NEWS_LIST, new BaseCallBack<IndustryResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_NEWS_LIST, new BaseCallBack<BannerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -75,18 +73,17 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, IndustryResult result) {
+            protected void onSuccess(Call call, Response response, BannerResult result) {
 //                mLoading.hide();
                 if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
-                List<IndustryInfo> data = result.getData();
+                List<BannerInfo> data = result.getData();
                 if (data == null || data.size() == 0) {
                     return;
                 }
-//                initTopBanner(data);
-                mAdapter.addAll(data);
+                initTopBanner(data);
             }
 
             @Override
@@ -161,25 +158,15 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
     private void initTopBanner(List<BannerInfo> data) {
         List mUrlList = new ArrayList<>();
         List<String> titleas = new ArrayList<>();
-//        for (int i = 0; i < data.size(); i++) {
-//            BannerInfo bannerInfo = data.get(i);
-//            if (bannerInfo==null){
-//                continue;
-//            }
-//
-//            mUrlList.add(bannerInfo.getPicUrl());
-//            titleas.add(bannerInfo.getTitle());
-//        }
+        for (int i = 0; i < data.size(); i++) {
+            BannerInfo bannerInfo = data.get(i);
+            if (bannerInfo==null){
+                continue;
+            }
 
-        mUrlList.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1423774393,3301272101&fm=26&gp=0.jpg");
-        mUrlList.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1764774024,3138989852&fm=26&gp=0.jpg");
-        mUrlList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606555763664&di=6a180735dfa87a6be39a67ddbb47f4a6&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20140408%2F20140408130734-1854992764.jpg");
-        mUrlList.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3811056552,313222880&fm=26&gp=0.jpg");
-
-        titleas.add("标题一");
-        titleas.add("标题二");
-        titleas.add("标题三");
-        titleas.add("标题四");
+            mUrlList.add(bannerInfo.getPicUrl());
+            titleas.add(bannerInfo.getTitle());
+        }
 
         if (mBanner != null) {
             mBanner.setViewUrls(mContext, mUrlList, titleas);

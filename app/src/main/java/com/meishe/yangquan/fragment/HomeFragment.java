@@ -105,8 +105,16 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
          ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getChildFragmentManager(),0,mContext,mFragmentList,mTopTabTitleList);
          mViewPager.setAdapter(viewPagerAdapter);
          mTabLayout.setupWithViewPager(mViewPager);
+
+         getUserDataFromServer();
     }
 
+    /**
+     * 获取用户数据
+     */
+    private void getUserDataFromServer() {
+
+    }
 
 
     private void initTabTitle() {

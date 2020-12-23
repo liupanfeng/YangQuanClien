@@ -83,7 +83,7 @@ public class MessageListHolder extends BaseViewHolder {
             }
 
 
-            User user= UserManager.getInstance(context).getUser();
+            User user= null;
             if (user!=null) {
                 int userType = user.getUserType();
                 switch (userType){

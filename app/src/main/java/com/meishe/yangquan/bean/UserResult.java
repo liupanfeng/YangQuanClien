@@ -10,7 +10,7 @@ public class UserResult {
     private String msg;
 
     //暂时先用单个对象 稍后改成list
-    private User data;
+    private UserInfo data;
 
     public int getStatus() {
         return status;
@@ -28,11 +28,11 @@ public class UserResult {
         this.msg = msg;
     }
 
-    public User getData() {
+    public UserInfo getData() {
         return data;
     }
 
-    public void setData(User data) {
+    public void setData(UserInfo data) {
         this.data = data;
     }
 }

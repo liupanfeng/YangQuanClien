@@ -4,10 +4,11 @@ import android.content.Context;
 import android.text.TextUtils;
 
 import com.meishe.yangquan.bean.User;
+import com.meishe.yangquan.bean.UserInfo;
 
 public class UserManager {
     private static  UserManager instance ;
-    private User user;
+    private UserInfo user;
     private String token="";
     private Context mContext;
     private SharedPreferencesUtil sharedPreferencesUtil;
@@ -27,11 +28,11 @@ public class UserManager {
         sharedPreferencesUtil=SharedPreferencesUtil.getInstance(context);
     }
 
-    public User getUser() {
+    public UserInfo getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserInfo user) {
         this.user = user;
     }
 

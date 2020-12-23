@@ -278,15 +278,15 @@ public class LoginActivity extends BaseActivity {
 
 
     public void updateDeviceAlias() {
-        User user = UserManager.getInstance(mContext).getUser();
+        User user = null;
         if (user == null) {
             return;
         }
-        String userId = user.getUserId() + "";
+//        String userId = user.getUserId() + "";
         String registrationID = JPushInterface.getRegistrationID(mContext);
         final HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("registrationId", registrationID);
-        requestParam.put("userId", userId);
+//        requestParam.put("userId", userId);
         OkHttpManager.getInstance().postRequest(HttpUrl.PUSH_UPDATE_DEVICE_ALIAS, new BaseCallBack<UpdateDeviceAliasResult>() {
             @Override
             protected void OnRequestBefore(Request request) {

@@ -43,7 +43,7 @@ public class PathUtils {
     public static String getTempCoverImageName(Context context) {
 //        CommonData commonData = CommonData.getInstance();
 //        UserInfo userInfo = commonData.getUserInfo();
-        User user=UserManager.getInstance(context).getUser();
+        User user=null;
         if (user == null) {
             return null;
         }

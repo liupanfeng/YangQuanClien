@@ -162,7 +162,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             mLLNoLogin.setVisibility(View.GONE);
         }
 
-        User user = UserManager.getInstance(getContext()).getUser();
+        User user =null;
         if (user != null) {
             mTvNumber.setText(user.getPhoneNumber());
             mTvNickname.setText(user.getNickname());

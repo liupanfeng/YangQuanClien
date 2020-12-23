@@ -1,17 +1,15 @@
 package com.meishe.yangquan.bean;
 
+
 import java.util.Date;
 
-public class User {
-    private Integer id;
+import static com.meishe.yangquan.utils.Constants.tokenId;
 
-    private Long userId;
+/**
+ * @author 86188
+ */
+public class User extends BaseInfo{
 
-    private String tokenId;
-
-    private String phoneNumber;
-
-    private String nickname;
 
     private String photoUrl;
 
@@ -48,6 +46,11 @@ public class User {
     private String dockingFinance;
 
     private long createTime;
+    private Integer id;
+    private Long userId;
+    private String tokenId;
+    private String phoneNumber;
+    private String nickname;
 
     public Integer getId() {
         return id;

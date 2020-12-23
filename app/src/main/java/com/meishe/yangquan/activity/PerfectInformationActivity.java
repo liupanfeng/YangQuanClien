@@ -131,7 +131,7 @@ public class PerfectInformationActivity extends BaseActivity {
     @Override
     public void initData() {
         HttpRequestUtil.getInstance(PerfectInformationActivity.this).setListener(this);
-        mUser = UserManager.getInstance(this).getUser();
+        mUser = null;
         mUserSexArray = getResources().getStringArray(R.array.user_sex_spinner_values);
         updateUI();
 
@@ -584,7 +584,7 @@ public class PerfectInformationActivity extends BaseActivity {
             protected void onSuccess(Call call, Response response, UserResult result) {
                 hideLoading();
                 if (result != null) {
-                    User user = result.getData();
+                    User user = null;
                     if (user != null) {
                         mUser = user;
 //                        String photoUrl = mUser.getPhotoUrl();
@@ -597,7 +597,7 @@ public class PerfectInformationActivity extends BaseActivity {
 //                                .into(mIvPhoto);
                         updateUI();
                         ToastUtil.showToast(mContext, "更新数据成功");
-                        UserManager.getInstance(App.getContext()).setUser(user);
+//                        UserManager.getInstance(App.getContext()).setUser(user);
                         EventBus.getDefault().post(new MsgEvent("", MESSAGE_EVENT_UPDATE_USER_UI));
                     }
                 }

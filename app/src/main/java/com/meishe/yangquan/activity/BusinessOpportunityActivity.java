@@ -48,7 +48,6 @@ public class BusinessOpportunityActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mUser = UserManager.getInstance(this).getUser();
         if (mUser == null) {
             return;
         }

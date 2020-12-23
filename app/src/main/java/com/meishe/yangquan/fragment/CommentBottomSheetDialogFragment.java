@@ -156,7 +156,7 @@ public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment 
                     return;
                 }
 
-                mUser=UserManager.getInstance(mContext).getUser();
+                mUser=null;
 
                 FragmentManager fragmentManager = getFragmentManager();
                 if (fragmentManager == null){

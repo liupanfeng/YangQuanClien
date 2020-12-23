@@ -85,7 +85,7 @@ public class ServiceTypeListHolder extends BaseViewHolder {
             mLikeView.notifyDataSetChanged();
 
             //默认的点赞状态
-            User user = UserManager.getInstance(context).getUser();
+            User user = null;
             if (user != null) {
                 int userType = user.getUserType();
                 if (userType == 1) {

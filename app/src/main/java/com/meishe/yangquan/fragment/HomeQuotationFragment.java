@@ -80,8 +80,8 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
         mTvTodayQuotation.setText(String.format("今日行情 %s", DateUtil.dateToString(new Date(), DateUtil.FORMAT_TYPE_YEAR_MONTH_DAY)));
         initRecyclerView();
         selectLittleSheep();
-//        getBannerDataFromServer();
-        initTopBanner(null);
+        getBannerDataFromServer();
+//        initTopBanner(null);
         getQuotationDataFromServer(5);
     }
 
@@ -186,25 +186,25 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
     private void initTopBanner(List<BannerInfo> data) {
         mUrlList = new ArrayList<>();
         List<String> titleas = new ArrayList<>();
-//        for (int i = 0; i < data.size(); i++) {
-//            BannerInfo bannerInfo = data.get(i);
-//            if (bannerInfo==null){
-//                continue;
-//            }
+        for (int i = 0; i < data.size(); i++) {
+            BannerInfo bannerInfo = data.get(i);
+            if (bannerInfo==null){
+                continue;
+            }
+
+            mUrlList.add(bannerInfo.getPicUrl());
+            titleas.add(bannerInfo.getTitle());
+        }
+
+//        mUrlList.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1423774393,3301272101&fm=26&gp=0.jpg");
+//        mUrlList.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1764774024,3138989852&fm=26&gp=0.jpg");
+//        mUrlList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606555763664&di=6a180735dfa87a6be39a67ddbb47f4a6&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20140408%2F20140408130734-1854992764.jpg");
+//        mUrlList.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3811056552,313222880&fm=26&gp=0.jpg");
 //
-//            mUrlList.add(bannerInfo.getPicUrl());
-//            titleas.add(bannerInfo.getTitle());
-//        }
-
-        mUrlList.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1423774393,3301272101&fm=26&gp=0.jpg");
-        mUrlList.add("https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1764774024,3138989852&fm=26&gp=0.jpg");
-        mUrlList.add("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1606555763664&di=6a180735dfa87a6be39a67ddbb47f4a6&imgtype=0&src=http%3A%2F%2Fpic.baike.soso.com%2Fp%2F20140408%2F20140408130734-1854992764.jpg");
-        mUrlList.add("https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3811056552,313222880&fm=26&gp=0.jpg");
-
-        titleas.add("标题一");
-        titleas.add("标题二");
-        titleas.add("标题三");
-        titleas.add("标题四");
+//        titleas.add("标题一");
+//        titleas.add("标题二");
+//        titleas.add("标题三");
+//        titleas.add("标题四");
 
         if (mBanner != null) {
             mBanner.setViewUrls(mContext, mUrlList, titleas);

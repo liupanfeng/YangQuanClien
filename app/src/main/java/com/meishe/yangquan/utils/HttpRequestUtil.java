@@ -14,6 +14,7 @@ import com.meishe.yangquan.bean.ServerCustomerResult;
 import com.meishe.yangquan.bean.ServiceMessageResult;
 import com.meishe.yangquan.bean.SheepNewsResult;
 import com.meishe.yangquan.bean.User;
+import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -26,13 +27,14 @@ import java.util.HashMap;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
 public class HttpRequestUtil {
 
-    private static final String TAG=HttpRequestUtil.class.getSimpleName();
+    private static final String TAG = HttpRequestUtil.class.getSimpleName();
 
     private static final HttpRequestUtil ourInstance = new HttpRequestUtil();
 
@@ -45,10 +47,11 @@ public class HttpRequestUtil {
         this.listener = listener;
     }
 
-    private  OnResponseListener listener;
+    private OnResponseListener listener;
     private static Context mContext;
+
     public static HttpRequestUtil getInstance(Context context) {
-        mContext= context;
+        mContext = context;
         return ourInstance;
     }
 
@@ -57,8 +60,7 @@ public class HttpRequestUtil {
     }
 
 
-
-    private void registerFromServer(String phoneNumber,int mUserType) {
+    private void registerFromServer(String phoneNumber, int mUserType) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put(Constants.phoneNumber, phoneNumber);
@@ -77,7 +79,7 @@ public class HttpRequestUtil {
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
                 if (result != null) {
-                    User user = result.getData();
+                    UserInfo user = result.getData();
 //                    String nickName=user.getNickname();
                     Log.e(TAG, "注册成功");
                 }
@@ -104,8 +106,7 @@ public class HttpRequestUtil {
     public void getUserByToken(String token) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put(Constants.token, token);
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_USER, new BaseCallBack<UserResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_USER_INFO, new BaseCallBack<UserResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -119,8 +120,8 @@ public class HttpRequestUtil {
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
                 if (result != null) {
-                    User user=result.getData();
-                    if (user!=null){
+                    UserInfo user = result.getData();
+                    if (user != null) {
                         UserManager.getInstance(App.getContext()).setUser(user);
                     }
                 }
@@ -142,10 +143,10 @@ public class HttpRequestUtil {
             protected void inProgress(int progress, long total, int id) {
 
             }
-        }, requestParam);
+        }, requestParam, token);
     }
 
-    public void uploadUserPhoto(long userId,String key,String content) {
+    public void uploadUserPhoto(long userId, String key, String content) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("key", key);
@@ -164,8 +165,8 @@ public class HttpRequestUtil {
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
                 if (result != null) {
-                    User user=result.getData();
-                    if (user!=null){
+                    UserInfo user = result.getData();
+                    if (user != null) {
                         UserManager.getInstance(App.getContext()).setUser(user);
                     }
                 }
@@ -191,7 +192,7 @@ public class HttpRequestUtil {
     }
 
 
-    public void uploadUserInfo(long userId,String type,String content) {
+    public void uploadUserInfo(long userId, String type, String content) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("userId", userId);
@@ -211,10 +212,10 @@ public class HttpRequestUtil {
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
                 if (result != null) {
-                    User user=result.getData();
-                    if (user!=null){
+                    UserInfo user = result.getData();
+                    if (user != null) {
                         UserManager.getInstance(App.getContext()).setUser(user);
-                        if (listener!=null){
+                        if (listener != null) {
                             listener.onSuccess(user);
                         }
                     }
@@ -231,7 +232,7 @@ public class HttpRequestUtil {
                 if (e instanceof com.google.gson.JsonParseException) {
                     ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
                 }
-                if (listener!=null){
+                if (listener != null) {
                     listener.onError(e);
                 }
 
@@ -247,7 +248,7 @@ public class HttpRequestUtil {
     /**
      * 获取开屏广告
      */
-    public void getADFromServer(){
+    public void getADFromServer() {
         HashMap<String, Object> requestParam = new HashMap<>();
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_AD, new BaseCallBack<ADOpenScreenResult>() {
             @Override
@@ -262,8 +263,8 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, ADOpenScreenResult result) {
-                if (result != null||result.getStatus()==200) {
-                    if (listener!=null){
+                if (result != null || result.getStatus() == 200) {
+                    if (listener != null) {
                         listener.onSuccess(result);
                     }
                 }
@@ -290,7 +291,7 @@ public class HttpRequestUtil {
      * 服务循环消息
      * type 1 ：头部循环消息  2. 咨询消息
      */
-    public  void  getServiceMessageFromServer(final int type){
+    public void getServiceMessageFromServer(final int type) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_MESSAGE, new BaseCallBack<ServiceMessageResult>() {
@@ -306,9 +307,9 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, ServiceMessageResult result) {
-                if (result != null||result.getStatus()==200) {
-                    if (listener!=null){
-                        listener.onSuccess(type,result);
+                if (result != null || result.getStatus() == 200) {
+                    if (listener != null) {
+                        listener.onSuccess(type, result);
                     }
                 }
             }
@@ -336,10 +337,10 @@ public class HttpRequestUtil {
     /**
      * 服务列表消息
      */
-    public  void  getServiceListFromServer(int userType){
+    public void getServiceListFromServer(int userType) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("userType",userType);
+        requestParam.put("userType", userType);
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_LIST, new BaseCallBack<ServerCustomerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -353,8 +354,8 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, ServerCustomerResult result) {
-                if (result != null&&result.getStatus()==200) {
-                    if (listener!=null){
+                if (result != null && result.getStatus() == 200) {
+                    if (listener != null) {
                         listener.onSuccess(result);
                     }
                 }
@@ -384,7 +385,7 @@ public class HttpRequestUtil {
      * 咨询新闻
      * type :2 表示咨询新闻
      */
-    public  void  getServiceNewsFromServer(final int type){
+    public void getServiceNewsFromServer(final int type) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_SHEEP_NEWS, new BaseCallBack<SheepNewsResult>() {
@@ -400,9 +401,9 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, SheepNewsResult result) {
-                if (result != null||result.getStatus()==200) {
-                    if (listener!=null){
-                        listener.onSuccess(type,result);
+                if (result != null || result.getStatus() == 200) {
+                    if (listener != null) {
+                        listener.onSuccess(type, result);
                     }
                 }
             }
@@ -430,13 +431,13 @@ public class HttpRequestUtil {
     /**
      * 发布消息
      */
-    public  void  publishMessage(String token, int sheepType, String content, String iconBase64){
+    public void publishMessage(String token, int sheepType, String content, String iconBase64) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("token",token);
-        requestParam.put("sheepType",sheepType);
-        requestParam.put("content",content);
-        requestParam.put("iconBase64",iconBase64);
+        requestParam.put("token", token);
+        requestParam.put("sheepType", sheepType);
+        requestParam.put("content", content);
+        requestParam.put("iconBase64", iconBase64);
         OkHttpManager.getInstance().postRequest(HttpUrl.MESSAGE_PUBLISH, new BaseCallBack<MessageResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -445,19 +446,19 @@ public class HttpRequestUtil {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (listener!=null){
+                if (listener != null) {
                     listener.onError(e);
                 }
             }
 
             @Override
             protected void onSuccess(Call call, Response response, MessageResult result) {
-                if (result!=null) {
-                    if (result.getStatus()!=200){
-                        ToastUtil.showToast(mContext,result.getMsg());
+                if (result != null) {
+                    if (result.getStatus() != 200) {
+                        ToastUtil.showToast(mContext, result.getMsg());
                         return;
                     }
-                    if (listener!=null){
+                    if (listener != null) {
                         listener.onSuccess(result.getData());
                     }
                 }
@@ -470,7 +471,7 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (listener!=null){
+                if (listener != null) {
                     listener.onError(e);
                 }
             }
@@ -483,14 +484,13 @@ public class HttpRequestUtil {
     }
 
 
-
     /**
      * 信息列表
      */
-    public void getMessageListFromServer(int userType){
+    public void getMessageListFromServer(int userType) {
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("userType",userType);
+        requestParam.put("userType", userType);
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_MESSAGE_LIST, new BaseCallBack<MessageResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -504,8 +504,8 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, MessageResult result) {
-                if (response != null&&response.code()==200) {
-                    if (listener!=null){
+                if (response != null && response.code() == 200) {
+                    if (listener != null) {
                         listener.onSuccess(result);
                     }
                 }
@@ -518,7 +518,7 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (listener!=null){
+                if (listener != null) {
                     listener.onError(e);
                 }
 
@@ -534,10 +534,10 @@ public class HttpRequestUtil {
     /**
      * 完善个人信息
      */
-    public  void  updateUserFromServer(Context context) throws Exception{
+    public void updateUserFromServer(Context context) throws Exception {
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        User user=UserManager.getInstance(context).getUser();
+        UserInfo user = UserManager.getInstance(context).getUser();
         Field[] fields = user.getClass().getDeclaredFields();
         for (int i = 0, len = fields.length; i < len; i++) {
             PropertyDescriptor pd = new PropertyDescriptor(fields[i].getName(), user.getClass());
@@ -560,8 +560,8 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, SheepNewsResult result) {
-                if (result != null||result.getStatus()==200) {
-                    if (listener!=null){
+                if (result != null || result.getStatus() == 200) {
+                    if (listener != null) {
                         listener.onSuccess(result);
                     }
                 }
@@ -600,7 +600,7 @@ public class HttpRequestUtil {
 
             @Override
             protected void onSuccess(Call call, Response response, String o) {
-                Log.d("lpf","onSuccess");
+                Log.d("lpf", "onSuccess");
             }
 
             @Override
@@ -610,13 +610,13 @@ public class HttpRequestUtil {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                Log.d("lpf","onEror");
+                Log.d("lpf", "onEror");
             }
 
             @Override
             protected void inProgress(int progress, long total, int id) {
 
             }
-        },tempFile,s,requestParam);
+        }, tempFile, s, requestParam);
     }
 }

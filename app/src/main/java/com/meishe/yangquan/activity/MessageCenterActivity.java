@@ -48,7 +48,7 @@ public class MessageCenterActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        mUser = UserManager.getInstance(this).getUser();
+        mUser = null;
         if (mUser == null) {
             return;
         }

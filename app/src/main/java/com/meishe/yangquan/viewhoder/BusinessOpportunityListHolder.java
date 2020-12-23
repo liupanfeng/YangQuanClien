@@ -42,7 +42,7 @@ public class BusinessOpportunityListHolder extends BaseViewHolder {
             if (createTime>0){
                 tv_opportunity_time.setText(DateUtil.longToString(createTime,DateUtil.FORMAT_TYPE));
             }
-            User user= UserManager.getInstance(context).getUser();
+            User user=null;
             if (user!=null){
                 String nickName=user.getNickname();
                 tv_opportunity_title.setText("尊敬的"+nickName+":");

@@ -284,7 +284,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
                 return;
             }
-            User user = UserManager.getInstance(mContext).getUser();
+            User user = null;
             switch (v.getId()) {
                 case R.id.btn_order:
                     if (user != null) {
@@ -341,7 +341,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     fragment.show(mFragment.getFragmentManager(), "dialog");
                     break;
                 case R.id.btn_message_start_connect:    //我要联系
-                    User user = UserManager.getInstance(mContext).getUser();
+                    User user = null;
                     if (user != null) {
                         String phoneNum = user.getPhoneNumber();
                         long fromUserId = user.getUserId();

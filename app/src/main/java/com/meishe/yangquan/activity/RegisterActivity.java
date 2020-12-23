@@ -216,11 +216,11 @@ public class RegisterActivity extends BaseActivity  {
                         return;
                     }
                     if (code==200){
-                        User user=result.getData();
+                        User user=null;
                         if (user!=null){
                             String token = user.getTokenId();
                             UserManager.getInstance(mContext).setToken(token);
-                            UserManager.getInstance(mContext).setUser(user);
+//                            UserManager.getInstance(mContext).setUser(user);
                             AppManager.getInstance().jumpActivity(RegisterActivity.this, MainActivity.class);
                             updateDeviceAlias();
                             finish();
@@ -260,7 +260,7 @@ public class RegisterActivity extends BaseActivity  {
 
 
     public void updateDeviceAlias(){
-        User user=UserManager.getInstance(mContext).getUser();
+        User user=null;
         if(user==null){
             return;
         }

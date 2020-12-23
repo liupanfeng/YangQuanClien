@@ -37,8 +37,10 @@ public class HttpUrl {
     /*发送短信验证码*/
     public static final String USER_SEND_CODE = URL + "app/verify/code/msg";
 
+
     /*获取用户信息*/
-    public static final String URL_GET_USER = URL + "user/get/token";
+    public static final String URL_GET_USER_INFO = URL + "app/user/info";
+
 
     /*完善用户信息*/
     public static final String URL_UPDATE_USER = URL + "user/update";
@@ -117,6 +119,7 @@ public class HttpUrl {
 
     /*服务列表点赞*/
     public static final String SERVICE_LIST_DELETE_ZAN = URL + "zan/delete";
+
 
 
 }
