@@ -4,10 +4,10 @@ import java.util.List;
 
 /**
  * @author liupanfeng
- * @desc 行业资讯列表
+ * @desc 服务返回结果
  * @date 2020/11/28 17:57
  */
-public class IndustryResult {
+public class ServiceResult {
 
     private int code;
 
@@ -15,7 +15,7 @@ public class IndustryResult {
 
     private String msg;
 
-    private List<IndustryInfo> data;
+    private List<ServiceInfo> data;
 
     public int getCode() {
         return code;
@@ -41,11 +41,11 @@ public class IndustryResult {
         this.msg = msg;
     }
 
-    public List<IndustryInfo> getData() {
+    public List<ServiceInfo> getData() {
         return data;
     }
 
-    public void setData(List<IndustryInfo> data) {
+    public void setData(List<ServiceInfo> data) {
         this.data = data;
     }
 

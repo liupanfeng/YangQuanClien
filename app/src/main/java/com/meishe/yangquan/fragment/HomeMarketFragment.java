@@ -35,9 +35,13 @@ import okhttp3.Response;
  */
 public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnClickListener {
 
+   /*出售羊苗*/
     private static final int TYPE_MARKET_SELL_LITTLE_SHEEP = 9;
+    /*购买羊苗*/
     private static final int TYPE_MARKET_BUY_LITTLE_SHEEP = 10;
+    /*出售成品羊*/
     private static final int TYPE_MARKET_SELL_BIG_SHEEP = 11;
+    /*收购成品羊*/
     private static final int TYPE_MARKET_BUY_BIG_SHEEP = 12;
 
     /*最新*/
@@ -50,7 +54,6 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
     private CustomButton mBuyLittleSheep;
     private CustomButton mSellBigSheep;
     private CustomButton mBuyBigSheep;
-    private MultiFunctionAdapter mMarketAdapter;
     private CustomTextView mTvMarketNewest;
     private CustomTextView mTvMarketCommand;
 
@@ -88,12 +91,6 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         getMarketDataFromServer(TYPE_MARKET_SELL_LITTLE_SHEEP, TYPE_MARKET_LIST_TYPE_NEWEST);
     }
 
-//    private void initRecyclerView() {
-//        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
-//        mRecyclerView.setLayoutManager(layoutManager);
-//        mMarketAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-//        mRecyclerView.setAdapter(mMarketAdapter);
-//    }
 
     @Override
     public void onClick(View v) {
@@ -175,7 +172,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         param.put("pageNum", 1);
         param.put("pageSize", 30);
         String token = UserManager.getInstance(mContext).getToken();
-        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_QUOTATION, new BaseCallBack<MarketResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_MARKET, new BaseCallBack<MarketResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -197,7 +194,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
                 if (data == null || data.size() == 0) {
                     return;
                 }
-                mMarketAdapter.addAll(data);
+                mAdapter.addAll(data);
             }
 
             @Override

@@ -9,7 +9,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.SystemNotification;
-import com.meishe.yangquan.utils.DateUtil;
+import com.meishe.yangquan.utils.FormatDateUtil;
 
 /**
  *  消息中心
@@ -36,7 +36,7 @@ public class MessageCenterListHolder extends BaseViewHolder {
             SystemNotification notification= (SystemNotification) info;
             long createTime=notification.getCreateTime();
             if (createTime>0){
-                tv_message_center_time.setText(DateUtil.longToString(createTime,DateUtil.FORMAT_TYPE));
+                tv_message_center_time.setText(FormatDateUtil.longToString(createTime, FormatDateUtil.FORMAT_TYPE));
             }
             tv_message_center_content.setText(notification.getContent());
         }

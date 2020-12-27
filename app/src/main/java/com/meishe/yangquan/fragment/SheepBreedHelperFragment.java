@@ -23,7 +23,7 @@ import java.util.List;
 public class SheepBreedHelperFragment extends BaseRecyclerFragment {
 
     private static final String ARGUMENT_KEY_TITLE = "key_title";
-    private String mTitle;
+    private int mId;
     private TextView mTvTitle;
     private TabLayout mTabLayout;
     private MViewPager mViewPager;
@@ -32,11 +32,11 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
     private List<Fragment> mFragmentList=new ArrayList<>();
 
 
-    public static SheepBreedHelperFragment newInstance(String title) {
+    public static SheepBreedHelperFragment newInstance(int id) {
         SheepBreedHelperFragment fragment = new SheepBreedHelperFragment();
         Bundle args = new Bundle();
         //使用bundle 进行数据传递
-        args.putString(ARGUMENT_KEY_TITLE, title);
+        args.putInt(ARGUMENT_KEY_TITLE, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -46,7 +46,7 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
         super.onCreate(savedInstanceState);
         //在onCreate方法中获取参数
         if (getArguments() != null) {
-            mTitle = getArguments().getString(ARGUMENT_KEY_TITLE);
+            mId = getArguments().getInt(ARGUMENT_KEY_TITLE);
         }
     }
 
@@ -54,7 +54,6 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.sheep_breed_helper_fragment, container, false);
         mTvTitle = view.findViewById(R.id.tv_title);
-        mTvTitle.setText(mTitle);
         mTabLayout = view.findViewById(R.id.tab_layout);
         mViewPager = view.findViewById(R.id.viewpager);
         return view;

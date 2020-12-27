@@ -102,7 +102,7 @@
                         android:id="@+id/tv_select_sheep_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="请选择肉羊品种"
+                        android:text="1"
                         android:textColor="#ffc2c2c2"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp35"
@@ -140,6 +140,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp70"
                         android:layout_centerVertical="true"
+                        android:gravity="end"
                         android:textSize="13sp"
                         android:background="@null"
                         />
@@ -187,6 +188,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp70"
                         android:layout_centerVertical="true"
+                        android:gravity="end"
                         android:textSize="13sp"
                         android:background="@null"
                         />
@@ -233,6 +235,7 @@
                         android:textColorHint="#ffc2c2c2"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp70"
+                        android:gravity="end"
                         android:layout_centerVertical="true"
                         android:textSize="13sp"
                         android:background="@null"
@@ -274,10 +277,9 @@
 
 
                     <TextView
-                        android:id="@+id/et_sheep_time"
+                        android:id="@+id/tv_sheep_time"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2020-10-08"
                         android:textColor="#ff303030"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp36"
@@ -399,6 +401,7 @@
 
 
                         <TextView
+                            android:id="@+id/tv_sell_type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="羊腔"
@@ -433,6 +436,7 @@
                             />
 
                         <EditText
+                            android:id="@+id/et_sell_sheep_price"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="请输入进栏价格"
@@ -440,6 +444,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/dp70"
                             android:layout_centerVertical="true"
+                            android:gravity="end"
                             android:textSize="13sp"
                             android:background="@null"
                             />
@@ -479,12 +484,14 @@
                             />
 
                         <EditText
+                            android:id="@+id/et_sell_weight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:hint="请输入进栏重量"
+                            android:hint="请输入出栏重量"
                             android:textColorHint="#ffc2c2c2"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/dp70"
+                            android:gravity="end"
                             android:layout_centerVertical="true"
                             android:textSize="13sp"
                             android:background="@null"
@@ -526,9 +533,11 @@
                             />
 
                         <EditText
+                            android:id="@+id/et_sell_sheep_weight"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="请输入羊腔重量"
+                            android:gravity="end"
                             android:textColorHint="#ffc2c2c2"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/dp70"
@@ -557,43 +566,6 @@
                     </RelativeLayout>
 
 
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_marginLeft="@dimen/dp16"
-                        android:layout_height="54dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="进栏时间"
-                            android:textColor="#ff303030"
-                            android:textSize="13sp"
-                            android:layout_centerVertical="true"
-                            />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="2020-10-08"
-                            android:textColor="#ff303030"
-                            android:layout_alignParentRight="true"
-                            android:layout_marginRight="@dimen/dp36"
-                            android:layout_centerVertical="true"
-                            android:textSize="13sp"
-                            />
-
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/dp0p3"
-                            android:background="#e5e5e5"
-                            android:layout_alignParentBottom="true"
-                            />
-                    </RelativeLayout>
-
-
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_marginLeft="@dimen/dp16"
@@ -609,12 +581,14 @@
                             />
 
                         <EditText
+                            android:id="@+id/et_sell_sheep_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:hint="请输入出栏数量"
                             android:textColorHint="#ffc2c2c2"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/dp70"
+                            android:gravity="end"
                             android:layout_centerVertical="true"
                             android:textSize="13sp"
                             android:background="@null"
@@ -655,6 +629,7 @@
                             />
 
                         <TextView
+                            android:id="@+id/tv_surplus_number"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="300"
@@ -685,10 +660,43 @@
                             />
                     </RelativeLayout>
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/dp16"
+                        android:layout_height="54dp">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="出栏时间"
+                            android:textColor="#ff303030"
+                            android:textSize="13sp"
+                            android:layout_centerVertical="true"
+                            />
+
+
+                        <TextView
+                            android:id="@+id/tv_sell_sheep_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#ff303030"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginRight="@dimen/dp36"
+                            android:layout_centerVertical="true"
+                            android:textSize="13sp"
+                            />
+
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dp0p3"
+                            android:background="#e5e5e5"
+                            android:layout_alignParentBottom="true"
+                            />
+                    </RelativeLayout>
 
                     <Button
-                        android:id="@+id/btn_receive"
+                        android:id="@+id/btn_sell_sheep"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
                         android:background="@drawable/mine_gold_button_bg"

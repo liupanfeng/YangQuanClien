@@ -5,7 +5,7 @@ import android.net.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class DateUtil {
+public class FormatDateUtil {
 
     public static final String FORMAT_TYPE="yyyy-MM-dd HH:mm:ss";
     public static final String FORMAT_TYPE_YEAR_MONTH_DAY="yyyy-MM-dd";

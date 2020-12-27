@@ -35,7 +35,6 @@ import okhttp3.Response;
 public class HomeIndustryInformation extends BaseRecyclerFragment{
 
     private BannerLayout mBanner;
-    private MultiFunctionAdapter mAdapter;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -54,14 +53,19 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
     protected void initData() {
         initRecyclerView();
         getBannerDataFromServer();
-//        initTopBanner(null);
         getIndustryInfoFromServer();
     }
 
+    /**
+     * 获取资讯列表
+     */
     private void getIndustryInfoFromServer() {
         HashMap<String, Object> param = new HashMap<>();
         String token = UserManager.getInstance(mContext).getToken();
-        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_NEWS_LIST, new BaseCallBack<BannerResult>() {
+        param.put("pageNum",1);
+        param.put("pageSize",30);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_NEWS_LIST, new BaseCallBack<IndustryResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -73,17 +77,17 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, BannerResult result) {
+            protected void onSuccess(Call call, Response response, IndustryResult result) {
 //                mLoading.hide();
                 if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
-                List<BannerInfo> data = result.getData();
+                List<IndustryInfo> data = result.getData();
                 if (data == null || data.size() == 0) {
                     return;
                 }
-                initTopBanner(data);
+                mAdapter.addAll(data);
             }
 
             @Override

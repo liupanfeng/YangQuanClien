@@ -10,6 +10,8 @@ import com.meishe.yangquan.activity.ServicePublishActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.MarketResult;
+import com.meishe.yangquan.bean.ServiceInfo;
+import com.meishe.yangquan.bean.ServiceResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
@@ -33,11 +35,14 @@ import okhttp3.Response;
  * @date 2020/11/26 10:43
  */
 public class HomeServiceFragment extends BaseRecyclerFragment implements View.OnClickListener {
-
-    private static final int TYPE_SERVICE_CUT_WOOL = 9;
-    private static final int TYPE_SERVICE_VACCINE = 10;
-    private static final int TYPE_SERVICE_SHEEP_DUNG = 11;
-    private static final int TYPE_SERVICE_LOOK_CAR = 12;
+    /*剪羊毛*/
+    private static final int TYPE_SERVICE_CUT_WOOL = 13;
+    /*打疫苗*/
+    private static final int TYPE_SERVICE_VACCINE = 14;
+    /*拉羊粪*/
+    private static final int TYPE_SERVICE_SHEEP_DUNG = 15;
+    /*找车辆*/
+    private static final int TYPE_SERVICE_LOOK_CAR = 16;
 
     /*最新*/
     private static final int TYPE_MARKET_LIST_TYPE_NEWEST = 1;
@@ -59,7 +64,6 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
     private int mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
     private int mServiceType = TYPE_SERVICE_CUT_WOOL;
 
-    private MultiFunctionAdapter mServiceAdapter;
     private ImageView mIvPublishService;
 
     @Override
@@ -188,7 +192,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         param.put("pageNum", 1);
         param.put("pageSize", 30);
         String token = UserManager.getInstance(mContext).getToken();
-        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_QUOTATION, new BaseCallBack<MarketResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_SERVICE, new BaseCallBack<ServiceResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -200,17 +204,17 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, MarketResult result) {
+            protected void onSuccess(Call call, Response response, ServiceResult result) {
 //                mLoading.hide();
                 if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
-                List<MarketInfo> data = result.getData();
+                List<ServiceInfo> data = result.getData();
                 if (data == null || data.size() == 0) {
                     return;
                 }
-                mServiceAdapter.addAll(data);
+                mAdapter.addAll(data);
             }
 
             @Override

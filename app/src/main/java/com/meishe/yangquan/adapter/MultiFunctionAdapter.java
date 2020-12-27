@@ -18,6 +18,7 @@ import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
+import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
@@ -34,6 +35,7 @@ import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
 import com.meishe.yangquan.viewhoder.QuotationListHolder;
 import com.meishe.yangquan.viewhoder.ServiceLabelHolder;
+import com.meishe.yangquan.viewhoder.ServiceListHolder;
 import com.meishe.yangquan.viewhoder.ServiceMessageListHolder;
 import com.meishe.yangquan.viewhoder.ServiceSheepNewsHolder;
 import com.meishe.yangquan.viewhoder.ServiceMessageHolder;
@@ -111,6 +113,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_market, parent, false);
                 viewHolder = new MarketListHolder(view, this);
                 break;
+            /*服务列表*/
+            case VIEW_SERVICE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_service, parent, false);
+                viewHolder = new ServiceListHolder(view, this);
+                break;
             /*行业资讯列表*/
             case VIEW_INDUSTRY_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_industry, parent, false);
@@ -173,6 +180,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_SHEEP_BAR_ADD_PIC;
         } else if (baseInfo instanceof SheepBarMessageInfo) {
             return VIEW_SHEEP_BAR_MESSAGE;
+        } else if (baseInfo instanceof ServiceInfo) {
+            return VIEW_SERVICE_LIST;
         }
         return super.getItemViewType(position);
     }

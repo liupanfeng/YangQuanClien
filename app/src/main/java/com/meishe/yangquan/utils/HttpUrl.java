@@ -24,6 +24,16 @@ public class HttpUrl {
     public static final String HOME_PAGE_GET_QUOTATION = URL + "app/quotation/list";
 
     /**
+     * 请求市场数据
+     */
+    public static final String HOME_PAGE_GET_MARKET = URL + "app/market/list";
+
+    /**
+     * 请求服务数据
+     */
+    public static final String HOME_PAGE_GET_SERVICE = URL + "app/service/list";
+
+    /**
      * 请求广告条数据
      */
     public static final String HOME_PAGE_GET_BANNER = URL + "app/home/banner";
@@ -119,6 +129,25 @@ public class HttpUrl {
 
     /*服务列表点赞*/
     public static final String SERVICE_LIST_DELETE_ZAN = URL + "zan/delete";
+
+
+   /*申请服务*/
+    public static final String SHEEP_HOLDER_APPLY_SERVICE = URL + "app/cultural/service/save";
+
+   /*我的业务*/
+    public static final String SHEEP_HOLDER_APPLY_MY_BUSINESS = URL + "app/cultural/service/latest";
+
+   /*创建档案*/
+    public static final String SHEEP_HOLDER_CREATE_BATCH = URL + "app/cultural/assistant/batch/save";
+
+   /*获取批次列表*/
+    public static final String SHEEP_HOLDER_BATCH_LIST = URL + "app/cultural/assistant/batch/list";
+
+   /*羊助手基础信息填写*/
+    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_IN = URL + "app/cultural/assistant/batch/in";
+
+   /*羊助手出栏信息填写*/
+    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT= URL + "/app/cultural/assistant/batch/out";
 
 
 

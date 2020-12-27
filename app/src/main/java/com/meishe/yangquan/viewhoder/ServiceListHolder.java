@@ -2,28 +2,22 @@ package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
-import android.util.Base64;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.MarketInfo;
-import com.meishe.yangquan.utils.FormatCurrentData;
-import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.CircleImageView;
-import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
  * 市场
  * @author 86188
  */
-public class MarketListHolder extends BaseViewHolder {
+public class ServiceListHolder extends BaseViewHolder {
 
 
     private final RequestOptions options;
@@ -50,7 +44,7 @@ public class MarketListHolder extends BaseViewHolder {
 
     private ImageView iv_market_phone;
 
-    public MarketListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
+    public ServiceListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter=adapter;
 

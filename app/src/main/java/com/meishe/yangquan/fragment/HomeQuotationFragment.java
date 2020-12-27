@@ -1,7 +1,5 @@
 package com.meishe.yangquan.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +14,7 @@ import com.meishe.yangquan.bean.QuotationInfo;
 import com.meishe.yangquan.bean.QuotationResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
-import com.meishe.yangquan.utils.DateUtil;
+import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -77,7 +75,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
 
     @Override
     protected void initData() {
-        mTvTodayQuotation.setText(String.format("今日行情 %s", DateUtil.dateToString(new Date(), DateUtil.FORMAT_TYPE_YEAR_MONTH_DAY)));
+        mTvTodayQuotation.setText(String.format("今日行情 %s", FormatDateUtil.dateToString(new Date(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY)));
         initRecyclerView();
         selectLittleSheep();
         getBannerDataFromServer();

@@ -7,7 +7,6 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -18,10 +17,8 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.User;
-import com.meishe.yangquan.utils.DateUtil;
+import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.UserManager;
-import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
@@ -79,7 +76,7 @@ public class MessageListHolder extends BaseViewHolder {
             }
             long createTime=message.getCreateTime();
             if (createTime>0){
-                mTvMessageTime.setText(DateUtil.longToString(createTime,"yyyy-MM-dd HH:mm:ss"));
+                mTvMessageTime.setText(FormatDateUtil.longToString(createTime,"yyyy-MM-dd HH:mm:ss"));
             }
 
 
