@@ -24,6 +24,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.LoginActivity;
+import com.meishe.yangquan.activity.SettingActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.User;
@@ -84,6 +85,8 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
     private RelativeLayout mRlMineCommont;
     /*待退款*/
     private RelativeLayout mRlMineRefund;
+    /*设置*/
+    private ImageView mIvSetting;
 
     public MineFragment() {
     }
@@ -121,6 +124,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         mRlMineCommont = view.findViewById(R.id.rl_mine_comment);
         mRlMineRefund = view.findViewById(R.id.rl_mine_refund);
         mTvNickname = view.findViewById(R.id.tv_nickname);
+        mIvSetting = view.findViewById(R.id.iv_mine_setting);
         return view;
     }
 
@@ -131,6 +135,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         mRlMineReceive.setOnClickListener(this);
         mRlMineCommont.setOnClickListener(this);
         mRlMineRefund.setOnClickListener(this);
+        mIvSetting.setOnClickListener(this);
     }
 
     @Override
@@ -222,6 +227,10 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             case R.id.rl_mine_receive:
                 break;
             case R.id.rl_mine_refund:
+                break;
+            case R.id.iv_mine_setting:
+                //设置
+                AppManager.getInstance().jumpActivity(getActivity(), SettingActivity.class);
                 break;
             default:
                 break;

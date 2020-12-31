@@ -85,7 +85,12 @@ public class SheepBreedHelperActivity extends BaseActivity {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                showCreateDialog();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        showCreateDialog();
+                    }
+                });
             }
 
             @Override
