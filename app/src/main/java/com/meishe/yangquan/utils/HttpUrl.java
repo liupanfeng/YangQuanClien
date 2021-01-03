@@ -147,7 +147,12 @@ public class HttpUrl {
     public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_IN = URL + "app/cultural/assistant/batch/in";
 
    /*羊助手出栏信息填写*/
-    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT= URL + "/app/cultural/assistant/batch/out";
+    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT= URL + "app/cultural/assistant/batch/out";
+
+   /*添加服务*/
+    public static final String HOME_PAGE_ADD_SERVICE = URL + "app/service/add";
+    /*添加市场*/
+    public static final String HOME_PAGE_ADD_MARKET = URL + "app/market/add";
 
 
 

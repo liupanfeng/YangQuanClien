@@ -2,9 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="@dimen/dp10"
-    android:layout_marginRight="@dimen/dp10"
     android:background="@drawable/home_market_list_item_bg"
+    android:layout_marginBottom="8dp"
     android:orientation="vertical">
 
     <RelativeLayout
@@ -17,6 +16,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp11"
+            android:background="@mipmap/ic_default_photo"
             android:layout_height="@dimen/dp22" />
 
         <TextView
@@ -41,6 +41,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp14"
             android:textSize="11sp"
+            android:drawablePadding="@dimen/dp5"
             android:drawableLeft="@mipmap/ic_market_location"
             />
 
@@ -90,6 +91,7 @@
                         android:layout_height="15dp"
                         android:text="通榆"
                         android:gravity="center"
+                        android:drawablePadding="@dimen/dp3"
                         android:drawableLeft="@mipmap/ic_market_place"
                         android:textColor="#ff656565"
                         android:textSize="11sp"
@@ -103,6 +105,7 @@
                         android:gravity="center"
                         android:layout_marginLeft="@dimen/dp12"
                         android:textColor="#ff656565"
+                        android:drawablePadding="@dimen/dp3"
                         android:drawableLeft="@mipmap/ic_market_specification"
                         android:textSize="11sp"
                         />
@@ -115,6 +118,7 @@
                         android:layout_marginLeft="@dimen/dp12"
                         android:text="1000只"
                         android:textColor="#ff656565"
+                        android:drawablePadding="@dimen/dp3"
                         android:drawableLeft="@mipmap/ic_market_sheep_number"
                         android:textSize="11sp"
                         />
@@ -195,7 +199,7 @@
                         android:id="@+id/iv_market_phone"
                         android:layout_width="47dp"
                         android:layout_height="47dp"
-                        android:layout_marginLeft="@dimen/dp12"
+                        android:layout_marginLeft="@dimen/dp6"
                         android:layout_marginTop="@dimen/dp22"
                         android:src="@mipmap/ic_market_phone"
                         />

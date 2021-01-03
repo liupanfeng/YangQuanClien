@@ -269,6 +269,12 @@ public class SheepBreedHelperActivity extends BaseActivity {
     @Override
     public void initListener() {
         mLlCreate.setOnClickListener(this);
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 
     @Override

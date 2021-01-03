@@ -40,7 +40,8 @@
         android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle">
-        <activity android:name=".activity.SettingActivity"></activity>
+        <activity android:name=".activity.PublishMarketActivity"></activity>
+        <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.SheepBarDetailActivity" />
         <activity android:name=".activity.BarSheepPublishActivity" />
         <activity android:name=".activity.SheepBreedHelperActivity" />
@@ -113,7 +114,7 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <activity android:name=".activity.AboutActivity" />
         <activity android:name=".activity.ClipCircleImageActivity" />
-        <activity android:name=".activity.ServicePublishActivity" />
+        <activity android:name=".activity.PublishServiceActivity" />
         <activity android:name=".activity.ContactUsActivity" />
         <activity android:name=".activity.VersionUpdateActivity" />
         <activity android:name=".activity.BusinessOpportunityActivity" />
@@ -125,7 +126,7 @@
             android:theme="@style/NoTitleStyle" />
         <activity
             android:name=".activity.LoginActivity"
-            android:theme="@style/NoTitleStyle"></activity>
+            android:theme="@style/NoTitleStyle" />
         <activity
             android:name=".activity.SplashActivity"
             android:screenOrientation="portrait"

@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.LoginActivity;
-import com.meishe.yangquan.activity.ServicePublishActivity;
+import com.meishe.yangquan.activity.PublishServiceActivity;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.TabInfo;
 import com.meishe.yangquan.utils.AppManager;
@@ -164,7 +164,7 @@ public class MessageFragment extends BaseRecyclerFragment implements View.OnClic
         if (!UserManager.getInstance(mContext).isNeedLogin()){
             Bundle bundle=new Bundle();
             bundle.putInt("currentPosition",mCurrentPosition);
-            AppManager.getInstance().jumpActivity(getActivity(), ServicePublishActivity.class,bundle);
+            AppManager.getInstance().jumpActivity(getActivity(), PublishServiceActivity.class,bundle);
         }else{
             AppManager.getInstance().jumpActivity(getActivity(), LoginActivity.class);
         }

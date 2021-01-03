@@ -1,19 +1,18 @@
 package com.meishe.yangquan.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.activity.PublishMarketActivity;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.MarketResult;
-import com.meishe.yangquan.bean.QuotationInfo;
-import com.meishe.yangquan.bean.QuotationResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -35,7 +34,7 @@ import okhttp3.Response;
  */
 public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnClickListener {
 
-   /*出售羊苗*/
+    /*出售羊苗*/
     private static final int TYPE_MARKET_SELL_LITTLE_SHEEP = 9;
     /*购买羊苗*/
     private static final int TYPE_MARKET_BUY_LITTLE_SHEEP = 10;
@@ -59,6 +58,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
 
     private int mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
     private int mMarketType = TYPE_MARKET_SELL_LITTLE_SHEEP;
+    private ImageView mIvPublishMarket;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -70,6 +70,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mRecyclerView = view.findViewById(R.id.recycler);
         mTvMarketNewest = view.findViewById(R.id.tv_market_newest);
         mTvMarketCommand = view.findViewById(R.id.tv_market_command);
+        mIvPublishMarket = view.findViewById(R.id.iv_publish_market);
         return view;
     }
 
@@ -81,6 +82,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mBuyBigSheep.setOnClickListener(this);
         mTvMarketNewest.setOnClickListener(this);
         mTvMarketCommand.setOnClickListener(this);
+        mIvPublishMarket.setOnClickListener(this);
     }
 
     @Override
@@ -127,6 +129,11 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
                 mTvMarketNewest.setSelected(false);
                 getMarketDataFromServer(mMarketType, mListType);
                 break;
+            case R.id.iv_publish_market:
+                Bundle bundle = new Bundle();
+                bundle.putInt("market_type", mMarketType);
+                AppManager.getInstance().jumpActivity(getActivity(), PublishMarketActivity.class, bundle);
+                break;
             default:
                 break;
         }
@@ -165,7 +172,6 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
      * 获取市场数据
      */
     private void getMarketDataFromServer(int typeId, int listType) {
-//        mLoading.show();
         HashMap<String, Object> param = new HashMap<>();
         param.put("typeId", typeId);
         param.put("listType", listType);

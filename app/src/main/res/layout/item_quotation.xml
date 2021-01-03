@@ -17,7 +17,7 @@
         android:id="@+id/tv_address"
         android:layout_width="@dimen/dp70"
         android:layout_height="18dp"
-        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginLeft="@dimen/dp15"
         android:textColor="#ff656565"
         android:textSize="13sp" />
 
@@ -26,7 +26,7 @@
         android:id="@+id/tv_specification"
         android:layout_width="@dimen/dp20"
         android:layout_height="18dp"
-        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginLeft="@dimen/dp15"
         android:textColor="#ff656565"
         android:textSize="13sp" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/tv_price"
         android:layout_width="wrap_content"
         android:layout_height="18dp"
-        android:layout_marginLeft="@dimen/dp20"
+        android:layout_marginLeft="@dimen/dp15"
         android:textColor="#ff656565"
         android:textSize="13sp" />
 
@@ -43,6 +43,7 @@
         android:layout_height="15dp"
         android:text="> 进入行情走势"
         android:textColor="#ff3ba786"
+        android:visibility="gone"
         android:gravity="right"
         android:layout_marginRight="@dimen/dp15"
         android:textSize="11sp" />

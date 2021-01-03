@@ -6,12 +6,15 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.view.CircleImageView;
+
+import java.util.List;
 
 /**
  * 市场
@@ -82,13 +85,22 @@ public class ServiceListHolder extends BaseViewHolder {
     public void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener) {
         if (info instanceof MarketInfo){
             tv_market_name.setText(((MarketInfo) info).getNickname());
-//            Comment comment= (Comment) info;
-//            String photoUrl=comment.getPhotoUrl();
-//            Glide.with(context)
-//                    .asBitmap()
-//                    .load(HttpUrl.URL_IMAGE+photoUrl)
-//                    .apply(options)
-//                    .into(iv_comment_photo);
+
+            tv_market_address.setText(((MarketInfo) info).getAddress());
+            tv_market_type_name.setText(((MarketInfo) info).getVariety());
+            tv_market_sheep_number.setText(((MarketInfo) info).getAmount()+"");
+            tv_market_price.setText(((MarketInfo) info).getPrice()+"");
+
+            List<String> images = ((MarketInfo) info).getImages();
+            if (images!=null&&images.size()>0){
+                String coverUrl = images.get(0);
+                Glide.with(context)
+                        .asBitmap()
+                        .load(coverUrl)
+                        .apply(options)
+                        .into(iv_market_cover);
+            }
+
 
 //            tv_comment_nickname.setText(comment.getNickName());
 //            byte[] bytes=Base64.decode(comment.getContent(), Base64.DEFAULT);

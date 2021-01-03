@@ -1,15 +1,13 @@
 package com.meishe.yangquan.fragment;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.activity.ServicePublishActivity;
-import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.bean.MarketInfo;
-import com.meishe.yangquan.bean.MarketResult;
+import com.meishe.yangquan.activity.PublishServiceActivity;
 import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceResult;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -143,8 +141,10 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
                 getServiceDataFromServer(mServiceType, mListType);
                 break;
             case R.id.iv_publish_service:
+                Bundle bundle=new Bundle();
+                bundle.putInt("service_type",mServiceType);
                 //发布服务
-                AppManager.getInstance().jumpActivity(getActivity(), ServicePublishActivity.class);
+                AppManager.getInstance().jumpActivity(getActivity(), PublishServiceActivity.class,bundle);
                 break;
             default:
                 break;

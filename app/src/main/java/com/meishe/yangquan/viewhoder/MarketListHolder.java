@@ -19,8 +19,11 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
+import java.util.List;
+
 /**
- * 市场
+ * 首页-市场
+ *
  * @author 86188
  */
 public class MarketListHolder extends BaseViewHolder {
@@ -52,7 +55,7 @@ public class MarketListHolder extends BaseViewHolder {
 
     public MarketListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
-        mAdapter=adapter;
+        mAdapter = adapter;
 
         options = new RequestOptions();
         options.centerCrop();
@@ -60,34 +63,53 @@ public class MarketListHolder extends BaseViewHolder {
     }
 
     @Override
-    protected void initViewHolder(View view, Object ...obj) {
-        civ_photo_circle=view.findViewById(R.id.civ_photo_circle);
-        tv_market_name=view.findViewById(R.id.tv_market_name);
+    protected void initViewHolder(View view, Object... obj) {
+        civ_photo_circle = view.findViewById(R.id.civ_photo_circle);
+        tv_market_name = view.findViewById(R.id.tv_market_name);
 
-        tv_market_address=view.findViewById(R.id.tv_market_address);
-        iv_market_cover=view.findViewById(R.id.iv_market_cover);
+        tv_market_address = view.findViewById(R.id.tv_market_address);
+        iv_market_cover = view.findViewById(R.id.iv_market_cover);
 
-        tv_market_type_name=view.findViewById(R.id.tv_market_type_name);
-        tv_place_of_origin=view.findViewById(R.id.tv_place_of_origin);
-        tv_market_specification=view.findViewById(R.id.tv_market_specification);
-        tv_market_sheep_number=view.findViewById(R.id.tv_market_sheep_number);
+        tv_market_type_name = view.findViewById(R.id.tv_market_type_name);
+        tv_place_of_origin = view.findViewById(R.id.tv_place_of_origin);
+        tv_market_specification = view.findViewById(R.id.tv_market_specification);
+        tv_market_sheep_number = view.findViewById(R.id.tv_market_sheep_number);
 
-        tv_market_price=view.findViewById(R.id.tv_market_price);
+        tv_market_price = view.findViewById(R.id.tv_market_price);
 
-        iv_market_1=view.findViewById(R.id.iv_market_1);
-        iv_market_2=view.findViewById(R.id.iv_market_2);
-        iv_market_3=view.findViewById(R.id.iv_market_3);
-        iv_market_4=view.findViewById(R.id.iv_market_4);
-        iv_market_5=view.findViewById(R.id.iv_market_5);
-        iv_market_6=view.findViewById(R.id.iv_market_6);
+        iv_market_1 = view.findViewById(R.id.iv_market_1);
+        iv_market_2 = view.findViewById(R.id.iv_market_2);
+        iv_market_3 = view.findViewById(R.id.iv_market_3);
+        iv_market_4 = view.findViewById(R.id.iv_market_4);
+        iv_market_5 = view.findViewById(R.id.iv_market_5);
+        iv_market_6 = view.findViewById(R.id.iv_market_6);
 
-        iv_market_phone=view.findViewById(R.id.iv_market_phone);
+        iv_market_phone = view.findViewById(R.id.iv_market_phone);
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener) {
-        if (info instanceof MarketInfo){
+    public void bindViewHolder(Context context, BaseInfo info, int position, View.OnClickListener listener) {
+        if (info instanceof MarketInfo) {
+
             tv_market_name.setText(((MarketInfo) info).getNickname());
+            tv_market_address.setText(((MarketInfo) info).getAddress());
+            tv_market_type_name.setText(((MarketInfo) info).getTitle());
+            tv_market_sheep_number.setText(((MarketInfo) info).getAmount() + "");
+            tv_market_price.setText(((MarketInfo) info).getPrice() + "元/只");
+            tv_market_specification.setText(((MarketInfo) info).getWeight()+"斤");
+            tv_place_of_origin.setText(((MarketInfo) info).getAddress());
+
+            List<String> images = ((MarketInfo) info).getImages();
+            if (images != null && images.size() > 0) {
+                String coverUrl = images.get(0);
+                Glide.with(context)
+                        .asBitmap()
+                        .load(coverUrl)
+                        .apply(options)
+                        .into(iv_market_cover);
+            }
+
+
 //            Comment comment= (Comment) info;
 //            String photoUrl=comment.getPhotoUrl();
 //            Glide.with(context)

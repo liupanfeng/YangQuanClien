@@ -16,11 +16,10 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
@@ -31,6 +30,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.MsgResult;
+import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -59,7 +59,7 @@ import okhttp3.Response;
 /**
  * 服务发布页面
  */
-public class ServicePublishActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class PublishServiceActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
 
     //相册请求码
@@ -77,16 +77,23 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
     private int mSheepType = 0;
     private Bitmap showBitmap;
     private MaterialProgress mp_loading;
-    private EditText mEtServiceInputTitle;
-    private EditText mEtServiceInputBreed;
-    private EditText mEtServiceInputWeight;
+    /*团队名称*/
+    private EditText mEtServiceInputTeamName;
+    private EditText mEtServiceInputTeamNumber;
+    private EditText mEtServiceInputTeamDesc;
 
-    private EditText mEtServiceInputCount;
     private EditText mEtServiceInputPrice;
     private EditText mEtServiceInputPhoneNumber;
 
-    private RecyclerView mRecyclerView;
-    private MultiFunctionAdapter mAdapter;
+    private Button mBtnPublish;
+
+    private int mServiceType;
+    private String mTeamName;
+    private String mTeamNumber;
+    private String mTeamDesc;
+    private String mPrice;
+    private String mPhone;
+    private String mWeight;
 
 
     @Override
@@ -96,49 +103,50 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
 
     @Override
     public void initView() {
-        mToolbar = findViewById(R.id.toolbar);
-        mEtServiceInputTitle = findViewById(R.id.et_service_input_title);
-        mEtServiceInputBreed = findViewById(R.id.et_service_input_breed);
-        mEtServiceInputWeight = findViewById(R.id.et_service_input_weight);
 
-        mEtServiceInputCount = findViewById(R.id.et_service_input_count);
+
+        mTvTitle = findViewById(R.id.tv_title);
+        mIvBack = findViewById(R.id.iv_back);
+        mBtnPublish = findViewById(R.id.btn_publish);
+
+
+        mEtServiceInputTeamName = findViewById(R.id.et_service_input_team_name);
+        mEtServiceInputTeamNumber = findViewById(R.id.et_service_input_team_number);
         mEtServiceInputPrice = findViewById(R.id.et_service_input_price);
+        mEtServiceInputTeamDesc = findViewById(R.id.et_service_input_team_desc);
         mEtServiceInputPhoneNumber = findViewById(R.id.et_service_input_phone_number);
-        mRecyclerView = findViewById(R.id.recycler);
-
-        initRecyclerView();
 
     }
 
-    @Override
-    public void initRecyclerView() {
-        GridLayoutManager layoutManager = new GridLayoutManager(mContext, 4);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.setAdapter(mAdapter);
-    }
 
     @Override
     public void initData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                mServiceType = extras.getInt("service_type");
+            }
+        }
     }
 
     @Override
     public void initTitle() {
-        mToolbar.setMyTitle("服务发布");
-        mToolbar.setMyTitleVisible(View.VISIBLE);
-        mToolbar.setLeftButtonVisible(View.VISIBLE);
-        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
-
-        mToolbar.setRightButtonVisible(View.VISIBLE);
-        mToolbar.setOnRightButtonClickListener(new OnRightButtonListener());
-        mToolbar.setRightButtonText("发布");
-        mToolbar.setRightButtonBackground(getResources().getColor(R.color.mainColor));
+        mTvTitle.setText("服务发布");
     }
 
     @Override
     public void initListener() {
-//        mRadioGroup.setOnCheckedChangeListener(this);
-//        mIvSelectIcon.setOnClickListener(this);
+
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        mBtnPublish.setOnClickListener(this);
+
     }
 
     @Override
@@ -149,11 +157,40 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-//            case R.id.iv_select_icon:
-//                showPictureSelectItem();
-//                break;
+            case R.id.btn_publish:
+                mTeamName = mEtServiceInputTeamName.getText().toString().trim();
+                if (Util.checkNull(mTeamName)) {
+                    ToastUtil.showToast(mContext, "服务名称必须填写");
+                    return;
+                }
+
+                mTeamNumber = mEtServiceInputTeamNumber.getText().toString().trim();
+                if (Util.checkNull(mTeamNumber)) {
+                    ToastUtil.showToast(mContext, "服务数量必须填写");
+                    return;
+                }
+
+                mPrice = mEtServiceInputPrice.getText().toString().trim();
+                if (Util.checkNull(mPrice)) {
+                    ToastUtil.showToast(mContext, "价格必须填写");
+                    return;
+                }
+                mTeamDesc= mEtServiceInputTeamDesc.getText().toString().trim();
+                if (Util.checkNull(mTeamDesc)) {
+                    ToastUtil.showToast(mContext, "团队描述必须填写");
+                    return;
+                }
+                mPhone = mEtServiceInputPhoneNumber.getText().toString().trim();
+                if (Util.checkNull(mPhone)) {
+                    ToastUtil.showToast(mContext, "手机号必须填写");
+                    return;
+                }
+
+                publishService();
+                break;
         }
     }
+
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -217,17 +254,18 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
     }
 
 
-    /**
-     * 发临时测试
-     */
-    public void testMessage(String yqtoken, String sheepType, String msgContent, String iconBase64) {
-
+    public void publishService() {
+        String token= UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)){
+            return;
+        }
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("yqtoken", yqtoken);
-        requestParam.put("sheepType", sheepType);
-        requestParam.put("msgContent", msgContent);
-        requestParam.put("iconBase64", iconBase64);
-        OkHttpManager.getInstance().postRequest(HttpUrl.MESSAGE_TEST, new BaseCallBack<MsgResult>() {
+        requestParam.put("typeId", mServiceType);
+        requestParam.put("teamName", mTeamName);
+        requestParam.put("teamDesc", mTeamDesc);
+        requestParam.put("price", mPrice);
+        requestParam.put("phone", mPhone);
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_ADD_SERVICE, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -238,21 +276,18 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mp_loading.hide();
                         ToastUtil.showToast(mContext, "上传失败");
                     }
                 });
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, MsgResult result) {
-                if (result != null&&result.getStatus()==200) {
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null&&result.getCode()==1) {
                     ToastUtil.showToast(mContext, "发布成功");
-                    mp_loading.hide();
                     finish();
                 }else{
                     ToastUtil.showToast(mContext, result.getMsg());
-                    mp_loading.hide();
                 }
             }
 
@@ -266,7 +301,6 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        mp_loading.hide();
                         ToastUtil.showToast(mContext, "上传失败");
                     }
                 });
@@ -277,7 +311,7 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
             protected void inProgress(int progress, long total, int id) {
 
             }
-        }, requestParam);
+        }, requestParam,token);
     }
 
 
@@ -389,7 +423,7 @@ public class ServicePublishActivity extends BaseActivity implements RadioGroup.O
 
 
     private void showPictureSelectItem() {
-        new BottomMenuFragment(ServicePublishActivity.this)
+        new BottomMenuFragment(PublishServiceActivity.this)
                 .addMenuItems(new MenuItem("拍照"))
                 .addMenuItems(new MenuItem("相册"))
                 .setOnItemClickListener(new BottomMenuFragment.OnItemClickListener() {

@@ -100,7 +100,6 @@
         android:layout_marginRight="@dimen/dp22"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        >
+        />
 
-    </ImageView>
 </RelativeLayout>

@@ -93,15 +93,25 @@ public class Util {
     private static final String CLIP_LABEL_NAME = "yang_quan";
 
     private static long lastClickTime2;
+
+
+    public static boolean checkNull(String content) {
+        if (TextUtils.isEmpty(content)) {
+            return true;
+        }
+        return false;
+    }
+
     /**
-     *  是否是快速双击
+     * 是否是快速双击
+     *
      * @return 是否是快速双击
      */
     public static boolean isFastDoubleClick() {
         boolean flag = false;
         long time = System.currentTimeMillis();
         long timeD = time - lastClickTime2;
-        if ( 0 < timeD && timeD < 800) {
+        if (0 < timeD && timeD < 800) {
             flag = true;
         }
         lastClickTime2 = time;
@@ -109,26 +119,26 @@ public class Util {
     }
 
 
-
-
     /**
      * 处理上传服务器内容中包含图片不能识别的问题
+     *
      * @param content
      * @return
      */
-    public static String encodeString(String content){
-        String str_count=  Base64.encodeToString(content.getBytes(), Base64.DEFAULT);
+    public static String encodeString(String content) {
+        String str_count = Base64.encodeToString(content.getBytes(), Base64.DEFAULT);
         return str_count;
     }
 
     /**
      * 解码数据
+     *
      * @param content
      * @return
      */
-    public static String decodeString(String content){
-        byte[] bytes=Base64.decode(content, Base64.DEFAULT);
-       return new String(bytes);
+    public static String decodeString(String content) {
+        byte[] bytes = Base64.decode(content, Base64.DEFAULT);
+        return new String(bytes);
     }
 
     public static boolean isBackground(Context context) {
@@ -274,7 +284,6 @@ public class Util {
     }
 
 
-
     public static String getAgeByBirth(String birth) {
         Date birthDay = null;
         if (birth == null) {
@@ -386,6 +395,7 @@ public class Util {
 
     /**
      * 这个是完整的格式
+     *
      * @param string
      * @return
      */
@@ -548,7 +558,6 @@ public class Util {
     }
 
 
-
     public static String formatUTC(long time, String strPattern) {
         if (TextUtils.isEmpty(strPattern)) {
             strPattern = "yyyy-MM-dd HH:mm:ss";
@@ -653,10 +662,6 @@ public class Util {
     }
 
 
-
-
-
-
     /**
      * 跳转到微信
      */
@@ -709,7 +714,7 @@ public class Util {
             objectOutputStream.writeObject(obj);
             objectOutputStream.close();
         } catch (IOException e) {
-            Log.e(TAG,"fail to serilizeData" ,e);
+            Log.e(TAG, "fail to serilizeData", e);
         }
 
     }
@@ -726,7 +731,7 @@ public class Util {
             obj = objectInputStream.readObject();
             objectInputStream.close();
         } catch (Exception e) {
-            Log.e(TAG,"fail to reverseSerilizeData" ,e);
+            Log.e(TAG, "fail to reverseSerilizeData", e);
         }
         return obj;
     }
@@ -752,7 +757,7 @@ public class Util {
     }
 
     public static void refreshPictureToPhoto(Context context, String fileName) {
-        if (context == null){
+        if (context == null) {
             return;
         }
         Intent intent = new Intent();
@@ -765,12 +770,12 @@ public class Util {
      * 拷贝文本到剪贴板
      */
     public static void copyClipData(Context context, String clipContent) {
-        if (context == null){
+        if (context == null) {
             return;
         }
         //获取剪贴板管理器
         ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
-        if (clipboardManager != null){
+        if (clipboardManager != null) {
             // 创建普通字符型ClipData
             ClipData clipData = ClipData.newPlainText(CLIP_LABEL_NAME, clipContent);
             ClipDescription clipDescription = clipboardManager.getPrimaryClipDescription();
@@ -784,15 +789,15 @@ public class Util {
      * 获取剪贴板内容
      */
     public static String getClipData(Context context) {
-        if (context == null){
+        if (context == null) {
             return "";
         }
         ClipboardManager clipboardManager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
-        if (clipboardManager != null){
+        if (clipboardManager != null) {
             ClipDescription clipDescription = clipboardManager.getPrimaryClipDescription();
-            if (clipDescription != null){
+            if (clipDescription != null) {
                 CharSequence clipLabelName = clipDescription.getLabel();
-                if (!TextUtils.isEmpty(clipLabelName) && CLIP_LABEL_NAME.equals(clipLabelName)){
+                if (!TextUtils.isEmpty(clipLabelName) && CLIP_LABEL_NAME.equals(clipLabelName)) {
                     //如果剪切板名称不为空，且与CLIP_LABEL_NAME相同,则认为是从当前App复制的内容，页面不作跳转
                     return "";
                 }
@@ -814,7 +819,7 @@ public class Util {
                     && clipContent.contains("<$")
                     && clipContent.contains("$>")) {
                 clipContentResult = clipContent.substring(clipContent.indexOf("<$") + 2, clipContent.indexOf("$>"));
-            }else {
+            } else {
                 clipContentResult = clipContent;
             }
             return clipContentResult;
@@ -826,7 +831,7 @@ public class Util {
      * 清空剪贴板内容
      */
     public static void clearClipboard(Context context) {
-        if (context == null){
+        if (context == null) {
             return;
         }
         ClipboardManager manager = (ClipboardManager) context.getSystemService(CLIPBOARD_SERVICE);
@@ -835,7 +840,7 @@ public class Util {
                 manager.setPrimaryClip(manager.getPrimaryClip());
                 manager.setText(null);
             } catch (Exception e) {
-                Log.d(TAG,"fail to clear clipboard:" + e.getMessage());
+                Log.d(TAG, "fail to clear clipboard:" + e.getMessage());
             }
         }
     }
@@ -843,6 +848,7 @@ public class Util {
 
     /**
      * 获取所有权限列表(相机权限，麦克风权限，存储权限) 动态申请的权限内容
+     *
      * @return
      */
     public static List<String> getAllPermissionsList() {

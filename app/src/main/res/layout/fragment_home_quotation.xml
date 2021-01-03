@@ -90,7 +90,7 @@
 
             <TextView
                 android:id="@+id/tv_name"
-                android:layout_width="@dimen/dp70"
+                android:layout_width="@dimen/dp60"
                 android:layout_height="18dp"
                 android:layout_marginLeft="@dimen/dp15"
                 android:textColor="#303030"
@@ -99,9 +99,9 @@
 
             <TextView
                 android:id="@+id/tv_address"
-                android:layout_width="@dimen/dp70"
+                android:layout_width="@dimen/dp60"
                 android:layout_height="18dp"
-                android:layout_marginLeft="@dimen/dp20"
+                android:layout_marginLeft="@dimen/dp15"
                 android:textColor="#303030"
                 android:text="产地"
                 android:textSize="13sp" />

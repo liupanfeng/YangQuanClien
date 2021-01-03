@@ -12,10 +12,42 @@
         android:background="#fff5f5f5"
         android:orientation="vertical">
 
-        <include layout="@layout/custom_toolbar_layout" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp48">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp18"
+                android:background="@mipmap/ic_title_back" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="个人信息"
+                android:textColor="#ff303030"
+                android:textSize="17sp" />
+
+            <Button
+                android:id="@+id/btn_publish"
+                android:layout_width="@dimen/dp53"
+                android:layout_height="@dimen/dp27"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp18"
+                android:text="发布"
+                android:background="@drawable/mine_gold_button_bg"
+                android:textColor="@color/white"
+                />
+
+        </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_title"
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
@@ -25,12 +57,12 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp16"
-                android:text="标题"
+                android:text="团队名称"
                 android:textColor="#ff303030"
                 android:textSize="13sp" />
 
             <EditText
-                android:id="@+id/et_service_input_title"
+                android:id="@+id/et_service_input_team_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -38,7 +70,8 @@
                 android:layout_marginRight="@dimen/dp32"
                 android:drawableRight="@mipmap/right_arrow_normal"
                 android:drawablePadding="6dp"
-                android:hint="请输入标题"
+                android:hint="请输入团队名称"
+                android:gravity="end"
                 android:textColorHint="#ffc2c2c2"
                 android:background="@null"
                 android:textSize="13sp" />
@@ -51,7 +84,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_breed"
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
@@ -61,12 +93,12 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp16"
-                android:text="品种"
+                android:text="团队人数"
                 android:textColor="#ff303030"
                 android:textSize="13sp" />
 
             <EditText
-                android:id="@+id/et_service_input_breed"
+                android:id="@+id/et_service_input_team_number"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
@@ -74,7 +106,8 @@
                 android:layout_marginRight="@dimen/dp32"
                 android:drawableRight="@mipmap/right_arrow_normal"
                 android:drawablePadding="6dp"
-                android:hint="请输入品种"
+                android:hint="请输入团队人数"
+                android:gravity="end"
                 android:textColorHint="#ffc2c2c2"
                 android:background="@null"
                 android:textSize="13sp" />
@@ -87,7 +120,6 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/rl_weight"
             android:layout_width="match_parent"
             android:layout_height="60dp">
 
@@ -97,83 +129,9 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp16"
-                android:text="重量"
+                android:text="服务价格"
                 android:textColor="#ff303030"
                 android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/et_service_input_weight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp32"
-                android:drawableRight="@mipmap/right_arrow_normal"
-                android:drawablePadding="6dp"
-                android:hint="请输入重量"
-                android:textColorHint="#ffc2c2c2"
-                android:background="@null"
-                android:textSize="13sp" />
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp0p3"
-                android:layout_alignParentBottom="true"
-                android:background="#E5E5E5" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/rl_number"
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp16"
-                android:text="数量"
-                android:textColor="#ff303030"
-                android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/et_service_input_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp32"
-                android:drawableRight="@mipmap/right_arrow_normal"
-                android:drawablePadding="6dp"
-                android:hint="请输入数量"
-                android:textColorHint="#ffc2c2c2"
-                android:background="@null"
-                android:textSize="13sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp0p3"
-                android:layout_alignParentBottom="true"
-                android:background="#E5E5E5" />
-        </RelativeLayout>
-
-
-        <RelativeLayout
-            android:id="@+id/rl_price"
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp16"
-                android:text="价格"
-                android:textColor="#ff303030"
-                android:textSize="13sp" />
-
 
             <EditText
                 android:id="@+id/et_service_input_price"
@@ -184,7 +142,44 @@
                 android:layout_marginRight="@dimen/dp32"
                 android:drawableRight="@mipmap/right_arrow_normal"
                 android:drawablePadding="6dp"
-                android:hint="请输入价格"
+                android:hint="请输入价格元"
+                android:gravity="end"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="团队介绍"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_service_input_team_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入团队介绍"
+                android:gravity="end"
                 android:textColorHint="#ffc2c2c2"
                 android:background="@null"
                 android:textSize="13sp" />
@@ -195,6 +190,8 @@
                 android:layout_alignParentBottom="true"
                 android:background="#E5E5E5" />
         </RelativeLayout>
+
+
 
         <RelativeLayout
             android:id="@+id/rl_phone_number"
@@ -220,6 +217,7 @@
                 android:layout_marginRight="@dimen/dp32"
                 android:drawableRight="@mipmap/right_arrow_normal"
                 android:drawablePadding="6dp"
+                android:gravity="end"
                 android:hint="请输入电话"
                 android:textColorHint="#ffc2c2c2"
                 android:background="@null"
@@ -235,17 +233,14 @@
         <TextView
             android:layout_width="53dp"
             android:layout_height="19dp"
-            android:text="上传照片"
+            android:text="上传照片(车辆正面照片)"
             android:textColor="#ff303030"
             android:textSize="13sp"
             android:layout_marginLeft="@dimen/dp16"
             android:layout_marginTop="@dimen/dp17"
             />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+
 
     </LinearLayout>
 
