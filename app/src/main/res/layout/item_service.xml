@@ -1,6 +1,408 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/home_market_list_item_bg"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp41">
+
+        <com.meishe.yangquan.view.CircleImageView
+            android:id="@+id/civ_photo_circle"
+            android:layout_width="@dimen/dp22"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp11"
+            android:background="@mipmap/ic_default_photo"
+            android:layout_height="@dimen/dp22" />
+
+        <TextView
+            android:id="@+id/tv_market_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/civ_photo_circle"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp11"
+            android:text="用户昵称"
+            android:textColor="#ff656565"
+            android:textSize="13sp"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:background="#EBEBEB"
+        android:layout_height="0.33dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="145dp">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_height="120dp">
+            <com.meishe.yangquan.view.RoundAngleImageView
+                android:id="@+id/iv_market_cover"
+                android:layout_width="102dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp11"
+                android:scaleType="fitXY"
+                app:roundHeight="@dimen/dp5"
+                app:roundWidth="@dimen/dp5"
+                android:src="@mipmap/ic_market_default"
+                />
+            <RelativeLayout
+                android:id="@+id/rl_cut_sheep_hair"
+                android:layout_toRightOf="@+id/iv_market_cover"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_menu_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="团队名称:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_menu_name"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:text="大唐羊毛对"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_menu_person_number"
+                    android:layout_below="@+id/tv_menu_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="团队人数:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_below="@+id/tv_menu_name"
+                    android:layout_toRightOf="@+id/tv_menu_person_number"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:id="@+id/tv_person_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="10"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_menu_sheep_price"
+                    android:layout_below="@+id/tv_menu_person_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="价格:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sheep_price"
+                    android:layout_below="@+id/tv_menu_person_number"
+                    android:layout_toRightOf="@+id/tv_menu_sheep_price"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1.5元/只"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_menu_team_desc"
+                    android:layout_below="@+id/tv_menu_sheep_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="团队介绍:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_team_desc"
+                    android:layout_below="@+id/tv_menu_sheep_price"
+                    android:layout_toRightOf="@+id/tv_menu_team_desc"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_marginRight="@dimen/dp55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我们团队成立于2018年，是一直专业的团队"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/dp55"
+                    android:layout_height="@dimen/dp55"
+                    android:background="@mipmap/ic_market_phone"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="@dimen/dp16"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dp18"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rl_cut_sheep_dung"
+                android:layout_toRightOf="@+id/iv_market_cover"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:visibility="gone"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_sheep_dung_menu_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="车队名称:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sheep_dung_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_sheep_dung_menu_name"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:text="大唐车对"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sheep_dung_menu_person_number"
+                    android:layout_below="@+id/tv_sheep_dung_menu_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="车队人数:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_below="@+id/tv_sheep_dung_menu_name"
+                    android:layout_toRightOf="@+id/tv_sheep_dung_menu_person_number"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:id="@+id/tv_sheep_dung_person_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sheep_dung_menu_sheep_price"
+                    android:layout_below="@+id/tv_sheep_dung_menu_person_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="车辆数量:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sheep_dung_sheep_price"
+                    android:layout_below="@+id/tv_sheep_dung_menu_person_number"
+                    android:layout_toRightOf="@+id/tv_sheep_dung_menu_sheep_price"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="5辆"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sheep_dung_menu_team_desc"
+                    android:layout_below="@+id/tv_sheep_dung_menu_sheep_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="服务价格:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_sheep_dung_team_desc"
+                    android:layout_below="@+id/tv_sheep_dung_menu_sheep_price"
+                    android:layout_toRightOf="@+id/tv_sheep_dung_menu_team_desc"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_marginRight="@dimen/dp55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="100元/车"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/dp55"
+                    android:layout_height="@dimen/dp55"
+                    android:background="@mipmap/ic_market_phone"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="@dimen/dp16"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dp18"
+                    />
+            </RelativeLayout>
+
+
+            <RelativeLayout
+                android:id="@+id/rl_find_car"
+                android:layout_toRightOf="@+id/iv_market_cover"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/tv_find_car_menu_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="车辆类型:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_find_car_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/tv_find_car_menu_name"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:text="长途车、短途车"
+                    android:singleLine="true"
+                    android:ellipsize="end"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_find_car_menu_person_number"
+                    android:layout_below="@+id/tv_find_car_menu_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="服务类别:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:layout_below="@+id/tv_find_car_menu_name"
+                    android:layout_toRightOf="@+id/tv_find_car_menu_person_number"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:id="@+id/tv_find_car_person_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="拉成品羊、拉饲料"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_find_car_menu_sheep_price"
+                    android:layout_below="@+id/tv_find_car_menu_person_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="车长*宽*高："
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_find_car_sheep_price"
+                    android:layout_below="@+id/tv_find_car_menu_person_number"
+                    android:layout_toRightOf="@+id/tv_find_car_menu_sheep_price"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.2*1.9*1.8"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_find_car_menu_team_desc"
+                    android:layout_below="@+id/tv_find_car_menu_sheep_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:text="限高通行:"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_find_car_team_desc"
+                    android:layout_below="@+id/tv_find_car_menu_sheep_price"
+                    android:layout_toRightOf="@+id/tv_find_car_menu_team_desc"
+                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_marginTop="@dimen/dp4"
+                    android:layout_marginRight="@dimen/dp55"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="4.5米"
+                    android:textColor="#ff2f3742"
+                    android:textSize="13sp"
+                    />
+
+                <ImageView
+                    android:layout_width="@dimen/dp55"
+                    android:layout_height="@dimen/dp55"
+                    android:background="@mipmap/ic_market_phone"
+                    android:scaleType="fitXY"
+                    android:layout_marginRight="@dimen/dp16"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="@dimen/dp18"
+                    />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

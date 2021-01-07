@@ -34,13 +34,13 @@ import okhttp3.Response;
  */
 public class HomeServiceFragment extends BaseRecyclerFragment implements View.OnClickListener {
     /*剪羊毛*/
-    private static final int TYPE_SERVICE_CUT_WOOL = 13;
+    public static final int TYPE_SERVICE_CUT_WOOL = 13;
     /*打疫苗*/
-    private static final int TYPE_SERVICE_VACCINE = 14;
+    public static final int TYPE_SERVICE_VACCINE = 14;
     /*拉羊粪*/
-    private static final int TYPE_SERVICE_SHEEP_DUNG = 15;
+    public static final int TYPE_SERVICE_SHEEP_DUNG = 15;
     /*找车辆*/
-    private static final int TYPE_SERVICE_LOOK_CAR = 16;
+    public static final int TYPE_SERVICE_LOOK_CAR = 16;
 
     /*最新*/
     private static final int TYPE_MARKET_LIST_TYPE_NEWEST = 1;
@@ -200,19 +200,22 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
 
             @Override
             protected void onFailure(Call call, IOException e) {
-//                mLoading.hide();
             }
 
             @Override
             protected void onSuccess(Call call, Response response, ServiceResult result) {
-//                mLoading.hide();
                 if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
                 List<ServiceInfo> data = result.getData();
                 if (data == null || data.size() == 0) {
+                    mAdapter.addAll(data);
                     return;
+                }
+                for (int i=0;i<data.size();i++){
+                    ServiceInfo serviceInfo = data.get(i);
+                    serviceInfo.setServerType(mServiceType);
                 }
                 mAdapter.addAll(data);
             }

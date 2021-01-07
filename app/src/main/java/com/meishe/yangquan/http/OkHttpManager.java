@@ -71,11 +71,15 @@ public class OkHttpManager {
         doRequest(request, callBack);
     }
 
-    public void postUploadSingleImage(String url, final BaseCallBack callback, File file, String fileKey, Map<String, String> params) {
+    public void postUploadSingleImage(String url, final BaseCallBack callback, File file, String fileKey, Map<String, String> params){
+        postUploadSingleImage(url,callback,file,fileKey,params,"");
+    }
+
+    public void postUploadSingleImage(String url, final BaseCallBack callback, File file, String fileKey, Map<String, String> params,String token) {
         Param[] paramsArr = fromMapToParams(params);
 
         try {
-            postAsyn(url, callback, file, fileKey, paramsArr);
+            postAsyn(url, callback, file, fileKey, token,paramsArr);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -103,6 +107,11 @@ public class OkHttpManager {
     //单个文件上传请求 带参数
     private void postAsyn(String url, BaseCallBack callback, File file, String fileKey, Param... params) throws IOException {
         Request request = buildMultipartFormRequest(url, new File[]{file}, new String[]{fileKey}, params);
+        doRequest(request, callback);
+    }
+    //单个文件上传请求 带参数
+    private void postAsyn(String url, BaseCallBack callback, File file, String fileKey, String token,Param... params) throws IOException {
+        Request request = buildMultipartFormRequest(url, new File[]{file}, new String[]{fileKey},params,token);
         doRequest(request, callback);
     }
 
@@ -166,8 +175,13 @@ public class OkHttpManager {
 
     }
 
-    //构造上传图片 Request
     private Request buildMultipartFormRequest(String url, File[] files, String[] fileKeys, Param[] params) {
+        return buildMultipartFormRequest(url,files,fileKeys,params,"");
+    }
+
+
+    //构造上传图片 Request
+    private Request buildMultipartFormRequest(String url, File[] files, String[] fileKeys, Param[] params,String token) {
         params = validateParam(params);
         MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
         for (Param param : params) {
@@ -189,7 +203,7 @@ public class OkHttpManager {
 
         RequestBody requestBody = builder.build();
         return new Request.Builder()
-                .url(url)
+                .url(url).addHeader("token",token)
                 .post(requestBody)
                 .build();
     }

@@ -9,6 +9,8 @@ import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.meishe.yangquan.App;
+
 
 public class ToastUtil {
 
@@ -21,6 +23,29 @@ public class ToastUtil {
      * @param msg
      */
     public static void showToast(Context context, String msg) {
+        if (context == null){
+            return;
+        }
+        if (TextUtils.isEmpty(msg)) {
+            return;
+        }
+
+        if (mTextToast == null) {
+            mTextToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT);
+        } else {
+            mTextToast.setText(msg);
+        }
+        mTextToast.show();
+    }
+
+
+    /**
+     * 显示Toast
+     *
+     * @param msg
+     */
+    public static void showToast(String msg) {
+        Context context= App.getContext();
         if (context == null){
             return;
         }

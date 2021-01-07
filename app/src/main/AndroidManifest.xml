@@ -43,7 +43,7 @@
         <activity android:name=".activity.PublishMarketActivity"></activity>
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.SheepBarDetailActivity" />
-        <activity android:name=".activity.BarSheepPublishActivity" />
+        <activity android:name=".activity.PublishSheepBarActivity" />
         <activity android:name=".activity.SheepBreedHelperActivity" />
         <activity android:name=".activity.SheepMyBusinessActivity" />
         <activity android:name=".activity.SheepApplyIntroduceActivity" />

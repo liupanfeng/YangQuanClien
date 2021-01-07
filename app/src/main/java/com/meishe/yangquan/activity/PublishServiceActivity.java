@@ -16,7 +16,6 @@ import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -27,11 +26,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.MsgResult;
 import com.meishe.yangquan.bean.ServerResult;
-import com.meishe.yangquan.bean.User;
+import com.meishe.yangquan.bean.UploadFileInfo;
+import com.meishe.yangquan.bean.UploadFileResult;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -56,6 +55,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_CUT_WOOL;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_LOOK_CAR;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_VACCINE;
+
 /**
  * 服务发布页面
  */
@@ -71,8 +75,6 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CODE = 203;   //拍摄存储权限
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 201;
-    private File tempFile;
-    private ImageView mIvShowIcon;
 
     private int mSheepType = 0;
     private Bitmap showBitmap;
@@ -94,27 +96,28 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     private String mPrice;
     private String mPhone;
     private String mWeight;
+    private File mTempFile;
+    private ImageView mIvPublishService;
 
 
     @Override
     protected int initRootView() {
-        return R.layout.activity_message_publish;
+        return R.layout.activity_service_publish;
     }
 
     @Override
     public void initView() {
 
-
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
         mBtnPublish = findViewById(R.id.btn_publish);
-
 
         mEtServiceInputTeamName = findViewById(R.id.et_service_input_team_name);
         mEtServiceInputTeamNumber = findViewById(R.id.et_service_input_team_number);
         mEtServiceInputPrice = findViewById(R.id.et_service_input_price);
         mEtServiceInputTeamDesc = findViewById(R.id.et_service_input_team_desc);
         mEtServiceInputPhoneNumber = findViewById(R.id.et_service_input_phone_number);
+        mIvPublishService = findViewById(R.id.iv_publish_service);
 
     }
 
@@ -132,7 +135,23 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
     @Override
     public void initTitle() {
-        mTvTitle.setText("服务发布");
+        switch (mServiceType) {
+            case TYPE_SERVICE_CUT_WOOL:
+                mTvTitle.setText("羊毛服务");
+                break;
+            case TYPE_SERVICE_VACCINE:
+                mTvTitle.setText("疫苗服务");
+                break;
+            case TYPE_SERVICE_SHEEP_DUNG:
+                mTvTitle.setText("羊粪服务");
+                break;
+            case TYPE_SERVICE_LOOK_CAR:
+                mTvTitle.setText("车辆服务");
+                break;
+            default:
+                break;
+        }
+
     }
 
     @Override
@@ -146,6 +165,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         });
 
         mBtnPublish.setOnClickListener(this);
+        mIvPublishService.setOnClickListener(this);
 
     }
 
@@ -175,7 +195,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                     ToastUtil.showToast(mContext, "价格必须填写");
                     return;
                 }
-                mTeamDesc= mEtServiceInputTeamDesc.getText().toString().trim();
+                mTeamDesc = mEtServiceInputTeamDesc.getText().toString().trim();
                 if (Util.checkNull(mTeamDesc)) {
                     ToastUtil.showToast(mContext, "团队描述必须填写");
                     return;
@@ -185,10 +205,75 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                     ToastUtil.showToast(mContext, "手机号必须填写");
                     return;
                 }
-
-                publishService();
+                if (!mTempFile.exists()) {
+                    ToastUtil.showToast(mContext, "图片必须上传");
+                }
+                uploadPicture();
+                break;
+            case R.id.iv_publish_service:
+                showPictureSelectItem();
+                break;
+            default:
                 break;
         }
+    }
+
+    /**
+     * 图片上传
+     */
+    private void uploadPicture() {
+        String token = UserManager.getInstance(mContext).getToken();
+        if (Util.checkNull(token)) {
+            return;
+        }
+        HashMap<String, String> param = new HashMap<>();
+        param.put("uploadMode", "5");
+        param.put("order", "1");
+
+        OkHttpManager.getInstance().postUploadSingleImage(HttpUrl.HOME_PAGE_COMMON_FILE_UPLOAD, new BaseCallBack<UploadFileResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UploadFileResult uploadFileResult) {
+                if (uploadFileResult == null) {
+                    ToastUtil.showToast(response.message());
+                    return;
+                }
+                if (uploadFileResult.getCode() != 1) {
+                    ToastUtil.showToast(uploadFileResult.getMsg());
+                    return;
+                }
+                UploadFileInfo data = uploadFileResult.getData();
+                if (data == null) {
+                    ToastUtil.showToast("UploadFileInfo is null");
+                    return;
+                }
+                publishService(String.valueOf(data.getId()));
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, mTempFile, "file", param, token);
     }
 
 
@@ -207,10 +292,10 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     private void addMessage(String userToken, String sheepType, String msgContent, String iconBase64) {
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
         FormBody.Builder formBody = new FormBody.Builder();//创建表单请求体
-        formBody.add("userToken",userToken);
-        formBody.add("sheepType",sheepType);
-        formBody.add("msgContent",msgContent);
-        formBody.add("iconBase64",iconBase64);
+        formBody.add("userToken", userToken);
+        formBody.add("sheepType", sheepType);
+        formBody.add("msgContent", msgContent);
+        formBody.add("iconBase64", iconBase64);
         Request request = new Request.Builder()//创建Request 对象。
                 .url(HttpUrl.MESSAGE_ADD)
                 .post(formBody.build())//传递请求体
@@ -230,7 +315,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
             @Override
             public void onResponse(Call call, final Response response) throws IOException {
-                if (response != null&&response.code()==200) {
+                if (response != null && response.code() == 200) {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -240,7 +325,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                         }
                     });
 
-                }else{
+                } else {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -254,17 +339,19 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     }
 
 
-    public void publishService() {
-        String token= UserManager.getInstance(mContext).getToken();
-        if (TextUtils.isEmpty(token)){
+    public void publishService(String pictureId) {
+        String token = UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)) {
             return;
         }
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("typeId", mServiceType);
         requestParam.put("teamName", mTeamName);
         requestParam.put("teamDesc", mTeamDesc);
+        requestParam.put("teamHumanScale", mTeamNumber);
         requestParam.put("price", mPrice);
         requestParam.put("phone", mPhone);
+        requestParam.put("fileIds", pictureId);
         OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_ADD_SERVICE, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -283,10 +370,10 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
-                if (result != null&&result.getCode()==1) {
+                if (result != null && result.getCode() == 1) {
                     ToastUtil.showToast(mContext, "发布成功");
                     finish();
-                }else{
+                } else {
                     ToastUtil.showToast(mContext, result.getMsg());
                 }
             }
@@ -311,7 +398,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
             protected void inProgress(int progress, long total, int id) {
 
             }
-        }, requestParam,token);
+        }, requestParam, token);
     }
 
 
@@ -344,11 +431,11 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
             @Override
             protected void onSuccess(Call call, Response response, MsgResult result) {
-                if (result != null&&result.getStatus()==200) {
+                if (result != null && result.getStatus() == 200) {
                     ToastUtil.showToast(mContext, "发布成功");
                     mp_loading.hide();
                     finish();
-                }else{
+                } else {
                     ToastUtil.showToast(mContext, result.getMsg());
                     mp_loading.hide();
                 }
@@ -473,16 +560,16 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
      */
     private void getPicFromCamera() {
         //用于保存调用相机拍照后所生成的文件
-        tempFile = new File(Environment.getExternalStorageDirectory().getPath(), System.currentTimeMillis() + ".png");
+        mTempFile = new File(Environment.getExternalStorageDirectory().getPath(), System.currentTimeMillis() + ".png");
         //跳转到调用系统相机
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //判断版本
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {   //如果在Android7.0以上,使用FileProvider获取Uri
             intent.setFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
-            Uri contentUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", tempFile);
+            Uri contentUri = FileProvider.getUriForFile(this, getPackageName() + ".fileprovider", mTempFile);
             intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
         } else {    //否则使用Uri.fromFile(file)方法获取Uri
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(mTempFile));
         }
         startActivityForResult(intent, CAMERA_REQUEST_CODE);
     }
@@ -502,33 +589,37 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
         super.onActivityResult(requestCode, resultCode, intent);
         switch (requestCode) {
-            case CAMERA_REQUEST_CODE:   //调用相机后返回
-                if (tempFile != null) {
-                    Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
-//                    mIvSelectIcon.setVisibility(View.GONE);
+            //调用相机后返回
+            case CAMERA_REQUEST_CODE:
+                if (mTempFile != null) {
+                    Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(mTempFile.getAbsolutePath(), 1080);
+                    if (tmpBitmap == null) {
+                        return;
+                    }
                     Matrix matrix = new Matrix();
                     matrix.setScale(0.2f, 0.2f);
                     showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
                             tmpBitmap.getHeight(), matrix, true);
-
-
-                    mIvShowIcon.setImageBitmap(showBitmap);
+                    mIvPublishService.setImageBitmap(showBitmap);
                 }
                 break;
-
-            case ALBUM_REQUEST_CODE:    //调用相册后返回
+            //调用相册后返回
+            case ALBUM_REQUEST_CODE:
                 if (resultCode == RESULT_OK) {
                     String imagePath = null;
-                    if (intent == null)
+                    if (intent == null) {
                         return;
+                    }
                     Uri uri = intent.getData();
-                    if (uri == null)
+                    if (uri == null) {
                         return;
+                    }
                     if (DocumentsContract.isDocumentUri(this, uri)) {
                         //如果是document类型的Uri,则通过document id处理
                         String docId = DocumentsContract.getDocumentId(uri);
                         if ("com.android.providers.media.documents".equals(uri.getAuthority())) {
-                            String id = docId.split(":")[1];//解析出数字格式的id
+                            //解析出数字格式的id
+                            String id = docId.split(":")[1];
                             String selection = MediaStore.Images.Media._ID + "=" + id;
                             imagePath = getImagePath(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, selection);
                         } else if ("com.android.providers.downloads.documents".equals(uri.getAuthority())) {
@@ -543,23 +634,23 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                         imagePath = uri.getPath();
                     }
                     if (imagePath != null) {
-                        tempFile = new File(imagePath);
-                        Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
+                        mTempFile = new File(imagePath);
+                        Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(mTempFile.getAbsolutePath(), 1080);
                         Matrix matrix = new Matrix();
                         matrix.setScale(0.4f, 0.4f);
                         showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
                                 tmpBitmap.getHeight(), matrix, true);
-//                        mIvSelectIcon.setVisibility(View.GONE);
-                        mIvShowIcon.setImageBitmap(showBitmap);
+                        mIvPublishService.setImageBitmap(showBitmap);
                     }
                 }
                 break;
 
-
-            case CROP_SMALL_PICTURE:  //调用剪裁后返回
+            //调用剪裁后返回
+            case CROP_SMALL_PICTURE:
                 if (resultCode == RESULT_OK) {
-                    if (intent == null)
+                    if (intent == null) {
                         return;
+                    }
                     File tempCoverFile = new File(PathUtils.getPersonalCoverImageDirectory(), PathUtils.getTempCoverImageName(mContext));
                     Bitmap bitMap = BitmapFactory.decodeFile(tempCoverFile.getAbsolutePath());
 //                    if (bitMap != null) {
@@ -568,6 +659,9 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 //                    showLoading();
 //                    uploadUserInfo("icon", Util.bitmaptoString(bitMap));
                 }
+                break;
+            default:
+                break;
         }
     }
 

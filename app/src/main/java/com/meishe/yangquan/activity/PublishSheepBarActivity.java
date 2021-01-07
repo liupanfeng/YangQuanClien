@@ -37,7 +37,7 @@ import java.util.List;
 /**
  * 发布羊吧内容界面
  */
-public class BarSheepPublishActivity extends BaseActivity {
+public class PublishSheepBarActivity extends BaseActivity {
 
     //相册请求码
     private static final int ALBUM_REQUEST_CODE = 1;
@@ -173,7 +173,7 @@ public class BarSheepPublishActivity extends BaseActivity {
 
 
     private void showPictureSelectItem() {
-        new BottomMenuFragment(BarSheepPublishActivity.this)
+        new BottomMenuFragment(PublishSheepBarActivity.this)
                 .addMenuItems(new MenuItem("拍照"))
                 .addMenuItems(new MenuItem("相册"))
                 .setOnItemClickListener(new BottomMenuFragment.OnItemClickListener() {

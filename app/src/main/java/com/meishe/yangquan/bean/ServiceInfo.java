@@ -7,9 +7,9 @@ import java.util.List;
  * @desc 首页-服务数据
  * @date 2020/11/29 16:09
  */
-public class ServiceInfo extends BaseInfo{
+public class ServiceInfo extends BaseInfo {
 
-//    {
+    //    {
 //        "code": 1,
 //            "enMsg": "success",
 //            "msg": "成功",
@@ -30,11 +30,13 @@ public class ServiceInfo extends BaseInfo{
 //                "id": 10
 //    }]
 //    }
+    /*服务类型 剪羊毛 打疫苗 找车辆*/
+    private int serverType;
 
     private int id;
     private int authState;
     private List<String> images;
-    private String initDate;
+    private long initDate;
 
     private float max_height;
     private String team_desc;
@@ -67,11 +69,11 @@ public class ServiceInfo extends BaseInfo{
     }
 
 
-    public String getInitDate() {
+    public long getInitDate() {
         return initDate;
     }
 
-    public void setInitDate(String initDate) {
+    public void setInitDate(long initDate) {
         this.initDate = initDate;
     }
 
@@ -178,5 +180,18 @@ public class ServiceInfo extends BaseInfo{
 
     public void setPrice(float price) {
         this.price = price;
+    }
+
+
+    public int getServerType() {
+        return serverType;
+    }
+
+    public void setServerType(int serverType) {
+        this.serverType = serverType;
+    }
+
+    public float getPrice() {
+        return price;
     }
 }

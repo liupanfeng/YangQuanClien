@@ -35,13 +35,13 @@ public class RecycleViewDivider extends BaseDecoration {
      * @param orientation 列表方向
      */
     public RecycleViewDivider(BaseRecyclerAdapter adapter, int mSpace, Context context, int orientation) {
-        super(adapter,mSpace);
+        super(adapter, mSpace);
         if (orientation != LinearLayoutManager.VERTICAL && orientation != LinearLayoutManager.HORIZONTAL) {
             throw new IllegalArgumentException("请输入正确的参数！");
         }
         mOrientation = orientation;
-        mDividerHeight=mSpace;
-        mAdapter=adapter;
+        mDividerHeight = mSpace;
+        mAdapter = adapter;
         mPaint = new Paint();
         mPaint.setColor(context.getResources().getColor(R.color.divide));
         final TypedArray a = context.obtainStyledAttributes(ATTRS);

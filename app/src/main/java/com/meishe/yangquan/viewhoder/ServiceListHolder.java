@@ -1,6 +1,8 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
@@ -12,7 +14,11 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MarketInfo;
+import com.meishe.yangquan.bean.ServiceInfo;
+import com.meishe.yangquan.fragment.HomeServiceFragment;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.view.CircleImageView;
+import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.util.List;
 
@@ -29,7 +35,7 @@ public class ServiceListHolder extends BaseViewHolder {
     /*昵称*/
     private TextView tv_market_name;
     private TextView tv_market_address;
-    private ImageView iv_market_cover;
+    private RoundAngleImageView iv_market_cover;
 
     private TextView tv_market_type_name;
     private TextView tv_place_of_origin;
@@ -46,6 +52,9 @@ public class ServiceListHolder extends BaseViewHolder {
     private ImageView iv_market_6;
 
     private ImageView iv_market_phone;
+    private View rl_cut_sheep_hair;
+    private View rl_find_car;
+    private View rl_cut_sheep_dung;
 
     public ServiceListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -58,6 +67,10 @@ public class ServiceListHolder extends BaseViewHolder {
 
     @Override
     protected void initViewHolder(View view, Object ...obj) {
+        rl_cut_sheep_hair=view.findViewById(R.id.rl_cut_sheep_hair);
+        rl_cut_sheep_dung=view.findViewById(R.id.rl_cut_sheep_dung);
+        rl_find_car=view.findViewById(R.id.rl_find_car);
+
         civ_photo_circle=view.findViewById(R.id.civ_photo_circle);
         tv_market_name=view.findViewById(R.id.tv_market_name);
 
@@ -83,30 +96,48 @@ public class ServiceListHolder extends BaseViewHolder {
 
     @Override
     public void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener) {
-        if (info instanceof MarketInfo){
-            tv_market_name.setText(((MarketInfo) info).getNickname());
+        if (info instanceof ServiceInfo){
+            int serverType = ((ServiceInfo) info).getServerType();
+            switch (serverType){
+                case HomeServiceFragment.TYPE_SERVICE_CUT_WOOL:
+                case HomeServiceFragment.TYPE_SERVICE_VACCINE:
+                    rl_cut_sheep_hair.setVisibility(View.VISIBLE);
+                    rl_cut_sheep_dung.setVisibility(View.GONE);
+                    rl_find_car.setVisibility(View.GONE);
+                    break;
+                case HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG:
+                    rl_cut_sheep_hair.setVisibility(View.GONE);
+                    rl_cut_sheep_dung.setVisibility(View.VISIBLE);
+                    rl_find_car.setVisibility(View.GONE);
+                    break;
+                case HomeServiceFragment.TYPE_SERVICE_LOOK_CAR:
+                    rl_cut_sheep_hair.setVisibility(View.GONE);
+                    rl_cut_sheep_dung.setVisibility(View.GONE);
+                    rl_find_car.setVisibility(View.VISIBLE);
+                    break;
+                default:
+                    break;
+            }
+//            tv_market_name.setText(((ServiceInfo) info).getNickname());
 
-            tv_market_address.setText(((MarketInfo) info).getAddress());
-            tv_market_type_name.setText(((MarketInfo) info).getVariety());
-            tv_market_sheep_number.setText(((MarketInfo) info).getAmount()+"");
-            tv_market_price.setText(((MarketInfo) info).getPrice()+"");
+//            tv_market_address.setText(((ServiceInfo) info).getAddress());
+//            tv_market_type_name.setText(((ServiceInfo) info).getVariety());
+//            tv_market_sheep_number.setText(((ServiceInfo) info).getAmount()+"");
+//            tv_market_price.setText(((ServiceInfo) info).getPrice()+"");
 
-            List<String> images = ((MarketInfo) info).getImages();
+            List<String> images = ((ServiceInfo) info).getImages();
             if (images!=null&&images.size()>0){
+
+
                 String coverUrl = images.get(0);
                 Glide.with(context)
                         .asBitmap()
                         .load(coverUrl)
                         .apply(options)
                         .into(iv_market_cover);
+
+
             }
-
-
-//            tv_comment_nickname.setText(comment.getNickName());
-//            byte[] bytes=Base64.decode(comment.getContent(), Base64.DEFAULT);
-//            tv_comment_content.setText(new String(bytes));
-//            tv_comment_time.setText(FormatCurrentData.getTimeRange(comment.getCreateTime()+""));
-
         }
     }
 

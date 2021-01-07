@@ -676,8 +676,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
      * @param list
      */
     public void addAll(List<? extends BaseInfo> list) {
+        mList.clear();
         if (list != null && list.size() > 0) {
-            mList.clear();
             mList.addAll(list);
         }
         notifyDataSetChanged();

@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.UserInfo;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
 import java.util.ArrayList;
@@ -62,6 +64,10 @@ public abstract class BaseRecyclerFragment extends Fragment {
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+    protected String getToken(){
+        return UserManager.getInstance(mContext).getToken();
     }
 
 }

@@ -154,6 +154,12 @@ public class HttpUrl {
     /*添加市场*/
     public static final String HOME_PAGE_ADD_MARKET = URL + "app/market/add";
 
+    /*上传文件*/
+    public static final String HOME_PAGE_COMMON_FILE_UPLOAD = URL + "common/file/upload";
+
+    /*获取羊吧列表*/
+    public static final String SHEEP_BAR_INFO_LIST = URL + "app/bar/post/list";
+
 
 
 }
