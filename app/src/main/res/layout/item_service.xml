@@ -46,7 +46,7 @@
             android:layout_centerVertical="true"
             android:layout_height="120dp">
             <com.meishe.yangquan.view.RoundAngleImageView
-                android:id="@+id/iv_market_cover"
+                android:id="@+id/iv_service_cover"
                 android:layout_width="102dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp11"
@@ -73,7 +73,7 @@
                     />
 
                 <TextView
-                    android:id="@+id/tv_name"
+                    android:id="@+id/tv_service_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toRightOf="@+id/tv_menu_name"

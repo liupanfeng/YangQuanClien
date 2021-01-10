@@ -1,8 +1,6 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,17 +11,15 @@ import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.fragment.HomeServiceFragment;
-import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.util.List;
 
 /**
- * 市场
+ * home - 服务
  * @author 86188
  */
 public class ServiceListHolder extends BaseViewHolder {
@@ -36,11 +32,13 @@ public class ServiceListHolder extends BaseViewHolder {
     private TextView tv_market_name;
     private TextView tv_market_address;
     private RoundAngleImageView iv_market_cover;
-
-    private TextView tv_market_type_name;
+     /*团队名称*/
+    private TextView tv_service_name;
     private TextView tv_place_of_origin;
-    private TextView tv_market_specification;
-    private TextView tv_market_sheep_number;
+    /*团队人数*/
+    private TextView tv_person_number;
+    /*服务价格*/
+    private TextView tv_sheep_price;
 
     private TextView tv_market_price;
 
@@ -75,12 +73,11 @@ public class ServiceListHolder extends BaseViewHolder {
         tv_market_name=view.findViewById(R.id.tv_market_name);
 
         tv_market_address=view.findViewById(R.id.tv_market_address);
-        iv_market_cover=view.findViewById(R.id.iv_market_cover);
+        iv_market_cover=view.findViewById(R.id.iv_service_cover);
 
-        tv_market_type_name=view.findViewById(R.id.tv_market_type_name);
-        tv_place_of_origin=view.findViewById(R.id.tv_place_of_origin);
-        tv_market_specification=view.findViewById(R.id.tv_market_specification);
-        tv_market_sheep_number=view.findViewById(R.id.tv_market_sheep_number);
+        tv_service_name =view.findViewById(R.id.tv_service_name);
+        tv_person_number =view.findViewById(R.id.tv_person_number);
+        tv_sheep_price =view.findViewById(R.id.tv_sheep_price);
 
         tv_market_price=view.findViewById(R.id.tv_market_price);
 
