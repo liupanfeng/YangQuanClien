@@ -7,14 +7,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.fragment.ShareBottomSheetDialogFragment;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.CustomToolbar;
-import com.umeng.analytics.MobclickAgent;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.UMShareAPI;
-import com.umeng.socialize.UMShareListener;
-import com.umeng.socialize.bean.SHARE_MEDIA;
 
 /**
  * 关于页面
@@ -115,46 +109,46 @@ public class AboutActivity extends BaseActivity {
     private class OnRightImageListener implements CustomToolbar.OnRightButtonClickListener {
         @Override
         public void onClick() {
-            new ShareAction(AboutActivity.this).withText("羊圈App下载地址：" + "http://59.110.142.42:8080/images/yangquan-release.apk").setDisplayList(SHARE_MEDIA.WEIXIN)
-                    .setCallback(new UMShareListener() {
-                        @Override
-                        public void onStart(SHARE_MEDIA share_media) {
-
-                        }
-
-                        @Override
-                        public void onResult(SHARE_MEDIA share_media) {
-
-                        }
-
-                        @Override
-                        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
-
-                        }
-
-                        @Override
-                        public void onCancel(SHARE_MEDIA share_media) {
-
-                        }
-                    }).open();
+//            new ShareAction(AboutActivity.this).withText("羊圈App下载地址：" + "http://59.110.142.42:8080/images/yangquan-release.apk").setDisplayList(SHARE_MEDIA.WEIXIN)
+//                    .setCallback(new UMShareListener() {
+//                        @Override
+//                        public void onStart(SHARE_MEDIA share_media) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onResult(SHARE_MEDIA share_media) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onError(SHARE_MEDIA share_media, Throwable throwable) {
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancel(SHARE_MEDIA share_media) {
+//
+//                        }
+//                    }).open();
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        MobclickAgent.onResume(this);
+//        MobclickAgent.onResume(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        MobclickAgent.onPause(this);
+//        MobclickAgent.onPause(this);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+//        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
     }
 }

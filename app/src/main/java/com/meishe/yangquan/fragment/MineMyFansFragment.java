@@ -1,12 +1,10 @@
 package com.meishe.yangquan.fragment;
 
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 
 /**
  * @author liupanfeng

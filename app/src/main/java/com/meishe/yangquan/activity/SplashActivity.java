@@ -4,14 +4,13 @@ package com.meishe.yangquan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.ADOpenScreenResult;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.umeng.analytics.MobclickAgent;

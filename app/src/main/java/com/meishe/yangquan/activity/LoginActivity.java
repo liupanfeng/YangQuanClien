@@ -17,7 +17,6 @@ import com.meishe.yangquan.bean.LoginInfo;
 import com.meishe.yangquan.bean.LoginResult;
 import com.meishe.yangquan.bean.SendSmsResult;
 import com.meishe.yangquan.bean.UpdateDeviceAliasResult;
-import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.CheckNetwork;
@@ -31,7 +30,6 @@ import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.ChangeIdentityView;
 import com.meishe.yangquan.wiget.MaterialProgress;
-import com.meishe.yangquan.wiget.TitleBar;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.IOException;

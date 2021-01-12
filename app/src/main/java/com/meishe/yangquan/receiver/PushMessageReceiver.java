@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.meishe.yangquan.activity.BusinessOpportunityActivity;
-import com.meishe.yangquan.activity.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

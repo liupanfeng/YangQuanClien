@@ -30,30 +30,12 @@
                 android:background="@mipmap/ic_close"/>
         </RelativeLayout>
 
-        <com.scwang.smartrefresh.layout.SmartRefreshLayout
-            android:layout_below="@id/bottom_sheet_dialog_close_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_above="@id/edit_text"
-            android:id="@+id/refresh_layout"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="49dp"
-            app:srlEnableRefresh="false"
-            app:srlEnableAutoLoadMore="false"
-            app:srlEnableLoadMore="true"
-            app:srlEnableFooterTranslationContent="false"
-            app:srlEnableHeaderTranslationContent="false"
-            app:srlEnableNestedScrolling="false">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/common_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
-            <com.scwang.smartrefresh.header.MaterialHeader
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
         <View
             android:layout_width="match_parent"

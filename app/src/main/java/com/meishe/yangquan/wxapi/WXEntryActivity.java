@@ -3,13 +3,12 @@ package com.meishe.yangquan.wxapi;
 import android.os.Bundle;
 
 import com.meishe.yangquan.R;
-import com.umeng.socialize.weixin.view.WXCallbackActivity;
 
-public class WXEntryActivity extends WXCallbackActivity {
+public class WXEntryActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_wxentry);
-    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_wxentry);
+//    }
 }

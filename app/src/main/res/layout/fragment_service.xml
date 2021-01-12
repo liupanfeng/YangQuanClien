@@ -35,7 +35,7 @@
 
     </android.support.design.widget.CoordinatorLayout>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
       >
@@ -59,14 +59,14 @@
                 </com.meishe.yangquan.view.AutoPollRecyclerView>
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/service_type_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
                 android:layout_below="@+id/ll_top_notify"
                 android:background="@color/white" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/service_news_recycler"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
 
         </RelativeLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 
     <com.meishe.yangquan.wiget.MaterialProgress
         android:id="@+id/mp_loading"

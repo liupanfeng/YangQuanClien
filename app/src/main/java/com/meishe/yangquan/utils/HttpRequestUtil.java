@@ -3,17 +3,13 @@ package com.meishe.yangquan.utils;
 import android.content.Context;
 import android.util.Log;
 
-import com.googlecode.openbeans.PropertyDescriptor;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.ADOpenScreenResult;
-import com.meishe.yangquan.bean.AdOpenScreen;
-import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MessageResult;
 import com.meishe.yangquan.bean.ServerCustomerResult;
 import com.meishe.yangquan.bean.ServiceMessageResult;
 import com.meishe.yangquan.bean.SheepNewsResult;
-import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -531,58 +527,58 @@ public class HttpRequestUtil {
         }, requestParam);
     }
 
-    /**
-     * 完善个人信息
-     */
-    public void updateUserFromServer(Context context) throws Exception {
-
-        HashMap<String, Object> requestParam = new HashMap<>();
-        UserInfo user = UserManager.getInstance(context).getUser();
-        Field[] fields = user.getClass().getDeclaredFields();
-        for (int i = 0, len = fields.length; i < len; i++) {
-            PropertyDescriptor pd = new PropertyDescriptor(fields[i].getName(), user.getClass());
-            Method getMethod = pd.getReadMethod();     //获得get方法
-//            getMethod.invoke(user);    //此处为执行该Object对象的get方法
-            String varName = fields[i].getName();
-            requestParam.put(varName, getMethod.invoke(user));
-//            System.out.println(varName + "---" + getMethod.getName());
-        }
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_USER_UPDATE, new BaseCallBack<SheepNewsResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, SheepNewsResult result) {
-                if (result != null || result.getStatus() == 200) {
-                    if (listener != null) {
-                        listener.onSuccess(result);
-                    }
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
+//    /**
+//     * 完善个人信息
+//     */
+//    public void updateUserFromServer(Context context) throws Exception {
+//
+//        HashMap<String, Object> requestParam = new HashMap<>();
+//        UserInfo user = UserManager.getInstance(context).getUser();
+//        Field[] fields = user.getClass().getDeclaredFields();
+//        for (int i = 0, len = fields.length; i < len; i++) {
+//            PropertyDescriptor pd = new PropertyDescriptor(fields[i].getName(), user.getClass());
+//            Method getMethod = pd.getReadMethod();     //获得get方法
+////            getMethod.invoke(user);    //此处为执行该Object对象的get方法
+//            String varName = fields[i].getName();
+//            requestParam.put(varName, getMethod.invoke(user));
+////            System.out.println(varName + "---" + getMethod.getName());
+//        }
+//        OkHttpManager.getInstance().postRequest(HttpUrl.URL_USER_UPDATE, new BaseCallBack<SheepNewsResult>() {
+//            @Override
+//            protected void OnRequestBefore(Request request) {
+//
+//            }
+//
+//            @Override
+//            protected void onFailure(Call call, IOException e) {
+//
+//            }
+//
+//            @Override
+//            protected void onSuccess(Call call, Response response, SheepNewsResult result) {
+//                if (result != null || result.getStatus() == 200) {
+//                    if (listener != null) {
+//                        listener.onSuccess(result);
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            protected void onResponse(Response response) {
+//
+//            }
+//
+//            @Override
+//            protected void onEror(Call call, int statusCode, Exception e) {
+//
+//            }
+//
+//            @Override
+//            protected void inProgress(int progress, long total, int id) {
+//
+//            }
+//        }, requestParam);
+//    }
 
 
     public void uploadFile(File tempFile, String s) {

@@ -2,7 +2,6 @@ package com.meishe.yangquan.activity;
 
 import android.text.TextUtils;
 import android.view.View;
-import android.webkit.URLUtil;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -11,8 +10,6 @@ import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
-import com.meishe.yangquan.utils.Constants;
-import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:ignore="RtlCompat">
+
+    <ImageView
+        android:id="@+id/base_play_img"
+        android:layout_width="@dimen/dp_px_54"
+        android:layout_height="@dimen/dp_px_54"
+        android:layout_marginLeft="@dimen/dp_px_75"
+        android:layout_marginRight="@dimen/dp_px_45"
+        android:background="@mipmap/base_play"
+        android:layout_marginStart="@dimen/dp_px_75"
+        android:layout_marginEnd="@dimen/dp_px_45"
+        android:contentDescription="@null" />
+
+    <SeekBar
+        android:id="@+id/base_seek_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp_px_9"
+        android:layout_marginRight="@dimen/dp_px_9"
+        android:layout_toLeftOf="@id/base_tv_current_text"
+        android:layout_toRightOf="@id/base_tv_start_text"
+        android:maxHeight="@dimen/dp_px_5"
+        android:progressDrawable="@drawable/play_control_seek_bar"
+        android:thumb="@drawable/seek_bar_ball_white_black"
+        android:layout_toStartOf="@id/base_tv_current_text"
+        android:layout_toEndOf="@id/base_tv_start_text" />
+
+    <TextView
+        android:id="@+id/base_tv_start_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/base_play_img"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/sp_px_30"
+        android:layout_toEndOf="@id/base_play_img" />
+
+    <TextView
+        android:id="@+id/base_tv_current_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/dp_px_71"
+        android:gravity="center"
+        android:textColor="@color/white_8"
+        android:textSize="@dimen/sp_px_30"
+        android:layout_marginEnd="@dimen/dp_px_71" />
+
+</RelativeLayout>

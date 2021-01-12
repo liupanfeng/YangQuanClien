@@ -10,7 +10,7 @@
         android:id="@+id/title"
         layout="@layout/custom_toolbar_layout" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_below="@+id/title"
         android:layout_width="match_parent"

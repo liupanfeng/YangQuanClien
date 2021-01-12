@@ -56,7 +56,7 @@
             android:id="@+id/ll_publish_cut_sheep"
             android:layout_width="match_parent"
             android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
         <RelativeLayout
@@ -205,72 +205,17 @@
 
 
 
-        <RelativeLayout
-            android:id="@+id/rl_phone_number"
-            android:layout_width="match_parent"
-            android:layout_height="60dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/dp16"
-                android:text="电话"
-                android:textColor="#ff303030"
-                android:textSize="13sp" />
-
-            <EditText
-                android:id="@+id/et_service_input_phone_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp32"
-                android:drawableRight="@mipmap/right_arrow_normal"
-                android:drawablePadding="6dp"
-                android:gravity="end"
-                android:hint="请输入电话"
-                android:textColorHint="#ffc2c2c2"
-                android:background="@null"
-                android:textSize="13sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp0p3"
-                android:layout_alignParentBottom="true"
-                android:background="#E5E5E5" />
-        </RelativeLayout>
 
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="上传照片(车辆正面照片)"
-            android:textColor="#ff303030"
-            android:textSize="13sp"
-            android:layout_marginLeft="@dimen/dp16"
-            android:layout_marginTop="@dimen/dp17"
-            />
-
-        <ImageView
-            android:id="@+id/iv_publish_service"
-            android:layout_width="67dp"
-            android:layout_height="67dp"
-            android:layout_marginLeft="@dimen/dp16"
-            android:layout_marginTop="@dimen/dp15"
-            android:scaleType="centerCrop"
-            android:background="@mipmap/ic_publish_service_add_picture"
-            />
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_publish_vaccinte"
+            android:id="@+id/ll_publish_sheep_dung"
             android:layout_width="match_parent"
             android:orientation="vertical"
             android:visibility="gone"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
 
             <RelativeLayout
@@ -283,12 +228,12 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp16"
-                    android:text="团队名称"
+                    android:text="车对名称"
                     android:textColor="#ff303030"
                     android:textSize="13sp" />
 
                 <EditText
-                    android:id="@+id/et_vaccinte_input_team_name"
+                    android:id="@+id/et_sheep_dung_input_team_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -296,7 +241,7 @@
                     android:layout_marginRight="@dimen/dp32"
                     android:drawableRight="@mipmap/right_arrow_normal"
                     android:drawablePadding="6dp"
-                    android:hint="请输入团队名称"
+                    android:hint="请输入车队名称"
                     android:gravity="end"
                     android:textColorHint="#ffc2c2c2"
                     android:background="@null"
@@ -319,12 +264,12 @@
                     android:layout_alignParentLeft="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/dp16"
-                    android:text="团队人数"
+                    android:text="车队人数"
                     android:textColor="#ff303030"
                     android:textSize="13sp" />
 
                 <EditText
-                    android:id="@+id/et_vaccinte_input_team_number"
+                    android:id="@+id/et_sheep_dung_input_team_number"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -332,7 +277,43 @@
                     android:layout_marginRight="@dimen/dp32"
                     android:drawableRight="@mipmap/right_arrow_normal"
                     android:drawablePadding="6dp"
-                    android:hint="请输入团队人数"
+                    android:hint="请输入车队人数"
+                    android:gravity="end"
+                    android:textColorHint="#ffc2c2c2"
+                    android:background="@null"
+                    android:textSize="13sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp0p3"
+                    android:layout_alignParentBottom="true"
+                    android:background="#E5E5E5" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="60dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/dp16"
+                    android:text="车辆数量"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/et_sheep_dung_input_car_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="@dimen/dp32"
+                    android:drawableRight="@mipmap/right_arrow_normal"
+                    android:drawablePadding="6dp"
+                    android:hint="请输入车辆数量"
                     android:gravity="end"
                     android:textColorHint="#ffc2c2c2"
                     android:background="@null"
@@ -360,7 +341,7 @@
                     android:textSize="13sp" />
 
                 <EditText
-                    android:id="@+id/et_vaccinte_input_price"
+                    android:id="@+id/et_sheep_dung_input_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
@@ -368,7 +349,7 @@
                     android:layout_marginRight="@dimen/dp32"
                     android:drawableRight="@mipmap/right_arrow_normal"
                     android:drawablePadding="6dp"
-                    android:hint="请输入价格元"
+                    android:hint="请输入服务价格（元）"
                     android:gravity="end"
                     android:textColorHint="#ffc2c2c2"
                     android:background="@null"
@@ -380,104 +361,221 @@
                     android:background="#E5E5E5" />
             </RelativeLayout>
 
+        </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp16"
-                    android:text="团队介绍"
-                    android:textColor="#ff303030"
-                    android:textSize="13sp" />
-
-                <EditText
-                    android:id="@+id/et_vaccinte_input_team_desc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp32"
-                    android:drawableRight="@mipmap/right_arrow_normal"
-                    android:drawablePadding="6dp"
-                    android:hint="请输入团队介绍"
-                    android:gravity="end"
-                    android:textColorHint="#ffc2c2c2"
-                    android:background="@null"
-                    android:textSize="13sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp0p3"
-                    android:layout_alignParentBottom="true"
-                    android:background="#E5E5E5" />
-            </RelativeLayout>
+        <LinearLayout
+        android:id="@+id/ll_publish_find_car"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:layout_height="wrap_content">
 
 
-
-            <RelativeLayout
-                android:id="@+id/rl_vaccinte_phone_number"
-                android:layout_width="match_parent"
-                android:layout_height="60dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="@dimen/dp16"
-                    android:text="电话"
-                    android:textColor="#ff303030"
-                    android:textSize="13sp" />
-
-                <EditText
-                    android:id="@+id/et_vaccinte_input_phone_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="@dimen/dp32"
-                    android:drawableRight="@mipmap/right_arrow_normal"
-                    android:drawablePadding="6dp"
-                    android:gravity="end"
-                    android:hint="请输入电话"
-                    android:textColorHint="#ffc2c2c2"
-                    android:background="@null"
-                    android:textSize="13sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp0p3"
-                    android:layout_alignParentBottom="true"
-                    android:background="#E5E5E5" />
-            </RelativeLayout>
-
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="上传照片"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="车辆类型"
                 android:textColor="#ff303030"
-                android:textSize="13sp"
-                android:layout_marginLeft="@dimen/dp16"
-                android:layout_marginTop="@dimen/dp17"
-                />
+                android:textSize="13sp" />
 
-            <ImageView
-                android:id="@+id/iv_vaccinte_publish_service"
-                android:layout_width="67dp"
-                android:layout_height="67dp"
+            <EditText
+                android:id="@+id/et_find_car_input_car_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入车辆类型"
+                android:gravity="end"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp16"
-                android:layout_marginTop="@dimen/dp15"
-                android:scaleType="centerCrop"
-                android:background="@mipmap/ic_publish_service_add_picture"
-                />
-        </LinearLayout>
+                android:text="服务类别"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/sp_find_car_input_service_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请选择服务类别"
+                android:gravity="end"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/dp32"
+                android:drawableEnd="@mipmap/right_arrow_normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="车长宽高"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_find_car_input_length_width_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入车长宽高（6*4*3）"
+                android:gravity="end"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="限高通行"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_find_car_input_limit_height"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:hint="请输入限高通行（米）"
+                android:gravity="end"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/rl_sheep_dung_phone_number"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="电话"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_sheep_dung_input_phone_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:gravity="end"
+                android:hint="请输入电话"
+                android:textColorHint="#ffc2c2c2"
+                android:background="@null"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="上传照片"
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp17"
+            />
+
+        <ImageView
+            android:id="@+id/iv_sheep_dung_publish_service"
+            android:layout_width="67dp"
+            android:layout_height="67dp"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp15"
+            android:scaleType="centerCrop"
+            android:background="@mipmap/ic_publish_service_add_picture"
+            />
 
     </LinearLayout>
 

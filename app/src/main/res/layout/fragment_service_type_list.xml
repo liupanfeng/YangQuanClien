@@ -6,36 +6,10 @@
     android:layout_height="match_parent">
 
 
-    <com.scwang.smartrefresh.layout.SmartRefreshLayout
-        android:id="@+id/refreshLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:srlEnableAutoLoadMore="false"
-        app:srlEnableFooterTranslationContent="false"
-        app:srlEnableHeaderTranslationContent="false"
-        app:srlEnableScrollContentWhenLoaded="false">
-
-    <com.scwang.smartrefresh.header.MaterialHeader
-        android:id="@+id/mh_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    </com.scwang.smartrefresh.header.MaterialHeader>
-
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/service_type_list_recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
-
-        <com.scwang.smartrefresh.header.MaterialHeader
-            android:id="@+id/mh_footer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </com.scwang.smartrefresh.header.MaterialHeader>
-
-    </com.scwang.smartrefresh.layout.SmartRefreshLayout>
-
 
 
     <com.meishe.yangquan.wiget.MaterialProgress

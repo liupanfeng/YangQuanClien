@@ -1,10 +1,8 @@
 package com.meishe.yangquan.activity;
 
-import android.content.DialogInterface;
 import android.net.http.SslError;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +14,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.utils.Util;
@@ -40,8 +40,8 @@ public class MainWebViewActivity extends BaseActivity {
     public void initView() {
         mToolbar = findViewById(R.id.toolbar);
         mToolbar.setTitle("");
-        setSupportActionBar(mToolbar);
-        getSupportActionBar( ).setDisplayHomeAsUpEnabled(true);
+//        setSupportActionBar(mToolbar);
+//        getSupportActionBar( ).setDisplayHomeAsUpEnabled(true);
         mToolbar.setNavigationIcon(R.mipmap.main_webview_back);
         // webView
         mWebView = findViewById(R.id.main_activity_web_view);
@@ -109,7 +109,7 @@ public class MainWebViewActivity extends BaseActivity {
         });
 
         // title
-        mContentTitle = findViewById(R.id.webview_content_title);
+//        mContentTitle = findViewById(R.id.webview_content_title);
         // WebChromeClient
         mWebView.setWebChromeClient(new WebChromeClient( ) {
             @Override

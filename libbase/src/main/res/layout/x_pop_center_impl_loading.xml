@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:padding="@dimen/dp_px_45"
+    android:background="@drawable/x_pop_round3_dark_bg"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <com.lxj.xpopup.widget.LoadingView
+        android:layout_width="@dimen/dp_px_90"
+        android:layout_height="@dimen/dp_px_90" />
+    <TextView
+        android:id="@+id/tv_title"
+        android:maxLines="1"
+        android:visibility="gone"
+        android:ellipsize="end"
+        android:textSize="@dimen/sp_px_45"
+        android:textColor="@color/white_ddd"
+        android:paddingLeft="@dimen/dp_px_24"
+        android:paddingRight="@dimen/dp_px_54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/dp_px_24"
+        android:paddingEnd="@dimen/dp_px_54" />
+</LinearLayout>
+

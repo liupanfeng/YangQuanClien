@@ -1,0 +1,7 @@
+<resources >
+    <string name="app_name">Base</string>
+    <string name="third_quick_loading">正在加载中&#160;&#160;&#160;</string>
+    <string name="third_quick_load_failed">加载失败，请点我重试</string>
+    <string name="third_quick_load_end">没有更多数据</string>
+    <string name="videoEdit">视频编辑</string>
+</resources>

@@ -5,9 +5,10 @@ package com.meishe.yangquan.listener;
  */
 
 import android.graphics.Rect;
-import android.support.v4.app.DialogFragment;
 import android.view.View;
 import android.view.ViewTreeObserver;
+
+import androidx.fragment.app.DialogFragment;
 
 /**
  *  监听软键盘是否弹出

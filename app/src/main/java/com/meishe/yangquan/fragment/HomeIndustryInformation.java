@@ -6,7 +6,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BannerInfo;
 import com.meishe.yangquan.bean.BannerResult;
 import com.meishe.yangquan.bean.IndustryInfo;

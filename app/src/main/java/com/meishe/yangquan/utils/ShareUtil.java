@@ -1,24 +1,13 @@
 package com.meishe.yangquan.utils;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.Gravity;
-import android.widget.TextView;
 
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import okhttp3.Request;
 
 
 public class ShareUtil {

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.AppBarLayout
+<com.google.android.material.appbar.AppBarLayout
     android:id="@+id/appbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -12,4 +12,4 @@
         android:background="@color/mainColor"
         android:minHeight="48dp"
         />
-</android.support.design.widget.AppBarLayout>
+</com.google.android.material.appbar.AppBarLayout>

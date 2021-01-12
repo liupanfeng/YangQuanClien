@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_bar_list0"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:overScrollMode="never" />
+
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="@dimen/dp_px_108"
+        android:layout_height="@dimen/dp_px_172"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/dp_px_10"
+        android:layout_marginLeft="@dimen/dp_px_10"
+        android:contentDescription="@null"
+        android:paddingStart="@dimen/dp_px_35"
+        android:paddingLeft="@dimen/dp_px_35"
+        android:paddingTop="@dimen/dp_px_60"
+        android:paddingEnd="@dimen/dp_px_35"
+        android:paddingRight="@dimen/dp_px_35"
+        android:paddingBottom="@dimen/dp_px_60"
+        android:src="@mipmap/bar_back_white"
+        android:visibility="invisible" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_bar_list1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="@dimen/dp_px_140"
+        android:layout_marginLeft="@dimen/dp_px_140"
+        android:overScrollMode="never"
+        android:visibility="invisible" />
+</merge>

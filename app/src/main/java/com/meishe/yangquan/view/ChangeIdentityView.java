@@ -1,10 +1,11 @@
 package com.meishe.yangquan.view;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
+
+import androidx.annotation.Nullable;
 
 import com.meishe.yangquan.R;
 

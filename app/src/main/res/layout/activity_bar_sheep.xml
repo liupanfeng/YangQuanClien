@@ -29,7 +29,7 @@
             android:background="@null"
             />
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
             android:layout_marginTop="176dp"
             android:layout_centerHorizontal="true"

@@ -2,14 +2,15 @@ package com.meishe.yangquan.activity;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.inter.OnResponseListener;
@@ -18,7 +19,7 @@ import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.TitleBar;
 
-public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener , OnResponseListener {
+public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener , OnResponseListener {
 
     protected Context mContext;
 
@@ -68,7 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 
     protected void initRecyclerView(){
         LinearLayoutManager layoutManager =
-                new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+                new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);

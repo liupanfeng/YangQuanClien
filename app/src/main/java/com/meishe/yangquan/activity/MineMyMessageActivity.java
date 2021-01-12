@@ -1,10 +1,11 @@
 package com.meishe.yangquan.activity;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
@@ -36,7 +37,7 @@ public class MineMyMessageActivity extends BaseActivity {
     @Override
     public void initRecyclerView() {
         LinearLayoutManager layoutManager =
-                new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+                new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);

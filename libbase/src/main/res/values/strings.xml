@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Base</string>
+    <string name="third_quick_loading">loading&#160;&#160;&#160;</string>
+    <string name="third_quick_load_failed">fail to load,please click to retry</string>
+    <string name="third_quick_load_end">no more data</string>
+    <string name="videoEdit">video edit</string>
+</resources>

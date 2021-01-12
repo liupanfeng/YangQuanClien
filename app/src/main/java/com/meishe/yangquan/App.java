@@ -4,19 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Typeface;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.reflect.TypeToken;
-import com.meishe.yangquan.utils.GetGson;
-import com.meishe.yangquan.utils.SharedPreferencesUtil;
+
 import com.umeng.commonsdk.UMConfigure;
-import com.umeng.socialize.PlatformConfig;
-
-import org.json.JSONArray;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -43,9 +32,9 @@ public class App extends Application {
         UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
         // 打开统计SDK调试模式
         UMConfigure.setLogEnabled(true);
-        PlatformConfig.setWeixin("wxc86baec54fc83b32", "bb1228fe238abe0bd962e5b4d50bf05e");
-        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
-        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");
+//        PlatformConfig.setWeixin("wxc86baec54fc83b32", "bb1228fe238abe0bd962e5b4d50bf05e");
+//        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
+//        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");
     }
 
 

@@ -2,7 +2,6 @@ package com.meishe.yangquan.view;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -11,7 +10,11 @@ import android.text.style.ClickableSpan;
 import android.text.style.DynamicDrawableSpan;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.apannable.CircleMovementMethod;
@@ -20,7 +23,7 @@ import com.meishe.yangquan.bean.ServerZan;
 
 import java.util.List;
 
-public class LikesView extends android.support.v7.widget.AppCompatTextView {
+public class LikesView extends AppCompatTextView {
 
     private Context mContext;
     private List<ServerZan> list;

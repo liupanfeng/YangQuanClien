@@ -13,17 +13,19 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.MenuItem;
@@ -98,6 +100,32 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     private String mWeight;
     private File mTempFile;
     private ImageView mIvPublishService;
+    private LinearLayout mLlPublishCutSheep;
+    private LinearLayout mLlPublishSheepDung;
+    private LinearLayout mLlPublishFindCar;
+
+
+    /*车对名称*/
+    private EditText mEtServiceSheepDungCarName;
+    /*车辆数量*/
+    private EditText mEtServiceSheepDungCarNumber;
+    /*车对人数*/
+    private EditText mEtServiceSheepDungPersonNumber;
+    /*服务价格*/
+    private EditText mEtServiceSheepDrungPrice;
+
+    /*车辆类型*/
+    private EditText mEtServiceFindCarType;
+    /*服务类别*/
+    private EditText mEtServiceFindCarSreviceType;
+    /*输入长宽高*/
+    private EditText mEtServiceFindCarLengthWidthHeight;
+    /*限制高度*/
+    private EditText mEtServiceFindCarLimitHeight;
+
+    private String mSheepDungPersonNumber;
+    private String mSheepDungCuarNmber;
+    private String mSeephDungCarName;
 
 
     @Override
@@ -116,8 +144,26 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         mEtServiceInputTeamNumber = findViewById(R.id.et_service_input_team_number);
         mEtServiceInputPrice = findViewById(R.id.et_service_input_price);
         mEtServiceInputTeamDesc = findViewById(R.id.et_service_input_team_desc);
-        mEtServiceInputPhoneNumber = findViewById(R.id.et_service_input_phone_number);
-        mIvPublishService = findViewById(R.id.iv_publish_service);
+        mEtServiceInputPhoneNumber = findViewById(R.id.et_sheep_dung_input_phone_number);
+        mIvPublishService = findViewById(R.id.iv_sheep_dung_publish_service);
+
+        mLlPublishCutSheep = findViewById(R.id.ll_publish_cut_sheep);
+        mLlPublishSheepDung = findViewById(R.id.ll_publish_sheep_dung);
+        mLlPublishFindCar = findViewById(R.id.ll_publish_find_car);
+
+
+        ////////////////////////publish sheep dung////////////////////////////
+        mEtServiceSheepDungCarName = findViewById(R.id.et_sheep_dung_input_team_name);
+        mEtServiceSheepDungPersonNumber = findViewById(R.id.et_sheep_dung_input_team_number);
+        mEtServiceSheepDungCarNumber = findViewById(R.id.et_sheep_dung_input_car_number);
+        mEtServiceSheepDrungPrice = findViewById(R.id.et_sheep_dung_input_price);
+
+        ///////////////////////publish find cat //////////////////////////////////
+        mEtServiceFindCarType = findViewById(R.id.et_find_car_input_car_type);
+//        mSpServiceFindCarSreviceType = findViewById(R.id.sp_find_car_input_service_type);
+        mEtServiceFindCarLengthWidthHeight = findViewById(R.id.et_find_car_input_length_width_height);
+        mEtServiceFindCarLimitHeight = findViewById(R.id.et_find_car_input_limit_height);
+
 
     }
 
@@ -138,15 +184,19 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         switch (mServiceType) {
             case TYPE_SERVICE_CUT_WOOL:
                 mTvTitle.setText("羊毛服务");
+                showCutHair();
                 break;
             case TYPE_SERVICE_VACCINE:
                 mTvTitle.setText("疫苗服务");
+                showCutHair();
                 break;
             case TYPE_SERVICE_SHEEP_DUNG:
                 mTvTitle.setText("羊粪服务");
+                showSheepDung();
                 break;
             case TYPE_SERVICE_LOOK_CAR:
                 mTvTitle.setText("车辆服务");
+                showFindCar();
                 break;
             default:
                 break;
@@ -154,9 +204,32 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
     }
 
+    /**
+     * 展示找车辆
+     */
+    private void showFindCar() {
+        mLlPublishCutSheep.setVisibility(View.GONE);
+        mLlPublishSheepDung.setVisibility(View.GONE);
+        mLlPublishFindCar.setVisibility(View.VISIBLE);
+    }
+
+    private void showSheepDung() {
+        mLlPublishCutSheep.setVisibility(View.GONE);
+        mLlPublishSheepDung.setVisibility(View.VISIBLE);
+        mLlPublishFindCar.setVisibility(View.GONE);
+    }
+
+    /**
+     * 展示剪羊毛 页面  剪羊毛跟打疫苗设置页面一样
+     */
+    private void showCutHair() {
+        mLlPublishCutSheep.setVisibility(View.VISIBLE);
+        mLlPublishSheepDung.setVisibility(View.GONE);
+        mLlPublishFindCar.setVisibility(View.GONE);
+    }
+
     @Override
     public void initListener() {
-
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -178,44 +251,106 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_publish:
-                mTeamName = mEtServiceInputTeamName.getText().toString().trim();
-                if (Util.checkNull(mTeamName)) {
-                    ToastUtil.showToast(mContext, "服务名称必须填写");
-                    return;
+                switch (mServiceType) {
+                    case TYPE_SERVICE_CUT_WOOL:
+                    case TYPE_SERVICE_VACCINE:
+                        publishCutSheepHair();
+                        break;
+                    case TYPE_SERVICE_SHEEP_DUNG:
+                        publishSheepDung();
+                        break;
+                    case TYPE_SERVICE_LOOK_CAR:
+                        break;
+                    default:
+                        break;
                 }
-
-                mTeamNumber = mEtServiceInputTeamNumber.getText().toString().trim();
-                if (Util.checkNull(mTeamNumber)) {
-                    ToastUtil.showToast(mContext, "服务数量必须填写");
-                    return;
-                }
-
-                mPrice = mEtServiceInputPrice.getText().toString().trim();
-                if (Util.checkNull(mPrice)) {
-                    ToastUtil.showToast(mContext, "价格必须填写");
-                    return;
-                }
-                mTeamDesc = mEtServiceInputTeamDesc.getText().toString().trim();
-                if (Util.checkNull(mTeamDesc)) {
-                    ToastUtil.showToast(mContext, "团队描述必须填写");
-                    return;
-                }
-                mPhone = mEtServiceInputPhoneNumber.getText().toString().trim();
-                if (Util.checkNull(mPhone)) {
-                    ToastUtil.showToast(mContext, "手机号必须填写");
-                    return;
-                }
-                if (!mTempFile.exists()) {
-                    ToastUtil.showToast(mContext, "图片必须上传");
-                }
-                uploadPicture();
                 break;
-            case R.id.iv_publish_service:
+            case R.id.iv_sheep_dung_publish_service:
                 showPictureSelectItem();
                 break;
             default:
                 break;
         }
+    }
+
+    /**
+     * 发布剪羊毛 和打疫苗
+     */
+    private void publishCutSheepHair() {
+        mTeamName = mEtServiceInputTeamName.getText().toString().trim();
+        if (Util.checkNull(mTeamName)) {
+            ToastUtil.showToast(mContext, "服务名称必须填写");
+            return;
+        }
+
+        mTeamNumber = mEtServiceInputTeamNumber.getText().toString().trim();
+        if (Util.checkNull(mTeamNumber)) {
+            ToastUtil.showToast(mContext, "服务数量必须填写");
+            return;
+        }
+
+        mPrice = mEtServiceInputPrice.getText().toString().trim();
+        if (Util.checkNull(mPrice)) {
+            ToastUtil.showToast(mContext, "价格必须填写");
+            return;
+        }
+        mTeamDesc = mEtServiceInputTeamDesc.getText().toString().trim();
+        if (Util.checkNull(mTeamDesc)) {
+            ToastUtil.showToast(mContext, "团队描述必须填写");
+            return;
+        }
+        mPhone = mEtServiceInputPhoneNumber.getText().toString().trim();
+        if (Util.checkNull(mPhone)) {
+            ToastUtil.showToast(mContext, "手机号必须填写");
+            return;
+        }
+        if (!mTempFile.exists()) {
+            ToastUtil.showToast(mContext, "图片必须上传");
+        }
+        uploadPicture();
+    }
+
+
+
+    /**
+     * publish sheep dung
+     * 这个类别不一样的只有一个是 车队的数量
+     */
+    private void publishSheepDung() {
+
+        mSeephDungCarName = mEtServiceSheepDungCarName.getText().toString().trim();
+        if (Util.checkNull(mSeephDungCarName)) {
+            ToastUtil.showToast(mContext, "车队名称必须填写");
+            return;
+        }
+
+        mSheepDungCuarNmber = mEtServiceSheepDungCarNumber.getText().toString().trim();
+        if (Util.checkNull(mSheepDungCuarNmber)) {
+            ToastUtil.showToast(mContext, "车辆数必须填写");
+            return;
+        }
+
+        mPrice = mEtServiceSheepDrungPrice.getText().toString().trim();
+        if (Util.checkNull(mPrice)) {
+            ToastUtil.showToast(mContext, "服务价格必须填写");
+            return;
+        }
+
+        mSheepDungPersonNumber = mEtServiceSheepDungPersonNumber.getText().toString().trim();
+        if (Util.checkNull(mSheepDungPersonNumber)) {
+            ToastUtil.showToast(mContext, "车队人数必须填写");
+            return;
+        }
+
+        mPhone = mEtServiceInputPhoneNumber.getText().toString().trim();
+        if (Util.checkNull(mPhone)) {
+            ToastUtil.showToast(mContext, "手机号必须填写");
+            return;
+        }
+        if (!mTempFile.exists()) {
+            ToastUtil.showToast(mContext, "图片必须上传");
+        }
+        uploadPicture();
     }
 
     /**
@@ -256,7 +391,20 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                     ToastUtil.showToast("UploadFileInfo is null");
                     return;
                 }
-                publishService(String.valueOf(data.getId()));
+                switch (mServiceType){
+                    case TYPE_SERVICE_SHEEP_DUNG:
+                        publishSheepDungService(String.valueOf(data.getId()));
+                        break;
+                    case TYPE_SERVICE_VACCINE:
+                    case TYPE_SERVICE_CUT_WOOL:
+                        publishService(String.valueOf(data.getId()));
+                        break;
+                    case TYPE_SERVICE_LOOK_CAR:
+                        break;
+                        default:
+                            break;
+                }
+
             }
 
             @Override
@@ -338,7 +486,10 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         });
     }
 
-
+    /**
+     * 发布 cut sheep hair
+     * @param pictureId
+     */
     public void publishService(String pictureId) {
         String token = UserManager.getInstance(mContext).getToken();
         if (TextUtils.isEmpty(token)) {
@@ -349,6 +500,73 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         requestParam.put("teamName", mTeamName);
         requestParam.put("teamDesc", mTeamDesc);
         requestParam.put("teamHumanScale", mTeamNumber);
+        requestParam.put("price", mPrice);
+        requestParam.put("phone", mPhone);
+        requestParam.put("fileIds", pictureId);
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_ADD_SERVICE, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    ToastUtil.showToast(mContext, "发布成功");
+                    finish();
+                } else {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+    }
+
+
+    /**
+     * 发布  sheep dung
+     * @param pictureId
+     */
+    public void publishSheepDungService(String pictureId) {
+        String token = UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("typeId", mServiceType);
+        requestParam.put("teamName", mSeephDungCarName);
+        requestParam.put("teamCarScale", mSheepDungCuarNmber);
+        requestParam.put("teamHumanScale", mSheepDungPersonNumber);
         requestParam.put("price", mPrice);
         requestParam.put("phone", mPhone);
         requestParam.put("fileIds", pictureId);

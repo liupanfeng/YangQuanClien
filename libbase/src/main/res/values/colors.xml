@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorTranslucent">#00000000</color>
+    <color name="white">#ffffffff</color>
+    <color name="white_d1">#ffd1d1d1</color>
+    <color name="white_1">#19ffffff</color>
+    <color name="white_2">#33ffffff</color>
+    <color name="white_5">#7fffffff</color>
+    <color name="white_6">#99ffffff</color>
+    <color name="white_8">#ccffffff</color>
+    <color name="white_ddd">#DDDDDD</color>
+    <color name="white_9f">#9F9F9F</color>
+    <color name="black">#ff000000</color>
+    <color name="black_2122">#ff212223</color>
+    <color name="black_242">#242424</color>
+    <color name="black_3333">#333333</color>
+    <color name="black_3636">#363636</color>
+    <color name="black_282">#282828</color>
+    <color name="black_5">#7f000000</color>
+    <color name="black_8">#cc000000</color>
+    <color name="black_9">#e5000000</color>
+    <color name="red_fd48">#FD481F</color>
+    <color name="red_ff365">#FF365E</color>
+    <!-- 贝塞尔曲线颜色 -->
+    <color name="bezier_rect">#4cFFFFFF</color>
+    <color name="bezier_baseline">#ccFFFFFF</color>
+    <color name="bezier_line">#FC2B55</color>
+    <color name="bezier_fill_point">#D8D8D8</color>
+    <color name="bezier_bg">#101010</color>
+    <color name="bezier_speed">#4CFFFFFF</color>
+
+    <!--titlebar-->
+    <color name="title_center_text_color">#ccffffff</color>
+</resources>

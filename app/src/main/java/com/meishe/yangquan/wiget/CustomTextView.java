@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 import com.meishe.yangquan.R;
 
 /**
@@ -11,7 +13,7 @@ import com.meishe.yangquan.R;
  * @desc 自定义文案 带有选中效果
  * @date 2020/11/28 13:38
  */
-public class CustomTextView extends android.support.v7.widget.AppCompatTextView {
+public class CustomTextView extends AppCompatTextView {
 
     private Context mContext;
 

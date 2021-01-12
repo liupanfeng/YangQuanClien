@@ -1,8 +1,6 @@
 package com.meishe.yangquan.wiget;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -11,6 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import com.meishe.yangquan.R;
 

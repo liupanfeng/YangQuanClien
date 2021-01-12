@@ -3,14 +3,13 @@ package com.meishe.yangquan.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.AboutActivity;
@@ -30,7 +29,6 @@ import com.meishe.yangquan.activity.MineSystemMessageActivity;
 import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceMessageListActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
-import com.meishe.yangquan.activity.ShowPicActivity;
 import com.meishe.yangquan.activity.VersionUpdateActivity;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
@@ -46,13 +44,10 @@ import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
-import com.meishe.yangquan.fragment.CommentBottomSheetDialogFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
-import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.PerformClickAction;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.ListLoadingView;
@@ -337,9 +332,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             switch (v.getId()) {
                 case R.id.iv_message_comment:
                 case R.id.tv_message_comment:
-                    CommentBottomSheetDialogFragment fragment = new CommentBottomSheetDialogFragment();
-                    fragment.setmMessageId(((Message) info).getMessageId());
-                    fragment.show(mFragment.getFragmentManager(), "dialog");
+//                    CommentBottomSheetDialogFragment fragment = new CommentBottomSheetDialogFragment();
+//                    fragment.setmMessageId(((Message) info).getMessageId());
+//                    fragment.show(mFragment.getFragmentManager(), "dialog");
                     break;
                 case R.id.btn_message_start_connect:    //我要联系
                     User user = null;

@@ -1,14 +1,14 @@
 package com.meishe.yangquan.activity;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.tabs.TabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
-import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BatchInfo;
 import com.meishe.yangquan.bean.BatchInfoResult;
 import com.meishe.yangquan.bean.BatchResult;
@@ -16,7 +16,6 @@ import com.meishe.yangquan.fragment.SheepBreedHelperFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.SheepBreedHelper;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.MViewPager;
