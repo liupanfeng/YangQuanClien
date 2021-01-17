@@ -9,28 +9,24 @@ import java.util.List;
  */
 public class ServiceInfo extends BaseInfo {
 
-    //    {
-//        "code": 1,
-//            "enMsg": "success",
-//            "msg": "成功",
-//            "data": [{
-//        "images": [],
-//        "authState": 1,
-//                "initDate": "2020-12-12 21:20:39",
-//                "max_height": 4.50,
-//                "team_desc": "专业团队",
-//                "team_car_scale": 5,
-//                "team_name": "剪羊毛6",
-//                "car_type": 1,
-//                "car_volume": "3m*5m*3m",
-//                "team_human_scale": 5,
-//                "service_type": "2",
-//                "phone": "13254543434",
-//                "price": 800.00,
-//                "id": 10
-//    }]
-//    }
-    /*服务类型 剪羊毛 打疫苗 找车辆*/
+//    {
+//        "id": 10,
+//            "teamName": "剪羊毛6",
+//            "teamHumanScale": 5,
+//            "teamCarScale": 5,
+//            "teamDesc": "专业团队",
+//            "price": 800,
+//            "phone": "13254543434",
+//            "carType": 1,
+//            "serviceType": 2,
+//            "carVolume": "3m*5m*3m",
+//            "maxHeight": 4.5,
+//            "initDate": 1607779239000,
+//            "initUser": 2,
+//            "authState": 1,
+//            "images": [ ]
+//    },
+
     private int serverType;
 
     private int id;
@@ -38,19 +34,19 @@ public class ServiceInfo extends BaseInfo {
     private List<String> images;
     private long initDate;
 
-    private float max_height;
-    private String team_desc;
+    private float maxHeight;
+    private String teamDesc;
 
-    private int team_car_scale;
-    private String team_name;
+    private int teamCarScale;
+    private String teamName;
 
-    private int car_type;
+    private int carType;
 
-    private String car_volume;
+    private String carVolume;
 
-    private int team_human_scale;
+    private int teamHumanScale;
 
-    private int service_type;
+    private int serviceType;
 
 
     private String phone;
@@ -59,6 +55,16 @@ public class ServiceInfo extends BaseInfo {
 
     private String nickname;
 
+    private int initUser;
+
+
+    public int getServerType() {
+        return serverType;
+    }
+
+    public void setServerType(int serverType) {
+        this.serverType = serverType;
+    }
 
     public int getId() {
         return id;
@@ -66,100 +72,6 @@ public class ServiceInfo extends BaseInfo {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-
-    public long getInitDate() {
-        return initDate;
-    }
-
-    public void setInitDate(long initDate) {
-        this.initDate = initDate;
-    }
-
-    public float getMax_height() {
-        return max_height;
-    }
-
-    public void setMax_height(float max_height) {
-        this.max_height = max_height;
-    }
-
-    public String getTeam_desc() {
-        return team_desc;
-    }
-
-    public void setTeam_desc(String team_desc) {
-        this.team_desc = team_desc;
-    }
-
-    public int getTeam_car_scale() {
-        return team_car_scale;
-    }
-
-    public void setTeam_car_scale(int team_car_scale) {
-        this.team_car_scale = team_car_scale;
-    }
-
-    public String getTeam_name() {
-        return team_name;
-    }
-
-    public void setTeam_name(String team_name) {
-        this.team_name = team_name;
-    }
-
-    public int getCar_type() {
-        return car_type;
-    }
-
-    public void setCar_type(int car_type) {
-        this.car_type = car_type;
-    }
-
-    public String getCar_volume() {
-        return car_volume;
-    }
-
-    public void setCar_volume(String car_volume) {
-        this.car_volume = car_volume;
-    }
-
-    public int getTeam_human_scale() {
-        return team_human_scale;
-    }
-
-    public void setTeam_human_scale(int team_human_scale) {
-        this.team_human_scale = team_human_scale;
-    }
-
-    public int getService_type() {
-        return service_type;
-    }
-
-    public void setService_type(int service_type) {
-        this.service_type = service_type;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
     }
 
     public int getAuthState() {
@@ -178,20 +90,107 @@ public class ServiceInfo extends BaseInfo {
         this.images = images;
     }
 
-    public void setPrice(float price) {
-        this.price = price;
+    public long getInitDate() {
+        return initDate;
     }
 
-
-    public int getServerType() {
-        return serverType;
+    public void setInitDate(long initDate) {
+        this.initDate = initDate;
     }
 
-    public void setServerType(int serverType) {
-        this.serverType = serverType;
+    public float getMaxHeight() {
+        return maxHeight;
+    }
+
+    public void setMaxHeight(float maxHeight) {
+        this.maxHeight = maxHeight;
+    }
+
+    public String getTeamDesc() {
+        return teamDesc;
+    }
+
+    public void setTeamDesc(String teamDesc) {
+        this.teamDesc = teamDesc;
+    }
+
+    public int getTeamCarScale() {
+        return teamCarScale;
+    }
+
+    public void setTeamCarScale(int teamCarScale) {
+        this.teamCarScale = teamCarScale;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public int getCarType() {
+        return carType;
+    }
+
+    public void setCarType(int carType) {
+        this.carType = carType;
+    }
+
+    public String getCarVolume() {
+        return carVolume;
+    }
+
+    public void setCarVolume(String carVolume) {
+        this.carVolume = carVolume;
+    }
+
+    public int getTeamHumanScale() {
+        return teamHumanScale;
+    }
+
+    public void setTeamHumanScale(int teamHumanScale) {
+        this.teamHumanScale = teamHumanScale;
+    }
+
+    public int getServiceType() {
+        return serviceType;
+    }
+
+    public void setServiceType(int serviceType) {
+        this.serviceType = serviceType;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public float getPrice() {
         return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public int getInitUser() {
+        return initUser;
+    }
+
+    public void setInitUser(int initUser) {
+        this.initUser = initUser;
     }
 }

@@ -22,6 +22,8 @@ import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
+import com.meishe.yangquan.bean.SheepBarCommentInfo;
+import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfo;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.bean.SheepNews;
@@ -42,6 +44,8 @@ import com.meishe.yangquan.viewhoder.ServiceSheepNewsHolder;
 import com.meishe.yangquan.viewhoder.ServiceMessageHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeListHolder;
+import com.meishe.yangquan.viewhoder.SheepBarCommentListHolder;
+import com.meishe.yangquan.viewhoder.SheepBarCommentSecondaryListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarMessageListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarPictureListHolder;
 
@@ -134,6 +138,16 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_sheep_bar_message, parent, false);
                 viewHolder = new SheepBarMessageListHolder(view, this);
                 break;
+            /*羊吧一级评论列表*/
+            case VIEW_COMMENT_LEVEL1_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_sheep_bar_comment, parent, false);
+                viewHolder = new SheepBarCommentListHolder(view, this);
+                break;
+            /*羊吧二级评论列表*/
+            case VIEW_COMMENT_LEVEL1_CHILD_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_sheep_bar_comment, parent, false);
+                viewHolder = new SheepBarCommentSecondaryListHolder(view, this);
+                break;
         }
         return viewHolder;
     }
@@ -183,7 +197,13 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_SHEEP_BAR_MESSAGE;
         } else if (baseInfo instanceof ServiceInfo) {
             return VIEW_SERVICE_LIST;
+        } else if (baseInfo instanceof SheepBarCommentInfo){
+            return VIEW_COMMENT_LEVEL1_LIST;
+        } else if (baseInfo instanceof SheepBarCommentSecondaryInfo){
+            return VIEW_COMMENT_LEVEL1_CHILD_LIST;
         }
         return super.getItemViewType(position);
     }
+
+
 }

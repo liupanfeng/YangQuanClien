@@ -1,4 +1,6 @@
 package com.meishe.yangquan.bean;
 
-public class BaseInfo {
+import java.io.Serializable;
+
+public class BaseInfo implements Serializable {
 }

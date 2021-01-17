@@ -128,13 +128,13 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
                 selectLookCar();
                 getServiceDataFromServer(mServiceType, mListType);
                 break;
-            case R.id.tv_market_newest:
+            case R.id.tv_service_newest:
                 mListType = TYPE_MARKET_LIST_TYPE_NEWEST;
                 mTvMarketNewest.setSelected(true);
                 mTvMarketCommand.setSelected(false);
                 getServiceDataFromServer(mServiceType, mListType);
                 break;
-            case R.id.tv_market_command:
+            case R.id.tv_service_command:
                 mListType = TYPE_MARKET_LIST_TYPE_RECOMMEND;
                 mTvMarketCommand.setSelected(true);
                 mTvMarketNewest.setSelected(false);

@@ -15,7 +15,7 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.RoundAngleImageView;
 import com.meishe.yangquan.wiget.CustomToolbar;
 
-public class ShowPicActivity extends AppCompatActivity {
+public class ShowPicActivity extends BaseActivity {
 
     private RoundAngleImageView iv_show_pic;
     private RequestOptions options;
@@ -29,16 +29,47 @@ public class ShowPicActivity extends AppCompatActivity {
         initTitle();
     }
 
-    private void initTitle() {
-        mToolbar.setMyTitle("大图展示");
-        mToolbar.setMyTitleVisible(View.VISIBLE);
-        mToolbar.setLeftButtonVisible(View.VISIBLE);
-        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
+    @Override
+    protected int initRootView() {
+        return R.layout.activity_show_pic;
     }
 
-    private void initView() {
-        mToolbar = findViewById(R.id.toolbar);
+    public void initTitle() {
+//        mToolbar.setMyTitle("查看大图");
+//        mToolbar.setMyTitleVisible(View.VISIBLE);
+//        mToolbar.setLeftButtonVisible(View.VISIBLE);
+//        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
+        mTvTitle.setText("查看大图");
+    }
+
+    @Override
+    public void initListener() {
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        iv_show_pic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+    }
+
+    @Override
+    public void release() {
+
+    }
+
+    public void initView() {
+        mTvTitle = findViewById(R.id.tv_title);
         iv_show_pic=findViewById(R.id.iv_show_pic);
+        mIvBack = findViewById(R.id.iv_back);
+
+//        mToolbar = findViewById(R.id.toolbar);
         RelativeLayout.LayoutParams params= (RelativeLayout.LayoutParams) iv_show_pic.getLayoutParams();
         Display display = getWindowManager().getDefaultDisplay();
         int width = display.getWidth();
@@ -47,16 +78,17 @@ public class ShowPicActivity extends AppCompatActivity {
         params.height=width;
     }
 
-    private void initData() {
+    public void initData() {
         Intent intent=getIntent();
         if (intent!=null){
             options = new RequestOptions();
             options.centerCrop();
+            options.skipMemoryCache(true);
             options.placeholder(R.mipmap.ic_message_list_photo_default);
             String imageUrl=intent.getStringExtra("imageUrl");
             Glide.with(this)
                     .asBitmap()
-                    .load(HttpUrl.URL_IMAGE + imageUrl)
+                    .load(imageUrl)
                     .apply(options)
                     .into(iv_show_pic);
 
@@ -64,12 +96,30 @@ public class ShowPicActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onClick(View view) {
 
-    private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
-
-        @Override
-        public void onClick() {
-            finish();
-        }
     }
+
+    @Override
+    public void onSuccess(Object object) {
+
+    }
+
+    @Override
+    public void onSuccess(int type, Object object) {
+
+    }
+
+    @Override
+    public void onError(Object obj) {
+
+    }
+
+    @Override
+    public void onError(int type, Object obj) {
+
+    }
+
+
 }

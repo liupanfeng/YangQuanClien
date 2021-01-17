@@ -9,6 +9,8 @@ public class SheepBarPictureInfo extends BaseInfo {
 
     public static final int TYPE_CAPTURE_PIC = 2;               //相机的图片
 
+    public static final int TYPE_URL_PIC = 3;               //网络图片
+
 
     private int type;
 

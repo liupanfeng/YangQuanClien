@@ -1,82 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@color/white"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:orientation="vertical">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="190dp"
-        android:background="@mipmap/ic_sheep_bar_top_bg"
-        >
+        android:background="@mipmap/ic_sheep_bar_top_bg">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="羊吧"
-            android:textColor="#ffffffff"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="17dp"
-            android:textSize="17sp"
-            />
-        
+            android:text="羊吧"
+            android:textColor="#ffffffff"
+            android:textSize="17sp" />
+
         <ImageView
             android:layout_width="@dimen/dp18"
             android:layout_height="@dimen/dp18"
+            android:layout_alignParentRight="true"
             android:layout_marginTop="@dimen/dp21"
             android:layout_marginRight="@dimen/dp18"
-            android:background="@mipmap/ic_sheep_bar_search"
-            android:layout_alignParentRight="true"
-            />
+            android:visibility="gone"
+            android:background="@mipmap/ic_sheep_bar_search" />
 
         <RelativeLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/dp87"
+            android:layout_height="@dimen/dp55"
             android:layout_marginLeft="@dimen/dp15"
-            android:layout_height="@dimen/dp55">
+            android:layout_marginTop="@dimen/dp87"
+            android:orientation="horizontal">
 
-            <ImageView
+            <com.meishe.yangquan.view.RoundAngleImageView
                 android:id="@+id/iv_bar_sheep_photo"
                 android:layout_width="@dimen/dp55"
                 android:layout_height="@dimen/dp55"
-                android:background="@mipmap/ic_sheep_bar_default_photo"
-                />
+                app:roundHeight="@dimen/dp27"
+                app:roundWidth="@dimen/dp27"
+                android:background="@mipmap/ic_sheep_bar_default_photo" />
 
             <TextView
-                android:layout_toRightOf="@+id/iv_bar_sheep_photo"
+                android:id="@+id/tv_sheep_bar_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="羊吧"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/dp12"
+                android:layout_toRightOf="@+id/iv_bar_sheep_photo"
+                android:text="羊吧"
                 android:textColor="#ffffffff"
-                android:textSize="20sp"
-                />
+                android:textSize="20sp" />
 
 
             <LinearLayout
-                android:background="@drawable/bg_sheep_bar_sign_in"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/dp15"
-                android:layout_centerVertical="true"
                 android:layout_width="@dimen/dp65"
-                android:layout_height="@dimen/dp30">
+                android:layout_height="@dimen/dp30"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp15"
+                android:background="@drawable/bg_sheep_bar_sign_in"
+                android:visibility="gone">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="签到"
                     android:gravity="center"
+                    android:text="签到"
                     android:textColor="#ff3ba786"
-                    android:textSize="15sp"
-                    />
+                    android:textSize="15sp" />
 
             </LinearLayout>
 
         </RelativeLayout>
-
 
 
     </RelativeLayout>
@@ -86,81 +85,81 @@
         android:id="@+id/ll_sign_up"
         android:layout_width="match_parent"
         android:layout_height="102dp"
-        android:background="@drawable/mine_middle_bg"
         android:layout_marginTop="155dp"
+        android:background="@drawable/mine_middle_bg"
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/ll_top_message_container_1"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/dp43"
             android:layout_marginLeft="@dimen/dp16"
-            android:layout_marginRight="@dimen/dp16"
             android:layout_marginTop="@dimen/dp16"
-            android:layout_height="@dimen/dp43">
+            android:layout_marginRight="@dimen/dp16">
 
             <ImageView
                 android:layout_width="@dimen/dp46"
                 android:layout_height="@dimen/dp17"
-                android:background="@mipmap/ic_sheep_bar_to_top"
                 android:layout_gravity="center_vertical"
-                />
+                android:background="@mipmap/ic_sheep_bar_to_top" />
 
 
             <TextView
+                android:id="@+id/tv_top_message_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp10"
-                android:text="天青色等烟雨而我在等你，月色被打捞起晕开了结局,月色被打捞起晕开了结局"
                 android:layout_gravity="center_vertical"
-                android:singleLine="true"
+                android:layout_marginLeft="@dimen/dp10"
                 android:ellipsize="end"
+                android:singleLine="true"
+                android:text="天青色等烟雨而我在等你，月色被打捞起晕开了结局,月色被打捞起晕开了结局"
                 android:textColor="#ff656565"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp0p3"
-            android:background="#e5e5e5"
             android:layout_marginLeft="@dimen/dp16"
             android:layout_marginRight="@dimen/dp16"
-            />
+            android:background="#e5e5e5" />
 
         <LinearLayout
+            android:id="@+id/ll_top_message_container_2"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/dp42"
             android:layout_marginLeft="@dimen/dp16"
-            android:layout_marginRight="@dimen/dp16"
-            android:layout_height="@dimen/dp42">
+            android:layout_marginRight="@dimen/dp16">
 
             <ImageView
                 android:layout_width="@dimen/dp46"
                 android:layout_height="@dimen/dp17"
-                android:background="@mipmap/ic_sheep_bar_to_top"
                 android:layout_gravity="center_vertical"
-                />
+                android:background="@mipmap/ic_sheep_bar_to_top" />
 
 
             <TextView
+                android:id="@+id/tv_top_message_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp10"
-                android:text="天青色等烟雨而我在等你，月色被打捞起晕开了结局,月色被打捞起晕开了结局"
                 android:layout_gravity="center_vertical"
-                android:singleLine="true"
+                android:layout_marginLeft="@dimen/dp10"
                 android:ellipsize="end"
+                android:singleLine="true"
+                android:text="天青色等烟雨而我在等你，月色被打捞起晕开了结局,月色被打捞起晕开了结局"
                 android:textColor="#ff656565"
-                android:textSize="14sp"
-                />
+                android:textSize="14sp" />
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp0p3"
-            android:background="#e5e5e5"
             android:layout_marginLeft="@dimen/dp16"
             android:layout_marginRight="@dimen/dp16"
-            />
+            android:background="#e5e5e5" />
     </LinearLayout>
 
 
@@ -170,35 +169,36 @@
         android:layout_below="@+id/ll_sign_up"
         android:layout_marginTop="@dimen/dp20"
         android:orientation="vertical">
+
         <LinearLayout
-            android:orientation="horizontal"
             android:layout_width="match_parent"
+            android:layout_height="@dimen/dp40"
             android:layout_marginLeft="@dimen/dp20"
             android:layout_marginRight="@dimen/dp20"
-            android:layout_height="@dimen/dp40">
+            android:orientation="horizontal">
+
             <com.meishe.yangquan.wiget.CustomTextView
-                android:layout_width="wrap_content"
                 android:id="@+id/tv_bar_sheep_newest"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
-                android:text="最新"
-                />
+                android:text="最新" />
+
             <com.meishe.yangquan.wiget.CustomTextView
                 android:id="@+id/tv_bar_sheep_command"
                 android:layout_width="wrap_content"
-                android:layout_marginLeft="@dimen/dp24"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp24"
                 android:gravity="center_vertical"
-                android:text="推荐"
-                />
+                android:text="推荐" />
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler"
-            android:layout_marginLeft="@dimen/dp11"
-            android:layout_marginRight="@dimen/dp11"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp11"
+            android:layout_marginRight="@dimen/dp11" />
 
     </LinearLayout>
 
@@ -207,11 +207,10 @@
         android:id="@+id/iv_publish_sheep_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@mipmap/ic_home_service_publish"
-        android:layout_marginBottom="@dimen/dp19"
-        android:layout_marginRight="@dimen/dp22"
-        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        />
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="@dimen/dp22"
+        android:layout_marginBottom="@dimen/dp19"
+        android:background="@mipmap/ic_home_service_publish" />
 
 </RelativeLayout>

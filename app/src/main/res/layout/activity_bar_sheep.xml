@@ -5,9 +5,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".activity.PublishSheepBarActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp48">
 
-    <include layout="@layout/custom_toolbar_layout" />
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp18"
+            android:background="@mipmap/ic_title_back" />
 
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="个人信息"
+            android:textColor="#ff303030"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/btn_publish"
+            android:layout_width="@dimen/dp53"
+            android:layout_height="@dimen/dp27"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp18"
+            android:text="发布"
+            android:background="@drawable/mine_gold_button_bg"
+            android:textColor="@color/white"
+            />
+
+    </RelativeLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp8"

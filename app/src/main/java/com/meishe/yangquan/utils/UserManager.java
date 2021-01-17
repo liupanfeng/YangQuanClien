@@ -43,12 +43,13 @@ public class UserManager {
     }
 
     public String getToken() {
-//        if (!TextUtils.isEmpty(token)){
-//            return token;
-//        }
-//        token=sharedPreferencesUtil.getString("token");
-//        return token;
-        return "78816dafbbe544fe80e8d21118bf3faa";
+        if (!TextUtils.isEmpty(token)){
+            return token;
+        }
+        token=sharedPreferencesUtil.getString("token");
+        return token;
+//        return "78816dafbbe544fe80e8d21118bf3faa";
+//        return "";
     }
 
     public void setToken(String token) {

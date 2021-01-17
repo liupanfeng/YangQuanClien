@@ -52,8 +52,8 @@ public class HttpUrl {
     public static final String URL_GET_USER_INFO = URL + "app/user/info";
 
 
-    /*完善用户信息*/
-    public static final String URL_UPDATE_USER = URL + "user/update";
+    /*更新用户信息*/
+    public static final String URL_UPDATE_USER = URL + "app/user/update";
 
     /*注册*/
     public static final String USER_REGISTER = URL + "user/register";
@@ -157,8 +157,27 @@ public class HttpUrl {
     /*上传文件*/
     public static final String HOME_PAGE_COMMON_FILE_UPLOAD = URL + "common/file/upload";
 
+    /*批量上传文件*/
+    public static final String HOME_PAGE_COMMON_FILES_UPLOAD = URL + "/common/files/upload";
+
     /*获取羊吧列表*/
     public static final String SHEEP_BAR_INFO_LIST = URL + "app/bar/post/list";
+
+    /*上传羊吧信息*/
+    public static final String SHEEP_BAR_INFO_SAVE = URL + "app/bar/post/save";
+
+
+    /*获取一级评论*/
+    public static final String SHEEP_BAR_COMMENT_LIST_LEVEL1 = URL + "app/bar/comment/list/level1";
+    /*获取二级评论*/
+    public static final String SHEEP_BAR_COMMENT_LIST_LEVEL2 = URL + "app/bar/comment/list/level2";
+
+    /*赞帖子，点赞评论，收藏帖子，分享帖子*/
+    public static final String SHEEP_BAR_INTERACT = URL + "app/bar/interact";
+
+    /*添加评论*/
+    public static final String SHEEP_BAR_ADD_COMMENT = URL + "app/bar/comment/save";
+
 
 
 

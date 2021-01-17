@@ -43,6 +43,34 @@ public class ScreenUtils {
         return dm.heightPixels;
     }
 
+
+    /**
+     * Return the status bar's height.
+     *
+     * @return the status bar's height
+     */
+    public static int getStatusBarHeight() {
+        Resources resources = Resources.getSystem();
+        int resourceId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        return resources.getDimensionPixelSize(resourceId);
+    }
+
+
+    /**
+     * Return the navigation bar's height.
+     * 返回导航栏的高度
+     * @return the navigation bar's height
+     */
+    public static int getNavBarHeight() {
+        Resources res = Resources.getSystem();
+        int resourceId = res.getIdentifier("navigation_bar_height", "dimen", "android");
+        if (resourceId != 0) {
+            return res.getDimensionPixelSize(resourceId);
+        } else {
+            return 0;
+        }
+    }
+
     /**
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素)
      */

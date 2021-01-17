@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 
 
+import com.bumptech.glide.request.target.ViewTarget;
 import com.umeng.commonsdk.UMConfigure;
 
 import cn.jpush.android.api.JPushInterface;
@@ -24,6 +25,8 @@ public class App extends Application {
         super.onCreate();
         app=this;
         mContext = getApplicationContext();
+
+        ViewTarget.setTagId(R.id.tag_glide);
 
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.meishe.third.pop.widget.PopupDrawerLayout
+<com.meishe.libbase.pop.widget.PopupDrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
@@ -15,4 +15,4 @@
         android:minWidth="@dimen/dp_px_90"
         android:focusable="true">
     </FrameLayout>
-</com.meishe.third.pop.widget.PopupDrawerLayout>
+</com.meishe.libbase.pop.widget.PopupDrawerLayout>

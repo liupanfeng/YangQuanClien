@@ -6,7 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     tools:context=".activity.ShowPicActivity">
-    <include layout="@layout/custom_toolbar_layout" />
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/custom_title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="#fff5f5f5"
+        android:layout_below="@+id/title"
+        />
 
     <com.meishe.yangquan.view.RoundAngleImageView
         android:id="@+id/iv_show_pic"

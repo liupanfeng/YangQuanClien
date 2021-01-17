@@ -16,6 +16,7 @@ import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpRequestUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.TitleBar;
 
@@ -75,4 +76,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         mRecyclerView.setAdapter(mAdapter);
     }
 
+    protected String getToken(){
+        return UserManager.getInstance(mContext).getToken();
+    }
 }

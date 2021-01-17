@@ -69,6 +69,7 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/tv_sheep_bar_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="发布标题发布标题发布标题发布标题发布标题
@@ -89,7 +90,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
-        android:layout_marginLeft="@dimen/dp56"
+        android:layout_marginLeft="@dimen/dp50"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_corners_3">
+
+    <RadioGroup
+        android:id="@+id/rg_select_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="7dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_pop_big_sheep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/bg_radio_selector"
+            android:paddingLeft="@dimen/dp7"
+            android:text="拉成品羊" />
+
+        <RadioButton
+            android:id="@+id/rb_pop_feed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp7"
+            android:button="@drawable/bg_radio_selector"
+            android:paddingLeft="@dimen/dp7"
+            android:text="拉饲料" />
+
+        <RadioButton
+            android:id="@+id/rb_pop_corn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp7"
+            android:button="@drawable/bg_radio_selector"
+            android:paddingLeft="@dimen/dp7"
+            android:text="拉玉米" />
+
+        <RadioButton
+            android:id="@+id/rb_pop_truck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp7"
+            android:button="@drawable/bg_radio_selector"
+            android:paddingLeft="@dimen/dp7"
+            android:text="冷藏车" />
+
+    </RadioGroup>
+</LinearLayout>
+

@@ -2,6 +2,7 @@ package com.meishe.yangquan.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,23 +34,29 @@ import com.meishe.yangquan.activity.VersionUpdateActivity;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.BusinessOpportunityResult;
+import com.meishe.yangquan.bean.EmptyInfo;
 import com.meishe.yangquan.bean.EndInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServerZan;
 import com.meishe.yangquan.bean.ServerZanResult;
+import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
+import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.ListLoadingView;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.EmptyHolder;
@@ -93,10 +100,12 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_SHEEP_BAR_ADD_PIC = VIEW_TYPE_BASE + 17;                                //羊吧信息发布 图片列表
     protected static final int VIEW_SHEEP_BAR_MESSAGE = VIEW_TYPE_BASE + 18;                                //羊吧信息列表
     protected static final int VIEW_SERVICE_LIST = VIEW_TYPE_BASE + 19;                                   //首页-市场列表
+    protected static final int VIEW_COMMENT_LEVEL1_LIST = VIEW_TYPE_BASE + 20;                                   //羊吧一级评论列表
+    protected static final int VIEW_COMMENT_LEVEL1_CHILD_LIST = VIEW_TYPE_BASE + 21;                                   //羊吧二级评论列表
 
     private IosDialog mDialog;
 
-    protected  int pageType;
+    protected int pageType;
 
     public void setPageType(int pageType) {
         this.pageType = pageType;
@@ -141,7 +150,11 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 holder = new FooterHolder(new ListLoadingView(mContext, height, R.string.list_loading_normal));
                 break;
             case VIEW_TYPE_EMPTY:
-                holder = new EmptyHolder(new View(mContext));
+                View view = new View(mContext);
+                ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+                        ViewGroup.LayoutParams.MATCH_PARENT, 150);
+                view.setLayoutParams(layoutParams);
+                holder = new EmptyHolder(view);
                 break;
             case VIEW_TYPE_END:
                 holder = new EmptyHolder(new ListLoadingView(mContext, height, R.string.list_end));
@@ -154,9 +167,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
         holder.setIsRecyclable(true);
         if (isNeedAutoScroll) {
-            holder.bindViewHolder(mContext, mList.get(position % mList.size()), position,this);
+            holder.bindViewHolder(mContext, mList.get(position % mList.size()), position, this);
         } else {
-            holder.bindViewHolder(mContext, mList.get(position), position,this);
+            holder.bindViewHolder(mContext, mList.get(position), position, this);
         }
     }
 
@@ -166,6 +179,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         BaseInfo baseInfo = getItem(position);
         if (baseInfo instanceof EndInfo) {
             return VIEW_TYPE_END;
+        } else if (baseInfo instanceof EmptyInfo) {
+            return VIEW_TYPE_EMPTY;
         }
         return 0;
     }
@@ -199,14 +214,22 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
      */
     protected void onItemClick(View v) {
         BaseInfo info = (BaseInfo) v.getTag();
-        if (onItemClickListener!=null){
-            onItemClickListener.onItemClick(v,getItemPosition(info),info);
+        if (onItemClickListener != null) {
+            onItemClickListener.onItemClick(v, getItemPosition(info), info);
         }
         if (info instanceof ServiceTypeInfo) {
             Bundle bundle = new Bundle();
             bundle.putString("name", ((ServiceTypeInfo) info).getName());
             bundle.putInt("type", ((ServiceTypeInfo) info).getType());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
+        } else if (info instanceof SheepBarPictureInfo){
+            if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
+                return;
+            }
+            ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, ((SheepBarPictureInfo) info).getFilePath());
+            if (showBigPictureView != null) {
+                showBigPictureView.show();
+            }
         } else if (info instanceof MineTypeInfo) {
 //            boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             boolean isNeedLogin = true;
@@ -272,8 +295,13 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MinePayPasswordActivity.class);
                     break;
             }
-        } else if (info instanceof SheepNews) {
-            ToastUtil.showToast(mContext, "暂无历史数据");
+        } else if (info instanceof ServiceInfo) {
+            //首页服务
+            String phone = ((ServiceInfo) info).getPhone();
+            if (Util.checkNull(phone)) {
+                return;
+            }
+            callPhone(phone);
         } else if (info instanceof ServerCustomer) {
             boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             if (isNeedLogin) {
@@ -298,13 +326,13 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
                     boolean isOldCheckedStatus = ((ServerCustomer) info).isIschecked();
                     if (isOldCheckedStatus) {//取消点赞
-                        if (user!=null){
+                        if (user != null) {
                             final MaterialProgress materialProgress = getMaterialProgress();
                             if (materialProgress != null) {
                                 materialProgress.show();
                             }
-                            deleteZan(user.getUserId(),(ServerCustomer) info);
-                        }else{
+                            deleteZan(user.getUserId(), (ServerCustomer) info);
+                        } else {
                             ToastUtil.showToast(mContext, "用户信息异常，请重新登陆再取消赞");
                         }
 
@@ -319,7 +347,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                             String photoUrl = user.getPhotoUrl();
                             long serverId = ((ServerCustomer) info).getServerId();
                             addZan(userId, nickName, photoUrl, serverId + "", (ServerCustomer) info);
-                        }else{
+                        } else {
                             ToastUtil.showToast(mContext, "用户信息异常，请重新登陆再点赞");
                         }
                     }
@@ -356,11 +384,24 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     break;
             }
 
-        }else if(info instanceof ServiceMessage){
-            Intent intent=new Intent(mContext, ServiceMessageListActivity.class);
+        } else if (info instanceof ServiceMessage) {
+            Intent intent = new Intent(mContext, ServiceMessageListActivity.class);
             mContext.startActivity(intent);
         }
 
+    }
+
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public void callPhone(String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        mContext.startActivity(intent);
     }
 
 
@@ -489,7 +530,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                         ToastUtil.showToast(mContext, "点赞成功");
                         serverCustomer.setIschecked(true);
                         List<ServerZan> zans = serverCustomer.getZans();
-                        if (zans!=null){
+                        if (zans != null) {
                             zans.add(serverZan);
                         }
                         notifyDataSetChanged();
@@ -527,7 +568,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     /**
      * 取消点赞
      */
-    private void deleteZan(long userId,final ServerCustomer serverCustomer) {
+    private void deleteZan(long userId, final ServerCustomer serverCustomer) {
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("userId", userId);
         OkHttpManager.getInstance().postRequest(HttpUrl.SERVICE_LIST_DELETE_ZAN, new BaseCallBack<ServerZanResult>() {
@@ -557,17 +598,17 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     ServerZan serverZan = result.getData();
                     if (serverZan != null) {
                         List<ServerZan> zans = serverCustomer.getZans();
-                        if (zans!=null){
+                        if (zans != null) {
                             Iterator<ServerZan> iterator = zans.iterator();
-                            while (iterator.hasNext()){
-                                ServerZan zan=iterator.next();
-                                if (zan.getUserId().longValue()==serverZan.getUserId().longValue()){
+                            while (iterator.hasNext()) {
+                                ServerZan zan = iterator.next();
+                                if (zan.getUserId().longValue() == serverZan.getUserId().longValue()) {
                                     iterator.remove();
                                     serverCustomer.setIschecked(false);
                                     notifyDataSetChanged();
                                 }
                             }
-                            for (ServerZan zan:zans){
+                            for (ServerZan zan : zans) {
 
                             }
                         }
@@ -607,7 +648,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
      * @return
      */
     public BaseInfo getItem(int position) {
-        if (position < 0 || mList == null || position >= mList.size()){
+        if (position < 0 || mList == null || position >= mList.size()) {
             return new BaseInfo();
         }
         return mList.get(position);
@@ -694,8 +735,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         this.onItemClickListener = onItemClickListener;
     }
 
-    public interface OnItemClickListener{
+    public interface OnItemClickListener {
 
-        void onItemClick(View view,int position,BaseInfo baseInfo);
+        void onItemClick(View view, int position, BaseInfo baseInfo);
     }
 }

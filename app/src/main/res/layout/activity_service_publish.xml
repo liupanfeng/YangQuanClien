@@ -385,20 +385,50 @@
                 android:textColor="#ff303030"
                 android:textSize="13sp" />
 
-            <EditText
-                android:id="@+id/et_find_car_input_car_type"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp32"
-                android:drawableRight="@mipmap/right_arrow_normal"
-                android:drawablePadding="6dp"
-                android:hint="请输入车辆类型"
-                android:gravity="end"
-                android:textColorHint="#ffc2c2c2"
-                android:background="@null"
-                android:textSize="13sp" />
+            <!--<EditText-->
+                <!--android:id="@+id/et_find_car_input_car_type"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_alignParentRight="true"-->
+                <!--android:layout_centerVertical="true"-->
+                <!--android:layout_marginRight="@dimen/dp32"-->
+                <!--android:drawableRight="@mipmap/right_arrow_normal"-->
+                <!--android:drawablePadding="6dp"-->
+                <!--android:hint="请输入车辆类型"-->
+                <!--android:gravity="end"-->
+                <!--android:textColorHint="#ffc2c2c2"-->
+                <!--android:background="@null"-->
+                <!--android:textSize="13sp" />-->
+
+             <RadioGroup
+                 android:id="@+id/rg_select_car_type"
+                 android:orientation="horizontal"
+                 android:layout_centerVertical="true"
+                 android:layout_marginRight="@dimen/dp32"
+                 android:layout_alignParentRight="true"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content">
+
+                 <RadioButton
+                     android:id="@+id/rb_long_car"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:button="@drawable/bg_radio_selector"
+                     android:paddingLeft="@dimen/dp7"
+                     android:text="长途车"
+                     />
+
+                 <RadioButton
+                     android:id="@+id/rb_short_car"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:button="@drawable/bg_radio_selector"
+                     android:paddingLeft="@dimen/dp7"
+                     android:layout_marginLeft="@dimen/dp7"
+                     android:text="短途车"
+                     />
+
+             </RadioGroup>
 
             <View
                 android:layout_width="match_parent"
@@ -421,8 +451,8 @@
                 android:textColor="#ff303030"
                 android:textSize="13sp" />
 
-            <androidx.appcompat.widget.AppCompatSpinner
-                android:id="@+id/sp_find_car_input_service_type"
+            <TextView
+                android:id="@+id/tv_find_car_input_service_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

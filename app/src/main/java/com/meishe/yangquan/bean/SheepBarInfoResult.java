@@ -1,5 +1,7 @@
 package com.meishe.yangquan.bean;
 
+import java.util.List;
+
 /**
  * 羊吧列表返回结果
  */
@@ -12,7 +14,7 @@ public class SheepBarInfoResult {
 
     private String enMsg;
 
-    private SheepBarInfoWarp data;
+    private List<SheepBarMessageInfo> data;
 
     public int getCode() {
         return code;
@@ -38,11 +40,11 @@ public class SheepBarInfoResult {
         this.enMsg = enMsg;
     }
 
-    public SheepBarInfoWarp getData() {
+    public List<SheepBarMessageInfo> getData() {
         return data;
     }
 
-    public void setData(SheepBarInfoWarp data) {
+    public void setData(List<SheepBarMessageInfo> data) {
         this.data = data;
     }
 }

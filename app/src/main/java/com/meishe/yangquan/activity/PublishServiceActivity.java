@@ -36,6 +36,8 @@ import com.meishe.yangquan.bean.UploadFileResult;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.pop.SelectCarServiceTypeView;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
@@ -125,7 +127,13 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
     private String mSheepDungPersonNumber;
     private String mSheepDungCuarNmber;
-    private String mSeephDungCarName;
+    private String mSheepDungCarName;
+    private RadioGroup mRgSelectCarType;
+    private TextView mTvServiceFindCarSreviceType;
+    private int mCarType = 0;
+    private String mCarLengthHighWidth;
+    private String mCarLimitHeight;
+    private int mCarServiceType;
 
 
     @Override
@@ -159,8 +167,8 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         mEtServiceSheepDrungPrice = findViewById(R.id.et_sheep_dung_input_price);
 
         ///////////////////////publish find cat //////////////////////////////////
-        mEtServiceFindCarType = findViewById(R.id.et_find_car_input_car_type);
-//        mSpServiceFindCarSreviceType = findViewById(R.id.sp_find_car_input_service_type);
+        mRgSelectCarType = findViewById(R.id.rg_select_car_type);
+        mTvServiceFindCarSreviceType = findViewById(R.id.tv_find_car_input_service_type);
         mEtServiceFindCarLengthWidthHeight = findViewById(R.id.et_find_car_input_length_width_height);
         mEtServiceFindCarLimitHeight = findViewById(R.id.et_find_car_input_limit_height);
 
@@ -230,6 +238,10 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
     @Override
     public void initListener() {
+        mBtnPublish.setOnClickListener(this);
+        mIvPublishService.setOnClickListener(this);
+        mTvServiceFindCarSreviceType.setOnClickListener(this);
+
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -237,9 +249,19 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
             }
         });
 
-        mBtnPublish.setOnClickListener(this);
-        mIvPublishService.setOnClickListener(this);
-
+        mRgSelectCarType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                int checkedRadioButtonId = radioGroup.getCheckedRadioButtonId();
+                if (checkedRadioButtonId == R.id.rb_long_car) {
+                    //长途车
+                    mCarType = 1;
+                } else if (checkedRadioButtonId == R.id.rb_short_car) {
+                    //短途车
+                    mCarType = 2;
+                }
+            }
+        });
     }
 
     @Override
@@ -260,6 +282,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                         publishSheepDung();
                         break;
                     case TYPE_SERVICE_LOOK_CAR:
+                        publishSheepCar();
                         break;
                     default:
                         break;
@@ -268,10 +291,30 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
             case R.id.iv_sheep_dung_publish_service:
                 showPictureSelectItem();
                 break;
+            case R.id.tv_find_car_input_service_type:
+                //展示选择服务
+                SelectCarServiceTypeView selectCarServiceTypeView = SelectCarServiceTypeView.create(mContext, mTvServiceFindCarSreviceType, new SelectCarServiceTypeView.OnAttachListener() {
+                    @Override
+                    public void onSelectType(String content) {
+                        if ("拉成品羊".equals(content)) {
+                            mCarServiceType = 1;
+                        } else if ("拉饲料".equals(content)) {
+                            mCarServiceType = 2;
+                        } else if ("拉玉米".equals(content)) {
+                            mCarServiceType = 3;
+                        } else if ("冷藏车".equals(content)) {
+                            mCarServiceType = 4;
+                        }
+                        mTvServiceFindCarSreviceType.setText(content);
+                    }
+                });
+                selectCarServiceTypeView.show();
+                break;
             default:
                 break;
         }
     }
+
 
     /**
      * 发布剪羊毛 和打疫苗
@@ -311,15 +354,14 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     }
 
 
-
     /**
      * publish sheep dung
      * 这个类别不一样的只有一个是 车队的数量
      */
     private void publishSheepDung() {
 
-        mSeephDungCarName = mEtServiceSheepDungCarName.getText().toString().trim();
-        if (Util.checkNull(mSeephDungCarName)) {
+        mSheepDungCarName = mEtServiceSheepDungCarName.getText().toString().trim();
+        if (Util.checkNull(mSheepDungCarName)) {
             ToastUtil.showToast(mContext, "车队名称必须填写");
             return;
         }
@@ -352,6 +394,44 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         }
         uploadPicture();
     }
+
+    /**
+     * 发布找车辆
+     */
+    private void publishSheepCar() {
+        if (mCarType == 0) {
+            ToastUtil.showToast(mContext, "车类型必须选择");
+            return;
+        }
+
+        if (mCarServiceType == 0) {
+            ToastUtil.showToast(mContext, "服务类别必须选择");
+            return;
+        }
+
+        mCarLengthHighWidth = mEtServiceFindCarLengthWidthHeight.getText().toString().trim();
+        if (Util.checkNull(mCarLengthHighWidth)) {
+            ToastUtil.showToast(mContext, "车长高宽必须填写");
+            return;
+        }
+
+        mCarLimitHeight = mEtServiceFindCarLimitHeight.getText().toString().trim();
+        if (Util.checkNull(mCarLimitHeight)) {
+            ToastUtil.showToast(mContext, "限高必须填写");
+            return;
+        }
+
+        mPhone = mEtServiceInputPhoneNumber.getText().toString().trim();
+        if (Util.checkNull(mPhone)) {
+            ToastUtil.showToast(mContext, "手机号必须填写");
+            return;
+        }
+        if (!mTempFile.exists()) {
+            ToastUtil.showToast(mContext, "图片必须上传");
+        }
+        uploadPicture();
+    }
+
 
     /**
      * 图片上传
@@ -391,7 +471,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                     ToastUtil.showToast("UploadFileInfo is null");
                     return;
                 }
-                switch (mServiceType){
+                switch (mServiceType) {
                     case TYPE_SERVICE_SHEEP_DUNG:
                         publishSheepDungService(String.valueOf(data.getId()));
                         break;
@@ -400,9 +480,10 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                         publishService(String.valueOf(data.getId()));
                         break;
                     case TYPE_SERVICE_LOOK_CAR:
+                        publishFindCarService(String.valueOf(data.getId()));
                         break;
-                        default:
-                            break;
+                    default:
+                        break;
                 }
 
             }
@@ -424,6 +505,73 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         }, mTempFile, "file", param, token);
     }
 
+    /**
+     * 发布找车辆 服务
+     *
+     * @param pictureId
+     */
+    private void publishFindCarService(String pictureId) {
+        String token = UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("typeId", mServiceType);
+        requestParam.put("carType", mCarType);
+        requestParam.put("serviceType", mCarServiceType);
+        requestParam.put("carVolume", mCarLengthHighWidth);
+        requestParam.put("maxHeight", mCarLimitHeight);
+        requestParam.put("phone", mPhone);
+        requestParam.put("fileIds", pictureId);
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_ADD_SERVICE, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    ToastUtil.showToast(mContext, "发布成功");
+                    finish();
+                } else {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+    }
+
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -436,58 +584,9 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         }
     }
 
-
-    private void addMessage(String userToken, String sheepType, String msgContent, String iconBase64) {
-        OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象。
-        FormBody.Builder formBody = new FormBody.Builder();//创建表单请求体
-        formBody.add("userToken", userToken);
-        formBody.add("sheepType", sheepType);
-        formBody.add("msgContent", msgContent);
-        formBody.add("iconBase64", iconBase64);
-        Request request = new Request.Builder()//创建Request 对象。
-                .url(HttpUrl.MESSAGE_ADD)
-                .post(formBody.build())//传递请求体
-                .build();
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, final IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, e.getMessage());
-                        mp_loading.hide();
-                    }
-                });
-
-            }
-
-            @Override
-            public void onResponse(Call call, final Response response) throws IOException {
-                if (response != null && response.code() == 200) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ToastUtil.showToast(mContext, "发布成功");
-                            mp_loading.hide();
-                            finish();
-                        }
-                    });
-
-                } else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            ToastUtil.showToast(mContext, response.message());
-                            mp_loading.hide();
-                        }
-                    });
-                }
-            }
-        });
-    }
-
     /**
      * 发布 cut sheep hair
+     *
      * @param pictureId
      */
     public void publishService(String pictureId) {
@@ -555,6 +654,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
     /**
      * 发布  sheep dung
+     *
      * @param pictureId
      */
     public void publishSheepDungService(String pictureId) {
@@ -564,7 +664,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         }
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("typeId", mServiceType);
-        requestParam.put("teamName", mSeephDungCarName);
+        requestParam.put("teamName", mSheepDungCarName);
         requestParam.put("teamCarScale", mSheepDungCuarNmber);
         requestParam.put("teamHumanScale", mSheepDungPersonNumber);
         requestParam.put("price", mPrice);

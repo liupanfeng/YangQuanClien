@@ -86,11 +86,11 @@ public class OkHttpManager {
 
     }
 
-    public void postUploadMoreImages(String url, final BaseCallBack callback, File[] files, String[] fileKeys, Map<String, String> params) {
+    public void postUploadMoreImages(String url, final BaseCallBack callback, File[] files, String[] fileKeys, Map<String, String> params,String token) {
         Param[] paramsArr = fromMapToParams(params);
 
         try {
-            postAsyn(url, callback, files, fileKeys, paramsArr);
+            postAsyn(url, callback, files, fileKeys, token,paramsArr);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -116,8 +116,8 @@ public class OkHttpManager {
     }
 
     //多个文件上传请求 带参数
-    private void postAsyn(String url, BaseCallBack callback, File[] files, String[] fileKeys, Param... params) throws IOException {
-        Request request = buildMultipartFormRequest(url, files, fileKeys, params);
+    private void postAsyn(String url, BaseCallBack callback, File[] files, String[] fileKeys, String token,Param... params) throws IOException {
+        Request request = buildMultipartFormRequest(url, files, fileKeys, params,token);
         doRequest(request, callback);
     }
 

@@ -1,6 +1,7 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.View;
@@ -9,10 +10,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.ShowPicActivity;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.CropViewUtils;
 
 /**
@@ -42,7 +48,7 @@ public class SheepBarPictureListHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, int position, View.OnClickListener listener) {
+    public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof SheepBarPictureInfo) {
             if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
                 String filePath = ((SheepBarPictureInfo) info).getFilePath();
@@ -55,11 +61,21 @@ public class SheepBarPictureListHolder extends BaseViewHolder {
 //                Bitmap showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
 //                        tmpBitmap.getHeight(), matrix, true);
                 mIvSheepBarMessage.setImageBitmap(tmpBitmap);
+            } else if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_URL_PIC) {
+                RequestOptions options = new RequestOptions();
+                options.centerCrop();
+                options.placeholder(R.mipmap.ic_message_list_photo_default);
+                Glide.with(context)
+                        .asBitmap()
+                        .load(((SheepBarPictureInfo) info).getFilePath())
+                        .apply(options)
+                        .into(mIvSheepBarMessage);
+                mIvSheepBarMessage.setTag(((SheepBarPictureInfo) info).getFilePath());
             }
         }
-
         mIvSheepBarMessage.setTag(info);
         mIvSheepBarMessage.setOnClickListener(listener);
+
     }
 
 

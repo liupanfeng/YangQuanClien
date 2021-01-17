@@ -11,7 +11,10 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -24,16 +27,38 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MenuItem;
+import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.UploadFileInfo;
+import com.meishe.yangquan.bean.UploadFileResult;
+import com.meishe.yangquan.bean.UploadFilesResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.BitmapUtils;
+import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.wiget.CustomToolbar;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_CUT_WOOL;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_LOOK_CAR;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_VACCINE;
 
 /**
  * 发布羊吧内容界面
@@ -52,6 +77,8 @@ public class PublishSheepBarActivity extends BaseActivity {
     private File tempFile;
 
     private List<SheepBarPictureInfo> mData = new ArrayList<>();
+    private Button mBtnPublish;
+    private EditText mEtInputSheepBarMessage;
 
     @Override
     protected int initRootView() {
@@ -60,8 +87,13 @@ public class PublishSheepBarActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mToolbar = findViewById(R.id.toolbar);
         mRecyclerView = findViewById(R.id.recycler);
+        mTvTitle = findViewById(R.id.tv_title);
+        mIvBack = findViewById(R.id.iv_back);
+        mBtnPublish = findViewById(R.id.btn_publish);
+        mEtInputSheepBarMessage = findViewById(R.id.et_input_sheep_bar_message);
+
+
         initGridRecyclerView();
     }
 
@@ -87,19 +119,29 @@ public class PublishSheepBarActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mToolbar.setMyTitle("羊吧信息");
-        mToolbar.setMyTitleVisible(View.VISIBLE);
-        mToolbar.setLeftButtonVisible(View.VISIBLE);
-        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
+        mTvTitle.setText("羊吧信息");
 
-        mToolbar.setRightButtonVisible(View.VISIBLE);
-        mToolbar.setOnRightButtonClickListener(new OnRightButtonListener());
-        mToolbar.setRightButtonText("发布");
-        mToolbar.setRightButtonBackground(getResources().getColor(R.color.mainColor));
+//        mToolbar.setMyTitle("羊吧信息");
+//        mToolbar.setMyTitleVisible(View.VISIBLE);
+//        mToolbar.setLeftButtonVisible(View.VISIBLE);
+//        mToolbar.setOnLeftButtonClickListener(new OnLeftButtonListener());
+//
+//        mToolbar.setRightButtonVisible(View.VISIBLE);
+//        mToolbar.setOnRightButtonClickListener(new OnRightButtonListener());
+//        mToolbar.setRightButtonText("发布");
+//        mToolbar.setRightButtonBackground(getResources().getColor(R.color.mainColor));
     }
 
     @Override
     public void initListener() {
+        mBtnPublish.setOnClickListener(this);
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
         mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
@@ -123,7 +165,12 @@ public class PublishSheepBarActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
-
+        switch (view.getId()) {
+            case R.id.btn_publish:
+                //发布
+                uploadPictures();
+                break;
+        }
     }
 
     @Override
@@ -172,6 +219,169 @@ public class PublishSheepBarActivity extends BaseActivity {
         }
     }
 
+
+    /**
+     * 上传多张图片
+     */
+    private void uploadPictures() {
+        if (CommonUtils.isEmpty(mData)) {
+            return;
+        }
+        int size = mData.size();
+        if (size <= 1) {
+            ToastUtil.showToast(mContext, "请选择图片！");
+            return;
+        }
+        String[] fileKeys = new String[size - 1];
+        File[] files = new File[size - 1];
+        for (int i = 0; i < mData.size(); i++) {
+            SheepBarPictureInfo sheepBarPictureInfo = mData.get(i);
+            if (sheepBarPictureInfo == null) {
+                continue;
+            }
+
+            File file = new File(sheepBarPictureInfo.getFilePath());
+            if (!file.exists()) {
+                continue;
+            }
+            files[i] = file;
+            fileKeys[i] = "files";
+        }
+        String token = UserManager.getInstance(mContext).getToken();
+        if (Util.checkNull(token)) {
+            return;
+        }
+        HashMap<String, String> param = new HashMap<>();
+        param.put("uploadMode", "13");
+        param.put("order", "1");
+
+        OkHttpManager.getInstance().postUploadMoreImages(HttpUrl.HOME_PAGE_COMMON_FILES_UPLOAD, new BaseCallBack<UploadFilesResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UploadFilesResult uploadFileResult) {
+                if (uploadFileResult == null) {
+                    ToastUtil.showToast(response.message());
+                    return;
+                }
+                if (uploadFileResult.getCode() != 1) {
+                    ToastUtil.showToast(uploadFileResult.getMsg());
+                    return;
+                }
+                List<UploadFileInfo> datas = uploadFileResult.getData();
+                if (datas == null) {
+                    ToastUtil.showToast("UploadFileInfo is null");
+                    return;
+                }
+                StringBuilder stringBuilder=new StringBuilder();
+
+                for (int i=0;i<datas.size();i++){
+                    UploadFileInfo uploadFileInfo = datas.get(i);
+                    if (uploadFileInfo==null){
+                        continue;
+                    }
+                    stringBuilder.append(uploadFileInfo.getId());
+                    if (i<datas.size()-1){
+                        stringBuilder.append(",") ;
+                    }
+                }
+                publishSheepBar(stringBuilder.toString());
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, files, fileKeys, param, token);
+    }
+
+
+    /**
+     * 发布  羊吧信息
+     *
+     * @param pictureIds
+     */
+    public void publishSheepBar(String pictureIds) {
+        String token = UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        String content = mEtInputSheepBarMessage.getText().toString().trim();
+        if (TextUtils.isEmpty(content)) {
+            ToastUtil.showToast(mContext, "请输入内容！");
+            return;
+        }
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("content", content);
+        requestParam.put("fileIds", pictureIds);
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_BAR_INFO_SAVE, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    ToastUtil.showToast(mContext, "发布成功");
+                    BitmapUtils.deleteCacheFile();
+                    finish();
+                } else {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+    }
 
     private void showPictureSelectItem() {
         new BottomMenuFragment(PublishSheepBarActivity.this)
@@ -254,19 +464,10 @@ public class PublishSheepBarActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, intent);
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
-                if (tempFile != null) {
-//                    Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
-////                    mIvSelectIcon.setVisibility(View.GONE);
-//                    Matrix matrix = new Matrix();
-//                    matrix.setScale(0.2f, 0.2f);
-//                    showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
-//                            tmpBitmap.getHeight(), matrix, true);
-//
-//
-//                    mIvShowIcon.setImageBitmap(showBitmap);
-
+                if (tempFile != null && tempFile.exists()) {
+                    String filePath = BitmapUtils.compressImageUpload(tempFile.getAbsolutePath());
                     SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
-                    sheepBarMessageInfo.setFilePath(tempFile.getAbsolutePath());
+                    sheepBarMessageInfo.setFilePath(filePath);
                     sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_CAPTURE_PIC);
                     mData.add(0, sheepBarMessageInfo);
                     mAdapter.addAll(mData);
@@ -300,17 +501,9 @@ public class PublishSheepBarActivity extends BaseActivity {
                         imagePath = uri.getPath();
                     }
                     if (imagePath != null) {
-//                        tempFile = new File(imagePath);
-//                        Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(tempFile.getAbsolutePath(), 1080);
-//                        Matrix matrix = new Matrix();
-//                        matrix.setScale(0.4f, 0.4f);
-//                        showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
-//                                tmpBitmap.getHeight(), matrix, true);
-////                        mIvSelectIcon.setVisibility(View.GONE);
-//                        mIvShowIcon.setImageBitmap(showBitmap);
-
+                        String filePath = BitmapUtils.compressImageUpload(imagePath);
                         SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
-                        sheepBarMessageInfo.setFilePath(imagePath);
+                        sheepBarMessageInfo.setFilePath(filePath);
                         sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_CAPTURE_PIC);
                         mData.add(0, sheepBarMessageInfo);
                         mAdapter.addAll(mData);

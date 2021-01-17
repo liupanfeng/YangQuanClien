@@ -5,6 +5,27 @@ package com.meishe.yangquan.bean;
  */
 public class UserInfo {
 
+//
+//    "code": 1,
+//            "enMsg": "success",
+//            "msg": "成功",
+//            "data": {
+//        "nickname": "张三",
+//                "iconUrl": "http://localhost:9999/user_icon/2020-12/06/1607242911519.jpg",
+//                "isInfoComplete": 1,
+//                "idCardFrontUrl": "http://localhost:9999/user_id_card_front/2020-12/06/1607242952268.jpg",
+//                "idCardReverseUrl": "http://localhost:9999/user_id_card_reverse/2020-12/06/1607242962993.jpg",
+//                "driveCardFrontUrl": "http://localhost:9999/user_drive_card_front/2020-12/06/1607242983664.jpg",
+//                "driveCardReverseUrl": "http://localhost:9999/user_drive_card_reverse/2020-12/06/1607242994433.jpg",
+//                "runCardFrontUrl": "http://localhost:9999/user_run_card_front/2020-12/06/1607243004052.jpg",
+//                "runCardReverseUrl": "http://localhost:9999/user_run_card_reverse/2020-12/06/1607243018576.jpg",
+//                "culturalScale": 1000,
+//                "culturalAddress": "北京市海淀区",
+//                "culturalAge": 20,
+//                "currentCulturalQuantity": 567
+//    }
+
+
     private String nickname;                        //昵称
 
     private String iconUrl;                         //头像
