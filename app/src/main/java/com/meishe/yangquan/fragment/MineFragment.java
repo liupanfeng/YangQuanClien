@@ -22,18 +22,21 @@ import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.SettingActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.User;
+import com.meishe.yangquan.bean.UserInfo;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.MsgEvent;
 import com.meishe.yangquan.utils.UserManager;
+import com.meishe.yangquan.view.RoundAngleImageView;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import static com.meishe.yangquan.utils.Constants.MESSAGE_EVENT_UPDATE_USER_UI;
+import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_USER_INFO;
 
 
 public class MineFragment extends BaseRecyclerFragment implements View.OnClickListener {
@@ -45,9 +48,9 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
     private RecyclerView mRecyclerView;
 
     private String[] mSettingInfo = {"个人信息", "饲料金", "我的关注", "我的消息",
-            "我的积分","养殖档案", "我的收藏",
+            "我的积分", "养殖档案", "我的收藏",
             "系统消息", "支付密码"};
-//    private String[] mSettingInfo = {"个人信息", "饲料金", "我的关注", "我的消息", "建议留言",
+    //    private String[] mSettingInfo = {"个人信息", "饲料金", "我的关注", "我的消息", "建议留言",
 //            "我的积分","养殖档案", "我的收藏",
 //            "系统消息", "支付密码"};
     private int[] mSettingIcon = {R.mipmap.ic_mine_personal_message,
@@ -58,7 +61,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             R.mipmap.ic_mine_my_collection,
             R.mipmap.ic_mine_system_message,
             R.mipmap.ic_mine_pay_password};
-//    private int[] mSettingIcon = {R.mipmap.ic_mine_personal_message,
+    //    private int[] mSettingIcon = {R.mipmap.ic_mine_personal_message,
 //            R.mipmap.ic_mine_feed_gold, R.mipmap.ic_mine_my_focus,
 //            R.mipmap.ic_mine_my_message,
 //            R.mipmap.ic_mine_suggest,
@@ -67,10 +70,9 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
 //            R.mipmap.ic_mine_my_collection,
 //            R.mipmap.ic_mine_system_message,
 //            R.mipmap.ic_mine_pay_password};
-    private LinearLayout mLLNoLogin;
-    private LinearLayout mLLLogin;
-    private TextView mTvNumber;
-    private ImageView mIvMinePhoto;
+
+    private RoundAngleImageView mIvMinePhoto;
+
     private TextView mTvNickname;
     /*待支付*/
     private RelativeLayout mRlMinePay;
@@ -104,6 +106,10 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -118,8 +124,11 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         mRlMineReceive = view.findViewById(R.id.rl_mine_receive);
         mRlMineCommont = view.findViewById(R.id.rl_mine_comment);
         mRlMineRefund = view.findViewById(R.id.rl_mine_refund);
-        mTvNickname = view.findViewById(R.id.tv_nickname);
+
+        mTvNickname = view.findViewById(R.id.tv_mine_nickname);
         mIvSetting = view.findViewById(R.id.iv_mine_setting);
+        mIvMinePhoto = view.findViewById(R.id.iv_mine_photo);
+
         return view;
     }
 
@@ -149,55 +158,27 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         }
         adapter.addAll(mList);
 
-//        updateUserUI();
+        updateUserUI();
 
     }
 
     private void updateUserUI() {
-        if (UserManager.getInstance(getContext()).isNeedLogin()) {
-            mLLNoLogin.setVisibility(View.VISIBLE);
-            mLLLogin.setVisibility(View.GONE);
-        } else {
-            mLLLogin.setVisibility(View.VISIBLE);
-            mLLNoLogin.setVisibility(View.GONE);
-        }
-
-        User user =null;
+        UserInfo user = UserManager.getInstance(getContext()).getUser();
         if (user != null) {
-            mTvNumber.setText(user.getPhoneNumber());
             mTvNickname.setText(user.getNickname());
-            String photoUrl = user.getPhotoUrl();
+            String photoUrl = user.getIconUrl();
             RequestOptions options = new RequestOptions();
             options.circleCrop();
-            options.placeholder(R.mipmap.ic_photo_default);
+            options.placeholder(R.mipmap.ic_default_photo);
             Glide.with(mContext)
                     .asBitmap()
-                    .load(HttpUrl.URL_IMAGE + photoUrl)
-                    .apply(options)
-                    .into(mIvMinePhoto);
-        } else {
-            RequestOptions options = new RequestOptions();
-            options.diskCacheStrategy(DiskCacheStrategy.ALL);
-            options.circleCrop();
-            options.placeholder(R.mipmap.ic_photo_default);
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load("")
+                    .load(photoUrl)
                     .apply(options)
                     .into(mIvMinePhoto);
         }
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void handleEvent(MsgEvent carrier) {
-        String content = carrier.getEventMessage();
-        switch (content) {
-            case MESSAGE_EVENT_UPDATE_USER_UI:
-                updateUserUI();
-                break;
-        }
-    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -228,6 +209,23 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
                 AppManager.getInstance().jumpActivity(getActivity(), SettingActivity.class);
                 break;
             default:
+                break;
+        }
+    }
+
+
+    /**
+     * On message event.
+     * 消息事件
+     *
+     * @param event the event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        int eventType = event.getEventType();
+        switch (eventType){
+            case MESSAGE_TYPE_UPDATE_USER_INFO:
+                updateUserUI();
                 break;
         }
     }

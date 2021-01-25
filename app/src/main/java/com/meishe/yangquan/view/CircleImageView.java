@@ -26,7 +26,7 @@ import com.meishe.yangquan.R;
 
 
 /**
- * Created by wxy on 16/6/27.
+ * 带描边的圆图
  */
 public class CircleImageView extends AppCompatImageView {
     private static final String TAG = CircleImageView.class.getSimpleName();

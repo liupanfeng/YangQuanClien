@@ -15,20 +15,33 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.UserInfo;
+import com.meishe.yangquan.helper.BackHandlerHelper;
+import com.meishe.yangquan.inter.FragmentBackHandler;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.MaterialProgress;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseRecyclerFragment extends Fragment {
+public abstract class BaseRecyclerFragment extends Fragment implements FragmentBackHandler {
 
     protected Context mContext;
     protected List<BaseInfo> mList=new ArrayList<>();
     protected MaterialProgress mLoading;
     protected RecyclerView mRecyclerView;
     protected MultiFunctionAdapter mAdapter;
+    /*分页加载 下拉刷新*/
+    protected SmartRefreshLayout mRefreshLayout;
+    /*是否加载成功*/
+    protected boolean mIsLoadFinish = true;
+
+    /*页码*/
+    protected int mPageNum=1;
+    /*每页的数量*/
+    protected int mPageSize=3;
+
 
     @Nullable
     @Override
@@ -55,9 +68,15 @@ public abstract class BaseRecyclerFragment extends Fragment {
         mContext=null;
     }
 
+
     protected abstract View initView(LayoutInflater inflater, ViewGroup container);
     protected abstract void initListener();
     protected abstract void initData();
+
+    @Override
+    public boolean onBackPressed() {
+        return BackHandlerHelper.handleBackPress(this);
+    }
 
 
     protected void initRecyclerView() {
@@ -65,6 +84,25 @@ public abstract class BaseRecyclerFragment extends Fragment {
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
+    }
+
+
+    protected void showLoading(){
+        mLoading.show();
+    }
+
+    protected void hideLoading(){
+        mLoading.hide();
+    }
+
+
+    protected void hideUIState(){
+        mIsLoadFinish = true;
+        mLoading.hide();
+        mRefreshLayout.finishLoadMore();
+        mRefreshLayout.finishRefresh();
+//        mNoDataTip.setVisibility(View.GONE);
+//        mNoNetworkTipLayout.setVisibility(View.GONE);
     }
 
     protected String getToken(){

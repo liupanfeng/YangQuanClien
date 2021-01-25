@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.HomeQuotationHistoryActivity">
+
+    <include layout="@layout/custom_title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="81dp"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp18"
+        android:background="@drawable/bg_quotation_history"
+        >
+
+        <TextView
+            android:id="@+id/tv_today_average_price_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="当日均价（元/斤）"
+            android:textColor="@color/color_ff2f3742"
+            android:textSize="15sp"
+            android:layout_marginLeft="@dimen/dp19"
+            android:layout_marginTop="@dimen/dp14"
+            />
+
+        <TextView
+            android:id="@+id/tv_compared_with_yesterday_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="相比于前日"
+            android:layout_toRightOf="@+id/tv_today_average_price_menu"
+            android:layout_marginTop="@dimen/dp14"
+            android:layout_marginLeft="@dimen/dp40"
+            android:textColor="@color/color_ff2f3742"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_today_average_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="26.88"
+            android:layout_marginLeft="@dimen/dp19"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_below="@+id/tv_today_average_price_menu"
+            android:textColor="@color/color_ff3ba786"
+            android:textSize="23sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_compared_with_yesterday"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="下跌-0.01-0.02%"
+            android:layout_toRightOf="@+id/tv_today_average_price_menu"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginLeft="@dimen/dp40"
+            android:layout_below="@+id/tv_today_average_price_menu"
+            android:textColor="@color/color_ff3ba786"
+            android:textSize="17sp"
+            />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_highest_price_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="近七日最高价："
+            android:textColor="@color/color_ff2f3742"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="@dimen/dp15"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_highest_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@+id/tv_highest_price_menu"
+            android:text="26.88"
+            android:textColor="#fffa561e"
+            android:textSize="15sp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_lowest_price_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="近七日最低价："
+            android:layout_marginTop="@dimen/dp15"
+            android:layout_toRightOf="@+id/tv_highest_price_menu"
+            android:layout_marginLeft="@dimen/dp70"
+            android:textColor="@color/color_ff2f3742"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_lowest_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_lowest_price_menu"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/dp15"
+            android:text="26.88"
+            android:textColor="@color/color_ff3ba786"
+            android:textSize="15sp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_average_price_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="近七日平均价："
+            android:textColor="@color/color_ff2f3742"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="@dimen/dp19"
+            android:layout_below="@+id/tv_highest_price_menu"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_average_price"
+            android:layout_toRightOf="@+id/tv_average_price_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_highest_price_menu"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="5dp"
+            android:text="26.88"
+            android:textColor="@color/color_ff656565"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_update_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_average_price_menu"
+            android:layout_marginLeft="@dimen/dp19"
+            android:layout_marginTop="@dimen/dp10"
+            android:text="更新时间：2020-10-31"
+            android:textColor="@color/color_ffc2c2c2"
+            android:textSize="10sp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_update_time"
+            android:layout_marginLeft="156dp"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_below="@+id/tv_average_price_menu"
+            android:text="单位：元/斤"
+            android:textColor="@color/color_ffc2c2c2"
+            android:textSize="10sp"
+            />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5"
+        android:layout_marginTop="@dimen/dp10"
+        />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="山羊均价走势图"
+        android:layout_marginTop="@dimen/dp15"
+        android:textColor="@color/color_ff2f3742"
+        android:layout_gravity="center_horizontal"
+        android:textSize="15sp"
+        />
+
+</LinearLayout>

@@ -1,283 +1,307 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".activity.MinePersonalInfoActivity">
 
-    <include layout="@layout/custom_title"/>
-
-    <View
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp8"
-        android:background="#fff5f5f5"
-        />
-
-    <ImageView
-        android:id="@+id/iv_personal_mine_photo"
-        android:layout_width="93dp"
-        android:layout_height="93dp"
-        android:layout_marginTop="@dimen/dp27"
-        android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_default_photo"/>
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
 
 
-    <RelativeLayout
-        android:id="@+id/rl_title"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+        <include layout="@layout/custom_title" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp16"
-            android:text="昵称"
-            android:textColor="#ff303030"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tv_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp32"
-            android:drawableRight="@mipmap/right_arrow_normal"
-            android:drawablePadding="6dp"
-            android:text="昵称"
-            android:textColor="#ffc2c2c2"
-            android:textSize="13sp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp0p3"
-            android:layout_alignParentBottom="true"
-            android:background="#E5E5E5" />
-    </RelativeLayout>
+            android:layout_height="@dimen/dp8"
+            android:background="#fff5f5f5" />
+
+        <com.meishe.yangquan.view.RoundAngleImageView
+            android:id="@+id/iv_personal_mine_photo"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp27"
+            android:background="@mipmap/ic_default_photo"
+            app:roundHeight="47dp"
+            app:roundWidth="47dp" />
 
 
-    <RelativeLayout
-        android:id="@+id/rl_sex"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp16"
-            android:text="昵称"
-            android:textColor="#ff303030"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tv_sex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp32"
-            android:drawableRight="@mipmap/right_arrow_normal"
-            android:drawablePadding="6dp"
-            android:text="性别"
-            android:textColor="#ffc2c2c2"
-            android:textSize="13sp" />
-
-        <View
+        <RelativeLayout
+            android:id="@+id/rl_title"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp0p3"
-            android:layout_alignParentBottom="true"
-            android:background="#E5E5E5" />
-    </RelativeLayout>
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="昵称"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:background="@null"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:gravity="end"
+                android:hint="请输入昵称"
+                android:textColorHint="#ffc2c2c2"
+                android:textSize="13sp" />
 
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/rl_upload_id_card"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp16"
-            android:text="昵称"
-            android:textColor="#ff303030"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tv_upload_id_card"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp32"
-            android:drawableRight="@mipmap/right_arrow_normal"
-            android:drawablePadding="6dp"
-            android:text="上传身份证"
-            android:textColor="#ffc2c2c2"
-            android:textSize="13sp" />
-
-        <View
+        <RelativeLayout
+            android:id="@+id/rl_sex"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp0p3"
-            android:layout_alignParentBottom="true"
-            android:background="#E5E5E5" />
-    </RelativeLayout>
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="性别"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_personal_sex"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:background="@null"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:gravity="end"
+                android:hint="请选择性别"
+                android:textColorHint="#ffc2c2c2"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+
+        </RelativeLayout>
 
 
-
-    <RelativeLayout
-        android:id="@+id/rl_breed_scale"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp16"
-            android:text="养殖规模"
-            android:textColor="#ff303030"
-            android:textSize="13sp" />
-
-        <EditText
-            android:id="@+id/et_input_breeding_scale"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp32"
-            android:drawableRight="@mipmap/right_arrow_normal"
-            android:drawablePadding="6dp"
-            android:hint="请输入养殖规模"
-            android:textColorHint="#ffc2c2c2"
-            android:background="@null"
-            android:textSize="13sp" />
-
-        <View
+        <RelativeLayout
+            android:id="@+id/rl_upload_id_card"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp0p3"
-            android:layout_alignParentBottom="true"
-            android:background="#E5E5E5" />
-    </RelativeLayout>
+            android:layout_height="60dp"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="身份证号"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <TextView
+                android:id="@+id/tv_upload_id_card"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:text="上传身份证"
+                android:textColor="#ffc2c2c2"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
 
 
-    <RelativeLayout
-        android:id="@+id/rl_breed_address"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp16"
-            android:text="养殖地址"
-            android:textColor="#ff303030"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/et_input_breeding_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp32"
-            android:drawableRight="@mipmap/right_arrow_normal"
-            android:drawablePadding="6dp"
-            android:text="请输入养殖地址"
-            android:textColor="#ffc2c2c2"
-            android:background="@null"
-            android:textSize="13sp" />
-
-        <View
+        <RelativeLayout
+            android:id="@+id/rl_breed_scale"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp0p3"
-            android:layout_alignParentBottom="true"
-            android:background="#E5E5E5" />
-    </RelativeLayout>
+            android:layout_height="60dp">
 
-    <RelativeLayout
-        android:id="@+id/rl_breed_years"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="养殖规模"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp16"
-            android:text="养殖地址"
-            android:textColor="#ff303030"
-            android:textSize="13sp" />
+            <EditText
+                android:id="@+id/et_input_breeding_scale"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:background="@null"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:gravity="end"
+                android:hint="请输入养殖规模"
+                android:textColorHint="#ffc2c2c2"
+                android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/et_input_breeding_years"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp32"
-            android:drawableRight="@mipmap/right_arrow_normal"
-            android:drawablePadding="6dp"
-            android:text="请输入养殖年限"
-            android:textColor="#ffc2c2c2"
-            android:background="@null"
-            android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
 
-        <View
+
+        <RelativeLayout
+            android:id="@+id/rl_breed_address"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp0p3"
-            android:layout_alignParentBottom="true"
-            android:background="#E5E5E5" />
-    </RelativeLayout>
+            android:layout_height="60dp">
 
-    <RelativeLayout
-        android:id="@+id/rl_breed_inventory"
-        android:layout_width="match_parent"
-        android:layout_height="60dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="养殖地址"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp16"
-            android:text="存栏数量"
-            android:textColor="#ff303030"
-            android:textSize="13sp" />
+            <EditText
+                android:id="@+id/et_input_breeding_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:background="@null"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:gravity="end"
+                android:hint="请选择养殖地址"
+                android:textColorHint="#ffc2c2c2"
+                android:textSize="13sp" />
 
-        <TextView
-            android:id="@+id/et_input_breeding_inventory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="@dimen/dp32"
-            android:drawableRight="@mipmap/right_arrow_normal"
-            android:drawablePadding="6dp"
-            android:text="请输入存栏数量"
-            android:textColor="#ffc2c2c2"
-            android:background="@null"
-            android:textSize="13sp" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
 
-        <View
+        <RelativeLayout
+            android:id="@+id/rl_breed_years"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp0p3"
-            android:layout_alignParentBottom="true"
-            android:background="#E5E5E5" />
-    </RelativeLayout>
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="养殖年限"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_input_breeding_years"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:background="@null"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:gravity="end"
+                android:hint="请输入养殖年限"
+                android:textColorHint="#ffc2c2c2"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_breed_inventory"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="存栏数量"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_input_breeding_inventory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:background="@null"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:gravity="end"
+                android:hint="请输入存栏数量"
+                android:textColorHint="#ffc2c2c2"
+                android:textSize="13sp" />
 
 
-</LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</RelativeLayout>

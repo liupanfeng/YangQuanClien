@@ -18,7 +18,7 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.TabInfo;
-import com.meishe.yangquan.fragment.BarSheepFragment;
+import com.meishe.yangquan.fragment.SheepBarFragment;
 import com.meishe.yangquan.fragment.FeedFragment;
 import com.meishe.yangquan.fragment.HomeFragment;
 import com.meishe.yangquan.fragment.MineFragment;
@@ -153,9 +153,9 @@ public class MainActivity extends BasePermissionActivity {
                 App.getInstance().getString(R.string.tab_home_page),
                 R.drawable.bg_tab_home_page));
 
-//        mTabList.add(new TabInfo(PageId.PAGE_FEED_PAGE,
-//                App.getInstance().getString(R.string.tab_feed_page),
-//                R.drawable.bg_tab_feed_page));
+        mTabList.add(new TabInfo(PageId.PAGE_FEED_PAGE,
+                App.getInstance().getString(R.string.tab_feed_page),
+                R.drawable.bg_tab_feed_page));
 
         mTabList.add(new TabInfo(PageId.PAGE_SHEEP_HOUSE_KEEP,
                 App.getInstance().getString(R.string.tab_sheep_house_keeper_page),
@@ -210,7 +210,7 @@ public class MainActivity extends BasePermissionActivity {
                 mFragmentList.add(sheepHouseKeepFragment);
                 break;
             case PageId.PAGE_SHEEP_BAR_PAGE:
-                BarSheepFragment barSheepFragment = BarSheepFragment.newInstance("", "");
+                SheepBarFragment barSheepFragment = SheepBarFragment.newInstance("", "");
                 mFragmentList.add(barSheepFragment);
                 break;
             case PageId.PAGE_MINE:
@@ -332,23 +332,4 @@ public class MainActivity extends BasePermissionActivity {
 
     }
 
-    @Override
-    public void onSuccess(Object object) {
-
-    }
-
-    @Override
-    public void onSuccess(int type, Object object) {
-
-    }
-
-    @Override
-    public void onError(Object obj) {
-
-    }
-
-    @Override
-    public void onError(int type, Object obj) {
-
-    }
 }

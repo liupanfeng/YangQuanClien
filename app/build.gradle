@@ -61,8 +61,12 @@ dependencies {
     implementation 'com.umeng.umsdk:analytics:8.0.0'
     implementation 'com.umeng.umsdk:common:2.0.0'
 
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-21'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-21'
+
     implementation project(path: ':libbase')
 
 
-
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }

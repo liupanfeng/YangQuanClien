@@ -17,6 +17,7 @@ import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
  * 行业资讯
+ *
  * @author 86188
  */
 public class IndustryListHolder extends BaseViewHolder {
@@ -29,22 +30,25 @@ public class IndustryListHolder extends BaseViewHolder {
 
     public IndustryListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
-        mAdapter=adapter;
+        mAdapter = adapter;
 
     }
 
     @Override
-    protected void initViewHolder(View view, Object ...obj) {
-        mTvIndex=view.findViewById(R.id.tv_index);
-        mTvTitle=view.findViewById(R.id.tv_title);
+    protected void initViewHolder(View view, Object... obj) {
+        mTvIndex = view.findViewById(R.id.tv_index);
+        mTvTitle = view.findViewById(R.id.tv_title);
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info,int position, View.OnClickListener listener) {
-        if (info instanceof IndustryInfo){
-            mTvIndex.setText((position+1)+"");
+    public void bindViewHolder(Context context, BaseInfo info, int position, View.OnClickListener listener) {
+        if (info instanceof IndustryInfo) {
+            mTvIndex.setText((position + 1) + ".");
             mTvTitle.setText(((IndustryInfo) info).getTitle());
         }
+
+        itemView.setTag(info);
+        itemView.setOnClickListener(listener);
     }
 
 

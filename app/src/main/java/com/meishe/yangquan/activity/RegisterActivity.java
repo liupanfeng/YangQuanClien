@@ -210,7 +210,7 @@ public class RegisterActivity extends BaseActivity  {
             protected void onSuccess(Call call, Response response, UserResult result) {
                 mLoading.hide();
                 if (result != null) {
-                    int code=result.getStatus();
+                    int code=result.getCode();
                     if (code!=200){
                         ToastUtil.showToast(mContext,result.getMsg());
                         return;
@@ -422,26 +422,6 @@ public class RegisterActivity extends BaseActivity  {
 
     }
 
-
-    @Override
-    public void onSuccess(Object object) {
-
-    }
-
-    @Override
-    public void onSuccess(int type, Object object) {
-
-    }
-
-    @Override
-    public void onError(Object obj) {
-
-    }
-
-    @Override
-    public void onError(int type, Object obj) {
-
-    }
 
     @Override
     public void onResume() {

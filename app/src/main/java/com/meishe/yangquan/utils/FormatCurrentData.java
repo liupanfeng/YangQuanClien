@@ -2,6 +2,7 @@ package com.meishe.yangquan.utils;
 
 import android.util.Log;
 
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -125,5 +126,16 @@ public class FormatCurrentData {
 
         SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
         return  sdf2.format(startData);
+    }
+
+    /**
+     *
+      * @param value
+     * @return
+     */
+    public static String getFormatStringFromFloat(float value){
+        DecimalFormat decimalFormat = new DecimalFormat("##0.0");
+        String dd=decimalFormat.format(value);
+        return dd;
     }
 }

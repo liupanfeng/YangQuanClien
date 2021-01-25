@@ -16,15 +16,16 @@
             android:layout_height="73dp"
             android:layout_marginTop="96dp">
 
-            <com.meishe.yangquan.view.CircleImageView
+            <com.meishe.yangquan.view.RoundAngleImageView
                 android:id="@+id/iv_mine_photo"
-                android:layout_width="73dp"
-                android:layout_height="73dp"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
                 android:layout_marginLeft="15dp"
                 android:background="@mipmap/ic_mine_photo_default"
-                app:civ_border_color="@color/mainColor"
-                app:civ_border_width="2dp"
-                app:civ_fill_color="@color/white" />
+                app:roundHeight="37dp"
+                app:roundWidth="37dp" />
+
+
 
             <TextView
                 android:id="@+id/tv_mine_nickname"

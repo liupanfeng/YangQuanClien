@@ -73,6 +73,13 @@
     <color name="btn_agree">#FC2B55</color>
     <color name="colorTranslucent">#00000000</color>
     <color name="app_main_color">#ff3ba786</color>
-    <color name="line_color">#fff5f5f5</color>
+    <color name="line_color">#E5E5E5</color>
+    <color name="unselect_text_color">#656565</color>
+    <color name="color_ff3ba786">#ff3ba786</color>
+    <color name="color_ff2f3742">#ff2f3742</color>
+    <color name="color_ff656565">#ff656565</color>
+    <color name="color_ffc2c2c2">#ffc2c2c2</color>
+    <color name="color_ff303030">#ff303030</color>
+    <color name="color_fffa561e">#fffa561e</color>
 
 </resources>

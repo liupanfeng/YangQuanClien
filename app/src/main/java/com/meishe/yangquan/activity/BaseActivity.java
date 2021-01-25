@@ -7,20 +7,25 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.helper.BackHandlerHelper;
 import com.meishe.yangquan.inter.OnResponseListener;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.CustomToolbar;
+import com.meishe.yangquan.wiget.MaterialProgress;
 import com.meishe.yangquan.wiget.TitleBar;
 
-public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener , OnResponseListener {
+import org.greenrobot.eventbus.EventBus;
+
+public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener {
 
     protected Context mContext;
 
@@ -33,6 +38,8 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     protected TextView mTvTitle;
     protected ImageView mIvBack;
 
+    protected MaterialProgress mLoading;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +48,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         //设置视图
         setContentView(initRootView());
         mContext=this;
-        HttpRequestUtil.getInstance(mContext).setListener(this);
+//        HttpRequestUtil.getInstance(mContext).setListener(this);
         initView();
         initData();
         initTitle();
@@ -56,6 +63,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         release();
     }
 
+
     protected abstract int initRootView();
 
     public abstract void initView();
@@ -68,6 +76,15 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 
     public abstract void release();
 
+    protected void showLoading(){
+        mLoading.show();
+    }
+
+    protected void hideLoading(){
+        mLoading.hide();
+    }
+
+
     protected void initRecyclerView(){
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
@@ -79,4 +96,6 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     protected String getToken(){
         return UserManager.getInstance(mContext).getToken();
     }
+
+
 }

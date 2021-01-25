@@ -56,7 +56,6 @@ public class ShowBigPictureView extends CenterPopupView {
 
         RequestOptions options = new RequestOptions();
         options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
         Glide.with(this)
                 .asBitmap()
                 .load(mImagePath)

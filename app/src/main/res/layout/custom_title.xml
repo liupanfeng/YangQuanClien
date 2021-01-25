@@ -21,4 +21,16 @@
             android:textColor="#ff303030"
             android:textSize="17sp" />
 
+        <Button
+            android:id="@+id/btn_right"
+            android:layout_width="@dimen/dp53"
+            android:layout_height="@dimen/dp27"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp18"
+            android:visibility="gone"
+            android:background="@drawable/mine_gold_button_bg"
+            android:textColor="@color/white"
+            />
+
 </RelativeLayout>

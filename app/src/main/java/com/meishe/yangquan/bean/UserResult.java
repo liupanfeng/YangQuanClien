@@ -4,20 +4,20 @@ package com.meishe.yangquan.bean;
 public class UserResult {
 
     // 响应业务状态
-    private int status;
-
+    private int code;
     // 响应消息
     private String msg;
 
-    //暂时先用单个对象 稍后改成list
+    private String enMsg;
+
     private UserInfo data;
 
-    public int getStatus() {
-        return status;
+    public int getCode() {
+        return code;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {
@@ -26,6 +26,14 @@ public class UserResult {
 
     public void setMsg(String msg) {
         this.msg = msg;
+    }
+
+    public String getEnMsg() {
+        return enMsg;
+    }
+
+    public void setEnMsg(String enMsg) {
+        this.enMsg = enMsg;
     }
 
     public UserInfo getData() {

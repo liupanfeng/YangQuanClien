@@ -34,17 +34,17 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/icon_logo"
-
         android:appComponentFactory="lpf"
-        tools:replace="android:appComponentFactory"
-
+        android:icon="@mipmap/icon_logo"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_config"
         android:roundIcon="@mipmap/icon_logo"
         android:supportsRtl="true"
-        android:theme="@style/NoTitleStyle">
-        <activity android:name=".activity.PublishMarketActivity"></activity>
+        android:theme="@style/NoTitleStyle"
+        tools:replace="android:appComponentFactory">
+        <activity android:name=".activity.HomeQuotationHistoryActivity" />
+        <activity android:name=".activity.HomeIndustryInformationDetailActivity" />
+        <activity android:name=".activity.PublishMarketActivity" />
         <activity android:name=".activity.SettingActivity" />
         <activity android:name=".activity.SheepBarDetailActivity" />
         <activity android:name=".activity.PublishSheepBarActivity" />

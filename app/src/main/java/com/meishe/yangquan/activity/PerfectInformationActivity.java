@@ -37,7 +37,6 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.MsgEvent;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.Util;
@@ -129,7 +128,6 @@ public class PerfectInformationActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        HttpRequestUtil.getInstance(PerfectInformationActivity.this).setListener(this);
         mUser = null;
         mUserSexArray = getResources().getStringArray(R.array.user_sex_spinner_values);
         updateUI();
@@ -335,29 +333,6 @@ public class PerfectInformationActivity extends BaseActivity {
         startActivityForResult(albumIntent, ALBUM_REQUEST_CODE);
     }
 
-
-    @Override
-    public void onSuccess(Object object) {
-        hideLoading();
-        if (object instanceof User) {
-            mUser = (User) object;
-        }
-    }
-
-    @Override
-    public void onSuccess(int type, Object object) {
-        hideLoading();
-    }
-
-    @Override
-    public void onError(Object obj) {
-        hideLoading();
-    }
-
-    @Override
-    public void onError(int type, Object obj) {
-        hideLoading();
-    }
 
     private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
         @Override
@@ -597,7 +572,7 @@ public class PerfectInformationActivity extends BaseActivity {
                         updateUI();
                         ToastUtil.showToast(mContext, "更新数据成功");
 //                        UserManager.getInstance(App.getContext()).setUser(user);
-                        EventBus.getDefault().post(new MsgEvent("", MESSAGE_EVENT_UPDATE_USER_UI));
+//                        EventBus.getDefault().post(new MsgEvent("", MESSAGE_EVENT_UPDATE_USER_UI));
                     }
                 }
             }

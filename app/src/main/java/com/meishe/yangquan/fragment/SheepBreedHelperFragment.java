@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class SheepBreedHelperFragment extends BaseRecyclerFragment {
 
-    private static final String ARGUMENT_KEY_TITLE = "key_title";
+    private static final String TYPE_KEY_BATCH_ID = "key_title";
     private int mId;
     private TextView mTvTitle;
     private TabLayout mTabLayout;
@@ -37,7 +37,7 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
         SheepBreedHelperFragment fragment = new SheepBreedHelperFragment();
         Bundle args = new Bundle();
         //使用bundle 进行数据传递
-        args.putInt(ARGUMENT_KEY_TITLE, id);
+        args.putInt(TYPE_KEY_BATCH_ID, id);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +47,7 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
         super.onCreate(savedInstanceState);
         //在onCreate方法中获取参数
         if (getArguments() != null) {
-            mId = getArguments().getInt(ARGUMENT_KEY_TITLE);
+            mId = getArguments().getInt(TYPE_KEY_BATCH_ID);
         }
     }
 
@@ -78,8 +78,8 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
         mTitleList.add("养殖过程");
         mTitleList.add("效益分析");
 
-        mFragmentList.add(new SheepBreedHelperBaseMessage());
-        mFragmentList.add(new SheepBreedHelperProcessFragment());
+        mFragmentList.add(SheepBreedHelperBaseMessage.newInstance(mId));
+        mFragmentList.add(SheepBreedHelperProcessFragment.newInstance(mId));
         mFragmentList.add(new SheepBreedHelperBenefitAnalysisFragment());
 
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),0,mContext,mFragmentList,mTitleList));

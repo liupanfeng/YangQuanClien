@@ -29,6 +29,7 @@ public class QuotationListHolder extends BaseViewHolder {
     private TextView tv_address;
     private TextView tv_specification;
     private TextView tv_price;
+    private TextView tv_to_history;
 
     public QuotationListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -41,16 +42,21 @@ public class QuotationListHolder extends BaseViewHolder {
         tv_address = view.findViewById(R.id.tv_address);
         tv_specification = view.findViewById(R.id.tv_specification);
         tv_price = view.findViewById(R.id.tv_price);
+        tv_to_history = view.findViewById(R.id.tv_to_history);
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, int position,View.OnClickListener listener) {
+    public void bindViewHolder(Context context, BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof QuotationInfo) {
             QuotationInfo quotationInfo = (QuotationInfo) info;
             tv_name.setText(quotationInfo.getName());
             tv_address.setText(quotationInfo.getPlace());
-            tv_specification.setText(quotationInfo.getSpecification()+"");
+            tv_specification.setText(quotationInfo.getSpecification() + "");
             tv_price.setText(quotationInfo.getTodayPrice() + "");
+
+            tv_to_history.setTag(info);
+            tv_to_history.setOnClickListener(listener);
+
         }
     }
 

@@ -57,24 +57,4 @@ public class MineBreedingArchivesActivity extends BaseActivity {
     public void onClick(View v) {
 
     }
-
-    @Override
-    public void onSuccess(Object object) {
-
-    }
-
-    @Override
-    public void onSuccess(int type, Object object) {
-
-    }
-
-    @Override
-    public void onError(Object obj) {
-
-    }
-
-    @Override
-    public void onError(int type, Object obj) {
-
-    }
 }

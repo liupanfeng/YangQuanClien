@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="66dp">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginLeft="@dimen/dp15"
+        android:layout_marginRight="@dimen/dp19"
+        android:layout_centerVertical="true"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_point_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="每天登录"
+            android:textColor="@color/color_ff303030"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_point_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_point_type"
+            android:layout_marginTop="3dp"
+            android:text="2020-10-10"
+            android:textColor="@color/color_ffc2c2c2"
+            android:textSize="12sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_point_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:text="+1"
+            android:textColor="@color/color_fffa561e"
+            android:textSize="13sp"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_color" />
+</RelativeLayout>

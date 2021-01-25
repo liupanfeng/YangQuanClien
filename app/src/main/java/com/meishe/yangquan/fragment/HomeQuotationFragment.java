@@ -1,5 +1,6 @@
 package com.meishe.yangquan.fragment;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -7,13 +8,19 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.HomeIndustryInformationDetailActivity;
+import com.meishe.yangquan.activity.HomeQuotationHistoryActivity;
+import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BannerInfo;
 import com.meishe.yangquan.bean.BannerResult;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
 import com.meishe.yangquan.bean.QuotationResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -71,6 +78,17 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
         mBigSheep.setOnClickListener(this);
         mDieSheep.setOnClickListener(this);
         mForageGrass.setOnClickListener(this);
+
+        mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, BaseInfo baseInfo) {
+                if (baseInfo instanceof QuotationInfo) {
+                    Bundle bundle=new Bundle();
+                    bundle.putString(Constants.QUOTATION_ID,((QuotationInfo) baseInfo).getId());
+                    AppManager.getInstance().jumpActivity(getActivity(), HomeQuotationHistoryActivity.class,bundle);
+                }
+            }
+        });
     }
 
     @Override
@@ -186,7 +204,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
         List<String> titleas = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             BannerInfo bannerInfo = data.get(i);
-            if (bannerInfo==null){
+            if (bannerInfo == null) {
                 continue;
             }
 

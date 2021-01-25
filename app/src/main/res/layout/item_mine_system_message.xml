@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="89dp"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/iv_system_message"
+        android:layout_width="@dimen/dp36"
+        android:layout_height="@dimen/dp36"
+        android:layout_marginLeft="@dimen/dp20"
+        android:layout_centerVertical="true"
+        android:background="@mipmap/ic_mine_system_message_item" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/iv_system_message"
+        android:layout_marginLeft="12dp"
+        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/tv_system_message_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户XXX"
+            android:textColor="@color/color_ff2f3742"
+            android:textSize="14sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_system_message_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="XXX回复了您"
+            android:textColor="@color/color_ff656565"
+            android:textSize="13sp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2020-10-10"
+        android:layout_marginTop="3dp"
+        android:textColor="#ff656565"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="@dimen/dp20"
+        android:layout_centerVertical="true"
+        android:textSize="13sp"
+        />
+
+
+</RelativeLayout>

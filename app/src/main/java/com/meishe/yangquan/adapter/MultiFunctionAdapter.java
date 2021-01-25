@@ -13,10 +13,12 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.IndustryInfo;
+import com.meishe.yangquan.bean.IndustryNewsClip;
 import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
+import com.meishe.yangquan.bean.PointRecordInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServiceInfo;
@@ -26,15 +28,21 @@ import com.meishe.yangquan.bean.SheepBarCommentInfo;
 import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfo;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.SheepHairInfo;
 import com.meishe.yangquan.bean.SheepNews;
+import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
 import com.meishe.yangquan.viewhoder.CommentListHolder;
+import com.meishe.yangquan.viewhoder.CutSheepHairHolder;
+import com.meishe.yangquan.viewhoder.IndustryContentHolder;
 import com.meishe.yangquan.viewhoder.IndustryListHolder;
 import com.meishe.yangquan.viewhoder.MarketListHolder;
 import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
+import com.meishe.yangquan.viewhoder.MineMyPointsHolder;
+import com.meishe.yangquan.viewhoder.MineSystemMessageHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
 import com.meishe.yangquan.viewhoder.QuotationListHolder;
 import com.meishe.yangquan.viewhoder.ServiceLabelHolder;
@@ -148,6 +156,26 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_sheep_bar_comment, parent, false);
                 viewHolder = new SheepBarCommentSecondaryListHolder(view, this);
                 break;
+            /*资讯详情页内容*/
+            case VIEW_INDUSTRY_CONTENT_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_industry_content, parent, false);
+                viewHolder = new IndustryContentHolder(view, this);
+                break;
+            /*剪羊毛内容*/
+            case VIEW_CUT_SHEEP_HAIR_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_cut_sheep_hair, parent, false);
+                viewHolder = new CutSheepHairHolder(view, this);
+                break;
+            /*我的积分记录*/
+            case VIEW_MINE_MY_POINTS_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_my_points, parent, false);
+                viewHolder = new MineMyPointsHolder(view, this);
+                break;
+            /*我的系统消息*/
+            case VIEW_MINE_SUYSTEM_MESSAGE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_system_message, parent, false);
+                viewHolder = new MineSystemMessageHolder(view, this);
+                break;
         }
         return viewHolder;
     }
@@ -201,6 +229,14 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_COMMENT_LEVEL1_LIST;
         } else if (baseInfo instanceof SheepBarCommentSecondaryInfo){
             return VIEW_COMMENT_LEVEL1_CHILD_LIST;
+        }else if (baseInfo instanceof IndustryNewsClip){
+            return VIEW_INDUSTRY_CONTENT_LIST;
+        }else if (baseInfo instanceof SheepHairInfo){
+            return VIEW_CUT_SHEEP_HAIR_LIST;
+        }else if (baseInfo instanceof PointRecordInfo){
+            return VIEW_MINE_MY_POINTS_LIST;
+        }else if (baseInfo instanceof SystemMessageInfo){
+            return VIEW_MINE_SUYSTEM_MESSAGE_LIST;
         }
         return super.getItemViewType(position);
     }

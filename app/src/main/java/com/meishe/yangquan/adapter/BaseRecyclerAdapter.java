@@ -102,6 +102,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_SERVICE_LIST = VIEW_TYPE_BASE + 19;                                   //首页-市场列表
     protected static final int VIEW_COMMENT_LEVEL1_LIST = VIEW_TYPE_BASE + 20;                                   //羊吧一级评论列表
     protected static final int VIEW_COMMENT_LEVEL1_CHILD_LIST = VIEW_TYPE_BASE + 21;                                   //羊吧二级评论列表
+    protected static final int VIEW_INDUSTRY_CONTENT_LIST = VIEW_TYPE_BASE + 22;                      //资讯详情页内容
+    protected static final int VIEW_CUT_SHEEP_HAIR_LIST = VIEW_TYPE_BASE + 23;                        //剪羊毛列表
+    protected static final int VIEW_MINE_MY_POINTS_LIST = VIEW_TYPE_BASE + 24;                        //我的积分
+    protected static final int VIEW_MINE_SUYSTEM_MESSAGE_LIST = VIEW_TYPE_BASE + 25;                  //系统消息
 
     private IosDialog mDialog;
 

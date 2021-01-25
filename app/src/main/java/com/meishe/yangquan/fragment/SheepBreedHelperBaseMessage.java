@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +23,8 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.pop.SelectSheepSellTypeView;
+import com.meishe.yangquan.pop.SelectSheepTypeView;
 import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -49,7 +52,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
     private LinearLayout mLlOpenClose;
     private RelativeLayout mRlOutOpen;
     private RelativeLayout mRlOpenClose;
-    private TextView mTvSelectSheepType;
+    private EditText mEtSelectSheepType;
     /*羊肉价格*/
     private EditText mEtSheepPrice;
     /*羊重量*/
@@ -66,7 +69,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
     private int mMonth;
     private int mDay;
     private DatePicker mDatePicker;
-    private TextView mTvSellType;
+    private EditText mEtSellType;
     private EditText mEtSellSheepPrice;
 
     /*出栏重量*/
@@ -80,6 +83,9 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
     /*出栏时间*/
     private TextView mTvSellSheepTime;
     private Button mBtnSellSheep;
+    private SelectSheepTypeView mSelectSheepTypeView;
+    private SelectSheepSellTypeView mSelectSheepSellTypeView;
+    private RelativeLayout mRlSellSheepWeight;
 
     public static SheepBreedHelperBaseMessage newInstance(int batchId) {
         SheepBreedHelperBaseMessage helperBaseMessage = new SheepBreedHelperBaseMessage();
@@ -108,7 +114,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mRlOpenClose = view.findViewById(R.id.rl_open_close);
         mLlOpenClose = view.findViewById(R.id.ll_open_close);
 
-        mTvSelectSheepType = view.findViewById(R.id.tv_select_sheep_type);
+        mEtSelectSheepType = view.findViewById(R.id.et_select_sheep_type);
         mEtSheepPrice = view.findViewById(R.id.et_sheep_price);
         mEtSelectSheepWeight = view.findViewById(R.id.et_sheep_weight);
         mEtSelectSheepNumbr = view.findViewById(R.id.et_sheep_number);
@@ -116,7 +122,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mBtnBaseMessageSave = view.findViewById(R.id.btn_base_massage_save);
 
         /*----------出栏数据------------*/
-        mTvSellType = view.findViewById(R.id.tv_sell_type);
+        mEtSellType = view.findViewById(R.id.et_sell_type);
         mEtSellSheepPrice = view.findViewById(R.id.et_sell_sheep_price);
         mEtSellWeight = view.findViewById(R.id.et_sell_weight);
         mEtSellSheepWeight = view.findViewById(R.id.et_sell_sheep_weight);
@@ -124,6 +130,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mTvSellSheepSurplusNumber = view.findViewById(R.id.tv_surplus_number);
         mTvSellSheepTime = view.findViewById(R.id.tv_sell_sheep_time);
         mBtnSellSheep = view.findViewById(R.id.btn_sell_sheep);
+        mRlSellSheepWeight = view.findViewById(R.id.rl_sell_sheep_weight);
 
 
         mTvSheepTime.setText(FormatDateUtil.longToString(System.currentTimeMillis(),
@@ -141,12 +148,51 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mRlPickUp.setOnClickListener(this);
         mRlOutOpen.setOnClickListener(this);
         mRlOpenClose.setOnClickListener(this);
-        mTvSelectSheepType.setOnClickListener(this);
         mTvSheepTime.setOnClickListener(this);
         mBtnBaseMessageSave.setOnClickListener(this);
         mTvSellSheepTime.setOnClickListener(this);
-
         mBtnSellSheep.setOnClickListener(this);
+
+        mEtSelectSheepType.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (mSelectSheepTypeView == null) {
+                    mSelectSheepTypeView = SelectSheepTypeView.create(mContext, mEtSelectSheepType, new SelectSheepTypeView.OnAttachListener() {
+                        @Override
+                        public void onSelectType(String content) {
+                            mEtSelectSheepType.setText(content);
+                        }
+                    });
+                }
+                if (!mSelectSheepTypeView.isShow()) {
+                    mSelectSheepTypeView.show();
+                }
+                return true;
+            }
+        });
+
+        mEtSellType.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (mSelectSheepSellTypeView == null) {
+                    mSelectSheepSellTypeView = SelectSheepSellTypeView.create(mContext, mEtSellType, new SelectSheepSellTypeView.OnAttachListener() {
+                        @Override
+                        public void onSelectType(String content) {
+                            if (content.equals("活羊")) {
+                                mRlSellSheepWeight.setVisibility(View.GONE);
+                            } else {
+                                mRlSellSheepWeight.setVisibility(View.VISIBLE);
+                            }
+                            mEtSellType.setText(content);
+                        }
+                    });
+                }
+                if (!mSelectSheepSellTypeView.isShow()) {
+                    mSelectSheepSellTypeView.show();
+                }
+                return true;
+            }
+        });
     }
 
     @Override
@@ -170,10 +216,6 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
                 break;
             case R.id.rl_open_close:
                 hideOutPickUp();
-                break;
-            /*选择肉羊品种*/
-            case R.id.tv_select_sheep_type:
-
                 break;
             /*基础信息保存*/
             case R.id.btn_base_massage_save:
@@ -206,13 +248,13 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         if (TextUtils.isEmpty(token)) {
             return;
         }
-        String sellType = mTvSellType.getText().toString().trim();
+        String sellType = mEtSellType.getText().toString().trim();
         if (TextUtils.isEmpty(sellType)) {
             return;
         }
         String sellSheepPrice = mEtSellSheepPrice.getText().toString().trim();
         if (TextUtils.isEmpty(sellSheepPrice)) {
-            ToastUtil.showToast(mContext,"出栏价格必须填写");
+            ToastUtil.showToast(mContext, "出栏价格必须填写");
             return;
         }
 
@@ -220,15 +262,16 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         String sellSheepWeight = mEtSellSheepWeight.getText().toString().trim();
         String sellSheepNumber = mEtSellSheepNumber.getText().toString().trim();
         if (TextUtils.isEmpty(sellSheepPrice)) {
-            ToastUtil.showToast(mContext,"出栏数量必须填写");
+            ToastUtil.showToast(mContext, "出栏数量必须填写");
             return;
         }
+        /*剩余只数*/
         String sellSheepsurplusNumber = mTvSellSheepSurplusNumber.getText().toString().trim();
         String sellSheepTime = mTvSellSheepTime.getText().toString().trim();
 
         HashMap<String, Object> param = new HashMap<>();
         param.put("batchId", mBatchId);
-        param.put("outType", 1);
+        param.put("outType", sellType);
         param.put("price", sellSheepPrice);
         param.put("weight", sellWeight);
         param.put("cavityWeight", sellSheepWeight);
@@ -331,7 +374,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         if (TextUtils.isEmpty(token)) {
             return;
         }
-        String sheepType = mTvSelectSheepType.getText().toString().trim();
+        String sheepType = mEtSelectSheepType.getText().toString().trim();
         if (TextUtils.isEmpty(sheepType)) {
             return;
         }

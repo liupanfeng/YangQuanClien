@@ -53,5 +53,10 @@
         android:layout_marginLeft="@dimen/dp16"
         />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
 
 </LinearLayout>

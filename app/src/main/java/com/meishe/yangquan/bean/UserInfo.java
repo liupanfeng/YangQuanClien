@@ -10,19 +10,26 @@ public class UserInfo {
 //            "enMsg": "success",
 //            "msg": "成功",
 //            "data": {
-//        "nickname": "张三",
-//                "iconUrl": "http://localhost:9999/user_icon/2020-12/06/1607242911519.jpg",
-//                "isInfoComplete": 1,
-//                "idCardFrontUrl": "http://localhost:9999/user_id_card_front/2020-12/06/1607242952268.jpg",
-//                "idCardReverseUrl": "http://localhost:9999/user_id_card_reverse/2020-12/06/1607242962993.jpg",
-//                "driveCardFrontUrl": "http://localhost:9999/user_drive_card_front/2020-12/06/1607242983664.jpg",
-//                "driveCardReverseUrl": "http://localhost:9999/user_drive_card_reverse/2020-12/06/1607242994433.jpg",
-//                "runCardFrontUrl": "http://localhost:9999/user_run_card_front/2020-12/06/1607243004052.jpg",
-//                "runCardReverseUrl": "http://localhost:9999/user_run_card_reverse/2020-12/06/1607243018576.jpg",
-//                "culturalScale": 1000,
-//                "culturalAddress": "北京市海淀区",
-//                "culturalAge": 20,
-//                "currentCulturalQuantity": 567
+
+
+//        "userId": null,
+//         "nickname": "羊圈用户(2160)",
+//         "iconUrl": "http://59.110.142.42:9999/user_icon/2021-01/17/1610897395306.jpg",
+//         "isInfoComplete": 0,
+//         "phone": null,
+//         "gender": null,
+//         "state": 1,
+//         "idCardFrontUrl": null,
+//         "idCardReverseUrl": null,
+//         "driveCardFrontUrl": null,
+//         "driveCardReverseUrl": null,
+//         "runCardFrontUrl": null,
+//         "runCardReverseUrl": null,
+//         "culturalScale": null,
+//         "culturalAddress": null,
+//         "culturalAge": null,
+//         "currentCulturalQuantity": null
+
 //    }
 
 
@@ -31,6 +38,10 @@ public class UserInfo {
     private String iconUrl;                         //头像
 
     private int isInfoComplete;                     //信息是否完整
+
+    private int gender = -1;                             //性别
+
+    private int state;                              //这个是什么状态
 
     private String idCardFrontUrl;                  //身份证正面信息
 
@@ -44,13 +55,13 @@ public class UserInfo {
 
     private String runCardReverseUrl;
 
-    private int culturalScale;
+    private int culturalScale = -1;                    //养殖规模
 
-    private String culturalAddress;                //养殖场地址
+    private String culturalAddress;                  //养殖场地址
 
-    private int culturalAge;
+    private int culturalAge = -1;                        //养殖年限
 
-    private int currentCulturalQuantity;
+    private int currentCulturalQuantity = -1;           // 存栏量
 
     public String getNickname() {
         return nickname;
@@ -74,6 +85,22 @@ public class UserInfo {
 
     public void setIsInfoComplete(int isInfoComplete) {
         this.isInfoComplete = isInfoComplete;
+    }
+
+    public int getGender() {
+        return gender;
+    }
+
+    public void setGender(int gender) {
+        this.gender = gender;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public String getIdCardFrontUrl() {
@@ -155,5 +182,4 @@ public class UserInfo {
     public void setCurrentCulturalQuantity(int currentCulturalQuantity) {
         this.currentCulturalQuantity = currentCulturalQuantity;
     }
-
 }

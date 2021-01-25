@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_corners_3">
+
+    <RadioGroup
+        android:id="@+id/rg_select_service"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:orientation="vertical">
+
+        <RadioButton
+            android:id="@+id/rb_pop_dongbei_sheep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/bg_radio_selector"
+            android:paddingLeft="@dimen/dp7"
+            android:text="东北羊" />
+
+        <RadioButton
+            android:id="@+id/rb_pop_zhangbei_sheep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp7"
+            android:button="@drawable/bg_radio_selector"
+            android:paddingLeft="@dimen/dp7"
+            android:text="张北羊" />
+
+        <RadioButton
+            android:id="@+id/rb_pop_neimeng_shepp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp7"
+            android:button="@drawable/bg_radio_selector"
+            android:paddingLeft="@dimen/dp7"
+            android:text="内蒙羊" />
+
+        <RadioButton
+            android:id="@+id/rb_pop_shandogn_sheep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp7"
+            android:button="@drawable/bg_radio_selector"
+            android:paddingLeft="@dimen/dp7"
+            android:text="山东羊" />
+
+    </RadioGroup>
+</LinearLayout>
+

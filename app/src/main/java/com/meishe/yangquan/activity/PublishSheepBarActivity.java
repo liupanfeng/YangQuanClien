@@ -173,25 +173,6 @@ public class PublishSheepBarActivity extends BaseActivity {
         }
     }
 
-    @Override
-    public void onSuccess(Object object) {
-
-    }
-
-    @Override
-    public void onSuccess(int type, Object object) {
-
-    }
-
-    @Override
-    public void onError(Object obj) {
-
-    }
-
-    @Override
-    public void onError(int type, Object obj) {
-
-    }
 
     private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
         @Override
@@ -465,7 +446,7 @@ public class PublishSheepBarActivity extends BaseActivity {
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (tempFile != null && tempFile.exists()) {
-                    String filePath = BitmapUtils.compressImageUpload(tempFile.getAbsolutePath());
+                    String filePath = BitmapUtils.compressImageUpload(tempFile.getAbsolutePath(),400,400);
                     SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
                     sheepBarMessageInfo.setFilePath(filePath);
                     sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_CAPTURE_PIC);
@@ -501,7 +482,7 @@ public class PublishSheepBarActivity extends BaseActivity {
                         imagePath = uri.getPath();
                     }
                     if (imagePath != null) {
-                        String filePath = BitmapUtils.compressImageUpload(imagePath);
+                        String filePath = BitmapUtils.compressImageUpload(imagePath,400,400);
                         SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
                         sheepBarMessageInfo.setFilePath(filePath);
                         sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_CAPTURE_PIC);

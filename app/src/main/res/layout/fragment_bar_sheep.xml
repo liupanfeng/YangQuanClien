@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:background="@color/white"
     android:orientation="vertical">
 
@@ -112,7 +113,6 @@
                 android:layout_marginLeft="@dimen/dp10"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="天青色等烟雨而我在等你，月色被打捞起晕开了结局,月色被打捞起晕开了结局"
                 android:textColor="#ff656565"
                 android:textSize="14sp" />
 
@@ -148,7 +148,6 @@
                 android:layout_marginLeft="@dimen/dp10"
                 android:ellipsize="end"
                 android:singleLine="true"
-                android:text="天青色等烟雨而我在等你，月色被打捞起晕开了结局,月色被打捞起晕开了结局"
                 android:textColor="#ff656565"
                 android:textSize="14sp" />
 
@@ -163,44 +162,30 @@
     </LinearLayout>
 
 
-    <LinearLayout
+    <com.meishe.libbase.SlidingTabLayout
+        android:id="@+id/slidingTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_px_100"
+        android:layout_below="@+id/ll_sign_up"
+        android:layout_marginLeft="@dimen/dp_px_30"
+        android:layout_marginRight="@dimen/dp_px_30"
+        tl:tl_indicator_color="@color/mainColor"
+        tl:tl_indicator_height="@dimen/dp_px_6"
+        tl:tl_indicator_width="@dimen/dp_px_30"
+        tl:tl_tab_space_equal="true"
+        tl:tl_tab_width="@dimen/dp_px_150"
+        tl:tl_textSelectColor="@color/mainColor"
+        tl:tl_textSize="@dimen/sp_px_39"
+        tl:tl_textUnselectedColor="@color/unselect_text_color" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_pager"
+        android:layout_below="@+id/slidingTabLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll_sign_up"
-        android:layout_marginTop="@dimen/dp20"
-        android:orientation="vertical">
+        android:layout_marginTop="@dimen/dp10"
+        />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp40"
-            android:layout_marginLeft="@dimen/dp20"
-            android:layout_marginRight="@dimen/dp20"
-            android:orientation="horizontal">
-
-            <com.meishe.yangquan.wiget.CustomTextView
-                android:id="@+id/tv_bar_sheep_newest"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="最新" />
-
-            <com.meishe.yangquan.wiget.CustomTextView
-                android:id="@+id/tv_bar_sheep_command"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp24"
-                android:gravity="center_vertical"
-                android:text="推荐" />
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp11"
-            android:layout_marginRight="@dimen/dp11" />
-
-    </LinearLayout>
 
 
     <ImageView
@@ -212,5 +197,7 @@
         android:layout_marginRight="@dimen/dp22"
         android:layout_marginBottom="@dimen/dp19"
         android:background="@mipmap/ic_home_service_publish" />
+
+
 
 </RelativeLayout>

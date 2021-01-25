@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="47dp">
 
     <TextView
         android:id="@+id/tv_index"
@@ -9,6 +9,7 @@
         android:layout_height="22dp"
         android:layout_marginLeft="@dimen/dp10"
         android:text="1"
+        android:layout_centerVertical="true"
         android:textColor="#ff303030"
         android:textSize="16sp"
         />
@@ -22,6 +23,7 @@
         android:singleLine="true"
         android:ellipsize="end"
         android:textColor="#ff303030"
+        android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dp10"
         android:layout_marginRight="@dimen/dp10"
         android:textSize="16sp"
@@ -29,11 +31,18 @@
 
     <ImageView
         android:id="@+id/iv_right_array"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="5dp"
+        android:layout_height="10dp"
         android:background="@mipmap/right_arrow_normal"
+        android:layout_centerVertical="true"
         android:layout_alignParentRight="true"
         android:layout_marginRight="@dimen/dp10"
         />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp0p3"
+        android:layout_alignParentBottom="true"
+        android:background="@color/line_color" />
 
 </RelativeLayout>

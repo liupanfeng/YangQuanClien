@@ -1,17 +1,22 @@
 package com.meishe.yangquan.fragment;
 
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.HomeIndustryInformationDetailActivity;
+import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BannerInfo;
 import com.meishe.yangquan.bean.BannerResult;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.IndustryInfo;
 import com.meishe.yangquan.bean.IndustryResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -45,7 +50,17 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
 
     @Override
     protected void initListener() {
+        mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, BaseInfo baseInfo) {
+                if (baseInfo instanceof IndustryInfo){
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("newsId",((IndustryInfo) baseInfo).getId());
+                    AppManager.getInstance().jumpActivity(getContext(), HomeIndustryInformationDetailActivity.class,bundle);
+                }
 
+            }
+        });
     }
 
     @Override

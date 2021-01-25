@@ -98,15 +98,17 @@
                         android:layout_centerVertical="true"
                         />
 
-                    <TextView
-                        android:id="@+id/tv_select_sheep_type"
+                    <EditText
+                        android:id="@+id/et_select_sheep_type"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1"
-                        android:textColor="#ffc2c2c2"
+                        android:hint="请选择肉羊品种"
+                        android:textColorHint="#ffc2c2c2"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="@dimen/dp35"
+                        android:gravity="end"
                         android:layout_centerVertical="true"
+                        android:background="@null"
                         android:textSize="13sp"
                         />
 
@@ -400,17 +402,21 @@
                             />
 
 
-                        <TextView
-                            android:id="@+id/tv_sell_type"
+                        <EditText
+                            android:id="@+id/et_sell_type"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="羊腔"
+                            android:hint="请选择出售方式"
                             android:textColor="#ff2f3742"
                             android:textSize="13sp"
                             android:layout_alignParentRight="true"
                             android:layout_marginRight="@dimen/dp35"
                             android:layout_centerVertical="true"
+                            android:textColorHint="#ffc2c2c2"
+                            android:gravity="end"
+                            android:background="@null"
                             />
+
 
 
                         <View
@@ -519,6 +525,7 @@
 
 
                     <RelativeLayout
+                        android:id="@+id/rl_sell_sheep_weight"
                         android:layout_width="match_parent"
                         android:layout_marginLeft="@dimen/dp16"
                         android:layout_height="54dp">

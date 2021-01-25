@@ -24,6 +24,11 @@ public class HttpUrl {
     public static final String HOME_PAGE_GET_QUOTATION = URL + "app/quotation/list";
 
     /**
+     * 请求行情数据
+     */
+    public static final String HOME_PAGE_GET_QUOTATION_HISTORY = URL + "app/quotation/history";
+
+    /**
      * 请求市场数据
      */
     public static final String HOME_PAGE_GET_MARKET = URL + "app/market/list";
@@ -42,6 +47,9 @@ public class HttpUrl {
      * 请求行业资讯数据
      */
     public static final String HOME_PAGE_GET_NEWS_LIST = URL + "app/news/list";
+
+    /*行业资讯详情页面*/
+    public static final String HOME_PAGE_GET_NEWS_INFO = URL + "app/news/info";
 
 
     /*发送短信验证码*/
@@ -131,25 +139,45 @@ public class HttpUrl {
     public static final String SERVICE_LIST_DELETE_ZAN = URL + "zan/delete";
 
 
-   /*申请服务*/
+    ///////////////////////////////////////新的///////////////////////////////////////////////
+
+
+    /*申请服务*/
     public static final String SHEEP_HOLDER_APPLY_SERVICE = URL + "app/cultural/service/save";
 
-   /*我的业务*/
+    /*我的业务*/
     public static final String SHEEP_HOLDER_APPLY_MY_BUSINESS = URL + "app/cultural/service/latest";
 
-   /*创建档案*/
+    /*创建档案*/
     public static final String SHEEP_HOLDER_CREATE_BATCH = URL + "app/cultural/assistant/batch/save";
 
-   /*获取批次列表*/
+    /*获取批次列表*/
     public static final String SHEEP_HOLDER_BATCH_LIST = URL + "app/cultural/assistant/batch/list";
 
-   /*羊助手基础信息填写*/
+    /*羊助手基础信息填写*/
     public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_IN = URL + "app/cultural/assistant/batch/in";
 
-   /*羊助手出栏信息填写*/
-    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT= URL + "app/cultural/assistant/batch/out";
+    /*羊助手出栏信息填写*/
+    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT = URL + "app/cultural/assistant/batch/out";
 
-   /*添加服务*/
+
+    /*羊管家 养殖助手 饲料分析列表 */
+    public static final String SHEEP_HOLDER_FODDER_ANALYSE_LIST = URL + "app/cultural/assistant/batch/fodder/analyse/list";
+
+    /*羊管家 养殖助手-新增饲料分析 */
+    public static final String SHEEP_HOLDER_FODDER_SAVE = URL + "app/cultural/assistant/batch/fodder/save";
+
+    /*羊管家 养殖助手-上一次饲料分析记录 */
+    public static final String SHEEP_HOLDER_FODDER_LATEST = URL + "app/cultural/assistant/batch/fodder/latest";
+
+    /*羊管家 养殖助手-新增其他分析 */
+    public static final String SHEEP_HOLDER_FODDER_OTHER_SAVE = URL + "app/cultural/assistant/batch/other/save";
+
+    /*羊管家 养殖助手-其他记录列表 */
+    public static final String SHEEP_HOLDER_FODDER_OTHER_LIST = URL + "app/cultural/assistant/batch/other/list";
+
+
+    /*添加服务*/
     public static final String HOME_PAGE_ADD_SERVICE = URL + "app/service/add";
     /*添加市场*/
     public static final String HOME_PAGE_ADD_MARKET = URL + "app/market/add";
@@ -179,6 +207,10 @@ public class HttpUrl {
     public static final String SHEEP_BAR_ADD_COMMENT = URL + "app/bar/comment/save";
 
 
+    /*我的积分*/
+    public static final String SHEEP_MINE_MY_POINTS = URL + "app/user/wealth/info";
+    /*系统消息*/
+    public static final String SHEEP_MINE_SYSTEM_LIST = URL + "app/message/system/list";
 
 
 }
