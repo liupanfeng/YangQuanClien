@@ -68,12 +68,6 @@ public class ServiceListHolder extends BaseViewHolder {
     private ImageView iv_call_phone_number;
 
 
-    private ImageView iv_market_1;
-    private ImageView iv_market_2;
-    private ImageView iv_market_3;
-    private ImageView iv_market_4;
-    private ImageView iv_market_5;
-    private ImageView iv_market_6;
 
     private ImageView iv_market_phone;
     private View rl_cut_sheep_hair;
@@ -124,12 +118,6 @@ public class ServiceListHolder extends BaseViewHolder {
         iv_call_phone_number = view.findViewById(R.id.iv_find_car_call_phone_number);
 
 
-        iv_market_1 = view.findViewById(R.id.iv_market_1);
-        iv_market_2 = view.findViewById(R.id.iv_market_2);
-        iv_market_3 = view.findViewById(R.id.iv_market_3);
-        iv_market_4 = view.findViewById(R.id.iv_market_4);
-        iv_market_5 = view.findViewById(R.id.iv_market_5);
-        iv_market_6 = view.findViewById(R.id.iv_market_6);
 
         iv_market_phone = view.findViewById(R.id.iv_market_phone);
     }

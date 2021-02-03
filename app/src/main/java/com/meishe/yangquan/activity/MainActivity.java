@@ -18,6 +18,9 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.TabInfo;
+import com.meishe.yangquan.fragment.BUHomeFragment;
+import com.meishe.yangquan.fragment.BUMessageFragment;
+import com.meishe.yangquan.fragment.BUMineFragment;
 import com.meishe.yangquan.fragment.SheepBarFragment;
 import com.meishe.yangquan.fragment.FeedFragment;
 import com.meishe.yangquan.fragment.HomeFragment;
@@ -28,7 +31,7 @@ import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.PageId;
-import com.meishe.yangquan.utils.SpUtil;
+import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BrandTextView;
 import com.meishe.yangquan.view.MViewPager;
@@ -45,8 +48,8 @@ import okhttp3.Response;
 
 public class MainActivity extends BasePermissionActivity {
 
-    private static final String TAG="MainActivity";
-    private String url="http://192.168.10.55:8080/YangQuan/servlet/ServletDemo03";
+    private static final String TAG = "MainActivity";
+    private String url = "http://192.168.10.55:8080/YangQuan/servlet/ServletDemo03";
     private List mFragmentList;
     private List mListTitle;
     private ViewPager mViewPager;
@@ -55,13 +58,14 @@ public class MainActivity extends BasePermissionActivity {
     private ArrayList<TabInfo> mTabList;
     private int defaultTab;
     private PrivacyPolicyDialog privacyPolicyDialog;
+    private int mLoginType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mContext=this;
-        defaultTab=0;
+        mContext = this;
+        defaultTab = 0;
         initView();
         initData();
     }
@@ -104,6 +108,18 @@ public class MainActivity extends BasePermissionActivity {
 
     @Override
     public void initData() {
+        Intent intent = getIntent();
+        if (intent != null) {
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                mLoginType = extras.getInt(Constants.LOGIN_TYPE);
+                SharedPreferencesUtil.getInstance(mContext).putInt(Constants.LOGIN_TYPE, mLoginType);
+            } else {
+                mLoginType = SharedPreferencesUtil.getInstance(mContext).getInt(Constants.LOGIN_TYPE);
+            }
+        } else {
+            mLoginType = SharedPreferencesUtil.getInstance(mContext).getInt(Constants.LOGIN_TYPE);
+        }
         if (hasAllPermission()) {
             //有了权限需要处理的事情
             showPrivacyDialog();
@@ -111,14 +127,16 @@ public class MainActivity extends BasePermissionActivity {
             //检测权限
             checkPermissions();
         }
+
+
         mFragmentList = new ArrayList<>();
         mListTitle = new ArrayList<>();
         mTabList = new ArrayList<>();
         initTabList();
-        for (TabInfo tabInfo:mTabList){
+        for (TabInfo tabInfo : mTabList) {
             setupChildView(tabInfo);
         }
-        mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(),0,mContext, mFragmentList, mListTitle));
+        mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0, mContext, mFragmentList, mListTitle));
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabWithIcons(mTabList);
     }
@@ -140,7 +158,7 @@ public class MainActivity extends BasePermissionActivity {
 
     @Override
     public void initView() {
-        mTabLayout =  findViewById(R.id.tab_layout);
+        mTabLayout = findViewById(R.id.tab_layout);
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setTabTextColors(R.color.white, R.color.mainColor);
@@ -149,25 +167,44 @@ public class MainActivity extends BasePermissionActivity {
     }
 
     private void initTabList() {
-        mTabList.add(new TabInfo(PageId.PAGE_HOME_PAGE,
-                App.getInstance().getString(R.string.tab_home_page),
-                R.drawable.bg_tab_home_page));
 
-        mTabList.add(new TabInfo(PageId.PAGE_FEED_PAGE,
-                App.getInstance().getString(R.string.tab_feed_page),
-                R.drawable.bg_tab_feed_page));
+        if (mLoginType == Constants.TYPE_IDENTITY_PERSONAL) {
 
-        mTabList.add(new TabInfo(PageId.PAGE_SHEEP_HOUSE_KEEP,
-                App.getInstance().getString(R.string.tab_sheep_house_keeper_page),
-                R.drawable.bg_tab_sheep_house_keeper));
+            mTabList.add(new TabInfo(PageId.PAGE_HOME_PAGE,
+                    App.getInstance().getString(R.string.tab_home_page),
+                    R.drawable.bg_tab_home_page));
 
-        mTabList.add(new TabInfo(PageId.PAGE_SHEEP_BAR_PAGE,
-                App.getInstance().getString(R.string.tab_sheep_bar_page),
-                R.drawable.bg_tab_sheep_bar));
+            mTabList.add(new TabInfo(PageId.PAGE_FEED_PAGE,
+                    App.getInstance().getString(R.string.tab_feed_page),
+                    R.drawable.bg_tab_feed_page));
 
-        mTabList.add(new TabInfo(PageId.PAGE_MINE,
-                App.getInstance().getString(R.string.tab_mine_page),
-                R.drawable.bg_tab_mine));
+            mTabList.add(new TabInfo(PageId.PAGE_SHEEP_HOUSE_KEEP,
+                    App.getInstance().getString(R.string.tab_sheep_house_keeper_page),
+                    R.drawable.bg_tab_sheep_house_keeper));
+
+            mTabList.add(new TabInfo(PageId.PAGE_SHEEP_BAR_PAGE,
+                    App.getInstance().getString(R.string.tab_sheep_bar_page),
+                    R.drawable.bg_tab_sheep_bar));
+
+            mTabList.add(new TabInfo(PageId.PAGE_MINE,
+                    App.getInstance().getString(R.string.tab_mine_page),
+                    R.drawable.bg_tab_mine));
+
+        } else if (mLoginType == Constants.TYPE_IDENTITY_BUSINESS) {
+
+            mTabList.add(new TabInfo(PageId.PAGE_BU_HOME,
+                    App.getInstance().getString(R.string.tab_bu_home),
+                    R.drawable.bg_tab_bu_home_page));
+
+            mTabList.add(new TabInfo(PageId.PAGE_BU_MESSAGE,
+                    App.getInstance().getString(R.string.tab_bu_message),
+                    R.drawable.bg_tab_bu_message_page));
+
+            mTabList.add(new TabInfo(PageId.PAGE_BU_MINE,
+                    App.getInstance().getString(R.string.tab_bu_mine),
+                    R.drawable.bg_tab_bu_mine_page));
+        }
+
     }
 
 
@@ -186,8 +223,8 @@ public class MainActivity extends BasePermissionActivity {
 
     private View createTabView(TabInfo tabInfo) {
         View view = getLayoutInflater().inflate(R.layout.layout_item_tab, null);
-        ImageView iv_icon =  view.findViewById(R.id.resview_icon);
-        BrandTextView tv_name =  view.findViewById(R.id.tv_name);
+        ImageView iv_icon = view.findViewById(R.id.resview_icon);
+        BrandTextView tv_name = view.findViewById(R.id.tv_name);
         iv_icon.setImageResource(tabInfo.getIcon());
         tv_name.setText(tabInfo.getTitle());
         return view;
@@ -198,7 +235,7 @@ public class MainActivity extends BasePermissionActivity {
         int tabId = tabInfo.getTabId();
         switch (tabId) {
             case PageId.PAGE_HOME_PAGE:
-                HomeFragment serviceFragment =  HomeFragment.newInstance("", "");
+                HomeFragment serviceFragment = HomeFragment.newInstance("", "");
                 mFragmentList.add(serviceFragment);
                 break;
             case PageId.PAGE_FEED_PAGE:
@@ -214,9 +251,23 @@ public class MainActivity extends BasePermissionActivity {
                 mFragmentList.add(barSheepFragment);
                 break;
             case PageId.PAGE_MINE:
-                MineFragment mineFragment=MineFragment.newInstance("","");
+                MineFragment mineFragment = MineFragment.newInstance("", "");
                 mFragmentList.add(mineFragment);
                 break;
+            /////////////////////////////////商版////////////////////////////////////////
+            case PageId.PAGE_BU_HOME:
+                BUHomeFragment buHomeFragment = new BUHomeFragment();
+                mFragmentList.add(buHomeFragment);
+                break;
+            case PageId.PAGE_BU_MESSAGE:
+                BUMessageFragment buMessageFragment = new BUMessageFragment();
+                mFragmentList.add(buMessageFragment);
+                break;
+            case PageId.PAGE_BU_MINE:
+                BUMineFragment buMineFragment = new BUMineFragment();
+                mFragmentList.add(buMineFragment);
+                break;
+
 
         }
     }
@@ -226,17 +277,17 @@ public class MainActivity extends BasePermissionActivity {
      * 展示隐私权限
      */
     private void showPrivacyDialog() {
-        final SpUtil spUtil = SpUtil.getInstance(getApplicationContext());
-        boolean isAgreePrivacy = spUtil.getBoolean(Constants.KEY_AGREE_PRIVACY, false);
+        final SharedPreferencesUtil sharedPreferencesUtil = SharedPreferencesUtil.getInstance(getApplicationContext());
+        boolean isAgreePrivacy = sharedPreferencesUtil.getBoolean(Constants.KEY_AGREE_PRIVACY, false);
         if (!isAgreePrivacy) {
-            if (privacyPolicyDialog!=null&&privacyPolicyDialog.isShowing()){
+            if (privacyPolicyDialog != null && privacyPolicyDialog.isShowing()) {
                 return;
             }
             privacyPolicyDialog = new PrivacyPolicyDialog(MainActivity.this, R.style.dialog);
             privacyPolicyDialog.setOnButtonClickListener(new PrivacyPolicyDialog.OnPrivacyClickListener() {
                 @Override
                 public void onButtonClick(boolean isAgree) {
-                    spUtil.putBoolean(Constants.KEY_AGREE_PRIVACY, isAgree);
+                    sharedPreferencesUtil.putBoolean(Constants.KEY_AGREE_PRIVACY, isAgree);
                     if (!isAgree) {
                         AppManager.getInstance().finishActivity();
                     }
@@ -265,39 +316,38 @@ public class MainActivity extends BasePermissionActivity {
     }
 
 
-
     private void getDataAsync() {
 
         OkHttpManager.getInstance().getRequest(url, new BaseCallBack<String>() {
             @Override
             protected void OnRequestBefore(Request request) {
-                Log.d(TAG,"OnRequestBefore");
+                Log.d(TAG, "OnRequestBefore");
             }
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                Log.d(TAG,"onFailure");
+                Log.d(TAG, "onFailure");
             }
 
             @Override
             protected void onSuccess(Call call, Response response, String user) {
-                Log.d(TAG,"response.code()=="+response.code());
-                Log.d(TAG,"response.message()=="+response.message());
+                Log.d(TAG, "response.code()==" + response.code());
+                Log.d(TAG, "response.message()==" + response.message());
             }
 
             @Override
             protected void onResponse(Response response) {
-                Log.d(TAG,"onResponse");
+                Log.d(TAG, "onResponse");
             }
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                Log.d(TAG,"onEror");
+                Log.d(TAG, "onEror");
             }
 
             @Override
             protected void inProgress(int progress, long total, int id) {
-                Log.d(TAG,"inProgress");
+                Log.d(TAG, "inProgress");
             }
         });
     }
@@ -305,13 +355,13 @@ public class MainActivity extends BasePermissionActivity {
 
     public void request(View view) {
 
-       new Thread(){
-           @Override
-           public void run() {
-               super.run();
-               getDataAsync();
-           }
-       }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                super.run();
+                getDataAsync();
+            }
+        }.start();
     }
 
 

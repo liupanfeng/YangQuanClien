@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="horizontal">
+
+    <com.meishe.yangquan.view.RoundAngleImageView
+        android:id="@+id/iv_photo"
+        android:layout_width="@dimen/dp36"
+        android:layout_height="@dimen/dp36"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="@dimen/dp20"
+        app:roundHeight="@dimen/dp18"
+        app:roundWidth="@dimen/dp18" />
+
+
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:text="用户XXX"
+        android:textColor="#ff2f3742"
+        android:textSize="14sp" />
+
+
+    <LinearLayout
+        android:id="@+id/ll_sheep_bar_focus"
+        android:layout_width="@dimen/dp53"
+        android:layout_height="@dimen/dp20"
+        android:visibility="gone"
+        android:layout_gravity="center_vertical"
+        android:layout_marginRight="@dimen/dp20"
+        android:background="@drawable/bg_sheep_bar_focus">
+
+        <TextView
+            android:id="@+id/tv_sheep_bar_focus_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="+关注"
+            android:textColor="#ff3ba786"
+            android:textSize="12sp" />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -16,7 +16,9 @@ import com.meishe.yangquan.R;
  */
 public class ChangeIdentityView extends BaseCustomLinearLayout {
 
+    /*普通用户*/
     public static final int TYPE_IDENTITY_PERSONAL = 1;
+    /*商户*/
     public static final int TYPE_IDENTITY_BUSINESS = 2;
 
     private Button mBtnPersonal;

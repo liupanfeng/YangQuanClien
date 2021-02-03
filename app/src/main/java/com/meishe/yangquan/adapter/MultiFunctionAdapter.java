@@ -9,14 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
+import com.meishe.yangquan.bean.HomeMarketPictureInfo;
+import com.meishe.yangquan.bean.HouseKeeperSourceAnalysisInfo;
 import com.meishe.yangquan.bean.IndustryInfo;
 import com.meishe.yangquan.bean.IndustryNewsClip;
 import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
+import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
+import com.meishe.yangquan.bean.MineMyFansInfo;
+import com.meishe.yangquan.bean.MineMyFocusInfo;
+import com.meishe.yangquan.bean.MineMyMessageInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.PointRecordInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
@@ -29,18 +36,27 @@ import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfo;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
+import com.meishe.yangquan.bean.SheepLossInfo;
 import com.meishe.yangquan.bean.SheepNews;
+import com.meishe.yangquan.bean.SheepVaccineInfo;
 import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.SystemNotification;
+import com.meishe.yangquan.viewhoder.BUHomeShopDataHolder;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
+import com.meishe.yangquan.viewhoder.BreedingArchivesFoodAnalysisHolder;
 import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
 import com.meishe.yangquan.viewhoder.CommentListHolder;
-import com.meishe.yangquan.viewhoder.CutSheepHairHolder;
+import com.meishe.yangquan.viewhoder.SheepCutHairHolder;
+import com.meishe.yangquan.viewhoder.HomemarketPictureListHolder;
 import com.meishe.yangquan.viewhoder.IndustryContentHolder;
 import com.meishe.yangquan.viewhoder.IndustryListHolder;
 import com.meishe.yangquan.viewhoder.MarketListHolder;
 import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
+import com.meishe.yangquan.viewhoder.MineBreedingArchivesHolder;
+import com.meishe.yangquan.viewhoder.MineMyFansHolder;
+import com.meishe.yangquan.viewhoder.MineMyFocusHolder;
+import com.meishe.yangquan.viewhoder.MineMyMessageHolder;
 import com.meishe.yangquan.viewhoder.MineMyPointsHolder;
 import com.meishe.yangquan.viewhoder.MineSystemMessageHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
@@ -56,6 +72,8 @@ import com.meishe.yangquan.viewhoder.SheepBarCommentListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarCommentSecondaryListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarMessageListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarPictureListHolder;
+import com.meishe.yangquan.viewhoder.SheepLossHolder;
+import com.meishe.yangquan.viewhoder.SheepVaccinesHolder;
 
 public class MultiFunctionAdapter extends BaseRecyclerAdapter {
 
@@ -136,10 +154,14 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_industry, parent, false);
                 viewHolder = new IndustryListHolder(view, this);
                 break;
-                /*羊吧图片*/
+            /*羊吧图片*/
             case VIEW_SHEEP_BAR_ADD_PIC:
                 view = mLayoutInflater.inflate(R.layout.item_sheep_bar, parent, false);
                 viewHolder = new SheepBarPictureListHolder(view, this);
+                break;
+            case VIEW_HOME_MARKET_PICTURE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_home_market, parent, false);
+                viewHolder = new HomemarketPictureListHolder(view, this);
                 break;
             /*羊吧信息发布*/
             case VIEW_SHEEP_BAR_MESSAGE:
@@ -164,7 +186,17 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             /*剪羊毛内容*/
             case VIEW_CUT_SHEEP_HAIR_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_cut_sheep_hair, parent, false);
-                viewHolder = new CutSheepHairHolder(view, this);
+                viewHolder = new SheepCutHairHolder(view, this);
+                break;
+            /*养殖助手-损耗列表*/
+            case VIEW_CUT_SHEEP_LOSS_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_sheep_loss, parent, false);
+                viewHolder = new SheepLossHolder(view, this);
+                break;
+            /*养殖助手-疫苗列表*/
+            case VIEW_CUT_SHEEP_VACCINE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_sheep_vaccine, parent, false);
+                viewHolder = new SheepVaccinesHolder(view, this);
                 break;
             /*我的积分记录*/
             case VIEW_MINE_MY_POINTS_LIST:
@@ -175,6 +207,40 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             case VIEW_MINE_SUYSTEM_MESSAGE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_system_message, parent, false);
                 viewHolder = new MineSystemMessageHolder(view, this);
+                break;
+
+            /*我的消息*/
+            case VIEW_MINE_MY_MESSAGE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_my_message, parent, false);
+                viewHolder = new MineMyMessageHolder(view, this);
+                break;
+            /*我的-我的粉丝*/
+            case VIEW_MINE_MY_FANS_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_my_fans, parent, false);
+                viewHolder = new MineMyFansHolder(view, this);
+                break;
+            /*我的-我的关注*/
+            case VIEW_MINE_MY_FOCUS_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_my_focus, parent, false);
+                viewHolder = new MineMyFocusHolder(view, this);
+                break;
+            /*我的-养殖档案*/
+            case VIEW_MINE_BREEDING_ARCHIVE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_breeding_archives, parent, false);
+                viewHolder = new MineBreedingArchivesHolder(view, this);
+                break;
+
+            /*养殖助手-配料分析*/
+            case VIEW_SHEEP_BREEDING_FOOD_ANALYSIS_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_breeding_archives_food_analysis, parent, false);
+                viewHolder = new BreedingArchivesFoodAnalysisHolder(view, this);
+                break;
+
+
+            /*商版-店铺数据*/
+            case VIEW_BU_HOME_SHOPDATA_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_home_shop_data, parent, false);
+                viewHolder = new BUHomeShopDataHolder(view, this);
                 break;
         }
         return viewHolder;
@@ -225,18 +291,36 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_SHEEP_BAR_MESSAGE;
         } else if (baseInfo instanceof ServiceInfo) {
             return VIEW_SERVICE_LIST;
-        } else if (baseInfo instanceof SheepBarCommentInfo){
+        } else if (baseInfo instanceof SheepBarCommentInfo) {
             return VIEW_COMMENT_LEVEL1_LIST;
-        } else if (baseInfo instanceof SheepBarCommentSecondaryInfo){
+        } else if (baseInfo instanceof SheepBarCommentSecondaryInfo) {
             return VIEW_COMMENT_LEVEL1_CHILD_LIST;
-        }else if (baseInfo instanceof IndustryNewsClip){
+        } else if (baseInfo instanceof IndustryNewsClip) {
             return VIEW_INDUSTRY_CONTENT_LIST;
-        }else if (baseInfo instanceof SheepHairInfo){
+        } else if (baseInfo instanceof SheepHairInfo) {
             return VIEW_CUT_SHEEP_HAIR_LIST;
-        }else if (baseInfo instanceof PointRecordInfo){
+        } else if (baseInfo instanceof PointRecordInfo) {
             return VIEW_MINE_MY_POINTS_LIST;
-        }else if (baseInfo instanceof SystemMessageInfo){
+        } else if (baseInfo instanceof SystemMessageInfo) {
             return VIEW_MINE_SUYSTEM_MESSAGE_LIST;
+        } else if (baseInfo instanceof MineMyMessageInfo) {
+            return VIEW_MINE_MY_MESSAGE_LIST;
+        }else if (baseInfo instanceof HomeMarketPictureInfo) {
+            return VIEW_HOME_MARKET_PICTURE_LIST;
+        }else if (baseInfo instanceof BUShopDataInfo) {
+            return VIEW_BU_HOME_SHOPDATA_LIST;
+        }else if (baseInfo instanceof MineBreedingArchivesInfo) {
+            return VIEW_MINE_BREEDING_ARCHIVE_LIST;
+        }else if (baseInfo instanceof HouseKeeperSourceAnalysisInfo) {
+            return VIEW_SHEEP_BREEDING_FOOD_ANALYSIS_LIST;
+        }else if (baseInfo instanceof MineMyFansInfo) {
+            return VIEW_MINE_MY_FANS_LIST;
+        }else if (baseInfo instanceof MineMyFocusInfo) {
+            return VIEW_MINE_MY_FOCUS_LIST;
+        }else if (baseInfo instanceof SheepLossInfo) {
+            return VIEW_CUT_SHEEP_LOSS_LIST;
+        }else if (baseInfo instanceof SheepVaccineInfo) {
+            return VIEW_CUT_SHEEP_VACCINE_LIST;
         }
         return super.getItemViewType(position);
     }

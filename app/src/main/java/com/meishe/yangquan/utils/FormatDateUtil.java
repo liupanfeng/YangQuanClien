@@ -71,4 +71,28 @@ public class FormatDateUtil {
         return date.getTime();
     }
 
+
+    /**
+     * 计算某个时间距离当前时间的天数,小时数以及分钟数.
+     * @param calDate
+     * @return
+     */
+    public static String calculateTime(Date calDate){
+        String tips = "";
+        Date now = new Date();
+        long l = calDate.getTime() - now.getTime();
+        long days =  (l / (1000 * 60 * 60 * 24));
+        if (days > 0){
+            tips += days + "天";
+        }
+        long hours =  (l / (1000 * 60 * 60) - days*24);
+        if (hours > 0 || (days > 0 && hours == 0)){
+            tips += hours + "小时";
+        }
+        long mins =  (l / (1000 * 60)) - days*24*60 - hours*60;
+        tips += mins + "分钟";
+        return tips;
+    }
+
+
 }

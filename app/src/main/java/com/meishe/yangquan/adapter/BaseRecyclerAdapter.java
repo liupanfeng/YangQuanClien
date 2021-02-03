@@ -36,6 +36,7 @@ import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.BusinessOpportunityResult;
 import com.meishe.yangquan.bean.EmptyInfo;
 import com.meishe.yangquan.bean.EndInfo;
+import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
@@ -106,6 +107,19 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_CUT_SHEEP_HAIR_LIST = VIEW_TYPE_BASE + 23;                        //剪羊毛列表
     protected static final int VIEW_MINE_MY_POINTS_LIST = VIEW_TYPE_BASE + 24;                        //我的积分
     protected static final int VIEW_MINE_SUYSTEM_MESSAGE_LIST = VIEW_TYPE_BASE + 25;                  //系统消息
+    protected static final int VIEW_MINE_MY_MESSAGE_LIST = VIEW_TYPE_BASE + 26;                     //我的消息
+    protected static final int VIEW_HOME_MARKET_PICTURE_LIST = VIEW_TYPE_BASE + 27;                     //市场-小图列表
+    protected static final int VIEW_MINE_BREEDING_ARCHIVE_LIST = VIEW_TYPE_BASE + 28;                     //我的养殖档案
+    protected static final int VIEW_SHEEP_BREEDING_FOOD_ANALYSIS_LIST = VIEW_TYPE_BASE + 29;              //饲料列表
+    protected static final int VIEW_MINE_MY_FANS_LIST = VIEW_TYPE_BASE + 30;                             //粉丝列表
+    protected static final int VIEW_MINE_MY_FOCUS_LIST = VIEW_TYPE_BASE + 31;                             //关注列表
+    protected static final int VIEW_CUT_SHEEP_VACCINE_LIST = VIEW_TYPE_BASE + 32;                        //疫苗列表
+    protected static final int VIEW_CUT_SHEEP_LOSS_LIST = VIEW_TYPE_BASE + 33;                        //损耗列表
+
+
+
+    protected static final int VIEW_BU_HOME_SHOPDATA_LIST = VIEW_TYPE_BASE + 50;                     //商版店铺数据
+
 
     private IosDialog mDialog;
 
@@ -226,7 +240,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             bundle.putString("name", ((ServiceTypeInfo) info).getName());
             bundle.putInt("type", ((ServiceTypeInfo) info).getType());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
-        } else if (info instanceof SheepBarPictureInfo){
+        } else if (info instanceof SheepBarPictureInfo) {
             if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
                 return;
             }
@@ -302,6 +316,13 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         } else if (info instanceof ServiceInfo) {
             //首页服务
             String phone = ((ServiceInfo) info).getPhone();
+            if (Util.checkNull(phone)) {
+                return;
+            }
+            callPhone(phone);
+        } else if (info instanceof MarketInfo) {
+            //市场
+            String phone = ((MarketInfo) info).getPhone();
             if (Util.checkNull(phone)) {
                 return;
             }

@@ -1,9 +1,11 @@
 package com.meishe.yangquan.activity;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
@@ -12,6 +14,7 @@ import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.BatchInfo;
 import com.meishe.yangquan.bean.BatchInfoResult;
 import com.meishe.yangquan.bean.BatchResult;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.fragment.SheepBreedHelperFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -21,6 +24,8 @@ import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.IosDialog;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +34,8 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_USER_INFO;
 
 /**
  * 羊管家-养殖助手
@@ -42,7 +49,7 @@ public class SheepBreedHelperActivity extends BaseActivity {
     private IosDialog mIosDialog;
     private LinearLayout mLlCreate;
 
-    private List<BatchInfo> mBatchData=new ArrayList<>();
+    private List<BatchInfo> mBatchData = new ArrayList<>();
 
 
     @Override
@@ -105,12 +112,13 @@ public class SheepBreedHelperActivity extends BaseActivity {
                 }
 
                 List<BatchInfo> data = batchInfoResult.getData();
-                if (data==null){
+                if (data == null) {
                     showCreateDialog();
                     return;
                 }
+                mBatchData.clear();
                 mBatchData.addAll(data);
-                if (mBatchData.size()==0){
+                if (mBatchData.size() == 0) {
                     showCreateDialog();
                     return;
                 }
@@ -138,10 +146,10 @@ public class SheepBreedHelperActivity extends BaseActivity {
 
     private void initTabLayout(List<BatchInfo> batchData) {
         mFragments = new ArrayList<>();
-        List<String> titleList=new ArrayList<>();
+        List<String> titleList = new ArrayList<>();
         for (int i = 0; i < batchData.size(); i++) {
             BatchInfo batchInfo = batchData.get(i);
-            if (batchInfo==null){
+            if (batchInfo == null) {
                 continue;
             }
 
@@ -150,7 +158,8 @@ public class SheepBreedHelperActivity extends BaseActivity {
             titleList.add(batchInfo.getTitle());
 
             mTabLayout.addTab(tab);
-            SheepBreedHelperFragment sheepBreedHelperFragment = SheepBreedHelperFragment.newInstance(batchInfo.getId());
+            SheepBreedHelperFragment sheepBreedHelperFragment = SheepBreedHelperFragment.newInstance(batchInfo.getId(),
+                    batchInfo.getCurrentCulturalQuantity(),batchInfo.getInitDate());
             mFragments.add(sheepBreedHelperFragment);
         }
         mViewPage.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0, mContext, mFragments, titleList));
@@ -234,7 +243,7 @@ public class SheepBreedHelperActivity extends BaseActivity {
                     if (code != 1) {
                         ToastUtil.showToast(mContext, response.message());
                     }
-                    BatchInfo batchInfo=new BatchInfo();
+                    BatchInfo batchInfo = new BatchInfo();
                     batchInfo.setTitle(title);
                     batchInfo.setId(batchResult.getData());
                     mBatchData.add(batchInfo);
@@ -292,4 +301,15 @@ public class SheepBreedHelperActivity extends BaseActivity {
         }
     }
 
+    @Override
+    protected void eventBusUpdateUI(MessageEvent event) {
+        super.eventBusUpdateUI(event);
+        int eventType = event.getEventType();
+        switch (eventType) {
+            case MessageEvent.MESSAGE_TYPE_UPDATE_BREEDING_ARCHIVING:
+                getDispatchFromServer();
+                break;
+        }
+
+    }
 }

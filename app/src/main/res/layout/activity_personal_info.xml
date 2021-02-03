@@ -28,7 +28,7 @@
             android:layout_height="93dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp27"
-            android:background="@mipmap/ic_default_photo"
+            android:scaleType="centerCrop"
             app:roundHeight="47dp"
             app:roundWidth="47dp" />
 

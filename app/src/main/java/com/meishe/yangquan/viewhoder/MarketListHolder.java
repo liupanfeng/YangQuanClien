@@ -7,19 +7,28 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
+import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.Comment;
+import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.MarketInfo;
+import com.meishe.yangquan.bean.SheepBarMessageInfo;
+import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.divider.CustomGridItemDecoration;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.FormatCurrentData;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,14 +54,13 @@ public class MarketListHolder extends BaseViewHolder {
 
     private TextView tv_market_price;
 
-    private ImageView iv_market_1;
-    private ImageView iv_market_2;
-    private ImageView iv_market_3;
-    private ImageView iv_market_4;
-    private ImageView iv_market_5;
-    private ImageView iv_market_6;
 
     private ImageView iv_market_phone;
+
+    private RecyclerView grid_recycler;
+
+    private MultiFunctionAdapter mGrideAdapter;
+
 
     public MarketListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -78,14 +86,17 @@ public class MarketListHolder extends BaseViewHolder {
 
         tv_market_price = view.findViewById(R.id.tv_market_price);
 
-        iv_market_1 = view.findViewById(R.id.iv_market_1);
-        iv_market_2 = view.findViewById(R.id.iv_market_2);
-        iv_market_3 = view.findViewById(R.id.iv_market_3);
-        iv_market_4 = view.findViewById(R.id.iv_market_4);
-        iv_market_5 = view.findViewById(R.id.iv_market_5);
-        iv_market_6 = view.findViewById(R.id.iv_market_6);
-
+        grid_recycler = view.findViewById(R.id.grid_recycler);
         iv_market_phone = view.findViewById(R.id.iv_market_phone);
+
+        GridLayoutManager gridLayoutManager =
+                new GridLayoutManager(grid_recycler.getContext(), 3);
+        mGrideAdapter = new MultiFunctionAdapter(grid_recycler.getContext(), grid_recycler);
+        CustomGridItemDecoration customGridItemDecoration = new CustomGridItemDecoration(5);
+        grid_recycler.addItemDecoration(customGridItemDecoration);
+        grid_recycler.setLayoutManager(gridLayoutManager);
+        grid_recycler.setAdapter(mGrideAdapter);
+
     }
 
     @Override
@@ -111,18 +122,21 @@ public class MarketListHolder extends BaseViewHolder {
             }
 
 
-//            Comment comment= (Comment) info;
-//            String photoUrl=comment.getPhotoUrl();
-//            Glide.with(context)
-//                    .asBitmap()
-//                    .load(HttpUrl.URL_IMAGE+photoUrl)
-//                    .apply(options)
-//                    .into(iv_comment_photo);
+            List<HomeMarketPictureInfo> list = new ArrayList<>();
+            if (!CommonUtils.isEmpty(images)&&images.size()>1) {
+                for (int i = 1; i < images.size(); i++) {
+                    HomeMarketPictureInfo homeMarketPictureInfo = new HomeMarketPictureInfo();
+                    homeMarketPictureInfo.setFilePath(images.get(i));
+                    homeMarketPictureInfo.setType(SheepBarPictureInfo.TYPE_URL_PIC);
+                    list.add(homeMarketPictureInfo);
+                }
+                mGrideAdapter.addAll(list);
+            }else{
+                mGrideAdapter.addAll(null);
+            }
 
-//            tv_comment_nickname.setText(comment.getNickName());
-//            byte[] bytes=Base64.decode(comment.getContent(), Base64.DEFAULT);
-//            tv_comment_content.setText(new String(bytes));
-//            tv_comment_time.setText(FormatCurrentData.getTimeRange(comment.getCreateTime()+""));
+            iv_market_phone.setTag(info);
+            iv_market_phone.setOnClickListener(listener);
 
         }
     }

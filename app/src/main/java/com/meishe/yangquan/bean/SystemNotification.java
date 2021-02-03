@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * 系统通知，展现在我的消息里边 包含一些系统推送的消息
  */
+@Deprecated
 public class SystemNotification extends BaseInfo{
     private Integer id;
 

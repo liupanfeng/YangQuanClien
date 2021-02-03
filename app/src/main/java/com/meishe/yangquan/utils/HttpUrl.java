@@ -157,20 +157,24 @@ public class HttpUrl {
     /*羊助手基础信息填写*/
     public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_IN = URL + "app/cultural/assistant/batch/in";
 
+    /*羊管家 获取入栏信息 */
+    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_IN_INFO = URL + "app/cultural/assistant/batch/in/info";
+
+
     /*羊助手出栏信息填写*/
     public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT = URL + "app/cultural/assistant/batch/out";
 
 
     /*羊管家 养殖助手 饲料分析列表 */
-    public static final String SHEEP_HOLDER_FODDER_ANALYSE_LIST = URL + "app/cultural/assistant/batch/fodder/analyse/list";
+    public static final String SHEEP_HOLDER_FODDER_ANALYSE_LIST = URL + "app/cultural/assistant/batch/fodder/list";
 
-    /*羊管家 养殖助手-新增饲料分析 */
+    /*羊管家 养殖助手-新增饲料记录 */
     public static final String SHEEP_HOLDER_FODDER_SAVE = URL + "app/cultural/assistant/batch/fodder/save";
 
     /*羊管家 养殖助手-上一次饲料分析记录 */
     public static final String SHEEP_HOLDER_FODDER_LATEST = URL + "app/cultural/assistant/batch/fodder/latest";
 
-    /*羊管家 养殖助手-新增其他分析 */
+    /*羊管家 养殖助手-新增其他数据 */
     public static final String SHEEP_HOLDER_FODDER_OTHER_SAVE = URL + "app/cultural/assistant/batch/other/save";
 
     /*羊管家 养殖助手-其他记录列表 */
@@ -209,6 +213,20 @@ public class HttpUrl {
 
     /*我的积分*/
     public static final String SHEEP_MINE_MY_POINTS = URL + "app/user/wealth/info";
+
+    /*我的-关注*/
+    public static final String SHEEP_MINE_FOCUS = URL + "app/user/focus";
+
+    /*我的-关注-列表*/
+    public static final String SHEEP_MINE_FOCUS_LIST = URL + "app/user/focus/list";
+
+    /*我的-粉丝列表*/
+    public static final String SHEEP_MINE_FANS_LIST = URL + "app/user/fans/list";
+
+    /*我的-养殖档案列表*/
+    public static final String SHEEP_MINE_BREEDING_ARCHIVE = URL + "app/user/cultural/archive/list";
+
+
     /*系统消息*/
     public static final String SHEEP_MINE_SYSTEM_LIST = URL + "app/message/system/list";
 

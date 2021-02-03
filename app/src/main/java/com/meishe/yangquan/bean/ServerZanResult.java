@@ -1,5 +1,6 @@
 package com.meishe.yangquan.bean;
 
+@Deprecated
 public class ServerZanResult {
 
     // 响应业务状态

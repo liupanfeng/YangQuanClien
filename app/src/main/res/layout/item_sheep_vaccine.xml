@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="10.16"
+            android:textColor="@color/mainColor"
+            android:textSize="13sp" />
+
+
+        <EditText
+            android:id="@+id/et_vaccine_content"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="防疫内容"
+            android:textColor="#ff303030"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/tv_amount"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="20支"
+            android:textColor="#ff303030"
+            android:textSize="13sp" />
+
+
+        <EditText
+            android:id="@+id/et_input_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:background="@null"
+            android:gravity="center"
+            android:hint="成本"
+            android:textColor="#ff2f3742"
+            android:textSize="13sp" />
+
+
+        <TextView
+            android:id="@+id/tv_save"
+            android:layout_width="0dp"
+            android:layout_height="20dp"
+            android:layout_weight="1"
+            android:textColor="@color/mainColor"
+            android:background="@drawable/bg_sheep_bar_focus"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:text="保存" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/line_color" />
+
+</RelativeLayout>

@@ -1,5 +1,6 @@
 package com.meishe.yangquan.bean;
 
+@Deprecated
 public class ServiceNotifyInfo extends BaseInfo{
 
     private String content;

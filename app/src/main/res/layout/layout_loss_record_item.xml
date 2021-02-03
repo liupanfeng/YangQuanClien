@@ -103,23 +103,30 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:gravity="center"
                 android:text="损失金额（元）"
                 android:textColor="#ff303030"
                 android:textSize="13sp" />
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/white"
+                />
+
         </LinearLayout>
 
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
+            android:id="@+id/recycler_loss"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
 
         <LinearLayout
-            android:id="@+id/ll_create"
+            android:id="@+id/ll_create_loss"
             android:layout_width="100dp"
             android:layout_height="30dp"
             android:layout_gravity="center_horizontal"

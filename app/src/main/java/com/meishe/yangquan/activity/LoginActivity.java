@@ -22,6 +22,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.CheckNetwork;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.CountDownTimerUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.Logger;
@@ -61,6 +62,9 @@ public class LoginActivity extends BaseActivity {
     private EditText mEtImageCode;
     private String mImageCode;
 
+    private int mLoginType = 1;
+
+
     @Override
     protected int initRootView() {
         return R.layout.login;
@@ -85,10 +89,10 @@ public class LoginActivity extends BaseActivity {
     @Override
     public void initData() {
         String token = UserManager.getInstance(mContext).getToken();
-        if (!TextUtils.isEmpty(token)){
+        if (!TextUtils.isEmpty(token)) {
             AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);
             finish();
-        }else{
+        } else {
             getImageCode();
         }
 
@@ -108,7 +112,7 @@ public class LoginActivity extends BaseActivity {
         mChangeIdentity.setOnChangeIdentityListener(new ChangeIdentityView.OnChangeIdentityListener() {
             @Override
             public void onChangeIdentity(int type) {
-
+                mLoginType = type;
             }
         });
 
@@ -173,7 +177,6 @@ public class LoginActivity extends BaseActivity {
                 mInputCheckCode.setFocusable(true);
                 mInputCheckCode.setFocusableInTouchMode(true);
                 mInputCheckCode.requestFocus();
-                mGetCheckCode.setEnabled(false);
                 getMessageCode();
 
                 break;
@@ -352,20 +355,22 @@ public class LoginActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, SendSmsResult result) {
                 mMaterialProgress.hide();
-                if (result.getStatus() != 1) {
+                mInputCheckCode.setEnabled(true);
+                if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     mInputCheckCode.setFocusable(true);
                     mInputCheckCode.setFocusableInTouchMode(true);
                     mInputCheckCode.requestFocus();
                     return;
                 }
-                if (result != null && result.getStatus() == 1) {
+                if (result != null && result.getCode() == 1) {
                     ToastUtil.showToast(mContext, "验证码已发送");
                     CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
                     countDownTimer.start();
                     mInputCheckCode.setFocusable(true);
                     mInputCheckCode.setFocusableInTouchMode(true);
                     mInputCheckCode.requestFocus();
+
                 }
             }
 
@@ -424,7 +429,12 @@ public class LoginActivity extends BaseActivity {
 //                        String token = user.getTokenId();
                         String token = loginInfo.getToken();
                         UserManager.getInstance(mContext).setToken(token);
-                        AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);
+
+                        Bundle bundle = new Bundle();
+                        bundle.putInt(Constants.LOGIN_TYPE, mLoginType);
+
+                        AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class, bundle);
+
 //                        updateDeviceAlias();
                         LoginActivity.this.finish();
                         ToastUtil.showToast(mContext, "登录成功");
@@ -448,7 +458,6 @@ public class LoginActivity extends BaseActivity {
             }
         }, requestParam);
     }
-
 
 
     @Override

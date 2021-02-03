@@ -36,13 +36,13 @@ import okhttp3.Response;
  * @desc 主页-行业资讯页面
  * @date 2020/11/26 10:44
  */
-public class HomeIndustryInformation extends BaseRecyclerFragment{
+public class HomeIndustryInformation extends BaseRecyclerFragment {
 
     private BannerLayout mBanner;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
-        View view=inflater.inflate(R.layout.fragment_home_industry_information,container,false);
+        View view = inflater.inflate(R.layout.fragment_home_industry_information, container, false);
         mBanner = view.findViewById(R.id.banner);
         mRecyclerView = view.findViewById(R.id.recycler);
         return view;
@@ -53,10 +53,10 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
         mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
-                if (baseInfo instanceof IndustryInfo){
-                    Bundle bundle=new Bundle();
-                    bundle.putInt("newsId",((IndustryInfo) baseInfo).getId());
-                    AppManager.getInstance().jumpActivity(getContext(), HomeIndustryInformationDetailActivity.class,bundle);
+                if (baseInfo instanceof IndustryInfo) {
+                    Bundle bundle = new Bundle();
+                    bundle.putInt("newsId", ((IndustryInfo) baseInfo).getId());
+                    AppManager.getInstance().jumpActivity(getContext(), HomeIndustryInformationDetailActivity.class, bundle);
                 }
 
             }
@@ -76,8 +76,8 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
     private void getIndustryInfoFromServer() {
         HashMap<String, Object> param = new HashMap<>();
         String token = UserManager.getInstance(mContext).getToken();
-        param.put("pageNum",1);
-        param.put("pageSize",30);
+        param.put("pageNum", 1);
+        param.put("pageSize", 30);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_NEWS_LIST, new BaseCallBack<IndustryResult>() {
             @Override
@@ -173,12 +173,12 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
         }, param, token);
     }
 
-    private void initTopBanner(List<BannerInfo> data) {
+    private void initTopBanner(final List<BannerInfo> data) {
         List mUrlList = new ArrayList<>();
         List<String> titleas = new ArrayList<>();
         for (int i = 0; i < data.size(); i++) {
             BannerInfo bannerInfo = data.get(i);
-            if (bannerInfo==null){
+            if (bannerInfo == null) {
                 continue;
             }
 
@@ -191,7 +191,12 @@ public class HomeIndustryInformation extends BaseRecyclerFragment{
             mBanner.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
-                    Toast.makeText(mContext, "position:" + position, Toast.LENGTH_SHORT).show();
+                    BannerInfo bannerInfo = data.get(position);
+                    if (bannerInfo != null) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("newsId", bannerInfo.getNewsId());
+                        AppManager.getInstance().jumpActivity(getContext(), HomeIndustryInformationDetailActivity.class, bundle);
+                    }
                 }
             });
         }

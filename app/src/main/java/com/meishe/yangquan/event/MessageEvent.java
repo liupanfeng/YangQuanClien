@@ -15,10 +15,16 @@ public class MessageEvent {
      * 常数MESSAGE_TYPE_BASE
      */
     public static final int MESSAGE_TYPE_BASE = 100;
+
     /**
      * 更细用户信息
      */
     public static final int MESSAGE_TYPE_UPDATE_USER_INFO = MESSAGE_TYPE_BASE + 1;
+
+    /**
+     * 更新养殖档案菜单列表
+     */
+    public static final int MESSAGE_TYPE_UPDATE_BREEDING_ARCHIVING = MESSAGE_TYPE_BASE + 2;
 
     private int mEventType;
 
@@ -62,8 +68,9 @@ public class MessageEvent {
      *
      * @param eventType the event type
      */
-    public void setEventType(int eventType) {
+    public MessageEvent setEventType(int eventType) {
         this.mEventType = eventType;
+        return this;
     }
 
     /**

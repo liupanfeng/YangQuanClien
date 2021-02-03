@@ -20,6 +20,7 @@ import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.CropViewUtils;
+import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
  * 羊吧 添加羊吧内容 图片列表
@@ -33,7 +34,7 @@ public class SheepBarPictureListHolder extends BaseViewHolder {
     /*资讯索引*/
     private TextView mTvIndex;
 
-    private ImageView mIvSheepBarMessage;
+    private RoundAngleImageView mIvSheepBarMessage;
 
 
     public SheepBarPictureListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {

@@ -2,6 +2,7 @@ package com.meishe.yangquan.bean;
 
 import java.util.Date;
 
+@Deprecated
 public class Comment extends BaseInfo{
     private Integer id;
 

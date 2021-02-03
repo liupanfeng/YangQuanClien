@@ -321,6 +321,7 @@
         android:textColor="#ffc2c2c2"
         android:textSize="15sp"
         android:layout_below="@+id/btn_login"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/dp60"
         android:layout_centerHorizontal="true"
         />
@@ -330,6 +331,7 @@
         android:layout_width="wrap_content"
         android:layout_below="@+id/tv_login_type"
         android:layout_centerHorizontal="true"
+        android:visibility="gone"
         android:layout_marginTop="@dimen/dp30"
         android:layout_height="wrap_content">
 
@@ -353,11 +355,11 @@
 
 
     <LinearLayout
-        android:layout_below="@+id/rl_login_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp20"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="@dimen/dp20"
         >
 
         <TextView

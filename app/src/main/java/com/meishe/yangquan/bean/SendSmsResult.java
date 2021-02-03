@@ -1,10 +1,10 @@
 package com.meishe.yangquan.bean;
 
-
+@Deprecated
 public class SendSmsResult {
 
     // 响应业务状态
-    private int status;
+    private int code;
 
     // 响应消息
     private String msg;
@@ -12,12 +12,12 @@ public class SendSmsResult {
     //暂时先用单个对象 稍后改成list
     private String data;
 
-    public int getStatus() {
-        return status;
+    public int getCode() {
+        return code;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCode(int code) {
+        this.code = code;
     }
 
     public String getMsg() {

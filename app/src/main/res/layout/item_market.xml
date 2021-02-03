@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/home_market_list_item_bg"
     android:layout_marginBottom="8dp"
     android:orientation="vertical">
@@ -58,11 +59,13 @@
             android:layout_width="match_parent"
             android:layout_centerVertical="true"
             android:layout_height="128dp">
-            <ImageView
+            <com.meishe.yangquan.view.RoundAngleImageView
                 android:id="@+id/iv_market_cover"
                 android:layout_width="128dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp11"
+                app:roundWidth="5dp"
+                app:roundHeight="5dp"
                 android:scaleType="fitXY"
                 android:src="@mipmap/ic_market_default"
                 />
@@ -135,75 +138,25 @@
                     android:textSize="13sp"
                     />
 
-                <LinearLayout
-                    android:orientation="horizontal"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <LinearLayout
-                        android:orientation="vertical"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent">
-                            <ImageView
-                                android:id="@+id/iv_market_1"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
-                                android:src="@mipmap/ic_market_default"
-                                />
-                            <ImageView
-                                android:id="@+id/iv_market_2"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
-                                android:layout_marginLeft="@dimen/dp10"
-                                android:src="@mipmap/ic_market_default"
-                                />
-                            <ImageView
-                                android:id="@+id/iv_market_3"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
-                                android:layout_marginLeft="@dimen/dp10"
-                                android:src="@mipmap/ic_market_default"
-                                />
-                        </LinearLayout>
-                        <LinearLayout
-                            android:orientation="horizontal"
-                            android:layout_marginTop="@dimen/dp6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                            <ImageView
-                                android:id="@+id/iv_market_4"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
-                                android:src="@mipmap/ic_market_default"
-                                />
-                            <ImageView
-                                android:id="@+id/iv_market_5"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
-                                android:layout_marginLeft="@dimen/dp10"
-                                android:src="@mipmap/ic_market_default"
-                                />
-                            <ImageView
-                                android:id="@+id/iv_market_6"
-                                android:layout_width="34dp"
-                                android:layout_height="34dp"
-                                android:layout_marginLeft="@dimen/dp10"
-                                android:src="@mipmap/ic_market_default"
-                                />
-                        </LinearLayout>
-                    </LinearLayout>
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/grid_recycler"
+                        android:layout_toLeftOf="@id/iv_market_phone"
+                        android:layout_marginRight="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
                     <ImageView
                         android:id="@+id/iv_market_phone"
                         android:layout_width="47dp"
                         android:layout_height="47dp"
-                        android:layout_marginLeft="@dimen/dp6"
                         android:layout_marginTop="@dimen/dp22"
+                        android:layout_marginRight="@dimen/dp10"
+                        android:layout_alignParentRight="true"
                         android:src="@mipmap/ic_market_phone"
                         />
-                </LinearLayout>
+                </RelativeLayout>
 
             </LinearLayout>
 

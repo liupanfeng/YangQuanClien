@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_bu_shop_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp10"
+        android:text="0"
+        android:layout_gravity="center_horizontal"
+        android:textColor="#ff3ba786"
+        android:textSize="17sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_bu_shop_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp15"
+        android:text="待评价"
+        android:textColor="#ff656565"
+        android:textSize="13sp"
+        android:layout_marginBottom="@dimen/dp10"
+        />
+
+
+
+</LinearLayout>

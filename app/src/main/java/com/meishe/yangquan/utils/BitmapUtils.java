@@ -149,6 +149,17 @@ public class BitmapUtils {
      * @param path
      * @return
      */
+    public static Bitmap compressImage(String path,float hh,float ww) {
+        String filename = path.substring(path.lastIndexOf("/") + 1);
+        Bitmap image = getImage(path,hh,ww);
+        return image;
+    }
+
+    /**
+     * 压缩上传路径
+     * @param path
+     * @return
+     */
     public static String compressImageUpload(String path) {
         String filename = path.substring(path.lastIndexOf("/") + 1);
         Bitmap image = getImage(path);

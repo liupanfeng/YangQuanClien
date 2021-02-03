@@ -1,6 +1,5 @@
 package com.meishe.yangquan.bean;
 
-import java.util.List;
 
 /**
  * @author liupanfeng

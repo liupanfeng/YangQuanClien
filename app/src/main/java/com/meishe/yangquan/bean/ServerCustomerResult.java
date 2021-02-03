@@ -3,6 +3,7 @@ package com.meishe.yangquan.bean;
 
 import java.util.List;
 
+@Deprecated
 public class ServerCustomerResult {
 
     // 响应业务状态

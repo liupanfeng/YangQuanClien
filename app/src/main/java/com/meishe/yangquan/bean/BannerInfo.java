@@ -2,7 +2,7 @@ package com.meishe.yangquan.bean;
 
 /**
  * @author liupanfeng
- * @desc
+ * @desc 轮播图
  * @date 2020/11/29 17:52
  */
 public class BannerInfo {

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".activity.HomeIndustryInformationDetailActivity">
+
+    <TextView
+        android:id="@+id/tv_industry_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp13"
+        android:layout_marginRight="@dimen/dp13"
+        android:layout_marginTop="8dp"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="#ff303030"
+        android:textSize="23sp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_author_and_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp13"
+        android:textColor="#ffc2c2c2"
+        android:textSize="13sp"
+        android:layout_marginTop="@dimen/dp15"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginLeft="@dimen/dp13"
+        android:textColor="#ffc2c2c2"
+        android:textSize="13sp"
+        />
+
+</LinearLayout>

@@ -28,6 +28,7 @@ import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.utils.FormatCurrentData;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +49,7 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
     private TextView mTvIndex;
 
     /*yang*/
-    private ImageView mIvSheepBarPhoto;
+    private RoundAngleImageView mIvSheepBarPhoto;
 
     /*昵称*/
     private TextView tv_sheep_bar_nickname;
@@ -66,6 +67,8 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
     private TextView tv_sheep_bar_prise_number;
 
     private MultiFunctionAdapter mGrideAdapter;
+    /*关注*/
+    private TextView tv_sheep_bar_focus_content;
 
     public SheepBarMessageListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
@@ -86,6 +89,7 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
         recycler = view.findViewById(R.id.recycler);
         tv_sheep_bar_comment_number = view.findViewById(R.id.tv_sheep_bar_comment_number);
         tv_sheep_bar_prise_number = view.findViewById(R.id.tv_sheep_bar_prise_number);
+        tv_sheep_bar_focus_content = view.findViewById(R.id.tv_sheep_bar_focus_content);
 
         GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(recycler.getContext(), 3);
@@ -132,6 +136,8 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
             tv_sheep_bar_prise_number.setCompoundDrawablesWithIntrinsicBounds(((SheepBarMessageInfo) info).isHasPraised() ?
                     context.getResources().getDrawable(R.mipmap.ic_sheep_bar_select_prise) :
                     context.getResources().getDrawable(R.mipmap.ic_sheep_bar_prise), null, null, null);
+
+            tv_sheep_bar_focus_content.setText(((SheepBarMessageInfo) info).isHasFocused()?"已关注":"+关注");
 
             List<String> images = ((SheepBarMessageInfo) info).getImages();
             List<SheepBarPictureInfo> list = new ArrayList<>();

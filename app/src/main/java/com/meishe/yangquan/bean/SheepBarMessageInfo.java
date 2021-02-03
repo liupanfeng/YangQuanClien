@@ -47,6 +47,15 @@ public class SheepBarMessageInfo extends BaseInfo {
 
     private List<String> images;
 
+    private boolean hasFocused;
+
+    public boolean isHasFocused() {
+        return hasFocused;
+    }
+
+    public void setHasFocused(boolean hasFocused) {
+        this.hasFocused = hasFocused;
+    }
 
     public int getId() {
         return id;

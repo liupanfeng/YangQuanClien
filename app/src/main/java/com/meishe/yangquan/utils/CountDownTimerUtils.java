@@ -36,7 +36,7 @@ public class CountDownTimerUtils extends CountDownTimer {
     public void onTick(long millisUntilFinished) {
         mTextView.setClickable(false); //设置不可点击
         mTextView.setText(millisUntilFinished / 1000 + "s"); //设置倒计时时间
-        mTextView.setBackgroundResource(R.drawable.login_shape); //设置按钮为灰色，这时是不能点击的
+//        mTextView.setBackgroundResource(R.drawable.login_shape); //设置按钮为灰色，这时是不能点击的
         mTextView.setTextColor(mTextView.getContext().getResources().getColor(R.color.mainColor));
         SpannableString spannableString = new SpannableString(mTextView.getText().toString()); //获取按钮上的文字
         ForegroundColorSpan span = new ForegroundColorSpan(mTextView.getContext().getResources().getColor(R.color.mainColor));
@@ -55,10 +55,10 @@ public class CountDownTimerUtils extends CountDownTimer {
     @Override
     public void onFinish() {
         mTextView.setText("重新获取");
-        mTextView.setTextColor(Color.WHITE);
+//        mTextView.setTextColor(Color.WHITE);
         mTextView.setClickable(true);//重新获得点击
         mTextView.setEnabled(true);
         mTextView.requestFocus();
-        mTextView.setBackgroundResource(R.drawable.main_color_shape); //还原背景色
+//        mTextView.setBackgroundResource(R.drawable.main_color_shape); //还原背景色
     }
 }

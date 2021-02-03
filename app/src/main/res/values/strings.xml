@@ -7,6 +7,10 @@
     <string name="tab_sheep_bar_page">羊吧</string>
     <string name="tab_mine_page">我的</string>
 
+    <string name="tab_bu_home">工作台</string>
+    <string name="tab_bu_message">消息</string>
+    <string name="tab_bu_mine">我的</string>
+
 
     <string name="str_login_title">登录</string>
 

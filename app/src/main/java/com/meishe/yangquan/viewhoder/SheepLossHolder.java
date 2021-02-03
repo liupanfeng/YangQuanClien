@@ -3,6 +3,7 @@ package com.meishe.yangquan.viewhoder;
 import android.content.Context;
 import android.text.Editable;
 import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -15,8 +16,10 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
+import com.meishe.yangquan.bean.SheepLossInfo;
 import com.meishe.yangquan.utils.FormatCurrentData;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.Util;
 
 /**
@@ -32,10 +35,10 @@ public class SheepLossHolder extends BaseViewHolder {
     private TextView tv_time;
     /*数量*/
     private EditText et_amount;
-    /*单价*/
-    private TextView tv_single_price;
     /*总价*/
-    private TextView et_total_price;
+    private TextView tv_price;
+    /*保存*/
+    private TextView tv_save;
 
 
     public SheepLossHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
@@ -49,39 +52,33 @@ public class SheepLossHolder extends BaseViewHolder {
     @Override
     protected void initViewHolder(View view, Object... obj) {
         tv_time = view.findViewById(R.id.tv_time);
-        et_amount = view.findViewById(R.id.et_amount);
-        tv_single_price = view.findViewById(R.id.tv_single_price);
-        et_total_price = view.findViewById(R.id.et_total_price);
+        et_amount = view.findViewById(R.id.et_input_amount);
+        tv_price = view.findViewById(R.id.tv_price);
+        tv_save = view.findViewById(R.id.tv_save);
 
-        et_total_price.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-        et_amount.setInputType(InputType.TYPE_CLASS_NUMBER);
     }
 
     @Override
-    public void bindViewHolder(Context context, BaseInfo info, int position, View.OnClickListener listener) {
-        if (info instanceof SheepHairInfo) {
-            long time = ((SheepHairInfo) info).getTime();
-            if (time == 0) {
+    public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
+        if (info instanceof SheepLossInfo) {
+            String time = ((SheepLossInfo) info).getRecordDate();
+            if (TextUtils.isEmpty(time)) {
                 tv_time.setText(FormatDateUtil.longToString(System.currentTimeMillis(),
-                        FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
+                        FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY).substring(5));
+                ((SheepLossInfo) info).setRecordDate(FormatDateUtil.longToString(System.currentTimeMillis(),
+                        FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY).substring(5));
             } else {
-                tv_time.setText(FormatDateUtil.longToString(time,
-                        FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
+                tv_time.setText(time);
             }
 
-            int amount = ((SheepHairInfo) info).getAmount();
+            int amount = ((SheepLossInfo) info).getAmount();
             if (amount != 0) {
                 et_amount.setText(amount + "");
             }
-            float totalPrice = ((SheepHairInfo) info).getTotalPrice();
-            if (totalPrice != 0) {
-                et_total_price.setText(totalPrice + "");
-            }
 
-            if (amount != 0 && totalPrice != 0) {
-                tv_single_price.setText(FormatCurrentData.getFormatStringFromFloat(totalPrice / amount * 1f));
-            } else {
-                tv_single_price.setText(0.0 + "");
+            float totalPrice = ((SheepLossInfo) info).getPrice();
+            if (totalPrice != 0) {
+                tv_price.setText(totalPrice + "");
             }
 
             et_amount.addTextChangedListener(new TextWatcher() {
@@ -94,16 +91,19 @@ public class SheepLossHolder extends BaseViewHolder {
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     int length = charSequence.length();
                     if (length > 0) {
-                        String amount = charSequence.toString().trim();
-                        Integer integer = Integer.valueOf(amount);
-                        String totalPrice = et_total_price.getText().toString().trim();
-                        if (!Util.checkNull(totalPrice)) {
-                            Float aFloat = Float.valueOf(totalPrice);
-                            tv_single_price.setText(FormatCurrentData.
-                                    getFormatStringFromFloat(aFloat / integer * 1f));
+                        String content = charSequence.toString().trim();
+                        Integer amount = Integer.valueOf(content);
+                        ((SheepLossInfo) info).setAmount(amount);
+                        String priceStr = SharedPreferencesUtil.getInstance(context).getString(((SheepLossInfo) info).getBatchId() + "");
+                        if (!TextUtils.isEmpty(priceStr)) {
+                            float price = Float.valueOf(priceStr);
+                            tv_price.setText(price * amount + "");
+                            ((SheepLossInfo) info).setPrice(price * amount);
                         }
                     } else {
-                        tv_single_price.setText(0.0 + "");
+                        ((SheepLossInfo) info).setAmount(0);
+                        ((SheepLossInfo) info).setPrice(0);
+                        tv_price.setText(0 + "");
                     }
                 }
 
@@ -113,39 +113,10 @@ public class SheepLossHolder extends BaseViewHolder {
                 }
             });
 
-            et_total_price.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
-                }
+            tv_save.setTag(info);
+            tv_save.setOnClickListener(listener);
 
-                @Override
-                public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    try {
-                        int length = charSequence.length();
-                        if (length > 0) {
-                            String totalPrice = charSequence.toString().trim();
-                            Integer integer = Integer.valueOf(totalPrice);
-                            String amount = et_amount.getText().toString().trim();
-                            if (!Util.checkNull(amount)) {
-                                Float aFloat = Float.valueOf(amount);
-                                tv_single_price.setText(FormatCurrentData.
-                                        getFormatStringFromFloat(integer / aFloat * 1f));
-                            }
-                        } else {
-                            tv_single_price.setText(0.0 + "");
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
-                }
-            });
         }
 
     }

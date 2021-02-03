@@ -16,6 +16,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.PublishSheepBarActivity;
+import com.meishe.yangquan.activity.SheepBarDetailActivity;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.bean.SheepBarInfoResult;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
@@ -62,8 +63,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
 
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
-    private List<Fragment> mFragmentList =new ArrayList<>();
-    private List<String> mTitleList=new ArrayList<>();
+    private List<SheepBarMessageInfo> mTopDatas;
 
     public static SheepBarFragment newInstance(String param1, String param2) {
         SheepBarFragment fragment = new SheepBarFragment();
@@ -99,6 +99,10 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
     @Override
     protected void initListener() {
         mIvPublishSheepBar.setOnClickListener(this);
+
+        mLlTopMessageContainer1.setOnClickListener(this);
+
+        mLlTopMessageContainer2.setOnClickListener(this);
     }
 
     @Override
@@ -129,23 +133,22 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
         getSheepBarTopDataFromServer();
 
 
-
     }
 
     private void initTabLayout() {
         mFragmentList.clear();
         mTitleList.clear();
-        SheepBarNewestFragment sheepBarNewestFragment=new SheepBarNewestFragment();
+        SheepBarNewestFragment sheepBarNewestFragment = new SheepBarNewestFragment();
         mFragmentList.add(sheepBarNewestFragment);
 
-        SheepBarRecommendFragment sheepBarRecommendFragment=new SheepBarRecommendFragment();
+        SheepBarRecommendFragment sheepBarRecommendFragment = new SheepBarRecommendFragment();
         mFragmentList.add(sheepBarRecommendFragment);
 
         mTitleList.add("最新");
         mTitleList.add("推荐");
 
         mViewPager.setOffscreenPageLimit(2);
-        mViewPager.setAdapter(new CommonFragmentAdapter(getChildFragmentManager(),mFragmentList,mTitleList));
+        mViewPager.setAdapter(new CommonFragmentAdapter(getChildFragmentManager(), mFragmentList, mTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);
     }
 
@@ -155,6 +158,22 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
             case R.id.iv_publish_sheep_bar:
                 //发布羊吧
                 AppManager.getInstance().jumpActivity(getActivity(), PublishSheepBarActivity.class);
+                break;
+
+            case R.id.ll_top_message_container_1:
+                if (CommonUtils.isEmpty(mTopDatas)) {
+                    return;
+                }
+                Bundle bundle = new Bundle();
+                bundle.putSerializable("sheep_bar_info", mTopDatas.get(0));
+                AppManager.getInstance().jumpActivity(getActivity(), SheepBarDetailActivity.class, bundle);
+                break;
+            case R.id.ll_top_message_container_2:
+                if ((!CommonUtils.isEmpty(mTopDatas)) && (mTopDatas.size() > 1)) {
+                    bundle = new Bundle();
+                    bundle.putSerializable("sheep_bar_info", mTopDatas.get(1));
+                    AppManager.getInstance().jumpActivity(getActivity(), SheepBarDetailActivity.class, bundle);
+                }
                 break;
             default:
                 break;
@@ -190,46 +209,46 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
             protected void onSuccess(Call call, Response response, SheepBarInfoResult sheepBarInfoResult) {
                 if (sheepBarInfoResult == null) {
                     ToastUtil.showToast(response.message());
-                    mLlSignUp.setVisibility(View.INVISIBLE);
+                    mLlSignUp.setVisibility(View.GONE);
                     return;
                 }
                 if (sheepBarInfoResult.getCode() != 1) {
                     ToastUtil.showToast(sheepBarInfoResult.getMsg());
-                    mLlSignUp.setVisibility(View.INVISIBLE);
+                    mLlSignUp.setVisibility(View.GONE);
                     return;
                 }
-                List<SheepBarMessageInfo> datas = sheepBarInfoResult.getData();
-                if (CommonUtils.isEmpty(datas)) {
+                mTopDatas = sheepBarInfoResult.getData();
+                if (CommonUtils.isEmpty(mTopDatas)) {
                     ToastUtil.showToast("没有获取到羊吧信息！");
-                    mLlSignUp.setVisibility(View.INVISIBLE);
+                    mLlSignUp.setVisibility(View.GONE);
                     return;
                 }
                 mLlSignUp.setVisibility(View.VISIBLE);
-                for (int i = 0; i < datas.size(); i++) {
-                    SheepBarMessageInfo sheepBarMessageInfo = datas.get(i);
+                for (int i = 0; i < mTopDatas.size(); i++) {
+                    SheepBarMessageInfo sheepBarMessageInfo = mTopDatas.get(i);
                     if (sheepBarMessageInfo == null) {
                         if (i == 0) {
                             return;
                         } else if (i == 1) {
-                            mLlTopMessageContainer2.setVisibility(View.INVISIBLE);
+                            mLlTopMessageContainer2.setVisibility(View.GONE);
                         }
                     }
                 }
 
-                if (datas.size() == 1) {
-                    mLlTopMessageContainer2.setVisibility(View.INVISIBLE);
-                    SheepBarMessageInfo sheepBarMessageInfo = datas.get(0);
+                if (mTopDatas.size() == 1) {
+                    mLlTopMessageContainer2.setVisibility(View.GONE);
+                    SheepBarMessageInfo sheepBarMessageInfo = mTopDatas.get(0);
                     if (sheepBarMessageInfo != null) {
                         mLlTopMessageContainer1.setVisibility(View.VISIBLE);
                         mLlTopMessage1.setText(sheepBarMessageInfo.getContent());
                     } else {
-                        mLlTopMessageContainer1.setVisibility(View.INVISIBLE);
+                        mLlTopMessageContainer1.setVisibility(View.GONE);
                     }
-                } else if (datas.size() >= 2) {
-                    SheepBarMessageInfo sheepBarMessageInfo = datas.get(0);
+                } else if (mTopDatas.size() >= 2) {
+                    SheepBarMessageInfo sheepBarMessageInfo = mTopDatas.get(0);
                     mLlTopMessageContainer1.setVisibility(View.VISIBLE);
                     mLlTopMessage1.setText(sheepBarMessageInfo.getContent());
-                    sheepBarMessageInfo = datas.get(1);
+                    sheepBarMessageInfo = mTopDatas.get(1);
                     mLlTopMessageContainer2.setVisibility(View.VISIBLE);
                     mLlTopMessage2.setText(sheepBarMessageInfo.getContent());
                 }

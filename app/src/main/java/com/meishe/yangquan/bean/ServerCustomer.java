@@ -1,8 +1,8 @@
 package com.meishe.yangquan.bean;
 
-import java.util.Date;
 import java.util.List;
 
+@Deprecated
 public class ServerCustomer extends BaseInfo{
     private Integer id;
 

@@ -40,11 +40,11 @@ import static com.meishe.yangquan.utils.Constants.TYPE_LIST_TYPE_NEWEST;
  * @CreateDate : 2021/1/18
  * @Description : 羊吧最新页面
  */
-public class SheepBarNewestFragment extends BaseRecyclerFragment{
+public class SheepBarNewestFragment extends BaseRecyclerFragment {
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
-        View view=inflater.inflate(R.layout.fragment_sheep_bar_newest,container,false);
+        View view = inflater.inflate(R.layout.fragment_sheep_bar_newest, container, false);
         mRecyclerView = view.findViewById(R.id.recycler);
         mLoading = view.findViewById(R.id.loading);
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
@@ -60,8 +60,9 @@ public class SheepBarNewestFragment extends BaseRecyclerFragment{
                 switch (id) {
                     case R.id.ll_sheep_bar_focus:
                         //关注
-                        ToastUtil.showToast("关注");
-
+                        if (baseInfo instanceof SheepBarMessageInfo) {
+                            focusUserServer(position, (SheepBarMessageInfo) baseInfo);
+                        }
                         return;
                     case R.id.tv_sheep_bar_prise_number:
                         //点赞
@@ -105,8 +106,68 @@ public class SheepBarNewestFragment extends BaseRecyclerFragment{
     protected void initData() {
         mList.clear();
         initRecyclerView();
-        mPageNum=1;
+        mPageNum = 1;
         getSheepBarDataFromServer();
+    }
+
+
+    /**
+     * 关注用户
+     */
+    private void focusUserServer(final int position, final SheepBarMessageInfo sheepBarMessageInfo) {
+        String token = getToken();
+        if (Util.checkNull(token)) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("focusUserId", sheepBarMessageInfo.getInitUser());
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_FOCUS, new BaseCallBack<SheepBarInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, SheepBarInfoResult sheepBarInfoResult) {
+                if (sheepBarInfoResult == null) {
+                    ToastUtil.showToast(response.message());
+                    return;
+                }
+                if (sheepBarInfoResult.getCode() != 1) {
+                    ToastUtil.showToast(sheepBarInfoResult.getMsg());
+                    return;
+                }
+
+                if (sheepBarMessageInfo.isHasFocused()) {
+                    sheepBarMessageInfo.setHasFocused(false);
+                } else {
+                    sheepBarMessageInfo.setHasFocused(true);
+                }
+                mAdapter.notifyItemChanged(position);
+
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+
     }
 
 
@@ -277,7 +338,6 @@ public class SheepBarNewestFragment extends BaseRecyclerFragment{
 
 
     }
-
 
 
 }

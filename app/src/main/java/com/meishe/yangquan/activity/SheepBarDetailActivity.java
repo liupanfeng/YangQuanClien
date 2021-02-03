@@ -23,6 +23,7 @@ import com.meishe.yangquan.bean.EmptyInfo;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.SheepBarCommentInfo;
 import com.meishe.yangquan.bean.SheepBarCommentInfoResult;
+import com.meishe.yangquan.bean.SheepBarInfoResult;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
@@ -159,7 +160,7 @@ public class SheepBarDetailActivity extends BaseActivity {
                         FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
                 tv_sheep_bar_content.setText(mSheepBarMessageInfo.getContent());
                 tv_sheep_bar_comment_number.setText("最新回复（" + mSheepBarMessageInfo.getCommentAmount() + "）");
-
+                tv_sheep_bar_focus_content.setText(mSheepBarMessageInfo.isHasFocused() ? "已关注" : "+关注");
                 List<String> images = mSheepBarMessageInfo.getImages();
                 List<SheepBarPictureInfo> list = new ArrayList<>();
                 if (!CommonUtils.isEmpty(images)) {
@@ -187,6 +188,7 @@ public class SheepBarDetailActivity extends BaseActivity {
         tv_sheep_bar_comment_number.setOnClickListener(this);
         tv_sheep_bar_only_see_owner.setOnClickListener(this);
         tv_sheep_bar_publish.setOnClickListener(this);
+        ll_sheep_bar_focus.setOnClickListener(this);
         backLayout.setOnClickListener(this);
 
         //监测最底部输入内容
@@ -302,10 +304,74 @@ public class SheepBarDetailActivity extends BaseActivity {
             case R.id.backLayout:
                 finish();
                 break;
+            case R.id.ll_sheep_bar_focus:
+                //关注
+                focusUserServer(mSheepBarMessageInfo);
+                break;
             default:
                 break;
         }
     }
+
+
+    /**
+     * 关注用户
+     */
+    private void focusUserServer(final SheepBarMessageInfo sheepBarMessageInfo) {
+        String token = getToken();
+        if (Util.checkNull(token)) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("focusUserId", sheepBarMessageInfo.getInitUser());
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_FOCUS, new BaseCallBack<SheepBarInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, SheepBarInfoResult sheepBarInfoResult) {
+                if (sheepBarInfoResult == null) {
+                    ToastUtil.showToast(response.message());
+                    return;
+                }
+                if (sheepBarInfoResult.getCode() != 1) {
+                    ToastUtil.showToast(sheepBarInfoResult.getMsg());
+                    return;
+                }
+
+                if (sheepBarMessageInfo.isHasFocused()) {
+                    sheepBarMessageInfo.setHasFocused(false);
+                } else {
+                    sheepBarMessageInfo.setHasFocused(true);
+                }
+                tv_sheep_bar_focus_content.setText(sheepBarMessageInfo.isHasFocused() ? "已关注" : "+关注");
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+
+    }
+
 
     /**
      * 发表评论
@@ -372,7 +438,7 @@ public class SheepBarDetailActivity extends BaseActivity {
                 ToastUtil.showToast("评论成功！");
                 et_say_your_idea.setText("");
                 et_say_your_idea.setHint("说说你的看法...");
-                mIsReply=false;
+                mIsReply = false;
                 KeyboardUtils.hideSoftInput(et_say_your_idea);
                 getCommentDataFromServer(mSheepBarMessageInfo.getId(), mListType);
             }
@@ -488,15 +554,13 @@ public class SheepBarDetailActivity extends BaseActivity {
     }
 
 
-
     /**
      * 互动接口 点赞帖子，点赞评论，收藏帖子，分享帖子
      *
-     * @param sheepBarMessageInfo 对应的实体类
-     * @param interactType        1 给帖子点赞
-     *                            2 评论点赞
-     *                            3 收藏帖子
-     *                            4 分享贴子
+     * @param interactType 1 给帖子点赞
+     *                     2 评论点赞
+     *                     3 收藏帖子
+     *                     4 分享贴子
      */
     private void postInteractSheepBar(final int position, final SheepBarCommentInfo sheepBarCommentInfo, final int interactType) {
         String token = getToken();

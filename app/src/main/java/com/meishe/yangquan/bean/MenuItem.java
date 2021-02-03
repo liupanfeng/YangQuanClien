@@ -1,5 +1,6 @@
 package com.meishe.yangquan.bean;
 
+@Deprecated
 public class MenuItem {
     public MenuItem() {
 

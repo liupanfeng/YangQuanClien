@@ -37,7 +37,9 @@ import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.SelectCarServiceTypeView;
+import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
@@ -67,7 +69,7 @@ import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_VACC
 /**
  * 服务发布页面
  */
-public class PublishServiceActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class PublishServiceActivity extends BaseActivity {
 
 
     //相册请求码
@@ -80,9 +82,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CODE = 203;   //拍摄存储权限
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 201;
 
-    private int mSheepType = 0;
     private Bitmap showBitmap;
-    private MaterialProgress mp_loading;
     /*团队名称*/
     private EditText mEtServiceInputTeamName;
     private EditText mEtServiceInputTeamNumber;
@@ -147,6 +147,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
         mBtnPublish = findViewById(R.id.btn_publish);
+        mLoading = findViewById(R.id.loading);
 
         mEtServiceInputTeamName = findViewById(R.id.et_service_input_team_name);
         mEtServiceInputTeamNumber = findViewById(R.id.et_service_input_team_number);
@@ -441,6 +442,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
         if (Util.checkNull(token)) {
             return;
         }
+        showLoading();
         HashMap<String, String> param = new HashMap<>();
         param.put("uploadMode", "5");
         param.put("order", "1");
@@ -460,15 +462,18 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
             protected void onSuccess(Call call, Response response, UploadFileResult uploadFileResult) {
                 if (uploadFileResult == null) {
                     ToastUtil.showToast(response.message());
+                    hideLoading();
                     return;
                 }
                 if (uploadFileResult.getCode() != 1) {
                     ToastUtil.showToast(uploadFileResult.getMsg());
+                    hideLoading();
                     return;
                 }
                 UploadFileInfo data = uploadFileResult.getData();
                 if (data == null) {
                     ToastUtil.showToast("UploadFileInfo is null");
+                    hideLoading();
                     return;
                 }
                 switch (mServiceType) {
@@ -573,16 +578,6 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
     }
 
 
-    @Override
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
-        RadioButton rb = findViewById(checkedId);
-        CharSequence text = rb.getText();
-        if ("成品羊".equals(text)) {
-            mSheepType = 1;
-        } else if ("羊崽儿".equals(text)) {
-            mSheepType = 2;
-        }
-    }
 
     /**
      * 发布 cut sheep hair
@@ -620,6 +615,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
+                hideLoading();
                 if (result != null && result.getCode() == 1) {
                     ToastUtil.showToast(mContext, "发布成功");
                     finish();
@@ -688,6 +684,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
+                hideLoading();
                 if (result != null && result.getCode() == 1) {
                     ToastUtil.showToast(mContext, "发布成功");
                     finish();
@@ -717,98 +714,6 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
 
             }
         }, requestParam, token);
-    }
-
-
-    /**
-     * 发布消息
-     */
-    public void publishMessage(String yqtoken, String sheepType, String msgContent, String iconBase64) {
-
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("yqtoken", yqtoken);
-        requestParam.put("sheepType", sheepType);
-        requestParam.put("msgContent", msgContent);
-        requestParam.put("iconBase64", iconBase64);
-        OkHttpManager.getInstance().postRequest(HttpUrl.MESSAGE_ADD, new BaseCallBack<MsgResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mp_loading.hide();
-                        ToastUtil.showToast(mContext, "上传失败");
-                    }
-                });
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, MsgResult result) {
-                if (result != null && result.getStatus() == 200) {
-                    ToastUtil.showToast(mContext, "发布成功");
-                    mp_loading.hide();
-                    finish();
-                } else {
-                    ToastUtil.showToast(mContext, result.getMsg());
-                    mp_loading.hide();
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        mp_loading.hide();
-                        ToastUtil.showToast(mContext, "上传失败");
-                    }
-                });
-
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
-
-
-
-    private class OnLeftButtonListener implements CustomToolbar.OnLeftButtonClickListener {
-        @Override
-        public void onClick() {
-            finish();
-        }
-    }
-
-    private class OnRightButtonListener implements CustomToolbar.OnRightButtonClickListener {
-        @Override
-        public void onClick() {
-//            String content = mEtInput.getText().toString().trim();
-//            if (showBitmap == null) {
-//                ToastUtil.showToast(mContext, "请选择图片！");
-//                return;
-//            }
-//            if (TextUtils.isEmpty(content)) {
-//                ToastUtil.showToast(mContext, "请输入内容！");
-//                return;
-//            }
-            mp_loading.show();
-//            publishMessage(mUser.getTokenId(),String.valueOf(mSheepType),content, Util.bitmaptoString(showBitmap));
-//            publishMessage(mUser.getTokenId(),String.valueOf(mSheepType),content, Util.bitmaptoString(showBitmap));
-
-        }
     }
 
 
@@ -895,14 +800,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
             //调用相机后返回
             case CAMERA_REQUEST_CODE:
                 if (mTempFile != null) {
-                    Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(mTempFile.getAbsolutePath(), 1080);
-                    if (tmpBitmap == null) {
-                        return;
-                    }
-                    Matrix matrix = new Matrix();
-                    matrix.setScale(0.2f, 0.2f);
-                    showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
-                            tmpBitmap.getHeight(), matrix, true);
+                    showBitmap = BitmapUtils.compressImage(mTempFile.getAbsolutePath(), Constants.COMPRESS_WIDTH,Constants.COMPRESS_HEIGHT);
                     mIvPublishService.setImageBitmap(showBitmap);
                 }
                 break;
@@ -937,12 +835,7 @@ public class PublishServiceActivity extends BaseActivity implements RadioGroup.O
                         imagePath = uri.getPath();
                     }
                     if (imagePath != null) {
-                        mTempFile = new File(imagePath);
-                        Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(mTempFile.getAbsolutePath(), 1080);
-                        Matrix matrix = new Matrix();
-                        matrix.setScale(0.4f, 0.4f);
-                        showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
-                                tmpBitmap.getHeight(), matrix, true);
+                        showBitmap = BitmapUtils.compressImage(imagePath, Constants.COMPRESS_WIDTH,Constants.COMPRESS_HEIGHT);
                         mIvPublishService.setImageBitmap(showBitmap);
                     }
                 }

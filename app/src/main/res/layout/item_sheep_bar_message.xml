@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -8,11 +9,13 @@
         android:layout_marginTop="@dimen/dp10"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/dp36">
-        <ImageView
+        <com.meishe.yangquan.view.RoundAngleImageView
             android:id="@+id/iv_sheep_bar_photo"
             android:layout_width="@dimen/dp36"
             android:layout_height="@dimen/dp36"
             android:layout_marginLeft="@dimen/dp13"
+            app:roundHeight="@dimen/dp18"
+            app:roundWidth="@dimen/dp18"
             android:background="@mipmap/ic_default_photo"
             />
 
@@ -72,13 +75,6 @@
         android:id="@+id/tv_sheep_bar_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题"
         android:layout_marginLeft="@dimen/dp56"
         android:layout_marginRight="@dimen/dp36"
         android:layout_marginTop="@dimen/dp8"

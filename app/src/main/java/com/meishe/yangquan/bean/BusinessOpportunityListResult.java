@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * 我的商机数据结果
  */
+@Deprecated
 public class BusinessOpportunityListResult {
 
     // 响应业务状态

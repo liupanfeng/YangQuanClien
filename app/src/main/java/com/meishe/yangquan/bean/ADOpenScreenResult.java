@@ -1,6 +1,6 @@
 package com.meishe.yangquan.bean;
 
-
+@Deprecated
 public class ADOpenScreenResult {
 
     // 响应业务状态

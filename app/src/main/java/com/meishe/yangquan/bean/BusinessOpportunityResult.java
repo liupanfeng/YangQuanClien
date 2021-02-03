@@ -5,6 +5,7 @@ package com.meishe.yangquan.bean;
 /**
  * 我的商机数据结果
  */
+@Deprecated
 public class BusinessOpportunityResult {
 
     // 响应业务状态

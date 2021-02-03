@@ -5,18 +5,30 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.adapter.QuotationNewsAdapter;
+import com.meishe.yangquan.bean.IndustryNewsClip;
 import com.meishe.yangquan.bean.IndustryNewsInfo;
 import com.meishe.yangquan.bean.IndustryNewsResult;
+import com.meishe.yangquan.bean.section.QuotationNewsSection;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.Util;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -34,6 +46,8 @@ public class HomeIndustryInformationDetailActivity extends BaseActivity {
     /*新闻来源*/
     private TextView mTvFrom;
 
+    private QuotationNewsAdapter mQuotationNewsAdapter;
+
     @Override
     protected int initRootView() {
         return R.layout.activity_home_industry_information;
@@ -44,11 +58,18 @@ public class HomeIndustryInformationDetailActivity extends BaseActivity {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
         mRecyclerView = findViewById(R.id.recycler);
-        mTvIndustryTitle = findViewById(R.id.tv_industry_title);
-        mTvAuthorAndTime = findViewById(R.id.tv_author_and_time);
-        mTvFrom = findViewById(R.id.tv_from);
+//        mTvIndustryTitle = findViewById(R.id.tv_industry_title);
+//        mTvAuthorAndTime = findViewById(R.id.tv_author_and_time);
+//        mTvFrom = findViewById(R.id.tv_from);
 
-        initRecyclerView();
+//        initRecyclerView();
+
+         mQuotationNewsAdapter=new QuotationNewsAdapter(mContext);
+
+        LinearLayoutManager layoutManager =
+                new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mQuotationNewsAdapter);
 
     }
 
@@ -97,7 +118,7 @@ public class HomeIndustryInformationDetailActivity extends BaseActivity {
     private void getIndustryInformationInfo(int newsId) {
 
         String token = getToken();
-        if (Util.checkNull(token)){
+        if (Util.checkNull(token)) {
             return;
         }
         HashMap<String, Object> param = new HashMap<>();
@@ -146,19 +167,36 @@ public class HomeIndustryInformationDetailActivity extends BaseActivity {
 
     /**
      * 设置新闻数据
+     *
      * @param industryNewsInfo
      */
     private void setData(IndustryNewsInfo industryNewsInfo) {
-        if (industryNewsInfo==null){
+        if (industryNewsInfo == null) {
             return;
         }
-        mTvIndustryTitle.setText(industryNewsInfo.getTitle());
-        mTvAuthorAndTime.setText(industryNewsInfo.getAuthor()+" | "+ FormatDateUtil.
-                longToString(industryNewsInfo.getPublishDate(),
-                FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
-        mTvFrom.setText(industryNewsInfo.getNewsSource());
+//        mTvIndustryTitle.setText(industryNewsInfo.getTitle());
+//        mTvAuthorAndTime.setText(industryNewsInfo.getAuthor() + " | " + FormatDateUtil.
+//                longToString(industryNewsInfo.getPublishDate(),
+//                        FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
+//        mTvFrom.setText("来源于：" + industryNewsInfo.getNewsSource());
+//
+//        mAdapter.addAll(industryNewsInfo.getClips());
 
-        mAdapter.addAll(industryNewsInfo.getClips());
+        List<QuotationNewsSection> list = new ArrayList<>();
 
+        QuotationNewsSection quotationNewsSection = new QuotationNewsSection(null);
+        quotationNewsSection.isHeader = true;
+        quotationNewsSection.setIndustryNewsInfo(industryNewsInfo);
+        list.add(quotationNewsSection);
+
+        List<IndustryNewsClip> clips = industryNewsInfo.getClips();
+        if (!CommonUtils.isEmpty(clips)) {
+            for (IndustryNewsClip clip : clips) {
+                quotationNewsSection = new QuotationNewsSection(clip);
+                list.add(quotationNewsSection);
+            }
+        }
+
+        mQuotationNewsAdapter.addData(list);
     }
 }

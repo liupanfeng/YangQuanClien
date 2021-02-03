@@ -6,6 +6,7 @@ import java.util.List;
 /**
  *  添加评论数据结果
  */
+@Deprecated
 public class CommentResult {
 
     // 响应业务状态

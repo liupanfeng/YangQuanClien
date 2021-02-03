@@ -364,7 +364,7 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.meishe.yangquan.wiget.MaterialProgress
-        android:id="@+id/mp_loading"
+        android:id="@+id/loading"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_centerInParent="true" />

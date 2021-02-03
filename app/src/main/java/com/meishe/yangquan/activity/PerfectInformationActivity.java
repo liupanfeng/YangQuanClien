@@ -35,7 +35,6 @@ import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
-import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -46,8 +45,6 @@ import com.meishe.yangquan.wiget.IosDialog;
 import com.meishe.yangquan.wiget.MaterialProgress;
 import com.umeng.analytics.MobclickAgent;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
@@ -55,8 +52,6 @@ import java.util.HashMap;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static com.meishe.yangquan.utils.Constants.MESSAGE_EVENT_UPDATE_USER_UI;
 
 /**
  * 完善资料
@@ -113,7 +108,7 @@ public class PerfectInformationActivity extends BaseActivity {
         mTvChangePhoto = findViewById(R.id.tv_change_photo);
         mRlNickName = findViewById(R.id.rl_nickname);
         mTvPhoneNumber = findViewById(R.id.tv_phone_number_content);
-        mMpLoading = findViewById(R.id.mp_loading);
+        mMpLoading = findViewById(R.id.loading);
         mTvNickNameContent = findViewById(R.id.tv_nickname_content);
         mRlPhoneNumber = findViewById(R.id.rl_phone_number);
         rl_autograph = findViewById(R.id.rl_autograph);

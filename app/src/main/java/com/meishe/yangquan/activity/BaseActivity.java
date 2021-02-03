@@ -2,28 +2,28 @@ package com.meishe.yangquan.activity;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.helper.BackHandlerHelper;
-import com.meishe.yangquan.inter.OnResponseListener;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.utils.AppManager;
-import com.meishe.yangquan.utils.HttpRequestUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.MaterialProgress;
 import com.meishe.yangquan.wiget.TitleBar;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener {
 
@@ -47,7 +47,8 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         AppManager.getInstance().addActivity(this);
         //设置视图
         setContentView(initRootView());
-        mContext=this;
+        EventBus.getDefault().register(this);
+        mContext = this;
 //        HttpRequestUtil.getInstance(mContext).setListener(this);
         initView();
         initData();
@@ -56,10 +57,10 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     }
 
 
-
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         release();
     }
 
@@ -74,18 +75,22 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
 
     public abstract void initListener();
 
+    protected void eventBusUpdateUI(MessageEvent event){
+
+    }
+
     public abstract void release();
 
-    protected void showLoading(){
+    protected void showLoading() {
         mLoading.show();
     }
 
-    protected void hideLoading(){
+    protected void hideLoading() {
         mLoading.hide();
     }
 
 
-    protected void initRecyclerView(){
+    protected void initRecyclerView() {
         LinearLayoutManager layoutManager =
                 new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
@@ -93,9 +98,27 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         mRecyclerView.setAdapter(mAdapter);
     }
 
-    protected String getToken(){
-        return UserManager.getInstance(mContext).getToken();
+    protected String getToken() {
+        String token = UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)) {
+            AppManager.getInstance().jumpActivity(mContext, LoginActivity.class);
+            return null;
+        }
+        return token;
     }
+
+
+    /**
+     * On message event.
+     * 消息事件
+     *
+     * @param event the event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        eventBusUpdateUI(event);
+    }
+
 
 
 }

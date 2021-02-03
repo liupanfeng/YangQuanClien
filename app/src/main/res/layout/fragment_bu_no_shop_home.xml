@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/view_no_shop"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/ll_bu_top"
+        android:layout_width="match_parent"
+        android:layout_height="155dp"
+        android:background="@drawable/bg_bu_home_top_view"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_bu_tips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp60"
+            android:text="线上线下虚拟结合，用户范围扩大"
+            android:textColor="#ffffffff"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/btn_bu_apply_open_shop"
+            android:layout_width="146dp"
+            android:layout_height="@dimen/dp33"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp15"
+            android:background="@drawable/bg_bu_white_button"
+            android:text="申请开店"
+            android:textColor="@color/mainColor" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp13"
+        android:layout_marginTop="@dimen/dp19"
+        android:text="已入驻用户："
+        android:textColor="#ff303030"
+        android:textSize="15sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

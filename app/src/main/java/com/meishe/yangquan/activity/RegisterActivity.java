@@ -372,14 +372,14 @@ public class RegisterActivity extends BaseActivity  {
             @Override
             protected void onSuccess(Call call, Response response, SendSmsResult result) {
                 mLoading.hide();
-                if (result.getStatus() != 200) {
+                if (result.getCode() != 200) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     mInputCheckCode.setFocusable(true);
                     mInputCheckCode.setFocusableInTouchMode(true);
                     mInputCheckCode.requestFocus();
                     return;
                 }
-                if (result != null && result.getStatus() == 200) {
+                if (result != null && result.getCode() == 200) {
                     ToastUtil.showToast(mContext, "验证码已发送");
                     CountDownTimerUtils countDownTimer = new CountDownTimerUtils(mGetCheckCode, 60000, 1000);
                     countDownTimer.start();

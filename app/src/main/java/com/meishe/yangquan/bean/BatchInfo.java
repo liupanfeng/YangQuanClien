@@ -16,6 +16,7 @@ public class BatchInfo {
 
     private long initDate;
 
+    /*剩余只数*/
     private int currentCulturalQuantity;
 
 

@@ -5,6 +5,7 @@ package com.meishe.yangquan.bean;
 /**
  * push绑定设备id
  */
+@Deprecated
 public class UpdateDeviceAliasResult {
 
     // 响应业务状态

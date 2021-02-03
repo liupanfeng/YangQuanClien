@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.view.MViewPager;
 
 import java.util.ArrayList;
@@ -23,21 +24,27 @@ import java.util.List;
  */
 public class SheepBreedHelperFragment extends BaseRecyclerFragment {
 
-    private static final String TYPE_KEY_BATCH_ID = "key_title";
-    private int mId;
+
+    /*批次id*/
+    private int mBatchId;
+    /*剩余出栏羊*/
+    private int mCurrentCulturalQuantity;
     private TextView mTvTitle;
     private TabLayout mTabLayout;
     private MViewPager mViewPager;
 
-    private List<String> mTitleList=new ArrayList<>();
-    private List<Fragment> mFragmentList=new ArrayList<>();
+    private List<String> mTitleList = new ArrayList<>();
+    private List<Fragment> mFragmentList = new ArrayList<>();
+    private long mInitTime;
 
 
-    public static SheepBreedHelperFragment newInstance(int id) {
+    public static SheepBreedHelperFragment newInstance(int id, int currentCulturalQuantity,long initTime) {
         SheepBreedHelperFragment fragment = new SheepBreedHelperFragment();
         Bundle args = new Bundle();
         //使用bundle 进行数据传递
-        args.putInt(TYPE_KEY_BATCH_ID, id);
+        args.putInt(Constants.TYPE_KEY_BATCH_ID, id);
+        args.putInt(Constants.TYPE_KEY_SHEEP_SURPLUS, currentCulturalQuantity);
+        args.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initTime);
         fragment.setArguments(args);
         return fragment;
     }
@@ -47,7 +54,9 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
         super.onCreate(savedInstanceState);
         //在onCreate方法中获取参数
         if (getArguments() != null) {
-            mId = getArguments().getInt(TYPE_KEY_BATCH_ID);
+            mBatchId = getArguments().getInt(Constants.TYPE_KEY_BATCH_ID);
+            mCurrentCulturalQuantity = getArguments().getInt(Constants.TYPE_KEY_SHEEP_SURPLUS);
+            mInitTime = getArguments().getLong(Constants.TYPE_KEY_SHEEP_INIT_TIME);
         }
     }
 
@@ -78,11 +87,11 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
         mTitleList.add("养殖过程");
         mTitleList.add("效益分析");
 
-        mFragmentList.add(SheepBreedHelperBaseMessage.newInstance(mId));
-        mFragmentList.add(SheepBreedHelperProcessFragment.newInstance(mId));
+        mFragmentList.add(SheepBreedHelperBaseMessage.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime));
+        mFragmentList.add(SheepBreedHelperProcessFragment.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime));
         mFragmentList.add(new SheepBreedHelperBenefitAnalysisFragment());
 
-        mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(),0,mContext,mFragmentList,mTitleList));
+        mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), 0, mContext, mFragmentList, mTitleList));
         mTabLayout.setupWithViewPager(mViewPager);
 
 

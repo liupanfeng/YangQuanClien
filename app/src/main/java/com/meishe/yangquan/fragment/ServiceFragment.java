@@ -1,7 +1,6 @@
 package com.meishe.yangquan.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.activity.ServiceMessageListActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceMessageResult;
@@ -61,7 +59,7 @@ public class ServiceFragment extends BaseRecyclerFragment implements OnResponseL
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_service, container, false);
         mRecyclerView=view.findViewById(R.id.recycler);
-        mp_loading=view.findViewById(R.id.mp_loading);
+        mp_loading=view.findViewById(R.id.loading);
 
         mServiceTypeRecycler=view.findViewById(R.id.service_type_recycler);
         mServiceNewsRecycler=view.findViewById(R.id.service_news_recycler);

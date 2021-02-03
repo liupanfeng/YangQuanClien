@@ -116,18 +116,6 @@ public class MinePersonalInfoActivity extends BaseActivity {
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this); //解除注册
-    }
-
-    @Override
     protected int initRootView() {
         return R.layout.activity_personal_info;
     }
@@ -355,14 +343,14 @@ public class MinePersonalInfoActivity extends BaseActivity {
                 switch (uploadMode) {
                     case UPLOAD_FILE_MODE_1:
                         mUserParamInfo.setIconFileId(data.getId());
-                        RequestOptions options = new RequestOptions();
-                        options.centerCrop();
-                        options.placeholder(R.mipmap.ic_default_photo);
-                        Glide.with(mContext)
-                                .asBitmap()
-                                .load(data.getUrl())
-                                .apply(options)
-                                .into(mIvPersonalMinePhoto);
+//                        RequestOptions options = new RequestOptions();
+//                        options.centerCrop();
+//                        options.placeholder(R.mipmap.ic_default_photo);
+//                        Glide.with(mContext)
+//                                .asBitmap()
+//                                .load(data.getUrl())
+//                                .apply(options)
+//                                .into(mIvPersonalMinePhoto);
                         break;
 //                    case TYPE_SERVICE_VACCINE:
 //                    case TYPE_SERVICE_CUT_WOOL:
@@ -561,11 +549,14 @@ public class MinePersonalInfoActivity extends BaseActivity {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (tempFile != null && tempFile.exists()) {
                     String compressImagePath = BitmapUtils.
-                            compressImageUpload(tempFile.getAbsolutePath(), 100, 100);
+                            compressImageUpload(tempFile.getAbsolutePath(), Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
                     mTempFile = new File(compressImagePath);
                     if (!mTempFile.exists()) {
                         return;
                     }
+                    Bitmap bitmap = BitmapUtils.
+                            compressImage(tempFile.getAbsolutePath(), Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
+                    mIvPersonalMinePhoto.setImageBitmap(bitmap);
                     uploadPicture(UPLOAD_FILE_MODE_1);
                 }
                 break;
@@ -597,11 +588,14 @@ public class MinePersonalInfoActivity extends BaseActivity {
                         imagePath = uri.getPath();
                     }
                     if (imagePath != null) {
-                        String compressImagePath = BitmapUtils.compressImageUpload(imagePath, 100, 100);
+                        String compressImagePath = BitmapUtils.compressImageUpload(imagePath, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
                         mTempFile = new File(compressImagePath);
                         if (!mTempFile.exists()) {
                             return;
                         }
+                        Bitmap bitmap = BitmapUtils.
+                                compressImage(imagePath, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
+                        mIvPersonalMinePhoto.setImageBitmap(bitmap);
                         uploadPicture(UPLOAD_FILE_MODE_1);
                     }
                 }
@@ -638,8 +632,9 @@ public class MinePersonalInfoActivity extends BaseActivity {
     }
 
 
-    @Subscribe(threadMode = ThreadMode.MAIN)
-    public void onMessageEvent(MessageEvent event) {
+    @Override
+    protected void eventBusUpdateUI(MessageEvent event) {
+        super.eventBusUpdateUI(event);
         int eventType = event.getEventType();
         switch (eventType) {
             case MESSAGE_TYPE_UPDATE_USER_INFO:

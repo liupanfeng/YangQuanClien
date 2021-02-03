@@ -69,7 +69,7 @@ public class MessageListFragmentList extends BaseRecyclerFragment implements OnR
         View view=inflater.inflate(R.layout.fragment_message_fragment_list_layout,container,false);
         mRecyclerView=view.findViewById(R.id.recycler);
         mNoDate=view.findViewById(R.id.view_no_data);
-        mp_loading=view.findViewById(R.id.mp_loading);
+        mp_loading=view.findViewById(R.id.loading);
         return view;
     }
 

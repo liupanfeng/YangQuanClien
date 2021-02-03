@@ -6,22 +6,47 @@ package com.meishe.yangquan.bean;
  * @Description : 疫苗数据 view 层的显示
  */
 public class SheepVaccineInfo extends BaseInfo{
-    /*时间*/
-    private long time;
-    /*数量*/
+    private int id;
+
+    private int batchId;
+
+    private int recordType;
+
     private int amount;
-    /*单价*/
-    private float singlePrice;
-    /*总价*/
-    private float totalPrice;
+
+    private float price;
+
+    private long initDate;
+
+    private int  state;
+
+    private String recordDate;
+
+    private String recordContent;
 
 
-    public long getTime() {
-        return time;
+    public int getId() {
+        return id;
     }
 
-    public void setTime(long time) {
-        this.time = time;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getBatchId() {
+        return batchId;
+    }
+
+    public void setBatchId(int batchId) {
+        this.batchId = batchId;
+    }
+
+    public int getRecordType() {
+        return recordType;
+    }
+
+    public void setRecordType(int recordType) {
+        this.recordType = recordType;
     }
 
     public int getAmount() {
@@ -32,19 +57,43 @@ public class SheepVaccineInfo extends BaseInfo{
         this.amount = amount;
     }
 
-    public float getSinglePrice() {
-        return singlePrice;
+    public float getPrice() {
+        return price;
     }
 
-    public void setSinglePrice(float singlePrice) {
-        this.singlePrice = singlePrice;
+    public void setPrice(float price) {
+        this.price = price;
     }
 
-    public float getTotalPrice() {
-        return totalPrice;
+    public long getInitDate() {
+        return initDate;
     }
 
-    public void setTotalPrice(float totalPrice) {
-        this.totalPrice = totalPrice;
+    public void setInitDate(long initDate) {
+        this.initDate = initDate;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    public String getRecordDate() {
+        return recordDate;
+    }
+
+    public void setRecordDate(String recordDate) {
+        this.recordDate = recordDate;
+    }
+
+    public String getRecordContent() {
+        return recordContent;
+    }
+
+    public void setRecordContent(String recordContent) {
+        this.recordContent = recordContent;
     }
 }
