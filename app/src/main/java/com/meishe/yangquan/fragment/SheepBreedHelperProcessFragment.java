@@ -102,6 +102,7 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
     private EditText mEtInputEstimateWeight;
     /*喂养天数*/
     private TextView mTvFeedingDays;
+    private String test="test01";
 
 
     public static SheepBreedHelperProcessFragment newInstance(int batchId, int currentCulturalQuantity,long initTime) {
