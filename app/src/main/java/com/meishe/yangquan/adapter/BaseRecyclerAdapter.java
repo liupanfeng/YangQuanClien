@@ -19,6 +19,7 @@ import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
 import com.meishe.yangquan.activity.MineBreedingArchivesActivity;
+import com.meishe.yangquan.activity.MineCallBackActivity;
 import com.meishe.yangquan.activity.MineFeedGoldActivity;
 import com.meishe.yangquan.activity.MineMyCollectionActivity;
 import com.meishe.yangquan.activity.MineMyFocusActivity;
@@ -115,6 +116,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_MINE_MY_FOCUS_LIST = VIEW_TYPE_BASE + 31;                             //关注列表
     protected static final int VIEW_CUT_SHEEP_VACCINE_LIST = VIEW_TYPE_BASE + 32;                        //疫苗列表
     protected static final int VIEW_CUT_SHEEP_LOSS_LIST = VIEW_TYPE_BASE + 33;                        //损耗列表
+    protected static final int VIEW_MINE_CALLBACK_LIST = VIEW_TYPE_BASE + 34;                        //我的反馈
+    protected static final int VIEW_MINE_USER_MESSAGE_LIST = VIEW_TYPE_BASE + 35;                        //我的消息
 
 
 
@@ -143,12 +146,12 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
     public Context mContext;
     protected LayoutInflater mLayoutInflater;
-    protected List<BaseInfo> mList;
     protected RecyclerView mRecyclerView;
     protected boolean isNeedAutoScroll = false;
 
     private OnItemClickListener onItemClickListener;
 
+    private List<BaseInfo> mList;
 
     public BaseRecyclerAdapter(final Context context, RecyclerView recyclerView) {
         mContext = context;
@@ -311,6 +314,9 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     break;
                 case "支付密码":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MinePayPasswordActivity.class);
+                    break;
+                case "建议留言":
+                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineCallBackActivity.class);
                     break;
             }
         } else if (info instanceof ServiceInfo) {
@@ -677,6 +683,15 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             return new BaseInfo();
         }
         return mList.get(position);
+    }
+
+    /**
+     * 获得所有素材元素
+     *
+     * @return
+     */
+    public List<BaseInfo> getData() {
+        return mList;
     }
 
     public int getItemPosition(BaseInfo info) {

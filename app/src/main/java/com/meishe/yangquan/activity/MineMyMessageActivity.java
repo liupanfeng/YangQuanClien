@@ -5,15 +5,12 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.bean.MineMyMessageInfo;
-import com.meishe.yangquan.bean.MineMyMessageInfoResult;
-import com.meishe.yangquan.bean.MinePointsInfo;
-import com.meishe.yangquan.bean.MinePointsInfoResult;
+import com.meishe.yangquan.bean.MineUserMessageInfo;
+import com.meishe.yangquan.bean.MineUserMessageInfoResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpUrl;
@@ -35,8 +32,6 @@ public class MineMyMessageActivity extends BaseActivity {
 
     private TextView mTvTitle;
     private ImageView mIvBack;
-    private RecyclerView mRecyclerView;
-    private MultiFunctionAdapter mAdapter;
 
     @Override
     protected int initRootView() {
@@ -46,23 +41,14 @@ public class MineMyMessageActivity extends BaseActivity {
     @Override
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
-        mRecyclerView = findViewById(R.id.recycler);
         mIvBack = findViewById(R.id.iv_back);
+        mRecyclerView = findViewById(R.id.recycler);
         initRecyclerView();
     }
 
     @Override
-    public void initRecyclerView() {
-        LinearLayoutManager layoutManager =
-                new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
-        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-    }
-
-    @Override
     public void initData() {
-//        getMyMessageData();
+        getMyMessageData();
     }
 
     /**
@@ -75,7 +61,7 @@ public class MineMyMessageActivity extends BaseActivity {
         }
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_MY_POINTS, new BaseCallBack<MineMyMessageInfoResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_USER_LIST, new BaseCallBack<MineUserMessageInfoResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -92,9 +78,9 @@ public class MineMyMessageActivity extends BaseActivity {
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, MineMyMessageInfoResult result) {
+            protected void onSuccess(Call call, Response response, MineUserMessageInfoResult result) {
                 if (result != null && result.getCode() == 1) {
-                    List<MineMyMessageInfo> data = result.getData();
+                    List<MineUserMessageInfo> data = result.getData();
                     if (data == null) {
                         return;
                     }

@@ -96,7 +96,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
     private RelativeLayout mRlSellSheepWeight;
     private long mInitTime;
 
-    public static SheepBreedHelperBaseMessage newInstance(int batchId, int currentCulturalQuantity,long initTime) {
+    public static SheepBreedHelperBaseMessage newInstance(int batchId, int currentCulturalQuantity, long initTime) {
         SheepBreedHelperBaseMessage helperBaseMessage = new SheepBreedHelperBaseMessage();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.TYPE_KEY_BATCH_ID, batchId);
@@ -147,6 +147,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
 
         /*出栏剩余只数*/
         mTvSellSheepSurplusNumber.setText(mCurrentCulturalQuantity + "");
+        mEtSellSheepNumber.setText(mCurrentCulturalQuantity + "");
 
         mTvSellSheepTime.setText(FormatDateUtil.longToString(System.currentTimeMillis(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
         mTvSheepTime.setText(FormatDateUtil.longToString(System.currentTimeMillis(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
@@ -202,6 +203,13 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
                 if (!mSelectSheepSellTypeView.isShow()) {
                     mSelectSheepSellTypeView.show();
                 }
+                return true;
+            }
+        });
+
+        mEtSellSheepNumber.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
                 return true;
             }
         });
@@ -520,7 +528,9 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
                 } else {
                     ToastUtil.showToast(mContext, "建档信息已保存");
                     mTvSellSheepSurplusNumber.setText(mEtSelectSheepNumber.getText().toString());
-                    SharedPreferencesUtil.getInstance(mContext).putString(mBatchId+"",mEtSheepPrice.getText().toString().trim());
+                    mEtSellSheepNumber.setText(mEtSelectSheepNumber.getText().toString());
+                    SharedPreferencesUtil.getInstance(mContext).putString("sheep_amount_"+mBatchId,mEtSelectSheepNumber.getText().toString());
+                    SharedPreferencesUtil.getInstance(mContext).putString(mBatchId + "", mEtSheepPrice.getText().toString().trim());
                 }
 
             }

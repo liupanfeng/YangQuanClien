@@ -42,6 +42,7 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".activity.MineCallBackActivity"></activity>
         <activity android:name=".activity.HomeQuotationHistoryActivity" />
         <activity android:name=".activity.HomeIndustryInformationDetailActivity" />
         <activity android:name=".activity.PublishMarketActivity" />

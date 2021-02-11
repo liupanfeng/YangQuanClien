@@ -17,10 +17,13 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
 import com.meishe.yangquan.bean.SheepLossInfo;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.utils.FormatCurrentData;
 import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.Util;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 羊管家 养殖助手  损耗记录
@@ -105,6 +108,7 @@ public class SheepLossHolder extends BaseViewHolder {
                         ((SheepLossInfo) info).setPrice(0);
                         tv_price.setText(0 + "");
                     }
+                    EventBus.getDefault().post(new MessageEvent().setEventType(MessageEvent.MESSAGE_TYPE_LOSS_TOTAL_PRICE));
                 }
 
                 @Override

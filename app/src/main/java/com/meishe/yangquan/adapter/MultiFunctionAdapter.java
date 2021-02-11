@@ -13,6 +13,7 @@ import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
+import com.meishe.yangquan.bean.FodderInfo;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.HouseKeeperSourceAnalysisInfo;
 import com.meishe.yangquan.bean.IndustryInfo;
@@ -21,10 +22,11 @@ import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
+import com.meishe.yangquan.bean.MineCallbackInfo;
 import com.meishe.yangquan.bean.MineMyFansInfo;
 import com.meishe.yangquan.bean.MineMyFocusInfo;
-import com.meishe.yangquan.bean.MineMyMessageInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
+import com.meishe.yangquan.bean.MineUserMessageInfo;
 import com.meishe.yangquan.bean.PointRecordInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
@@ -46,6 +48,7 @@ import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BreedingArchivesFoodAnalysisHolder;
 import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
 import com.meishe.yangquan.viewhoder.CommentListHolder;
+import com.meishe.yangquan.viewhoder.MineCallbackHolder;
 import com.meishe.yangquan.viewhoder.SheepCutHairHolder;
 import com.meishe.yangquan.viewhoder.HomemarketPictureListHolder;
 import com.meishe.yangquan.viewhoder.IndustryContentHolder;
@@ -210,7 +213,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 break;
 
             /*我的消息*/
-            case VIEW_MINE_MY_MESSAGE_LIST:
+            case VIEW_MINE_USER_MESSAGE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_my_message, parent, false);
                 viewHolder = new MineMyMessageHolder(view, this);
                 break;
@@ -223,6 +226,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             case VIEW_MINE_MY_FOCUS_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_my_focus, parent, false);
                 viewHolder = new MineMyFocusHolder(view, this);
+                break;
+            /*我的-我的反馈*/
+            case VIEW_MINE_CALLBACK_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_my_callback, parent, false);
+                viewHolder = new MineCallbackHolder(view, this);
                 break;
             /*我的-养殖档案*/
             case VIEW_MINE_BREEDING_ARCHIVE_LIST:
@@ -303,15 +311,13 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_MY_POINTS_LIST;
         } else if (baseInfo instanceof SystemMessageInfo) {
             return VIEW_MINE_SUYSTEM_MESSAGE_LIST;
-        } else if (baseInfo instanceof MineMyMessageInfo) {
-            return VIEW_MINE_MY_MESSAGE_LIST;
-        }else if (baseInfo instanceof HomeMarketPictureInfo) {
+        } else if (baseInfo instanceof HomeMarketPictureInfo) {
             return VIEW_HOME_MARKET_PICTURE_LIST;
         }else if (baseInfo instanceof BUShopDataInfo) {
             return VIEW_BU_HOME_SHOPDATA_LIST;
         }else if (baseInfo instanceof MineBreedingArchivesInfo) {
             return VIEW_MINE_BREEDING_ARCHIVE_LIST;
-        }else if (baseInfo instanceof HouseKeeperSourceAnalysisInfo) {
+        }else if (baseInfo instanceof FodderInfo) {
             return VIEW_SHEEP_BREEDING_FOOD_ANALYSIS_LIST;
         }else if (baseInfo instanceof MineMyFansInfo) {
             return VIEW_MINE_MY_FANS_LIST;
@@ -321,6 +327,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_CUT_SHEEP_LOSS_LIST;
         }else if (baseInfo instanceof SheepVaccineInfo) {
             return VIEW_CUT_SHEEP_VACCINE_LIST;
+        }else if (baseInfo instanceof MineCallbackInfo) {
+            return VIEW_MINE_CALLBACK_LIST;
+        }else if (baseInfo instanceof MineUserMessageInfo) {
+            return VIEW_MINE_USER_MESSAGE_LIST;
         }
         return super.getItemViewType(position);
     }

@@ -180,6 +180,17 @@ public class HttpUrl {
     /*羊管家 养殖助手-其他记录列表 */
     public static final String SHEEP_HOLDER_FODDER_OTHER_LIST = URL + "app/cultural/assistant/batch/other/list";
 
+    /*羊管家 养殖助手-效益分析接口 */
+    public static final String SHEEP_HOLDER_BENEFIT_ANALYSIS = URL + "app/cultural/assistant/batch/analyse/info";
+    /*羊管家 养殖助手-保存总收入 */
+    public static final String SHEEP_HOLDER_INCOMING_SAVE = URL + "app/cultural/assistant/batch/income/save";
+
+    /*羊管家 养殖助手-获取配料分析标准 */
+    public static final String SHEEP_HOLDER_FODDER_ANALYSE = URL + "app/cultural/assistant/batch/fodder/analyse";
+
+    /*羊管家 养殖助手-求助 */
+    public static final String SHEEP_HOLDER_APPLY_HELP = URL + "app/cultural/assistant/help/apply";
+
 
     /*添加服务*/
     public static final String HOME_PAGE_ADD_SERVICE = URL + "app/service/add";
@@ -217,6 +228,11 @@ public class HttpUrl {
     /*我的-关注*/
     public static final String SHEEP_MINE_FOCUS = URL + "app/user/focus";
 
+    /*我的-建议*/
+    public static final String SHEEP_MINE_SUGGEST = URL + "app/suggest/list";
+    /*我的-发送建议*/
+    public static final String SHEEP_MINE_SUGGEST_SEND = URL + "app/suggest/send";
+
     /*我的-关注-列表*/
     public static final String SHEEP_MINE_FOCUS_LIST = URL + "app/user/focus/list";
 
@@ -229,6 +245,9 @@ public class HttpUrl {
 
     /*系统消息*/
     public static final String SHEEP_MINE_SYSTEM_LIST = URL + "app/message/system/list";
+
+    /*用户消息*/
+    public static final String SHEEP_MINE_USER_LIST = URL + "app/message/user/list";
 
 
 }

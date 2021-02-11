@@ -25,6 +25,19 @@ public class MessageEvent {
      * 更新养殖档案菜单列表
      */
     public static final int MESSAGE_TYPE_UPDATE_BREEDING_ARCHIVING = MESSAGE_TYPE_BASE + 2;
+    /**
+     * 疫苗总价
+     */
+    public static final int MESSAGE_TYPE_VACCINE_TOTAL_PRICE = MESSAGE_TYPE_BASE + 3;
+    /**
+     * 损耗总价
+     */
+    public static final int MESSAGE_TYPE_LOSS_TOTAL_PRICE = MESSAGE_TYPE_BASE + 4;
+
+    /**
+     * 剪羊毛总价
+     */
+    public static final int MESSAGE_TYPE_CUT_HAIR_TOTAL_PRICE = MESSAGE_TYPE_BASE + 5;
 
     private int mEventType;
 

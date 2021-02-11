@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:scrollbars="none"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="none">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/dp16"
         android:layout_marginRight="@dimen/dp16"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/rl_benefit_analysis_open"
@@ -72,577 +72,580 @@
 
         <LinearLayout
             android:id="@+id/ll_benefit_content"
-            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="47dp">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="明细"
-                android:textColor="#ff303030"
-                android:textSize="13sp"
-                android:gravity="center"
-                android:layout_gravity="center"
-                />
+                android:layout_height="47dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="明细"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="批次"
                     android:textColor="#ff303030"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="单只"
-                    android:layout_weight="1"
                     android:textColor="#ff303030"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#000000"
-                />
+                android:background="#000000" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="总收入"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_total_incoming"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3000元"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
-
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_total_incoming_each"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="400元"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
+                android:background="#e5e5e5" />
 
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="羊苗费用支出"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_totalLittleSheepExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3000元"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_eachLittleSheepExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="400元"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
-
+                android:background="#e5e5e5" />
 
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="羊毛费用支出"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_totalWoolExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3000元"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_eachWoolExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="400元"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
+                android:background="#e5e5e5" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="饲料费用支出"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_totalFodderExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3000元"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_eachFodderExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="400元"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
-
-
+                android:background="#e5e5e5" />
 
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="疫苗费用支出"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_totalVaccineExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3000元"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_eachVaccineExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="400元"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
-
+                android:background="#e5e5e5" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="损耗费用支出"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+                <TextView
+                    android:id="@+id/tv_totalLostExpense"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+
+                <TextView
+                    android:id="@+id/tv_eachLostExpense"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:background="#e5e5e5" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="总费用支出"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_totalExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3000元"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_teachExpense"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="400元"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
+                android:background="#e5e5e5" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="总利润"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_totalProfit"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="3000元"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_eachProfit"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="400元"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
+                android:background="#e5e5e5" />
 
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="日增重"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_dailyGain"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="1斤"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
+                android:background="#e5e5e5" />
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="出腔率"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_cavityRatio"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="30%"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
+                android:background="#e5e5e5" />
 
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="料肉比（成品羊）"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_fodderSheepRatio"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="30元/斤"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
+                android:background="#e5e5e5" />
 
 
             <LinearLayout
-                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="40dp">
+                android:layout_height="40dp"
+                android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="料肉比（羊腔）"
-                    android:layout_gravity="center"
-                    android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
                     android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
+                    android:textSize="13sp" />
 
 
                 <TextView
+                    android:id="@+id/tv_fodderCavityRatio"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:text="30元/斤"
-                    android:textColor="#ff303030"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="13sp"
-                    />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp0p3"
-                android:background="#e5e5e5"
-                />
+                android:background="#e5e5e5" />
 
 
         </LinearLayout>

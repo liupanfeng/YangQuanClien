@@ -1,18 +1,24 @@
 package com.meishe.yangquan.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.SheepBreedHelperActivity;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.SharedPreferencesUtil;
+import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.view.MViewPager;
+import com.meishe.yangquan.wiget.IosDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +42,7 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
     private List<String> mTitleList = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
     private long mInitTime;
+    private IosDialog mIosDialog;
 
 
     public static SheepBreedHelperFragment newInstance(int id, int currentCulturalQuantity,long initTime) {
@@ -71,7 +78,29 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
 
     @Override
     protected void initListener() {
-
+//        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//                if (position==2){
+//                    String totalPrice = SharedPreferencesUtil.getInstance(mContext).getString("" + mBatchId);
+//                    if (TextUtils.isEmpty(totalPrice)){
+//                        showInputIncomingDialog();
+//                    }else{
+//
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
     }
 
     @Override
@@ -89,11 +118,12 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
 
         mFragmentList.add(SheepBreedHelperBaseMessage.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime));
         mFragmentList.add(SheepBreedHelperProcessFragment.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime));
-        mFragmentList.add(new SheepBreedHelperBenefitAnalysisFragment());
+        mFragmentList.add(SheepBreedHelperBenefitAnalysisFragment.newInstance(mBatchId));
 
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), 0, mContext, mFragmentList, mTitleList));
         mTabLayout.setupWithViewPager(mViewPager);
 
 
     }
+
 }

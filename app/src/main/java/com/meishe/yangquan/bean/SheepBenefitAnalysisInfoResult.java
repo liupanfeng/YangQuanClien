@@ -3,20 +3,20 @@ package com.meishe.yangquan.bean;
 import java.util.List;
 
 /**
- * 我的 - 我的消息
+ * @Author : lpf
+ * @CreateDate : 2021/2/6
+ * @Description : 效益分析接口
  */
-public class MineMyMessageInfoResult {
+public class SheepBenefitAnalysisInfoResult extends BaseInfo{
 
     // 响应业务状态
     private int code;
-
     // 响应消息
     private String msg;
 
-    // 响应消息
     private String enMsg;
 
-    private List<MineMyMessageInfo> data;
+    private SheepBenefitAnalysisInfo data;
 
     public int getCode() {
         return code;
@@ -42,11 +42,11 @@ public class MineMyMessageInfoResult {
         this.enMsg = enMsg;
     }
 
-    public List<MineMyMessageInfo> getData() {
+    public SheepBenefitAnalysisInfo getData() {
         return data;
     }
 
-    public void setData(List<MineMyMessageInfo> data) {
+    public void setData(SheepBenefitAnalysisInfo data) {
         this.data = data;
     }
 }

@@ -17,9 +17,12 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
 import com.meishe.yangquan.bean.SheepVaccineInfo;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.utils.FormatCurrentData;
 import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.Util;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 羊管家 养殖助手 剪羊毛
@@ -100,10 +103,11 @@ public class SheepCutHairHolder extends BaseViewHolder {
                         } else {
                             ((SheepHairInfo) info).setPrice(0);
                         }
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
+                    EventBus.getDefault().post(new MessageEvent().setEventType(MessageEvent.MESSAGE_TYPE_CUT_HAIR_TOTAL_PRICE));
                 }
 
                 @Override

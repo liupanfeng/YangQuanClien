@@ -17,7 +17,10 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
 import com.meishe.yangquan.bean.SheepLossInfo;
 import com.meishe.yangquan.bean.SheepVaccineInfo;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.utils.FormatDateUtil;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 羊管家 养殖助手  疫苗记录
@@ -125,10 +128,11 @@ public class SheepVaccinesHolder extends BaseViewHolder {
                         }else{
                             ((SheepVaccineInfo) info).setPrice(0);
                         }
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
+                    EventBus.getDefault().post(new MessageEvent().setEventType(MessageEvent.MESSAGE_TYPE_VACCINE_TOTAL_PRICE));
                 }
 
                 @Override

@@ -35,6 +35,8 @@ import android.widget.TextView;
 
 import androidx.core.content.FileProvider;
 
+import com.meishe.yangquan.bean.FodderInfo;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -44,6 +46,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -765,6 +768,18 @@ public class Util {
             clipboardManager.setPrimaryClip(clipData);
 
         }
+    }
+
+
+    /**
+     * float 保留两位小数
+     * @param value
+     * @return
+     */
+    public static String float2StringTwoPosition(float value){
+        DecimalFormat df = new DecimalFormat("#.00");
+        String format = df.format(value);
+        return format;
     }
 
     /**

@@ -101,6 +101,8 @@ public class SheepMyBusinessActivity extends BaseActivity {
                                 showFirstMessage();
                             }else if (authState==2){
                                 showReviewMessage();
+                            }else{
+                                showNoMessage();
                             }
                         }
                     }else{

@@ -114,6 +114,8 @@ public class MinePersonalInfoActivity extends BaseActivity {
 
     private ModifyUserInfoFragment mModifyUserInfoFragment;
 
+    private boolean isShowModifyView = false;
+
 
     @Override
     protected int initRootView() {
@@ -247,12 +249,14 @@ public class MinePersonalInfoActivity extends BaseActivity {
     }
 
     private void showModifyView(int modifyType) {
+        isShowModifyView = true;
         mModifyUserInfoFragment = ModifyUserInfoFragment.newInstance(modifyType);
         getSupportFragmentManager().beginTransaction().
                 replace(R.id.container, mModifyUserInfoFragment).commit();
         mModifyUserInfoFragment.setOnFragmentListener(new ModifyUserInfoFragment.OnFragmentListener() {
             @Override
             public void hideFragment() {
+                isShowModifyView = false;
                 getSupportFragmentManager().beginTransaction().hide(mModifyUserInfoFragment).commit();
             }
         });
@@ -658,7 +662,12 @@ public class MinePersonalInfoActivity extends BaseActivity {
 
     @Override
     public void onBackPressed() {
+        if (!isShowModifyView) {
+            super.onBackPressed();
+            return;
+        }
         if (!BackHandlerHelper.handleBackPress(this)) {
+            isShowModifyView = false;
             getSupportFragmentManager().beginTransaction().hide(mModifyUserInfoFragment).commit();
             return;
         } else {

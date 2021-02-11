@@ -8,8 +8,6 @@ import android.widget.TextView;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfoResult;
-import com.meishe.yangquan.bean.MineMyMessageInfo;
-import com.meishe.yangquan.bean.MineMyMessageInfoResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpUrl;
