@@ -620,12 +620,12 @@
             android:layout_marginRight="@dimen/dp17"
             android:layout_marginTop="@dimen/dp10"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dp200">
+            android:layout_height="@dimen/dp260">
 
             <TextView
                 android:id="@+id/tv_sheep_food_advise"
                 android:layout_margin="6dp"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="@dimen/sp13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />

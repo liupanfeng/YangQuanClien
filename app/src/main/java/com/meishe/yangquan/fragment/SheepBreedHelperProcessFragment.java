@@ -806,19 +806,25 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
                         if (sheepNutritionInfo == null) {
                             continue;
                         }
-                        stringBuilder.append(sheepNutritionInfo.getSuggest() + "\n");
+                        stringBuilder.append((i+1)+"."+sheepNutritionInfo.getSuggest() + "\n");
                         if (sheepNutritionInfo.getName().equals("蛋白质")) {
-                            tv_protein.setText(sheepNutritionInfo.getUserValue());
+                            tv_protein.setText(sheepNutritionInfo.getUserValue()+"");
+                            tv_protein_advise.setText(sheepNutritionInfo.getResult()+"");
                         } else if (sheepNutritionInfo.getName().equals("能量")) {
-                            tv_energy.setText(sheepNutritionInfo.getUserValue());
+                            tv_energy.setText(sheepNutritionInfo.getUserValue()+"");
+                            tv_energy_advise.setText(sheepNutritionInfo.getResult()+"");
                         } else if (sheepNutritionInfo.getName().equals("钙")) {
-                            tv_calcium.setText(sheepNutritionInfo.getUserValue());
+                            tv_calcium.setText(sheepNutritionInfo.getUserValue()+"");
+                            tv_calcium_advise.setText(sheepNutritionInfo.getResult()+"");
                         } else if (sheepNutritionInfo.getName().equals("盐")) {
-                            tv_salt.setText(sheepNutritionInfo.getUserValue());
+                            tv_salt.setText(sheepNutritionInfo.getUserValue()+"");
+                            tv_salt_advise.setText(sheepNutritionInfo.getResult()+"");
                         } else if (sheepNutritionInfo.getName().equals("磷")) {
-                            tv_phosphorus.setText(sheepNutritionInfo.getUserValue());
+                            tv_phosphorus.setText(sheepNutritionInfo.getUserValue()+"");
+                            tv_phosphorus_advise.setText(sheepNutritionInfo.getResult()+"");
                         } else if (sheepNutritionInfo.getName().equals("小苏打")) {
-                            tv_soda.setText(sheepNutritionInfo.getUserValue());
+                            tv_soda.setText(sheepNutritionInfo.getUserValue()+"");
+                            tv_soda_advise.setText(sheepNutritionInfo.getResult()+"");
                         }
                     }
 
