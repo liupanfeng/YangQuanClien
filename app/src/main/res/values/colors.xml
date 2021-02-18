@@ -83,4 +83,7 @@
     <color name="color_fffa561e">#fffa561e</color>
     <color name="color_fff7f7f7">#fff7f7f7</color>
 
+    <color name="location_select_font_color">#FFD800</color>
+
+
 </resources>

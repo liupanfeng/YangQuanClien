@@ -849,10 +849,20 @@ public class Util {
      * @return
      */
     public static List<String> getAllPermissionsList() {
-        ArrayList<String> newList = new ArrayList<>();
-        newList.add(Manifest.permission.CAMERA);
-        newList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
-        newList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        return newList;
+//        ArrayList<String> newList = new ArrayList<>();
+//        newList.add(Manifest.permission.CAMERA);
+//        newList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+//        newList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        ArrayList<String> permissionsList = new ArrayList<>();
+        permissionsList.add(Manifest.permission.READ_EXTERNAL_STORAGE);
+        permissionsList.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        permissionsList.add(Manifest.permission.CAMERA);
+//        permissionsList.add(Manifest.permission.RECORD_AUDIO);
+        permissionsList.add(Manifest.permission.ACCESS_COARSE_LOCATION);
+        permissionsList.add(Manifest.permission.ACCESS_FINE_LOCATION);
+
+        return permissionsList;
     }
+
+
 }

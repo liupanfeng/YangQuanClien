@@ -9,31 +9,26 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
-import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
+import com.amap.api.services.core.PoiItem;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.MenuItem;
-import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.UploadFileInfo;
 import com.meishe.yangquan.bean.UploadFileResult;
 import com.meishe.yangquan.bean.UserInfo;
@@ -45,6 +40,7 @@ import com.meishe.yangquan.fragment.ModifyUserInfoFragment;
 import com.meishe.yangquan.helper.BackHandlerHelper;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
@@ -55,8 +51,6 @@ import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.File;
 import java.io.IOException;
@@ -67,13 +61,15 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_USER_INFO;
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG;
 import static com.meishe.yangquan.utils.Constants.UPLOAD_FILE_MODE_1;
 
 /**
  * 我的-个人信息页面
  */
 public class MinePersonalInfoActivity extends BaseActivity {
+
+
+    public static final int SHOW_ADD_LOCATION_ACTIVITY_RESULT = 300;
 
     private File tempFile;
     //相册请求码
@@ -116,6 +112,7 @@ public class MinePersonalInfoActivity extends BaseActivity {
 
     private boolean isShowModifyView = false;
 
+    private PoiItem mPoiItem = null;
 
     @Override
     protected int initRootView() {
@@ -238,9 +235,13 @@ public class MinePersonalInfoActivity extends BaseActivity {
 
         /*养殖地址*/
         mEtbreedAddress.setOnTouchListener(new View.OnTouchListener() {
+
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                ToastUtil.showToast("养殖地址");
+                if (Util.isFastDoubleClick()) {
+                    return true;
+                }
+                AppManager.getInstance().jumpActivityForResult(MinePersonalInfoActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
                 return true;
             }
         });
@@ -400,13 +401,14 @@ public class MinePersonalInfoActivity extends BaseActivity {
         }
 
         HashMap<String, Object> requestParam = new HashMap<>();
-//        requestParam.put("nickname", mUserParamInfo.getNickname());
-//        requestParam.put("gender", mUserParamInfo.getGender());
-        requestParam.put("iconFileId", mUserParamInfo.getIconFileId());
-//        requestParam.put("culturalScale", mUserParamInfo.getCulturalScale());
-//        requestParam.put("culturalAddress", mUserParamInfo.getCulturalAddress());
-//        requestParam.put("culturalAge", mUserParamInfo.getCulturalAge());
-//        requestParam.put("currentCulturalQuantity", mUserParamInfo.getCurrentCulturalQuantity());
+        Integer iconFileId = mUserParamInfo.getIconFileId();
+        if (iconFileId != null) {
+            requestParam.put("iconFileId", iconFileId);
+        }
+        String culturalAddress = mUserParamInfo.getCulturalAddress();
+        if (!TextUtils.isEmpty(culturalAddress)) {
+            requestParam.put("culturalAddress", culturalAddress);
+        }
 
         OkHttpManager.getInstance().postRequest(HttpUrl.URL_UPDATE_USER, new BaseCallBack<UserResult>() {
             @Override
@@ -427,6 +429,7 @@ public class MinePersonalInfoActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, UserResult result) {
                 if (result != null && result.getCode() == 1) {
+                    mUserParamInfo.clear();
                     BitmapUtils.deleteCacheFile();
                     UserManager.getInstance(mContext).setUser(result.getData());
                     MessageEvent messageEvent = new MessageEvent();
@@ -460,6 +463,7 @@ public class MinePersonalInfoActivity extends BaseActivity {
             }
         }, requestParam, token);
     }
+
 
     /**
      * 用更改用户信息
@@ -605,6 +609,20 @@ public class MinePersonalInfoActivity extends BaseActivity {
                 }
                 break;
 
+            case SHOW_ADD_LOCATION_ACTIVITY_RESULT:
+                if (intent != null) {
+                    mPoiItem = intent.getParcelableExtra("PoiItem");
+                    String title = "不显示我的位置";
+                    if (title.equals(mPoiItem.getTitle())) {
+                        mEtbreedAddress.setText(null);
+                    } else {
+                        mEtbreedAddress.setText(mPoiItem.getTitle());
+                        mUserParamInfo.setCulturalAddress(mPoiItem.getTitle());
+                        hasChangeUserInfo();
+                    }
+                }
+                break;
+
 
             case CROP_SMALL_PICTURE:  //调用剪裁后返回
                 if (resultCode == RESULT_OK) {
@@ -674,4 +692,6 @@ public class MinePersonalInfoActivity extends BaseActivity {
             super.onBackPressed();
         }
     }
+
+
 }

@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.meishe.yangquan"
+        applicationId "com.tangyang.yangquan"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
@@ -72,4 +72,10 @@ dependencies {
 
     /*表格*/
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    //高德搜索
+    implementation 'com.amap.api:search:latest.integration'
+    //高德定位
+    implementation 'com.amap.api:location:latest.integration'
+
 }

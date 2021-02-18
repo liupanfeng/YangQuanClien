@@ -144,4 +144,9 @@ public class UserParamInfo {
     public void setCurrentCulturalQuantity(Integer currentCulturalQuantity) {
         this.currentCulturalQuantity = currentCulturalQuantity;
     }
+
+    public void clear() {
+        this.iconFileId = null;
+        this.culturalAddress = null;
+    }
 }

@@ -43,6 +43,7 @@
     <string name="top_tab_market">市场</string>
     <string name="top_tab_service">服务</string>
     <string name="top_tab_industry_information">行业资讯</string>
+    <string name="no_result">对不起，没有搜索到相关数据！</string>
 
-
+    <string name="no_data_remain">没有数据啦</string>
 </resources>

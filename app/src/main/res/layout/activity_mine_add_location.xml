@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="#181A21"
+    android:focusable="true"
+    android:focusableInTouchMode="true" >
+
+
+    <include layout="@layout/custom_title"
+            android:id="@+id/title"
+        />
+
+    <RelativeLayout
+        android:id="@+id/edit_text_layout"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_below="@+id/title"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="15dp">
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#353740"
+            android:drawableLeft="@mipmap/add_location_search"
+            android:hint="搜索位置"
+            android:drawablePadding="10dp"
+            android:textColorHint="#7A7A7E"
+            android:paddingLeft="9dp"
+            android:textColor="#D4D4D4"
+            android:textSize="17sp"
+            android:imeOptions="actionSearch"
+            android:inputType="text"/>
+
+
+        <ImageView
+            android:id="@+id/delete_all"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/location_search_delete_all"
+            android:layout_centerInParent="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edit_text_layout"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="22dp"
+        android:layout_alignParentBottom="true">
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/normal_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srlEnableAutoLoadMore="false"
+            app:srlEnableRefresh="false"
+            app:srlEnableFooterTranslationContent="false"
+            app:srlEnableHeaderTranslationContent="false"
+            app:srlEnableScrollContentWhenLoaded="true">
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.scwang.smartrefresh.header.MaterialHeader>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/normal_location_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.scwang.smartrefresh.header.MaterialHeader>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+        <com.scwang.smartrefresh.layout.SmartRefreshLayout
+            android:id="@+id/search_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            app:srlEnableAutoLoadMore="false"
+            app:srlEnableRefresh="false"
+            app:srlEnableFooterTranslationContent="false"
+            app:srlEnableHeaderTranslationContent="false"
+            app:srlEnableScrollContentWhenLoaded="true">
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.scwang.smartrefresh.header.MaterialHeader>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/search_location_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+            <com.scwang.smartrefresh.header.MaterialHeader
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.scwang.smartrefresh.header.MaterialHeader>
+
+        </com.scwang.smartrefresh.layout.SmartRefreshLayout>
+
+    </RelativeLayout>
+
+    <include layout="@layout/layout_loading"/>
+
+</RelativeLayout>
