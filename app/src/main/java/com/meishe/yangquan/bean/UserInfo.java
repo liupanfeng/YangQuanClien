@@ -39,7 +39,7 @@ public class UserInfo {
 
     private int isInfoComplete;                     //信息是否完整
 
-    private int gender = -1;                             //性别
+    private Integer gender ;                             //性别
 
     private int state;                              //这个是什么状态
 
@@ -87,11 +87,11 @@ public class UserInfo {
         this.isInfoComplete = isInfoComplete;
     }
 
-    public int getGender() {
+    public Integer getGender() {
         return gender;
     }
 
-    public void setGender(int gender) {
+    public void setGender(Integer gender) {
         this.gender = gender;
     }
 

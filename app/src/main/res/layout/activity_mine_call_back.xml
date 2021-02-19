@@ -52,7 +52,7 @@
             android:layout_marginTop="@dimen/dp10"
             android:layout_marginRight="@dimen/dp10"
             android:layout_marginBottom="@dimen/dp10"
-            android:text="发布"
+            android:text="反馈"
             android:textColor="@color/text_content_color"
             android:textSize="15sp" />
 

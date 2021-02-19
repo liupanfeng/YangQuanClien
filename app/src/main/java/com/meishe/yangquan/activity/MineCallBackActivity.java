@@ -158,7 +158,7 @@ public class MineCallBackActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    ToastUtil.showToast(mContext, "发送成功！");
+                    ToastUtil.showToast(mContext, "反馈成功！");
                     et_say_your_idea.setText("");
                     MineCallbackInfo callbackInfo = new MineCallbackInfo();
                     callbackInfo.setContent(content);

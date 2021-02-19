@@ -37,6 +37,7 @@ import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.fragment.ModifyUserInfoFragment;
+import com.meishe.yangquan.fragment.ModifyUserSexFragment;
 import com.meishe.yangquan.helper.BackHandlerHelper;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -65,6 +66,7 @@ import static com.meishe.yangquan.utils.Constants.UPLOAD_FILE_MODE_1;
 
 /**
  * 我的-个人信息页面
+ * @author 86188
  */
 public class MinePersonalInfoActivity extends BaseActivity {
 
@@ -113,6 +115,7 @@ public class MinePersonalInfoActivity extends BaseActivity {
     private boolean isShowModifyView = false;
 
     private PoiItem mPoiItem = null;
+    private ModifyUserSexFragment mModifyUserSexInfoFragment;
 
     @Override
     protected int initRootView() {
@@ -228,7 +231,10 @@ public class MinePersonalInfoActivity extends BaseActivity {
         mEtPersonalSex.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                ToastUtil.showToast("选择性别");
+                if (Util.isFastDoubleClick()) {
+                    return true;
+                }
+                showModifySexView();
                 return true;
             }
         });
@@ -259,6 +265,20 @@ public class MinePersonalInfoActivity extends BaseActivity {
             public void hideFragment() {
                 isShowModifyView = false;
                 getSupportFragmentManager().beginTransaction().hide(mModifyUserInfoFragment).commit();
+            }
+        });
+    }
+
+    private void showModifySexView() {
+        isShowModifyView = true;
+        mModifyUserSexInfoFragment = ModifyUserSexFragment.onCreate();
+        getSupportFragmentManager().beginTransaction().
+                replace(R.id.container, mModifyUserSexInfoFragment).commit();
+        mModifyUserSexInfoFragment.setOnFragmentListener(new ModifyUserSexFragment.OnFragmentListener() {
+            @Override
+            public void hideFragment() {
+                isShowModifyView = false;
+                getSupportFragmentManager().beginTransaction().hide(mModifyUserSexInfoFragment).commit();
             }
         });
     }
@@ -669,7 +689,10 @@ public class MinePersonalInfoActivity extends BaseActivity {
         mUser = UserManager.getInstance(mContext).getUser();
         if (mUser != null) {
             mEtNickname.setText(mUser.getNickname());
-            mEtPersonalSex.setText(mUser.getGender() == 0 ? "女" : "男");
+            Integer gender = mUser.getGender();
+            if (gender !=null){
+                mEtPersonalSex.setText(gender == 0 ? "女" : "男");
+            }
             mEtbreedAddress.setText(mUser.getCulturalAddress() == null ? "" : mUser.getCulturalAddress());
             et_input_breeding_scale.setText(mUser.getCulturalScale() < 0 ? "" : mUser.getCulturalScale() + "");
             et_input_breeding_years.setText(mUser.getCulturalAge() < 0 ? "" : mUser.getCulturalAge() + "");
@@ -686,7 +709,13 @@ public class MinePersonalInfoActivity extends BaseActivity {
         }
         if (!BackHandlerHelper.handleBackPress(this)) {
             isShowModifyView = false;
-            getSupportFragmentManager().beginTransaction().hide(mModifyUserInfoFragment).commit();
+
+            if (mModifyUserInfoFragment != null) {
+                getSupportFragmentManager().beginTransaction().hide(mModifyUserInfoFragment).commit();
+            }
+            if (mModifyUserSexInfoFragment != null) {
+                getSupportFragmentManager().beginTransaction().hide(mModifyUserSexInfoFragment).commit();
+            }
             return;
         } else {
             super.onBackPressed();

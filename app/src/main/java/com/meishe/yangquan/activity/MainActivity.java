@@ -174,9 +174,9 @@ public class MainActivity extends BasePermissionActivity {
                     App.getInstance().getString(R.string.tab_home_page),
                     R.drawable.bg_tab_home_page));
 
-            mTabList.add(new TabInfo(PageId.PAGE_FEED_PAGE,
-                    App.getInstance().getString(R.string.tab_feed_page),
-                    R.drawable.bg_tab_feed_page));
+//            mTabList.add(new TabInfo(PageId.PAGE_FEED_PAGE,
+//                    App.getInstance().getString(R.string.tab_feed_page),
+//                    R.drawable.bg_tab_feed_page));
 
             mTabList.add(new TabInfo(PageId.PAGE_SHEEP_HOUSE_KEEP,
                     App.getInstance().getString(R.string.tab_sheep_house_keeper_page),
