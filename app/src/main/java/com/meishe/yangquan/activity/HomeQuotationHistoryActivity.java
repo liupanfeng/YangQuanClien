@@ -10,10 +10,12 @@ import android.widget.TextView;
 import com.github.mikephil.charting.charts.LineChart;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.HistoryInfo;
+import com.meishe.yangquan.bean.HistoryInfoResult;
 import com.meishe.yangquan.bean.QuotationHistoryInfo;
 import com.meishe.yangquan.bean.QuotationHistoryInfoResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.StatisticsInfo;
+import com.meishe.yangquan.bean.StatisticsInfoResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.LineChartManager;
@@ -98,6 +100,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
                 mQuotationId = extras.getString(Constants.QUOTATION_ID);
                 mQuotationType = extras.getInt(Constants.TYPE_QUOTATION);
                 getQuotationHistoryData(mQuotationId, Constants.QUOTATION_TIME_TYPE_SEVEN);
+                getNearQuotationHistoryData(mQuotationId);
             }
         }
         String type = "";
@@ -166,16 +169,14 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
      *
      * @param data
      */
-    private void updateUi(QuotationHistoryInfo data) {
+    private void updateUi(StatisticsInfo data) {
         if (data == null) {
             return;
         }
-        StatisticsInfo statistics = data.getStatistics();   //获取行情信息
-        HistoryInfo history = data.getHistory();   //折线图数据
         /*更新行情数据*/
-        if (statistics != null) {
-            float today = statistics.getToday();
-            float yesterday = statistics.getYesterday();
+        if (data != null) {
+            float today = data.getToday();
+            float yesterday = data.getYesterday();
             tv_today_average_price.setText(today + "");
             if (today > 0 && yesterday > 0) {
                 String result = "";
@@ -195,12 +196,15 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
                 tv_compared_with_yesterday.setText(yesterday + "");
             }
 
-            tv_highest_price.setText(statistics.getMax() + "");
-            tv_lowest_price.setText(statistics.getMin() + "");
-            tv_average_price.setText(statistics.getAverage() + "");
-            tv_update_time.setText("更新于：" + statistics.getUpdateDate());
+            tv_highest_price.setText(data.getMax() + "");
+            tv_lowest_price.setText(data.getMin() + "");
+            tv_average_price.setText(data.getAverage() + "");
+            tv_update_time.setText("更新于：" + data.getUpdateDate());
         }
 
+    }
+
+    private  void updateChartView(HistoryInfo history){
         /*更新折线图数据*/
         if (history != null) {
             List<String> dates = history.getDates();
@@ -234,7 +238,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("id", quotationId);
         requestParam.put("timeThresholdType", type);
-        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_QUOTATION_HISTORY, new BaseCallBack<QuotationHistoryInfoResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_QUOTATION_HISTORY, new BaseCallBack<HistoryInfoResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -251,9 +255,78 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
             }
 
             @Override
-            protected void onSuccess(Call call, Response response, QuotationHistoryInfoResult result) {
+            protected void onSuccess(Call call, Response response, HistoryInfoResult result) {
                 if (result != null && result.getCode() == 1) {
-                    QuotationHistoryInfo data = result.getData();
+                    HistoryInfo data = result.getData();
+                    if (data == null) {
+                        return;
+                    }
+                    updateChartView(data);
+                } else {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "接口异常");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+    }
+
+
+    /**
+     * 获取历史行情数据
+     *
+     * @param quotationId 行情id
+     */
+    private void getNearQuotationHistoryData(String quotationId) {
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        if (TextUtils.isEmpty(quotationId)) {
+            return;
+        }
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("id", quotationId);
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_NEAR_QUOTATION_HISTORY, new BaseCallBack<StatisticsInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "接口异常");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, StatisticsInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    StatisticsInfo data = result.getData();
                     if (data == null) {
                         return;
                     }
@@ -285,5 +358,6 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
             }
         }, requestParam, token);
     }
+
 
 }

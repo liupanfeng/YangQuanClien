@@ -27,6 +27,13 @@ public class HttpUrl {
      * 请求行情数据
      */
     public static final String HOME_PAGE_GET_QUOTATION_HISTORY = URL + "app/quotation/history";
+    /**
+     * 最近行情统计
+     */
+    public static final String HOME_PAGE_GET_NEAR_QUOTATION_HISTORY = URL + "app/quotation/statistics";
+
+
+
 
     /**
      * 请求市场数据

@@ -40,6 +40,9 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
     /*是否加载成功*/
     protected boolean mIsLoadFinish = true;
 
+    /*是否加载更多*/
+    protected boolean mIsLoadMore = false;
+
     /*页码*/
     protected int mPageNum = 1;
     /*每页的数量*/
@@ -47,6 +50,11 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
 
     protected List<Fragment> mFragmentList = new ArrayList<>();
     protected List<String> mTitleList = new ArrayList<>();
+
+
+    /** Fragment当前状态是否可见 */
+    protected boolean isVisible;
+
 
 
     @Nullable
@@ -60,6 +68,47 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
         super.onViewCreated(view, savedInstanceState);
         initData();
         initListener();
+    }
+
+
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if(getUserVisibleHint()) {
+            isVisible = true;
+            onVisible();
+        } else {
+            isVisible = false;
+            onInvisible();
+        }
+    }
+
+
+    /**
+     * 可见
+     */
+    protected void onVisible() {
+        lazyLoad();
+    }
+
+
+    /**
+     * 不可见
+     */
+    protected void onInvisible() {
+
+
+    }
+
+
+    /**
+     * 延迟加载
+     * 子类必须重写此方法
+     */
+    protected  void lazyLoad(){
+
     }
 
     @Override

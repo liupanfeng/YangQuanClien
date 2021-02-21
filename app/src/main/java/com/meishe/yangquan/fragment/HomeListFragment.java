@@ -100,6 +100,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 mIsLoadFinish = true;
+                mIsLoadMore = true;
                 if (mTabType == Constants.TAB_TYPE_MARKET) {
                     getMarketDataFromServer(mType, mListType);
                 } else if (mTabType == Constants.TAB_TYPE_SERVICE) {
@@ -119,6 +120,12 @@ public class HomeListFragment extends BaseRecyclerFragment {
         } else if (mTabType == Constants.TAB_TYPE_SERVICE) {
             getServiceDataFromServer(mType, mListType);
         }
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+
     }
 
     /**
@@ -157,7 +164,9 @@ public class HomeListFragment extends BaseRecyclerFragment {
                 }
 
                 List<MarketInfo> datas = result.getData();
-                if (CommonUtils.isEmpty(datas)) {
+                if (CommonUtils.isEmpty(datas) && mIsLoadMore) {
+                    ToastUtil.showToast("暂无更多内容！");
+                    mIsLoadMore = false;
                     return;
                 }
 
@@ -220,6 +229,8 @@ public class HomeListFragment extends BaseRecyclerFragment {
                 }
                 List<ServiceInfo> datas = result.getData();
                 if (CommonUtils.isEmpty(datas)) {
+                    ToastUtil.showToast("暂无更多内容！");
+                    mIsLoadMore = false;
                     return;
                 }
 

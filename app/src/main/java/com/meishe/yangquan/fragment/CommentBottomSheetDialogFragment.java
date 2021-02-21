@@ -53,6 +53,7 @@ import okhttp3.Response;
 import static com.meishe.yangquan.activity.SheepBarDetailActivity.TYPE_SHEEP_BAR_COMMEND;
 import static com.meishe.yangquan.activity.SheepBarDetailActivity.TYPE_SHEEP_BAR_NEWEST;
 
+@Deprecated
 public class CommentBottomSheetDialogFragment extends BottomSheetDialogFragment {
 
     private Context mContext = null;
