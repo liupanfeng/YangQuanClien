@@ -61,6 +61,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
     private String mQuotationId;
     private int mQuotationType;
     private TextView tv_chart_title;
+    private TextView tv_time;
 
 
     @Override
@@ -83,6 +84,9 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
         btn_seven = findViewById(R.id.btn_seven);
         btn_thirty = findViewById(R.id.btn_thirty);
         tv_chart_title = findViewById(R.id.tv_chart_title);
+        tv_time = findViewById(R.id.tv_time);
+
+        tv_time.setText(FormatDateUtil.longToString(System.currentTimeMillis(),FormatDateUtil.FORMAT_TYPE_YEAR));
     }
 
     @Override

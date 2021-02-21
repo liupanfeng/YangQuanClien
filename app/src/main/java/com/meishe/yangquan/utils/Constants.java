@@ -222,4 +222,17 @@ public class Constants {
 
     /*行情列表*/
     public static final String TYPE_QUOTATION = "type.quotation";
+
+    /*商版消息类型*/
+    public static final String BU_TYPE_MESSAGE = "bu.type.message";
+
+    /*商版订单消息*/
+    public static final int BU_TYPE_MESSAGE_ORDER = 1;
+    /*商版评论消息*/
+    public static final int BU_TYPE_MESSAGE_COMMENT = 2;
+    /*商版退款消息*/
+    public static final int BU_TYPE_MESSAGE_REFUND= 3;
+    /*商版其他消息*/
+    public static final int BU_TYPE_MESSAGE_OTHER= 4;
+
 }

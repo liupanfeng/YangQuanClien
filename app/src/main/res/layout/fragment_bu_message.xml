@@ -1,6 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp14"
+        android:layout_marginBottom="@dimen/dp14"
+        android:text="消息管理"
+        android:textColor="#ff303030"
+        android:textSize="17sp" />
+
+    <com.meishe.libbase.SlidingTabLayout
+        android:id="@+id/slidingTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:layout_below="@+id/ll_sign_up"
+        android:layout_marginLeft="@dimen/dp_px_30"
+        android:layout_marginRight="@dimen/dp_px_30"
+        tl:tl_indicator_color="@color/mainColor"
+        tl:tl_indicator_height="@dimen/dp_px_6"
+        tl:tl_indicator_width="@dimen/dp_px_30"
+        tl:tl_tab_space_equal="true"
+        tl:tl_textSelectColor="@color/mainColor"
+        tl:tl_textSize="@dimen/sp_px_39"
+        tl:tl_textUnselectedColor="@color/unselect_text_color" />
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/vp_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

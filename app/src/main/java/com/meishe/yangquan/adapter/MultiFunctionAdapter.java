@@ -9,13 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.BUMeesageDataInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.FodderInfo;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
-import com.meishe.yangquan.bean.HouseKeeperSourceAnalysisInfo;
 import com.meishe.yangquan.bean.IndustryInfo;
 import com.meishe.yangquan.bean.IndustryNewsClip;
 import com.meishe.yangquan.bean.Label;
@@ -43,7 +43,8 @@ import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.SheepVaccineInfo;
 import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.SystemNotification;
-import com.meishe.yangquan.viewhoder.BUHomeShopDataHolder;
+import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
+import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BreedingArchivesFoodAnalysisHolder;
 import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
@@ -247,8 +248,13 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
 
             /*商版-店铺数据*/
             case VIEW_BU_HOME_SHOPDATA_LIST:
-                view = mLayoutInflater.inflate(R.layout.item_bu_home_shop_data, parent, false);
-                viewHolder = new BUHomeShopDataHolder(view, this);
+                view = mLayoutInflater.inflate(R.layout.item_bu_home_shop_view, parent, false);
+                viewHolder = new BUHomeShopViewHolder(view, this);
+                break;
+            /*商版-消息数据*/
+            case VIEW_BU_MESSAGE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_message_view, parent, false);
+                viewHolder = new BUMessageViewHolder(view, this);
                 break;
         }
         return viewHolder;
@@ -331,6 +337,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_CALLBACK_LIST;
         }else if (baseInfo instanceof MineUserMessageInfo) {
             return VIEW_MINE_USER_MESSAGE_LIST;
+        }else if (baseInfo instanceof BUMeesageDataInfo) {
+            return VIEW_BU_MESSAGE_LIST;
         }
         return super.getItemViewType(position);
     }

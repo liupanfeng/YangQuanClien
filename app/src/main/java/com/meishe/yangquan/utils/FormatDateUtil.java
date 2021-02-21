@@ -9,6 +9,7 @@ public class FormatDateUtil {
 
     public static final String FORMAT_TYPE="yyyy-MM-dd HH:mm:ss";
     public static final String FORMAT_TYPE_YEAR_MONTH_DAY="yyyy-MM-dd";
+    public static final String FORMAT_TYPE_YEAR="yyyy";
     // formatType格式为yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日 HH时mm分ss秒
     // data Date类型的时间
     public static String dateToString(Date data, String formatType) {

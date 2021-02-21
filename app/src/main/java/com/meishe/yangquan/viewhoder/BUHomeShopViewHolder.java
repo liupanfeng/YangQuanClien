@@ -17,7 +17,7 @@ import com.meishe.yangquan.bean.BaseInfo;
  *
  * @author 86188
  */
-public class BUHomeShopDataHolder extends BaseViewHolder {
+public class BUHomeShopViewHolder extends BaseViewHolder {
 
     private final RequestOptions options;
 
@@ -27,7 +27,7 @@ public class BUHomeShopDataHolder extends BaseViewHolder {
     private TextView tv_bu_shop_name;
 
 
-    public BUHomeShopDataHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
+    public BUHomeShopViewHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         options = new RequestOptions();
         options.centerCrop();

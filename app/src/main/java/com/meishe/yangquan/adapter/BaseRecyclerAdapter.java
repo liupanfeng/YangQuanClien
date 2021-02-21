@@ -122,6 +122,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
 
     protected static final int VIEW_BU_HOME_SHOPDATA_LIST = VIEW_TYPE_BASE + 50;                     //商版店铺数据
+    protected static final int VIEW_BU_MESSAGE_LIST = VIEW_TYPE_BASE + 51;                     //商版店铺数据
 
 
     private IosDialog mDialog;

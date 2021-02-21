@@ -50,7 +50,6 @@
             android:layout_below="@+id/tv_today_average_price_menu"
             android:layout_marginLeft="@dimen/dp19"
             android:layout_marginTop="@dimen/dp10"
-            android:text="26.88"
             android:textColor="@color/color_ff3ba786"
             android:textSize="23sp" />
 
@@ -62,7 +61,6 @@
             android:layout_marginLeft="@dimen/dp40"
             android:layout_marginTop="@dimen/dp10"
             android:layout_toRightOf="@+id/tv_today_average_price_menu"
-            android:text="下跌-0.01-0.02%"
             android:textColor="@color/color_ff3ba786"
             android:textSize="17sp" />
 
@@ -89,7 +87,6 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="@dimen/dp15"
             android:layout_toRightOf="@+id/tv_highest_price_menu"
-            android:text="26.88"
             android:textColor="#fffa561e"
             android:textSize="15sp" />
 
@@ -112,7 +109,6 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="@dimen/dp15"
             android:layout_toRightOf="@+id/tv_lowest_price_menu"
-            android:text="26.88"
             android:textColor="@color/color_ff3ba786"
             android:textSize="15sp" />
 
@@ -136,7 +132,6 @@
             android:layout_marginLeft="5dp"
             android:layout_marginTop="8dp"
             android:layout_toRightOf="@+id/tv_average_price_menu"
-            android:text="26.88"
             android:textColor="@color/color_ff656565"
             android:textSize="15sp" />
 
@@ -147,7 +142,7 @@
             android:layout_below="@+id/tv_average_price_menu"
             android:layout_marginLeft="@dimen/dp19"
             android:layout_marginTop="@dimen/dp10"
-            android:text="更新时间：2020-10-31"
+            android:text="更新时间："
             android:textColor="@color/color_ffc2c2c2"
             android:textSize="10sp" />
 
@@ -199,7 +194,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/dp17"
-            android:text="2021"
             android:textColor="@color/color_ff656565"
             android:textSize="13sp" />
     </RelativeLayout>

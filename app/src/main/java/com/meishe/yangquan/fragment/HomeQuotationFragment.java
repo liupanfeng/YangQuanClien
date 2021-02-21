@@ -1,6 +1,7 @@
 package com.meishe.yangquan.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -159,6 +160,10 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
         param.put("pageNum", 1);
         param.put("pageSize", 30);
         String token = UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)){
+            return;
+        }
+        mAdapter.addAll(null);
         OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_QUOTATION, new BaseCallBack<QuotationResult>() {
             @Override
             protected void OnRequestBefore(Request request) {

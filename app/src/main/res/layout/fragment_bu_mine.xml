@@ -1,6 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="245dp"
+        android:background="@mipmap/ic_mine_top_bg">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="73dp"
+            android:layout_marginTop="96dp">
+
+            <com.meishe.yangquan.view.RoundAngleImageView
+                android:id="@+id/iv_mine_photo"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:layout_marginLeft="15dp"
+                android:background="@mipmap/ic_mine_photo_default"
+                app:roundHeight="37dp"
+                app:roundWidth="37dp" />
+
+            <LinearLayout
+                android:layout_toRightOf="@+id/iv_mine_photo"
+                android:layout_marginLeft="@dimen/dp15"
+                android:orientation="vertical"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="店铺名称"
+                    android:textColor="#ffffffff"
+                    android:textSize="20sp"
+                    />
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp7"
+                    android:text="真实姓名的店铺"
+                    android:textColor="#ffffffff"
+                    android:textSize="13sp"
+                    />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/iv_mine_setting"
+            android:layout_width="@dimen/dp21"
+            android:layout_height="@dimen/dp21"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp37"
+            android:layout_marginRight="@dimen/dp20"
+            android:background="@mipmap/ic_mine_setting" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="225dp"
+        android:background="@drawable/mine_middle_bg"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp">
+            <ImageView
+                android:id="@+id/iv_bu_mine_shopping"
+                android:layout_width="20dp"
+                android:layout_height="@dimen/dp18"
+                android:background="@mipmap/ic_bu_mine_shopping"
+                android:layout_marginLeft="@dimen/dp25"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/iv_bu_mine_shopping"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp15"
+                android:text="店铺信息"
+                android:layout_centerVertical="true"
+                android:textColor="#ff2f3742"
+                android:textSize="15sp"
+                />
+
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="@dimen/dp11"
+                android:background="@mipmap/ic_bu_mine_next"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_alignParentEnd="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.4dp"
+                android:background="@color/line_color"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_marginLeft="@dimen/dp20"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp">
+            <ImageView
+                android:id="@+id/iv_bu_mine_feed_god"
+                android:layout_width="20dp"
+                android:layout_height="@dimen/dp18"
+                android:background="@mipmap/ic_bu_mine_feed_god"
+                android:layout_marginLeft="@dimen/dp25"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/iv_bu_mine_feed_god"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp15"
+                android:text="饲料金"
+                android:layout_centerVertical="true"
+                android:textColor="#ff2f3742"
+                android:textSize="15sp"
+                />
+
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="@dimen/dp11"
+                android:background="@mipmap/ic_bu_mine_next"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_alignParentEnd="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.4dp"
+                android:background="@color/line_color"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_marginLeft="@dimen/dp20"
+                />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="58dp">
+            <ImageView
+                android:id="@+id/iv_bu_mine_recommend"
+                android:layout_width="20dp"
+                android:layout_height="@dimen/dp18"
+                android:background="@mipmap/ic_bu_mine_recommend"
+                android:layout_marginLeft="@dimen/dp25"
+                android:layout_centerVertical="true"
+                />
+
+            <TextView
+                android:layout_toRightOf="@+id/iv_bu_mine_recommend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp15"
+                android:text="反馈建议"
+                android:layout_centerVertical="true"
+                android:textColor="#ff2f3742"
+                android:textSize="15sp"
+                />
+
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="@dimen/dp11"
+                android:background="@mipmap/ic_bu_mine_next"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_alignParentEnd="true" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.4dp"
+                android:background="@color/line_color"
+                android:layout_alignParentBottom="true"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_marginLeft="@dimen/dp20"
+                />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
