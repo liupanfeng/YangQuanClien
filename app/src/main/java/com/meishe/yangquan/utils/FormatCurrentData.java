@@ -188,7 +188,7 @@ public class FormatCurrentData {
      * @return
      */
     public static String getFormatStringFromFloat(float value){
-        DecimalFormat decimalFormat = new DecimalFormat("##0.0");
+        DecimalFormat decimalFormat = new DecimalFormat("##0.00");
         String dd=decimalFormat.format(value);
         return dd;
     }

@@ -18,6 +18,8 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.LineChartManager;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.FormatCurrentData;
+import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 
@@ -57,6 +59,8 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
     private Button btn_seven;
     private Button btn_thirty;
     private String mQuotationId;
+    private int mQuotationType;
+    private TextView tv_chart_title;
 
 
     @Override
@@ -78,6 +82,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
         mLineChart = findViewById(R.id.lineChart);
         btn_seven = findViewById(R.id.btn_seven);
         btn_thirty = findViewById(R.id.btn_thirty);
+        tv_chart_title = findViewById(R.id.tv_chart_title);
     }
 
     @Override
@@ -87,10 +92,26 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
             Bundle extras = intent.getExtras();
             if (extras != null) {
                 mQuotationId = extras.getString(Constants.QUOTATION_ID);
+                mQuotationType = extras.getInt(Constants.TYPE_QUOTATION);
                 getQuotationHistoryData(mQuotationId, Constants.QUOTATION_TIME_TYPE_SEVEN);
             }
         }
-
+        String type = "";
+        switch (mQuotationType) {
+            case 5:
+                type = "羊苗";
+                break;
+            case 6:
+                type = "成品羊";
+                break;
+            case 7:
+                type = "羊腔";
+                break;
+            case 8:
+                type = "饲草";
+                break;
+        }
+        tv_chart_title.setText(type + "均价走势图");
         initChartData();
         mLineChartManager = new LineChartManager(this, mLineChart);
         mLineChartManager.showLineChart(xAxisValues, yAxisValues);
@@ -100,21 +121,9 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
     private void initChartData() {
         xAxisValues = new ArrayList<>();
         xAxisValues.add("1.15");
-        xAxisValues.add("1.16");
-        xAxisValues.add("1.17");
-        xAxisValues.add("1.18");
-        xAxisValues.add("1.19");
-        xAxisValues.add("1.20");
-        xAxisValues.add("1.21");
 
         yAxisValues = new ArrayList<>();
         yAxisValues.add(35f);
-        yAxisValues.add(36f);
-        yAxisValues.add(35.5f);
-        yAxisValues.add(36.3f);
-        yAxisValues.add(35.8f);
-        yAxisValues.add(36.2f);
-        yAxisValues.add(35.8f);
     }
 
 
@@ -137,7 +146,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.btn_thirty:
                 getQuotationHistoryData(mQuotationId, Constants.QUOTATION_TIME_TYPE_THIRTY);
                 break;
@@ -161,8 +170,27 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
         HistoryInfo history = data.getHistory();   //折线图数据
         /*更新行情数据*/
         if (statistics != null) {
-            tv_today_average_price.setText(statistics.getToday() + "");
-            tv_compared_with_yesterday.setText(statistics.getYesterday() + "");
+            float today = statistics.getToday();
+            float yesterday = statistics.getYesterday();
+            tv_today_average_price.setText(today + "");
+            if (today > 0 && yesterday > 0) {
+                String result = "";
+                String offset = "";
+                if (yesterday > today) {
+                    offset = FormatCurrentData.getFormatStringFromFloat(yesterday - today);
+                    result = "下降:";
+                    tv_compared_with_yesterday.setText(result + offset);
+                } else if (today > yesterday) {
+                    offset =  FormatCurrentData.getFormatStringFromFloat(today - yesterday);
+                    result = "上涨:";
+                    tv_compared_with_yesterday.setText(result + offset);
+                } else {
+                    tv_compared_with_yesterday.setText("价格平稳");
+                }
+            } else {
+                tv_compared_with_yesterday.setText(yesterday + "");
+            }
+
             tv_highest_price.setText(statistics.getMax() + "");
             tv_lowest_price.setText(statistics.getMin() + "");
             tv_average_price.setText(statistics.getAverage() + "");

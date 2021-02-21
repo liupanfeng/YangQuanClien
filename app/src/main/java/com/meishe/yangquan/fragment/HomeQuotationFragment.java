@@ -53,9 +53,9 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
     private CustomButton mDieSheep;
     private CustomButton mForageGrass;
 
-    private MultiFunctionAdapter mQuotationAdapter;
     private TextView mTvTodayQuotation;
 
+    private int mType;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -86,6 +86,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
                 if (baseInfo instanceof QuotationInfo) {
                     Bundle bundle = new Bundle();
                     bundle.putString(Constants.QUOTATION_ID, ((QuotationInfo) baseInfo).getId());
+                    bundle.putInt(Constants.TYPE_QUOTATION, mType);
                     AppManager.getInstance().jumpActivity(getActivity(), HomeQuotationHistoryActivity.class, bundle);
                 }
             }
@@ -100,6 +101,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
         getBannerDataFromServer();
 //        initTopBanner(null);
         getQuotationDataFromServer(5);
+        mType = 5;
     }
 
     private void getBannerDataFromServer() {
@@ -235,6 +237,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
         switch (v.getId()) {
             case R.id.btn_little_sheep:
                 selectLittleSheep();
+                mType = 5;
                 getQuotationDataFromServer(5);
                 break;
             case R.id.btn_big_sheep:
@@ -242,6 +245,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
                 mBigSheep.setSelected(true);
                 mDieSheep.setSelected(false);
                 mForageGrass.setSelected(false);
+                mType = 6;
                 getQuotationDataFromServer(6);
                 break;
             case R.id.btn_die_sheep:
@@ -249,6 +253,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
                 mBigSheep.setSelected(false);
                 mDieSheep.setSelected(true);
                 mForageGrass.setSelected(false);
+                mType = 7;
                 getQuotationDataFromServer(7);
                 break;
             case R.id.btn_forage_grass:
@@ -256,6 +261,7 @@ public class HomeQuotationFragment extends BaseRecyclerFragment implements View.
                 mBigSheep.setSelected(false);
                 mDieSheep.setSelected(false);
                 mForageGrass.setSelected(true);
+                mType = 8;
                 getQuotationDataFromServer(8);
                 break;
             default:

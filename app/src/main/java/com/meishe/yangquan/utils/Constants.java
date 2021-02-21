@@ -18,6 +18,7 @@ public class Constants {
     public static final int TYPE_IDENTITY_BUSINESS = 2;
 
 
+
     public static String userId = "userId";
 
     public static String tokenId = "tokenId";
@@ -219,5 +220,6 @@ public class Constants {
     /*养殖助手-损耗记录*/
     public static final int TYPE_LOSS_RECORD_TYPE = 3;
 
-
+    /*行情列表*/
+    public static final String TYPE_QUOTATION = "type.quotation";
 }

@@ -35,7 +35,7 @@
 
         <TextView
             android:id="@+id/tv_specification"
-            android:layout_width="@dimen/dp20"
+            android:layout_width="wrap_content"
             android:layout_height="18dp"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="@dimen/dp15"
