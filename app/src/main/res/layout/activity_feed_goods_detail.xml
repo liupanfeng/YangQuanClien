@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.meishe.yangquan.activity.FeedGoodsDetailActivity">
+    <include layout="@layout/custom_title"
+        />
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_marginTop="@dimen/dp48"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp8"
+            android:background="#fff5f5f5"
+            />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="360dp"
+            android:background="@mipmap/ic_feed_goods_detail_cover"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp8"
+            android:background="#fff5f5f5"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="236dp">
+
+            <TextView
+                android:id="@+id/tv_feed_goods_detail_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥27.9/斤"
+                android:textColor="#fffa561e"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_marginLeft="@dimen/dp18"
+                android:textSize="15sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_feed_goods_detail_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_feed_goods_detail_price"
+                android:layout_marginTop="@dimen/dp5"
+                android:layout_marginLeft="@dimen/dp18"
+                android:text="英美尔犊牛精料_教槽料_牛拉骨架饲料_牛全价_颗粒饲料"
+                android:textColor="#ff303030"
+                android:textSize="16sp"
+                />
+
+        </RelativeLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp8"
+            android:background="#fff5f5f5"
+            />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="236dp">
+
+            <TextView
+                android:id="@+id/tv_feed_goods_comment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp13"
+                android:layout_marginLeft="@dimen/dp18"
+                android:text="商品评价（419）"
+                android:textColor="#ff303030"
+                android:textSize="16sp"
+                />
+
+
+            <TextView
+                android:id="@+id/tv_feed_goods_open_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="查看全部 >"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="@dimen/dp13"
+                android:layout_marginRight="@dimen/dp18"
+                android:textColor="#ff3ba786"
+                android:textSize="13sp"
+                android:layout_alignParentEnd="true" />
+
+            <RelativeLayout
+                android:id="@+id/rl_comment_1"
+                android:layout_below="@+id/tv_feed_goods_comment"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp80">
+
+                <RelativeLayout
+                    android:id="@+id/rl_feed_food_comment_top"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp28"
+                    android:orientation="horizontal"
+                    >
+                    <com.meishe.yangquan.view.RoundAngleImageView
+                        android:id="@+id/iv_feed_comment_photo"
+                        app:roundWidth="@dimen/dp14"
+                        app:roundHeight="@dimen/dp14"
+                        android:background="@mipmap/ic_default_photo"
+                        android:layout_marginLeft="@dimen/dp18"
+                        android:layout_width="@dimen/dp28"
+                        android:layout_height="@dimen/dp28"/>
+
+                    <TextView
+                        android:id="@+id/iv_feed_comment_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="用户XXX"
+                        android:layout_marginLeft="@dimen/dp8"
+                        android:layout_toRightOf="@+id/iv_feed_comment_photo"
+                        android:layout_centerVertical="true"
+                        android:textColor="@color/color_ff303030"
+                        android:textSize="13sp"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_feed_goods_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/dp18"
+                        android:layout_centerVertical="true"
+                        android:text="一个月前"
+                        android:textColor="@color/color_ff656565"
+                        android:textSize="@dimen/sp11"
+                        android:layout_alignParentEnd="true" />
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/tv_feed_goods_comment_content"
+                    android:layout_below="@+id/rl_feed_food_comment_top"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp18"
+                    android:text="物流太慢，饲料用着看看效果～"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp"
+                    />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+            android:id="@+id/rl_comment_2"
+            android:layout_below="@+id/rl_comment_1"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp80">
+
+            <RelativeLayout
+                android:id="@+id/rl_feed_food_comment_top_2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp28"
+                android:orientation="horizontal"
+                >
+                <com.meishe.yangquan.view.RoundAngleImageView
+                    android:id="@+id/iv_feed_comment_photo_2"
+                    app:roundWidth="@dimen/dp14"
+                    app:roundHeight="@dimen/dp14"
+                    android:background="@mipmap/ic_default_photo"
+                    android:layout_marginLeft="@dimen/dp18"
+                    android:layout_width="@dimen/dp28"
+                    android:layout_height="@dimen/dp28"/>
+
+                <TextView
+                    android:id="@+id/iv_feed_comment_nickname_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="用户XXX"
+                    android:layout_marginLeft="@dimen/dp8"
+                    android:layout_toRightOf="@+id/iv_feed_comment_photo_2"
+                    android:layout_centerVertical="true"
+                    android:textColor="@color/color_ff303030"
+                    android:textSize="13sp"
+                    />
+
+
+                <TextView
+                    android:id="@+id/tv_feed_goods_time_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/dp18"
+                    android:layout_centerVertical="true"
+                    android:text="一个月前"
+                    android:textColor="@color/color_ff656565"
+                    android:textSize="@dimen/sp11"
+                    android:layout_alignParentEnd="true" />
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/tv_feed_goods_comment_content_2"
+                android:layout_below="@+id/rl_feed_food_comment_top_2"
+                android:layout_marginTop="@dimen/dp10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp18"
+                android:text="物流太慢，饲料用着看看效果～"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+        </RelativeLayout>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp8"
+            android:background="#fff5f5f5"
+            />
+
+        <ImageView
+            android:id="@+id/iv_feed_goods_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ic_feed_goods_detail"
+            />
+    </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp48"
+        android:background="@color/white"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/ll_feed_goods_phone_call"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dp18"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/dp16"
+                android:layout_height="@dimen/dp16"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/ic_feed_goods_phone_call"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="联系商家"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ff656565"
+                android:textSize="8sp"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_feed_goods_collection"
+            android:layout_toRightOf="@+id/ll_feed_goods_phone_call"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/dp18"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="@dimen/dp16"
+                android:layout_height="@dimen/dp16"
+                android:layout_gravity="center_horizontal"
+                android:background="@mipmap/ic_feed_goods_collection"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="收藏"
+                android:layout_gravity="center_horizontal"
+                android:textColor="#ff656565"
+                android:textSize="8sp"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_feed_add_shopping_cart"
+            android:layout_width="98dp"
+            android:layout_height="34dp"
+            android:background="@drawable/mine_gold_button_pay_bg"
+            android:text="加入购物车"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/btn_feed_good_buy_now"
+            android:layout_marginRight="@dimen/dp14"
+            android:textColor="#ff00ad8a"
+            />
+
+
+        <Button
+            android:id="@+id/btn_feed_good_buy_now"
+            android:layout_width="98dp"
+            android:layout_height="34dp"
+            android:background="@drawable/mine_gold_button_bg"
+            android:text="立即购买"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/dp14"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentEnd="true" />
+
+
+
+
+
+    </RelativeLayout>
+
+</RelativeLayout>

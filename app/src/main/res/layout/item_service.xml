@@ -21,13 +21,12 @@
             android:layout_height="@dimen/dp22" />
 
         <TextView
-            android:id="@+id/tv_market_name"
+            android:id="@+id/tv_market_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/civ_photo_circle"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/dp11"
-            android:text="用户昵称"
             android:textColor="#ff656565"
             android:textSize="13sp"
             />

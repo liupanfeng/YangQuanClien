@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    tools:context="com.meishe.yangquan.activity.FeedShoppingDetailActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/bg_feed_shopping_detail"
+        android:layout_height="280dp">
+
+        <ImageView
+            android:layout_width="9dp"
+            android:layout_height="@dimen/dp15"
+            android:background="@mipmap/ic_back"
+            android:layout_marginTop="@dimen/dp44"
+            android:layout_marginLeft="@dimen/dp18"
+            android:padding="@dimen/dp5"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_feed_shopping_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp48"
+            android:layout_marginTop="@dimen/dp31"
+            android:text="XX商铺"
+            android:textColor="@color/white"
+            android:textSize="17sp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_feed_shopping_fans"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="粉丝：996"
+            android:textColor="@color/white"
+            android:layout_marginLeft="@dimen/dp48"
+            android:layout_marginTop="58dp"
+            android:textSize="@dimen/sp10"
+            />
+
+
+        <ImageView
+            android:layout_width="@dimen/dp11"
+            android:layout_height="@dimen/dp11"
+            android:background="@mipmap/ic_feed_shopping_sign"
+            android:layout_marginLeft="@dimen/dp18"
+            android:layout_marginTop="88dp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_feed_shopping_sign_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="店铺签名～"
+            android:layout_marginLeft="@dimen/dp34"
+            android:layout_marginTop="@dimen/dp85"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp11"
+            />
+        
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="133dp"
+            android:background="@mipmap/ic_feed_shopping_detail_cover"
+            android:layout_marginLeft="@dimen/dp18"
+            android:layout_marginRight="@dimen/dp18"
+            android:layout_marginTop="107dp"
+            />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@mipmap/ic_feed_shopping_detail_bg"
+        android:layout_marginTop="253dp">
+
+        <com.meishe.libbase.SlidingTabLayout
+            android:id="@+id/slidingTabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_px_100"
+            android:layout_marginLeft="@dimen/dp_px_30"
+            android:layout_marginRight="@dimen/dp_px_30"
+            android:layout_marginTop="@dimen/dp20"
+            tl:tl_indicator_color="@color/mainColor"
+            tl:tl_indicator_height="0.1dp"
+            tl:tl_indicator_width="0.1dp"
+            tl:tl_tab_space_equal="true"
+            tl:tl_textSelectColor="@color/mainColor"
+            tl:tl_textSize="@dimen/sp_px_39"
+            tl:tl_textUnselectedColor="@color/unselect_text_color" />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/vp_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/dp10" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

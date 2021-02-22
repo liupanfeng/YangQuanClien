@@ -234,5 +234,34 @@ public class Constants {
     public static final int BU_TYPE_MESSAGE_REFUND= 3;
     /*商版其他消息*/
     public static final int BU_TYPE_MESSAGE_OTHER= 4;
+    /*饲料类型*/
+    public static final String FEED_TYPE = "feed.type";
+
+    /*店铺数据*/
+    public static final String FEED_SHOPPING_INFO = "feed.shopping.info";
+
+    /*商品数据*/
+    public static final String FEED_GOODS_INFO = "feed.goods.info";
+
+    /*精料*/
+    public static final int TYPE_FEED_CONCENTRATE = 1;
+    /*草料*/
+    public static final int TYPE_FEED_FORAGE = 2;
+    /*豆粕*/
+    public static final int TYPE_FEED_MEAL = 3;
+    /*麻申*/
+    public static final int TYPE_FEED_MASHEN = 4;
+
+
+    /*推荐*/
+    public static final int TYPE_FEED_FOODS_RECOMMEND = 1;
+    /*综合*/
+    public static final int TYPE_FEED_FOODS_MULTIPLE = 2;
+    /*销量*/
+    public static final int TYPE_FEED_FOODS_SALES = 3;
+    /*价格*/
+    public static final int TYPE_FEED_FOODS_PRICE = 4;
+
+
 
 }

@@ -20,16 +20,15 @@ import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
  * 主页-市场 图片列表
- *
  * @author 86188
  */
-public class HomemarketPictureListHolder extends BaseViewHolder {
+public class HomeMarketPictureListHolder extends BaseViewHolder {
 
 
     private RoundAngleImageView mIvSheepBarMessage;
 
 
-    public HomemarketPictureListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
+    public HomeMarketPictureListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
 

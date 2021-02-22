@@ -26,14 +26,11 @@ public class FeedFragment extends BaseRecyclerFragment {
     private MViewPager mViewPager;
 
     private List<String> mTabContents = new ArrayList<>();
-    //    mTopTabContent={"饲料","玉米","工具"};
     private List<Fragment> mFragmentList = new ArrayList<>();
 
     public static FeedFragment newInstance(String param1, String param2) {
         FeedFragment fragment = new FeedFragment();
         Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }

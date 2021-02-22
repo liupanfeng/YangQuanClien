@@ -16,6 +16,8 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.AboutActivity;
 import com.meishe.yangquan.activity.BusinessOpportunityActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
+import com.meishe.yangquan.activity.FeedGoodsDetailActivity;
+import com.meishe.yangquan.activity.FeedShoppingDetailActivity;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
 import com.meishe.yangquan.activity.MineBreedingArchivesActivity;
@@ -37,6 +39,8 @@ import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.BusinessOpportunityResult;
 import com.meishe.yangquan.bean.EmptyInfo;
 import com.meishe.yangquan.bean.EndInfo;
+import com.meishe.yangquan.bean.FeedGoodsInfo;
+import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
@@ -47,14 +51,13 @@ import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
-import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.AppManager;
-import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -118,6 +121,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_CUT_SHEEP_LOSS_LIST = VIEW_TYPE_BASE + 33;                        //损耗列表
     protected static final int VIEW_MINE_CALLBACK_LIST = VIEW_TYPE_BASE + 34;                        //我的反馈
     protected static final int VIEW_MINE_USER_MESSAGE_LIST = VIEW_TYPE_BASE + 35;                        //我的消息
+    protected static final int VIEW_FEED_SHOPPING_LIST = VIEW_TYPE_BASE + 36;                        //饲料商店列表
+    protected static final int VIEW_FEED_FOODS_LIST = VIEW_TYPE_BASE + 37;                        //饲料商品列表
 
 
 
@@ -244,6 +249,14 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             bundle.putString("name", ((ServiceTypeInfo) info).getName());
             bundle.putInt("type", ((ServiceTypeInfo) info).getType());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
+        } else if (info instanceof FeedShoppingInfo) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constants.FEED_SHOPPING_INFO,info);
+            AppManager.getInstance().jumpActivity(mContext, FeedShoppingDetailActivity.class, bundle);
+        } else if (info instanceof FeedGoodsInfo) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(Constants.FEED_GOODS_INFO,info);
+            AppManager.getInstance().jumpActivity(mContext, FeedGoodsDetailActivity.class, bundle);
         } else if (info instanceof SheepBarPictureInfo) {
             if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
                 return;

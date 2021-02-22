@@ -14,6 +14,7 @@ import com.meishe.yangquan.utils.FormatDateUtil;
 
 /**
  *  消息中心
+ * @author 86188
  */
 public class MessageCenterListHolder extends BaseViewHolder {
 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="134dp">
+
+    <ImageView
+        android:id="@+id/iv_feed_cover"
+        android:layout_width="105dp"
+        android:layout_height="105dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/dp15"
+        android:background="@mipmap/ic_feed_goods_cover"
+        />
+
+    <TextView
+        android:id="@+id/tv_shopping_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp13"
+        android:layout_toRightOf="@+id/iv_feed_cover"
+        android:layout_marginLeft="@dimen/dp16"
+        android:text="店铺名称"
+        android:textColor="@color/color_ff303030"
+        android:textSize="@dimen/sp16"
+        />
+
+    <TextView
+        android:id="@+id/tv_shopping_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_feed_cover"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_below="@+id/tv_shopping_name"
+        android:layout_marginTop="@dimen/dp5"
+        android:text="5.7分"
+        android:textColor="#fff5a623"
+        android:textSize="13sp"
+        />
+
+    <LinearLayout
+        android:id="@+id/ll_feed_selling"
+        android:layout_toRightOf="@+id/iv_feed_cover"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_below="@+id/tv_shopping_score"
+        android:layout_width="90dp"
+        android:orientation="vertical"
+        android:layout_marginTop="10dp"
+        android:background="@mipmap/ic_feed_selling_bg"
+        android:layout_height="@dimen/dp20">
+
+        <TextView
+            android:id="@+id/tv_feed_selling"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="月售 2345"
+            android:layout_gravity="left"
+            android:textColor="#ff656565"
+            android:textSize="13sp"
+            />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_shopping_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/iv_feed_cover"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_below="@+id/ll_feed_selling"
+        android:layout_marginTop="@dimen/dp12"
+        android:drawableLeft="@mipmap/ic_feed_shopping_address"
+        android:text="唐县南店头乡葛堡村"
+        android:drawablePadding="@dimen/dp4"
+        android:textColor="@color/color_ff656565"
+        android:textSize="13sp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_feed_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/dp40"
+        android:layout_marginRight="@dimen/dp14"
+        android:text="  1.2km"
+        android:textColor="@color/color_ff656565"
+        android:textSize="13sp"
+        />
+
+</RelativeLayout>

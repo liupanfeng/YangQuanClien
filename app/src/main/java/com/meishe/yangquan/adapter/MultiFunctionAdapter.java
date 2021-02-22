@@ -14,6 +14,8 @@ import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
+import com.meishe.yangquan.bean.FeedGoodsInfo;
+import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.FodderInfo;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.IndustryInfo;
@@ -49,12 +51,14 @@ import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BreedingArchivesFoodAnalysisHolder;
 import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
 import com.meishe.yangquan.viewhoder.CommentListHolder;
+import com.meishe.yangquan.viewhoder.FeedFoodsHolder;
+import com.meishe.yangquan.viewhoder.FeedShoppingHolder;
 import com.meishe.yangquan.viewhoder.MineCallbackHolder;
 import com.meishe.yangquan.viewhoder.SheepCutHairHolder;
-import com.meishe.yangquan.viewhoder.HomemarketPictureListHolder;
+import com.meishe.yangquan.viewhoder.HomeMarketPictureListHolder;
 import com.meishe.yangquan.viewhoder.IndustryContentHolder;
 import com.meishe.yangquan.viewhoder.IndustryListHolder;
-import com.meishe.yangquan.viewhoder.MarketListHolder;
+import com.meishe.yangquan.viewhoder.HomeMarketListHolder;
 import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineBreedingArchivesHolder;
@@ -66,7 +70,7 @@ import com.meishe.yangquan.viewhoder.MineSystemMessageHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
 import com.meishe.yangquan.viewhoder.QuotationListHolder;
 import com.meishe.yangquan.viewhoder.ServiceLabelHolder;
-import com.meishe.yangquan.viewhoder.ServiceListHolder;
+import com.meishe.yangquan.viewhoder.HomeServiceListHolder;
 import com.meishe.yangquan.viewhoder.ServiceMessageListHolder;
 import com.meishe.yangquan.viewhoder.ServiceSheepNewsHolder;
 import com.meishe.yangquan.viewhoder.ServiceMessageHolder;
@@ -146,12 +150,12 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             /*市场列表*/
             case VIEW_MARKET_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_market, parent, false);
-                viewHolder = new MarketListHolder(view, this);
+                viewHolder = new HomeMarketListHolder(view, this);
                 break;
             /*服务列表*/
             case VIEW_SERVICE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_service, parent, false);
-                viewHolder = new ServiceListHolder(view, this);
+                viewHolder = new HomeServiceListHolder(view, this);
                 break;
             /*行业资讯列表*/
             case VIEW_INDUSTRY_LIST:
@@ -165,7 +169,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 break;
             case VIEW_HOME_MARKET_PICTURE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_home_market, parent, false);
-                viewHolder = new HomemarketPictureListHolder(view, this);
+                viewHolder = new HomeMarketPictureListHolder(view, this);
                 break;
             /*羊吧信息发布*/
             case VIEW_SHEEP_BAR_MESSAGE:
@@ -244,6 +248,19 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_breeding_archives_food_analysis, parent, false);
                 viewHolder = new BreedingArchivesFoodAnalysisHolder(view, this);
                 break;
+
+            /*饲料商店列表*/
+            case VIEW_FEED_SHOPPING_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_feed_shopping, parent, false);
+                viewHolder = new FeedShoppingHolder(view, this);
+                break;
+
+            /*饲料商品列表*/
+            case VIEW_FEED_FOODS_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_feed_foods, parent, false);
+                viewHolder = new FeedFoodsHolder(view, this);
+                break;
+
 
 
             /*商版-店铺数据*/
@@ -339,6 +356,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_USER_MESSAGE_LIST;
         }else if (baseInfo instanceof BUMeesageDataInfo) {
             return VIEW_BU_MESSAGE_LIST;
+        } else if (baseInfo instanceof FeedShoppingInfo) {
+            return VIEW_FEED_SHOPPING_LIST;
+        }else if (baseInfo instanceof FeedGoodsInfo) {
+            return VIEW_FEED_FOODS_LIST;
         }
         return super.getItemViewType(position);
     }
