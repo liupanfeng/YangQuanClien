@@ -10,9 +10,11 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.BUApplyShoppingActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
+import com.meishe.yangquan.utils.AppManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.List;
  * @CreateDate : 2021/1/28
  * @Description : 商版工作台主页面
  */
-public class BUHomeFragment extends BaseRecyclerFragment {
+public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClickListener {
 
     private TextView mTvTips;
     /*申请开店*/
@@ -48,8 +50,8 @@ public class BUHomeFragment extends BaseRecyclerFragment {
         mViewNoShop = view.findViewById(R.id.view_no_shop);
         mViewOpenShop = view.findViewById(R.id.view_open_shop);
 
-        mViewNoShop.setVisibility(View.GONE);
-        mViewOpenShop.setVisibility(View.VISIBLE);
+        mViewNoShop.setVisibility(View.VISIBLE);
+        mViewOpenShop.setVisibility(View.GONE);
 
         mRecyclerView = view.findViewById(R.id.recycler);
         mShopDataRecycler = view.findViewById(R.id.bu_shop_data_recycler);
@@ -100,8 +102,16 @@ public class BUHomeFragment extends BaseRecyclerFragment {
 
     @Override
     protected void initListener() {
-
+        mBtnApplyOpenShop.setOnClickListener(this);
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btn_bu_apply_open_shop:
+                AppManager.getInstance().jumpActivity(getActivity(), BUApplyShoppingActivity.class);
+                break;
+        }
+    }
 }

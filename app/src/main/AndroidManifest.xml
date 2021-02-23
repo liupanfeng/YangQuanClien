@@ -14,7 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activity.FeedGoodsDetailActivity"></activity>
+        <activity android:name=".activity.BUShoppingBaseInfoActivity"></activity>
+        <activity
+            android:name=".activity.BUApplyShoppingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/FullScreenTheme"></activity>
+        <activity android:name=".activity.FeedGoodsDetailActivity" />
         <activity android:name=".activity.FeedShoppingDetailActivity" />
         <activity android:name=".activity.MineAddLocationActivity" />
         <activity android:name=".activity.MineCallBackActivity" />

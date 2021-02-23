@@ -261,8 +261,6 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 viewHolder = new FeedFoodsHolder(view, this);
                 break;
 
-
-
             /*商版-店铺数据*/
             case VIEW_BU_HOME_SHOPDATA_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_bu_home_shop_view, parent, false);

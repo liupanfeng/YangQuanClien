@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <CheckBox
+        android:id="@+id/btn_bu_circle"
+        android:layout_width="@dimen/dp16"
+        android:layout_height="@dimen/dp16"
+        android:layout_centerVertical="true"
+        android:background="@drawable/btn_bu_select_circle"
+        android:button="@null"
+        />
+
+    <TextView
+        android:layout_toRightOf="@+id/btn_bu_circle"
+        android:id="@+id/tv_bu_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="个人店"
+        android:layout_marginLeft="@dimen/dp4"
+        android:textColor="#ffc2c2c2"
+        android:textSize="13sp"
+        />
+
+</RelativeLayout>
