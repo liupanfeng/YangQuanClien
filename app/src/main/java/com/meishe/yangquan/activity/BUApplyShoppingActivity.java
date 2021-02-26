@@ -70,9 +70,11 @@ public class BUApplyShoppingActivity extends BaseActivity {
                 break;
             case R.id.btn_bu_to_real_name:
                 //实名认证
+                AppManager.getInstance().jumpActivity(mContext, BURealNameAuthorActivity.class);
                 break;
             case R.id.btn_bu_to_business_license:
                 //营业执照
+                AppManager.getInstance().jumpActivity(mContext, BUBusinessLicenseActivity.class);
                 break;
         }
     }

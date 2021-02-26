@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -21,32 +22,21 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.amap.api.services.core.PoiItem;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MenuItem;
-import com.meishe.yangquan.bean.Message;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.pop.ShowBigPictureView;
-import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.PathUtils;
-import com.meishe.yangquan.utils.Util;
-import com.meishe.yangquan.view.CustomButtonWhitText;
 
 import java.io.File;
 
-
 /**
- * 申请开店基本信息填写页面
+ * 实名认证
  */
-public class BUShoppingBaseInfoActivity extends BaseActivity {
+public class BURealNameAuthorActivity extends BaseActivity {
 
     public static final int SHOW_ADD_LOCATION_ACTIVITY_RESULT = 300;
 
@@ -59,151 +49,51 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
     private static final int CROP_SMALL_PICTURE = 3;
     private static final int REQUEST_WRITE_EXTERNAL_STORAGE_PERMISSION_CODE = 203;   //拍摄存储权限
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 201;
-    public static final String IMAGE_PATH_ORIGINAL = "original_image";
-
-
-    /*商店类型*/
-    private int mShoppingType;
-    /*个人店*/
-    private CustomButtonWhitText cv_shopping_type_personal;
-    /*个体工商户*/
-    private CustomButtonWhitText cv_shopping_type_personal_business;
-    /*有限公司*/
-    private CustomButtonWhitText cv_shopping_type_company;
-
-
-    /*主营类目类型*/
-    private int mCategoryType;
-    /*饲料*/
-    private CustomButtonWhitText cv_category_type_feed;
-    /*玉米*/
-    private CustomButtonWhitText cv_category_type_corn;
-    /*五金电料*/
-    private CustomButtonWhitText cv_category_type_tool;
-
-
-    /*货源类型*/
-    private int mGoodsType;
-    /*厂家直销*/
-    private CustomButtonWhitText cv_goods_type_factory;
-    /*分销代销*/
-    private CustomButtonWhitText cv_goods_type_replace;
-
-    /*上传店外边照片*/
-    private View rl_bu_capture;
-    /*上传店内照片*/
-    private View rl_bu_capture_inner;
-
-    /*显示店外照片*/
-    private ImageView iv_bu_shopping_outside;
-
-    private EditText et_bu_input_shopping_name;
-    /*签名*/
-    private EditText et_bu_input_shopping_nickname;
-    /*选择经营地址*/
-    private TextView tv_bu_select_address;
     private File mTempFile;
-    private PoiItem mPoiItem = null;
+
     /*上传图片类型*/
     private int mTypeCapture;
 
+    private View rl_bu_capture_card_negative;
+    private View rl_bu_capture_card_positive;
+    private View btn_bu_next;
+    private ImageView iv_bu_capture_card_negative;
+    private ImageView iv_bu_capture_card_positive;
+    /*真实姓名*/
+    private EditText et_bu_input_real_name;
+    /*身份证号码*/
+    private EditText et_bu_input_card_number;
+
     @Override
     protected int initRootView() {
-        return R.layout.activity_b_u_shopping_base_info;
+        return R.layout.activity_bu_real_name_author;
     }
 
     @Override
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
-
-        et_bu_input_shopping_name = findViewById(R.id.et_bu_input_shopping_name);
-        et_bu_input_shopping_nickname = findViewById(R.id.et_bu_input_shopping_nickname);
-        tv_bu_select_address = findViewById(R.id.tv_bu_select_address);
-
-        //店铺类型
-        cv_shopping_type_personal = findViewById(R.id.cv_shopping_type_personal);
-        cv_shopping_type_personal.setCircleSelected(false);
-        cv_shopping_type_personal.setContent("个人店");
-
-        cv_shopping_type_personal_business = findViewById(R.id.cv_shopping_type_personal_business);
-        cv_shopping_type_personal_business.setCircleSelected(false);
-        cv_shopping_type_personal_business.setContent("个体工商户");
-
-        cv_shopping_type_company = findViewById(R.id.cv_shopping_type_company);
-        cv_shopping_type_company.setCircleSelected(false);
-        cv_shopping_type_company.setContent("有限公司");
-
-        //主营类目
-        cv_category_type_feed = findViewById(R.id.cv_category_type_feed);
-        cv_category_type_feed.setCircleSelected(false);
-        cv_category_type_feed.setContent("饲料");
-
-        cv_category_type_corn = findViewById(R.id.cv_category_type_corn);
-        cv_category_type_corn.setCircleSelected(false);
-        cv_category_type_corn.setContent("玉米");
-
-        cv_category_type_tool = findViewById(R.id.cv_category_type_tool);
-        cv_category_type_tool.setCircleSelected(false);
-        cv_category_type_tool.setContent("五金电料");
-
-        //货源类型
-        cv_goods_type_factory = findViewById(R.id.cv_goods_type_factory);
-        cv_goods_type_factory.setCircleSelected(false);
-        cv_goods_type_factory.setContent("厂家直销");
-
-        cv_goods_type_replace = findViewById(R.id.cv_goods_type_replace);
-        cv_goods_type_replace.setCircleSelected(false);
-        cv_goods_type_replace.setContent("分销/代销");
-
-        rl_bu_capture = findViewById(R.id.rl_bu_capture);
-        rl_bu_capture_inner = findViewById(R.id.rl_bu_capture_inner);
-        iv_bu_shopping_outside = findViewById(R.id.iv_bu_shopping_outside);
-
-        mRecyclerView = findViewById(R.id.recyclerView);
-        GridLayoutManager layoutManager =
-                new GridLayoutManager(mContext, 2);
-        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.setLayoutManager(layoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-
-
+        rl_bu_capture_card_negative = findViewById(R.id.rl_bu_capture_card_negative);
+        rl_bu_capture_card_positive = findViewById(R.id.rl_bu_capture_card_positive);
+        iv_bu_capture_card_negative = findViewById(R.id.iv_bu_capture_card_negative);
+        iv_bu_capture_card_positive = findViewById(R.id.iv_bu_capture_card_positive);
+        et_bu_input_real_name = findViewById(R.id.et_bu_input_real_name);
+        et_bu_input_card_number = findViewById(R.id.et_bu_input_card_number);
+        btn_bu_next = findViewById(R.id.btn_bu_next);
     }
 
     @Override
     public void initData() {
 
-        /*默认选中个人店*/
-        selectPersonal();
-        /*默认选中饲料*/
-        selectFeed();
-        /*默认选中*/
-        selectFactory();
-
     }
 
     @Override
     public void initTitle() {
-        mTvTitle.setText("店铺信息");
+        mTvTitle.setText("实名认证");
     }
 
     @Override
     public void initListener() {
-        cv_shopping_type_personal.setOnClickListener(this);
-        cv_shopping_type_personal_business.setOnClickListener(this);
-        cv_shopping_type_company.setOnClickListener(this);
-
-        cv_category_type_feed.setOnClickListener(this);
-        cv_category_type_corn.setOnClickListener(this);
-        cv_category_type_tool.setOnClickListener(this);
-
-        cv_goods_type_factory.setOnClickListener(this);
-        cv_goods_type_replace.setOnClickListener(this);
-
-        rl_bu_capture.setOnClickListener(this);
-        rl_bu_capture_inner.setOnClickListener(this);
-        tv_bu_select_address.setOnClickListener(this);
-        iv_bu_shopping_outside.setOnClickListener(this);
 
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -211,6 +101,15 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
                 finish();
             }
         });
+
+        rl_bu_capture_card_negative.setOnClickListener(this);
+        rl_bu_capture_card_positive.setOnClickListener(this);
+
+        iv_bu_capture_card_negative.setOnClickListener(this);
+        iv_bu_capture_card_positive.setOnClickListener(this);
+
+        btn_bu_next.setOnClickListener(this);
+
     }
 
     @Override
@@ -220,161 +119,61 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.cv_shopping_type_personal:
-                selectPersonal();
-                break;
-            case R.id.cv_shopping_type_personal_business:
-                selectPersonalBusiness();
-                break;
-            case R.id.cv_shopping_type_company:
-                selectCompany();
-                break;
 
-            case R.id.cv_category_type_feed:
-                selectFeed();
+        switch (v.getId()){
+            case R.id.rl_bu_capture_card_positive:
+                //正面
+                changePhoto();
+                mTypeCapture=1;
                 break;
-            case R.id.cv_category_type_corn:
-                selectCorn();
+            case R.id.rl_bu_capture_card_negative:
+                //反面
+                changePhoto();
+                mTypeCapture=2;
                 break;
-            case R.id.cv_category_type_tool:
-                selectTool();
-                break;
+            case R.id.btn_bu_next:
+                //下一步
 
-
-            case R.id.cv_goods_type_factory:
-                selectFactory();
                 break;
-            case R.id.cv_goods_type_replace:
-                selectReplace();
-                break;
-
-            /*查看大图*/
-            case R.id.iv_bu_shopping_outside:
-                Object tag = iv_bu_shopping_outside.getTag();
+            case R.id.iv_bu_capture_card_positive:
+                //查看大图
+                Object tag = iv_bu_capture_card_positive.getTag();
                 String path;
                 if (tag instanceof String){
                     path= (String) tag;
                 }else{
                     return;
                 }
-//                Intent intent=new Intent(mContext, ShowPicActivity.class);
-//                intent.putExtra("imageUrl",path);
-//                mContext.startActivity(intent);
 
                 ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, path);
                 if (showBigPictureView != null) {
                     showBigPictureView.show();
                 }
-
                 break;
-            /*上传店外照片*/
-            case R.id.rl_bu_capture:
-                if (Util.isFastDoubleClick()) {
+            case R.id.iv_bu_capture_card_negative:
+                //查看大图
+                 tag = iv_bu_capture_card_negative.getTag();
+                if (tag instanceof String){
+                    path= (String) tag;
+                }else{
                     return;
                 }
-                mTypeCapture = 1;
-                changePhoto();
+
+                 showBigPictureView = ShowBigPictureView.create(mContext, path);
+                if (showBigPictureView != null) {
+                    showBigPictureView.show();
+                }
                 break;
 
-            /*上传店内照片*/
-            case R.id.rl_bu_capture_inner:
-                if (Util.isFastDoubleClick()) {
-                    return;
-                }
-                mTypeCapture = 2;
-                changePhoto();
-                break;
-            /*选择经营地址*/
-            case R.id.tv_bu_select_address:
-                AppManager.getInstance().jumpActivityForResult(BUShoppingBaseInfoActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
-                break;
             default:
                 break;
-
 
         }
     }
 
 
-    private void selectPersonal() {
-        mShoppingType = 1;
-        cv_shopping_type_personal.setCircleSelected(true);
-        cv_shopping_type_personal_business.setCircleSelected(false);
-        cv_shopping_type_company.setCircleSelected(false);
-    }
-
-    /**
-     * 选中个体工商户
-     */
-    private void selectPersonalBusiness() {
-        mShoppingType = 2;
-        cv_shopping_type_personal.setCircleSelected(false);
-        cv_shopping_type_personal_business.setCircleSelected(true);
-        cv_shopping_type_company.setCircleSelected(false);
-    }
-
-    /**
-     * 选中公司
-     */
-    private void selectCompany() {
-        mShoppingType = 3;
-        cv_shopping_type_personal.setCircleSelected(false);
-        cv_shopping_type_personal_business.setCircleSelected(false);
-        cv_shopping_type_company.setCircleSelected(true);
-    }
-
-
-    /**
-     * 选中饲料
-     */
-    private void selectFeed() {
-        mCategoryType = 1;
-        cv_category_type_feed.setCircleSelected(true);
-        cv_category_type_corn.setCircleSelected(false);
-        cv_category_type_tool.setCircleSelected(false);
-    }
-
-    /**
-     * 选中玉米
-     */
-    private void selectCorn() {
-        mCategoryType = 2;
-        cv_category_type_feed.setCircleSelected(false);
-        cv_category_type_corn.setCircleSelected(true);
-        cv_category_type_tool.setCircleSelected(false);
-    }
-
-    /**
-     * 选中工具
-     */
-    private void selectTool() {
-        mCategoryType = 3;
-        cv_category_type_feed.setCircleSelected(false);
-        cv_category_type_corn.setCircleSelected(false);
-        cv_category_type_tool.setCircleSelected(true);
-    }
-
-    /**
-     * 选中厂家直销
-     */
-    private void selectFactory() {
-        mGoodsType = 1;
-        cv_goods_type_factory.setCircleSelected(true);
-        cv_goods_type_replace.setCircleSelected(false);
-    }
-
-    /**
-     * 选中分销
-     */
-    private void selectReplace() {
-        mGoodsType = 2;
-        cv_goods_type_factory.setCircleSelected(false);
-        cv_goods_type_replace.setCircleSelected(true);
-    }
-
     private void changePhoto() {
-        new BottomMenuFragment(BUShoppingBaseInfoActivity.this)
+        new BottomMenuFragment(BURealNameAuthorActivity.this)
                 .addMenuItems(new MenuItem("拍照"))
                 .addMenuItems(new MenuItem("相册"))
                 .setOnItemClickListener(new BottomMenuFragment.OnItemClickListener() {
@@ -485,8 +284,11 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 //                    mIvPersonalMinePhoto.setImageBitmap(bitmap);
 //                    uploadPicture(UPLOAD_FILE_MODE_1);
                     if (mTypeCapture==1){
-                        iv_bu_shopping_outside.setImageBitmap(bitmap);
-                        iv_bu_shopping_outside.setTag(compressImagePath);
+                        iv_bu_capture_card_positive.setImageBitmap(bitmap);
+                        iv_bu_capture_card_positive.setTag(compressImagePath);
+                    }else if (mTypeCapture==2){
+                        iv_bu_capture_card_negative.setImageBitmap(bitmap);
+                        iv_bu_capture_card_negative.setTag(compressImagePath);
                     }
                 }
                 break;
@@ -528,24 +330,12 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 //                        mIvPersonalMinePhoto.setImageBitmap(bitmap);
 //                        uploadPicture(UPLOAD_FILE_MODE_1);
                         if (mTypeCapture==1){
-                            iv_bu_shopping_outside.setImageBitmap(bitmap);
-                            iv_bu_shopping_outside.setTag(compressImagePath);
+                            iv_bu_capture_card_positive.setImageBitmap(bitmap);
+                            iv_bu_capture_card_positive.setTag(compressImagePath);
+                        }else if (mTypeCapture==2){
+                            iv_bu_capture_card_negative.setImageBitmap(bitmap);
+                            iv_bu_capture_card_negative.setTag(compressImagePath);
                         }
-                    }
-                }
-                break;
-
-            case SHOW_ADD_LOCATION_ACTIVITY_RESULT:
-                if (intent != null) {
-                    mPoiItem = intent.getParcelableExtra("PoiItem");
-                    String title = "不显示我的位置";
-                    if (title.equals(mPoiItem.getTitle())) {
-                        tv_bu_select_address.setText("请选择经营地址");
-                    } else {
-//                        tv_bu_select_address.setText(mPoiItem.getSnippet());
-                        tv_bu_select_address.setText(mPoiItem.getTitle());
-//                        mUserParamInfo.setCulturalAddress(mPoiItem.getTitle());
-//                        hasChangeUserInfo();
                     }
                 }
                 break;

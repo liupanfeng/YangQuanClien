@@ -14,11 +14,16 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activity.BUShoppingBaseInfoActivity"></activity>
+        <activity android:name=".activity.BUMineRecommendActivity"></activity>
+        <activity android:name=".activity.BUMineFeedGoldActivity" />
+        <activity android:name=".activity.BUMineShoppingMessageActivity" />
+        <activity android:name=".activity.BUBusinessLicenseActivity" />
+        <activity android:name=".activity.BURealNameAuthorActivity" />
+        <activity android:name=".activity.BUShoppingBaseInfoActivity" />
         <activity
             android:name=".activity.BUApplyShoppingActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/FullScreenTheme"></activity>
+            android:theme="@style/FullScreenTheme" />
         <activity android:name=".activity.FeedGoodsDetailActivity" />
         <activity android:name=".activity.FeedShoppingDetailActivity" />
         <activity android:name=".activity.MineAddLocationActivity" />
@@ -122,7 +127,7 @@
             android:value="16e4843c6591302c5d1b26de" /> <!-- since 3.0.9 Required SDK 核心功能 -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.meishe.yangquan.fileprovider"
+            android:authorities="com.tangyang.yangquan.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -131,12 +136,12 @@
         </provider> <!-- since 3.1.0 Required SDK 核心功能 -->
         <provider
             android:name="cn.jpush.android.service.DataProvider"
-            android:authorities="com.meishe.yangquan.DataProvider"
+            android:authorities="com.tangyang.yangquan.DataProvider"
             android:exported="false"
             android:process=":pushcore" /> <!-- Required SDK核心功能 -->
         <provider
             android:name="cn.jpush.android.service.DownloadProvider"
-            android:authorities="com.meishe.yangquan.DownloadProvider"
+            android:authorities="com.tangyang.yangquan.DownloadProvider"
             android:exported="true" /> <!-- Required SDK核心功能 -->
         <receiver
             android:name="cn.jpush.android.service.PushReceiver"

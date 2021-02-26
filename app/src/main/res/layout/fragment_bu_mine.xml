@@ -72,6 +72,7 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/rl_bu_shopping_message"
             android:layout_width="match_parent"
             android:layout_height="58dp">
             <ImageView
@@ -115,6 +116,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_bu_feed_gold"
             android:layout_width="match_parent"
             android:layout_height="58dp">
             <ImageView
@@ -158,6 +160,7 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_bu_recommend"
             android:layout_width="match_parent"
             android:layout_height="58dp">
             <ImageView

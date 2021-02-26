@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.meishe.yangquan.activity.BUMineShoppingMessageActivity">
+
+    <include layout="@layout/custom_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5" />
+
+     <RelativeLayout
+        android:id="@+id/rl_bu_shopping_name"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="店铺名称"
+            android:textColor="#ff303030"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_bu_shopping_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp32"
+            android:background="@null"
+            android:drawableRight="@mipmap/right_arrow_normal"
+            android:drawablePadding="6dp"
+            android:gravity="end"
+            android:hint="请店铺名称"
+            android:textColorHint="#ffc2c2c2"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:layout_alignParentBottom="true"
+            android:background="#E5E5E5" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bu_shopping_address"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="店铺地址"
+            android:textColor="#ff303030"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_bu_shopping_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp32"
+            android:background="@null"
+            android:drawableRight="@mipmap/right_arrow_normal"
+            android:drawablePadding="6dp"
+            android:gravity="end"
+            android:hint="请选择店铺地址"
+            android:textColorHint="#ffc2c2c2"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:layout_alignParentBottom="true"
+            android:background="#E5E5E5" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bu_shopping_sell_type"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="主营类型"
+            android:textColor="#ff303030"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_bu_shopping_sell_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp32"
+            android:background="@null"
+            android:drawableRight="@mipmap/right_arrow_normal"
+            android:drawablePadding="6dp"
+            android:gravity="end"
+            android:hint="请选择主营类型"
+            android:textColorHint="#ffc2c2c2"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:layout_alignParentBottom="true"
+            android:background="#E5E5E5" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bu_shopping_nickname"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="店铺签名"
+            android:textColor="#ff303030"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_bu_shopping_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp32"
+            android:background="@null"
+            android:drawableRight="@mipmap/right_arrow_normal"
+            android:drawablePadding="6dp"
+            android:gravity="end"
+            android:hint="请输入店铺签名"
+            android:textColorHint="#ffc2c2c2"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:layout_alignParentBottom="true"
+            android:background="#E5E5E5" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bu_shopping_front_picture"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="实体店门头照片"
+            android:textColor="#ff303030"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_bu_shopping_front_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp32"
+            android:background="@null"
+            android:drawableRight="@mipmap/right_arrow_normal"
+            android:drawablePadding="6dp"
+            android:gravity="end"
+            android:hint="点击上传（最多可上传1张）"
+            android:textColorHint="#ffc2c2c2"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:layout_alignParentBottom="true"
+            android:background="#E5E5E5" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bu_shopping_inner_picture"
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="实体店店内照片"
+            android:textColor="#ff303030"
+            android:textSize="13sp" />
+
+        <EditText
+            android:id="@+id/et_bu_shopping_inner_picture"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp32"
+            android:background="@null"
+            android:drawableRight="@mipmap/right_arrow_normal"
+            android:drawablePadding="6dp"
+            android:gravity="end"
+            android:hint="点击上传（最多可上传4张）"
+            android:textColorHint="#ffc2c2c2"
+            android:textSize="13sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp0p3"
+            android:layout_alignParentBottom="true"
+            android:background="#E5E5E5" />
+
+    </RelativeLayout>
+
+
+</LinearLayout>

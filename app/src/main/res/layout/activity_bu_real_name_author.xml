@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context="com.meishe.yangquan.activity.BUShoppingBaseInfoActivity">
+
+    <include layout="@layout/custom_title" />
+
+    <ScrollView
+        android:scrollbars="none"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp8"
+                android:background="#fff5f5f5" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/dp24"
+                    android:layout_marginLeft="@dimen/dp24"
+                    android:text="姓名"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/et_bu_input_real_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp25"
+                    android:layout_marginRight="@dimen/dp17"
+                    android:background="@null"
+                    android:hint="请输入真实姓名"
+                    android:textColor="#ffc2c2c2"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:background="@color/line_color" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="54dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/dp24"
+                    android:layout_marginLeft="@dimen/dp24"
+                    android:text="身份证号"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/et_bu_input_card_number"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp25"
+                    android:layout_marginRight="@dimen/dp17"
+                    android:background="@null"
+                    android:hint="请输入身份证号"
+                    android:textColor="#ffc2c2c2"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:background="@color/line_color" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp22"
+                android:text="身份证头像面照片"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_bu_capture_card_positive"
+                    android:layout_marginLeft="@dimen/dp25"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:background="@mipmap/ic_bu_shopping_picture_upload_bg"
+                    android:layout_width="120dp"
+                    android:layout_height="90dp">
+
+
+                    <LinearLayout
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/iv_bu_capture"
+                            android:layout_width="@dimen/dp26"
+                            android:layout_height="@dimen/dp24"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@mipmap/ic_bu_shopping_capture"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="点击上传"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="7dp"
+                            android:textColor="#ff656565"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="身份证正面照"
+                    android:layout_below="@+id/rl_bu_capture_card_positive"
+                    android:textColor="#ff656565"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:layout_marginLeft="@dimen/dp25"
+                    android:textSize="13sp"
+                    />
+
+
+                <com.meishe.yangquan.view.RoundAngleImageView
+                    android:id="@+id/iv_bu_capture_card_positive"
+                    android:scaleType="fitXY"
+                    app:roundHeight="@dimen/dp10"
+                    app:roundWidth="@dimen/dp10"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_toRightOf="@+id/rl_bu_capture_card_positive"
+                    android:layout_marginLeft="@dimen/dp17"
+                    android:layout_width="@dimen/dp170"
+                    android:layout_height="108dp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@color/line_color" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="身份证国徽面照片"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:layout_marginTop="@dimen/dp12"
+                android:textColor="#ff303030"
+                android:textSize="13sp"
+                />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/rl_bu_capture_card_negative"
+                    android:layout_marginLeft="@dimen/dp25"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_below="@+id/tv_bu_shopping_behind"
+                    android:background="@mipmap/ic_bu_shopping_picture_upload_bg"
+                    android:layout_width="120dp"
+                    android:layout_height="90dp">
+
+                    <LinearLayout
+                        android:layout_centerInParent="true"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_width="@dimen/dp26"
+                            android:layout_height="@dimen/dp24"
+                            android:layout_gravity="center_horizontal"
+                            android:background="@mipmap/ic_bu_shopping_capture"
+                            />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="点击上传"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_marginTop="7dp"
+                            android:textColor="#ff656565"
+                            android:textSize="13sp"
+                            />
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <TextView
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_bu_capture_card_negative"
+                    android:text="身份证国徽面照"
+                    android:layout_marginLeft="@dimen/dp25"
+                    android:gravity="center_horizontal"
+                    android:textColor="#ff656565"
+                    android:layout_marginTop="@dimen/dp10"
+                    android:textSize="13sp"
+                    />
+
+                <com.meishe.yangquan.view.RoundAngleImageView
+                    android:id="@+id/iv_bu_capture_card_negative"
+                    android:scaleType="fitXY"
+                    app:roundHeight="@dimen/dp10"
+                    app:roundWidth="@dimen/dp10"
+                    android:layout_marginTop="@dimen/dp20"
+                    android:layout_toRightOf="@+id/rl_bu_capture_card_negative"
+                    android:layout_marginLeft="@dimen/dp17"
+                    android:layout_width="@dimen/dp170"
+                    android:layout_height="108dp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:layout_marginTop="@dimen/dp20"
+                android:background="@color/line_color" />
+
+
+
+            <Button
+                android:id="@+id/btn_bu_next"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp40"
+                android:layout_marginTop="@dimen/dp55"
+                android:layout_marginLeft="@dimen/dp40"
+                android:layout_marginRight="@dimen/dp40"
+                android:text="下一步"
+                android:textColor="@color/white"
+                android:background="@drawable/bg_bu_btn_next" />
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginTop="@dimen/dp25"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:background="@color/line_color" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
