@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
@@ -12,22 +11,23 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
+import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
- * 羊吧 添加羊吧内容 图片列表
+ * 商版-图片列表
  *
  * @author 86188
  */
-public class SheepBarPictureListHolder extends BaseViewHolder {
+public class BUPictureListHolder extends BaseViewHolder {
 
-    private RoundAngleImageView mIvSheepBarMessage;
+    private RoundAngleImageView mIvBuPicture;
 
 
-    public SheepBarPictureListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
+    public BUPictureListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
 
@@ -35,37 +35,37 @@ public class SheepBarPictureListHolder extends BaseViewHolder {
 
     @Override
     protected void initViewHolder(View view, Object... obj) {
-        mIvSheepBarMessage = view.findViewById(R.id.iv_sheep_bar_message);
+        mIvBuPicture = view.findViewById(R.id.iv_bu_picture);
     }
 
     @Override
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
-        if (info instanceof SheepBarPictureInfo) {
-            if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
-                String filePath = ((SheepBarPictureInfo) info).getFilePath();
+        if (info instanceof BUPictureInfo) {
+            if (((BUPictureInfo) info).getType() == BUPictureInfo.TYPE_ADD_PIC) {
+                String filePath = ((BUPictureInfo) info).getFilePath();
                 Drawable drawable = context.getResources().getDrawable(Integer.valueOf(filePath));
-                mIvSheepBarMessage.setImageDrawable(drawable);
-            } else if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_CAPTURE_PIC) {
-                Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(((SheepBarPictureInfo) info).getFilePath(), 1080);
+                mIvBuPicture.setImageDrawable(drawable);
+            } else if (((BUPictureInfo) info).getType() == BUPictureInfo.TYPE_CAPTURE_PIC) {
+                Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(((BUPictureInfo) info).getFilePath(), 1080);
 //                Matrix matrix = new Matrix();
 //                matrix.setScale(0.4f, 0.4f);
 //                Bitmap showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
 //                        tmpBitmap.getHeight(), matrix, true);
-                mIvSheepBarMessage.setImageBitmap(tmpBitmap);
-            } else if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_URL_PIC) {
+                mIvBuPicture.setImageBitmap(tmpBitmap);
+            } else if (((BUPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_URL_PIC) {
                 RequestOptions options = new RequestOptions();
                 options.centerCrop();
                 options.placeholder(R.mipmap.ic_message_list_photo_default);
                 Glide.with(context)
                         .asBitmap()
-                        .load(((SheepBarPictureInfo) info).getFilePath())
+                        .load(((BUPictureInfo) info).getFilePath())
                         .apply(options)
-                        .into(mIvSheepBarMessage);
-                mIvSheepBarMessage.setTag(((SheepBarPictureInfo) info).getFilePath());
+                        .into(mIvBuPicture);
+                mIvBuPicture.setTag(((BUPictureInfo) info).getFilePath());
             }
         }
-        mIvSheepBarMessage.setTag(info);
-        mIvSheepBarMessage.setOnClickListener(listener);
+        mIvBuPicture.setTag(info);
+        mIvBuPicture.setOnClickListener(listener);
 
     }
 

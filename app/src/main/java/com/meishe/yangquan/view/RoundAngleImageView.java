@@ -115,4 +115,5 @@ public class RoundAngleImageView extends ImageView {
         path.close();
         canvas.drawPath(path, paint);
     }
+
 }

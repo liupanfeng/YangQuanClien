@@ -17,7 +17,8 @@ public class BUMineRecommendActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        mTvTitle = findViewById(R.id.tv_title);
+        mIvBack = findViewById(R.id.iv_back);
     }
 
     @Override
@@ -27,12 +28,17 @@ public class BUMineRecommendActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-
+        mTvTitle.setText("反馈建议");
     }
 
     @Override
     public void initListener() {
-
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override

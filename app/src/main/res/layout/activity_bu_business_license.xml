@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
-    <include layout="@layout/custom_title" />
+    <include layout="@layout/custom_title"
+        android:id="@+id/title"
+        />
 
     <ScrollView
+        android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="none">
@@ -113,6 +116,7 @@
                     android:textSize="13sp" />
 
                 <EditText
+                    android:id="@+id/et_bu_input_business_scope"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -150,6 +154,7 @@
                     android:textSize="13sp" />
 
                 <TextView
+                    android:id="@+id/tv_select_time"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -272,7 +277,7 @@
 
 
             <Button
-                android:id="@+id/btn_bu_next"
+                android:id="@+id/btn_bu_commit"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp40"
                 android:layout_marginTop="@dimen/dp55"
@@ -295,5 +300,5 @@
 
     </ScrollView>
 
-
-</LinearLayout>
+    <include layout="@layout/layout_loading" />
+</RelativeLayout>

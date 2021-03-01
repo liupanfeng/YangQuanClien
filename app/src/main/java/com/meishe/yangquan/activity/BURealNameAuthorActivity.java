@@ -14,6 +14,7 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -24,12 +25,16 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
+import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.pop.ShowBigPictureView;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.PathUtils;
+import com.meishe.yangquan.utils.ToastUtil;
 
 import java.io.File;
 
@@ -64,6 +69,12 @@ public class BURealNameAuthorActivity extends BaseActivity {
     /*身份证号码*/
     private EditText et_bu_input_card_number;
 
+    /*身份证正面*/
+    private String mIDCardFrontImagePath;
+    /*身份证反面*/
+    private String mIDCardResoveImagePath;
+
+
     @Override
     protected int initRootView() {
         return R.layout.activity_bu_real_name_author;
@@ -73,6 +84,7 @@ public class BURealNameAuthorActivity extends BaseActivity {
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
+
         rl_bu_capture_card_negative = findViewById(R.id.rl_bu_capture_card_negative);
         rl_bu_capture_card_positive = findViewById(R.id.rl_bu_capture_card_positive);
         iv_bu_capture_card_negative = findViewById(R.id.iv_bu_capture_card_negative);
@@ -84,7 +96,22 @@ public class BURealNameAuthorActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
+        if (buShoppingInfo != null && ShoppingInfoManager.getInstance().isRealNameWriteSuccess()) {
+            et_bu_input_real_name.setText(buShoppingInfo.getOwnerName());
+            et_bu_input_card_number.setText(buShoppingInfo.getOwnerIdCardNum());
+            String ownerIdCardFrontImageUrl = buShoppingInfo.getOwnerIdCardFrontImageUrl();
+            mIDCardFrontImagePath = ownerIdCardFrontImageUrl;
+            String ownerIdCardReverseImageUrl = buShoppingInfo.getOwnerIdCardReverseImageUrl();
+            mIDCardResoveImagePath = ownerIdCardReverseImageUrl;
+            Bitmap bitmap = BitmapUtils.
+                    compressImage(ownerIdCardFrontImageUrl, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
+            iv_bu_capture_card_positive.setImageBitmap(bitmap);
 
+            bitmap = BitmapUtils.
+                    compressImage(ownerIdCardReverseImageUrl, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
+            iv_bu_capture_card_negative.setImageBitmap(bitmap);
+        }
     }
 
     @Override
@@ -120,46 +147,73 @@ public class BURealNameAuthorActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.rl_bu_capture_card_positive:
                 //正面
                 changePhoto();
-                mTypeCapture=1;
+                mTypeCapture = 1;
                 break;
             case R.id.rl_bu_capture_card_negative:
                 //反面
                 changePhoto();
-                mTypeCapture=2;
+                mTypeCapture = 2;
                 break;
             case R.id.btn_bu_next:
                 //下一步
+                String ownName = et_bu_input_real_name.getText().toString();
+                if (TextUtils.isEmpty(ownName)) {
+                    ToastUtil.showToast("请填写真实姓名");
+                    return;
+                }
+
+                String idCardNumber = et_bu_input_card_number.getText().toString();
+                if (TextUtils.isEmpty(idCardNumber)) {
+                    ToastUtil.showToast("请输入身份证号");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mIDCardFrontImagePath)) {
+                    ToastUtil.showToast("请上传身份证正面照片");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mIDCardResoveImagePath)) {
+                    ToastUtil.showToast("请上传身份证反面照片");
+                    return;
+                }
+
+                BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
+                if (buShoppingInfo == null) {
+                    buShoppingInfo = new BUShoppingInfo();
+                    ShoppingInfoManager.getInstance().setBuShoppingInfo(buShoppingInfo);
+                }
+                buShoppingInfo.setOwnerName(ownName);
+                buShoppingInfo.setOwnerIdCardNum(idCardNumber);
+                buShoppingInfo.setOwnerIdCardFrontImageUrl(mIDCardFrontImagePath);
+                buShoppingInfo.setOwnerIdCardReverseImageUrl(mIDCardResoveImagePath);
+
+                ShoppingInfoManager.getInstance().setRealNameWriteSuccess(true);
+                AppManager.getInstance().jumpActivity(this, BUBusinessLicenseActivity.class);
 
                 break;
             case R.id.iv_bu_capture_card_positive:
                 //查看大图
-                Object tag = iv_bu_capture_card_positive.getTag();
-                String path;
-                if (tag instanceof String){
-                    path= (String) tag;
-                }else{
+                if (TextUtils.isEmpty(mIDCardFrontImagePath)) {
                     return;
                 }
 
-                ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, path);
+                ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, mIDCardFrontImagePath);
                 if (showBigPictureView != null) {
                     showBigPictureView.show();
                 }
                 break;
             case R.id.iv_bu_capture_card_negative:
                 //查看大图
-                 tag = iv_bu_capture_card_negative.getTag();
-                if (tag instanceof String){
-                    path= (String) tag;
-                }else{
+                if (TextUtils.isEmpty(mIDCardResoveImagePath)) {
                     return;
                 }
 
-                 showBigPictureView = ShowBigPictureView.create(mContext, path);
+                showBigPictureView = ShowBigPictureView.create(mContext, mIDCardResoveImagePath);
                 if (showBigPictureView != null) {
                     showBigPictureView.show();
                 }
@@ -283,12 +337,12 @@ public class BURealNameAuthorActivity extends BaseActivity {
                             compressImage(compressImagePath, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
 //                    mIvPersonalMinePhoto.setImageBitmap(bitmap);
 //                    uploadPicture(UPLOAD_FILE_MODE_1);
-                    if (mTypeCapture==1){
+                    if (mTypeCapture == 1) {
+                        mIDCardFrontImagePath = compressImagePath;
                         iv_bu_capture_card_positive.setImageBitmap(bitmap);
-                        iv_bu_capture_card_positive.setTag(compressImagePath);
-                    }else if (mTypeCapture==2){
+                    } else if (mTypeCapture == 2) {
+                        mIDCardResoveImagePath = compressImagePath;
                         iv_bu_capture_card_negative.setImageBitmap(bitmap);
-                        iv_bu_capture_card_negative.setTag(compressImagePath);
                     }
                 }
                 break;
@@ -329,12 +383,12 @@ public class BURealNameAuthorActivity extends BaseActivity {
                                 compressImage(compressImagePath, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
 //                        mIvPersonalMinePhoto.setImageBitmap(bitmap);
 //                        uploadPicture(UPLOAD_FILE_MODE_1);
-                        if (mTypeCapture==1){
+                        if (mTypeCapture == 1) {
+                            mIDCardFrontImagePath = compressImagePath;
                             iv_bu_capture_card_positive.setImageBitmap(bitmap);
-                            iv_bu_capture_card_positive.setTag(compressImagePath);
-                        }else if (mTypeCapture==2){
+                        } else if (mTypeCapture == 2) {
+                            mIDCardResoveImagePath = compressImagePath;
                             iv_bu_capture_card_negative.setImageBitmap(bitmap);
-                            iv_bu_capture_card_negative.setTag(compressImagePath);
                         }
                     }
                 }

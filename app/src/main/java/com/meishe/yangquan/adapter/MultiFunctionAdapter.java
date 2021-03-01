@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BUMeesageDataInfo;
+import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
@@ -47,6 +48,7 @@ import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
+import com.meishe.yangquan.viewhoder.BUPictureListHolder;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BreedingArchivesFoodAnalysisHolder;
 import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
@@ -271,6 +273,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_bu_message_view, parent, false);
                 viewHolder = new BUMessageViewHolder(view, this);
                 break;
+            /*商版-图片*/
+            case VIEW_BU_PICTURE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_picture, parent, false);
+                viewHolder = new BUPictureListHolder(view, this);
+                break;
         }
         return viewHolder;
     }
@@ -358,6 +365,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_FEED_SHOPPING_LIST;
         }else if (baseInfo instanceof FeedGoodsInfo) {
             return VIEW_FEED_FOODS_LIST;
+        }else if (baseInfo instanceof BUPictureInfo) {
+            return VIEW_BU_PICTURE_LIST;
         }
         return super.getItemViewType(position);
     }

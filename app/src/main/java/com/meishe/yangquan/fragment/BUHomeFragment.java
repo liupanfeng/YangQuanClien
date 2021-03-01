@@ -13,11 +13,25 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.BUApplyShoppingActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BUShopDataInfo;
+import com.meishe.yangquan.bean.BUShoppingInfo;
+import com.meishe.yangquan.bean.BUShoppingInfoResult;
+import com.meishe.yangquan.bean.BUShoppingUserInfo;
+import com.meishe.yangquan.bean.BUShoppingUserInfoResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.ToastUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * @Author : lpf
@@ -58,10 +72,23 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         mTvTips = view.findViewById(R.id.tv_bu_tips);
         mBtnApplyOpenShop = view.findViewById(R.id.btn_bu_apply_open_shop);
 
-
+        initShoppingUserRecycler();
         initShopDataRecycler();
 
         return view;
+    }
+
+    /**
+     * 初始化 已经入住的用户的信息
+     */
+    private void initShoppingUserRecycler() {
+        GridLayoutManager gridLayoutManager =
+                new GridLayoutManager(mContext, 5);
+        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+        CustomGridItemDecoration customGridItemDecoration = new CustomGridItemDecoration(5);
+        mRecyclerView.addItemDecoration(customGridItemDecoration);
+        mRecyclerView.setLayoutManager(gridLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     /**
@@ -80,7 +107,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
 
     @Override
     protected void initData() {
-        initShopData();
+        getShoppingData();
     }
 
     /**
@@ -98,6 +125,8 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         }
         mGridAdapter.addAll(buShopDataInfoArrayList);
 
+        getShoppingUserData();
+
     }
 
     @Override
@@ -114,4 +143,109 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
                 break;
         }
     }
+
+
+
+    /**
+     * 获取已经入住的用户
+     */
+    public void getShoppingUserData(){
+        HashMap<String, Object> param = new HashMap<>();
+        String token = getToken();
+        param.put("pageNum", 1);
+        param.put("pageSize", 30);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_SHOPPING_USER_LIST, new BaseCallBack<BUShoppingUserInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+//                mLoading.hide();
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, BUShoppingUserInfoResult result) {
+//                mLoading.hide();
+                if (result.getCode() != 1) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+                List<BUShoppingUserInfo> data = result.getData();
+                if (data == null || data.size() == 0) {
+                    return;
+                }
+                mAdapter.addAll(data);
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+    /**
+     * 获取店铺信息
+     */
+    public void getShoppingData(){
+        HashMap<String, Object> param = new HashMap<>();
+        String token = getToken();
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_APPLY_SHOPPING_INFO, new BaseCallBack<BUShoppingInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+//                mLoading.hide();
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, BUShoppingInfoResult result) {
+//                mLoading.hide();
+                if (result.getCode() != 1) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+                BUShoppingInfo data = result.getData();
+                if (data == null ) {
+                    initShopData();
+                    return;
+                }
+
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
 }

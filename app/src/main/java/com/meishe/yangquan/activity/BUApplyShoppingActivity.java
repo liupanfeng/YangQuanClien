@@ -5,7 +5,9 @@ import android.view.View;
 
 import com.meishe.libbase.adpater.BaseViewHolder;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.ToastUtil;
 
 
 /**
@@ -70,11 +72,21 @@ public class BUApplyShoppingActivity extends BaseActivity {
                 break;
             case R.id.btn_bu_to_real_name:
                 //实名认证
-                AppManager.getInstance().jumpActivity(mContext, BURealNameAuthorActivity.class);
+                boolean baseMessageWriteSuccess = ShoppingInfoManager.getInstance().isBaseMessageWriteSuccess();
+                if (baseMessageWriteSuccess){
+                    AppManager.getInstance().jumpActivity(mContext, BURealNameAuthorActivity.class);
+                }else {
+                    ToastUtil.showToast("请先填写基本信息");
+                }
                 break;
             case R.id.btn_bu_to_business_license:
                 //营业执照
-                AppManager.getInstance().jumpActivity(mContext, BUBusinessLicenseActivity.class);
+                boolean realNameWriteSuccess = ShoppingInfoManager.getInstance().isRealNameWriteSuccess();
+                if (realNameWriteSuccess){
+                    AppManager.getInstance().jumpActivity(mContext, BUBusinessLicenseActivity.class);
+                }else {
+                    ToastUtil.showToast("请进行实名认证");
+                }
                 break;
         }
     }

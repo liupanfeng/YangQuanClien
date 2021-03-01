@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,25 +24,40 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.amap.api.services.core.PoiItem;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.BUPictureInfo;
+import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.bean.MenuItem;
-import com.meishe.yangquan.bean.Message;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.UploadFileInfo;
+import com.meishe.yangquan.bean.UploadFileResult;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
+import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.CustomButtonWhitText;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 
 /**
@@ -63,7 +80,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 
 
     /*商店类型*/
-    private int mShoppingType;
+    private String mShoppingType;
     /*个人店*/
     private CustomButtonWhitText cv_shopping_type_personal;
     /*个体工商户*/
@@ -73,7 +90,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 
 
     /*主营类目类型*/
-    private int mCategoryType;
+    private String mCategoryType;
     /*饲料*/
     private CustomButtonWhitText cv_category_type_feed;
     /*玉米*/
@@ -83,7 +100,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 
 
     /*货源类型*/
-    private int mGoodsType;
+    private String mGoodsType;
     /*厂家直销*/
     private CustomButtonWhitText cv_goods_type_factory;
     /*分销代销*/
@@ -101,11 +118,18 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
     /*签名*/
     private EditText et_bu_input_shopping_nickname;
     /*选择经营地址*/
-    private TextView tv_bu_select_address;
+    private EditText et_bu_select_address;
     private File mTempFile;
     private PoiItem mPoiItem = null;
     /*上传图片类型*/
     private int mTypeCapture;
+    /*保存并进行下一步*/
+    private View btn_bu_save_next;
+
+    private List<BUPictureInfo> mPictureList = new ArrayList<>();
+    /*外边的地址*/
+    private String mOutsidePicturePath;
+
 
     @Override
     protected int initRootView() {
@@ -119,7 +143,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 
         et_bu_input_shopping_name = findViewById(R.id.et_bu_input_shopping_name);
         et_bu_input_shopping_nickname = findViewById(R.id.et_bu_input_shopping_nickname);
-        tv_bu_select_address = findViewById(R.id.tv_bu_select_address);
+        et_bu_select_address = findViewById(R.id.et_bu_select_address);
 
         //店铺类型
         cv_shopping_type_personal = findViewById(R.id.cv_shopping_type_personal);
@@ -159,6 +183,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
         rl_bu_capture = findViewById(R.id.rl_bu_capture);
         rl_bu_capture_inner = findViewById(R.id.rl_bu_capture_inner);
         iv_bu_shopping_outside = findViewById(R.id.iv_bu_shopping_outside);
+        btn_bu_save_next = findViewById(R.id.btn_bu_save_next);
 
         mRecyclerView = findViewById(R.id.recyclerView);
         GridLayoutManager layoutManager =
@@ -167,19 +192,81 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
 
-
     }
 
     @Override
     public void initData() {
+        BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
+        if (buShoppingInfo==null){
+            /*默认选中个人店*/
+            selectPersonal();
+            /*默认选中饲料*/
+            selectFeed();
+            /*默认选中*/
+            selectFactory();
+            mPictureList.clear();
+        }else{
+            et_bu_select_address.setText(buShoppingInfo.getAddress());
+            et_bu_input_shopping_nickname.setText(buShoppingInfo.getNickname());
+            et_bu_input_shopping_name.setText(buShoppingInfo.getName());
 
-        /*默认选中个人店*/
-        selectPersonal();
-        /*默认选中饲料*/
-        selectFeed();
-        /*默认选中*/
-        selectFactory();
+            String shopOutSideImageUrl = buShoppingInfo.getShopOutSideImageUrl();
 
+            Bitmap bitmap = BitmapUtils.
+                    compressImage(shopOutSideImageUrl, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
+            iv_bu_shopping_outside.setImageBitmap(bitmap);
+            mOutsidePicturePath=shopOutSideImageUrl;
+
+            List<String> shopInSideImageUrls = buShoppingInfo.getShopInSideImageUrls();
+            for (int i = 0; i < shopInSideImageUrls.size(); i++) {
+                String picturePath = shopInSideImageUrls.get(i);
+                BUPictureInfo buPictureInfo=new BUPictureInfo();
+                buPictureInfo.setFilePath(picturePath);
+                buPictureInfo.setType(BUPictureInfo.TYPE_CAPTURE_PIC);
+                mPictureList.add(buPictureInfo);
+            }
+            mAdapter.addAll(mPictureList);
+
+
+            String goodsSource = buShoppingInfo.getGoodsSource();
+            switch (goodsSource){
+                case "厂家直销":
+                    selectFactory();
+                    break;
+
+                case "分销代销":
+                    selectReplace();
+                    break;
+            }
+
+            String shopType = buShoppingInfo.getShopType();
+            switch (shopType){
+                case "个人店":
+                    selectPersonal();
+                    break;
+
+                case "个体工商户":
+                    selectPersonalBusiness();
+                    break;
+                case "有限公司":
+                    selectCompany();
+                    break;
+            }
+            String mainCategory = buShoppingInfo.getMainCategory();
+            switch (mainCategory){
+                case "饲料":
+                    selectFeed();
+                    break;
+
+                case "玉米":
+                    selectCorn();
+                    break;
+                case "五金电料":
+                    selectTool();
+                    break;
+            }
+
+        }
     }
 
     @Override
@@ -202,13 +289,24 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 
         rl_bu_capture.setOnClickListener(this);
         rl_bu_capture_inner.setOnClickListener(this);
-        tv_bu_select_address.setOnClickListener(this);
         iv_bu_shopping_outside.setOnClickListener(this);
+        btn_bu_save_next.setOnClickListener(this);
 
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        et_bu_select_address.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (Util.isFastDoubleClick()) {
+                    return true;
+                }
+                AppManager.getInstance().jumpActivityForResult(BUShoppingBaseInfoActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
+                return true;
             }
         });
     }
@@ -241,7 +339,6 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
                 selectTool();
                 break;
 
-
             case R.id.cv_goods_type_factory:
                 selectFactory();
                 break;
@@ -251,18 +348,12 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 
             /*查看大图*/
             case R.id.iv_bu_shopping_outside:
-                Object tag = iv_bu_shopping_outside.getTag();
-                String path;
-                if (tag instanceof String){
-                    path= (String) tag;
-                }else{
+
+                if (TextUtils.isEmpty(mOutsidePicturePath)) {
                     return;
                 }
-//                Intent intent=new Intent(mContext, ShowPicActivity.class);
-//                intent.putExtra("imageUrl",path);
-//                mContext.startActivity(intent);
 
-                ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, path);
+                ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, mOutsidePicturePath);
                 if (showBigPictureView != null) {
                     showBigPictureView.show();
                 }
@@ -285,9 +376,58 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
                 mTypeCapture = 2;
                 changePhoto();
                 break;
-            /*选择经营地址*/
-            case R.id.tv_bu_select_address:
-                AppManager.getInstance().jumpActivityForResult(BUShoppingBaseInfoActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
+            /*保存并进行下一步*/
+            case R.id.btn_bu_save_next:
+                String shoppingName = et_bu_input_shopping_name.getText().toString();
+                if (TextUtils.isEmpty(shoppingName)) {
+                    ToastUtil.showToast("请填写店铺名称");
+                    return;
+                }
+                String shoppingNickName = et_bu_input_shopping_nickname.getText().toString();
+                if (TextUtils.isEmpty(shoppingNickName)) {
+                    ToastUtil.showToast("请填写店铺签名");
+                    return;
+                }
+
+                String address = et_bu_select_address.getText().toString();
+                if (TextUtils.isEmpty(address)) {
+                    ToastUtil.showToast("请选择店铺地址");
+                    return;
+                }
+
+                if (TextUtils.isEmpty(mOutsidePicturePath)) {
+                    ToastUtil.showToast("请上传实体门店头照片");
+                    return;
+                }
+
+                if (CommonUtils.isEmpty(mPictureList)) {
+                    ToastUtil.showToast("请上传实体门店内照片");
+                    return;
+                }
+
+                BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
+                if (buShoppingInfo == null) {
+                    buShoppingInfo = new BUShoppingInfo();
+                    ShoppingInfoManager.getInstance().setBuShoppingInfo(buShoppingInfo);
+                }
+                buShoppingInfo.setName(shoppingName);
+                buShoppingInfo.setAddress(address);
+                buShoppingInfo.setNickname(shoppingNickName);
+                buShoppingInfo.setShopOutSideImageUrl(mOutsidePicturePath);
+                List<String> picturePaths = new ArrayList<>();
+                for (int i = 0; i < mPictureList.size(); i++) {
+                    BUPictureInfo buPictureInfo = mPictureList.get(i);
+                    picturePaths.add(buPictureInfo.getFilePath());
+                }
+                buShoppingInfo.setShopInSideImageUrls(picturePaths);
+
+                buShoppingInfo.setGoodsSource(mGoodsType);
+                buShoppingInfo.setShopType(mShoppingType);
+                buShoppingInfo.setMainCategory(mCategoryType);
+
+                ShoppingInfoManager.getInstance().setBaseMessageWriteSuccess(true);
+                AppManager.getInstance().jumpActivity(BUShoppingBaseInfoActivity.this, BURealNameAuthorActivity.class);
+                finish();
                 break;
             default:
                 break;
@@ -298,7 +438,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
 
 
     private void selectPersonal() {
-        mShoppingType = 1;
+        mShoppingType = "个人店";
         cv_shopping_type_personal.setCircleSelected(true);
         cv_shopping_type_personal_business.setCircleSelected(false);
         cv_shopping_type_company.setCircleSelected(false);
@@ -308,7 +448,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
      * 选中个体工商户
      */
     private void selectPersonalBusiness() {
-        mShoppingType = 2;
+        mShoppingType = "个体工商户";
         cv_shopping_type_personal.setCircleSelected(false);
         cv_shopping_type_personal_business.setCircleSelected(true);
         cv_shopping_type_company.setCircleSelected(false);
@@ -318,7 +458,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
      * 选中公司
      */
     private void selectCompany() {
-        mShoppingType = 3;
+        mShoppingType = "有限公司";
         cv_shopping_type_personal.setCircleSelected(false);
         cv_shopping_type_personal_business.setCircleSelected(false);
         cv_shopping_type_company.setCircleSelected(true);
@@ -329,7 +469,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
      * 选中饲料
      */
     private void selectFeed() {
-        mCategoryType = 1;
+        mCategoryType = "饲料";
         cv_category_type_feed.setCircleSelected(true);
         cv_category_type_corn.setCircleSelected(false);
         cv_category_type_tool.setCircleSelected(false);
@@ -339,7 +479,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
      * 选中玉米
      */
     private void selectCorn() {
-        mCategoryType = 2;
+        mCategoryType = "玉米";
         cv_category_type_feed.setCircleSelected(false);
         cv_category_type_corn.setCircleSelected(true);
         cv_category_type_tool.setCircleSelected(false);
@@ -349,7 +489,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
      * 选中工具
      */
     private void selectTool() {
-        mCategoryType = 3;
+        mCategoryType = "五金电料";
         cv_category_type_feed.setCircleSelected(false);
         cv_category_type_corn.setCircleSelected(false);
         cv_category_type_tool.setCircleSelected(true);
@@ -359,7 +499,7 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
      * 选中厂家直销
      */
     private void selectFactory() {
-        mGoodsType = 1;
+        mGoodsType = "厂家直销";
         cv_goods_type_factory.setCircleSelected(true);
         cv_goods_type_replace.setCircleSelected(false);
     }
@@ -368,10 +508,73 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
      * 选中分销
      */
     private void selectReplace() {
-        mGoodsType = 2;
+        mGoodsType = "分销代销";
         cv_goods_type_factory.setCircleSelected(false);
         cv_goods_type_replace.setCircleSelected(true);
     }
+
+
+    /**
+     * 单图片上传
+     *
+     * @param uploadMode 1 用户头像
+     */
+    private void uploadNeedPicture(final int uploadMode, File file) {
+        String token = UserManager.getInstance(mContext).getToken();
+        if (Util.checkNull(token)) {
+            return;
+        }
+        HashMap<String, String> param = new HashMap<>();
+        param.put("uploadMode", uploadMode + "");
+        param.put("order", "1");
+
+        OkHttpManager.getInstance().postUploadSingleImage(HttpUrl.HOME_PAGE_COMMON_FILE_UPLOAD, new BaseCallBack<UploadFileResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UploadFileResult uploadFileResult) {
+                if (uploadFileResult == null) {
+                    ToastUtil.showToast(response.message());
+                    return;
+                }
+                if (uploadFileResult.getCode() != 1) {
+                    ToastUtil.showToast(uploadFileResult.getMsg());
+                    return;
+                }
+                UploadFileInfo data = uploadFileResult.getData();
+                if (data == null) {
+                    ToastUtil.showToast("UploadFileInfo is null");
+                    return;
+                }
+
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, file, "file", param, token);
+    }
+
+
 
     private void changePhoto() {
         new BottomMenuFragment(BUShoppingBaseInfoActivity.this)
@@ -484,9 +687,26 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
                             compressImage(compressImagePath, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
 //                    mIvPersonalMinePhoto.setImageBitmap(bitmap);
 //                    uploadPicture(UPLOAD_FILE_MODE_1);
-                    if (mTypeCapture==1){
+                    if (mTypeCapture == 1) {
+                        mOutsidePicturePath = compressImagePath;
                         iv_bu_shopping_outside.setImageBitmap(bitmap);
-                        iv_bu_shopping_outside.setTag(compressImagePath);
+                    } else if (mTypeCapture == 2) {
+                        if (mPictureList.size() < 4) {
+                            BUPictureInfo buPictureInfo = new BUPictureInfo();
+                            buPictureInfo.setType(BUPictureInfo.TYPE_CAPTURE_PIC);
+                            buPictureInfo.setFilePath(compressImagePath);
+                            mPictureList.add(0, buPictureInfo);
+                            mAdapter.addAll(mPictureList);
+                            mAdapter.notifyDataSetChanged();
+                        } else {
+                            mPictureList.remove(mPictureList.size() - 1);
+                            BUPictureInfo buPictureInfo = new BUPictureInfo();
+                            buPictureInfo.setType(BUPictureInfo.TYPE_CAPTURE_PIC);
+                            buPictureInfo.setFilePath(compressImagePath);
+                            mPictureList.add(0, buPictureInfo);
+                            mAdapter.addAll(mPictureList);
+                            mAdapter.notifyDataSetChanged();
+                        }
                     }
                 }
                 break;
@@ -527,9 +747,27 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
                                 compressImage(compressImagePath, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
 //                        mIvPersonalMinePhoto.setImageBitmap(bitmap);
 //                        uploadPicture(UPLOAD_FILE_MODE_1);
-                        if (mTypeCapture==1){
+                        if (mTypeCapture == 1) {
                             iv_bu_shopping_outside.setImageBitmap(bitmap);
-                            iv_bu_shopping_outside.setTag(compressImagePath);
+                            mOutsidePicturePath = compressImagePath;
+                        } else if (mTypeCapture == 2) {
+                            if (mPictureList.size() < 4) {
+                                BUPictureInfo buPictureInfo = new BUPictureInfo();
+                                buPictureInfo.setType(BUPictureInfo.TYPE_CAPTURE_PIC);
+                                buPictureInfo.setFilePath(compressImagePath);
+                                mPictureList.add(0, buPictureInfo);
+                                mAdapter.addAll(mPictureList);
+                                mAdapter.notifyDataSetChanged();
+                            } else {
+                                mPictureList.remove(mPictureList.size() - 1);
+                                BUPictureInfo buPictureInfo = new BUPictureInfo();
+                                buPictureInfo.setType(BUPictureInfo.TYPE_CAPTURE_PIC);
+                                buPictureInfo.setFilePath(compressImagePath);
+                                mPictureList.add(0, buPictureInfo);
+                                mAdapter.addAll(mPictureList);
+                                mAdapter.notifyDataSetChanged();
+                            }
+
                         }
                     }
                 }
@@ -540,12 +778,8 @@ public class BUShoppingBaseInfoActivity extends BaseActivity {
                     mPoiItem = intent.getParcelableExtra("PoiItem");
                     String title = "不显示我的位置";
                     if (title.equals(mPoiItem.getTitle())) {
-                        tv_bu_select_address.setText("请选择经营地址");
                     } else {
-//                        tv_bu_select_address.setText(mPoiItem.getSnippet());
-                        tv_bu_select_address.setText(mPoiItem.getTitle());
-//                        mUserParamInfo.setCulturalAddress(mPoiItem.getTitle());
-//                        hasChangeUserInfo();
+                        et_bu_select_address.setText(mPoiItem.getTitle());
                     }
                 }
                 break;

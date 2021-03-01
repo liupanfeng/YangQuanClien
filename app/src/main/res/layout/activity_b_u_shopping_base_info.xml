@@ -188,14 +188,15 @@
                     android:textColor="#ff303030"
                     android:textSize="13sp" />
 
-                <TextView
-                    android:id="@+id/tv_bu_select_address"
+                <EditText
+                    android:id="@+id/et_bu_select_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:layout_marginLeft="@dimen/dp25"
                     android:layout_marginRight="@dimen/dp17"
-                    android:text="请选择经营地址"
+                    android:hint="请选择经营地址"
+                    android:background="@null"
                     android:textColor="#ffc2c2c2"
                     android:textSize="13sp"
                     />
@@ -439,6 +440,7 @@
 
 
             <Button
+                android:id="@+id/btn_bu_save_next"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/dp40"
                 android:layout_marginTop="@dimen/dp25"

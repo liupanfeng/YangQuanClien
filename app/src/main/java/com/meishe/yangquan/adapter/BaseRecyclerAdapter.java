@@ -34,6 +34,7 @@ import com.meishe.yangquan.activity.PerfectInformationActivity;
 import com.meishe.yangquan.activity.ServiceMessageListActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
 import com.meishe.yangquan.activity.VersionUpdateActivity;
+import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.BusinessOpportunityResult;
@@ -128,6 +129,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
     protected static final int VIEW_BU_HOME_SHOPDATA_LIST = VIEW_TYPE_BASE + 50;                     //商版店铺数据
     protected static final int VIEW_BU_MESSAGE_LIST = VIEW_TYPE_BASE + 51;                     //商版店铺数据
+    protected static final int VIEW_BU_PICTURE_LIST = VIEW_TYPE_BASE + 52;                     //图片列表
 
 
     private IosDialog mDialog;
@@ -265,7 +267,15 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             if (showBigPictureView != null) {
                 showBigPictureView.show();
             }
-        } else if (info instanceof MineTypeInfo) {
+        } else if (info instanceof BUPictureInfo) {
+            if (((BUPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
+                return;
+            }
+            ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, ((BUPictureInfo) info).getFilePath());
+            if (showBigPictureView != null) {
+                showBigPictureView.show();
+            }
+        }  else if (info instanceof MineTypeInfo) {
 //            boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             boolean isNeedLogin = true;
             switch (((MineTypeInfo) info).getName()) {

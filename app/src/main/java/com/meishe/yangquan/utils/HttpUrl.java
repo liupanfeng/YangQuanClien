@@ -257,4 +257,17 @@ public class HttpUrl {
     public static final String SHEEP_MINE_USER_LIST = URL + "app/message/user/list";
 
 
+
+    //////////////////////////////////////////商版//////////////////////////////////////////////
+
+    /*入驻的商家*/
+    public static final String BU_HOME_SHOPPING_USER_LIST = URL + "app/owner/list";
+
+    /*（商户）保存、更新店铺信息*/
+    public static final String BU_HOME_APPLY_SHOPPING_SANE = URL + "app/owner/shop/save";
+
+    /*（商户）获取店铺信息*/
+    public static final String BU_HOME_APPLY_SHOPPING_INFO = URL + "app/owner/shop/info";
+
+
 }
