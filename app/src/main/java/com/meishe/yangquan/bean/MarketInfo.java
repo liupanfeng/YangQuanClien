@@ -40,6 +40,8 @@ public class MarketInfo extends BaseInfo{
     private String title;
     private String description;
 
+    private int type;
+
 
     public int getId() {
         return id;
@@ -143,5 +145,13 @@ public class MarketInfo extends BaseInfo{
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

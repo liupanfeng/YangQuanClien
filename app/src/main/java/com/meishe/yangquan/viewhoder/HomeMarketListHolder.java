@@ -20,6 +20,7 @@ import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.SheepBarPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.ScreenUtils;
 import com.meishe.yangquan.view.CircleImageView;
 
@@ -55,6 +56,11 @@ public class HomeMarketListHolder extends BaseViewHolder {
     private RecyclerView grid_recycler;
 
     private MultiFunctionAdapter mGrideAdapter;
+    private View ll_sell_big;
+    private View ll_sell_little;
+    private View ll_buy_little;
+    private View ll_buy_big;
+    private TextView tv_market_desc;
 
 
     public HomeMarketListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
@@ -68,6 +74,15 @@ public class HomeMarketListHolder extends BaseViewHolder {
 
     @Override
     protected void initViewHolder(View view, Object... obj) {
+
+        ll_sell_big = view.findViewById(R.id.ll_sell_big);
+        ll_sell_little = view.findViewById(R.id.ll_sell_little);
+        ll_buy_little = view.findViewById(R.id.ll_buy_little);
+        ll_buy_big = view.findViewById(R.id.ll_buy_big);
+
+        tv_market_desc = view.findViewById(R.id.tv_market_desc);
+
+
         civ_photo_circle = view.findViewById(R.id.civ_photo_circle);
         tv_market_name = view.findViewById(R.id.tv_market_nickname);
 
@@ -87,7 +102,7 @@ public class HomeMarketListHolder extends BaseViewHolder {
         GridLayoutManager gridLayoutManager =
                 new GridLayoutManager(grid_recycler.getContext(), 3);
         mGrideAdapter = new MultiFunctionAdapter(grid_recycler.getContext(), grid_recycler);
-        CustomGridItemDecoration customGridItemDecoration = new CustomGridItemDecoration(ScreenUtils.dip2px(grid_recycler.getContext(),3));
+        CustomGridItemDecoration customGridItemDecoration = new CustomGridItemDecoration(ScreenUtils.dip2px(grid_recycler.getContext(), 3));
         grid_recycler.addItemDecoration(customGridItemDecoration);
         grid_recycler.setLayoutManager(gridLayoutManager);
         grid_recycler.setAdapter(mGrideAdapter);
@@ -97,15 +112,47 @@ public class HomeMarketListHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(Context context, BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof MarketInfo) {
+            int listType = ((MarketInfo) info).getType();
+            switch (listType) {
+                case Constants.TYPE_MARKET_SELL_LITTLE_SHEEP:
+                    ll_sell_big.setVisibility(View.GONE);
+                    ll_sell_little.setVisibility(View.VISIBLE);
+                    ll_buy_little.setVisibility(View.GONE);
+                    ll_buy_big.setVisibility(View.GONE);
 
+                    break;
+
+                case Constants.TYPE_MARKET_BUY_LITTLE_SHEEP:
+                    ll_sell_big.setVisibility(View.GONE);
+                    ll_sell_little.setVisibility(View.GONE);
+                    ll_buy_little.setVisibility(View.VISIBLE);
+                    ll_buy_big.setVisibility(View.GONE);
+
+                    break;
+
+
+                case Constants.TYPE_MARKET_SELL_BIG_SHEEP:
+                    ll_sell_big.setVisibility(View.VISIBLE);
+                    ll_sell_little.setVisibility(View.GONE);
+                    ll_buy_little.setVisibility(View.GONE);
+                    ll_buy_big.setVisibility(View.GONE);
+                    break;
+
+                case Constants.TYPE_MARKET_BUY_BIG_SHEEP:
+                    ll_sell_big.setVisibility(View.GONE);
+                    ll_sell_little.setVisibility(View.GONE);
+                    ll_buy_little.setVisibility(View.GONE);
+                    ll_buy_big.setVisibility(View.VISIBLE);
+                    break;
+            }
             tv_market_name.setText(((MarketInfo) info).getNickname());
             tv_market_address.setText(((MarketInfo) info).getAddress());
             tv_market_type_name.setText(((MarketInfo) info).getTitle());
             tv_market_sheep_number.setText(((MarketInfo) info).getAmount() + "");
             tv_market_price.setText(((MarketInfo) info).getPrice() + "元/只");
-            tv_market_specification.setText(((MarketInfo) info).getWeight()+"斤");
+            tv_market_specification.setText(((MarketInfo) info).getWeight() + "斤");
             tv_place_of_origin.setText(((MarketInfo) info).getVariety());
-
+            tv_market_desc.setText(((MarketInfo) info).getDescription());
             List<String> images = ((MarketInfo) info).getImages();
             if (images != null && images.size() > 0) {
                 String coverUrl = images.get(0);
@@ -114,7 +161,7 @@ public class HomeMarketListHolder extends BaseViewHolder {
                         .load(coverUrl)
                         .apply(options)
                         .into(iv_market_cover);
-            }else{
+            } else {
                 Glide.with(context)
                         .asBitmap()
                         .load("")
@@ -123,10 +170,8 @@ public class HomeMarketListHolder extends BaseViewHolder {
             }
 
 
-
-
             List<HomeMarketPictureInfo> list = new ArrayList<>();
-            if (!CommonUtils.isEmpty(images)&&images.size()>1) {
+            if (!CommonUtils.isEmpty(images) && images.size() > 1) {
                 for (int i = 1; i < images.size(); i++) {
                     HomeMarketPictureInfo homeMarketPictureInfo = new HomeMarketPictureInfo();
                     homeMarketPictureInfo.setFilePath(images.get(i));
@@ -134,7 +179,7 @@ public class HomeMarketListHolder extends BaseViewHolder {
                     list.add(homeMarketPictureInfo);
                 }
                 mGrideAdapter.addAll(list);
-            }else{
+            } else {
                 mGrideAdapter.addAll(null);
             }
 

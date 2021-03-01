@@ -2,167 +2,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/home_market_list_item_bg"
     android:layout_marginBottom="8dp"
+    android:background="@drawable/home_market_list_item_bg"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp41">
+    <include layout="@layout/market_sell_little_sheep_view" />
 
-        <com.meishe.yangquan.view.CircleImageView
-            android:id="@+id/civ_photo_circle"
-            android:layout_width="@dimen/dp22"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp11"
-            android:background="@mipmap/ic_default_photo"
-            android:layout_height="@dimen/dp22" />
+    <include layout="@layout/market_sell_big_sheep_view" />
 
-        <TextView
-            android:id="@+id/tv_market_nickname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/civ_photo_circle"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="@dimen/dp11"
-            android:text="用户昵称"
-            android:textColor="#ff656565"
-            android:textSize="13sp"
-            />
+    <include layout="@layout/market_buy_little_sheep_view" />
 
-        <TextView
-            android:id="@+id/tv_market_address"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="通榆"
-            android:textColor="#ff656565"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/dp14"
-            android:textSize="11sp"
-            android:drawablePadding="@dimen/dp5"
-            android:drawableLeft="@mipmap/ic_market_location"
-            />
-
-    </RelativeLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:background="#EBEBEB"
-        android:layout_height="0.33dp"/>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="145dp">
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_centerVertical="true"
-            android:layout_height="128dp">
-            <com.meishe.yangquan.view.RoundAngleImageView
-                android:id="@+id/iv_cover"
-                android:layout_width="128dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/dp11"
-                app:roundWidth="5dp"
-                app:roundHeight="5dp"
-                android:scaleType="fitXY"
-                android:src="@mipmap/ic_market_default"
-                />
-            <LinearLayout
-                android:orientation="vertical"
-                android:layout_toRightOf="@+id/iv_cover"
-                android:layout_marginLeft="@dimen/dp14"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <TextView
-                    android:id="@+id/tv_market_type_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="19dp"
-                    android:text="出售羊苗"
-                    android:gravity="center"
-                    android:textColor="#ff2f3742"
-                    android:textSize="13sp"
-                    />
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:id="@+id/tv_place_of_origin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="15dp"
-                        android:text="通榆"
-                        android:gravity="center"
-                        android:drawablePadding="@dimen/dp3"
-                        android:drawableLeft="@mipmap/ic_market_place"
-                        android:textColor="#ff656565"
-                        android:textSize="11sp"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_market_specification"
-                        android:layout_width="wrap_content"
-                        android:layout_height="15dp"
-                        android:text="30斤"
-                        android:gravity="center"
-                        android:layout_marginLeft="@dimen/dp12"
-                        android:textColor="#ff656565"
-                        android:drawablePadding="@dimen/dp3"
-                        android:drawableLeft="@mipmap/ic_market_specification"
-                        android:textSize="11sp"
-                        />
-
-                    <TextView
-                        android:id="@+id/tv_market_sheep_number"
-                        android:layout_width="wrap_content"
-                        android:layout_height="15dp"
-                        android:gravity="center"
-                        android:layout_marginLeft="@dimen/dp12"
-                        android:text="1000只"
-                        android:textColor="#ff656565"
-                        android:drawablePadding="@dimen/dp3"
-                        android:drawableLeft="@mipmap/ic_market_sheep_number"
-                        android:textSize="11sp"
-                        />
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_market_price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="19dp"
-                    android:text="900元/只"
-                    android:gravity="center"
-                    android:textColor="#fffa561e"
-                    android:textSize="13sp"
-                    />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/grid_recycler"
-                        android:layout_toLeftOf="@id/iv_market_phone"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <ImageView
-                        android:id="@+id/iv_market_phone"
-                        android:layout_width="47dp"
-                        android:layout_height="47dp"
-                        android:layout_marginTop="@dimen/dp22"
-                        android:layout_marginRight="@dimen/dp10"
-                        android:layout_alignParentRight="true"
-                        android:src="@mipmap/ic_market_phone"
-                        />
-                </RelativeLayout>
-
-            </LinearLayout>
-
-        </RelativeLayout>
-
-    </RelativeLayout>
+    <include layout="@layout/market_buy_big_sheep_view" />
 
 
 </LinearLayout>

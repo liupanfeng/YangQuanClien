@@ -166,7 +166,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
     /**
      * 获取市场数据
      */
-    private void getMarketDataFromServer(int typeId, int listType) {
+    private void getMarketDataFromServer(final int typeId, final int listType) {
         if (!mIsLoadFinish) {
             return;
         }
@@ -203,6 +203,11 @@ public class HomeListFragment extends BaseRecyclerFragment {
                     ToastUtil.showToast("暂无更多内容！");
                     mIsLoadMore = false;
                     return;
+                }
+
+                for (int i=0;i<datas.size();i++){
+                    MarketInfo marketInfo = datas.get(i);
+                    marketInfo.setType(typeId);
                 }
 
                 /*页码增加*/

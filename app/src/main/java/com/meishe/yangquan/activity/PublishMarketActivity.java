@@ -104,6 +104,8 @@ public class PublishMarketActivity extends BaseActivity {
     private String mDesc;
     private View rl_desc;
     private View tv_picture;
+    private int mMaxPictureAmount;
+
 
     @Override
     protected int initRootView() {
@@ -170,23 +172,25 @@ public class PublishMarketActivity extends BaseActivity {
                 mTvTitle.setText("出售羊苗");
                 rl_price.setVisibility(View.VISIBLE);
                 rl_desc.setVisibility(View.GONE);
+                mMaxPictureAmount=7;
                 break;
             case Constants.TYPE_MARKET_BUY_LITTLE_SHEEP:
                 mTvTitle.setText("购买羊苗");
                 rl_price.setVisibility(View.GONE);
                 rl_desc.setVisibility(View.VISIBLE);
-                hidePictureUpload();
+                mMaxPictureAmount=1;
                 break;
             case Constants.TYPE_MARKET_SELL_BIG_SHEEP:
                 mTvTitle.setText("出售成品羊");
                 rl_price.setVisibility(View.GONE);
                 rl_desc.setVisibility(View.GONE);
+                mMaxPictureAmount=7;
                 break;
             case Constants.TYPE_MARKET_BUY_BIG_SHEEP:
                 mTvTitle.setText("收购成品羊");
                 rl_price.setVisibility(View.GONE);
                 rl_desc.setVisibility(View.VISIBLE);
-                hidePictureUpload();
+                mMaxPictureAmount=1;
                 break;
         }
 
@@ -215,7 +219,7 @@ public class PublishMarketActivity extends BaseActivity {
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
                 if (baseInfo instanceof SheepBarPictureInfo) {
                     if (((SheepBarPictureInfo) baseInfo).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
-                        if (mData != null && mData.size() > 7) {
+                        if (mData != null && mData.size() >  mMaxPictureAmount) {
                             ToastUtil.showToast(mContext, "最多添加7张图片");
                             return;
                         }
@@ -371,6 +375,9 @@ public class PublishMarketActivity extends BaseActivity {
 
     /**
      * 发布市场
+     *  购买羊苗 收购成品羊 有描述  没有价格
+     *
+     *  价格只有出售羊苗有
      */
     private void publishMarket(String pictures) {
         String token = UserManager.getInstance(mContext).getToken();
@@ -384,7 +391,8 @@ public class PublishMarketActivity extends BaseActivity {
         if (mMarketType==Constants.TYPE_MARKET_SELL_LITTLE_SHEEP){
             param.put("price", mPrice);
         }
-        if (mMarketType==Constants.TYPE_MARKET_SELL_LITTLE_SHEEP){
+        if ((mMarketType==Constants.TYPE_MARKET_BUY_LITTLE_SHEEP) ||(mMarketType==Constants.TYPE_MARKET_BUY_BIG_SHEEP)) {
+            //购买羊苗  收购成品羊
             param.put("description", mDesc);
         }
         param.put("fileIds", pictures);
