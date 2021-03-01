@@ -135,6 +135,7 @@ public class BUBusinessLicenseActivity extends BaseActivity {
     public void initListener() {
         rl_bu_capture_business_license.setOnClickListener(this);
         btn_bu_commit.setOnClickListener(this);
+        tv_select_time.setOnClickListener(this);
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -251,7 +252,7 @@ public class BUBusinessLicenseActivity extends BaseActivity {
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void showDataPicker(final TextView textView) {
         String strTime = textView.getText().toString().trim();
-        if (!TextUtils.isEmpty(strTime)&&!strTime.equals("请选择营业执照到期时间")) {
+        if (!TextUtils.isEmpty(strTime) && !strTime.equals("请选择营业执照到期时间")) {
             String[] split = strTime.split("-");
             if (split != null && split.length == 3) {
                 mYear = Integer.valueOf(split[0]);
@@ -295,6 +296,7 @@ public class BUBusinessLicenseActivity extends BaseActivity {
 
     /**
      * 统计需要上传的图片数量
+     *
      * @param buShoppingInfo
      */
     private void StatisticsPictureNumber(BUShoppingInfo buShoppingInfo) {
@@ -458,7 +460,7 @@ public class BUBusinessLicenseActivity extends BaseActivity {
             return;
         }
         BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
-        if (buShoppingInfo==null){
+        if (buShoppingInfo == null) {
             return;
         }
         showLoading();
@@ -474,11 +476,12 @@ public class BUBusinessLicenseActivity extends BaseActivity {
         param.put("ownerName", buShoppingInfo.getOwnerName());
         param.put("ownerIdCardNum", buShoppingInfo.getOwnerIdCardNum());
         param.put("ownerIdCardFrontImageId", buShoppingInfo.getOwnerIdCardFrontImageId());
-        param.put("name", buShoppingInfo.getName());
-        param.put("name", buShoppingInfo.getName());
-        param.put("name", buShoppingInfo.getName());
-        param.put("name", buShoppingInfo.getName());
-        param.put("name", buShoppingInfo.getName());
+        param.put("ownerIdCardReverseImageId", buShoppingInfo.getOwnerIdCardReverseImageId());
+        param.put("businessName", buShoppingInfo.getBusinessName());
+        param.put("businessCreditCode", buShoppingInfo.getBusinessCreditCode());
+        param.put("businessScope", buShoppingInfo.getBusinessScope());
+        param.put("businessPeriod", buShoppingInfo.getBusinessPeriod());
+        param.put("businessCardImageId", buShoppingInfo.getBusinessCardImageId());
         OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_APPLY_SHOPPING_SANE, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -505,7 +508,6 @@ public class BUBusinessLicenseActivity extends BaseActivity {
                 }
                 ToastUtil.showToast(mContext, "申请成功，请等待…");
                 ShoppingInfoManager.getInstance().setApplyShoppingSuccess(true);
-                AppManager.getInstance().finishActivity(BUApplyShoppingActivity.class);
                 AppManager.getInstance().finishActivity(BUBusinessLicenseActivity.class);
             }
 
