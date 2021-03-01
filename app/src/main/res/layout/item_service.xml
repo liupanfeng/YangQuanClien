@@ -45,7 +45,7 @@
             android:layout_centerVertical="true"
             android:layout_height="120dp">
             <com.meishe.yangquan.view.RoundAngleImageView
-                android:id="@+id/iv_service_cover"
+                android:id="@+id/iv_cover"
                 android:layout_width="102dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/dp11"
@@ -57,7 +57,7 @@
 
             <RelativeLayout
                 android:id="@+id/rl_cut_sheep_hair"
-                android:layout_toRightOf="@+id/iv_service_cover"
+                android:layout_toRightOf="@+id/iv_cover"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_width="match_parent"
                 android:visibility="gone"
@@ -162,7 +162,7 @@
 
             <RelativeLayout
                 android:id="@+id/rl_cut_sheep_dung"
-                android:layout_toRightOf="@+id/iv_service_cover"
+                android:layout_toRightOf="@+id/iv_cover"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_width="match_parent"
                 android:visibility="gone"
@@ -266,7 +266,7 @@
 
             <RelativeLayout
                 android:id="@+id/rl_find_car"
-                android:layout_toRightOf="@+id/iv_service_cover"
+                android:layout_toRightOf="@+id/iv_cover"
                 android:layout_marginLeft="@dimen/dp10"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">

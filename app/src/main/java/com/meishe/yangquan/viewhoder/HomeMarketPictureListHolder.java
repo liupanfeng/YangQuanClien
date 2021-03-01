@@ -65,6 +65,7 @@ public class HomeMarketPictureListHolder extends BaseViewHolder {
                 mIvSheepBarMessage.setTag(((HomeMarketPictureInfo) info).getFilePath());
             }
         }
+
         mIvSheepBarMessage.setTag(info);
         mIvSheepBarMessage.setOnClickListener(listener);
 

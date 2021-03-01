@@ -42,6 +42,7 @@ import com.meishe.yangquan.bean.EmptyInfo;
 import com.meishe.yangquan.bean.EndInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
+import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineTypeInfo;
@@ -267,7 +268,15 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             if (showBigPictureView != null) {
                 showBigPictureView.show();
             }
-        } else if (info instanceof BUPictureInfo) {
+        } else if (info instanceof HomeMarketPictureInfo) {
+            if (((HomeMarketPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
+                return;
+            }
+            ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, ((HomeMarketPictureInfo) info).getFilePath());
+            if (showBigPictureView != null) {
+                showBigPictureView.show();
+            }
+        }else if (info instanceof BUPictureInfo) {
             if (((BUPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
                 return;
             }
@@ -343,14 +352,14 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineCallBackActivity.class);
                     break;
             }
-        } else if (info instanceof ServiceInfo) {
+        } else if (info instanceof ServiceInfo&&v.getId()==R.id.iv_find_car_call_phone_number) {
             //首页服务
             String phone = ((ServiceInfo) info).getPhone();
             if (Util.checkNull(phone)) {
                 return;
             }
             callPhone(phone);
-        } else if (info instanceof MarketInfo) {
+        } else if (info instanceof MarketInfo&&v.getId()==R.id.iv_market_phone) {
             //市场
             String phone = ((MarketInfo) info).getPhone();
             if (Util.checkNull(phone)) {

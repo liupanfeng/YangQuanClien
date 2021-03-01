@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activity.PublishMarketActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -273,8 +276,48 @@
                 android:layout_alignParentBottom="true"
                 android:background="#E5E5E5" />
         </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/rl_desc"
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp16"
+                android:text="描述"
+                android:textColor="#ff303030"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/et_market_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="@dimen/dp32"
+                android:background="@null"
+                android:drawableRight="@mipmap/right_arrow_normal"
+                android:drawablePadding="6dp"
+                android:gravity="end"
+                android:hint="请输入描述信息"
+                android:textColorHint="#ffc2c2c2"
+                android:textSize="13sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dp0p3"
+                android:layout_alignParentBottom="true"
+                android:background="#E5E5E5" />
+        </RelativeLayout>
+
+
+
 
         <TextView
+            android:id="@+id/tv_picture"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp16"
@@ -304,6 +347,6 @@
 
 
     <include layout="@layout/layout_loading" />
+    </RelativeLayout>
 
-
-</RelativeLayout>
+</FrameLayout>

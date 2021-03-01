@@ -10,18 +10,18 @@ import android.widget.LinearLayout;
  * @CreateDate : 2021/2/27
  * @Description : 方形View
  */
-public class SquareCardView extends LinearLayout {
+public class SquareView extends LinearLayout {
 
 
-    public SquareCardView(Context context) {
+    public SquareView(Context context) {
         super(context);
     }
 
-    public SquareCardView(Context context, AttributeSet attrs) {
+    public SquareView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SquareCardView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SquareView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

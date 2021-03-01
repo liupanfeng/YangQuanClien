@@ -1,6 +1,7 @@
 package com.meishe.yangquan.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.MarketResult;
@@ -16,6 +18,7 @@ import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
@@ -109,6 +112,38 @@ public class HomeListFragment extends BaseRecyclerFragment {
             }
         });
 
+        mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, BaseInfo baseInfo) {
+                String url = null;
+                if (mTabType == Constants.TAB_TYPE_MARKET) {
+                    List<String> images = ((MarketInfo) baseInfo).getImages();
+                    if (CommonUtils.isEmpty(images)) {
+                        return;
+                    }
+                    url = images.get(0);
+                    if (TextUtils.isEmpty(url)) {
+                        return;
+                    }
+                } else if (mTabType == Constants.TAB_TYPE_SERVICE) {
+                    List<String> images = ((ServiceInfo) baseInfo).getImages();
+                    if (CommonUtils.isEmpty(images)) {
+                        return;
+                    }
+                    url = images.get(0);
+                    if (TextUtils.isEmpty(url)) {
+                        return;
+                    }
+                }
+                if (url == null) {
+                    return;
+                }
+                ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, url);
+                if (showBigPictureView != null) {
+                    showBigPictureView.show();
+                }
+            }
+        });
     }
 
     @Override
@@ -164,7 +199,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
                 }
 
                 List<MarketInfo> datas = result.getData();
-                if (CommonUtils.isEmpty(datas) && mIsLoadMore) {
+                if (CommonUtils.isEmpty(datas) && mIsLoadMore && mList.size() >= mPageSize) {
                     ToastUtil.showToast("暂无更多内容！");
                     mIsLoadMore = false;
                     return;
@@ -228,7 +263,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
                     return;
                 }
                 List<ServiceInfo> datas = result.getData();
-                if (CommonUtils.isEmpty(datas)) {
+                if (CommonUtils.isEmpty(datas) && mIsLoadMore && mList.size() >= mPageSize) {
                     ToastUtil.showToast("暂无更多内容！");
                     mIsLoadMore = false;
                     return;

@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+<com.meishe.yangquan.view.SquareView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.meishe.yangquan.view.RoundAngleImageView
         android:id="@+id/iv_sheep_bar_message"
-        android:layout_width="@dimen/dp80"
-        android:layout_height="@dimen/dp80"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="fitXY"
         app:roundWidth="5dp"
         app:roundHeight="5dp"
         />
-</LinearLayout>
+</com.meishe.yangquan.view.SquareView>

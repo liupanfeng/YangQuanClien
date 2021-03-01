@@ -99,6 +99,11 @@ public class PublishMarketActivity extends BaseActivity {
     private String mPhone;
     private String mWeight;
     private ImageView mIvSheepMarketPublish;
+    private View rl_price;
+    private EditText et_market_desc;
+    private String mDesc;
+    private View rl_desc;
+    private View tv_picture;
 
     @Override
     protected int initRootView() {
@@ -118,6 +123,10 @@ public class PublishMarketActivity extends BaseActivity {
         mEtMarketInputPrice = findViewById(R.id.et_market_input_price);
         mEtMarketInputPhone = findViewById(R.id.et_market_input_phone);
         mIvSheepMarketPublish = findViewById(R.id.iv_sheep_market_publish);
+        rl_price = findViewById(R.id.rl_price);
+        rl_desc = findViewById(R.id.rl_desc);
+        et_market_desc = findViewById(R.id.et_market_desc);
+        tv_picture = findViewById(R.id.tv_picture);
 
         mRecyclerView = findViewById(R.id.recycler);
         mLoading = findViewById(R.id.loading);
@@ -127,7 +136,7 @@ public class PublishMarketActivity extends BaseActivity {
 
     private void initGridRecyclerView() {
         GridLayoutManager gridLayoutManager =
-                new GridLayoutManager(mContext, 3);
+                new GridLayoutManager(mContext, 4);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
         CustomGridItemDecoration customGridItemDecoration = new CustomGridItemDecoration(15);
         mRecyclerView.addItemDecoration(customGridItemDecoration);
@@ -159,19 +168,35 @@ public class PublishMarketActivity extends BaseActivity {
         switch (mMarketType) {
             case Constants.TYPE_MARKET_SELL_LITTLE_SHEEP:
                 mTvTitle.setText("出售羊苗");
+                rl_price.setVisibility(View.VISIBLE);
+                rl_desc.setVisibility(View.GONE);
                 break;
             case Constants.TYPE_MARKET_BUY_LITTLE_SHEEP:
                 mTvTitle.setText("购买羊苗");
+                rl_price.setVisibility(View.GONE);
+                rl_desc.setVisibility(View.VISIBLE);
+                hidePictureUpload();
                 break;
             case Constants.TYPE_MARKET_SELL_BIG_SHEEP:
                 mTvTitle.setText("出售成品羊");
+                rl_price.setVisibility(View.GONE);
+                rl_desc.setVisibility(View.GONE);
                 break;
             case Constants.TYPE_MARKET_BUY_BIG_SHEEP:
                 mTvTitle.setText("收购成品羊");
+                rl_price.setVisibility(View.GONE);
+                rl_desc.setVisibility(View.VISIBLE);
+                hidePictureUpload();
                 break;
         }
 
     }
+
+    public void hidePictureUpload(){
+        tv_picture.setVisibility(View.GONE);
+        mRecyclerView.setVisibility(View.GONE);
+    }
+
 
     @Override
     public void initListener() {
@@ -233,16 +258,13 @@ public class PublishMarketActivity extends BaseActivity {
                     return;
                 }
                 mPrice = mEtMarketInputPrice.getText().toString().trim();
-                if (Util.checkNull(mPrice)) {
-                    ToastUtil.showToast(mContext, "价格必须填写");
-                    return;
-                }
                 mPhone = mEtMarketInputPhone.getText().toString().trim();
                 if (Util.checkNull(mPhone)) {
                     ToastUtil.showToast(mContext, "电话必须填写");
                     return;
                 }
 
+                mDesc = et_market_desc.getText().toString().trim();
                 uploadPictures();
                 break;
             case R.id.iv_sheep_market_publish:
@@ -359,7 +381,12 @@ public class PublishMarketActivity extends BaseActivity {
         param.put("weight", mWeight);
         param.put("amount", mAmount);
         param.put("phone", mPhone);
-        param.put("price", mPrice);
+        if (mMarketType==Constants.TYPE_MARKET_SELL_LITTLE_SHEEP){
+            param.put("price", mPrice);
+        }
+        if (mMarketType==Constants.TYPE_MARKET_SELL_LITTLE_SHEEP){
+            param.put("description", mDesc);
+        }
         param.put("fileIds", pictures);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_ADD_MARKET, new BaseCallBack<ServerResult>() {

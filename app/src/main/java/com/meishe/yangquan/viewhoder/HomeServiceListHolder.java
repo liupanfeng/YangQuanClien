@@ -97,7 +97,7 @@ public class HomeServiceListHolder extends BaseViewHolder {
         tv_market_name = view.findViewById(R.id.tv_market_nickname);
 
         tv_market_address = view.findViewById(R.id.tv_market_address);
-        iv_market_cover = view.findViewById(R.id.iv_service_cover);
+        iv_market_cover = view.findViewById(R.id.iv_cover);
 
         //////////////////////剪羊毛/////////////////////////
         tv_service_name = view.findViewById(R.id.tv_service_name);
@@ -202,11 +202,19 @@ public class HomeServiceListHolder extends BaseViewHolder {
                         .apply(options)
                         .into(iv_market_cover);
 
+            }else {
+                Glide.with(context)
+                        .asBitmap()
+                        .load("")
+                        .apply(options)
+                        .into(iv_market_cover);
             }
 
 
             iv_call_phone_number.setTag(info);
             iv_call_phone_number.setOnClickListener(listener);
+            iv_market_cover.setTag(info);
+            iv_market_cover.setOnClickListener(listener);
 
         }
     }

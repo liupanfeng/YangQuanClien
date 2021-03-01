@@ -38,6 +38,8 @@ public class MarketInfo extends BaseInfo{
     private String nickname;
     private float weight;
     private String title;
+    private String description;
+
 
     public int getId() {
         return id;
@@ -133,5 +135,13 @@ public class MarketInfo extends BaseInfo{
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
