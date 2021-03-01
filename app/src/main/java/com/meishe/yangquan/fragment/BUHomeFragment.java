@@ -231,6 +231,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
 
             }
 
+
             @Override
             protected void onResponse(Response response) {
 
