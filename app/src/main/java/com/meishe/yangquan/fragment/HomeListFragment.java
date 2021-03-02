@@ -116,7 +116,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
             @Override
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
                 String url = null;
-                if (mTabType == Constants.TAB_TYPE_MARKET) {
+                if (mTabType == Constants.TAB_TYPE_MARKET&&view.getId()==R.id.iv_cover) {
                     List<String> images = ((MarketInfo) baseInfo).getImages();
                     if (CommonUtils.isEmpty(images)) {
                         return;
@@ -125,7 +125,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
                     if (TextUtils.isEmpty(url)) {
                         return;
                     }
-                } else if (mTabType == Constants.TAB_TYPE_SERVICE) {
+                } else if (mTabType == Constants.TAB_TYPE_SERVICE&&view.getId()==R.id.iv_cover) {
                     List<String> images = ((ServiceInfo) baseInfo).getImages();
                     if (CommonUtils.isEmpty(images)) {
                         return;
@@ -148,6 +148,12 @@ public class HomeListFragment extends BaseRecyclerFragment {
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
         mList.clear();
         mPageNum = 1;
         if (mTabType == Constants.TAB_TYPE_MARKET) {
@@ -155,12 +161,6 @@ public class HomeListFragment extends BaseRecyclerFragment {
         } else if (mTabType == Constants.TAB_TYPE_SERVICE) {
             getServiceDataFromServer(mType, mListType);
         }
-    }
-
-    @Override
-    protected void lazyLoad() {
-        super.lazyLoad();
-
     }
 
     /**

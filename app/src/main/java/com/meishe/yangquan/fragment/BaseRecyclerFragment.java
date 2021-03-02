@@ -54,13 +54,16 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
 
     /** Fragment当前状态是否可见 */
     protected boolean isVisible;
-
+    private boolean isInitView;
 
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return initView(inflater, container);
+        View view = initView(inflater, container);
+        isInitView = true;
+        onVisible();
+        return view;
     }
 
     @Override
@@ -75,7 +78,6 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-
         if(getUserVisibleHint()) {
             isVisible = true;
             onVisible();
@@ -86,11 +88,17 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
     }
 
 
+
     /**
      * 可见
      */
     protected void onVisible() {
-        lazyLoad();
+        if(isInitView && isVisible ){
+            lazyLoad();
+            //防止重复加载数据
+            isInitView = false;
+            isVisible = false;
+        }
     }
 
 

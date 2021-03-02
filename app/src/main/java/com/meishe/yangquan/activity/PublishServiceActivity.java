@@ -13,7 +13,9 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +73,7 @@ import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_VACC
  */
 public class PublishServiceActivity extends BaseActivity {
 
+    public static final int MAX_LENGTH = 30;
 
     //相册请求码
     private static final int ALBUM_REQUEST_CODE = 1;
@@ -263,6 +266,32 @@ public class PublishServiceActivity extends BaseActivity {
                 }
             }
         });
+
+        mEtServiceInputTeamDesc.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int length = s.length();
+                String str = s.toString();
+                if (length > MAX_LENGTH) {
+                    mEtServiceInputTeamDesc.setText(str.substring(0, MAX_LENGTH));
+                    mEtServiceInputTeamDesc.requestFocus();
+                    mEtServiceInputTeamDesc.setSelection(mEtServiceInputTeamDesc.getText().length());
+                } else {
+//                    int i = MAX_LENGTH - length;
+//                    mTvNumberLimit.setText(String.valueOf(i));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     @Override
@@ -348,8 +377,9 @@ public class PublishServiceActivity extends BaseActivity {
             ToastUtil.showToast(mContext, "手机号必须填写");
             return;
         }
-        if (!mTempFile.exists()) {
+        if (mTempFile==null||!mTempFile.exists()) {
             ToastUtil.showToast(mContext, "图片必须上传");
+            return;
         }
         uploadPicture();
     }
@@ -390,8 +420,9 @@ public class PublishServiceActivity extends BaseActivity {
             ToastUtil.showToast(mContext, "手机号必须填写");
             return;
         }
-        if (!mTempFile.exists()) {
+        if (mTempFile==null||!mTempFile.exists()) {
             ToastUtil.showToast(mContext, "图片必须上传");
+            return;
         }
         uploadPicture();
     }
@@ -427,8 +458,9 @@ public class PublishServiceActivity extends BaseActivity {
             ToastUtil.showToast(mContext, "手机号必须填写");
             return;
         }
-        if (!mTempFile.exists()) {
+        if (mTempFile==null||!mTempFile.exists()) {
             ToastUtil.showToast(mContext, "图片必须上传");
+            return;
         }
         uploadPicture();
     }
@@ -837,6 +869,7 @@ public class PublishServiceActivity extends BaseActivity {
                     if (imagePath != null) {
                         showBitmap = BitmapUtils.compressImage(imagePath, Constants.COMPRESS_WIDTH,Constants.COMPRESS_HEIGHT);
                         mIvPublishService.setImageBitmap(showBitmap);
+                        mTempFile=new File(imagePath);
                     }
                 }
                 break;

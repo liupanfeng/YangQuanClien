@@ -46,6 +46,7 @@ import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.SheepVaccineInfo;
 import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.SystemNotification;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
@@ -55,6 +56,10 @@ import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
 import com.meishe.yangquan.viewhoder.CommentListHolder;
 import com.meishe.yangquan.viewhoder.FeedFoodsHolder;
 import com.meishe.yangquan.viewhoder.FeedShoppingHolder;
+import com.meishe.yangquan.viewhoder.HomeMarketBuyBigSheepListHolder;
+import com.meishe.yangquan.viewhoder.HomeMarketBuyLittleSheepListHolder;
+import com.meishe.yangquan.viewhoder.HomeMarketSellBigSheepListHolder;
+import com.meishe.yangquan.viewhoder.HomeMarketSellLittleSheepListHolder;
 import com.meishe.yangquan.viewhoder.MineCallbackHolder;
 import com.meishe.yangquan.viewhoder.SheepCutHairHolder;
 import com.meishe.yangquan.viewhoder.HomeMarketPictureListHolder;
@@ -153,6 +158,26 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             case VIEW_MARKET_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_market, parent, false);
                 viewHolder = new HomeMarketListHolder(view, this);
+                break;
+            /*市场列表 SELL_LITTLE */
+            case VIEW_MARKET_LIST_SELL_LITTLE_SHEEP:
+                view = mLayoutInflater.inflate(R.layout.market_sell_little_sheep_view, parent, false);
+                viewHolder = new HomeMarketSellLittleSheepListHolder(view, this);
+                break;
+            /*市场列表 SELL_BIG */
+            case VIEW_MARKET_LIST_SELL_BIG_SHEEP:
+                view = mLayoutInflater.inflate(R.layout.market_sell_big_sheep_view, parent, false);
+                viewHolder = new HomeMarketSellBigSheepListHolder(view, this);
+                break;
+            /*市场列表 _BUY_BIG */
+            case VIEW_MARKET_LIST_BUY_BIG_SHEEP:
+                view = mLayoutInflater.inflate(R.layout.market_buy_big_sheep_view, parent, false);
+                viewHolder = new HomeMarketBuyBigSheepListHolder(view, this);
+                break;
+            /*市场列表 BUY_LITTLE */
+            case VIEW_MARKET_LIST_BUY_LITTLE_SHEEP:
+                view = mLayoutInflater.inflate(R.layout.market_buy_little_sheep_view, parent, false);
+                viewHolder = new HomeMarketBuyLittleSheepListHolder(view, this);
                 break;
             /*服务列表*/
             case VIEW_SERVICE_LIST:
@@ -318,7 +343,18 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
         } else if (baseInfo instanceof QuotationInfo) {
             return VIEW_QUOTATION_LIST;
         } else if (baseInfo instanceof MarketInfo) {
-            return VIEW_MARKET_LIST;
+            int type = ((MarketInfo) baseInfo).getType();
+            switch (type){
+                case Constants.TYPE_MARKET_SELL_LITTLE_SHEEP:
+                   return VIEW_MARKET_LIST_SELL_LITTLE_SHEEP;
+                case Constants.TYPE_MARKET_BUY_LITTLE_SHEEP:
+                    return VIEW_MARKET_LIST_BUY_LITTLE_SHEEP;
+
+                case Constants.TYPE_MARKET_SELL_BIG_SHEEP:
+                    return VIEW_MARKET_LIST_SELL_BIG_SHEEP;
+                case Constants.TYPE_MARKET_BUY_BIG_SHEEP:
+                    return VIEW_MARKET_LIST_BUY_BIG_SHEEP;
+            }
         } else if (baseInfo instanceof IndustryInfo) {
             return VIEW_INDUSTRY_LIST;
         } else if (baseInfo instanceof SheepBarPictureInfo) {

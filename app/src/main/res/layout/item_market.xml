@@ -6,9 +6,11 @@
     android:background="@drawable/home_market_list_item_bg"
     android:orientation="vertical">
 
+    <include layout="@layout/market_sell_big_sheep_view" />
+
     <include layout="@layout/market_sell_little_sheep_view" />
 
-    <include layout="@layout/market_sell_big_sheep_view" />
+
 
     <include layout="@layout/market_buy_little_sheep_view" />
 

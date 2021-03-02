@@ -137,9 +137,10 @@ public class HomeServiceListHolder extends BaseViewHolder {
                     rl_find_car.setVisibility(View.GONE);
 
                     tv_service_name.setText(((ServiceInfo) info).getTeamName());
-                    tv_person_number.setText(((ServiceInfo) info).getTeamHumanScale() + "");
-                    tv_sheep_price.setText(((ServiceInfo) info).getPrice() + "");
-                    tv_team_desc.setText(((ServiceInfo) info).getTeamDesc());
+                    tv_person_number.setText(((ServiceInfo) info).getTeamHumanScale() + "人");
+                    tv_sheep_price.setText(((ServiceInfo) info).getPrice() + "元");
+                    String teamDesc = ((ServiceInfo) info).getTeamDesc();
+                    tv_team_desc.setText(teamDesc);
 
                     break;
                 case HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG:
@@ -148,9 +149,9 @@ public class HomeServiceListHolder extends BaseViewHolder {
                     rl_find_car.setVisibility(View.GONE);
 
                     tv_sheep_dung_name.setText(((ServiceInfo) info).getTeamName());
-                    tv_sheep_dung_person_number.setText(((ServiceInfo) info).getTeamHumanScale() + "");
-                    tv_sheep_dung_cat_number.setText(((ServiceInfo) info).getTeamCarScale() + "");
-                    tv_sheep_dung_team_price.setText(((ServiceInfo) info).getPrice() + "/车");
+                    tv_sheep_dung_person_number.setText(((ServiceInfo) info).getTeamHumanScale() + "人");
+                    tv_sheep_dung_cat_number.setText(((ServiceInfo) info).getTeamCarScale() + "辆");
+                    tv_sheep_dung_team_price.setText(((ServiceInfo) info).getPrice() + "元/车");
 
                     break;
                 case HomeServiceFragment.TYPE_SERVICE_LOOK_CAR:
@@ -180,8 +181,8 @@ public class HomeServiceListHolder extends BaseViewHolder {
                             break;
                     }
                     tv_find_car_service_type.setText(carServiceType);
-                    tv_find_car_sheep_length_width.setText(((ServiceInfo) info).getCarVolume());
-                    tv_find_car_limit_height.setText(((ServiceInfo) info).getMaxHeight() + "");
+                    tv_find_car_sheep_length_width.setText(((ServiceInfo) info).getCarVolume()+"米");
+                    tv_find_car_limit_height.setText(((ServiceInfo) info).getMaxHeight() + "米");
                     break;
                 default:
                     break;

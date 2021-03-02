@@ -146,15 +146,15 @@
 
                 <TextView
                     android:id="@+id/tv_team_desc"
-                    android:layout_below="@+id/tv_menu_sheep_price"
-                    android:layout_toRightOf="@+id/tv_menu_team_desc"
-                    android:layout_marginLeft="@dimen/dp4"
+                    android:layout_below="@+id/tv_menu_team_desc"
                     android:layout_marginTop="@dimen/dp4"
                     android:layout_marginRight="@dimen/dp55"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="我们团队成立于2018年，是一直专业的团队"
                     android:textColor="#ff2f3742"
+                    android:maxLines="2"
+                    android:ellipsize="end"
                     android:textSize="13sp"
                     />
 

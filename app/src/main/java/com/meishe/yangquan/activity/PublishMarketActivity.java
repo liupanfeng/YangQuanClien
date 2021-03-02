@@ -10,8 +10,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Parcelable;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.amap.api.services.core.PoiItem;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
@@ -36,6 +39,7 @@ import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
@@ -59,6 +63,8 @@ import okhttp3.Response;
  * s首页-市场发布
  */
 public class PublishMarketActivity extends BaseActivity {
+
+    public static final int SHOW_ADD_LOCATION_ACTIVITY_RESULT = 300;
 
     //相册请求码
     private static final int ALBUM_REQUEST_CODE = 1;
@@ -105,6 +111,9 @@ public class PublishMarketActivity extends BaseActivity {
     private View rl_desc;
     private View tv_picture;
     private int mMaxPictureAmount;
+    private EditText mEtMarketInputAddress;
+    private String mAddress;
+    private PoiItem mPoiItem;
 
 
     @Override
@@ -124,6 +133,7 @@ public class PublishMarketActivity extends BaseActivity {
         mEtMarketInputAmount = findViewById(R.id.et_market_input_amount);
         mEtMarketInputPrice = findViewById(R.id.et_market_input_price);
         mEtMarketInputPhone = findViewById(R.id.et_market_input_phone);
+        mEtMarketInputAddress = findViewById(R.id.et_address);
         mIvSheepMarketPublish = findViewById(R.id.iv_sheep_market_publish);
         rl_price = findViewById(R.id.rl_price);
         rl_desc = findViewById(R.id.rl_desc);
@@ -220,12 +230,23 @@ public class PublishMarketActivity extends BaseActivity {
                 if (baseInfo instanceof SheepBarPictureInfo) {
                     if (((SheepBarPictureInfo) baseInfo).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
                         if (mData != null && mData.size() >  mMaxPictureAmount) {
-                            ToastUtil.showToast(mContext, "最多添加7张图片");
+                            ToastUtil.showToast(mContext, "最多添加"+mMaxPictureAmount+"张图片");
                             return;
                         }
                         showPictureSelectItem();
                     }
                 }
+            }
+        });
+
+        mEtMarketInputAddress.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (Util.isFastDoubleClick()){
+                    return true;
+                }
+                AppManager.getInstance().jumpActivityForResult(PublishMarketActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
+                return true;
             }
         });
     }
@@ -265,6 +286,11 @@ public class PublishMarketActivity extends BaseActivity {
                 mPhone = mEtMarketInputPhone.getText().toString().trim();
                 if (Util.checkNull(mPhone)) {
                     ToastUtil.showToast(mContext, "电话必须填写");
+                    return;
+                }
+                mAddress = mEtMarketInputAddress.getText().toString().trim();
+                if (Util.checkNull(mAddress)) {
+                    ToastUtil.showToast(mContext, "地址必须填写");
                     return;
                 }
 
@@ -388,6 +414,7 @@ public class PublishMarketActivity extends BaseActivity {
         param.put("weight", mWeight);
         param.put("amount", mAmount);
         param.put("phone", mPhone);
+        param.put("address", mAddress);
         if (mMarketType==Constants.TYPE_MARKET_SELL_LITTLE_SHEEP){
             param.put("price", mPrice);
         }
@@ -576,7 +603,16 @@ public class PublishMarketActivity extends BaseActivity {
                     }
                 }
                 break;
-
+            case SHOW_ADD_LOCATION_ACTIVITY_RESULT:
+                if (intent != null) {
+                    mPoiItem = intent.getParcelableExtra("PoiItem");
+                    String title = "不显示我的位置";
+                    if (title.equals(mPoiItem.getTitle())) {
+                    } else {
+                        mEtMarketInputAddress.setText(mPoiItem.getTitle());
+                    }
+                }
+                break;
 
             case CROP_SMALL_PICTURE:  //调用剪裁后返回
                 if (resultCode == RESULT_OK) {

@@ -172,6 +172,7 @@
             android:layout_height="60dp">
 
             <TextView
+                android:id="@+id/tv_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
@@ -185,6 +186,8 @@
                 android:id="@+id/et_service_input_team_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tv_desc"
+                android:layout_marginLeft="@dimen/dp10"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/dp32"
