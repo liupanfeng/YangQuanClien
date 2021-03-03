@@ -62,13 +62,19 @@
                         android:textSize="11sp"
                         />
 
+
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
                     <TextView
                         android:id="@+id/tv_market_specification"
                         android:layout_width="wrap_content"
                         android:layout_height="15dp"
                         android:text="30斤"
                         android:gravity="center"
-                        android:layout_marginLeft="@dimen/dp12"
                         android:textColor="#ff656565"
                         android:drawablePadding="@dimen/dp3"
                         android:drawableLeft="@mipmap/ic_market_specification"
@@ -89,7 +95,6 @@
                         />
 
                 </LinearLayout>
-
                 <TextView
                     android:id="@+id/tv_market_price"
                     android:layout_width="wrap_content"

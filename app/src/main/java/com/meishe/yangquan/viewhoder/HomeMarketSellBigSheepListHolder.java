@@ -138,7 +138,11 @@ public class HomeMarketSellBigSheepListHolder extends BaseViewHolder {
                         .apply(options)
                         .into(iv_market_cover);
             }
-
+            Glide.with(context)
+                    .asBitmap()
+                    .load(((MarketInfo) info).getIconUrl())
+                    .apply(options)
+                    .into(civ_photo_circle);
 
             List<HomeMarketPictureInfo> list = new ArrayList<>();
             if (!CommonUtils.isEmpty(images) && images.size() > 1) {

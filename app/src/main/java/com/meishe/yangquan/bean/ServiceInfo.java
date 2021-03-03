@@ -57,6 +57,8 @@ public class ServiceInfo extends BaseInfo {
 
     private int initUser;
 
+    private String iconUrl;
+
 
     public int getServerType() {
         return serverType;
@@ -192,5 +194,14 @@ public class ServiceInfo extends BaseInfo {
 
     public void setInitUser(int initUser) {
         this.initUser = initUser;
+    }
+
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 }

@@ -39,6 +39,7 @@ public class MarketInfo extends BaseInfo{
     private float weight;
     private String title;
     private String description;
+    private String iconUrl;
 
     private int type;
 
@@ -153,5 +154,14 @@ public class MarketInfo extends BaseInfo{
 
     public void setType(int type) {
         this.type = type;
+    }
+
+
+    public String getIconUrl() {
+        return iconUrl;
+    }
+
+    public void setIconUrl(String iconUrl) {
+        this.iconUrl = iconUrl;
     }
 }

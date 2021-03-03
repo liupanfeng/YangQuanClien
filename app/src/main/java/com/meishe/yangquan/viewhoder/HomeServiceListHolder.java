@@ -212,6 +212,12 @@ public class HomeServiceListHolder extends BaseViewHolder {
             }
 
 
+            Glide.with(context)
+                    .asBitmap()
+                    .load(((ServiceInfo) info).getIconUrl())
+                    .apply(options)
+                    .into(civ_photo_circle);
+
             iv_call_phone_number.setTag(info);
             iv_call_phone_number.setOnClickListener(listener);
             iv_market_cover.setTag(info);

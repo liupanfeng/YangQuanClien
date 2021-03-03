@@ -122,6 +122,7 @@ public class HomeMarketSellLittleSheepListHolder extends BaseViewHolder {
             if (tv_market_desc!=null){
                 tv_market_desc.setText(((MarketInfo) info).getDescription());
             }
+
             List<String> images = ((MarketInfo) info).getImages();
             if (images != null && images.size() > 0) {
                 String coverUrl = images.get(0);
@@ -138,6 +139,11 @@ public class HomeMarketSellLittleSheepListHolder extends BaseViewHolder {
                         .into(iv_market_cover);
             }
 
+            Glide.with(context)
+                    .asBitmap()
+                    .load(((MarketInfo) info).getIconUrl())
+                    .apply(options)
+                    .into(civ_photo_circle);
 
             List<HomeMarketPictureInfo> list = new ArrayList<>();
             if (!CommonUtils.isEmpty(images) && images.size() > 1) {

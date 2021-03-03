@@ -115,8 +115,8 @@ public class HomeMarketBuyLittleSheepListHolder extends BaseViewHolder {
             tv_market_name.setText(((MarketInfo) info).getNickname());
             tv_market_address.setText(((MarketInfo) info).getAddress());
             tv_market_type_name.setText(((MarketInfo) info).getTitle());
-            tv_market_sheep_number.setText(((MarketInfo) info).getAmount() + "");
-            tv_market_price.setText(((MarketInfo) info).getPrice() + "元/只");
+            tv_market_sheep_number.setText(((MarketInfo) info).getAmount() + "只");
+//            tv_market_price.setText(((MarketInfo) info).getPrice() + "元/只");
             tv_market_specification.setText(((MarketInfo) info).getWeight() + "斤");
             tv_place_of_origin.setText(((MarketInfo) info).getVariety());
             if (tv_market_desc!=null){
@@ -137,7 +137,11 @@ public class HomeMarketBuyLittleSheepListHolder extends BaseViewHolder {
                         .apply(options)
                         .into(iv_market_cover);
             }
-
+            Glide.with(context)
+                    .asBitmap()
+                    .load(((MarketInfo) info).getIconUrl())
+                    .apply(options)
+                    .into(civ_photo_circle);
 
             List<HomeMarketPictureInfo> list = new ArrayList<>();
             if (!CommonUtils.isEmpty(images) && images.size() > 1) {
