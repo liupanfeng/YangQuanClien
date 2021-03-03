@@ -449,8 +449,7 @@
             android:background="@drawable/bg_bu_publish_goods"
             android:layout_centerInParent="true"
             android:text="立即发布"
-            android:textColor="@color/white"
-            />
+            android:textColor="@color/white" />
 
     </RelativeLayout>
 
