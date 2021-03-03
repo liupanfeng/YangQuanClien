@@ -16,7 +16,8 @@ public class BUPublishGoodsActivity extends BaseActivity {
 
     @Override
     public void initView() {
-
+        mTvTitle = findViewById(R.id.tv_title);
+        mIvBack = findViewById(R.id.iv_back);
     }
 
     @Override
@@ -26,12 +27,17 @@ public class BUPublishGoodsActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-
+        mTvTitle.setText("发布商品");
     }
 
     @Override
     public void initListener() {
-
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
