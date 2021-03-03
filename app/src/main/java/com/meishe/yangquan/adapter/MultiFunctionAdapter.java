@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUMeesageDataInfo;
 import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
+import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
@@ -47,6 +49,8 @@ import com.meishe.yangquan.bean.SheepVaccineInfo;
 import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.viewhoder.BUHomeAlreadyApplyShoppingListHolder;
+import com.meishe.yangquan.viewhoder.BUHomeGoodsListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
@@ -303,6 +307,16 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_bu_picture, parent, false);
                 viewHolder = new BUPictureListHolder(view, this);
                 break;
+            /*商版-已经申请店铺的用户*/
+            case VIEW_BU_ALREADY_APPLY_SHOPPING_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_already_apply_shopping_view, parent, false);
+                viewHolder = new BUHomeAlreadyApplyShoppingListHolder(view, this);
+                break;
+            /*商版-商品*/
+            case VIEW_BU_GOODS_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_goods_view, parent, false);
+                viewHolder = new BUHomeGoodsListHolder(view, this);
+                break;
         }
         return viewHolder;
     }
@@ -403,6 +417,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_FEED_FOODS_LIST;
         }else if (baseInfo instanceof BUPictureInfo) {
             return VIEW_BU_PICTURE_LIST;
+        }else if (baseInfo instanceof BUShoppingUserInfo) {
+            return VIEW_BU_ALREADY_APPLY_SHOPPING_LIST;
+        }else if (baseInfo instanceof BUGoodsInfo) {
+            return VIEW_BU_GOODS_LIST;
         }
         return super.getItemViewType(position);
     }

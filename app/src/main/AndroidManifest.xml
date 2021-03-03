@@ -14,103 +14,157 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activity.BUMineRecommendActivity"
-            android:screenOrientation="portrait"
-            ></activity>
-        <activity android:name=".activity.BUMineFeedGoldActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".activity.BUMineShoppingMessageActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".activity.BUBusinessLicenseActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".activity.BURealNameAuthorActivity"
-            android:screenOrientation="portrait"
-            />
-        <activity android:name=".activity.BUShoppingBaseInfoActivity"
-            android:screenOrientation="portrait"
-            />
+        <activity android:name=".activity.BUPublishGoodsActivity"></activity>
+        <activity
+            android:name=".activity.BUHomeGoodsManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BUHomeOrderManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BUHomeCommentManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BUHomeRefundManagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BUMineRecommendActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BUMineFeedGoldActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BUMineShoppingMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BUBusinessLicenseActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BURealNameAuthorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BUShoppingBaseInfoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.BUApplyShoppingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme" />
-        <activity android:name=".activity.FeedGoodsDetailActivity"
+        <activity
+            android:name=".activity.FeedGoodsDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.FeedShoppingDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineAddLocationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineCallBackActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeQuotationHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.HomeIndustryInformationDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PublishMarketActivity"
             android:screenOrientation="portrait"
-            />
-        <activity android:name=".activity.FeedShoppingDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineAddLocationActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineCallBackActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.HomeQuotationHistoryActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.HomeIndustryInformationDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.PublishMarketActivity"
-              android:windowSoftInputMode="adjustPan|stateHidden"
-               android:screenOrientation="portrait"
-            />
-        <activity android:name=".activity.SettingActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SheepBarDetailActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.PublishSheepBarActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SheepBreedHelperActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SheepMyBusinessActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SheepApplyIntroduceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SheepApplyServiceResultActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SheepApplyServiceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.SheepBreedServerActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineMyFocusActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MinePayPasswordActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineSystemMessageActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineMyCollectionActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineBreedingArchivesActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineMyPointsActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineMyMessageActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MineFeedGoldActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MinePersonalInfoActivity"
-            android:screenOrientation="portrait"/>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity
+            android:name=".activity.SettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SheepBarDetailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PublishSheepBarActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SheepBreedHelperActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SheepMyBusinessActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SheepApplyIntroduceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SheepApplyServiceResultActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SheepApplyServiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.SheepBreedServerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineMyFocusActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MinePayPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineSystemMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineMyCollectionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineBreedingArchivesActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineMyPointsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineMyMessageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MineFeedGoldActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MinePersonalInfoActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".utils.permission.PermissionsActivity"
             android:screenOrientation="portrait"
             android:theme="@style/FullScreenTheme" />
-        <activity android:name=".activity.MainWebViewActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ServiceMessageListActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ShowPicActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.AboutActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ClipCircleImageActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.PublishServiceActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ContactUsActivity"  android:screenOrientation="portrait" />
-        <activity android:name=".activity.VersionUpdateActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.BusinessOpportunityActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.MessageCenterActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.PerfectInformationActivity"  android:screenOrientation="portrait"/>
-        <activity android:name=".activity.ServiceTypeListActivity"  android:screenOrientation="portrait"/>
+        <activity
+            android:name=".activity.MainWebViewActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ServiceMessageListActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ShowPicActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ClipCircleImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PublishServiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ContactUsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.VersionUpdateActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.BusinessOpportunityActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MessageCenterActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PerfectInformationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ServiceTypeListActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.RegisterActivity"
             android:screenOrientation="portrait"

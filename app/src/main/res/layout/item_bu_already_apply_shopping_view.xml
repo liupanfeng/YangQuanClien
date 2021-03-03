@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.meishe.yangquan.view.RoundAngleImageView
+        android:id="@+id/riv_bu_photo"
+        android:layout_gravity="center_horizontal"
+        app:roundWidth="@dimen/dp18"
+        app:roundHeight="@dimen/dp18"
+        android:layout_width="@dimen/dp_px_108"
+        android:layout_height="@dimen/dp_px_108"/>
+
+    <TextView
+        android:id="@+id/tv_bu_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp5"
+        android:layout_gravity="center_horizontal"
+        android:text="张某某"
+        android:textColor="#ff303030"
+        android:textSize="12sp"
+        />
+
+
+</LinearLayout>

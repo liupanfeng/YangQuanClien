@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -25,6 +26,9 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class BaseActivity extends FragmentActivity implements View.OnClickListener {
 
     protected Context mContext;
@@ -39,6 +43,9 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     protected ImageView mIvBack;
 
     protected MaterialProgress mLoading;
+
+    protected List<Fragment> mFragmentList = new ArrayList<>();
+    protected List<String> mTitleList = new ArrayList<>();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

@@ -269,5 +269,10 @@ public class HttpUrl {
     /*（商户）获取店铺信息*/
     public static final String BU_HOME_APPLY_SHOPPING_INFO = URL + "app/owner/shop/info";
 
+    /*（商户）获取商品信息*/
+    public static final String BU_HOME_GOODS_INFO = URL + "app/owner/goods/list";
+    /*（商户）添加商品*/
+    public static final String BU_HOME_GOODS_ADD = URL + "app/owner/goods/save";
+
 
 }

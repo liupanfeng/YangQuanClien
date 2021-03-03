@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="190dp"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginTop="@dimen/dp10"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="180dp">
+
+    <com.meishe.yangquan.view.RoundAngleImageView
+        android:id="@+id/riv_bu_goods_cover"
+        android:layout_width="104dp"
+        android:background="@mipmap/ic_bu_goods_cover"
+        app:roundWidth="@dimen/dp3"
+        app:roundHeight="@dimen/dp3"
+        android:layout_marginLeft="@dimen/dp14"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_height="104dp"/>
+
+    <TextView
+        android:id="@+id/tv_bu_goods_title"
+        android:layout_toRightOf="@+id/riv_bu_goods_cover"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="羔羊促生长料，河北张家口专
+业饲养..."
+        android:textColor="#ff303030"
+        android:textSize="16sp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_bu_goods_price"
+        android:layout_toRightOf="@+id/riv_bu_goods_cover"
+        android:layout_below="@+id/tv_bu_goods_title"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginRight="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="价格：1100/吨"
+        android:textColor="#ff656565"
+        android:textSize="13sp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_bu_goods_sell_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_bu_goods_price"
+        android:layout_toRightOf="@+id/riv_bu_goods_cover"
+        android:layout_marginLeft="@dimen/dp16"
+        android:layout_marginTop="@dimen/dp7"
+        android:text="已售：0"
+        android:textColor="#ff656565"
+        android:textSize="13sp"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_bu_goods_store_amount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_bu_goods_price"
+        android:layout_toRightOf="@+id/tv_bu_goods_sell_amount"
+        android:layout_marginLeft="@dimen/dp26"
+        android:layout_marginTop="@dimen/dp7"
+        android:text="库存：100"
+        android:textColor="#ff656565"
+        android:textSize="13sp"
+        />
+
+    <View
+        android:id="@+id/bu_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/riv_bu_goods_cover"
+        android:background="@color/line_color"
+        android:layout_marginTop="@dimen/dp11"
+        />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_below="@+id/bu_line"
+        android:layout_marginRight="5dp"
+        android:layout_marginLeft="@dimen/dp5"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_bu_edit_goods"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="@dimen/dp9"
+            android:layout_height="@dimen/dp30"
+            android:background="@drawable/bg_bu_edit_goods"
+            android:text="编辑商品"
+            />
+
+        <Button
+            android:id="@+id/btn_bu_shelves_goods"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="@dimen/dp9"
+            android:layout_gravity="center_vertical"
+            android:layout_height="@dimen/dp30"
+            android:background="@drawable/bg_bu_edit_goods"
+            android:text="上架"
+            />
+
+        <Button
+            android:id="@+id/btn_bu_delete_goods"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="9dp"
+            android:layout_marginRight="@dimen/dp9"
+            android:layout_gravity="center_vertical"
+            android:layout_height="@dimen/dp30"
+            android:background="@drawable/bg_bu_edit_goods"
+            android:text="删除"
+            />
+
+    </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>

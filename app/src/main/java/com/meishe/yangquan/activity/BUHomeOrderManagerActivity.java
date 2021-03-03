@@ -1,22 +1,18 @@
 package com.meishe.yangquan.activity;
 
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 
 /**
- * 饲料金页面
+ * 订单管理
  */
-public class MineFeedGoldActivity extends BaseActivity {
+public class BUHomeOrderManagerActivity extends BaseActivity {
 
-    private TextView mTvTitle;
-    private ImageView mIvBack;
 
     @Override
     protected int initRootView() {
-        return R.layout.activity_feed_gold;
+        return R.layout.activity_bu_home_order_manager;
     }
 
     @Override
@@ -32,14 +28,14 @@ public class MineFeedGoldActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mTvTitle.setText("饲料金");
+        mTvTitle.setText("商品管理");
     }
 
     @Override
     public void initListener() {
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 finish();
             }
         });
@@ -51,8 +47,7 @@ public class MineFeedGoldActivity extends BaseActivity {
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View v) {
 
     }
-
 }

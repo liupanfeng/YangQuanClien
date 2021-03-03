@@ -73,7 +73,7 @@
             android:background="@drawable/dialog_bottom_left_selector"
             android:gravity="center"
             android:text="取消"
-            android:textColor="@color/mainColor"
+            android:textColor="@color/color_ff656565"
             android:textSize="17sp" />
 
         <View

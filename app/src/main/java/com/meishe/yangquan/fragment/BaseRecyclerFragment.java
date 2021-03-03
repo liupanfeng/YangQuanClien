@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.divider.RecycleViewDivider;
 import com.meishe.yangquan.helper.BackHandlerHelper;
 import com.meishe.yangquan.inter.FragmentBackHandler;
 import com.meishe.yangquan.utils.AppManager;
@@ -147,6 +148,15 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
     protected void initRecyclerView() {
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+    }
+
+
+    protected void initRecyclerView(int itemDecor,int orientation) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, orientation, false);
+        mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
+        mRecyclerView.addItemDecoration(new RecycleViewDivider(mAdapter,itemDecor,mContext,orientation));
         mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
     }
