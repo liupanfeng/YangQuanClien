@@ -93,6 +93,7 @@ public class HomeServiceListHolder extends BaseViewHolder {
         rl_cut_sheep_dung = view.findViewById(R.id.rl_cut_sheep_dung);
         rl_find_car = view.findViewById(R.id.rl_find_car);
 
+
         civ_photo_circle = view.findViewById(R.id.civ_photo_circle);
         tv_market_name = view.findViewById(R.id.tv_market_nickname);
 
