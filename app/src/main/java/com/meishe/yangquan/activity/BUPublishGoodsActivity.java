@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,21 +33,40 @@ import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.bean.MenuItem;
+import com.meishe.yangquan.bean.ServerResult;
+import com.meishe.yangquan.bean.UploadFileInfo;
+import com.meishe.yangquan.bean.UploadFileResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.BUSelectGoodsSpecsView;
 import com.meishe.yangquan.pop.BUSelectGoodsTypeView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ScreenUtils;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
+
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_CUT_WOOL;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_LOOK_CAR;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG;
+import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_VACCINE;
 
 /**
  * 商版发布商品
@@ -95,8 +115,8 @@ public class BUPublishGoodsActivity extends BaseActivity {
 
     /*重量*/
     private EditText et_bu_input_goods_weight;
-    /*重量规格*/
-    private EditText et_bu_select_goods_weight_specs;
+//    /*重量规格*/
+//    private EditText et_bu_select_goods_weight_specs;
     /*价格*/
     private EditText et_bu_input_goods_price;
     /*库存*/
@@ -116,6 +136,54 @@ public class BUPublishGoodsActivity extends BaseActivity {
     private BUSelectGoodsSpecsView mBUSelectGoodsStoreAmountSpecsView;
     private BUSelectGoodsSpecsView mBUSelectGoodsWeightSpecsView;
 
+    /*标题*/
+    private String title;
+    /*商品的图片的id*/
+    private String goodsImageFileIds;
+
+    private StringBuilder goodsImageFile;
+    /*一级标题*/
+    private String firstCategory;
+    /*二级分类*/
+    private String secondCategory;
+
+
+    /*产地*/
+    private String place;
+
+
+    /*重量*/
+    private String weight;
+
+
+    /*规格*/
+    private String specification;
+
+
+    /*发货地址*/
+    private String address;
+
+
+    /*是否上架  0 否 1是*/
+    private int isPublic;
+
+    /*品牌*/
+    private String brand;
+
+    /*库存*/
+    private String storeAmount;
+
+    /*价格*/
+    private String price;
+    /*描述*/
+    private String description;
+    /*描述的图品的id*/
+    private String descriptionImageFileIds;
+
+    private StringBuilder descriptionImageFile;
+    private int needUploadPictureNumber;
+    /*成功上传图片的个数*/
+    private int mSuccessUploadPictureNumber;
 
     @Override
     protected int initRootView() {
@@ -126,6 +194,7 @@ public class BUPublishGoodsActivity extends BaseActivity {
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
+        mLoading = findViewById(R.id.loading);
         /*用于封面图片的上传*/
         mRecyclerView = findViewById(R.id.recycler);
         /*用于描述图片的上传*/
@@ -146,8 +215,8 @@ public class BUPublishGoodsActivity extends BaseActivity {
 
         /*重量*/
         et_bu_input_goods_weight = findViewById(R.id.et_bu_input_goods_weight);
-        /*重量规格*/
-        et_bu_select_goods_weight_specs = findViewById(R.id.et_bu_select_goods_weight_specs);
+//        /*重量规格*/
+//        et_bu_select_goods_weight_specs = findViewById(R.id.et_bu_select_goods_weight_specs);
         /*价格*/
         et_bu_input_goods_price = findViewById(R.id.et_bu_input_goods_price);
         /*库存*/
@@ -309,6 +378,8 @@ public class BUPublishGoodsActivity extends BaseActivity {
                     mBuSelectGoodsTypeView = BUSelectGoodsTypeView.create(mContext, new BUSelectGoodsTypeView.OnAttachListener() {
                         @Override
                         public void onSelectGoodsType(String goodsType, String subGoodsType) {
+                            firstCategory=goodsType;
+                            secondCategory=subGoodsType;
                             et_bu_select_goods_type.setText(goodsType+"-"+subGoodsType);
                         }
                     });
@@ -346,27 +417,27 @@ public class BUPublishGoodsActivity extends BaseActivity {
             }
         });
 
-        et_bu_select_goods_weight_specs.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (Util.isFastDoubleClick()) {
-                    return true;
-                }
-                if (mBUSelectGoodsWeightSpecsView ==null){
-                    mBUSelectGoodsWeightSpecsView = BUSelectGoodsSpecsView.create(mContext, mWeightSpecsList,new BUSelectGoodsSpecsView.OnAttachListener() {
-                        @Override
-                        public void onSelectGoodsType(String goodsType) {
-                            et_bu_select_goods_weight_specs.setText(goodsType);
-                        }
-                    });
-                }
-                if (mBUSelectGoodsWeightSpecsView.isShow()){
-                    return true;
-                }
-                mBUSelectGoodsWeightSpecsView.show();
-                return true;
-            }
-        });
+//        et_bu_select_goods_weight_specs.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (Util.isFastDoubleClick()) {
+//                    return true;
+//                }
+//                if (mBUSelectGoodsWeightSpecsView ==null){
+//                    mBUSelectGoodsWeightSpecsView = BUSelectGoodsSpecsView.create(mContext, mWeightSpecsList,new BUSelectGoodsSpecsView.OnAttachListener() {
+//                        @Override
+//                        public void onSelectGoodsType(String goodsType) {
+//                            et_bu_select_goods_weight_specs.setText(goodsType);
+//                        }
+//                    });
+//                }
+//                if (mBUSelectGoodsWeightSpecsView.isShow()){
+//                    return true;
+//                }
+//                mBUSelectGoodsWeightSpecsView.show();
+//                return true;
+//            }
+//        });
 
 
         et_bu_select_goods_place_of_origin.setOnTouchListener(new View.OnTouchListener() {
@@ -402,6 +473,95 @@ public class BUPublishGoodsActivity extends BaseActivity {
     public void onClick(View v) {
         if (v.getId()==R.id.btn_bu_goods_publish){
             //发布
+            title = et_bu_input_title.getText().toString();
+            if (TextUtils.isEmpty(title)){
+                ToastUtil.showToast("商品标题必须填写！");
+                return;
+            }
+
+            if (TextUtils.isEmpty(firstCategory)){
+                ToastUtil.showToast("商品类型必须选择！");
+                return;
+            }
+
+            if (TextUtils.isEmpty(secondCategory)){
+                ToastUtil.showToast("商品副类型必须选择！");
+                return;
+            }
+
+            place=et_bu_select_goods_place_of_origin.getText().toString();
+
+            if (TextUtils.isEmpty(place)){
+                ToastUtil.showToast("产地必须选择！");
+                return;
+            }
+
+            weight=et_bu_input_goods_weight.getText().toString();
+            if (TextUtils.isEmpty(weight)){
+                ToastUtil.showToast("重量必须填写！");
+                return;
+            }
+            specification=et_bu_select_goods_store_amount_specs.getText().toString();
+            if (TextUtils.isEmpty(specification)){
+                ToastUtil.showToast("规格必须填写！");
+                return;
+            }
+            address=et_bu_select_goods_address.getText().toString();
+            if (TextUtils.isEmpty(address)){
+                ToastUtil.showToast("发货地址必须填写！");
+                return;
+            }
+
+            brand=et_bu_input_goods_brand.getText().toString();
+            if (TextUtils.isEmpty(brand)){
+                ToastUtil.showToast("品牌必须填写！");
+                return;
+            }
+            storeAmount=et_bu_input_goods_store_amount.getText().toString();
+            if (TextUtils.isEmpty(storeAmount)){
+                ToastUtil.showToast("库存必须填写！");
+                return;
+            }
+
+            price=et_bu_input_goods_price.getText().toString();
+            if (TextUtils.isEmpty(price)){
+                ToastUtil.showToast("库存必须填写！");
+                return;
+            }
+            description=et_bu_input_desc.getText().toString();
+
+            if (CommonUtils.isEmpty(mCoverPictureList)){
+                ToastUtil.showToast("商品图片必须上传！");
+                return;
+            }
+
+            if (CommonUtils.isEmpty(mDescPictureList)){
+                ToastUtil.showToast("描述图片必须上传！");
+                return;
+            }
+            mSuccessUploadPictureNumber=0;
+            needUploadPictureNumber=mCoverPictureList.size()+mDescPictureList.size()-2;
+            if (needUploadPictureNumber<=0){
+                return;
+            }
+            goodsImageFile=new StringBuilder();
+            descriptionImageFile=new StringBuilder();
+
+            for (int i=0;i<mCoverPictureList.size();i++){
+                BUPictureInfo buPictureInfo = mCoverPictureList.get(i);
+                if (buPictureInfo.getType()==BUPictureInfo.TYPE_ADD_PIC){
+                    continue;
+                }
+                uploadPicture(buPictureInfo.getFilePath(),Constants.UPLOAD_FILE_MODE_17);
+            }
+
+            for (int i=0;i<mDescPictureList.size();i++){
+                BUPictureInfo buPictureInfo = mDescPictureList.get(i);
+                if (buPictureInfo.getType()==BUPictureInfo.TYPE_ADD_PIC){
+                    continue;
+                }
+                uploadPicture(buPictureInfo.getFilePath(),Constants.UPLOAD_FILE_MODE_18);
+            }
 
         }
     }
@@ -600,5 +760,180 @@ public class BUPublishGoodsActivity extends BaseActivity {
         return path;
     }
 
+
+
+    /**
+     * 图片上传
+     */
+    private void uploadPicture(String filePath, final int uploadMode) {
+
+        String token = UserManager.getInstance(mContext).getToken();
+        if (Util.checkNull(token)) {
+            return;
+        }
+        File file=new File(filePath);
+        if (!file.exists()){
+            return;
+        }
+        showLoading();
+        HashMap<String, String> param = new HashMap<>();
+        param.put("uploadMode", ""+uploadMode);
+        param.put("order", "1");
+
+        OkHttpManager.getInstance().postUploadSingleImage(HttpUrl.HOME_PAGE_COMMON_FILE_UPLOAD, new BaseCallBack<UploadFileResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UploadFileResult uploadFileResult) {
+                if (uploadFileResult == null) {
+                    ToastUtil.showToast(response.message());
+                    hideLoading();
+                    return;
+                }
+                if (uploadFileResult.getCode() != 1) {
+                    ToastUtil.showToast(uploadFileResult.getMsg());
+                    hideLoading();
+                    return;
+                }
+
+                UploadFileInfo data = uploadFileResult.getData();
+                if (data == null) {
+                    ToastUtil.showToast("UploadFileInfo is null");
+                    hideLoading();
+                    return;
+                }
+
+                mSuccessUploadPictureNumber++;
+
+                switch (uploadMode) {
+                    case Constants.UPLOAD_FILE_MODE_17:
+                         if (goodsImageFile.length()==0){
+                             goodsImageFile.append(data.getId());
+                         }else{
+                             goodsImageFile.append(","+data.getId());
+                         }
+                        break;
+                    case Constants.UPLOAD_FILE_MODE_18:
+                        if (descriptionImageFile.length()==0){
+                            descriptionImageFile.append(data.getId());
+                        }else{
+                            descriptionImageFile.append(","+data.getId());
+                        }
+                        break;
+                    default:
+                        break;
+                }
+
+                if (mSuccessUploadPictureNumber==needUploadPictureNumber){
+                    publishGoods(goodsImageFile.toString(),descriptionImageFile.toString());
+                }
+
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, file, "file", param, token);
+    }
+
+
+
+    /**
+     * 发布商品
+     *
+     * @param goodsPictureId 商品图片id
+     *  @param goodsDescPictureId 描述图片id
+     *
+     */
+    private void publishGoods(String goodsPictureId,String goodsDescPictureId) {
+
+        String token = UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("title", title);
+        requestParam.put("goodsImageFileIds", goodsPictureId);
+        requestParam.put("firstCategory", firstCategory);
+        requestParam.put("secondCategory", secondCategory);
+        requestParam.put("place", place);
+        requestParam.put("weight", weight);
+        requestParam.put("specification", specification);
+        requestParam.put("address", address);
+        requestParam.put("isPublic", 0);
+        requestParam.put("brand", brand);
+        requestParam.put("storeAmount", storeAmount);
+        requestParam.put("price", price);
+        requestParam.put("description", description);
+        requestParam.put("descriptionImageFileIds", goodsDescPictureId);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_GOODS_ADD, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                hideLoading();
+                if (result != null && result.getCode() == 1) {
+                    ToastUtil.showToast(mContext, "发布成功");
+                    finish();
+                } else {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "上传失败");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+    }
 
 }

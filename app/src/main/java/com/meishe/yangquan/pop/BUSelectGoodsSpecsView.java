@@ -75,7 +75,7 @@ public class BUSelectGoodsSpecsView extends BottomPopupView {
 
         if (ll_root_container != null) {
             ViewGroup.LayoutParams layoutParams = ll_root_container.getLayoutParams();
-            layoutParams.height = (int) (ScreenUtils.getScreenHeight(mContext) * 0.66);
+            layoutParams.height = (int) (ScreenUtils.getScreenHeight(mContext) * 0.5);
             ll_root_container.setLayoutParams(layoutParams);
         }
 

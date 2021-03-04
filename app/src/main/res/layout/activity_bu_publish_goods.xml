@@ -342,17 +342,15 @@
             android:textSize="13sp" />
 
 
-        <EditText
-            android:id="@+id/et_bu_select_goods_weight_specs"
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp48"
-            android:layout_marginLeft="@dimen/dp48"
+            android:layout_marginStart="@dimen/dp8"
+            android:layout_marginLeft="@dimen/dp8"
             android:layout_marginRight="@dimen/dp22"
-            android:hint="请选择规格"
+            android:hint="斤"
             android:background="@null"
             android:layout_gravity="center_vertical"
-            android:textColorHint="#ffc2c2c2"
             android:textColor="@color/color_ff303030"
             android:textSize="13sp" />
 
@@ -446,5 +444,9 @@
 
     </RelativeLayout>
 
+        <include layout="@layout/layout_loading"/>
+
     </RelativeLayout>
+
+
 </FrameLayout>
