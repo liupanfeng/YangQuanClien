@@ -595,6 +595,7 @@ public class BUPublishGoodsActivity extends BaseActivity {
                 }
             }
             cursor.close();
+
         }
         return path;
     }
