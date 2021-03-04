@@ -25,7 +25,7 @@ import com.meishe.yangquan.bean.SheepBarCommentInfo;
 import com.meishe.yangquan.bean.SheepBarCommentInfoResult;
 import com.meishe.yangquan.bean.SheepBarInfoResult;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -162,12 +162,12 @@ public class SheepBarDetailActivity extends BaseActivity {
                 tv_sheep_bar_comment_number.setText("最新回复（" + mSheepBarMessageInfo.getCommentAmount() + "）");
                 tv_sheep_bar_focus_content.setText(mSheepBarMessageInfo.isHasFocused() ? "已关注" : "+关注");
                 List<String> images = mSheepBarMessageInfo.getImages();
-                List<SheepBarPictureInfo> list = new ArrayList<>();
+                List<CommonPictureInfo> list = new ArrayList<>();
                 if (!CommonUtils.isEmpty(images)) {
                     for (int i = 0; i < images.size(); i++) {
-                        SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
+                        CommonPictureInfo sheepBarMessageInfo = new CommonPictureInfo();
                         sheepBarMessageInfo.setFilePath(images.get(i));
-                        sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_URL_PIC);
+                        sheepBarMessageInfo.setType(CommonPictureInfo.TYPE_URL_PIC);
                         list.add(sheepBarMessageInfo);
                     }
                     mGrideAdapter.addAll(list);

@@ -11,7 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
@@ -38,28 +38,28 @@ public class SheepBarPictureListHolder extends BaseViewHolder {
 
     @Override
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
-        if (info instanceof SheepBarPictureInfo) {
-            if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
-                String filePath = ((SheepBarPictureInfo) info).getFilePath();
+        if (info instanceof CommonPictureInfo) {
+            if (((CommonPictureInfo) info).getType() == CommonPictureInfo.TYPE_ADD_PIC) {
+                String filePath = ((CommonPictureInfo) info).getFilePath();
                 Drawable drawable = context.getResources().getDrawable(Integer.valueOf(filePath));
                 mIvSheepBarMessage.setImageDrawable(drawable);
-            } else if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_CAPTURE_PIC) {
-                Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(((SheepBarPictureInfo) info).getFilePath(), 1080);
+            } else if (((CommonPictureInfo) info).getType() == CommonPictureInfo.TYPE_CAPTURE_PIC) {
+                Bitmap tmpBitmap = CropViewUtils.compressBitmapForWidth(((CommonPictureInfo) info).getFilePath(), 1080);
 //                Matrix matrix = new Matrix();
 //                matrix.setScale(0.4f, 0.4f);
 //                Bitmap showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
 //                        tmpBitmap.getHeight(), matrix, true);
                 mIvSheepBarMessage.setImageBitmap(tmpBitmap);
-            } else if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_URL_PIC) {
+            } else if (((CommonPictureInfo) info).getType() == CommonPictureInfo.TYPE_URL_PIC) {
                 RequestOptions options = new RequestOptions();
                 options.centerCrop();
                 options.placeholder(R.mipmap.ic_message_list_photo_default);
                 Glide.with(context)
                         .asBitmap()
-                        .load(((SheepBarPictureInfo) info).getFilePath())
+                        .load(((CommonPictureInfo) info).getFilePath())
                         .apply(options)
                         .into(mIvSheepBarMessage);
-                mIvSheepBarMessage.setTag(((SheepBarPictureInfo) info).getFilePath());
+                mIvSheepBarMessage.setTag(((CommonPictureInfo) info).getFilePath());
             }
         }
         mIvSheepBarMessage.setTag(info);

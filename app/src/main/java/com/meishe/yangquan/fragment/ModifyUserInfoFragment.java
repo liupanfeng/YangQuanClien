@@ -84,7 +84,7 @@ public class ModifyUserInfoFragment extends BaseRecyclerFragment {
         mIvBack = view.findViewById(R.id.iv_back);
         mBtnRight = view.findViewById(R.id.btn_right);
         mEtInput = view.findViewById(R.id.et_input);
-        mTvNumberLimit = view.findViewById(R.id.tv_number_limit);
+        mTvNumberLimit = view.findViewById(R.id.tv_number_limit_title);
         mLoading = view.findViewById(R.id.loading);
 
         mBtnRight.setText("完成");

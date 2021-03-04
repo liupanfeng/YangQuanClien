@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activity.BUPublishGoodsActivity"></activity>
+        <activity
+            android:name=".activity.BUPublishGoodsActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
         <activity
             android:name=".activity.BUHomeGoodsManagerActivity"
             android:screenOrientation="portrait" />

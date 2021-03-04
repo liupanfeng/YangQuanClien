@@ -52,7 +52,7 @@ import com.meishe.yangquan.bean.ServerZanResult;
 import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -137,6 +137,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_BU_PICTURE_LIST = VIEW_TYPE_BASE + 52;                     //图片列表
     protected static final int VIEW_BU_ALREADY_APPLY_SHOPPING_LIST = VIEW_TYPE_BASE + 53;                     //图片列表
     protected static final int VIEW_BU_GOODS_LIST = VIEW_TYPE_BASE + 54;                     //商品列表
+    protected static final int VIEW_BU_GOODS_TYPE_LIST = VIEW_TYPE_BASE + 55;                     //商品类型  用于添加商品的类型选择
+    protected static final int VIEW_BU_GOODS_SUB_TYPE_LIST = VIEW_TYPE_BASE + 56;                     //商品副类型  用于添加商品的类型选择
 
 
     private IosDialog mDialog;
@@ -167,6 +169,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     private OnItemClickListener onItemClickListener;
 
     private List<BaseInfo> mList;
+
+    private int mSelectPosition=-1;
+    /*嵌套的recyclerview 选中的数据结构*/
+    private BaseInfo mChildRecyclerViewSelect;
 
     public BaseRecyclerAdapter(final Context context, RecyclerView recyclerView) {
         mContext = context;
@@ -210,6 +216,14 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     }
 
 
+    public BaseInfo getChildRecyclerViewSelect() {
+        return mChildRecyclerViewSelect;
+    }
+
+    public void setChildRecyclerViewSelect(BaseInfo childRecyclerViewSelect) {
+        this.mChildRecyclerViewSelect = childRecyclerViewSelect;
+    }
+
     @Override
     public int getItemViewType(int position) {
         BaseInfo baseInfo = getItem(position);
@@ -233,6 +247,15 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     @Override
     public void onClick(View v) {
         onItemClick(v);
+    }
+
+    public int getSelectPosition() {
+        return mSelectPosition;
+    }
+
+    public void setSelectPosition(int selectPosition) {
+        this.mSelectPosition = selectPosition;
+        notifyDataSetChanged();
     }
 
     public void setMaterialProgress(MaterialProgress materialProgress) {
@@ -266,16 +289,16 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constants.FEED_GOODS_INFO,info);
             AppManager.getInstance().jumpActivity(mContext, FeedGoodsDetailActivity.class, bundle);
-        } else if (info instanceof SheepBarPictureInfo) {
-            if (((SheepBarPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
+        } else if (info instanceof CommonPictureInfo) {
+            if (((CommonPictureInfo) info).getType() == CommonPictureInfo.TYPE_ADD_PIC) {
                 return;
             }
-            ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, ((SheepBarPictureInfo) info).getFilePath());
+            ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, ((CommonPictureInfo) info).getFilePath());
             if (showBigPictureView != null) {
                 showBigPictureView.show();
             }
         } else if (info instanceof HomeMarketPictureInfo) {
-            if (((HomeMarketPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
+            if (((HomeMarketPictureInfo) info).getType() == CommonPictureInfo.TYPE_ADD_PIC) {
                 return;
             }
             ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, ((HomeMarketPictureInfo) info).getFilePath());
@@ -283,7 +306,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 showBigPictureView.show();
             }
         }else if (info instanceof BUPictureInfo) {
-            if (((BUPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
+            if (((BUPictureInfo) info).getType() == CommonPictureInfo.TYPE_ADD_PIC) {
                 return;
             }
             ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, ((BUPictureInfo) info).getFilePath());
@@ -738,6 +761,10 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             return mList.indexOf(info);
         }
         return -1;
+    }
+
+    public BaseInfo getSelectData(){
+       return getItem(mSelectPosition);
     }
 
     public void updateListItem(int position, BaseInfo newInfo) {

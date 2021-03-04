@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
@@ -32,7 +31,7 @@ import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.ServerResult;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.bean.UploadFileInfo;
 import com.meishe.yangquan.bean.UploadFilesResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
@@ -77,7 +76,7 @@ public class PublishMarketActivity extends BaseActivity {
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 201;
     private File tempFile;
 
-    private List<SheepBarPictureInfo> mData = new ArrayList<>();
+    private List<CommonPictureInfo> mData = new ArrayList<>();
 
     private TextView mTvTitle;
     private ImageView mIvBack;
@@ -168,10 +167,10 @@ public class PublishMarketActivity extends BaseActivity {
         }
 
         mData.clear();
-        SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
-        sheepBarMessageInfo.setFilePath(String.valueOf(R.mipmap.ic_sheep_bar_add));
-        sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_ADD_PIC);
-        mData.add(sheepBarMessageInfo);
+        CommonPictureInfo commonPictureInfo = new CommonPictureInfo();
+        commonPictureInfo.setFilePath(String.valueOf(R.mipmap.ic_sheep_bar_add));
+        commonPictureInfo.setType(CommonPictureInfo.TYPE_ADD_PIC);
+        mData.add(commonPictureInfo);
         mAdapter.addAll(mData);
     }
 
@@ -227,8 +226,8 @@ public class PublishMarketActivity extends BaseActivity {
         mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
-                if (baseInfo instanceof SheepBarPictureInfo) {
-                    if (((SheepBarPictureInfo) baseInfo).getType() == SheepBarPictureInfo.TYPE_ADD_PIC) {
+                if (baseInfo instanceof CommonPictureInfo) {
+                    if (((CommonPictureInfo) baseInfo).getType() == CommonPictureInfo.TYPE_ADD_PIC) {
                         if (mData != null && mData.size() >  mMaxPictureAmount) {
                             ToastUtil.showToast(mContext, "最多添加"+mMaxPictureAmount+"张图片");
                             return;
@@ -319,12 +318,12 @@ public class PublishMarketActivity extends BaseActivity {
         String[] fileKeys = new String[size - 1];
         File[] files = new File[size - 1];
         for (int i = 0; i < mData.size(); i++) {
-            SheepBarPictureInfo sheepBarPictureInfo = mData.get(i);
-            if (sheepBarPictureInfo == null) {
+            CommonPictureInfo commonPictureInfo = mData.get(i);
+            if (commonPictureInfo == null) {
                 continue;
             }
 
-            File file = new File(sheepBarPictureInfo.getFilePath());
+            File file = new File(commonPictureInfo.getFilePath());
             if (!file.exists()) {
                 continue;
             }
@@ -559,9 +558,9 @@ public class PublishMarketActivity extends BaseActivity {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (tempFile != null && tempFile.exists()) {
                     String filePath = BitmapUtils.compressImageUpload(tempFile.getAbsolutePath(), Constants.COMPRESS_WIDTH,Constants.COMPRESS_HEIGHT);
-                    SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
+                    CommonPictureInfo sheepBarMessageInfo = new CommonPictureInfo();
                     sheepBarMessageInfo.setFilePath(filePath);
-                    sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_CAPTURE_PIC);
+                    sheepBarMessageInfo.setType(CommonPictureInfo.TYPE_CAPTURE_PIC);
                     mData.add(0, sheepBarMessageInfo);
                     mAdapter.addAll(mData);
                 }
@@ -595,9 +594,9 @@ public class PublishMarketActivity extends BaseActivity {
                     }
                     if (imagePath != null) {
                         String filePath = BitmapUtils.compressImageUpload(imagePath, Constants.COMPRESS_WIDTH,Constants.COMPRESS_HEIGHT);
-                        SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
+                        CommonPictureInfo sheepBarMessageInfo = new CommonPictureInfo();
                         sheepBarMessageInfo.setFilePath(filePath);
-                        sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_CAPTURE_PIC);
+                        sheepBarMessageInfo.setType(CommonPictureInfo.TYPE_CAPTURE_PIC);
                         mData.add(0, sheepBarMessageInfo);
                         mAdapter.addAll(mData);
                     }

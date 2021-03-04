@@ -17,7 +17,7 @@ import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.MarketInfo;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
@@ -175,7 +175,7 @@ public class HomeMarketListHolder extends BaseViewHolder {
                 for (int i = 1; i < images.size(); i++) {
                     HomeMarketPictureInfo homeMarketPictureInfo = new HomeMarketPictureInfo();
                     homeMarketPictureInfo.setFilePath(images.get(i));
-                    homeMarketPictureInfo.setType(SheepBarPictureInfo.TYPE_URL_PIC);
+                    homeMarketPictureInfo.setType(CommonPictureInfo.TYPE_URL_PIC);
                     list.add(homeMarketPictureInfo);
                 }
                 mGrideAdapter.addAll(list);

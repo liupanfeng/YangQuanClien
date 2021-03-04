@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_root_container"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp48">
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="@dimen/dp18"
+            android:layout_height="@dimen/dp18"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp5"
+            android:scaleType="fitXY"
+            android:background="@mipmap/ic_close"
+            android:layout_marginLeft="@dimen/dp18" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="选择商品类型"
+            android:textColor="#ff303030"
+            android:textSize="17sp" />
+
+        <Button
+            android:id="@+id/btn_confirm"
+            android:layout_width="@dimen/dp53"
+            android:layout_height="@dimen/dp27"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/dp18"
+            android:text="确定"
+            android:background="@drawable/mine_gold_button_bg"
+            android:textColor="@color/white"
+            />
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

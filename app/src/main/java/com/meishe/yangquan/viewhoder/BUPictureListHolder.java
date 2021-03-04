@@ -13,7 +13,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
@@ -52,7 +52,7 @@ public class BUPictureListHolder extends BaseViewHolder {
 //                Bitmap showBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(),
 //                        tmpBitmap.getHeight(), matrix, true);
                 mIvBuPicture.setImageBitmap(tmpBitmap);
-            } else if (((BUPictureInfo) info).getType() == SheepBarPictureInfo.TYPE_URL_PIC) {
+            } else if (((BUPictureInfo) info).getType() == CommonPictureInfo.TYPE_URL_PIC) {
                 RequestOptions options = new RequestOptions();
                 options.centerCrop();
                 options.placeholder(R.mipmap.ic_message_list_photo_default);

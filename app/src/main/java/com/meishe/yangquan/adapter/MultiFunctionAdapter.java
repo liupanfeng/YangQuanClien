@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BUGoodsInfo;
+import com.meishe.yangquan.bean.BUGoodsSubTypeInfo;
+import com.meishe.yangquan.bean.BUGoodsTypeInfo;
 import com.meishe.yangquan.bean.BUMeesageDataInfo;
 import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
@@ -41,7 +43,7 @@ import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepBarCommentInfo;
 import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfo;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
 import com.meishe.yangquan.bean.SheepLossInfo;
 import com.meishe.yangquan.bean.SheepNews;
@@ -51,6 +53,8 @@ import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.viewhoder.BUHomeAlreadyApplyShoppingListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeGoodsListHolder;
+import com.meishe.yangquan.viewhoder.BUHomeGoodsSubTypeListHolder;
+import com.meishe.yangquan.viewhoder.BUHomeGoodsTypeListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
@@ -317,6 +321,15 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_bu_goods_view, parent, false);
                 viewHolder = new BUHomeGoodsListHolder(view, this);
                 break;
+            /*商版-商品类型-用于添加商品类型的选择*/
+            case VIEW_BU_GOODS_TYPE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_goods_type_view, parent, false);
+                viewHolder = new BUHomeGoodsTypeListHolder(view, this);
+                break;
+            case VIEW_BU_GOODS_SUB_TYPE_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_goods_sub_type_view, parent, false);
+                viewHolder = new BUHomeGoodsSubTypeListHolder(view, this);
+                break;
         }
         return viewHolder;
     }
@@ -371,7 +384,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             }
         } else if (baseInfo instanceof IndustryInfo) {
             return VIEW_INDUSTRY_LIST;
-        } else if (baseInfo instanceof SheepBarPictureInfo) {
+        } else if (baseInfo instanceof CommonPictureInfo) {
             return VIEW_SHEEP_BAR_ADD_PIC;
         } else if (baseInfo instanceof SheepBarMessageInfo) {
             return VIEW_SHEEP_BAR_MESSAGE;
@@ -421,6 +434,10 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_BU_ALREADY_APPLY_SHOPPING_LIST;
         }else if (baseInfo instanceof BUGoodsInfo) {
             return VIEW_BU_GOODS_LIST;
+        }else if (baseInfo instanceof BUGoodsTypeInfo) {
+            return VIEW_BU_GOODS_TYPE_LIST;
+        }else if (baseInfo instanceof BUGoodsSubTypeInfo) {
+            return VIEW_BU_GOODS_SUB_TYPE_LIST;
         }
         return super.getItemViewType(position);
     }

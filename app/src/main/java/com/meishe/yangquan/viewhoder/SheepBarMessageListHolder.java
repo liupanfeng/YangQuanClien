@@ -1,10 +1,7 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,20 +11,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.ServiceInfo;
-import com.meishe.yangquan.bean.SheepBarCommentInfo;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
+import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.utils.CommonUtils;
-import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.utils.FormatCurrentData;
-import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.util.ArrayList;
@@ -140,12 +132,12 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
             tv_sheep_bar_focus_content.setText(((SheepBarMessageInfo) info).isHasFocused()?"已关注":"+关注");
 
             List<String> images = ((SheepBarMessageInfo) info).getImages();
-            List<SheepBarPictureInfo> list = new ArrayList<>();
+            List<CommonPictureInfo> list = new ArrayList<>();
             if (!CommonUtils.isEmpty(images)) {
                 for (int i = 0; i < images.size(); i++) {
-                    SheepBarPictureInfo sheepBarMessageInfo = new SheepBarPictureInfo();
+                    CommonPictureInfo sheepBarMessageInfo = new CommonPictureInfo();
                     sheepBarMessageInfo.setFilePath(images.get(i));
-                    sheepBarMessageInfo.setType(SheepBarPictureInfo.TYPE_URL_PIC);
+                    sheepBarMessageInfo.setType(CommonPictureInfo.TYPE_URL_PIC);
                     list.add(sheepBarMessageInfo);
                 }
                 mGrideAdapter.addAll(list);

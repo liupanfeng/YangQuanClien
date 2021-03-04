@@ -1,9 +1,9 @@
 package com.meishe.yangquan.bean;
 
 /**
- * 羊吧 上传图片
+ * 通用的 上传图片
  */
-public class SheepBarPictureInfo extends BaseInfo {
+public class CommonPictureInfo extends BaseInfo {
 
     public static final int TYPE_ADD_PIC = 1;                   //增加
 

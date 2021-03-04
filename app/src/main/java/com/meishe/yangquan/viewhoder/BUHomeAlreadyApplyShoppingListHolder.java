@@ -1,8 +1,6 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.TextView;
 
@@ -12,11 +10,8 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
-import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.SheepBarPictureInfo;
-import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
