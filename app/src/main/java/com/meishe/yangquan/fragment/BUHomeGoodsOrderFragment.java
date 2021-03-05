@@ -85,7 +85,6 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
     protected void lazyLoad() {
         super.lazyLoad();
 //        getGoodsDataFromServer();
-
     }
 
     /**
