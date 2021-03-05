@@ -271,4 +271,15 @@ public class Constants {
     /*商品等待发布*/
     public static final int TYPE_KEY_WAIT_PUBLISH_GOODS_TYPE = 2;
 
+    /*订单- 待付 */
+    public static final int TYPE_ORDER_WAIT_PAY_TYPE = 1;
+    /*订单-待发货*/
+    public static final int TYPE_ORDER_WAIT_SEND_TYPE = 2;
+    /*订单-已发货*/
+    public static final int TYPE_ORDER_ALREADY_SEND_TYPE = 3;
+    /*订单-已完成*/
+    public static final int TYPE_ORDER_FINISH_TYPE = 4;
+
+
+
 }

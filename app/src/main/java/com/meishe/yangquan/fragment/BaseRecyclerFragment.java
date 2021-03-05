@@ -97,7 +97,6 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
         if(isInitView && isVisible ){
             lazyLoad();
             //防止重复加载数据
-            isInitView = false;
             isVisible = false;
         }
     }
@@ -107,7 +106,6 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
      * 不可见
      */
     protected void onInvisible() {
-
 
     }
 

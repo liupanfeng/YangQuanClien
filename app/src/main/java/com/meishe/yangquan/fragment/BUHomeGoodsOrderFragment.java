@@ -41,16 +41,16 @@ import okhttp3.Response;
 /**
  * @Author : LiuPanFeng
  * @CreateDate : 2021/3/3 15:32
- * @Description : 商版-商品管理子碎片
+ * @Description : 商版-商品订单管理 子碎片
  */
-public class BUHomeGoodsFragment extends BaseRecyclerFragment {
+public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
 
-    /*发布状态 1已经发布  2等待发布*/
+    /*订单状态 1已经发布  2等待发布*/
     private int mType;
     private IosDialog mIosDialog;
 
-    public static BUHomeGoodsFragment onInstance(int type) {
-        BUHomeGoodsFragment buHomeGoodsFragment = new BUHomeGoodsFragment();
+    public static BUHomeGoodsOrderFragment onInstance(int type) {
+        BUHomeGoodsOrderFragment buHomeGoodsFragment = new BUHomeGoodsOrderFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.KEY_PUBLISH_GOODS_TYPE, type);
         buHomeGoodsFragment.setArguments(bundle);
@@ -84,7 +84,7 @@ public class BUHomeGoodsFragment extends BaseRecyclerFragment {
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        getGoodsDataFromServer();
+//        getGoodsDataFromServer();
     }
 
     /**

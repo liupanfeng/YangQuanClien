@@ -274,5 +274,11 @@ public class HttpUrl {
     /*（商户）添加商品*/
     public static final String BU_HOME_GOODS_ADD = URL + "app/owner/goods/save";
 
+    /*（（商户）上 下 架商品 */
+    public static final String BU_HOME_GOODS_UN_OR_DOWN = URL + "app/owner/goods/show";
+
+    /*（商户）删除商品 */
+    public static final String BU_HOME_DELETE_GOODS = URL + "app/owner/goods/delete";
+
 
 }

@@ -39,6 +39,12 @@ public class MessageEvent {
      */
     public static final int MESSAGE_TYPE_CUT_HAIR_TOTAL_PRICE = MESSAGE_TYPE_BASE + 5;
 
+
+    /**
+     * 发布商品成功
+     */
+    public static final int MESSAGE_TYPE_BU_PUBLISH_GOODS_SUCCESS = MESSAGE_TYPE_BASE + 6;
+
     private int mEventType;
 
     private BaseInfo mBaseInfo;

@@ -37,6 +37,7 @@ import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.UploadFileInfo;
 import com.meishe.yangquan.bean.UploadFileResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -52,6 +53,8 @@ import com.meishe.yangquan.utils.ScreenUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.IOException;
@@ -897,7 +900,8 @@ public class BUPublishGoodsActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(mContext, "上传失败");
+                        hideLoading();
+                        ToastUtil.showToast(mContext, "网络异常");
                     }
                 });
             }
@@ -906,6 +910,9 @@ public class BUPublishGoodsActivity extends BaseActivity {
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 hideLoading();
                 if (result != null && result.getCode() == 1) {
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setEventType(MessageEvent.MESSAGE_TYPE_BU_PUBLISH_GOODS_SUCCESS);
+                    EventBus.getDefault().post(messageEvent);
                     ToastUtil.showToast(mContext, "发布成功");
                     finish();
                 } else {
@@ -923,7 +930,8 @@ public class BUPublishGoodsActivity extends BaseActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(mContext, "上传失败");
+                        hideLoading();
+                        ToastUtil.showToast(mContext, "网络异常");
                     }
                 });
 
