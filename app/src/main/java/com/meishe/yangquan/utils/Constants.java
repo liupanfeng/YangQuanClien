@@ -266,6 +266,9 @@ public class Constants {
     /*发布商品类型*/
     public static final String KEY_PUBLISH_GOODS_TYPE = "key.goods.type";
 
+    /*订单状态*/
+    public static final String KEY_ORDER_STATE_TYPE = "key.order.state.type";
+
     /*商品已经发布*/
     public static final int TYPE_ALREADY_PUBLISH_GOODS_TYPE = 1;
     /*商品等待发布*/

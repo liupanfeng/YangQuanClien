@@ -13,6 +13,7 @@ import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsSubTypeInfo;
 import com.meishe.yangquan.bean.BUGoodsTypeInfo;
 import com.meishe.yangquan.bean.BUMeesageDataInfo;
+import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
@@ -55,6 +56,7 @@ import com.meishe.yangquan.viewhoder.BUHomeAlreadyApplyShoppingListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeGoodsListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeGoodsSubTypeListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeGoodsTypeListHolder;
+import com.meishe.yangquan.viewhoder.BUHomeOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
@@ -326,9 +328,15 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_bu_goods_type_view, parent, false);
                 viewHolder = new BUHomeGoodsTypeListHolder(view, this);
                 break;
+                /*商版-副商品类型-用于添加商品类型的选择*/
             case VIEW_BU_GOODS_SUB_TYPE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_bu_goods_sub_type_view, parent, false);
                 viewHolder = new BUHomeGoodsSubTypeListHolder(view, this);
+                break;
+
+            case VIEW_BU_ORDER_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_order_view, parent, false);
+                viewHolder = new BUHomeOrderListHolder(view, this);
                 break;
         }
         return viewHolder;
@@ -438,6 +446,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_BU_GOODS_TYPE_LIST;
         }else if (baseInfo instanceof BUGoodsSubTypeInfo) {
             return VIEW_BU_GOODS_SUB_TYPE_LIST;
+        }else if (baseInfo instanceof BUOrderInfo) {
+            return VIEW_BU_ORDER_LIST;
         }
         return super.getItemViewType(position);
     }

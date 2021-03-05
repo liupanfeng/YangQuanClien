@@ -139,6 +139,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_BU_GOODS_LIST = VIEW_TYPE_BASE + 54;                     //商品列表
     protected static final int VIEW_BU_GOODS_TYPE_LIST = VIEW_TYPE_BASE + 55;                     //商品类型  用于添加商品的类型选择
     protected static final int VIEW_BU_GOODS_SUB_TYPE_LIST = VIEW_TYPE_BASE + 56;                     //商品副类型  用于添加商品的类型选择
+    protected static final int VIEW_BU_ORDER_LIST = VIEW_TYPE_BASE + 57;                     //订单列表
 
 
     private IosDialog mDialog;

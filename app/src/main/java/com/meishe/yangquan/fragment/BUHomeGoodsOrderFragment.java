@@ -13,6 +13,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsInfoResult;
+import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.event.MessageEvent;
@@ -31,6 +32,7 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,14 +47,14 @@ import okhttp3.Response;
  */
 public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
 
-    /*订单状态 1已经发布  2等待发布*/
+    /*订单状态 1 待付 2 待发货 3 已发货 4 已完成 */
     private int mType;
     private IosDialog mIosDialog;
 
     public static BUHomeGoodsOrderFragment onInstance(int type) {
         BUHomeGoodsOrderFragment buHomeGoodsFragment = new BUHomeGoodsOrderFragment();
         Bundle bundle = new Bundle();
-        bundle.putInt(Constants.KEY_PUBLISH_GOODS_TYPE, type);
+        bundle.putInt(Constants.KEY_ORDER_STATE_TYPE, type);
         buHomeGoodsFragment.setArguments(bundle);
         return buHomeGoodsFragment;
     }
@@ -62,7 +64,7 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
         super.onCreate(savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null) {
-            mType = arguments.getInt(Constants.KEY_PUBLISH_GOODS_TYPE);
+            mType = arguments.getInt(Constants.KEY_ORDER_STATE_TYPE);
         }
     }
 
@@ -77,6 +79,21 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
 
     @Override
     protected void initData() {
+        List<BUOrderInfo> datas=new ArrayList<>();
+
+        BUOrderInfo buOrderInfo=new BUOrderInfo();
+        buOrderInfo.setState(mType);
+        datas.add(buOrderInfo);
+
+        buOrderInfo=new BUOrderInfo();
+        buOrderInfo.setState(mType);
+        datas.add(buOrderInfo);
+
+        buOrderInfo = new BUOrderInfo();
+        buOrderInfo.setState(mType);
+        datas.add(buOrderInfo);
+
+        mAdapter.addAll(datas);
 
     }
 
@@ -85,6 +102,8 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
     protected void lazyLoad() {
         super.lazyLoad();
     }
+
+
 
     /**
      * 获取商品列表
