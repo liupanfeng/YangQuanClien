@@ -137,6 +137,7 @@ public class IosDialog extends Dialog {
                 - 2 * dp2px(45), height != 0 ? height : WindowManager.LayoutParams.WRAP_CONTENT);
         setCanceledOnTouchOutside(false);
         setCancelable(true);
+
         return this;
     }
 
