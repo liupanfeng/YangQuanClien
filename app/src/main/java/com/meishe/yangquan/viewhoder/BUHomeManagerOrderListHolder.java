@@ -2,30 +2,23 @@ package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
-import com.meishe.yangquan.bean.BUGoodsInfo;
-import com.meishe.yangquan.bean.BUOrderInfo;
+import com.meishe.yangquan.bean.BUManagerOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
-
-import java.util.List;
 
 /**
  * 商版-主页-订单管理-订单列表
  *
  * @author 86188
  */
-public class BUHomeOrderListHolder extends BaseViewHolder {
+public class BUHomeManagerOrderListHolder extends BaseViewHolder {
 
     /*商品封面*/
     private ImageView riv_bu_goods_cover;
@@ -63,7 +56,7 @@ public class BUHomeOrderListHolder extends BaseViewHolder {
     private View btn_bu_order_send;
 
 
-    public BUHomeOrderListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
+    public BUHomeManagerOrderListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
 
@@ -95,7 +88,7 @@ public class BUHomeOrderListHolder extends BaseViewHolder {
 
     @Override
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
-        if (info instanceof BUOrderInfo) {
+        if (info instanceof BUManagerOrderInfo) {
 
 //            List<String> goodsImageUrls = ((BUGoodsInfo) info).getGoodsImageUrls();
 //            if (!CommonUtils.isEmpty(goodsImageUrls)) {
@@ -109,7 +102,7 @@ public class BUHomeOrderListHolder extends BaseViewHolder {
 //                        .into(riv_bu_goods_cover);
 //            }
 
-            int state = ((BUOrderInfo) info).getState();
+            int state = ((BUManagerOrderInfo) info).getState();
             if (state== Constants.TYPE_ORDER_WAIT_PAY_TYPE){
                 //待付
                 rl_bu_order_wait_pay.setVisibility(View.VISIBLE);
@@ -125,10 +118,13 @@ public class BUHomeOrderListHolder extends BaseViewHolder {
             }else if (state== Constants.TYPE_ORDER_ALREADY_SEND_TYPE){
                 //已发货
                 tv_bu_order_right_state.setText("已发货");
-
+                rl_bu_order_wait_pay.setVisibility(View.GONE);
+                rl_bu_order_wait_send.setVisibility(View.GONE);
             }else if (state== Constants.TYPE_ORDER_FINISH_TYPE){
                 //完成
                 tv_bu_order_right_state.setText("完成");
+                rl_bu_order_wait_pay.setVisibility(View.GONE);
+                rl_bu_order_wait_send.setVisibility(View.GONE);
             }
 
 

@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.BUManagerCommentInfo;
 import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsSubTypeInfo;
 import com.meishe.yangquan.bean.BUGoodsTypeInfo;
 import com.meishe.yangquan.bean.BUMeesageDataInfo;
-import com.meishe.yangquan.bean.BUOrderInfo;
+import com.meishe.yangquan.bean.BUManagerOrderInfo;
 import com.meishe.yangquan.bean.BUPictureInfo;
+import com.meishe.yangquan.bean.BUManagerRefundInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BaseInfo;
@@ -53,10 +55,12 @@ import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.viewhoder.BUHomeAlreadyApplyShoppingListHolder;
+import com.meishe.yangquan.viewhoder.BUHomeManagerCommentListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeGoodsListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeGoodsSubTypeListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeGoodsTypeListHolder;
-import com.meishe.yangquan.viewhoder.BUHomeOrderListHolder;
+import com.meishe.yangquan.viewhoder.BUHomeManagerOrderListHolder;
+import com.meishe.yangquan.viewhoder.BUHomeManagerRefundListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
@@ -333,10 +337,20 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_bu_goods_sub_type_view, parent, false);
                 viewHolder = new BUHomeGoodsSubTypeListHolder(view, this);
                 break;
-
+            /*商版-订单*/
             case VIEW_BU_ORDER_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_bu_order_view, parent, false);
-                viewHolder = new BUHomeOrderListHolder(view, this);
+                viewHolder = new BUHomeManagerOrderListHolder(view, this);
+                break;
+            /*商版-平价*/
+            case VIEW_BU_COMMENT_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_comment_view, parent, false);
+                viewHolder = new BUHomeManagerCommentListHolder(view, this);
+                break;
+            /*商版-退货*/
+            case VIEW_BU_REFUND_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_bu_refund_view, parent, false);
+                viewHolder = new BUHomeManagerRefundListHolder(view, this);
                 break;
         }
         return viewHolder;
@@ -446,8 +460,12 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_BU_GOODS_TYPE_LIST;
         }else if (baseInfo instanceof BUGoodsSubTypeInfo) {
             return VIEW_BU_GOODS_SUB_TYPE_LIST;
-        }else if (baseInfo instanceof BUOrderInfo) {
+        }else if (baseInfo instanceof BUManagerOrderInfo) {
             return VIEW_BU_ORDER_LIST;
+        }else if (baseInfo instanceof BUManagerCommentInfo) {
+            return VIEW_BU_COMMENT_LIST;
+        }else if (baseInfo instanceof BUManagerRefundInfo) {
+            return VIEW_BU_REFUND_LIST;
         }
         return super.getItemViewType(position);
     }

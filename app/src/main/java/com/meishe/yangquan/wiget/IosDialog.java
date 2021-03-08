@@ -141,6 +141,18 @@ public class IosDialog extends Dialog {
         return this;
     }
 
+
+
+
+    public void setContentViewLineSpace(float lineSpace){
+        contentTextView.setLineSpacing(0,lineSpace);
+    }
+
+    public void setContentViewLayoutGravity(int gravity){
+        contentTextView.setGravity(gravity);
+    }
+
+
     public void setAsureText(String asureText) {
         this.asureText = asureText;
     }

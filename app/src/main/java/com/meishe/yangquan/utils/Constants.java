@@ -268,6 +268,10 @@ public class Constants {
 
     /*订单状态*/
     public static final String KEY_ORDER_STATE_TYPE = "key.order.state.type";
+    /*评论类型*/
+    public static final String KEY_COMMENT_STATE_TYPE = "key.comment.state.type";
+    /*退货类型*/
+    public static final String KEY_REFUND_STATE_TYPE = "key.refund.state.type";
 
     /*商品已经发布*/
     public static final int TYPE_ALREADY_PUBLISH_GOODS_TYPE = 1;
@@ -282,6 +286,19 @@ public class Constants {
     public static final int TYPE_ORDER_ALREADY_SEND_TYPE = 3;
     /*订单-已完成*/
     public static final int TYPE_ORDER_FINISH_TYPE = 4;
+
+
+    /*好评 */
+    public static final int TYPE_COMMENT_GOOD_TYPE = 1;
+    /*中评*/
+    public static final int TYPE_COMMENT_MIDDLE_TYPE = 2;
+    /*差评*/
+    public static final int TYPE_COMMENT_BAD_TYPE = 3;
+
+    /*进行中*/
+    public static final int TYPE_REFUND_ING_TYPE = 1;
+    /*已完成*/
+    public static final int TYPE_REFUND_FINISH_TYPE = 2;
 
 
 

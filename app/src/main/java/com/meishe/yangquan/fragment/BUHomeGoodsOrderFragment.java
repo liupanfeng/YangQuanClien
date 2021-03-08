@@ -13,7 +13,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsInfoResult;
-import com.meishe.yangquan.bean.BUOrderInfo;
+import com.meishe.yangquan.bean.BUManagerOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.event.MessageEvent;
@@ -79,17 +79,17 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
 
     @Override
     protected void initData() {
-        List<BUOrderInfo> datas=new ArrayList<>();
+        List<BUManagerOrderInfo> datas=new ArrayList<>();
 
-        BUOrderInfo buOrderInfo=new BUOrderInfo();
+        BUManagerOrderInfo buOrderInfo=new BUManagerOrderInfo();
         buOrderInfo.setState(mType);
         datas.add(buOrderInfo);
 
-        buOrderInfo=new BUOrderInfo();
+        buOrderInfo=new BUManagerOrderInfo();
         buOrderInfo.setState(mType);
         datas.add(buOrderInfo);
 
-        buOrderInfo = new BUOrderInfo();
+        buOrderInfo = new BUManagerOrderInfo();
         buOrderInfo.setState(mType);
         datas.add(buOrderInfo);
 

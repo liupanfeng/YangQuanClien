@@ -6,7 +6,7 @@ package com.meishe.yangquan.bean;
  * @CreateDate : 2021/3/5 13:26
  * @Description : 商版-订单数据
  */
-public class BUOrderInfo extends BaseInfo{
+public class BUManagerOrderInfo extends BaseInfo{
 
     /*订单状态*/
     private int state;

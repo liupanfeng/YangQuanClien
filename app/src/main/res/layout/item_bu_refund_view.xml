@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginTop="@dimen/dp10"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_bu_order_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp22"
+        android:layout_marginTop="@dimen/dp12"
+        android:text="订单编号：6677889989"
+        android:textColor="#ff303030"
+        android:textSize="13sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_bu_order_right_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp22"
+        android:layout_alignParentRight="true"
+        android:text="已平价"
+        android:layout_marginTop="@dimen/dp12"
+        android:textColor="#3BA786"
+        android:textSize="13sp"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="@dimen/dp22" />
+
+
+    <com.meishe.yangquan.view.RoundAngleImageView
+        android:id="@+id/riv_bu_goods_cover"
+        android:layout_width="78dp"
+        android:background="@mipmap/ic_bu_goods_cover"
+        app:roundWidth="@dimen/dp3"
+        app:roundHeight="@dimen/dp3"
+        android:layout_below="@+id/tv_bu_order_id"
+        android:layout_marginLeft="@dimen/dp22"
+        android:layout_marginTop="@dimen/dp21"
+        android:layout_height="78dp"/>
+
+    <TextView
+        android:id="@+id/tv_bu_good_title"
+        android:layout_toRightOf="@+id/riv_bu_goods_cover"
+        android:layout_alignTop="@+id/riv_bu_goods_cover"
+        android:layout_marginLeft="@dimen/dp8"
+        android:layout_marginRight="@dimen/dp22"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="英美尔犊牛精料_教槽料_牛拉骨架…"
+        android:singleLine="true"
+        android:ellipsize="end"
+        android:textColor="#ff303030"
+        android:textSize="13sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_bu_goods_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/riv_bu_goods_cover"
+        android:layout_marginLeft="@dimen/dp8"
+        android:layout_alignBottom="@+id/riv_bu_goods_cover"
+        android:text="70/桶  |"
+        android:textColor="#ff303030"
+        android:textSize="13sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_bu_goods_amount"
+        android:layout_alignBottom="@+id/tv_bu_goods_price"
+        android:layout_toRightOf="@+id/tv_bu_goods_price"
+        android:layout_marginLeft="@dimen/dp8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="数量：3"
+        android:textColor="#ff303030"
+        android:textSize="13sp"
+        />
+
+    <View
+        android:id="@+id/bu_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:layout_below="@+id/riv_bu_goods_cover"
+        android:layout_marginLeft="@dimen/dp22"
+        android:layout_marginRight="@dimen/dp22"
+        android:layout_marginTop="@dimen/dp22"
+        android:background="#E5E5E5"
+        />
+
+
+    <RelativeLayout
+        android:layout_below="@+id/bu_line"
+        android:id="@+id/rl_bu_refund"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+
+        <Button
+            android:id="@+id/btn_bu_refund"
+            android:layout_width="74dp"
+            android:layout_below="@+id/tv_bu_buy_user_phone_number"
+            android:layout_height="@dimen/dp26"
+            android:layout_marginRight="@dimen/dp22"
+            android:layout_marginTop="@dimen/dp15"
+            android:background="@drawable/bg_bu_publish_goods"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/dp15"
+            android:text="同意退货"
+            android:textColor="@color/white"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+
+    </RelativeLayout>
+
+</LinearLayout>
