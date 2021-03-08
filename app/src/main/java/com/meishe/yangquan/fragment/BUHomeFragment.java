@@ -110,6 +110,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         initShoppingUserRecycler();
         initShopDataRecycler();
 
+
         return view;
     }
 
