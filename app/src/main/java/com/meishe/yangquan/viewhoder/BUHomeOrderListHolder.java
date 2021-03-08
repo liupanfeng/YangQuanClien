@@ -32,7 +32,7 @@ public class BUHomeOrderListHolder extends BaseViewHolder {
     /*订单编号*/
     private TextView tv_bu_order_id;
     /*右边状态*/
-    private Button tv_bu_order_right_state;
+    private TextView tv_bu_order_right_state;
     /*商品标题*/
     private TextView tv_bu_good_title;
     /*商品价格*/
