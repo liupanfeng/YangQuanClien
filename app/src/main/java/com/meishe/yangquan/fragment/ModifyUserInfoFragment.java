@@ -16,17 +16,24 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.BUBusinessLicenseActivity;
+import com.meishe.yangquan.bean.BUShoppingInfo;
+import com.meishe.yangquan.bean.BUShoppingInfoResult;
+import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.helper.BackHandlerHelper;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.manager.ShoppingInfoManager;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.KeyboardUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
+import com.meishe.yangquan.utils.Util;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -107,7 +114,20 @@ public class ModifyUserInfoFragment extends BaseRecyclerFragment {
         mBtnRight.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateUserInfo();
+                switch (mModifyType) {
+                    case Constants.USER_MODIFY_TYPE_NICKNAME:
+                    case Constants.USER_MODIFY_TYPE_SCALE:
+                    case Constants.USER_MODIFY_TYPE_YEAR:
+                    case Constants.USER_MODIFY_TYPE_QUANTITY:
+                        updateUserInfo();
+                        break;
+                    case Constants.USER_MODIFY_TYPE_SHOPPING_NAME:
+                    case Constants.USER_MODIFY_TYPE_SHOPPING_MAIN:
+                    case Constants.USER_MODIFY_TYPE_SHOPPING_SIGN:
+                        updateShoppingFromServer();
+                        break;
+                }
+
             }
         });
 
@@ -143,28 +163,69 @@ public class ModifyUserInfoFragment extends BaseRecyclerFragment {
     @Override
     protected void initData() {
         UserInfo user = UserManager.getInstance(getContext()).getUser();
-        if (user == null) {
-            return;
-        }
+
         switch (mModifyType) {
             case Constants.USER_MODIFY_TYPE_NICKNAME:
+                if (user == null) {
+                    return;
+                }
                 mTvTitle.setText("设置昵称");
                 mContent = user.getNickname();
                 break;
             case Constants.USER_MODIFY_TYPE_SCALE:
+                if (user == null) {
+                    return;
+                }
                 mTvTitle.setText("设置养殖规模");
                 mContent = user.getCulturalScale() < 0 ? "" : user.getCulturalScale() + "";
                 mEtInput.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
             case Constants.USER_MODIFY_TYPE_YEAR:
+                if (user == null) {
+                    return;
+                }
                 mTvTitle.setText("设置养殖年限");
                 mContent = user.getCulturalAge() < 0 ? "" : user.getCulturalAge() + "";
                 mEtInput.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
             case Constants.USER_MODIFY_TYPE_QUANTITY:
+                if (user == null) {
+                    return;
+                }
                 mTvTitle.setText("设置存栏量");
                 mContent = user.getCurrentCulturalQuantity() < 0 ? "" : user.getCurrentCulturalQuantity() + "";
                 mEtInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+                break;
+            case Constants.USER_MODIFY_TYPE_SHOPPING_NAME:
+                mTvTitle.setText("修改店铺名称");
+                BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
+                if (buShoppingInfo == null) {
+                    return;
+                }
+                mContent = buShoppingInfo.getName();
+//                mContent = user.getCurrentCulturalQuantity() < 0 ? "" : user.getCurrentCulturalQuantity() + "";
+//                mEtInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+                break;
+            case Constants.USER_MODIFY_TYPE_SHOPPING_MAIN:
+                mTvTitle.setText("修改店铺主营");
+                buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
+                if (buShoppingInfo == null) {
+                    return;
+                }
+                mContent = buShoppingInfo.getMainCategory();
+//                mContent = user.getCurrentCulturalQuantity() < 0 ? "" : user.getCurrentCulturalQuantity() + "";
+//                mEtInput.setInputType(InputType.TYPE_CLASS_NUMBER);
+                break;
+
+            case Constants.USER_MODIFY_TYPE_SHOPPING_SIGN:
+                mTvTitle.setText("修改店铺签名");
+                buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
+                if (buShoppingInfo == null) {
+                    return;
+                }
+                mContent = buShoppingInfo.getSign();
+//                mContent = user.getCurrentCulturalQuantity() < 0 ? "" : user.getCurrentCulturalQuantity() + "";
+//                mEtInput.setInputType(InputType.TYPE_CLASS_NUMBER);
                 break;
         }
         if (!TextUtils.isEmpty(mContent)) {
@@ -229,7 +290,7 @@ public class ModifyUserInfoFragment extends BaseRecyclerFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(mContext, "接口异常");
+                        ToastUtil.showToast(mContext, "网络异常");
                     }
                 });
             }
@@ -261,7 +322,7 @@ public class ModifyUserInfoFragment extends BaseRecyclerFragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        ToastUtil.showToast(mContext, "接口异常");
+                        ToastUtil.showToast(mContext, "网络异常");
                     }
                 });
 
@@ -273,6 +334,89 @@ public class ModifyUserInfoFragment extends BaseRecyclerFragment {
             }
         }, requestParam, token);
     }
+
+
+    /**
+     * 更新店铺信息
+     */
+    private void updateShoppingFromServer() {
+        String token = getToken();
+        if (Util.checkNull(token)) {
+            return;
+        }
+        BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
+        if (buShoppingInfo == null) {
+            return;
+        }
+        showLoading();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("id", buShoppingInfo.getId());
+        switch (mModifyType){
+            case Constants.USER_MODIFY_TYPE_SHOPPING_NAME:
+                param.put("name", buShoppingInfo.getName());
+                break;
+            case Constants.USER_MODIFY_TYPE_SHOPPING_MAIN:
+                param.put("mainCategory", buShoppingInfo.getMainCategory());
+                break;
+            case Constants.USER_MODIFY_TYPE_SHOPPING_SIGN:
+                param.put("sign", buShoppingInfo.getSign());
+                break;
+        }
+
+//        param.put("address", buShoppingInfo.getAddress());
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_APPLY_SHOPPING_SANE, new BaseCallBack<BUShoppingInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoading();
+                    }
+                });
+            }
+
+
+            @Override
+            protected void onSuccess(Call call, Response response, BUShoppingInfoResult result) {
+                hideLoading();
+                if (result.getCode() == 1) {
+                    ShoppingInfoManager.getInstance().setBuShoppingInfo(result.getData());
+                    MessageEvent messageEvent = new MessageEvent();
+                    messageEvent.setEventType(MessageEvent.MESSAGE_TYPE_UPDATE_SHOPPING_INFO);
+                    EventBus.getDefault().post(messageEvent);
+                    if (mOnFragmentListener != null) {
+                        KeyboardUtils.hideSoftInput(mEtInput);
+                        mOnFragmentListener.hideFragment();
+                    }
+                }else{
+                    ToastUtil.showToast(mContext, result.getMsg());
+                }
+
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
 
 
     @Override

@@ -50,7 +50,6 @@
                         android:layout_height="47dp"
                         android:layout_marginLeft="@dimen/dp13"
                         android:layout_marginTop="@dimen/dp19"
-                        android:background="@mipmap/ic_bu_photo_default"
                         app:roundHeight="@dimen/dp24"
                         app:roundWidth="@dimen/dp24" />
 

@@ -45,6 +45,11 @@ public class MessageEvent {
      */
     public static final int MESSAGE_TYPE_BU_PUBLISH_GOODS_SUCCESS = MESSAGE_TYPE_BASE + 6;
 
+    /**
+     * 更细店铺信息
+     */
+    public static final int MESSAGE_TYPE_UPDATE_SHOPPING_INFO = MESSAGE_TYPE_BASE + 7;
+
     private int mEventType;
 
     private BaseInfo mBaseInfo;

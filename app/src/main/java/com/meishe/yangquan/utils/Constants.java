@@ -194,6 +194,7 @@ public class Constants {
     /*修改昵称*/
     public static final int USER_MODIFY_TYPE_NICKNAME = 1;
 
+
     /*修改养殖规模*/
     public static final int USER_MODIFY_TYPE_SCALE = 2;
 
@@ -202,6 +203,15 @@ public class Constants {
 
     /*修改存栏量*/
     public static final int USER_MODIFY_TYPE_QUANTITY = 4;
+
+    /*修改店铺名称*/
+    public static final int USER_MODIFY_TYPE_SHOPPING_NAME = 5;
+    /*修改店铺地址*/
+    public static final int USER_MODIFY_TYPE_SHOPPING_ADDRESS = 6;
+    /*修改店铺主营*/
+    public static final int USER_MODIFY_TYPE_SHOPPING_MAIN = 7;
+    /*修改店铺签名*/
+    public static final int USER_MODIFY_TYPE_SHOPPING_SIGN = 8;
 
     /*批次id*/
     public static final String TYPE_KEY_BATCH_ID = "batch.id";

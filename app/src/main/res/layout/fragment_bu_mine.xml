@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/tv_bu_mine_shopping_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="店铺名称"
@@ -41,6 +42,7 @@
 
 
                 <TextView
+                    android:id="@+id/tv_bu_mine_real_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dp7"

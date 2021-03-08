@@ -1,5 +1,6 @@
 package com.meishe.yangquan.fragment;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.meishe.yangquan.bean.BUShoppingInfoResult;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfoResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
@@ -32,6 +34,10 @@ import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.IosDialog;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,6 +47,9 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_SHOPPING_INFO;
+import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_USER_INFO;
 
 /**
  * @Author : lpf
@@ -351,13 +360,14 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
             showNoShoppingView();
             return;
         } else {
+            ShoppingInfoManager.getInstance().setBuShoppingInfo(data);
             mShoppingStatue = data.getAuthState();
             switch (mShoppingStatue) {
                 case 0:
                     //审核中 暂时注释了
-//                    showNoShoppingView();
+                    showNoShoppingView();
                     //TODO 临时存在
-                     updateShoppingData(data);
+//                     updateShoppingData(data);
 
 //                    showNoShoppingView();
                     break;
@@ -368,7 +378,6 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
                 case -1:
                     //审核未通过
                     showNoShoppingView();
-                    ShoppingInfoManager.getInstance().setBuShoppingInfo(data);
                     break;
             }
         }
@@ -397,12 +406,13 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
             options.placeholder(R.mipmap.ic_message_list_photo_default);
             Glide.with(mContext)
                     .asBitmap()
-                    .load(((BUShoppingInfo) data).getIconUrl())
+                    .load(data.getShopInSideImageUrls().get(0))
                     .apply(options)
                     .into(bu_photo);
         }
 
         initShopData();
     }
+
 
 }
