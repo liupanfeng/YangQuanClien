@@ -33,6 +33,7 @@ import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineCallbackInfo;
+import com.meishe.yangquan.bean.MineFeedGoldInfo;
 import com.meishe.yangquan.bean.MineMyFansInfo;
 import com.meishe.yangquan.bean.MineMyFocusInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
@@ -75,6 +76,7 @@ import com.meishe.yangquan.viewhoder.HomeMarketBuyLittleSheepListHolder;
 import com.meishe.yangquan.viewhoder.HomeMarketSellBigSheepListHolder;
 import com.meishe.yangquan.viewhoder.HomeMarketSellLittleSheepListHolder;
 import com.meishe.yangquan.viewhoder.MineCallbackHolder;
+import com.meishe.yangquan.viewhoder.MineFeedGoldHolder;
 import com.meishe.yangquan.viewhoder.SheepCutHairHolder;
 import com.meishe.yangquan.viewhoder.HomeMarketPictureListHolder;
 import com.meishe.yangquan.viewhoder.IndustryContentHolder;
@@ -281,6 +283,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             /*我的-养殖档案*/
             case VIEW_MINE_BREEDING_ARCHIVE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_breeding_archives, parent, false);
+                viewHolder = new MineFeedGoldHolder(view, this);
+                break;
+            /*我的-饲料金*/
+            case VIEW_MINE_FEED_GOLD_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_feed_gold, parent, false);
                 viewHolder = new MineBreedingArchivesHolder(view, this);
                 break;
 
@@ -466,6 +473,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_BU_COMMENT_LIST;
         }else if (baseInfo instanceof BUManagerRefundInfo) {
             return VIEW_BU_REFUND_LIST;
+        }else if (baseInfo instanceof MineFeedGoldInfo) {
+            return VIEW_MINE_FEED_GOLD_LIST;
         }
         return super.getItemViewType(position);
     }

@@ -258,6 +258,8 @@ public class HttpUrl {
 
     /*我的-饲料金总额*/
     public static final String SHEEP_MINE_FEED_GOLD = URL + "app/user/gold/info";
+    /*我的-饲料金列表*/
+    public static final String SHEEP_MINE_FEED_GOLD_LIST = URL + "app/user/gold/list";
 
 
 

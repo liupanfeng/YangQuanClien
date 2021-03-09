@@ -283,6 +283,9 @@ public class Constants {
     /*退货类型*/
     public static final String KEY_REFUND_STATE_TYPE = "key.refund.state.type";
 
+    /*饲料金类型*/
+    public static final String KEY_FEED_GOLD_STATE_TYPE = "key.feed.gold.state.type";
+
     /*商品已经发布*/
     public static final int TYPE_ALREADY_PUBLISH_GOODS_TYPE = 1;
     /*商品等待发布*/
@@ -309,6 +312,12 @@ public class Constants {
     public static final int TYPE_REFUND_ING_TYPE = 1;
     /*已完成*/
     public static final int TYPE_REFUND_FINISH_TYPE = 2;
+
+
+    /*收入*/
+    public static final int TYPE_FEED_GOLD_IN_TYPE = 1;
+    /*支出*/
+    public static final int TYPE_FEED_GOLD_OUT_TYPE = 2;
 
 
 

@@ -1,76 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".activity.MineFeedGoldActivity">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <include layout="@layout/custom_title" />
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <include layout="@layout/custom_title"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp8"
-            android:background="#fff5f5f5"
-            />
-
-        <ImageView
-            android:layout_width="@dimen/dp55"
-            android:layout_height="@dimen/dp55"
-            android:background="@mipmap/ic_feed_gold"
-            android:layout_marginTop="@dimen/dp55"
-            android:layout_gravity="center_horizontal"
-            />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="我的饲料金"
-            android:textColor="#ff303030"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp30"
-            android:textSize="13sp"
-            />
-
-        <TextView
-            android:id="@+id/tv_gold_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="3189"
-            android:textColor="#fff3ba0d"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/dp8"
-            android:textSize="40sp"
-            />
-    </LinearLayout>
-
-
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5" />
 
     <Button
-    android:layout_width="153dp"
-    android:layout_height="34dp"
-    android:background="@drawable/mine_gold_button_bg"
-    android:layout_alignParentBottom="true"
-    android:layout_marginBottom="146dp"
-    android:text="收入"
-    android:textColor="@color/white"
-    android:layout_centerHorizontal="true"
-    />
+        android:layout_width="153dp"
+        android:layout_height="34dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="146dp"
+        android:background="@drawable/mine_gold_button_bg"
+        android:text="收入"
+        android:textColor="@color/white"
+        android:visibility="gone" />
 
     <Button
         android:id="@+id/btn_gold_pay"
         android:layout_width="153dp"
         android:layout_height="34dp"
-        android:background="@drawable/mine_gold_button_pay_bg"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
         android:layout_marginBottom="87dp"
+        android:background="@drawable/mine_gold_button_pay_bg"
         android:text="支出"
         android:textColor="#ff00ad8a"
-        android:layout_centerHorizontal="true"
-        />
+        android:visibility="gone" />
 
-</RelativeLayout>
+    <ImageView
+        android:layout_width="@dimen/dp55"
+        android:layout_height="@dimen/dp55"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/dp55"
+        android:background="@mipmap/ic_feed_gold"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="98dp"
+        android:background="@mipmap/ic_mine_feed_gold_top_bg"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_gold_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp20"
+            android:textColor="#ffffffff"
+            android:textSize="27sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp5"
+            android:text="余额（饲料金）"
+            android:textColor="#ffffffff"
+            android:textSize="13sp" />
+
+
+    </LinearLayout>
+
+    <com.meishe.libbase.SlidingTabLayout
+        android:id="@+id/slidingTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp45"
+        android:layout_marginLeft="@dimen/dp_px_30"
+        android:layout_marginRight="@dimen/dp_px_30"
+        android:layout_marginTop="@dimen/dp5"
+        tl:tl_indicator_color="@color/mainColor"
+        tl:tl_indicator_height="@dimen/dp_px_6"
+        tl:tl_indicator_width="@dimen/dp_px_30"
+        tl:tl_tab_space_equal="true"
+        tl:tl_textSelectColor="@color/mainColor"
+        tl:tl_textSize="@dimen/sp_px_39"
+        tl:tl_textUnselectedColor="@color/unselect_text_color" />
+
+    <com.meishe.yangquan.view.MViewPager
+        android:id="@+id/vp_pager"
+        android:layout_below="@+id/slidingTabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+
+
+
+</LinearLayout>

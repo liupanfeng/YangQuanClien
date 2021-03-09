@@ -13,6 +13,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.BUMineFeedGoldActivity;
 import com.meishe.yangquan.activity.BUMineRecommendActivity;
 import com.meishe.yangquan.activity.BUMineShoppingMessageActivity;
+import com.meishe.yangquan.activity.MineFeedGoldActivity;
 import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
@@ -93,7 +94,7 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
                 break;
             case R.id.rl_bu_feed_gold:
                 //饲料金
-                AppManager.getInstance().jumpActivity(getActivity(), BUMineFeedGoldActivity.class);
+                AppManager.getInstance().jumpActivity(getActivity(), MineFeedGoldActivity.class);
                 break;
             case R.id.rl_bu_recommend:
                 //反馈建议
