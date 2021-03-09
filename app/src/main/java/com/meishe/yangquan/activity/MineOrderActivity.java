@@ -90,7 +90,7 @@ public class MineOrderActivity extends BaseActivity {
                 mTvTitle.setText("待发货");
                 break;
             case Constants.TYPE_ORDER_ALREADY_SEND_TYPE:
-                mTvTitle.setText("待平价");
+                mTvTitle.setText("待评价");
                 break;
             case Constants.TYPE_ORDER_FINISH_TYPE:
                 mTvTitle.setText("退款");

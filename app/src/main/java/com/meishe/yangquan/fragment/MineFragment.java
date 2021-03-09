@@ -207,10 +207,19 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_comment:
+                bundle=new Bundle();
+                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_ALREADY_SEND_TYPE);
+                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_receive:
+                bundle=new Bundle();
+                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
+                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_refund:
+                bundle=new Bundle();
+                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_FINISH_TYPE);
+                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.iv_mine_setting:
                 //设置
