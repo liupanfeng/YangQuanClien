@@ -131,6 +131,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected static final int VIEW_MARKET_LIST_BUY_BIG_SHEEP = VIEW_TYPE_BASE + 40;                                //市场列表
     protected static final int VIEW_MARKET_LIST_BUY_LITTLE_SHEEP = VIEW_TYPE_BASE + 41;                                //市场列表
     protected static final int VIEW_MINE_FEED_GOLD_LIST = VIEW_TYPE_BASE + 42;                                //饲料金列表
+    protected static final int VIEW_MINE_ORDER_LIST = VIEW_TYPE_BASE + 43;                                //订单列表
 
 
     protected static final int VIEW_BU_HOME_SHOPDATA_LIST = VIEW_TYPE_BASE + 50;                     //商版店铺数据

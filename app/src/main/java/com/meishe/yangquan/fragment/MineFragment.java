@@ -2,6 +2,7 @@ package com.meishe.yangquan.fragment;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.MineOrderActivity;
 import com.meishe.yangquan.activity.SettingActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
@@ -28,6 +30,7 @@ import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.RoundAngleImageView;
@@ -199,6 +202,9 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
 //        AppManager.getInstance().jumpActivity(getActivity(), LoginActivity.class);
         switch (v.getId()) {
             case R.id.rl_mine_pay:
+                Bundle bundle=new Bundle();
+                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_WAIT_PAY_TYPE);
+                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_comment:
                 break;

@@ -36,6 +36,7 @@ import com.meishe.yangquan.bean.MineCallbackInfo;
 import com.meishe.yangquan.bean.MineFeedGoldInfo;
 import com.meishe.yangquan.bean.MineMyFansInfo;
 import com.meishe.yangquan.bean.MineMyFocusInfo;
+import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.MineUserMessageInfo;
 import com.meishe.yangquan.bean.PointRecordInfo;
@@ -290,6 +291,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_mine_feed_gold, parent, false);
                 viewHolder = new MineBreedingArchivesHolder(view, this);
                 break;
+            /*我的-订单*/
+            case VIEW_MINE_ORDER_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_feed_gold, parent, false);
+                viewHolder = new MineBreedingArchivesHolder(view, this);
+                break;
 
             /*养殖助手-配料分析*/
             case VIEW_SHEEP_BREEDING_FOOD_ANALYSIS_LIST:
@@ -475,6 +481,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_BU_REFUND_LIST;
         }else if (baseInfo instanceof MineFeedGoldInfo) {
             return VIEW_MINE_FEED_GOLD_LIST;
+        }else if (baseInfo instanceof MineOrderInfo) {
+            return VIEW_MINE_ORDER_LIST;
         }
         return super.getItemViewType(position);
     }
