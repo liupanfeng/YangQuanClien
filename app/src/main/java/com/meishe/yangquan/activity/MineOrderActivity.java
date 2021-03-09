@@ -95,6 +95,7 @@ public class MineOrderActivity extends BaseActivity {
             case Constants.TYPE_ORDER_FINISH_TYPE:
                 mTvTitle.setText("退款");
                 break;
+
         }
     }
 
