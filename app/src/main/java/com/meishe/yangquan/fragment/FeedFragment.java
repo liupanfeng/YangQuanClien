@@ -53,7 +53,7 @@ public class FeedFragment extends BaseRecyclerFragment {
         mFragmentList.clear();
         mTabContents.clear();
 
-        FeedFeedFragment feedFeedFragment = new FeedFeedFragment();
+        FeedContentListFragment feedFeedFragment = new FeedContentListFragment();
         mFragmentList.add(feedFeedFragment);
         mTabContents.add("饲料");
 

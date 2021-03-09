@@ -89,10 +89,16 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
     public abstract void release();
 
     protected void showLoading() {
+        if (mLoading==null){
+            return;
+        }
         mLoading.show();
     }
 
     protected void hideLoading() {
+        if (mLoading==null){
+            return;
+        }
         mLoading.hide();
     }
 
