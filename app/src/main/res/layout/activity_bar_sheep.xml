@@ -44,6 +44,15 @@
                 />
 
         </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp8"
@@ -67,12 +76,16 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
-                android:layout_marginTop="176dp"
-                android:layout_centerHorizontal="true"
+                android:layout_marginTop="60dp"
+                android:layout_below="@+id/et_input_sheep_bar_message"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
 
         </RelativeLayout>
+
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 
     <include layout="@layout/layout_loading"/>

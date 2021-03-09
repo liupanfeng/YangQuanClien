@@ -256,6 +256,9 @@ public class HttpUrl {
     /*用户消息*/
     public static final String SHEEP_MINE_USER_LIST = URL + "app/message/user/list";
 
+    /*我的-饲料金总额*/
+    public static final String SHEEP_MINE_FEED_GOLD = URL + "app/user/gold/info";
+
 
 
     //////////////////////////////////////////商版//////////////////////////////////////////////

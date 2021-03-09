@@ -32,6 +32,7 @@ import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.bean.UploadFileInfo;
 import com.meishe.yangquan.bean.UploadFilesResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -43,6 +44,8 @@ import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.IOException;
@@ -169,7 +172,7 @@ public class PublishSheepBarActivity extends BaseActivity {
         }
         int size = mData.size();
         if (size <= 1) {
-            ToastUtil.showToast(mContext, "请选择图片！");
+            publishSheepBar("");
             return;
         }
         String[] fileKeys = new String[size - 1];
@@ -223,16 +226,16 @@ public class PublishSheepBarActivity extends BaseActivity {
                     ToastUtil.showToast("UploadFileInfo is null");
                     return;
                 }
-                StringBuilder stringBuilder=new StringBuilder();
+                StringBuilder stringBuilder = new StringBuilder();
 
-                for (int i=0;i<datas.size();i++){
+                for (int i = 0; i < datas.size(); i++) {
                     UploadFileInfo uploadFileInfo = datas.get(i);
-                    if (uploadFileInfo==null){
+                    if (uploadFileInfo == null) {
                         continue;
                     }
                     stringBuilder.append(uploadFileInfo.getId());
-                    if (i<datas.size()-1){
-                        stringBuilder.append(",") ;
+                    if (i < datas.size() - 1) {
+                        stringBuilder.append(",");
                     }
                 }
                 publishSheepBar(stringBuilder.toString());
@@ -272,7 +275,9 @@ public class PublishSheepBarActivity extends BaseActivity {
 
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("content", content);
-        requestParam.put("fileIds", pictureIds);
+        if (!TextUtils.isEmpty(pictureIds)) {
+            requestParam.put("fileIds", pictureIds);
+        }
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_BAR_INFO_SAVE, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -296,6 +301,9 @@ public class PublishSheepBarActivity extends BaseActivity {
                 if (result != null && result.getCode() == 1) {
                     ToastUtil.showToast(mContext, "发布成功");
                     BitmapUtils.deleteCacheFile();
+                    MessageEvent messageEvent=new MessageEvent();
+                    messageEvent.setEventType(MessageEvent.MESSAGE_TYPE_UPDATE_SHEEP_BAR);
+                    EventBus.getDefault().post(messageEvent);
                     finish();
                 } else {
                     ToastUtil.showToast(mContext, result.getMsg());
@@ -408,7 +416,7 @@ public class PublishSheepBarActivity extends BaseActivity {
         switch (requestCode) {
             case CAMERA_REQUEST_CODE:   //调用相机后返回
                 if (tempFile != null && tempFile.exists()) {
-                    String filePath = BitmapUtils.compressImageUpload(tempFile.getAbsolutePath(), Constants.COMPRESS_WIDTH,Constants.COMPRESS_HEIGHT);
+                    String filePath = BitmapUtils.compressImageUpload(tempFile.getAbsolutePath(), Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
                     CommonPictureInfo sheepBarMessageInfo = new CommonPictureInfo();
                     sheepBarMessageInfo.setFilePath(filePath);
                     sheepBarMessageInfo.setType(CommonPictureInfo.TYPE_CAPTURE_PIC);
@@ -444,7 +452,7 @@ public class PublishSheepBarActivity extends BaseActivity {
                         imagePath = uri.getPath();
                     }
                     if (imagePath != null) {
-                        String filePath = BitmapUtils.compressImageUpload(imagePath,Constants.COMPRESS_WIDTH,Constants.COMPRESS_HEIGHT);
+                        String filePath = BitmapUtils.compressImageUpload(imagePath, Constants.COMPRESS_WIDTH, Constants.COMPRESS_HEIGHT);
                         CommonPictureInfo sheepBarMessageInfo = new CommonPictureInfo();
                         sheepBarMessageInfo.setFilePath(filePath);
                         sheepBarMessageInfo.setType(CommonPictureInfo.TYPE_CAPTURE_PIC);

@@ -192,7 +192,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
         param.put("listType", TYPE_MARKET_LIST_TYPE_TOP);
         param.put("content", "");
         param.put("pageNum", 1);
-        param.put("pageSize", 10);
+        param.put("pageSize", 4);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_BAR_INFO_LIST, new BaseCallBack<SheepBarInfoResult>() {
             @Override

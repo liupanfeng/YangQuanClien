@@ -22,6 +22,7 @@ import com.meishe.yangquan.bean.SheepBarCommentInfoResult;
 import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfo;
 import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfoResult;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.CommonUtils;
@@ -31,6 +32,8 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -66,7 +69,6 @@ public class SheepBarCommentListHolder extends BaseViewHolder {
     private RecyclerView child_recycler;
     private MultiFunctionAdapter mChildAdapter;
 
-
     public SheepBarCommentListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
@@ -96,8 +98,19 @@ public class SheepBarCommentListHolder extends BaseViewHolder {
             @Override
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
                 if (baseInfo instanceof SheepBarCommentSecondaryInfo ) {
-                    postInteractSheepBar(view.getContext(), position, (SheepBarCommentSecondaryInfo) baseInfo,
-                            2);
+                    switch (view.getId()){
+                        case R.id.tv_sheep_bar_prised:
+                            postInteractSheepBar(view.getContext(), position, (SheepBarCommentSecondaryInfo) baseInfo,
+                                    2);
+                            break;
+                        case R.id.tv_sheep_bar_content:
+                            MessageEvent messageEvent=new MessageEvent();
+                            messageEvent.setEventType(MessageEvent.MESSAGE_TYPE_DO_SECOND_COMMENT);
+                            messageEvent.setBaseInfo(baseInfo);
+                            EventBus.getDefault().post(messageEvent);
+                            break;
+                    }
+
                 }
             }
         });

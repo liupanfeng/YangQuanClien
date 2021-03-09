@@ -23,10 +23,12 @@ import com.meishe.yangquan.bean.EmptyInfo;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.SheepBarCommentInfo;
 import com.meishe.yangquan.bean.SheepBarCommentInfoResult;
+import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfo;
 import com.meishe.yangquan.bean.SheepBarInfoResult;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
 import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.CommonUtils;
@@ -397,7 +399,7 @@ public class SheepBarDetailActivity extends BaseActivity {
             //评论
             objectType = 2;
             objectId = mCommentId;
-            parentId = mCommentId;
+//            parentId = mCommentId;
         } else {
             //帖子
             objectType = 1;
@@ -645,5 +647,19 @@ public class SheepBarDetailActivity extends BaseActivity {
             }
         }, param, token);
 
+    }
+
+    @Override
+    protected void eventBusUpdateUI(MessageEvent event) {
+        super.eventBusUpdateUI(event);
+        if (event.getEventType()==MessageEvent.MESSAGE_TYPE_DO_SECOND_COMMENT){
+            BaseInfo baseInfo = event.getBaseInfo();
+            if (baseInfo instanceof SheepBarCommentSecondaryInfo){
+                KeyboardUtils.showSoftInput(et_say_your_idea);
+                et_say_your_idea.setHint("回复@" + ((SheepBarCommentSecondaryInfo) baseInfo).getNickname());
+                mCommentId = ((SheepBarCommentSecondaryInfo) baseInfo).getId();
+                mIsReply = true;
+            }
+        }
     }
 }

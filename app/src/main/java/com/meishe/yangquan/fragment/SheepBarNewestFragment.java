@@ -1,5 +1,6 @@
 package com.meishe.yangquan.fragment;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.SheepBarInfoResult;
 import com.meishe.yangquan.bean.SheepBarMessageInfo;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
@@ -25,6 +27,10 @@ import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
@@ -33,6 +39,8 @@ import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 
+import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_SHEEP_BAR;
+import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_USER_INFO;
 import static com.meishe.yangquan.utils.Constants.TYPE_LIST_TYPE_NEWEST;
 
 /**
@@ -339,5 +347,34 @@ public class SheepBarNewestFragment extends BaseRecyclerFragment {
 
     }
 
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        EventBus.getDefault().unregister(this); //解除注册
+    }
+
+
+    /**
+     * On message event.
+     * 消息事件
+     *
+     * @param event the event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        int eventType = event.getEventType();
+        switch (eventType){
+            case MESSAGE_TYPE_UPDATE_SHEEP_BAR:
+                initData();
+                break;
+        }
+    }
 
 }

@@ -105,6 +105,9 @@ public class SheepBarCommentSecondaryListHolder extends BaseViewHolder {
             tv_sheep_bar_prised.setTag(info);
             tv_sheep_bar_prised.setOnClickListener(listener);
 
+            tv_sheep_bar_content.setTag(info);
+            tv_sheep_bar_content.setOnClickListener(listener);
+
         }
 
     }

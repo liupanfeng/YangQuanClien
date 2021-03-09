@@ -13,7 +13,7 @@
         android:layout_marginLeft="@dimen/dp13"
         android:layout_marginRight="@dimen/dp13"
         android:layout_marginTop="8dp"
-        android:singleLine="true"
+        android:maxLines="2"
         android:ellipsize="end"
         android:textColor="#ff303030"
         android:textSize="23sp"

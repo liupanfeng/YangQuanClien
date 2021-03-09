@@ -49,6 +49,15 @@ public class MessageEvent {
      * 更细店铺信息
      */
     public static final int MESSAGE_TYPE_UPDATE_SHOPPING_INFO = MESSAGE_TYPE_BASE + 7;
+    /**
+     * 更新羊吧信息
+     */
+    public static final int MESSAGE_TYPE_UPDATE_SHEEP_BAR = MESSAGE_TYPE_BASE + 8;
+
+    /**
+     * 发起二级评论
+     */
+    public static final int MESSAGE_TYPE_DO_SECOND_COMMENT = MESSAGE_TYPE_BASE + 9;
 
     private int mEventType;
 
