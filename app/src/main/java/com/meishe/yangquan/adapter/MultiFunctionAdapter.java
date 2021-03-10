@@ -65,7 +65,7 @@ import com.meishe.yangquan.viewhoder.BUHomeManagerOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeManagerRefundListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
-import com.meishe.yangquan.viewhoder.BUMineOrderListHolder;
+import com.meishe.yangquan.viewhoder.MineOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BreedingArchivesFoodAnalysisHolder;
@@ -295,7 +295,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             /*我的-订单*/
             case VIEW_MINE_ORDER_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_order_view, parent, false);
-                viewHolder = new BUMineOrderListHolder(view, this);
+                viewHolder = new MineOrderListHolder(view, this);
                 break;
 
             /*养殖助手-配料分析*/
