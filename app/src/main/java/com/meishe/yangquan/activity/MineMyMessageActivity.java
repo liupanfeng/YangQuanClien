@@ -85,6 +85,7 @@ public class MineMyMessageActivity extends BaseActivity {
                         return;
                     }
                     mAdapter.addAll(data);
+
                 } else {
                     ToastUtil.showToast(mContext, result.getMsg());
                 }
