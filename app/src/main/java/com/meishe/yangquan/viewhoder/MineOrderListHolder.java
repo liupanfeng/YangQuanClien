@@ -66,7 +66,6 @@ public class MineOrderListHolder extends BaseViewHolder {
         btn_right_function = view.findViewById(R.id.btn_right_function);
 
 
-
     }
 
     @Override
