@@ -57,7 +57,7 @@ public class MineMyMessageHolder extends BaseViewHolder {
         if (info instanceof MineUserMessageInfo) {
             tv_my_message_title.setText(((MineUserMessageInfo) info).getNickname());
             tv_time.setText(FormatDateUtil.longToString(((MineUserMessageInfo) info).getInitDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
-            tv_my_message_content.setText(((MineUserMessageInfo) info).getContent());
+            tv_my_message_content.setText(((MineUserMessageInfo) info).getTitle());
             Glide.with(context).asBitmap().apply(options).load(((MineUserMessageInfo) info).getIconUrl()).into(iv_my_message);
         }
 
