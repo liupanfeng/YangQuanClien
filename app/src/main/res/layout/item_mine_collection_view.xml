@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:layout_marginTop="@dimen/dp10"
+        />
+
+    <RelativeLayout
+        android:id="@+id/rl_mine_collect_goods"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content">
+
+
+
+
+        <com.meishe.yangquan.view.RoundAngleImageView
+            android:id="@+id/riv_goods_cover"
+            android:layout_width="78dp"
+            android:background="@mipmap/ic_bu_goods_cover"
+            app:roundWidth="@dimen/dp3"
+            app:roundHeight="@dimen/dp3"
+            android:layout_marginLeft="@dimen/dp22"
+            android:layout_marginTop="@dimen/dp21"
+            android:layout_height="78dp"/>
+
+        <TextView
+            android:id="@+id/tv_good_title"
+            android:layout_toRightOf="@+id/riv_goods_cover"
+            android:layout_alignTop="@+id/riv_goods_cover"
+            android:layout_marginLeft="@dimen/dp8"
+            android:layout_marginRight="@dimen/dp22"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="英美尔犊牛精料_教槽料_牛拉骨架…"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_goods_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/riv_goods_cover"
+            android:layout_marginLeft="@dimen/dp8"
+            android:layout_alignBottom="@+id/riv_goods_cover"
+            android:text="70/桶  |"
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_goods_amount"
+            android:layout_alignBottom="@+id/tv_goods_price"
+            android:layout_toRightOf="@+id/tv_goods_price"
+            android:layout_marginLeft="@dimen/dp8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="数量：3"
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            />
+
+        <View
+            android:id="@+id/bu_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:layout_below="@+id/riv_goods_cover"
+            android:layout_marginLeft="@dimen/dp22"
+            android:layout_marginRight="@dimen/dp22"
+            android:layout_marginTop="@dimen/dp22"
+            android:background="#E5E5E5"
+            />
+
+
+
+    </RelativeLayout>
+
+
+
+    <RelativeLayout
+        android:id="@+id/rl_mine_collection_shopping"
+        android:visibility="gone"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_feed_cover"
+            android:layout_width="105dp"
+            android:layout_height="105dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/dp15"
+            android:background="@mipmap/ic_feed_goods_cover"
+            />
+
+        <TextView
+            android:id="@+id/tv_shopping_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp13"
+            android:layout_toRightOf="@+id/iv_feed_cover"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="店铺名称"
+            android:textColor="@color/color_ff303030"
+            android:textSize="@dimen/sp16"
+            />
+
+        <TextView
+            android:id="@+id/tv_shopping_score"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_feed_cover"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_below="@+id/tv_shopping_name"
+            android:layout_marginTop="@dimen/dp5"
+            android:text="5.7分"
+            android:textColor="#fff5a623"
+            android:textSize="13sp"
+            />
+
+        <LinearLayout
+            android:id="@+id/ll_feed_selling"
+            android:layout_toRightOf="@+id/iv_feed_cover"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_below="@+id/tv_shopping_score"
+            android:layout_width="90dp"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:background="@mipmap/ic_feed_selling_bg"
+            android:layout_height="@dimen/dp20">
+
+            <TextView
+                android:id="@+id/tv_feed_selling"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="月售 2345"
+                android:layout_gravity="left"
+                android:textColor="#ff656565"
+                android:textSize="13sp"
+                />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_shopping_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_feed_cover"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_below="@+id/ll_feed_selling"
+            android:layout_marginTop="@dimen/dp12"
+            android:drawableLeft="@mipmap/ic_feed_shopping_address"
+            android:text="唐县南店头乡葛堡村"
+            android:drawablePadding="@dimen/dp4"
+            android:textColor="@color/color_ff656565"
+            android:textSize="13sp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_feed_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="@dimen/dp40"
+            android:layout_marginRight="@dimen/dp14"
+            android:text="  1.2km"
+            android:textColor="@color/color_ff656565"
+            android:textSize="13sp"
+            />
+
+    </RelativeLayout>
+
+</LinearLayout>

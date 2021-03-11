@@ -287,6 +287,8 @@ public class Constants {
 
     /*饲料金类型*/
     public static final String KEY_FEED_GOLD_STATE_TYPE = "key.feed.gold.state.type";
+    /*收藏类型*/
+    public static final String KEY_MINE_COLLECTION_TYPE = "key.mine.collection.type";
 
     /*商品已经发布*/
     public static final int TYPE_ALREADY_PUBLISH_GOODS_TYPE = 1;
@@ -320,6 +322,11 @@ public class Constants {
     public static final int TYPE_FEED_GOLD_IN_TYPE = 1;
     /*支出*/
     public static final int TYPE_FEED_GOLD_OUT_TYPE = 2;
+
+    /*收藏-店铺*/
+    public static final int TYPE_MINE_COLLECT_SHOPPING = 1;
+    /*收藏-商品*/
+    public static final int TYPE_MINE_COLLECT_GOODS = 2;
 
 
 

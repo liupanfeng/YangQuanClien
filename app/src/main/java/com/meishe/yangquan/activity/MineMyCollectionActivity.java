@@ -4,7 +4,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.viewpager.widget.ViewPager;
+
+import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.CommonFragmentAdapter;
+import com.meishe.yangquan.fragment.MineCollectionFragment;
+import com.meishe.yangquan.fragment.MineFeedGoldFragment;
+import com.meishe.yangquan.utils.Constants;
+
+import java.util.ArrayList;
 
 /**
  * @author 86188
@@ -16,6 +25,9 @@ public class MineMyCollectionActivity extends BaseActivity {
     private ImageView mIvBack;
 
 
+    private SlidingTabLayout mSlidingTabLayout;
+    private ViewPager mViewPager;
+
     @Override
     protected int initRootView() {
         return R.layout.activity_mine_my_clollection;
@@ -25,10 +37,24 @@ public class MineMyCollectionActivity extends BaseActivity {
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
+
+        mSlidingTabLayout = findViewById(R.id.slidingTabLayout);
+        mViewPager = findViewById(R.id.vp_pager);
+
     }
 
     @Override
     public void initData() {
+
+        mFragmentList = new ArrayList<>();
+        mTitleList = new ArrayList<>();
+        mTitleList.add("店铺");
+        mTitleList.add("商品");
+        mFragmentList.add(MineCollectionFragment.onInstance(Constants.TYPE_MINE_COLLECT_SHOPPING));
+        mFragmentList.add(MineCollectionFragment.onInstance(Constants.TYPE_MINE_COLLECT_GOODS));
+        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(), mFragmentList, mTitleList));
+        mSlidingTabLayout.setViewPager(mViewPager);
 
     }
 

@@ -57,9 +57,10 @@ public class SettingActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_login_out:
-                AppManager.getInstance().finishActivity();
-                AppManager.getInstance().jumpActivity(SettingActivity.this,LoginActivity.class);
                 UserManager.getInstance(mContext).setToken("");
+                UserManager.getInstance(mContext).setUser(null);
+                AppManager.getInstance().finishAllActivity();
+                AppManager.getInstance().jumpActivity(SettingActivity.this,LoginActivity.class);
                 break;
 
             case R.id.rl_about_sheep:

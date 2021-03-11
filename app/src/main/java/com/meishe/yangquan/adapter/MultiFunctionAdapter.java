@@ -33,6 +33,7 @@ import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineCallbackInfo;
+import com.meishe.yangquan.bean.MineCollectionInfo;
 import com.meishe.yangquan.bean.MineFeedGoldInfo;
 import com.meishe.yangquan.bean.MineMyFansInfo;
 import com.meishe.yangquan.bean.MineMyFocusInfo;
@@ -65,6 +66,7 @@ import com.meishe.yangquan.viewhoder.BUHomeManagerOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeManagerRefundListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
+import com.meishe.yangquan.viewhoder.MineCollectionListHolder;
 import com.meishe.yangquan.viewhoder.MineOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
@@ -297,6 +299,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_mine_order_view, parent, false);
                 viewHolder = new MineOrderListHolder(view, this);
                 break;
+            /*我的-收藏*/
+            case VIEW_MINE_COLLECTION_LIST:
+                view = mLayoutInflater.inflate(R.layout.item_mine_collection_view, parent, false);
+                viewHolder = new MineCollectionListHolder(view, this);
+                break;
 
             /*养殖助手-配料分析*/
             case VIEW_SHEEP_BREEDING_FOOD_ANALYSIS_LIST:
@@ -484,6 +491,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_FEED_GOLD_LIST;
         }else if (baseInfo instanceof MineOrderInfo) {
             return VIEW_MINE_ORDER_LIST;
+        }else if (baseInfo instanceof MineCollectionInfo) {
+            return VIEW_MINE_COLLECTION_LIST;
         }
         return super.getItemViewType(position);
     }

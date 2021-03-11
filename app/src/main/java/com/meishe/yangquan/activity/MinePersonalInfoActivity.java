@@ -27,6 +27,7 @@ import androidx.core.content.FileProvider;
 import com.amap.api.services.core.PoiItem;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.UploadFileInfo;
@@ -66,6 +67,7 @@ import static com.meishe.yangquan.utils.Constants.UPLOAD_FILE_MODE_1;
 
 /**
  * 我的-个人信息页面
+ *
  * @author 86188
  */
 public class MinePersonalInfoActivity extends BaseActivity {
@@ -148,7 +150,6 @@ public class MinePersonalInfoActivity extends BaseActivity {
         if (mUser != null) {
 
             updateUserUI();
-
             String photoUrl = mUser.getIconUrl();
             RequestOptions options = new RequestOptions();
             options.circleCrop();
@@ -159,8 +160,11 @@ public class MinePersonalInfoActivity extends BaseActivity {
                     .apply(options)
                     .into(mIvPersonalMinePhoto);
 
+        } else {
+            getUserInfo();
         }
     }
+
 
     @Override
     public void initTitle() {
@@ -484,6 +488,61 @@ public class MinePersonalInfoActivity extends BaseActivity {
         }, requestParam, token);
     }
 
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfo() {
+        showLoading();
+        String token = getToken();
+        HashMap<String, Object> requestParam = new HashMap<>();
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_USER_INFO, new BaseCallBack<UserResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoading();
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UserResult result) {
+                hideLoading();
+                if (result != null) {
+                    UserInfo user = result.getData();
+                    if (user != null) {
+                        UserManager.getInstance(App.getContext()).setUser(user);
+                        initData();
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+
+    }
+
 
     /**
      * 用更改用户信息
@@ -690,7 +749,7 @@ public class MinePersonalInfoActivity extends BaseActivity {
         if (mUser != null) {
             mEtNickname.setText(mUser.getNickname());
             Integer gender = mUser.getGender();
-            if (gender !=null){
+            if (gender != null) {
                 mEtPersonalSex.setText(gender == 0 ? "女" : "男");
             }
             mEtbreedAddress.setText(mUser.getCulturalAddress() == null ? "" : mUser.getCulturalAddress());
