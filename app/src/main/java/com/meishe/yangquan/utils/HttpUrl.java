@@ -260,6 +260,23 @@ public class HttpUrl {
     public static final String SHEEP_MINE_FEED_GOLD = URL + "app/user/gold/info";
     /*我的-饲料金列表*/
     public static final String SHEEP_MINE_FEED_GOLD_LIST = URL + "app/user/gold/list";
+    /*用户版本-店铺信息*/
+    public static final String SHEEP_SHOP_LIST = URL + "app/user/shop/list";
+
+    /*（用户）商品列表 */
+    public static final String SHEEP_GOODS_LIST = URL + "app/user/goods/list";
+
+    /*（用户）商品信息 */
+    public static final String SHEEP_GOODS_INFO = URL + "app/user/goods/info";
+
+    /*（用户）添加到购物车 */
+    public static final String SHEEP_SHOPPING_CAR_ADD = URL + "app/user/shoppingCar/add";
+
+    /*（用户）从 购物车移除 */
+    public static final String SHEEP_SHOPPING_CAR_REMOVE = URL + "app/user/shoppingCar/remove";
+
+    /*（用户）购物车商品列表 */
+    public static final String SHEEP_SHOPPING_CAR_LIST = URL + "app/user/shoppingCar/list";
     /*我的-设置密码*/
     public static final String SHEEP_MINE_SETTING_PASSWORD = URL + "app/user/update/paymentCode";
 

@@ -246,6 +246,8 @@ public class Constants {
     public static final int BU_TYPE_MESSAGE_OTHER= 4;
     /*饲料类型*/
     public static final String FEED_TYPE = "feed.type";
+    /*店铺id*/
+    public static final String FEED_SHOPPING_IDTYPE = "feed.shopping.id.type";
 
     /*店铺数据*/
     public static final String FEED_SHOPPING_INFO = "feed.shopping.info";

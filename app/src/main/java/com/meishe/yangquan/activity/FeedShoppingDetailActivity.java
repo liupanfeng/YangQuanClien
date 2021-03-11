@@ -11,7 +11,8 @@ import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
-import com.meishe.yangquan.fragment.FeedFoodsListFragment;
+import com.meishe.yangquan.fragment.FeedGoodsListFragment;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
 
 import java.util.ArrayList;
@@ -29,6 +30,8 @@ public class FeedShoppingDetailActivity extends BaseActivity {
 
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
+    private int mShoppingId;
+    private View ll_feed_goods_shopping_car;
 
     @Override
     protected int initRootView() {
@@ -39,6 +42,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     public void initView() {
         mSlidingTabLayout =  findViewById(R.id.slidingTabLayout);
         mViewPager =  findViewById(R.id.vp_pager);
+        ll_feed_goods_shopping_car =  findViewById(R.id.ll_feed_goods_shopping_car);
     }
 
     @Override
@@ -49,7 +53,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             if (extras != null) {
                 FeedShoppingInfo feedInfo = (FeedShoppingInfo) extras.getSerializable(Constants.FEED_SHOPPING_INFO);
                 if (feedInfo != null) {
-
+                    mShoppingId=feedInfo.getId();
                 }
             }
         }
@@ -58,16 +62,16 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         mFragmentList.clear();
         mTitleList.clear();
 
-        FeedFoodsListFragment feedFoodsListFragment = FeedFoodsListFragment.newInstance(Constants.TYPE_FEED_FOODS_RECOMMEND);
+        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_RECOMMEND);
         mFragmentList.add(feedFoodsListFragment);
 
-        feedFoodsListFragment = FeedFoodsListFragment.newInstance(Constants.TYPE_FEED_FOODS_MULTIPLE);
+        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_MULTIPLE);
         mFragmentList.add(feedFoodsListFragment);
 
-        feedFoodsListFragment = FeedFoodsListFragment.newInstance(Constants.TYPE_FEED_FOODS_SALES);
+        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_SALES);
         mFragmentList.add(feedFoodsListFragment);
 
-        feedFoodsListFragment = FeedFoodsListFragment.newInstance(Constants.TYPE_FEED_FOODS_PRICE);
+        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_PRICE);
         mFragmentList.add(feedFoodsListFragment);
 
         mTitleList.add("推荐");
@@ -88,7 +92,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        ll_feed_goods_shopping_car.setOnClickListener(this);
     }
 
     @Override
@@ -98,6 +102,8 @@ public class FeedShoppingDetailActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-
+        if (v.getId()==R.id.ll_feed_goods_shopping_car){
+            AppManager.getInstance().jumpActivity(FeedShoppingDetailActivity.this,FeedShoppingCarActivity.class);
+        }
     }
 }

@@ -161,11 +161,15 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
 
 
     protected void showLoading() {
-        mLoading.show();
+        if(mLoading!=null){
+            mLoading.show();
+        }
     }
 
     protected void hideLoading() {
-        mLoading.hide();
+        if (mLoading!=null){
+            mLoading.hide();
+        }
     }
 
 
