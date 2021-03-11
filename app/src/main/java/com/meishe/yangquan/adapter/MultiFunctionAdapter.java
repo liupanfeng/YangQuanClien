@@ -304,7 +304,6 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_mine_collection_view, parent, false);
                 viewHolder = new MineCollectionListHolder(view, this);
                 break;
-
             /*养殖助手-配料分析*/
             case VIEW_SHEEP_BREEDING_FOOD_ANALYSIS_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_breeding_archives_food_analysis, parent, false);
