@@ -315,6 +315,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_feed_shopping, parent, false);
                 viewHolder = new FeedShoppingHolder(view, this);
                 break;
+
             /*饲料商品列表*/
             case VIEW_FEED_FOODS_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_feed_foods, parent, false);
