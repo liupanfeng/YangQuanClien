@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".activity.SettingActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <include layout="@layout/custom_title"/>
 
@@ -15,14 +19,30 @@
         />
 
     <RelativeLayout
+        android:id="@+id/rl_clear_cache"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp40">
+
         <TextView
-            android:layout_width="match_parent"
+            android:id="@+id/tv_clear_cache"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp16"
             android:layout_marginTop="@dimen/dp10"
             android:text="清除缓存"
+            android:textColor="#ff656565"
+            android:textSize="15sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_cache_total"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_marginRight="@dimen/dp16"
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_alignParentRight="true"
+            android:text="36kb"
             android:layout_centerInParent="true"
             android:textColor="#ff656565"
             android:textSize="15sp"
@@ -48,7 +68,6 @@
             android:layout_marginLeft="@dimen/dp16"
             android:layout_marginTop="@dimen/dp10"
             android:text="关于羊圈"
-            android:layout_centerInParent="true"
             android:textColor="#ff656565"
             android:textSize="15sp"
             />
@@ -86,4 +105,7 @@
         android:layout_centerHorizontal="true"
         />
 
-</LinearLayout>
+    </LinearLayout>
+
+    <include layout="@layout/layout_loading" />
+</RelativeLayout>

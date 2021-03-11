@@ -15,11 +15,12 @@
         android:layout_height="75dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="32dp"
-        android:background="@mipmap/logo"
+        android:background="@mipmap/icon_logo"
         app:roundHeight="5dp"
         app:roundWidth="5dp" />
 
     <TextView
+        android:id="@+id/tv_app_version"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -67,7 +68,7 @@
             android:focusable="false"
             android:focusableInTouchMode="false"
             android:gravity="left"
-            android:text="意见反馈"
+            android:text="建议留言"
             android:textSize="15sp" />
 
         <ImageView

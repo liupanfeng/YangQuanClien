@@ -53,7 +53,10 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
 //    private String[] mSettingInfo = {"个人信息", "饲料金", "我的关注", "我的消息",
 //            "我的积分", "养殖档案", "我的收藏",
 //            "系统消息", "支付密码"};
-        private String[] mSettingInfo = {"个人信息", "饲料金", "我的关注", "我的消息", "建议留言",
+//        private String[] mSettingInfo = {"个人信息", "饲料金", "我的关注", "我的消息", "建议留言",
+//            "我的积分","养殖档案", "我的收藏",
+//            "系统消息", "支付密码"};
+        private String[] mSettingInfo = {"个人信息", "饲料金", "我的关注", "我的消息",
             "我的积分","养殖档案", "我的收藏",
             "系统消息", "支付密码"};
 //    private int[] mSettingIcon = {
@@ -66,10 +69,18 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
 //            R.mipmap.ic_mine_system_message,
 //            R.mipmap.ic_mine_pay_password};
 
+//        private int[] mSettingIcon = {R.mipmap.ic_mine_personal_message,
+//            R.mipmap.ic_mine_feed_gold, R.mipmap.ic_mine_my_focus,
+//            R.mipmap.ic_mine_my_message,
+//            R.mipmap.ic_mine_suggest,
+//            R.mipmap.ic_mine_my_points,
+//            R.mipmap.ic_mine_keep,
+//            R.mipmap.ic_mine_my_collection,
+//            R.mipmap.ic_mine_system_message,
+//            R.mipmap.ic_mine_pay_password};
         private int[] mSettingIcon = {R.mipmap.ic_mine_personal_message,
             R.mipmap.ic_mine_feed_gold, R.mipmap.ic_mine_my_focus,
             R.mipmap.ic_mine_my_message,
-            R.mipmap.ic_mine_suggest,
             R.mipmap.ic_mine_my_points,
             R.mipmap.ic_mine_keep,
             R.mipmap.ic_mine_my_collection,

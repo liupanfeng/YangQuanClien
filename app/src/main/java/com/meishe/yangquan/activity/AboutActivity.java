@@ -1,12 +1,15 @@
 package com.meishe.yangquan.activity;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.CustomToolbar;
 
@@ -20,6 +23,7 @@ public class AboutActivity extends BaseActivity {
     private RelativeLayout rl_privacy_policy;
     private TextView mTvTitle;
     private ImageView mIvBack;
+    private TextView tv_app_version;
 
 
     @Override
@@ -34,13 +38,28 @@ public class AboutActivity extends BaseActivity {
 
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
+        tv_app_version = findViewById(R.id.tv_app_version);
 
 
     }
 
     @Override
     public void initData() {
+        try {
+            tv_app_version.setText("For android V"+getVersionName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+
+    private String getVersionName() throws Exception {
+        // 获取packagemanager的实例
+        PackageManager packageManager = getPackageManager();
+        // getPackageName()是你当前类的包名，0代表是获取版本信息
+        PackageInfo packInfo = packageManager.getPackageInfo(getPackageName(), 0);
+        String version = packInfo.versionName;
+        return version;
     }
 
     @Override
@@ -72,7 +91,7 @@ public class AboutActivity extends BaseActivity {
                 ToastUtil.showToast(this, "已经是最新版本了");
                 break;
             case R.id.rl_user_agreement:
-                ToastUtil.showToast(this, "反馈");
+                AppManager.getInstance().jumpActivity(mContext, MineCallBackActivity.class);
                 break;
         }
     }

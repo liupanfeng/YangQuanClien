@@ -15,30 +15,20 @@
         android:background="#fff5f5f5"
         />
 
-    <LinearLayout
-        android:id="@+id/tab_container"
+    <com.meishe.libbase.SlidingTabLayout
+        android:id="@+id/slidingTabLayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/tabTabBarLineSize"
-        android:layout_gravity="top"
-        android:orientation="vertical">
-
-        <com.meishe.libbase.SlidingTabLayout
-            android:id="@+id/slidingTabLayout"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_px_100"
-            android:layout_below="@+id/ll_sign_up"
-            android:layout_marginLeft="@dimen/dp_px_30"
-            android:layout_marginRight="@dimen/dp_px_30"
-            tl:tl_indicator_color="@color/mainColor"
-            tl:tl_indicator_height="@dimen/dp_px_6"
-            tl:tl_indicator_width="@dimen/dp_px_30"
-            tl:tl_tab_space_equal="true"
-            tl:tl_tab_width="@dimen/dp70"
-            tl:tl_textSelectColor="@color/mainColor"
-            tl:tl_textSize="@dimen/sp_px_39"
-            tl:tl_textUnselectedColor="@color/unselect_text_color" />
-
-    </LinearLayout>
+        android:layout_height="@dimen/dp_px_100"
+        android:layout_marginLeft="@dimen/dp_px_30"
+        android:layout_marginRight="@dimen/dp_px_30"
+        tl:tl_indicator_color="@color/mainColor"
+        tl:tl_indicator_height="@dimen/dp_px_6"
+        tl:tl_indicator_width="@dimen/dp_px_30"
+        tl:tl_tab_space_equal="true"
+        tl:tl_tab_width="@dimen/dp70"
+        tl:tl_textSelectColor="@color/mainColor"
+        tl:tl_textSize="@dimen/sp_px_39"
+        tl:tl_textUnselectedColor="@color/unselect_text_color" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_pager"

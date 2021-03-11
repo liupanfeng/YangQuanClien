@@ -280,6 +280,9 @@ public class HttpUrl {
     /*我的-设置密码*/
     public static final String SHEEP_MINE_SETTING_PASSWORD = URL + "app/user/update/paymentCode";
 
+    /*我的-版本更新*/
+    public static final String SHEEP_APP_VERSION_UPDATE = URL + "app/version/latest";
+
 
 
     //////////////////////////////////////////商版//////////////////////////////////////////////

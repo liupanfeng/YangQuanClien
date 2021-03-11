@@ -60,7 +60,9 @@ public class SheepBarRecommendFragment extends BaseRecyclerFragment {
                 switch (id) {
                     case R.id.ll_sheep_bar_focus:
                         //关注
-                        ToastUtil.showToast("关注");
+                        if (baseInfo instanceof SheepBarMessageInfo) {
+                            focusUserServer(position, (SheepBarMessageInfo) baseInfo);
+                        }
 
                         return;
                     case R.id.tv_sheep_bar_prise_number:
@@ -274,8 +276,68 @@ public class SheepBarRecommendFragment extends BaseRecyclerFragment {
             }
         }, param, token);
 
+    }
+
+    /**
+     * 关注用户
+     */
+    private void focusUserServer(final int position, final SheepBarMessageInfo sheepBarMessageInfo) {
+        String token = getToken();
+        if (Util.checkNull(token)) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("focusUserId", sheepBarMessageInfo.getInitUser());
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_FOCUS, new BaseCallBack<SheepBarInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, SheepBarInfoResult sheepBarInfoResult) {
+                if (sheepBarInfoResult == null) {
+                    ToastUtil.showToast(response.message());
+                    return;
+                }
+                if (sheepBarInfoResult.getCode() != 1) {
+                    ToastUtil.showToast(sheepBarInfoResult.getMsg());
+                    return;
+                }
+
+                if (sheepBarMessageInfo.isHasFocused()) {
+                    sheepBarMessageInfo.setHasFocused(false);
+                } else {
+                    sheepBarMessageInfo.setHasFocused(true);
+                }
+                mAdapter.notifyItemChanged(position);
+
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
 
     }
+
+
 
 
 }

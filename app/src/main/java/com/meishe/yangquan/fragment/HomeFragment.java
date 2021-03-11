@@ -92,6 +92,7 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
 
     @Override
     protected void initData() {
+
          initTabTitle();
          initTabFragment();
          //这里注意 如果是嵌套在 fragment里边 一定要使用getChildFragmentManager 这个方法获取FragmentManager 否则会出错
