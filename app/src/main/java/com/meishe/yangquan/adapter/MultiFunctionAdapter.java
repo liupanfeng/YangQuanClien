@@ -299,6 +299,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 view = mLayoutInflater.inflate(R.layout.item_mine_order_view, parent, false);
                 viewHolder = new MineOrderListHolder(view, this);
                 break;
+
             /*我的-收藏*/
             case VIEW_MINE_COLLECTION_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_collection_view, parent, false);
