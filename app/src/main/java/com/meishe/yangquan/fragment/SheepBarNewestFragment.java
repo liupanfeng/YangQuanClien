@@ -216,7 +216,6 @@ public class SheepBarNewestFragment extends BaseRecyclerFragment {
                     ToastUtil.showToast(response.message());
                     return;
                 }
-
                 if (sheepBarInfoResult.getCode() != 1) {
                     ToastUtil.showToast(sheepBarInfoResult.getMsg());
                     return;
