@@ -36,6 +36,7 @@ public class FeedShoppingCarActivity extends BaseActivity {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
         mRecyclerView=findViewById(R.id.recycler);
+        initRecyclerView();
     }
 
     @Override

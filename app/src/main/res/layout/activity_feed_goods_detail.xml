@@ -25,6 +25,7 @@
             />
 
         <ImageView
+            android:id="@+id/iv_feed_goods_cover"
             android:layout_width="match_parent"
             android:layout_height="360dp"
             android:background="@mipmap/ic_feed_goods_detail_cover"
@@ -237,7 +238,7 @@
             />
 
         <ImageView
-            android:id="@+id/iv_feed_goods_detail"
+            android:id="@+id/iv_feed_goods_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@mipmap/ic_feed_goods_detail"

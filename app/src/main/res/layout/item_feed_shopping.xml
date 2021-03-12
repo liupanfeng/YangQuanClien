@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="134dp">
+    android:layout_height="134dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <com.meishe.yangquan.view.RoundAngleImageView
         android:id="@+id/iv_feed_cover"
         android:layout_width="105dp"
         android:layout_height="105dp"
         android:layout_centerVertical="true"
+        app:roundWidth="@dimen/dp10"
+        app:roundHeight="@dimen/dp10"
         android:layout_marginLeft="@dimen/dp15"
         android:background="@mipmap/ic_feed_goods_cover"
         />

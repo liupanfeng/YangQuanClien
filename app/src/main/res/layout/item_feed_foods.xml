@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp120">
+    android:layout_height="@dimen/dp120"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
+    <com.meishe.yangquan.view.RoundAngleImageView
         android:id="@+id/iv_feed_goods_cover"
         android:layout_width="105dp"
         android:layout_height="105dp"
+        app:roundWidth="@dimen/dp8"
+        app:roundHeight="@dimen/dp8"
         android:background="@mipmap/ic_feed_goods_cover"
         android:layout_centerVertical="true"
         android:layout_marginLeft="@dimen/dp15"
@@ -14,7 +17,7 @@
 
 
     <TextView
-        android:id="@+id/tv_feed_goods_desc"
+        android:id="@+id/tv_feed_goods_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="羔羊促生长料，河北张家口专

@@ -7,11 +7,15 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
+import com.meishe.yangquan.bean.MarketInfo;
+
+import java.util.List;
 
 /**
  * 饲料商店列表
@@ -58,6 +62,27 @@ public class FeedShoppingHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof FeedShoppingInfo) {
+            tv_shopping_name.setText(((FeedShoppingInfo) info).getName());
+            tv_shopping_score.setText(((FeedShoppingInfo) info).getShopScore()+"");
+            tv_shopping_address.setText(((FeedShoppingInfo) info).getAddress());
+            tv_feed_distance.setVisibility(View.GONE);
+            tv_feed_selling.setText("月售：300");
+
+            String coverUrl = ((FeedShoppingInfo) info).getShopOutSideImageUrl();
+            if (coverUrl != null ) {
+                Glide.with(context)
+                        .asBitmap()
+                        .load(coverUrl)
+                        .apply(options)
+                        .into(iv_feed_cover);
+            } else {
+                Glide.with(context)
+                        .asBitmap()
+                        .load("")
+                        .apply(options)
+                        .into(iv_feed_cover);
+            }
+
             mItemView.setTag(info);
             mItemView.setOnClickListener(listener);
         }
