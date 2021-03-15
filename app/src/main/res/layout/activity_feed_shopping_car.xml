@@ -10,17 +10,106 @@
         />
 
     <View
+        android:id="@+id/line"
         android:layout_width="match_parent"
         android:layout_below="@+id/title"
         android:layout_height="@dimen/dp8"
+        android:visibility="gone"
         android:background="#fff5f5f5"
         />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
+        android:layout_below="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
+
+    <RelativeLayout
+        android:id="@+id/rl_feed_operation"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp48">
+
+        <ImageView
+            android:id="@+id/iv_feed_shopping_car"
+            android:layout_width="@dimen/dp16"
+            android:layout_height="@dimen/dp16"
+            android:layout_marginLeft="@dimen/dp22"
+            android:layout_marginTop="@dimen/dp12"
+            android:background="@mipmap/ic_bu_home_circle"
+            />
+
+        <TextView
+            android:id="@+id/tv_shopping_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/iv_feed_shopping_car"
+            android:layout_marginTop="@dimen/dp12"
+            android:text="全选"
+            android:drawablePadding="@dimen/dp5"
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            />
+
+        <Button
+            android:id="@+id/btn_feed_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_marginRight="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_feed_delete"
+            android:text="删除"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_feed_normal"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp48">
+
+        <ImageView
+            android:id="@+id/iv_feed_shopping_car_normal"
+            android:layout_width="@dimen/dp16"
+            android:layout_height="@dimen/dp16"
+            android:layout_marginLeft="@dimen/dp22"
+            android:layout_marginTop="@dimen/dp12"
+            android:background="@mipmap/ic_bu_home_circle"
+            />
+
+        <TextView
+            android:id="@+id/tv_shopping_name_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_toRightOf="@+id/iv_feed_shopping_car_normal"
+            android:layout_marginTop="@dimen/dp12"
+            android:text="全选"
+            android:drawablePadding="@dimen/dp5"
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            />
+
+        <Button
+            android:id="@+id/btn_feed_order"
+            android:layout_width="wrap_content"
+            android:layout_height="34dp"
+            android:layout_marginRight="22dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:textColor="@color/white"
+            android:background="@drawable/bg_bu_btn_next"
+            android:text="下单"
+            android:layout_alignParentEnd="true" />
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

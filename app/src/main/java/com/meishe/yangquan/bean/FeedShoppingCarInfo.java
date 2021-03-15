@@ -49,6 +49,29 @@ public class FeedShoppingCarInfo extends BaseInfo {
 
     private String shopName;
 
-    private List<FeedGoodsInfo> goodsList;
+    private List<FeedShoppingCarGoodsInfo> goodsList;
 
+    public int getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
+
+    public List<FeedShoppingCarGoodsInfo> getGoodsList() {
+        return goodsList;
+    }
+
+    public void setGoodsList(List<FeedShoppingCarGoodsInfo> goodsList) {
+        this.goodsList = goodsList;
+    }
 }

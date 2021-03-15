@@ -23,6 +23,7 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
+import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.FodderInfo;
@@ -501,7 +502,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_ORDER_LIST;
         }else if (baseInfo instanceof MineCollectionInfo) {
             return VIEW_MINE_COLLECTION_LIST;
-        }else if (baseInfo instanceof FeedShoppingCarInfo) {
+        }else if (baseInfo instanceof FeedShoppingCarGoodsInfo) {
             return VIEW_FEED_SHOPPING_CAR_LIST;
         }
         return super.getItemViewType(position);

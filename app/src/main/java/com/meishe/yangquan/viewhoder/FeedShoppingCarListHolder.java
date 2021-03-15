@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.FeedGoodsInfo;
+import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarInfo;
 import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.utils.Constants;
@@ -35,6 +37,7 @@ public class FeedShoppingCarListHolder extends BaseViewHolder {
     /*商品数量*/
     private TextView tv_bu_goods_amount;
 
+    private ImageView iv_feed_shopping_car;
 
 
     public FeedShoppingCarListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
@@ -50,6 +53,7 @@ public class FeedShoppingCarListHolder extends BaseViewHolder {
         tv_bu_order_right_state = view.findViewById(R.id.tv_order_right_state);
         riv_bu_goods_cover = view.findViewById(R.id.riv_goods_cover);
         tv_bu_good_title = view.findViewById(R.id.tv_good_title);
+        iv_feed_shopping_car = view.findViewById(R.id.iv_feed_shopping_car);
 //        tv_bu_goods_amount = view.findViewById(R.id.tv_goods_amount);
 
 
@@ -57,7 +61,7 @@ public class FeedShoppingCarListHolder extends BaseViewHolder {
 
     @Override
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
-        if (info instanceof FeedShoppingCarInfo) {
+        if (info instanceof FeedShoppingCarGoodsInfo) {
 
 //            List<String> goodsImageUrls = ((BUGoodsInfo) info).getGoodsImageUrls();
 //            if (!CommonUtils.isEmpty(goodsImageUrls)) {
@@ -71,10 +75,17 @@ public class FeedShoppingCarListHolder extends BaseViewHolder {
 //                        .into(riv_bu_goods_cover);
 //            }
 
+            boolean select = ((FeedShoppingCarGoodsInfo) info).isSelect();
+            if (select){
+                iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
+            }else{
+                iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle);
+            }
+
         }
 
-//        btn_bu_edit_goods.setTag(info);
-//        btn_bu_edit_goods.setOnClickListener(listener);
+        iv_feed_shopping_car.setTag(info);
+        iv_feed_shopping_car.setOnClickListener(listener);
 
 
     }

@@ -7,7 +7,7 @@ import java.util.List;
  * @CreateDate : 2021/2/20 11:32
  * @Description : 饲料商品列表数据
  */
-public class FeedGoodsInfo extends BaseInfo {
+public class FeedShoppingCarGoodsInfo extends BaseInfo {
 
 
 // "id": 4,
@@ -77,6 +77,8 @@ public class FeedGoodsInfo extends BaseInfo {
      private List<String> descriptionImageUrls;
 
      private long modDate;
+
+     private boolean isSelect;
 
 
     public int getId() {
@@ -247,4 +249,11 @@ public class FeedGoodsInfo extends BaseInfo {
         this.modDate = modDate;
     }
 
+    public boolean isSelect() {
+        return isSelect;
+    }
+
+    public void setSelect(boolean select) {
+        isSelect = select;
+    }
 }
