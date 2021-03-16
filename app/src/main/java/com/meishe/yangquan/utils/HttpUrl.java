@@ -314,5 +314,4 @@ public class HttpUrl {
     /*（商户）订单列表 */
     public static final String BU_HOME_ORDER_LIST = URL + "app/owner/order/list";
 
-
 }
