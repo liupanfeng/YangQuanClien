@@ -77,8 +77,13 @@ public class FeedShoppingCarGoodsInfo extends BaseInfo {
      private List<String> descriptionImageUrls;
 
      private long modDate;
+     /*选择数量-下单的时候选择的数量*/
+     private int selectAmount=1;
 
+     /*购物车是否选中*/
      private boolean isSelect;
+    /*是否需要隐藏选择框*/
+     private boolean isNeedHideSelect;
 
 
     public int getId() {
@@ -254,6 +259,25 @@ public class FeedShoppingCarGoodsInfo extends BaseInfo {
     }
 
     public void setSelect(boolean select) {
+
         isSelect = select;
+    }
+
+
+    public boolean isNeedHideSelect() {
+        return isNeedHideSelect;
+    }
+
+    public void setNeedHideSelect(boolean needHideSelect) {
+
+        isNeedHideSelect = needHideSelect;
+    }
+
+    public int getSelectAmount() {
+        return selectAmount;
+    }
+
+    public void setSelectAmount(int selectAmount) {
+        this.selectAmount = selectAmount;
     }
 }

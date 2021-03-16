@@ -101,7 +101,12 @@ public class MineOrderActivity extends BaseActivity {
 
     @Override
     public void initListener() {
-
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -111,6 +116,5 @@ public class MineOrderActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-
     }
 }

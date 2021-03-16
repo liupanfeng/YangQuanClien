@@ -8,14 +8,14 @@ import android.widget.ImageView;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.FeedGoodsInfo;
-import com.meishe.yangquan.bean.FeedGoodsInfoListResult;
 import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarInfoResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.manager.FeedGoodsManager;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -71,7 +71,7 @@ public class FeedShoppingCarActivity extends BaseActivity {
         btn_feed_delete = findViewById(R.id.btn_feed_delete);
         /*默认状态*/
         iv_feed_shopping_car_normal = findViewById(R.id.iv_feed_shopping_car_normal);
-        btn_feed_order = findViewById(R.id.btn_feed_order);
+        btn_feed_order = findViewById(R.id.btn_feed_commit_order);
 
         initRecyclerView();
     }
@@ -111,13 +111,27 @@ public class FeedShoppingCarActivity extends BaseActivity {
         mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
-                if (view.getId() == R.id.iv_feed_shopping_car &&
-                        baseInfo instanceof FeedShoppingCarGoodsInfo) {
+                if (baseInfo instanceof FeedShoppingCarGoodsInfo) {
                     ((FeedShoppingCarGoodsInfo) baseInfo).setSelect(!((FeedShoppingCarGoodsInfo) baseInfo).isSelect());
                     mAdapter.notifyItemChanged(position);
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        List<BaseInfo> data = mAdapter.getData();
+        if (CommonUtils.isEmpty(data)){
+            return;
+        }
+        for (int i=0;i<data.size();i++){
+            BaseInfo info = data.get(i);
+            if (info instanceof FeedShoppingCarGoodsInfo ){
+                ((FeedShoppingCarGoodsInfo) info).setNeedHideSelect(false);
+            }
+        }
     }
 
     @Override
@@ -171,8 +185,25 @@ public class FeedShoppingCarActivity extends BaseActivity {
                 }
             }
             deleteShoppingCarData(dataStr.toString());
-        }else if (view.getId()==R.id.btn_feed_order){
+        }else if (view.getId()==R.id.btn_feed_commit_order){
+            List<BaseInfo> data = mAdapter.getData();
+            if (CommonUtils.isEmpty(data)) {
+                return;
+            }
+            List<BaseInfo> list=new ArrayList<>();
+            for (int i=0;i<data.size();i++){
+                BaseInfo info = data.get(i);
+                if (info instanceof FeedShoppingCarGoodsInfo &&((FeedShoppingCarGoodsInfo) info).isSelect()){
+                    list.add( info);
+                }
+            }
 
+            if (CommonUtils.isEmpty(list)){
+                ToastUtil.showToast("请选择商品再下单!");
+                return;
+            }
+            FeedGoodsManager.getInstance().setList(list);
+            AppManager.getInstance().jumpActivity(this,FeedOrderActivity.class);
         }
     }
 

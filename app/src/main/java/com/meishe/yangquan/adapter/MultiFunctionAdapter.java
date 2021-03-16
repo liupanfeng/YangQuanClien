@@ -23,6 +23,7 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
+import com.meishe.yangquan.bean.FeedReceiverAddressInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
@@ -68,6 +69,7 @@ import com.meishe.yangquan.viewhoder.BUHomeManagerOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeManagerRefundListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
+import com.meishe.yangquan.viewhoder.FeedReceiveAddressListHolder;
 import com.meishe.yangquan.viewhoder.FeedShoppingCarListHolder;
 import com.meishe.yangquan.viewhoder.MineCollectionListHolder;
 import com.meishe.yangquan.viewhoder.MineOrderListHolder;
@@ -330,6 +332,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 viewHolder = new FeedShoppingCarListHolder(view, this);
                 break;
 
+            /*饲料-收货地址*/
+            case VIEW_FEED_RECEIVE_ADDRESS:
+                view = mLayoutInflater.inflate(R.layout.item_feed_receive_address_view, parent, false);
+                viewHolder = new FeedReceiveAddressListHolder(view, this);
+                break;
 
 
             /*商版-店铺数据*/
@@ -504,6 +511,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_COLLECTION_LIST;
         }else if (baseInfo instanceof FeedShoppingCarGoodsInfo) {
             return VIEW_FEED_SHOPPING_CAR_LIST;
+        }else if (baseInfo instanceof FeedReceiverAddressInfo) {
+            return VIEW_FEED_RECEIVE_ADDRESS;
         }
         return super.getItemViewType(position);
     }

@@ -103,6 +103,14 @@ public class Util {
         return flag;
     }
 
+    public static String formatPhoneNumber(String phoneNumber){
+        if(phoneNumber.length()!=11){
+            return phoneNumber;
+        }
+        phoneNumber=phoneNumber.substring(0,3)+"****"+phoneNumber.substring(7,11);
+        return phoneNumber;
+    }
+
 
     /**
      * 处理上传服务器内容中包含图片不能识别的问题

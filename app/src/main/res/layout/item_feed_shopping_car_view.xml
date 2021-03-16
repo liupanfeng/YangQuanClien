@@ -88,7 +88,7 @@
             android:layout_toRightOf="@+id/riv_goods_cover"
             android:layout_marginLeft="@dimen/dp8"
             android:layout_alignBottom="@+id/riv_goods_cover"
-            android:text="70/桶  |"
+            android:text="70/桶"
             android:textColor="#ff303030"
             android:textSize="13sp"
             />

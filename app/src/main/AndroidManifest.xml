@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activity.FeedOrderActivity"></activity>
+        <activity android:name=".activity.FeedEditReceiveAddressActivity"></activity>
+        <activity android:name=".activity.FeedReceiveAddressActivity" />
+        <activity android:name=".activity.FeedOrderActivity" />
         <activity
             android:name=".activity.MineOrderActivity"
             android:screenOrientation="portrait" />

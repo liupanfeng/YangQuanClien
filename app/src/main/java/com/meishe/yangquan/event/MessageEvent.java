@@ -58,6 +58,10 @@ public class MessageEvent {
      * 发起二级评论
      */
     public static final int MESSAGE_TYPE_DO_SECOND_COMMENT = MESSAGE_TYPE_BASE + 9;
+    /**
+     * 更新商品数量
+     */
+    public static final int MESSAGE_TYPE_FEED_GOODS_AMOUNT = MESSAGE_TYPE_BASE + 10;
 
     private int mEventType;
 
