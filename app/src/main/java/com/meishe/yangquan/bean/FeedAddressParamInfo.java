@@ -7,6 +7,8 @@ package com.meishe.yangquan.bean;
  */
 public class FeedAddressParamInfo extends BaseInfo {
 
+
+
     /*收货人*/
     private String name;
     /*收货人电话*/
