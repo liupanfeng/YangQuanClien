@@ -281,6 +281,8 @@ public class HttpUrl {
     public static final String SHEEP_MINE_SETTING_PASSWORD = URL + "app/user/update/paymentCode";
     /*饲料-提交订单*/
     public static final String SHEEP_FEED_ORDER_COMMIT = URL + "app/user/order/commit";
+    /*饲料-订单列表*/
+    public static final String SHEEP_FEED_ORDER_LIST = URL + "app/user/order/list";
 
     /*我的-版本更新*/
     public static final String SHEEP_APP_VERSION_UPDATE = URL + "app/version/latest";
@@ -308,6 +310,9 @@ public class HttpUrl {
 
     /*（商户）删除商品 */
     public static final String BU_HOME_DELETE_GOODS = URL + "app/owner/goods/delete";
+
+    /*（商户）订单列表 */
+    public static final String BU_HOME_ORDER_LIST = URL + "app/owner/order/list";
 
 
 }

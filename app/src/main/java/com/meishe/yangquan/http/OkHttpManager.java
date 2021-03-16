@@ -70,6 +70,11 @@ public class OkHttpManager {
         doRequest(request, callBack);
     }
 
+    public void postRequest(String url, final BaseCallBack callBack, Map<String, Object> params,String token,String body) {
+        Request request = buildRequest(url, params, HttpMethodType.POST,token,body);
+        doRequest(request, callBack);
+    }
+
     public void postUploadSingleImage(String url, final BaseCallBack callback, File file, String fileKey, Map<String, String> params){
         postUploadSingleImage(url,callback,file,fileKey,params,"");
     }
@@ -317,6 +322,20 @@ public class OkHttpManager {
         return builder.build();
     }
 
+    //创建 Request对象
+    private Request buildRequest(String url, Map<String, Object> params, HttpMethodType methodType,String token,String body) {
+
+        Request.Builder builder = new Request.Builder();
+        builder.url(url);
+        builder.addHeader("Token",token);
+        if (methodType == HttpMethodType.GET) {
+            builder.get();
+        } else if (methodType == HttpMethodType.POST) {
+            RequestBody requestBody = buildFormData(params,body);
+            builder.post(requestBody);
+        }
+        return builder.build();
+    }
 
     //构建请求所需的参数表单
     private RequestBody buildFormData(Map<String, Object> params) {
@@ -330,6 +349,24 @@ public class OkHttpManager {
             }
         }
         return builder.build();
+    }
+
+    //构建请求所需的参数表单
+    private RequestBody buildFormData(Map<String, Object> params,String body) {
+//        FormBody.Builder builder = new FormBody.Builder();
+//        builder.add("platform", "android");
+//        builder.add("version", "1.0");
+//        builder.add("key", "123456");
+//        if (params != null) {
+//            for (Map.Entry<String, Object> entry : params.entrySet()) {
+//                builder.add(entry.getKey(), String.valueOf(entry.getValue()));
+//            }
+//        }
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        RequestBody requestBody = RequestBody.create(JSON, body);
+
+        return requestBody;
     }
 
     private void callBackSuccess(final BaseCallBack callBack, final Call call, final Response response, final Object object) {

@@ -3,16 +3,27 @@ package com.meishe.yangquan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.MineOrderInfo;
+import com.meishe.yangquan.bean.MineOrderInfoResult;
+import com.meishe.yangquan.bean.ServerResult;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.ToastUtil;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 我的-订单页面
@@ -55,30 +66,88 @@ public class MineOrderActivity extends BaseActivity {
      * 获取订单数据
      */
     private void getOrderData() {
-        List<MineOrderInfo> lists=new ArrayList<>();
-        MineOrderInfo mineOrderInfo = new MineOrderInfo();
-        mineOrderInfo.setType(mType);
-        lists.add(mineOrderInfo);
+//        List<MineOrderInfo> lists=new ArrayList<>();
+//        MineOrderInfo mineOrderInfo = new MineOrderInfo();
+//        mineOrderInfo.setType(mType);
+//        lists.add(mineOrderInfo);
+//
+//        mineOrderInfo = new MineOrderInfo();
+//        mineOrderInfo.setType(mType);
+//        lists.add(mineOrderInfo);
+//
+//        mineOrderInfo = new MineOrderInfo();
+//        mineOrderInfo.setType(mType);
+//        lists.add(mineOrderInfo);
+//
+//        mineOrderInfo = new MineOrderInfo();
+//        mineOrderInfo.setType(mType);
+//        lists.add(mineOrderInfo);
+//
+//        mineOrderInfo = new MineOrderInfo();
+//        mineOrderInfo.setType(mType);
+//        lists.add(mineOrderInfo);
+//
+//        mAdapter.addAll(lists);
 
-        mineOrderInfo = new MineOrderInfo();
-        mineOrderInfo.setType(mType);
-        lists.add(mineOrderInfo);
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
 
-        mineOrderInfo = new MineOrderInfo();
-        mineOrderInfo.setType(mType);
-        lists.add(mineOrderInfo);
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("listType",0);
+        requestParam.put("pageNum",1);
+        requestParam.put("pageSize",30);
 
-        mineOrderInfo = new MineOrderInfo();
-        mineOrderInfo.setType(mType);
-        lists.add(mineOrderInfo);
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_FEED_ORDER_LIST, new BaseCallBack<MineOrderInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
 
-        mineOrderInfo = new MineOrderInfo();
-        mineOrderInfo.setType(mType);
-        lists.add(mineOrderInfo);
+            }
 
-        mAdapter.addAll(lists);
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "接口异常");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, MineOrderInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+
+                } else {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "接口异常");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
 
     }
+
 
     @Override
     public void initTitle() {

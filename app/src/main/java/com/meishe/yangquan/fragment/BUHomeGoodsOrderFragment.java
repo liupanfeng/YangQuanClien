@@ -95,6 +95,8 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
 
         mAdapter.addAll(datas);
 
+        getGoodsDataFromServer();
+
     }
 
 
@@ -109,20 +111,19 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
      * 获取商品列表
      */
     private void getGoodsDataFromServer() {
-        HashMap<String, Object> param = new HashMap<>();
-        param.put("pageNum", 1);
-        param.put("pageSize", 300);
-        if (mType == 2) {
-            param.put("isPublic", 0);
-        } else if (mType == 1) {
-            param.put("isPublic", 1);
-        }
+
         String token = UserManager.getInstance(mContext).getToken();
         if (TextUtils.isEmpty(token)) {
             return;
         }
+
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("listType", 0);
+        param.put("pageNum",1);
+        param.put("pageSize", 30);
+
 //        showLoading();
-        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_GOODS_INFO, new BaseCallBack<BUGoodsInfoResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_ORDER_LIST, new BaseCallBack<BUGoodsInfoResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -179,17 +180,14 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
                         //上架商品 或者下架商品  根据商品是否已经上架
                         if (isPublic == 0) {
                             //上架
-                            upGoods(((BUGoodsInfo) baseInfo));
                         } else if ((isPublic == 1)) {
                             //下架
-                            downGoods(((BUGoodsInfo) baseInfo));
                         }
                     } else if (view.getId() == R.id.btn_bu_delete_goods) {
                         if (isPublic == 0) {
                             //删除
 
                             int id = ((BUGoodsInfo) baseInfo).getId();
-                            showInputIncomingDialog(id);
                         } else if ((isPublic == 1)) {
                             //分享
                         }
@@ -210,193 +208,8 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
         });
     }
 
-    /**
-     * 删除商品提示框
-     * @param id
-     */
-    private void showInputIncomingDialog(final int id) {
-        final IosDialog.DialogBuilder builder = new IosDialog.DialogBuilder(mContext);
-        builder.setTitle("是否确认删除商品");
-        builder.setAsureText("确定");
-        builder.setCancelText("取消");
-        builder.addListener(new IosDialog.OnButtonClickListener() {
-            @Override
-            public void onAsureClick() {
-                mIosDialog.hide();
-                deleteGoods(id);
-            }
-
-            @Override
-            public void onCancelClick() {
-                mIosDialog.hide();
-            }
-        });
-        mIosDialog = builder.create();
-    }
-
-    /**
-     * 删除商品
-     * @param id 商品id
-     */
-    private void deleteGoods(int id) {
-        String token = UserManager.getInstance(mContext).getToken();
-        if (TextUtils.isEmpty(token)) {
-            return;
-        }
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("id", id);
-
-        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_DELETE_GOODS, new BaseCallBack<ServerResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideLoading();
-                        ToastUtil.showToast(mContext, "网络异常");
-                    }
-                });
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, ServerResult result) {
-                hideLoading();
-                if (result != null && result.getCode() == 1) {
-                    ToastUtil.showToast(mContext, "删除商品成功");
-                    getGoodsDataFromServer();
-                } else {
-                    ToastUtil.showToast(mContext, result.getMsg());
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "网络异常");
-                    }
-                });
-
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam, token);
-    }
-
-    /**
-     * 下架商品
-     *
-     * @param baseInfo
-     */
-    private void downGoods(BUGoodsInfo baseInfo) {
-        if (baseInfo == null) {
-            return;
-        }
-        int id = baseInfo.getId();
-        changeGoodsState(id, 0);
-    }
-
-    /**
-     * 上架商品
-     *
-     * @param baseInfo
-     */
-    private void upGoods(BUGoodsInfo baseInfo) {
-        if (baseInfo == null) {
-            return;
-        }
-        int id = baseInfo.getId();
-        changeGoodsState(id, 1);
-    }
 
 
-    /**
-     * 发布商品
-     *
-     * @param isPublic 0：下架 1上架
-     * @param id       商品id
-     */
-    private void changeGoodsState(int id, final int isPublic) {
-
-        String token = UserManager.getInstance(mContext).getToken();
-        if (TextUtils.isEmpty(token)) {
-            return;
-        }
-        HashMap<String, Object> requestParam = new HashMap<>();
-
-        requestParam.put("isPublic", isPublic);
-        requestParam.put("id", id);
-
-        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_GOODS_UN_OR_DOWN, new BaseCallBack<ServerResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        hideLoading();
-                        ToastUtil.showToast(mContext, "网络异常");
-                    }
-                });
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, ServerResult result) {
-                hideLoading();
-                if (result != null && result.getCode() == 1) {
-                    if (isPublic == 0) {
-                        //下架
-                        ToastUtil.showToast(mContext, "下架成功");
-                    } else if (isPublic == 1) {
-                        //上架
-                        ToastUtil.showToast(mContext, "上架成功");
-                    }
-                    getGoodsDataFromServer();
-                } else {
-                    ToastUtil.showToast(mContext, result.getMsg());
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "网络异常");
-                    }
-                });
-
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam, token);
-    }
 
 
     @Override
@@ -423,7 +236,7 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
         int eventType = event.getEventType();
         switch (eventType) {
             case MessageEvent.MESSAGE_TYPE_BU_PUBLISH_GOODS_SUCCESS:
-                getGoodsDataFromServer();
+//                getGoodsDataFromServer();
                 break;
         }
     }

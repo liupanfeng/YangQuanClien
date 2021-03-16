@@ -1,9 +1,7 @@
 package com.meishe.yangquan.activity;
 
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -30,22 +28,15 @@ import com.meishe.yangquan.fragment.MineFragment;
 import com.meishe.yangquan.fragment.SheepHouseKeepFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
-import com.meishe.yangquan.update.HProgressDialogUtils;
-import com.meishe.yangquan.update.UpdateAppHttpUtil;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.PageId;
 import com.meishe.yangquan.utils.SharedPreferencesUtil;
-import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BrandTextView;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.PrivacyPolicyDialog;
 import com.umeng.analytics.MobclickAgent;
-import com.vector.update_app.UpdateAppBean;
-import com.vector.update_app.UpdateAppManager;
-import com.vector.update_app.listener.ExceptionHandler;
-import com.vector.update_app.service.DownloadService;
 
 import java.io.File;
 import java.io.IOException;
@@ -131,7 +122,7 @@ public class MainActivity extends BasePermissionActivity {
         } else {
             mLoginType = SharedPreferencesUtil.getInstance(mContext).getInt(Constants.LOGIN_TYPE);
         }
-//        mLoginType = 2;
+        mLoginType = 2;
         if (hasAllPermission()) {
             //有了权限需要处理的事情
             showPrivacyDialog();
@@ -151,7 +142,7 @@ public class MainActivity extends BasePermissionActivity {
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0, mContext, mFragmentList, mListTitle));
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabWithIcons(mTabList);
-        updateApp();
+//        updateApp();
     }
 
     @Override
@@ -396,115 +387,115 @@ public class MainActivity extends BasePermissionActivity {
     }
 
 
-    public void updateApp(){
-        new UpdateAppManager
-                .Builder()
-                //当前Activity
-                .setActivity(this)
-                //更新地址
-                .setUpdateUrl("http://59.110.142.42:9999/app_version/2021-02/01/1612169724199.jpg")
-                .handleException(new ExceptionHandler() {
-                    @Override
-                    public void onException(Exception e) {
-                        e.printStackTrace();
-                    }
-                })
-                //实现httpManager接口的对象
-                .setHttpManager(new UpdateAppHttpUtil())
-                .build()
-                .update();
-    }
-    /**
-     * 自定义对话框
-     *
-     * @param updateApp
-     * @param updateAppManager
-     */
-    private void showDiyDialog(final UpdateAppBean updateApp, final UpdateAppManager updateAppManager) {
-        String targetSize = updateApp.getTargetSize();
-        String updateLog = updateApp.getUpdateLog();
-
-        String msg = "";
-
-        if (!TextUtils.isEmpty(targetSize)) {
-            msg = "新版本大小：" + targetSize + "\n\n";
-        }
-
-        if (!TextUtils.isEmpty(updateLog)) {
-            msg += updateLog;
-        }
-
-        new AlertDialog.Builder(this)
-                .setTitle(String.format("是否升级到%s版本？", updateApp.getNewVersion()))
-                .setMessage(msg)
-                .setPositiveButton("升级", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        //显示下载进度
-                        if (isShowDownloadProgress) {
-                            updateAppManager.download(new DownloadService.DownloadCallback() {
-                                @Override
-                                public void onStart() {
-                                    HProgressDialogUtils.showHorizontalProgressDialog(MainActivity.this, "下载进度", false);
-                                }
-
-                                /**
-                                 * 进度
-                                 *
-                                 * @param progress  进度 0.00 -1.00 ，总大小
-                                 * @param totalSize 总大小 单位B
-                                 */
-                                @Override
-                                public void onProgress(float progress, long totalSize) {
-                                    HProgressDialogUtils.setProgress(Math.round(progress * 100));
-                                }
-
-                                /**
-                                 *
-                                 * @param total 总大小 单位B
-                                 */
-                                @Override
-                                public void setMax(long total) {
-
-                                }
-
-
-                                @Override
-                                public boolean onFinish(File file) {
-                                    HProgressDialogUtils.cancel();
-                                    return true;
-                                }
-
-                                @Override
-                                public void onError(String msg) {
-                                    ToastUtil.showToast(msg);
-                                    HProgressDialogUtils.cancel();
-
-                                }
-
-                                @Override
-                                public boolean onInstallAppAndAppOnForeground(File file) {
-                                    return false;
-                                }
-                            });
-                        } else {
-                            //不显示下载进度
-                            updateAppManager.download();
-                        }
-
-
-                        dialog.dismiss();
-                    }
-                })
-                .setNegativeButton("暂不升级", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .create()
-                .show();
-    }
+//    public void updateApp(){
+//        new UpdateAppManager
+//                .Builder()
+//                //当前Activity
+//                .setActivity(this)
+//                //更新地址
+//                .setUpdateUrl("http://59.110.142.42:9999/app_version/2021-02/01/1612169724199.jpg")
+//                .handleException(new ExceptionHandler() {
+//                    @Override
+//                    public void onException(Exception e) {
+//                        e.printStackTrace();
+//                    }
+//                })
+//                //实现httpManager接口的对象
+//                .setHttpManager(new UpdateAppHttpUtil())
+//                .build()
+//                .update();
+//    }
+//    /**
+//     * 自定义对话框
+//     *
+//     * @param updateApp
+//     * @param updateAppManager
+//     */
+//    private void showDiyDialog(final UpdateAppBean updateApp, final UpdateAppManager updateAppManager) {
+//        String targetSize = updateApp.getTargetSize();
+//        String updateLog = updateApp.getUpdateLog();
+//
+//        String msg = "";
+//
+//        if (!TextUtils.isEmpty(targetSize)) {
+//            msg = "新版本大小：" + targetSize + "\n\n";
+//        }
+//
+//        if (!TextUtils.isEmpty(updateLog)) {
+//            msg += updateLog;
+//        }
+//
+//        new AlertDialog.Builder(this)
+//                .setTitle(String.format("是否升级到%s版本？", updateApp.getNewVersion()))
+//                .setMessage(msg)
+//                .setPositiveButton("升级", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        //显示下载进度
+//                        if (isShowDownloadProgress) {
+//                            updateAppManager.download(new DownloadService.DownloadCallback() {
+//                                @Override
+//                                public void onStart() {
+//                                    HProgressDialogUtils.showHorizontalProgressDialog(MainActivity.this, "下载进度", false);
+//                                }
+//
+//                                /**
+//                                 * 进度
+//                                 *
+//                                 * @param progress  进度 0.00 -1.00 ，总大小
+//                                 * @param totalSize 总大小 单位B
+//                                 */
+//                                @Override
+//                                public void onProgress(float progress, long totalSize) {
+//                                    HProgressDialogUtils.setProgress(Math.round(progress * 100));
+//                                }
+//
+//                                /**
+//                                 *
+//                                 * @param total 总大小 单位B
+//                                 */
+//                                @Override
+//                                public void setMax(long total) {
+//
+//                                }
+//
+//
+//                                @Override
+//                                public boolean onFinish(File file) {
+//                                    HProgressDialogUtils.cancel();
+//                                    return true;
+//                                }
+//
+//                                @Override
+//                                public void onError(String msg) {
+//                                    ToastUtil.showToast(msg);
+//                                    HProgressDialogUtils.cancel();
+//
+//                                }
+//
+//                                @Override
+//                                public boolean onInstallAppAndAppOnForeground(File file) {
+//                                    return false;
+//                                }
+//                            });
+//                        } else {
+//                            //不显示下载进度
+//                            updateAppManager.download();
+//                        }
+//
+//
+//                        dialog.dismiss();
+//                    }
+//                })
+//                .setNegativeButton("暂不升级", new DialogInterface.OnClickListener() {
+//                    @Override
+//                    public void onClick(DialogInterface dialog, int which) {
+//                        dialog.dismiss();
+//                    }
+//                })
+//                .create()
+//                .show();
+//    }
 
 
 }
