@@ -261,6 +261,7 @@ public class MineAddLocationActivity extends BaseActivity {
                 holder.addressLayout.setVisibility(View.VISIBLE);
                 holder.city_name.setTextColor(getResources().getColor(R.color.white));
             }else{
+
 //                String title = "不显示我的位置";
 //                if(title.equals(bean.getTitle())){
 //                    holder.city_name.setTextColor(Color.parseColor("#A2A2A7"));

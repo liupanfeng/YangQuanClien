@@ -14,6 +14,7 @@ import com.meishe.yangquan.activity.BUMineFeedGoldActivity;
 import com.meishe.yangquan.activity.BUMineRecommendActivity;
 import com.meishe.yangquan.activity.BUMineShoppingMessageActivity;
 import com.meishe.yangquan.activity.MineFeedGoldActivity;
+import com.meishe.yangquan.activity.SettingActivity;
 import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
@@ -39,6 +40,7 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
     private TextView tv_bu_mine_shopping_name;
     /*真实名称*/
     private TextView tv_bu_mine_real_name;
+    private View iv_bu_mine_setting;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -47,6 +49,7 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
         rl_bu_feed_gold = view.findViewById(R.id.rl_bu_feed_gold);
         rl_bu_recommend = view.findViewById(R.id.rl_bu_recommend);
         iv_mine_photo = view.findViewById(R.id.iv_mine_photo);
+        iv_bu_mine_setting = view.findViewById(R.id.iv_bu_mine_setting);
         tv_bu_mine_shopping_name = view.findViewById(R.id.tv_bu_mine_shopping_name);
         tv_bu_mine_real_name = view.findViewById(R.id.tv_bu_mine_real_name);
         return view;
@@ -83,6 +86,7 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
         rl_bu_shopping_message.setOnClickListener(this);
         rl_bu_feed_gold.setOnClickListener(this);
         rl_bu_recommend.setOnClickListener(this);
+        iv_bu_mine_setting.setOnClickListener(this);
     }
 
     @Override
@@ -99,6 +103,11 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
             case R.id.rl_bu_recommend:
                 //反馈建议
                 AppManager.getInstance().jumpActivity(getActivity(), BUMineRecommendActivity.class);
+                break;
+
+            case R.id.iv_bu_mine_setting:
+                //设置
+                AppManager.getInstance().jumpActivity(getActivity(), SettingActivity.class);
                 break;
         }
     }
