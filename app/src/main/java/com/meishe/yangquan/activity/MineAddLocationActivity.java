@@ -75,10 +75,10 @@ public class MineAddLocationActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mTvTitle = findViewById(R.id.tv_title);
-        mTvTitle.setTextColor(Color.WHITE);
-        mIvBack = findViewById(R.id.iv_back);
-        mIvBack.setBackgroundResource(R.mipmap.bar_back_white);
+//        mTvTitle = findViewById(R.id.tv_title);
+//        mTvTitle.setTextColor(Color.WHITE);
+//        mIvBack = findViewById(R.id.iv_back);
+//        mIvBack.setBackgroundResource(R.mipmap.bar_back_white);
 
         mEditText = findViewById(R.id.search_edit);
         mAroundLocationList = findViewById(R.id.normal_location_list);
@@ -166,18 +166,18 @@ public class MineAddLocationActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mTvTitle.setText("设置位置");
+//        mTvTitle.setText("设置位置");
     }
 
     @Override
     public void initListener() {
 
-        mIvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-            }
-        });
+//        mIvBack.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                finish();
+//            }
+//        });
 
         mNormalRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override

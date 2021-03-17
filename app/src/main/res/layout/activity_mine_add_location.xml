@@ -8,9 +8,9 @@
     android:focusableInTouchMode="true" >
 
 
-    <include layout="@layout/custom_title"
-            android:id="@+id/title"
-        />
+    <!--<include layout="@layout/custom_title"-->
+            <!--android:id="@+id/title"-->
+        <!--/>-->
 
     <RelativeLayout
         android:id="@+id/edit_text_layout"
