@@ -1,6 +1,7 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import java.util.List;
  *
  * @author 86188
  */
+@Deprecated
 public class HomeMarketListHolder extends BaseViewHolder {
 
 
@@ -146,7 +148,7 @@ public class HomeMarketListHolder extends BaseViewHolder {
                     break;
             }
             tv_market_name.setText(((MarketInfo) info).getNickname());
-            tv_market_address.setText(((MarketInfo) info).getAddress());
+//            tv_market_address.setText(((MarketInfo) info).getAddress());
             tv_market_type_name.setText(((MarketInfo) info).getTitle());
             tv_market_sheep_number.setText(((MarketInfo) info).getAmount() + "");
             tv_market_price.setText(((MarketInfo) info).getPrice() + "元/只");
@@ -189,6 +191,15 @@ public class HomeMarketListHolder extends BaseViewHolder {
 
             iv_market_cover.setOnClickListener(listener);
             iv_market_cover.setTag(info);
+
+//            tv_market_address.setOnClickListener(listener);
+//            tv_market_address.setTag(info);
+            tv_market_address.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("lpf","");
+                }
+            });
         }
     }
 

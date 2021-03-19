@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +20,7 @@ import com.meishe.yangquan.fragment.FeedGoodsListFragment;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.view.BannerLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,8 +45,10 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     private TextView tv_feed_shopping_fans;
     /*店铺签名*/
     private TextView tv_feed_shopping_sign_name;
-    private ImageView iv_shopping_cover;
     private RequestOptions options;
+    private BannerLayout banner;
+    private View iv_back;
+    private View ll_feed_goods_order;
 
     @Override
     protected int initRootView() {
@@ -59,7 +63,11 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         tv_feed_shopping_name =  findViewById(R.id.tv_feed_shopping_name);
         tv_feed_shopping_fans =  findViewById(R.id.tv_feed_shopping_fans);
         tv_feed_shopping_sign_name =  findViewById(R.id.tv_feed_shopping_sign_name);
-        iv_shopping_cover =  findViewById(R.id.iv_shopping_cover);
+        iv_back =  findViewById(R.id.iv_back);
+        ll_feed_goods_order =  findViewById(R.id.ll_feed_goods_order);
+
+        banner =  findViewById(R.id.banner);
+        banner.setIndicatorPosition(RelativeLayout.CENTER_HORIZONTAL);
     }
 
     @Override
@@ -101,7 +109,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         mTitleList.add("销量");
         mTitleList.add("价格");
 
-        mViewPager.setOffscreenPageLimit(4);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(), mFragmentList, mTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);
 
@@ -117,22 +125,22 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         List<String> shopInSideImageUrls = feedInfo.getShopInSideImageUrls();
         String coverUrl=null;
         if (!CommonUtils.isEmpty(shopInSideImageUrls)){
-             coverUrl = shopInSideImageUrls.get(0);
+            banner.setViewUrls(mContext, shopInSideImageUrls, null);
         }
 
-        if (coverUrl != null ) {
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(coverUrl)
-                    .apply(options)
-                    .into(iv_shopping_cover);
-        } else {
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load("")
-                    .apply(options)
-                    .into(iv_shopping_cover);
-        }
+//        if (coverUrl != null ) {
+//            Glide.with(mContext)
+//                    .asBitmap()
+//                    .load(coverUrl)
+//                    .apply(options)
+//                    .into(iv_shopping_cover);
+//        } else {
+//            Glide.with(mContext)
+//                    .asBitmap()
+//                    .load("")
+//                    .apply(options)
+//                    .into(iv_shopping_cover);
+//        }
 
 
     }
@@ -145,6 +153,13 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     @Override
     public void initListener() {
         ll_feed_goods_shopping_car.setOnClickListener(this);
+        ll_feed_goods_order.setOnClickListener(this);
+        iv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AppManager.getInstance().finishActivity();
+            }
+        });
     }
 
     @Override
@@ -156,6 +171,11 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     public void onClick(View v) {
         if (v.getId()==R.id.ll_feed_goods_shopping_car){
             AppManager.getInstance().jumpActivity(FeedShoppingDetailActivity.this,FeedShoppingCarActivity.class);
+        }else if (v.getId()==R.id.ll_feed_goods_order){
+            Bundle bundle=new Bundle();
+            bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_ALL_TYPE);
+            bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_ALL_TYPE);
+            AppManager.getInstance().jumpActivity(mContext,MineOrderActivity.class,bundle);
         }
     }
 }

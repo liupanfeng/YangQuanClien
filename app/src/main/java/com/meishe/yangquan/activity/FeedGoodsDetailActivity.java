@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -18,6 +19,7 @@ import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.view.BannerLayout;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -37,7 +39,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
     private int mGoodsId;
     private View btn_feed_add_shopping_cart;
     /*商品封面图片*/
-    private ImageView iv_feed_goods_cover;
+    private BannerLayout banner;
     /*商品描述图片*/
     private ImageView iv_feed_goods_desc;
     private RequestOptions options;
@@ -52,9 +54,9 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
         btn_feed_add_shopping_cart = findViewById(R.id.btn_feed_add_shopping_cart);
-        iv_feed_goods_cover = findViewById(R.id.iv_feed_goods_cover);
         iv_feed_goods_desc = findViewById(R.id.iv_feed_goods_desc);
-
+        banner = findViewById(R.id.banner);
+        banner.setIndicatorPosition(RelativeLayout.CENTER_HORIZONTAL);
     }
 
     @Override
@@ -87,14 +89,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         List<String> goodsImageUrls = feedGoodsInfo.getGoodsImageUrls();
         List<String> descriptionImageUrls = feedGoodsInfo.getDescriptionImageUrls();
         if (!CommonUtils.isEmpty(goodsImageUrls)){
-            String coverUrl = goodsImageUrls.get(0);
-            if (coverUrl != null ) {
-                Glide.with(mContext)
-                        .asBitmap()
-                        .load(coverUrl)
-                        .apply(options)
-                        .into(iv_feed_goods_cover);
-            }
+            banner.setViewUrls(mContext, goodsImageUrls, null);
         }
 
         if (!CommonUtils.isEmpty(descriptionImageUrls)){

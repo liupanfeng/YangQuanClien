@@ -41,9 +41,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 我的-添加定位信息页面
+ * 添加定位信息页面
  */
-public class MineAddLocationActivity extends BaseActivity {
+public class LocationActivity extends BaseActivity {
 
 
 

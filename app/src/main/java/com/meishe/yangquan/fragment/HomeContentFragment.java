@@ -10,7 +10,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.utils.Constants;
 
 /**

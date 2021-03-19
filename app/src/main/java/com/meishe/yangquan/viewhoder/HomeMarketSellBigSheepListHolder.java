@@ -162,6 +162,10 @@ public class HomeMarketSellBigSheepListHolder extends BaseViewHolder {
 
             iv_market_cover.setOnClickListener(listener);
             iv_market_cover.setTag(info);
+
+
+            tv_market_address.setOnClickListener(listener);
+            tv_market_address.setTag(info);
         }
     }
 

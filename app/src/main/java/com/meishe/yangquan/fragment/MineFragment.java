@@ -229,21 +229,25 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             case R.id.rl_mine_pay:
                 Bundle bundle=new Bundle();
                 bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_WAIT_PAY_TYPE);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_WAIT_PAY_TYPE);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_comment:
                 bundle=new Bundle();
                 bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_ALREADY_SEND_TYPE);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_ALREADY_SEND_TYPE);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_receive:
                 bundle=new Bundle();
                 bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_refund:
                 bundle=new Bundle();
                 bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_FINISH_TYPE);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_FINISH_TYPE);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.iv_mine_setting:

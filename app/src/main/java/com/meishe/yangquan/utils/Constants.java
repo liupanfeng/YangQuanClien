@@ -16,7 +16,8 @@ public class Constants {
     public static final int TYPE_IDENTITY_PERSONAL = 1;
     /*商户*/
     public static final int TYPE_IDENTITY_BUSINESS = 2;
-
+    /*列表选择*/
+    public static final String KEY_TAB_SELECT_INDEX ="select.index" ;
 
 
     public static String userId = "userId";
@@ -246,6 +247,10 @@ public class Constants {
     public static final int BU_TYPE_MESSAGE_OTHER= 4;
     /*饲料类型*/
     public static final String FEED_TYPE = "feed.type";
+
+    /*通过类型*/
+    public static final String COMMON_TYPE = "common.type";
+
     /*店铺id*/
     public static final String FEED_SHOPPING_IDTYPE = "feed.shopping.id.type";
 
@@ -295,6 +300,8 @@ public class Constants {
     /*商品等待发布*/
     public static final int TYPE_KEY_WAIT_PUBLISH_GOODS_TYPE = 2;
 
+    /*订单- 全部 */
+    public static final int TYPE_ORDER_ALL_TYPE = 0;
     /*订单- 待付 */
     public static final int TYPE_ORDER_WAIT_PAY_TYPE = 1;
     /*订单-待发货*/
@@ -328,6 +335,18 @@ public class Constants {
     /*收藏-商品*/
     public static final int TYPE_MINE_COLLECT_GOODS = 2;
 
+    /*百度*/
+    public static final int TYPE_MAP_BAIDU = 1;
+    /*高德*/
+    public static final int TYPE_MAP_GAODE = 2;
+    /*腾讯*/
+    public static final int TYPE_MAP_TENGXUN = 3;
+
+
+    /*拍摄*/
+    public static final int TYPE_CAPTURE = 1;
+    /*相册*/
+    public static final int TYPE_ALBUM = 2;
 
 
 }

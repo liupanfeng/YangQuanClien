@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg_pop_bottom_select_map_view"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <Button
+        android:id="@+id/btn_baidu"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp46"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:background="@drawable/select_pop_bottom_map_width_top_corners"
+        android:text="百度地图"/>
+    <include layout="@layout/common_line_view"/>
+
+    <Button
+        android:id="@+id/btn_gaode"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp46"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:background="@drawable/select_pop_bottom_map"
+        android:text="高德地图"/>
+  <!--  <include layout="@layout/common_line_view"/>-->
+    <Button
+        android:id="@+id/btn_tengxun"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp46"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:visibility="gone"
+        android:background="@drawable/select_pop_bottom_map"
+        android:text="腾讯地图"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5"
+        />
+    <Button
+        android:id="@+id/btn_cancel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp46"
+        android:gravity="center"
+        android:textColor="@color/gray"
+        android:background="@drawable/select_pop_bottom_map"
+        android:text="取消"/>
+
+</LinearLayout>

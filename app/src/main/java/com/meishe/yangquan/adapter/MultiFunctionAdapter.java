@@ -179,11 +179,11 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 viewHolder = new QuotationListHolder(view, this);
                 break;
 
-            /*市场列表*/
-            case VIEW_MARKET_LIST:
-                view = mLayoutInflater.inflate(R.layout.item_market, parent, false);
-                viewHolder = new HomeMarketListHolder(view, this);
-                break;
+//            /*市场列表*/
+//            case VIEW_MARKET_LIST:
+//                view = mLayoutInflater.inflate(R.layout.item_market, parent, false);
+//                viewHolder = new HomeMarketListHolder(view, this);
+//                break;
             /*市场列表 SELL_LITTLE */
             case VIEW_MARKET_LIST_SELL_LITTLE_SHEEP:
                 view = mLayoutInflater.inflate(R.layout.market_sell_little_sheep_view, parent, false);

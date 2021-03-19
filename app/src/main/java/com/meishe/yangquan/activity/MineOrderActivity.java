@@ -3,27 +3,15 @@ package com.meishe.yangquan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 
+import androidx.viewpager.widget.ViewPager;
+
+import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.MineOrderInfo;
-import com.meishe.yangquan.bean.MineOrderInfoResult;
-import com.meishe.yangquan.bean.ServerResult;
-import com.meishe.yangquan.http.BaseCallBack;
-import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.adapter.CommonFragmentAdapter;
+import com.meishe.yangquan.fragment.CommonListFragment;
 import com.meishe.yangquan.utils.Constants;
-import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.ToastUtil;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * 我的-订单页面
@@ -35,6 +23,9 @@ public class MineOrderActivity extends BaseActivity {
      */
     private int mType;
 
+    private SlidingTabLayout mSlidingTabLayout;
+    private ViewPager mViewPager;
+    private int mSelectIndex;
 
     @Override
     protected int initRootView() {
@@ -45,8 +36,8 @@ public class MineOrderActivity extends BaseActivity {
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
-        mRecyclerView = findViewById(R.id.recycler);
-        initRecyclerView();
+        mSlidingTabLayout = findViewById(R.id.slidingTabLayout);
+        mViewPager = findViewById(R.id.vp_pager);
     }
 
     @Override
@@ -55,117 +46,53 @@ public class MineOrderActivity extends BaseActivity {
         if (intent!=null){
             Bundle extras = intent.getExtras();
             if (extras!=null){
+                mSelectIndex = extras.getInt(Constants.KEY_TAB_SELECT_INDEX);
                 mType = extras.getInt(Constants.KEY_ORDER_STATE_TYPE);
             }
         }
 
-        getOrderData();
+        initTabLayout();
+        mSlidingTabLayout.setCurrentTab(mSelectIndex);
     }
 
-    /**
-     * 获取订单数据
-     */
-    private void getOrderData() {
-//        List<MineOrderInfo> lists=new ArrayList<>();
-//        MineOrderInfo mineOrderInfo = new MineOrderInfo();
-//        mineOrderInfo.setType(mType);
-//        lists.add(mineOrderInfo);
-//
-//        mineOrderInfo = new MineOrderInfo();
-//        mineOrderInfo.setType(mType);
-//        lists.add(mineOrderInfo);
-//
-//        mineOrderInfo = new MineOrderInfo();
-//        mineOrderInfo.setType(mType);
-//        lists.add(mineOrderInfo);
-//
-//        mineOrderInfo = new MineOrderInfo();
-//        mineOrderInfo.setType(mType);
-//        lists.add(mineOrderInfo);
-//
-//        mineOrderInfo = new MineOrderInfo();
-//        mineOrderInfo.setType(mType);
-//        lists.add(mineOrderInfo);
-//
-//        mAdapter.addAll(lists);
 
-        String token = getToken();
-        if (TextUtils.isEmpty(token)) {
-            return;
-        }
+    private void initTabLayout() {
+        mFragmentList.clear();
+        mTitleList.clear();
+        CommonListFragment allFragment= CommonListFragment.newInstance(mType);
+        mFragmentList.add(allFragment);
 
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("listType",0);
-        requestParam.put("pageNum",1);
-        requestParam.put("pageSize",30);
+        CommonListFragment waitPayFragment= CommonListFragment.newInstance(mType);
+        mFragmentList.add(waitPayFragment);
 
-        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_FEED_ORDER_LIST, new BaseCallBack<MineOrderInfoResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
+        CommonListFragment waitReceive= CommonListFragment.newInstance(mType);
+        mFragmentList.add(waitReceive);
 
-            }
+        CommonListFragment waitComment= CommonListFragment.newInstance(mType);
+        mFragmentList.add(waitComment);
 
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "接口异常");
-                    }
-                });
-            }
+        CommonListFragment waitRefund= CommonListFragment.newInstance(mType);
+        mFragmentList.add(waitRefund);
 
-            @Override
-            protected void onSuccess(Call call, Response response, MineOrderInfoResult result) {
-                if (result != null && result.getCode() == 1) {
+        mTitleList.add("全部");
+        mTitleList.add("待付款");
+        mTitleList.add("待收货");
+        mTitleList.add("待评价");
+        mTitleList.add("退款");
 
-                } else {
-                    ToastUtil.showToast(mContext, result.getMsg());
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "接口异常");
-                    }
-                });
-
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam, token);
-
+        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(),mFragmentList,mTitleList));
+        mSlidingTabLayout.setViewPager(mViewPager);
     }
+
+
+
+
 
 
     @Override
     public void initTitle() {
-        switch (mType){
-            case Constants.TYPE_ORDER_WAIT_PAY_TYPE:
-                mTvTitle.setText("待付款");
-                break;
-            case Constants.TYPE_ORDER_WAIT_SEND_TYPE:
-                mTvTitle.setText("待发货");
-                break;
-            case Constants.TYPE_ORDER_ALREADY_SEND_TYPE:
-                mTvTitle.setText("待评价");
-                break;
-            case Constants.TYPE_ORDER_FINISH_TYPE:
-                mTvTitle.setText("退款");
-                break;
-
-        }
+        mTvTitle.setText("我的订单");
     }
 
     @Override

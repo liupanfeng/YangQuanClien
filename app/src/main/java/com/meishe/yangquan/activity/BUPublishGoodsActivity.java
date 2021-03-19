@@ -43,6 +43,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.BUSelectGoodsSpecsView;
 import com.meishe.yangquan.pop.BUSelectGoodsTypeView;
+import com.meishe.yangquan.pop.SelectCaptureTypeView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.CommonUtils;
@@ -65,11 +66,6 @@ import java.util.List;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_CUT_WOOL;
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_LOOK_CAR;
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG;
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_VACCINE;
 
 /**
  * 商版发布商品
@@ -449,7 +445,7 @@ public class BUPublishGoodsActivity extends BaseActivity {
                 if (Util.isFastDoubleClick()) {
                     return true;
                 }
-                AppManager.getInstance().jumpActivityForResult(BUPublishGoodsActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
+                AppManager.getInstance().jumpActivityForResult(BUPublishGoodsActivity.this, LocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
                 return true;
             }
         });
@@ -460,7 +456,7 @@ public class BUPublishGoodsActivity extends BaseActivity {
                 if (Util.isFastDoubleClick()) {
                     return true;
                 }
-                AppManager.getInstance().jumpActivityForResult(BUPublishGoodsActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT_ADDRESS);
+                AppManager.getInstance().jumpActivityForResult(BUPublishGoodsActivity.this, LocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT_ADDRESS);
                 return true;
             }
         });
@@ -571,20 +567,20 @@ public class BUPublishGoodsActivity extends BaseActivity {
 
 
     private void showPictureSelectItem() {
-        new BottomMenuFragment(BUPublishGoodsActivity.this)
-                .addMenuItems(new MenuItem("拍照"))
-                .addMenuItems(new MenuItem("相册"))
-                .setOnItemClickListener(new BottomMenuFragment.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(TextView menu_item, int position) {
-                        if (menu_item.getText().equals("拍照") && position == 0) {
-                            checkPremission();//拍照
-                        } else {
-                            checkReadPermission();
-                        }
-                    }
-                })
-                .show();
+        SelectCaptureTypeView selectCaptureTypeView = SelectCaptureTypeView.create(mContext, new SelectCaptureTypeView.OnAttachListener() {
+            @Override
+            public void onSelect(int type) {
+                if (type==Constants.TYPE_CAPTURE){
+                    checkPremission();//拍照
+                }else if (type==Constants.TYPE_ALBUM){
+                    checkReadPermission();
+                }
+            }
+        });
+
+        if (!selectCaptureTypeView.isShow()){
+            selectCaptureTypeView.show();
+        }
     }
 
     private void checkPremission() {

@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 
+import com.amap.api.services.core.LatLonPoint;
 import com.amap.api.services.core.PoiItem;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
@@ -38,6 +39,7 @@ import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.pop.SelectCaptureTypeView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.CommonUtils;
@@ -113,6 +115,9 @@ public class PublishMarketActivity extends BaseActivity {
     private EditText mEtMarketInputAddress;
     private String mAddress;
     private PoiItem mPoiItem;
+
+    private double latitude;
+    private double longitude;
 
 
     @Override
@@ -244,7 +249,7 @@ public class PublishMarketActivity extends BaseActivity {
                 if (Util.isFastDoubleClick()){
                     return true;
                 }
-                AppManager.getInstance().jumpActivityForResult(PublishMarketActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
+                AppManager.getInstance().jumpActivityForResult(PublishMarketActivity.this, LocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
                 return true;
             }
         });
@@ -422,6 +427,8 @@ public class PublishMarketActivity extends BaseActivity {
             param.put("description", mDesc);
         }
         param.put("fileIds", pictures);
+        param.put("longitude", longitude);
+        param.put("latitude", latitude);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_ADD_MARKET, new BaseCallBack<ServerResult>() {
             @Override
@@ -476,20 +483,20 @@ public class PublishMarketActivity extends BaseActivity {
 
 
     private void showPictureSelectItem() {
-        new BottomMenuFragment(PublishMarketActivity.this)
-                .addMenuItems(new MenuItem("拍照"))
-                .addMenuItems(new MenuItem("相册"))
-                .setOnItemClickListener(new BottomMenuFragment.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(TextView menu_item, int position) {
-                        if (menu_item.getText().equals("拍照") && position == 0) {
-                            checkPremission();//拍照
-                        } else {
-                            checkReadPermission();
-                        }
-                    }
-                })
-                .show();
+        SelectCaptureTypeView selectCaptureTypeView = SelectCaptureTypeView.create(mContext, new SelectCaptureTypeView.OnAttachListener() {
+            @Override
+            public void onSelect(int type) {
+                if (type==Constants.TYPE_CAPTURE){
+                    checkPremission();//拍照
+                }else if (type==Constants.TYPE_ALBUM){
+                    checkReadPermission();
+                }
+            }
+        });
+
+        if (!selectCaptureTypeView.isShow()){
+            selectCaptureTypeView.show();
+        }
     }
 
     private void checkPremission() {
@@ -609,6 +616,9 @@ public class PublishMarketActivity extends BaseActivity {
                     if (title.equals(mPoiItem.getTitle())) {
                     } else {
                         mEtMarketInputAddress.setText(mPoiItem.getTitle());
+                        LatLonPoint latLonPoint = mPoiItem.getLatLonPoint();
+                         latitude = latLonPoint.getLatitude();
+                         longitude = latLonPoint.getLongitude();
                     }
                 }
                 break;

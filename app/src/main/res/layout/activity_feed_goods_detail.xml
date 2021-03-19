@@ -24,12 +24,21 @@
             android:background="#fff5f5f5"
             />
 
-        <ImageView
-            android:id="@+id/iv_feed_goods_cover"
+
+
+        <com.meishe.yangquan.view.BannerLayout
+            android:id="@+id/banner"
             android:layout_width="match_parent"
             android:layout_height="360dp"
-            android:background="@mipmap/ic_feed_goods_detail_cover"
-            />
+            app:scrollDuration="1000"
+            app:autoPlayDuration="3000"
+            app:unSelectedIndicatorHeight="6dp"
+            app:unSelectedIndicatorWidth="6dp"
+            app:selectedIndicatorHeight="6dp"
+            app:selectedIndicatorWidth="6dp"
+            app:unSelectedIndicatorColor="@color/white"
+            app:selectedIndicatorColor="@color/mainColor"
+            app:isAutoPlay="true"/>
 
         <View
             android:layout_width="match_parent"
@@ -241,7 +250,6 @@
             android:id="@+id/iv_feed_goods_desc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@mipmap/ic_feed_goods_detail"
             />
     </LinearLayout>
     </ScrollView>

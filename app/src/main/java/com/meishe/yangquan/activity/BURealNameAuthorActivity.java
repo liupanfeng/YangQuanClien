@@ -29,6 +29,7 @@ import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
+import com.meishe.yangquan.pop.SelectCaptureTypeView;
 import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
@@ -227,20 +228,20 @@ public class BURealNameAuthorActivity extends BaseActivity {
 
 
     private void changePhoto() {
-        new BottomMenuFragment(BURealNameAuthorActivity.this)
-                .addMenuItems(new MenuItem("拍照"))
-                .addMenuItems(new MenuItem("相册"))
-                .setOnItemClickListener(new BottomMenuFragment.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(TextView menu_item, int position) {
-                        if (menu_item.getText().equals("拍照") && position == 0) {
-                            checkPremission();//拍照
-                        } else {
-                            checkReadPermission();
-                        }
-                    }
-                })
-                .show();
+        SelectCaptureTypeView selectCaptureTypeView = SelectCaptureTypeView.create(mContext, new SelectCaptureTypeView.OnAttachListener() {
+            @Override
+            public void onSelect(int type) {
+                if (type==Constants.TYPE_CAPTURE){
+                    checkPremission();//拍照
+                }else if (type==Constants.TYPE_ALBUM){
+                    checkReadPermission();
+                }
+            }
+        });
+
+        if (!selectCaptureTypeView.isShow()){
+            selectCaptureTypeView.show();
+        }
     }
 
 

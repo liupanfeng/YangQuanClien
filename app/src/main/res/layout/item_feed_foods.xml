@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp120"
+    android:layout_height="127dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <com.meishe.yangquan.view.RoundAngleImageView
@@ -11,7 +11,7 @@
         app:roundWidth="@dimen/dp8"
         app:roundHeight="@dimen/dp8"
         android:background="@mipmap/ic_feed_goods_cover"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="@dimen/dp14"
         android:layout_marginLeft="@dimen/dp15"
         />
 

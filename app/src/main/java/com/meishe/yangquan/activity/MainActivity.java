@@ -122,7 +122,7 @@ public class MainActivity extends BasePermissionActivity {
         } else {
             mLoginType = SharedPreferencesUtil.getInstance(mContext).getInt(Constants.LOGIN_TYPE);
         }
-        mLoginType = 2;
+//        mLoginType = 2;
         if (hasAllPermission()) {
             //有了权限需要处理的事情
             showPrivacyDialog();

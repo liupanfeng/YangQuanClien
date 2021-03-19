@@ -68,7 +68,7 @@
             android:name=".activity.FeedShoppingDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MineAddLocationActivity"
+            android:name=".activity.LocationActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MineCallBackActivity"

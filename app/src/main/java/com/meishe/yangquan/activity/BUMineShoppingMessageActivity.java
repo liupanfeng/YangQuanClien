@@ -1,16 +1,8 @@
 package com.meishe.yangquan.activity;
 
 
-import android.content.ContentUris;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Matrix;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Parcelable;
-import android.provider.DocumentsContract;
-import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -28,17 +20,11 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.utils.AppManager;
-import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.KeyboardUtils;
-import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.Util;
 
-import org.greenrobot.eventbus.EventBus;
-
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 
@@ -167,7 +153,7 @@ public class BUMineShoppingMessageActivity extends BaseActivity {
                 if (Util.isFastDoubleClick()) {
                     return true;
                 }
-                AppManager.getInstance().jumpActivityForResult(BUMineShoppingMessageActivity.this, MineAddLocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
+                AppManager.getInstance().jumpActivityForResult(BUMineShoppingMessageActivity.this, LocationActivity.class, null, SHOW_ADD_LOCATION_ACTIVITY_RESULT);
                 return true;
             }
         });

@@ -18,10 +18,12 @@ import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.pop.SelectMapTypeView;
 import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.LocationUtil;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -116,7 +118,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
             @Override
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
                 String url = null;
-                if (mTabType == Constants.TAB_TYPE_MARKET&&view.getId()==R.id.iv_cover) {
+                if (mTabType == Constants.TAB_TYPE_MARKET && view.getId() == R.id.iv_cover) {
                     List<String> images = ((MarketInfo) baseInfo).getImages();
                     if (CommonUtils.isEmpty(images)) {
                         return;
@@ -125,7 +127,30 @@ public class HomeListFragment extends BaseRecyclerFragment {
                     if (TextUtils.isEmpty(url)) {
                         return;
                     }
-                } else if (mTabType == Constants.TAB_TYPE_SERVICE&&view.getId()==R.id.iv_cover) {
+                } else if (mTabType == Constants.TAB_TYPE_MARKET && view.getId() == R.id.tv_market_address) {
+                    //点击位置信息
+                    if (baseInfo instanceof MarketInfo) {
+                        final String address = ((MarketInfo) baseInfo).getAddress();
+                        if (!TextUtils.isEmpty(address)) {
+                            SelectMapTypeView selectMapTypeView = SelectMapTypeView.create(mContext, new SelectMapTypeView.OnAttachListener() {
+                                    @Override
+                                    public void onSelect(int type) {
+                                        if (type==Constants.TYPE_MAP_BAIDU){
+                                            LocationUtil.openBaidu(mContext,address);
+                                        }else if (type==Constants.TYPE_MAP_GAODE){
+                                            LocationUtil.openGaode(mContext,address);
+                                        }else if (type==Constants.TYPE_MAP_TENGXUN){
+
+                                        }
+                                    }
+                                });
+                            if (!selectMapTypeView.isShow()) {
+                                selectMapTypeView.show();
+                            }
+
+                        }
+                    }
+                } else if (mTabType == Constants.TAB_TYPE_SERVICE && view.getId() == R.id.iv_cover) {
                     List<String> images = ((ServiceInfo) baseInfo).getImages();
                     if (CommonUtils.isEmpty(images)) {
                         return;
@@ -205,7 +230,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
                     return;
                 }
 
-                for (int i=0;i<datas.size();i++){
+                for (int i = 0; i < datas.size(); i++) {
                     MarketInfo marketInfo = datas.get(i);
                     marketInfo.setType(typeId);
                 }

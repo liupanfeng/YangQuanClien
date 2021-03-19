@@ -75,6 +75,7 @@ public class BannerLayout extends RelativeLayout {
     private static final int titlePadding = 20;
 
     private int defaultImage;
+    private int mPosition=ALIGN_PARENT_RIGHT;
 
     private enum Shape {
         // 矩形 或 圆形的指示器
@@ -215,11 +216,11 @@ public class BannerLayout extends RelativeLayout {
     public void setViewUrls(Context context, List<String> urls, List<String> titles) {
         List<View> views = new ArrayList<>();
         itemCount = urls.size();
-        Log.e("TAG",titles.size()+"---90---"+urls.size());
-
-        if (titles != null && titles.size() != itemCount) {
-            throw new IllegalStateException("views.size() != titles.size()");
-        }
+//        Log.e("TAG",titles.size()+"---90---"+urls.size());
+//
+//        if (titles != null && titles.size() != itemCount) {
+//            throw new IllegalStateException("views.size() != titles.size()");
+//        }
 
         //主要是解决当item为小于3个的时候滑动有问题，这里将其拼凑成3个以上
         if (itemCount < 1) {//当item个数0
@@ -242,6 +243,9 @@ public class BannerLayout extends RelativeLayout {
         setViews(views);
     }
 
+    public void setIndicatorPosition(int position){
+        mPosition=position;
+    }
 
     private void setViews(final List<View> views) {
 
@@ -254,7 +258,7 @@ public class BannerLayout extends RelativeLayout {
         indicatorContainer.setGravity(Gravity.CENTER_VERTICAL);
         RelativeLayout.LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
         // 设置 指示点的位置  ALIGN_PARENT_RIGHT表示居右 CENTER_HORIZONTAL表示居中
-        params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        params.addRule(mPosition);
         params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 
         //设置margin
@@ -379,7 +383,7 @@ public class BannerLayout extends RelativeLayout {
         }else {
             Glide.with(getContext()).load(url).into(imageView);
         }
-        if (!TextUtils.isEmpty(title)) {
+        if (!TextUtils.isEmpty(title)||true) {
             TextView textView = new TextView(getContext());
             textView.setText(title);
             textView.setTextColor(titleColor);
