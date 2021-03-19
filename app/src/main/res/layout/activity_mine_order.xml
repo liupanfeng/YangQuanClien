@@ -10,6 +10,7 @@
 
     <include layout="@layout/custom_title"/>
 
+
     <com.meishe.libbase.SlidingTabLayout
         android:id="@+id/slidingTabLayout"
         android:layout_width="match_parent"
