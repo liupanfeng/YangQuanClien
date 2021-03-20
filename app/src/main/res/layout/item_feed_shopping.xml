@@ -85,7 +85,6 @@
         android:layout_marginLeft="@dimen/dp16"
         android:layout_below="@+id/ll_feed_selling"
         android:layout_marginTop="@dimen/dp12"
-
         android:drawableLeft="@mipmap/ic_feed_shopping_address"
         android:text="唐县南店头乡葛堡村"
         android:drawablePadding="@dimen/dp4"
