@@ -1,6 +1,7 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,7 +15,9 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.MarketInfo;
+import com.meishe.yangquan.view.RatingBar;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -38,6 +41,7 @@ public class FeedShoppingHolder extends BaseViewHolder {
     private TextView tv_shopping_address;
     /*距离*/
     private TextView tv_feed_distance;
+    private RatingBar rb_feed_start;
 
 
     public FeedShoppingHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
@@ -57,17 +61,22 @@ public class FeedShoppingHolder extends BaseViewHolder {
         tv_feed_selling = view.findViewById(R.id.tv_feed_selling);
         tv_shopping_address = view.findViewById(R.id.tv_shopping_address);
         tv_feed_distance = view.findViewById(R.id.tv_feed_distance);
+
+        rb_feed_start = view.findViewById(R.id.rb_feed_start);
     }
 
     @Override
     public void bindViewHolder(Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof FeedShoppingInfo) {
             tv_shopping_name.setText(((FeedShoppingInfo) info).getName());
-            tv_shopping_score.setText(((FeedShoppingInfo) info).getShopScore()+"");
+            tv_shopping_score.setText("评分："+((FeedShoppingInfo) info).getShopScore());
             tv_shopping_address.setText(((FeedShoppingInfo) info).getAddress());
             tv_feed_distance.setVisibility(View.GONE);
-            tv_feed_selling.setText("月售：300");
+            tv_feed_selling.setText("月售："+((FeedShoppingInfo) info).getSellAmount());
+            rb_feed_start.setStartTotalNumber(5);
 
+            float score = new BigDecimal(((FeedShoppingInfo) info).getShopScore()).setScale(0, BigDecimal.ROUND_HALF_UP).floatValue();
+            rb_feed_start.setSelectedNumber((int) score);
             String coverUrl = ((FeedShoppingInfo) info).getShopOutSideImageUrl();
             if (coverUrl != null ) {
                 Glide.with(context)
@@ -85,6 +94,13 @@ public class FeedShoppingHolder extends BaseViewHolder {
 
             mItemView.setTag(info);
             mItemView.setOnClickListener(listener);
+
+            rb_feed_start.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    return true;
+                }
+            });
         }
 
     }

@@ -57,6 +57,12 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
         BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
         if (buShoppingInfo== null){
             return;

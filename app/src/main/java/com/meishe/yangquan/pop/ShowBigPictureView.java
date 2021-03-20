@@ -39,6 +39,11 @@ public class ShowBigPictureView extends CenterPopupView {
 
 
     @Override
+    protected int getMaxWidth() {
+        return ScreenUtils.getScreenWidth(mContext);
+    }
+
+    @Override
     protected int getImplLayoutId() {
         return R.layout.show_pic_layout;
     }

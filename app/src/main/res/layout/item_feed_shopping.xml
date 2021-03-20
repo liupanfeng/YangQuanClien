@@ -40,12 +40,27 @@
         android:textSize="13sp"
         />
 
+    <com.meishe.yangquan.view.RatingBar
+        android:id="@+id/rb_feed_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/tv_shopping_score"
+        android:layout_alignTop="@+id/tv_shopping_score"
+        app:selectedNumber="3"
+        app:starDistance="6dp"
+        android:layout_marginLeft="@dimen/dp12"
+        app:starEmptyRes="@mipmap/ic_bu_star_normal"
+        app:starHalfRes="@mipmap/ic_bu_start_selected"
+        app:starIsFull="false"
+        app:starSelectedRes="@mipmap/ic_bu_start_selected"
+        />
+
     <LinearLayout
         android:id="@+id/ll_feed_selling"
         android:layout_toRightOf="@+id/iv_feed_cover"
         android:layout_marginLeft="@dimen/dp16"
         android:layout_below="@+id/tv_shopping_score"
-        android:layout_width="90dp"
+        android:layout_width="wrap_content"
         android:orientation="vertical"
         android:layout_marginTop="10dp"
         android:background="@mipmap/ic_feed_selling_bg"
@@ -54,8 +69,7 @@
         <TextView
             android:id="@+id/tv_feed_selling"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="月售 2345"
+            android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:textColor="#ff656565"
             android:textSize="13sp"

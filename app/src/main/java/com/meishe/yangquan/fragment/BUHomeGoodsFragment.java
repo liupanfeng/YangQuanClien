@@ -198,7 +198,8 @@ public class BUHomeGoodsFragment extends BaseRecyclerFragment {
      */
     private void showInputIncomingDialog(final int id) {
         final IosDialog.DialogBuilder builder = new IosDialog.DialogBuilder(mContext);
-        builder.setTitle("是否确认删除商品");
+        builder.setTitle("提示");
+        builder.setText("是否确认删除商品！");
         builder.setAsureText("确定");
         builder.setCancelText("取消");
         builder.addListener(new IosDialog.OnButtonClickListener() {

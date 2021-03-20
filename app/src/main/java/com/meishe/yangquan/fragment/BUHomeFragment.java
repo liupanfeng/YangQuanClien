@@ -1,6 +1,5 @@
 package com.meishe.yangquan.fragment;
 
-import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ import com.meishe.yangquan.bean.BUShoppingInfoResult;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfoResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
-import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
@@ -35,9 +33,6 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.IosDialog;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -48,8 +43,6 @@ import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_SHOPPING_INFO;
-import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_USER_INFO;
 
 /**
  * @Author : lpf
@@ -401,7 +394,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         mViewOpenShop.setVisibility(View.VISIBLE);
         //更新店铺相关的一些信息
         if (data != null) {
-            tv_bu_shop_name.setText(data.getNickname());
+            tv_bu_shop_name.setText(data.getName());
             RequestOptions options = new RequestOptions();
             options.centerCrop();
             options.placeholder(R.mipmap.ic_message_list_photo_default);

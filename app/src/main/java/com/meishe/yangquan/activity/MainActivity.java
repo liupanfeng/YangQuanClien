@@ -139,6 +139,7 @@ public class MainActivity extends BasePermissionActivity {
         for (TabInfo tabInfo : mTabList) {
             setupChildView(tabInfo);
         }
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0, mContext, mFragmentList, mListTitle));
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabWithIcons(mTabList);

@@ -48,67 +48,69 @@ public class FeedShoppingInfo extends BaseInfo {
 //            "iconUrl": "http://59.110.142.42:9999/user_icon/2021-03/02/1614694964643.jpg",
 //            "authOption": null
 
-          private int id;
+    private int id;
 
-          private String name;
+    private String name;
 
-          private String shopType;
+    private String shopType;
 
-          private String mainCategory;
+    private String mainCategory;
 
-          private long longitude;
+    private long longitude;
 
-          private long latitude;
+    private long latitude;
 
-          private String address;
+    private String address;
 
-          private String goodsSource;
+    private String goodsSource;
 
-          private String sign;
+    private String sign;
 
-          private int shopScore;
+    private int shopScore;
 
-          private int shopOutSideImageId;
+    private int shopOutSideImageId;
 
-          private String shopOutSideImageUrl;
+    private String shopOutSideImageUrl;
 
-          private String shopInsideImageIds;
+    private String shopInsideImageIds;
 
-          private List<String> shopInSideImageUrls;
+    private List<String> shopInSideImageUrls;
 
-          private String ownerName;
+    private String ownerName;
 
-          private String ownerIdCardNum;
-          private int ownerIdCardFrontImageId;
+    private String ownerIdCardNum;
+    private int ownerIdCardFrontImageId;
 
-          private String ownerIdCardFrontImageUrl;
+    private String ownerIdCardFrontImageUrl;
 
-          private String ownerIdCardReverseImageId;
+    private String ownerIdCardReverseImageId;
 
-          private String ownerIdCardReverseImageUrl;
+    private String ownerIdCardReverseImageUrl;
 
-          private String businessName;
+    private String businessName;
 
-          private String businessCreditCode;
+    private String businessCreditCode;
 
-          private String businessScope;
+    private String businessScope;
 
-          private String businessPeriod;
+    private String businessPeriod;
 
-          private String businessCardImageId;
-          private String businessCardImageUrl;
-          private int initUser;
+    private String businessCardImageId;
+    private String businessCardImageUrl;
+    private int initUser;
 
-          private long initDate;
-          private String modDate;
-          private long authDate;
-          private int authState;
-          private int authUser;
-          private int state;
+    private long initDate;
+    private String modDate;
+    private long authDate;
+    private int authState;
+    private int authUser;
+    private int state;
 
-          private String nickname;
-          private String iconUrl;
-          private String authOption;
+    private String nickname;
+    private String iconUrl;
+    private String authOption;
+    /*销量*/
+    private int sellAmount;
 
 
     public int getId() {
@@ -397,5 +399,13 @@ public class FeedShoppingInfo extends BaseInfo {
 
     public void setAuthOption(String authOption) {
         this.authOption = authOption;
+    }
+
+    public int getSellAmount() {
+        return sellAmount;
+    }
+
+    public void setSellAmount(int sellAmount) {
+        this.sellAmount = sellAmount;
     }
 }
