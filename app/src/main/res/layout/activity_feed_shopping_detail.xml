@@ -52,6 +52,7 @@
             android:layout_height="@dimen/dp11"
             android:background="@mipmap/ic_feed_shopping_sign"
             android:layout_marginLeft="@dimen/dp18"
+            android:visibility="gone"
             android:layout_marginTop="68dp"
             />
 
@@ -61,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="店铺签名～"
+            android:visibility="gone"
             android:layout_marginLeft="@dimen/dp34"
             android:layout_marginTop="@dimen/dp65"
             android:textColor="@color/white"
@@ -68,16 +70,13 @@
             />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="133dp"
-            android:layout_marginLeft="@dimen/dp18"
-            android:layout_marginRight="@dimen/dp18"
-            android:layout_marginTop="87dp"
-            tl:cardCornerRadius="@dimen/dp2"
+            android:layout_height="166dp"
+            android:layout_marginTop="67dp"
             >
             <com.meishe.yangquan.view.BannerLayout
                 android:id="@+id/banner"
                 android:layout_width="match_parent"
-                android:layout_height="133dp"
+                android:layout_height="match_parent"
                 app:scrollDuration="1000"
                 app:autoPlayDuration="3000"
                 app:unSelectedIndicatorHeight="6dp"
@@ -86,7 +85,7 @@
                 app:selectedIndicatorWidth="6dp"
                 app:unSelectedIndicatorColor="@color/white"
                 app:selectedIndicatorColor="@color/mainColor"
-                app:isAutoPlay="true"/>
+                app:isAutoPlay="false"/>
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
@@ -95,7 +94,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:background="@mipmap/ic_feed_shopping_detail_bg"
+        android:background="@color/white"
         android:layout_marginTop="233dp">
 
         <com.meishe.libbase.SlidingTabLayout
@@ -189,7 +188,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_feed_goods_collection"
+                android:id="@+id/ll_feed_shopping_collection"
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_weight="1"

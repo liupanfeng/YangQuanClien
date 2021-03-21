@@ -3,14 +3,12 @@ package com.meishe.yangquan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
@@ -20,6 +18,8 @@ import com.meishe.yangquan.fragment.FeedGoodsListFragment;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BannerLayout;
 
 import java.util.ArrayList;
@@ -49,6 +49,10 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     private BannerLayout banner;
     private View iv_back;
     private View ll_feed_goods_order;
+    /*收藏*/
+    private View ll_feed_goods_collection;
+    /*联系商家*/
+    private View ll_feed_goods_phone_call;
 
     @Override
     protected int initRootView() {
@@ -59,12 +63,15 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     public void initView() {
         mSlidingTabLayout =  findViewById(R.id.slidingTabLayout);
         mViewPager =  findViewById(R.id.vp_pager);
-        ll_feed_goods_shopping_car =  findViewById(R.id.ll_feed_goods_shopping_car);
         tv_feed_shopping_name =  findViewById(R.id.tv_feed_shopping_name);
         tv_feed_shopping_fans =  findViewById(R.id.tv_feed_shopping_fans);
         tv_feed_shopping_sign_name =  findViewById(R.id.tv_feed_shopping_sign_name);
         iv_back =  findViewById(R.id.iv_back);
+        /*底部按钮菜单*/
         ll_feed_goods_order =  findViewById(R.id.ll_feed_goods_order);
+        ll_feed_goods_collection =  findViewById(R.id.ll_feed_shopping_collection);
+        ll_feed_goods_phone_call =  findViewById(R.id.ll_feed_goods_phone_call);
+        ll_feed_goods_shopping_car =  findViewById(R.id.ll_feed_goods_shopping_car);
 
         banner =  findViewById(R.id.banner);
         banner.setIndicatorPosition(RelativeLayout.CENTER_HORIZONTAL);
@@ -122,27 +129,17 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         tv_feed_shopping_name.setText(feedInfo.getName());
 //        tv_feed_shopping_fans.setText(feedInfo.get);
         tv_feed_shopping_sign_name.setText((feedInfo.getSign()==null||feedInfo.getSign().equals("null"))?"暂无签名":feedInfo.getSign());
-        List<String> shopInSideImageUrls = feedInfo.getShopInSideImageUrls();
-        String coverUrl=null;
+        final List<String> shopInSideImageUrls = feedInfo.getShopInSideImageUrls();
         if (!CommonUtils.isEmpty(shopInSideImageUrls)){
             banner.setViewUrls(mContext, shopInSideImageUrls, null);
+            banner.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    String imagePath = shopInSideImageUrls.get(position);
+                    Util.showBigPicture(mContext,imagePath);
+                }
+            });
         }
-
-//        if (coverUrl != null ) {
-//            Glide.with(mContext)
-//                    .asBitmap()
-//                    .load(coverUrl)
-//                    .apply(options)
-//                    .into(iv_shopping_cover);
-//        } else {
-//            Glide.with(mContext)
-//                    .asBitmap()
-//                    .load("")
-//                    .apply(options)
-//                    .into(iv_shopping_cover);
-//        }
-
-
     }
 
     @Override
@@ -154,6 +151,8 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     public void initListener() {
         ll_feed_goods_shopping_car.setOnClickListener(this);
         ll_feed_goods_order.setOnClickListener(this);
+        ll_feed_goods_collection.setOnClickListener(this);
+        ll_feed_goods_phone_call.setOnClickListener(this);
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -176,6 +175,11 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_ALL_TYPE);
             bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_ALL_TYPE);
             AppManager.getInstance().jumpActivity(mContext,MineOrderActivity.class,bundle);
+        }else if (v.getId()==R.id.ll_feed_shopping_collection){
+            ToastUtil.showToast("店铺收藏");
+        }else if (v.getId()==R.id.ll_feed_goods_phone_call){
+            ToastUtil.showToast("联系商家");
+//            Util.callPhone(mContext,phone);
         }
     }
 }

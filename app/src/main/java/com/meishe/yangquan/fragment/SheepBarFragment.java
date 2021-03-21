@@ -13,6 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.PublishSheepBarActivity;
@@ -48,7 +49,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
     /*最新*/
     private static final int TYPE_MARKET_LIST_TYPE_TOP = 0;
 
-    private ImageView mIvPublishSheepBar;
+    private View mIvPublishSheepBar;
 
     private LinearLayout mLlSignUp;
     /*置顶内容1*/
@@ -81,8 +82,8 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
-        View view = inflater.inflate(R.layout.fragment_bar_sheep, container, false);
-        mIvPublishSheepBar = view.findViewById(R.id.iv_publish_sheep_bar);
+        View view = inflater.inflate(R.layout.fragment_bar_sheep_change, container, false);
+        mIvPublishSheepBar = view.findViewById(R.id.iv_common_publish);
         mLlSignUp = view.findViewById(R.id.ll_sign_up);
         mLlTopMessageContainer1 = view.findViewById(R.id.ll_top_message_container_1);
         mLlTopMessageContainer2 = view.findViewById(R.id.ll_top_message_container_2);
@@ -155,7 +156,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_publish_sheep_bar:
+            case R.id.iv_common_publish:
                 //发布羊吧
                 AppManager.getInstance().jumpActivity(getActivity(), PublishSheepBarActivity.class);
                 break;

@@ -1,18 +1,42 @@
 package com.meishe.yangquan.fragment;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.PublishServiceActivity;
+import com.meishe.yangquan.bean.HomeCheckDriverInfoResult;
+import com.meishe.yangquan.bean.Message;
+import com.meishe.yangquan.bean.MessageResult;
+import com.meishe.yangquan.bean.ServerResult;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.pop.HomeTipDriverInfoView;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.wiget.CustomButton;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.meishe.yangquan.utils.Constants.TAB_TYPE_SERVICE;
 
@@ -43,19 +67,19 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
 
     private int mServiceType = TYPE_SERVICE_CUT_WOOL;
 
-    private ImageView mIvPublishService;
+    private View mIvPublishService;
     private HomeContentFragment mHomeContentFragment;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
-        View view=inflater.inflate(R.layout.fragment_home_service,container,false);
+        View view = inflater.inflate(R.layout.fragment_home_service, container, false);
         mCutWool = view.findViewById(R.id.btn_cut_wool);
         mVaccine = view.findViewById(R.id.btn_vaccine);
         mSheepDung = view.findViewById(R.id.btn_sheep_dung);
         mLookCar = view.findViewById(R.id.btn_look_car);
 
         mRecyclerView = view.findViewById(R.id.recycler);
-        mIvPublishService = view.findViewById(R.id.iv_publish_service);
+        mIvPublishService = view.findViewById(R.id.iv_common_publish);
         return view;
     }
 
@@ -66,19 +90,96 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mSheepDung.setOnClickListener(this);
         mLookCar.setOnClickListener(this);
         mIvPublishService.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-                Bundle bundle=new Bundle();
-                bundle.putInt("service_type",mServiceType);
+
+
+                if (mServiceType == TYPE_SERVICE_LOOK_CAR) {
+                    checkDriverMessage();
+                    return;
+                }
+
+                Bundle bundle = new Bundle();
+                bundle.putInt("service_type", mServiceType);
                 //发布服务
-                AppManager.getInstance().jumpActivity(getActivity(), PublishServiceActivity.class,bundle);
+                AppManager.getInstance().jumpActivity(getActivity(), PublishServiceActivity.class, bundle);
             }
         });
     }
 
+    /**
+     * 检测驾驶信息
+     */
+    private void checkDriverMessage() {
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+
+        HashMap<String, Object> requestParam = new HashMap<>();
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_DRIVER_INFO, new BaseCallBack<HomeCheckDriverInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, HomeCheckDriverInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    HomeCheckDriverInfoResult.HomeCheckDriverInfo data = result.getData();
+                    if (data.isDriverInfoComplete()) {
+                        Bundle bundle = new Bundle();
+                        bundle.putInt("service_type", mServiceType);
+                        //发布服务
+                        AppManager.getInstance().jumpActivity(getActivity(), PublishServiceActivity.class, bundle);
+                    } else {
+                        HomeTipDriverInfoView homeTipDriverInfoView = HomeTipDriverInfoView.
+                                create(mContext, "提示", "您还没有完善驾驶信息，\n现在去完善?",
+                                        new HomeTipDriverInfoView.OnAttachListener() {
+                                            @Override
+                                            public void onClickConfirm() {
+
+                                            }
+
+                                            @Override
+                                            public void onClickCancel() {
+
+                                            }
+                                        });
+
+                        if (!homeTipDriverInfoView.isShow()) {
+                            homeTipDriverInfoView.show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+    }
+
     @Override
     protected void initData() {
-        HomeContentFragment contentFragment = HomeContentFragment.newInstance(mServiceType,TAB_TYPE_SERVICE);
+        HomeContentFragment contentFragment = HomeContentFragment.newInstance(mServiceType, TAB_TYPE_SERVICE);
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, contentFragment).commit();
@@ -112,7 +213,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         }
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        mHomeContentFragment = HomeContentFragment.newInstance(mServiceType,TAB_TYPE_SERVICE);
+        mHomeContentFragment = HomeContentFragment.newInstance(mServiceType, TAB_TYPE_SERVICE);
         fragmentTransaction.replace(R.id.container, mHomeContentFragment).commit();
     }
 

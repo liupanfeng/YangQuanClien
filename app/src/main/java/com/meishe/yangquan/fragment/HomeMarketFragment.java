@@ -31,7 +31,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
     private CustomButton mBuyBigSheep;
 
     private int mMarketType = Constants.TYPE_MARKET_SELL_LITTLE_SHEEP;
-    private ImageView mIvPublishMarket;
+    private View mIvPublishMarket;
     private HomeContentFragment mHomeContentFragment;
 
 
@@ -43,7 +43,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mSellBigSheep = view.findViewById(R.id.btn_sell_big_sheep);
         mBuyBigSheep = view.findViewById(R.id.btn_buy_big_sheep);
         mRecyclerView = view.findViewById(R.id.recycler);
-        mIvPublishMarket = view.findViewById(R.id.iv_publish_market);
+        mIvPublishMarket = view.findViewById(R.id.iv_common_publish);
         return view;
     }
 

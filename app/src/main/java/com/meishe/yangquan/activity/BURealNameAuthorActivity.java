@@ -36,6 +36,7 @@ import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.Util;
 
 import java.io.File;
 
@@ -199,25 +200,11 @@ public class BURealNameAuthorActivity extends BaseActivity {
                 break;
             case R.id.iv_bu_capture_card_positive:
                 //查看大图
-                if (TextUtils.isEmpty(mIDCardFrontImagePath)) {
-                    return;
-                }
-
-                ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, mIDCardFrontImagePath);
-                if (showBigPictureView != null) {
-                    showBigPictureView.show();
-                }
+                Util.showBigPicture(mContext,mIDCardFrontImagePath);
                 break;
             case R.id.iv_bu_capture_card_negative:
                 //查看大图
-                if (TextUtils.isEmpty(mIDCardResoveImagePath)) {
-                    return;
-                }
-
-                showBigPictureView = ShowBigPictureView.create(mContext, mIDCardResoveImagePath);
-                if (showBigPictureView != null) {
-                    showBigPictureView.show();
-                }
+                Util.showBigPicture(mContext,mIDCardFrontImagePath);
                 break;
 
             default:

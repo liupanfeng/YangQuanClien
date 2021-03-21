@@ -1,149 +1,188 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.SheepBarDetailActivity">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/title"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:background="@color/white"
+        android:layout_height="48dp">
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="48dp">
+            android:id="@+id/backLayout"
+            android:layout_width="44dp"
+            android:layout_height="match_parent">
 
-            <RelativeLayout
-                android:id="@+id/backLayout"
-                android:layout_width="44dp"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:layout_width="8dp"
-                    android:layout_height="15dp"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:background="@mipmap/iv_back_black"
-                    android:padding="8dp" />
-
-            </RelativeLayout>
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:text="羊吧详情"
-                android:textColor="#ff303030"
-                android:textSize="15sp" />
-
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp8"
-            android:layout_marginTop="@dimen/dp8"
-            android:background="#fff5f5f5" />
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dp36"
-            android:layout_marginTop="@dimen/dp10">
-
-            <com.meishe.yangquan.view.RoundAngleImageView
-                android:id="@+id/iv_sheep_bar_photo"
-                android:layout_width="@dimen/dp36"
-                android:layout_height="@dimen/dp36"
-                android:layout_marginLeft="@dimen/dp13"
-                android:background="@mipmap/ic_default_photo"
-                app:roundHeight="@dimen/dp18"
-                app:roundWidth="@dimen/dp18" />
-
-            <TextView
-                android:id="@+id/tv_sheep_bar_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp8"
-                android:layout_marginRight="@dimen/dp20"
-                android:layout_toLeftOf="@+id/ll_sheep_bar_focus"
-                android:layout_toRightOf="@+id/iv_sheep_bar_photo"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:text="用户5302"
-                android:textColor="#ff2f3742"
-                android:textSize="14sp" />
-
-
-            <TextView
-                android:id="@+id/tv_sheep_bar_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_sheep_bar_nickname"
-                android:layout_marginLeft="@dimen/dp8"
-                android:layout_toRightOf="@+id/iv_sheep_bar_photo"
-                android:text="一天前"
-                android:textColor="#ff9da8b5"
-                android:textSize="12sp" />
-
-            <LinearLayout
-                android:id="@+id/ll_sheep_bar_focus"
-                android:layout_width="@dimen/dp53"
-                android:layout_height="@dimen/dp20"
-                android:layout_alignParentRight="true"
+            <ImageView
+                android:layout_width="8dp"
+                android:layout_height="15dp"
+                android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:layout_marginRight="@dimen/dp20"
-                android:background="@drawable/bg_sheep_bar_focus">
-
-                <TextView
-                    android:id="@+id/tv_sheep_bar_focus_content"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="+关注"
-                    android:textColor="#ff3ba786"
-                    android:textSize="12sp" />
-
-            </LinearLayout>
+                android:background="@mipmap/iv_back_black"
+                android:padding="8dp" />
 
         </RelativeLayout>
+
 
         <TextView
-            android:id="@+id/tv_sheep_bar_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp56"
-            android:layout_marginTop="@dimen/dp8"
-            android:layout_marginRight="@dimen/dp36"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:text="发布标题发布标题发布标题发布标题发布标题
+            android:layout_centerInParent="true"
+            android:text="羊吧详情"
+            android:textColor="#ff303030"
+            android:textSize="15sp" />
+
+    </RelativeLayout>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_below="@+id/title"
+    android:background="@color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
+        >
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?android:windowBackground"
+            app:expandedTitleMarginBottom="25dp"
+            app:expandedTitleMarginStart="30dp"
+            app:contentScrim="?colorPrimary"
+            app:statusBarScrim="?colorPrimaryDark"
+            app:expandedTitleTextAppearance="@style/TextApperance.Album.Title"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp8"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:background="#fff5f5f5" />
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/dp36"
+                    android:layout_marginTop="@dimen/dp10">
+
+                    <com.meishe.yangquan.view.RoundAngleImageView
+                        android:id="@+id/iv_sheep_bar_photo"
+                        android:layout_width="@dimen/dp36"
+                        android:layout_height="@dimen/dp36"
+                        android:layout_marginLeft="@dimen/dp13"
+                        android:background="@mipmap/ic_default_photo"
+                        app:roundHeight="@dimen/dp18"
+                        app:roundWidth="@dimen/dp18" />
+
+                    <TextView
+                        android:id="@+id/tv_sheep_bar_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/dp8"
+                        android:layout_marginRight="@dimen/dp20"
+                        android:layout_toLeftOf="@+id/ll_sheep_bar_focus"
+                        android:layout_toRightOf="@+id/iv_sheep_bar_photo"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:text="用户5302"
+                        android:textColor="#ff2f3742"
+                        android:textSize="14sp" />
+
+
+                    <TextView
+                        android:id="@+id/tv_sheep_bar_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_sheep_bar_nickname"
+                        android:layout_marginLeft="@dimen/dp8"
+                        android:layout_toRightOf="@+id/iv_sheep_bar_photo"
+                        android:text="一天前"
+                        android:textColor="#ff9da8b5"
+                        android:textSize="12sp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_sheep_bar_focus"
+                        android:layout_width="@dimen/dp53"
+                        android:layout_height="@dimen/dp20"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="@dimen/dp20"
+                        android:background="@drawable/bg_sheep_bar_focus">
+
+                        <TextView
+                            android:id="@+id/tv_sheep_bar_focus_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:text="+关注"
+                            android:textColor="#ff3ba786"
+                            android:textSize="12sp" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tv_sheep_bar_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp56"
+                    android:layout_marginTop="@dimen/dp8"
+                    android:layout_marginRight="@dimen/dp36"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:text="发布标题发布标题发布标题发布标题发布标题
 发布标题发布标题发布标题发布标题发布标题
 发布标题发布标题发布标题发布标题发布标题发布标题发布标题
 发布标题发布标题发布标题发布标题发布标题
 发布标题发布标题发布标题发布标题发布标题发布标题发布标题
 发布标题发布标题发布标题发布标题发布标题
 发布标题发布标题"
-            android:textColor="#ff303030"
-            android:textSize="13sp" />
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_grid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp50" />
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_grid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp50" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp8"
-            android:layout_marginTop="8dp"
-            android:background="#fff5f5f5" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/dp8"
+                    android:layout_marginTop="8dp"
+                    android:background="#fff5f5f5" />
+
+            </LinearLayout>
+
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <RelativeLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        >
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="@dimen/dp12"
             android:background="@color/white"
             android:orientation="vertical">
 
@@ -179,7 +218,10 @@
 
         </LinearLayout>
 
-    </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
 
     <RelativeLayout
         android:layout_alignParentBottom="true"

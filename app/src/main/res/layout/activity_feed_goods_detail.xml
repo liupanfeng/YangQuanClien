@@ -29,7 +29,7 @@
         <com.meishe.yangquan.view.BannerLayout
             android:id="@+id/banner"
             android:layout_width="match_parent"
-            android:layout_height="360dp"
+            android:layout_height="180dp"
             app:scrollDuration="1000"
             app:autoPlayDuration="3000"
             app:unSelectedIndicatorHeight="6dp"
@@ -38,7 +38,7 @@
             app:selectedIndicatorWidth="6dp"
             app:unSelectedIndicatorColor="@color/white"
             app:selectedIndicatorColor="@color/mainColor"
-            app:isAutoPlay="true"/>
+            app:isAutoPlay="false"/>
 
         <View
             android:layout_width="match_parent"
@@ -288,7 +288,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_feed_goods_collection"
+            android:id="@+id/ll_feed_shopping_collection"
             android:layout_toRightOf="@+id/ll_feed_goods_phone_call"
             android:orientation="vertical"
             android:layout_marginLeft="@dimen/dp18"

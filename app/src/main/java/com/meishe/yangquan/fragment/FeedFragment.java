@@ -8,7 +8,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
+import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.view.MViewPager;
 
@@ -22,7 +24,7 @@ import java.util.List;
  */
 public class FeedFragment extends BaseRecyclerFragment {
 
-    private TabLayout mTabLayout;
+    private SlidingTabLayout mSlidingTabLayout;
     private MViewPager mViewPager;
 
     private List<String> mTabContents = new ArrayList<>();
@@ -38,7 +40,7 @@ public class FeedFragment extends BaseRecyclerFragment {
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
-        mTabLayout = view.findViewById(R.id.tab_layout);
+        mSlidingTabLayout = view.findViewById(R.id.slidingTabLayout);
         mViewPager = view.findViewById(R.id.viewpager);
         return view;
     }
@@ -65,8 +67,10 @@ public class FeedFragment extends BaseRecyclerFragment {
         mFragmentList.add(feedToolsFragment);
         mTabContents.add("工具");
 
-        mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), 0, mContext, mFragmentList, mTabContents));
-        mTabLayout.setupWithViewPager(mViewPager);
+
+        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setAdapter(new CommonFragmentAdapter(getChildFragmentManager(), mFragmentList, mTabContents));
+        mSlidingTabLayout.setViewPager(mViewPager);
 
     }
 }

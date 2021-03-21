@@ -287,6 +287,9 @@ public class HttpUrl {
     /*我的-版本更新*/
     public static final String SHEEP_APP_VERSION_UPDATE = URL + "app/version/latest";
 
+    /*用户驾驶信息是否完善*/
+    public static final String SHEEP_APP_DRIVER_INFO = URL + "app/user/driver/info";
+
 
 
     //////////////////////////////////////////商版//////////////////////////////////////////////

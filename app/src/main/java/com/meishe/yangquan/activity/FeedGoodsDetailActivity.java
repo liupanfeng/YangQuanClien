@@ -15,10 +15,12 @@ import com.meishe.yangquan.bean.FeedGoodsInfoResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BannerLayout;
 
 import java.io.IOException;
@@ -43,6 +45,10 @@ public class FeedGoodsDetailActivity extends BaseActivity {
     /*商品描述图片*/
     private ImageView iv_feed_goods_desc;
     private RequestOptions options;
+    /*联系商家*/
+    private View ll_feed_goods_phone_call;
+    /*收藏*/
+    private View ll_feed_goods_collection;
 
     @Override
     protected int initRootView() {
@@ -55,6 +61,10 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         mIvBack = findViewById(R.id.iv_back);
         btn_feed_add_shopping_cart = findViewById(R.id.btn_feed_add_shopping_cart);
         iv_feed_goods_desc = findViewById(R.id.iv_feed_goods_desc);
+        ll_feed_goods_phone_call = findViewById(R.id.ll_feed_goods_phone_call);
+        ll_feed_goods_collection = findViewById(R.id.ll_feed_shopping_collection);
+
+
         banner = findViewById(R.id.banner);
         banner.setIndicatorPosition(RelativeLayout.CENTER_HORIZONTAL);
     }
@@ -87,9 +97,16 @@ public class FeedGoodsDetailActivity extends BaseActivity {
      */
     private void updateUI(FeedGoodsInfo feedGoodsInfo) {
         List<String> goodsImageUrls = feedGoodsInfo.getGoodsImageUrls();
-        List<String> descriptionImageUrls = feedGoodsInfo.getDescriptionImageUrls();
+        final List<String> descriptionImageUrls = feedGoodsInfo.getDescriptionImageUrls();
         if (!CommonUtils.isEmpty(goodsImageUrls)){
             banner.setViewUrls(mContext, goodsImageUrls, null);
+            banner.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    String imagePath = descriptionImageUrls.get(position);
+                    Util.showBigPicture(mContext,imagePath);
+                }
+            });
         }
 
         if (!CommonUtils.isEmpty(descriptionImageUrls)){
@@ -176,7 +193,16 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
     @Override
     public void initListener() {
+
         btn_feed_add_shopping_cart.setOnClickListener(this);
+        ll_feed_goods_phone_call.setOnClickListener(this);
+        ll_feed_goods_collection.setOnClickListener(this);
+        mIvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AppManager.getInstance().finishActivity();
+            }
+        });
     }
 
     @Override
@@ -189,6 +215,11 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         if (v.getId()==R.id.btn_feed_add_shopping_cart){
             //加入购物车
             addShoppingCar();
+        }else if (v.getId()==R.id.ll_feed_goods_phone_call){
+            ToastUtil.showToast("联系商家");
+//            Util.callPhone(mContext,phone);
+        }else if (v.getId()==R.id.ll_feed_shopping_collection){
+            ToastUtil.showToast("收藏商品");
         }
     }
 

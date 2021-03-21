@@ -84,4 +84,5 @@ dependencies {
 
     implementation 'com.qianwen:okhttp-utils:3.8.0'
 
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

@@ -1,6 +1,8 @@
 package com.meishe.yangquan.utils;
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.ActivityNotFoundException;
@@ -33,9 +35,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 
 import com.meishe.yangquan.bean.FodderInfo;
+import com.meishe.yangquan.pop.ShowBigPictureView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -101,6 +105,47 @@ public class Util {
         }
         lastClickTime2 = time;
         return flag;
+    }
+
+    /**
+     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
+     *
+     * @param phoneNum 电话号码
+     */
+    public static void callPhone(Context context,String phoneNum) {
+        Intent intent = new Intent(Intent.ACTION_DIAL);
+        Uri data = Uri.parse("tel:" + phoneNum);
+        intent.setData(data);
+        context.startActivity(intent);
+    }
+
+
+    public static void showBigPicture(Context context,String filePath){
+        if (TextUtils.isEmpty(filePath)) {
+            return;
+        }
+
+        ShowBigPictureView showBigPictureView = ShowBigPictureView.create(context, filePath);
+        if (showBigPictureView != null) {
+            showBigPictureView.show();
+        }
+    }
+
+
+    public static void setViewClickEffect(final View view){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            view.animate()
+                    .translationZ(15f).setDuration(300)
+                    .setListener(new AnimatorListenerAdapter() {
+                        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                        @Override
+                        public void onAnimationEnd(Animator animation) {
+                            super.onAnimationEnd(animation);
+                            view.animate()
+                                    .translationZ(1.0f).setDuration(500);
+                        }
+                    }).start();
+        }
     }
 
     public static String formatPhoneNumber(String phoneNumber){

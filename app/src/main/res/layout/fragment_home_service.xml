@@ -59,15 +59,6 @@
             android:layout_height="match_parent"/>
 
     </LinearLayout>
-    <ImageView
-        android:id="@+id/iv_publish_service"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="@mipmap/ic_home_service_publish"
-        android:layout_marginBottom="@dimen/dp19"
-        android:layout_marginRight="@dimen/dp22"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        />
+    <include layout="@layout/common_publish_button"/>
 
 </RelativeLayout>

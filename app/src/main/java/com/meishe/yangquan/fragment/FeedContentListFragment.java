@@ -1,6 +1,7 @@
 package com.meishe.yangquan.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -135,6 +136,9 @@ public class FeedContentListFragment extends BaseRecyclerFragment {
         param.put("pageNum",1);
         param.put("pageSize",30);
         String token = getToken();
+        if (TextUtils.isEmpty(token)){
+            return;
+        }
         showLoading();
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_SHOP_LIST, new BaseCallBack<FeedShoppingInfoResult>() {

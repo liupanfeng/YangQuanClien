@@ -1,13 +1,18 @@
 package com.meishe.yangquan.activity;
 
+import android.animation.Animator;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
@@ -30,6 +35,7 @@ import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.ChangeIdentityView;
+import com.meishe.yangquan.view.NbButton;
 import com.meishe.yangquan.wiget.MaterialProgress;
 import com.umeng.analytics.MobclickAgent;
 
@@ -48,7 +54,7 @@ public class LoginActivity extends BaseActivity {
     private EditText mInputPhoneNum;
     private EditText mInputCheckCode;
     private TextView mGetCheckCode;
-    private Button mBtnLogin;
+    private NbButton mBtnLogin;
     private Button mBtnRegister;
 
     private TextView mUserAgreement;     //用户协议
@@ -64,6 +70,8 @@ public class LoginActivity extends BaseActivity {
 
     private int mLoginType = 1;
 
+    private RelativeLayout mRlRoot;
+    private Animator mAnimator;
 
     @Override
     protected int initRootView() {
@@ -84,6 +92,9 @@ public class LoginActivity extends BaseActivity {
         mChangeIdentity = findViewById(R.id.civ_change_identity);
         mIvVerification = findViewById(R.id.iv_verification);
 //        mTitleBar = findViewById(R.id.titleBar);
+//        mRlRoot = findViewById(R.id.rl_root);
+//        mRlRoot.getBackground().setAlpha(0);
+
     }
 
     @Override
@@ -151,6 +162,7 @@ public class LoginActivity extends BaseActivity {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.getcheckcode:
+
                 phoneNumber = mInputPhoneNum.getText().toString().trim();
                 mImageCode = mEtImageCode.getText().toString().trim();
                 if (TextUtils.isEmpty(phoneNumber)) {
@@ -181,6 +193,7 @@ public class LoginActivity extends BaseActivity {
 
                 break;
             case R.id.btn_login:
+
                 phoneNumber = mInputPhoneNum.getText().toString();
                 smsCode = mInputCheckCode.getText().toString().trim();
                 if (TextUtils.isEmpty(phoneNumber)) {
@@ -196,7 +209,15 @@ public class LoginActivity extends BaseActivity {
                     ToastUtil.showToast(mContext, "请输入正确的手机号码");
                     return;
                 }
-                userLogin();
+                mBtnLogin.startAnim();
+                mBtnLogin.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        userLogin();
+                    }
+                },1500);
+
                 break;
             case R.id.btn_register:
                 Bundle bundle = new Bundle();
@@ -211,6 +232,64 @@ public class LoginActivity extends BaseActivity {
 //            case R.id.privacy:
 //                break;
         }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+//        mAnimator.cancel();
+//        mRlRoot.getBackground().setAlpha(0);
+        mBtnLogin.regainBackground();
+    }
+
+    private void gotoNew() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.LOGIN_TYPE, mLoginType);
+
+        AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class, bundle);
+        overridePendingTransition(R.anim.anim_in,R.anim.anim_out);
+//                        updateDeviceAlias();
+        LoginActivity.this.finish();
+        ToastUtil.showToast(mContext, "登录成功");
+
+//        int xc=(mBtnLogin.getLeft()+mBtnLogin.getRight())/2;/
+//        int yc=(mBtnLogin.getTop()+mBtnLogin.getBottom())/2;
+////        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+////            mAnimator = ViewAnimationUtils.createCircularReveal(mRlRoot,xc,yc,0,1111);
+////        }
+//        mAnimator.setDuration(300);
+//        mAnimator.addListener(new Animator.AnimatorListener() {
+//            @Override
+//            public void onAnimationStart(Animator animation) {
+////                mBtnLogin.postDelayed(new Runnable() {
+////                    @Override
+////                    public void run() {
+////
+////                    }
+////                },200);
+//            }
+//
+//            @Override
+//            public void onAnimationEnd(Animator animation) {
+////                AppManager.getInstance().jumpActivity(LoginActivity.this,MainActivity.class);
+////
+////                AppManager.getInstance().finishActivity(LoginActivity.this);
+//
+//
+//            }
+//
+//            @Override
+//            public void onAnimationCancel(Animator animation) {
+//
+//            }
+//
+//            @Override
+//            public void onAnimationRepeat(Animator animation) {
+//
+//            }
+//        });
+//        mAnimator.start();
+//        mRlRoot.getBackground().setAlpha(255);
     }
 
     /**
@@ -400,7 +479,7 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void userLogin() {
-        mMaterialProgress.show();
+//        mMaterialProgress.show();
         final HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("phone", phoneNumber);
         requestParam.put("verifyCode", smsCode);
@@ -417,7 +496,8 @@ public class LoginActivity extends BaseActivity {
 
             @Override
             protected void onSuccess(Call call, Response response, LoginResult result) {
-                mMaterialProgress.hide();
+//                mMaterialProgress.hide();
+                mBtnLogin.gotoNew();
                 if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
@@ -429,15 +509,7 @@ public class LoginActivity extends BaseActivity {
 //                        String token = user.getTokenId();
                         String token = loginInfo.getToken();
                         UserManager.getInstance(mContext).setToken(token);
-
-                        Bundle bundle = new Bundle();
-                        bundle.putInt(Constants.LOGIN_TYPE, mLoginType);
-
-                        AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class, bundle);
-
-//                        updateDeviceAlias();
-                        LoginActivity.this.finish();
-                        ToastUtil.showToast(mContext, "登录成功");
+                        gotoNew();
                     }
                 }
             }

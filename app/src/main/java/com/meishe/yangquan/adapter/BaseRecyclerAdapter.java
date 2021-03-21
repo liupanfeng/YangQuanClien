@@ -395,14 +395,14 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             if (Util.checkNull(phone)) {
                 return;
             }
-            callPhone(phone);
+            Util.callPhone(mContext,phone);
         } else if (info instanceof MarketInfo&&v.getId()==R.id.iv_market_phone) {
             //市场
             String phone = ((MarketInfo) info).getPhone();
             if (Util.checkNull(phone)) {
                 return;
             }
-            callPhone(phone);
+            Util.callPhone(mContext,phone);
         } else if (info instanceof ServerCustomer) {
             boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             if (isNeedLogin) {
@@ -493,17 +493,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     }
 
 
-    /**
-     * 拨打电话（跳转到拨号界面，用户手动点击拨打）
-     *
-     * @param phoneNum 电话号码
-     */
-    public void callPhone(String phoneNum) {
-        Intent intent = new Intent(Intent.ACTION_DIAL);
-        Uri data = Uri.parse("tel:" + phoneNum);
-        intent.setData(data);
-        mContext.startActivity(intent);
-    }
+
 
 
     private void showDialog(final long fromUserId, final String fromPhoneNumber, final long userId, final String content, String title, String diaContent, String sureText) {

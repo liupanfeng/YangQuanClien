@@ -2,7 +2,6 @@ package com.meishe.yangquan.fragment;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -18,16 +16,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.MineOrderActivity;
 import com.meishe.yangquan.activity.SettingActivity;
+import com.meishe.yangquan.activity.TestActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
-import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.event.MessageEvent;
@@ -239,10 +235,15 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_receive:
-                bundle=new Bundle();
-                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
-                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
-                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
+//                bundle=new Bundle();
+//                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
+//                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
+//                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
+
+
+                AppManager.getInstance().jumpActivity(getActivity(), TestActivity.class);
+
+
                 break;
             case R.id.rl_mine_refund:
                 bundle=new Bundle();

@@ -9,7 +9,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
+import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.bean.ServiceMessage;
@@ -40,7 +42,7 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
     private MultiFunctionAdapter mSheepNewsAdapter;
     private MaterialProgress mp_loading;
 
-    private TabLayout mTabLayout;
+    private SlidingTabLayout mSlidingTabLayout;
     private MViewPager mViewPager;
 
     private int[]  mTopTabContent={R.string.top_tab_quotation,R.string.top_tab_market,R.string.top_tab_service,
@@ -65,7 +67,7 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        mTabLayout = view.findViewById(R.id.tab_layout);
+        mSlidingTabLayout = view.findViewById(R.id.slidingTabLayout);
         mViewPager = view.findViewById(R.id.viewpager);
         return view;
     }
@@ -96,9 +98,9 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
          initTabTitle();
          initTabFragment();
          //这里注意 如果是嵌套在 fragment里边 一定要使用getChildFragmentManager 这个方法获取FragmentManager 否则会出错
-         ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getChildFragmentManager(),0,mContext,mFragmentList,mTopTabTitleList);
-         mViewPager.setAdapter(viewPagerAdapter);
-         mTabLayout.setupWithViewPager(mViewPager);
+        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setAdapter(new CommonFragmentAdapter(getChildFragmentManager(), mFragmentList, mTopTabTitleList));
+        mSlidingTabLayout.setViewPager(mViewPager);
 
          getUserDataFromServer();
     }
@@ -131,56 +133,6 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
     }
 
 
-    /**
-     * 头部系统通知
-     */
-    private void initTopNotifyRecyclerView() {
-//        LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
-//        mRecyclerView.setLayoutManager(layoutManager);
-//        mServiceMessageAdapter=new MultiFunctionAdapter(mContext,mRecyclerView);
-//        mServiceMessageAdapter.setPageType(1);
-//        mRecyclerView.setAdapter(mServiceMessageAdapter);
-    }
-
-    private void initServiceNewsRecyclerView() {
-//        LinearLayoutManager layoutManager=new LinearLayoutManager(mContext, RecyclerView.VERTICAL,false);
-//        mServiceNewsRecycler.setLayoutManager(layoutManager);
-//        mSheepNewsAdapter=new MultiFunctionAdapter(mContext,mServiceNewsRecycler);
-//        mServiceNewsRecycler.setAdapter(mSheepNewsAdapter);
-//        int index=12;
-//        mList.clear();
-//        for (int i = 0; i <index ; i++) {
-//            SheepNews sheepNews=new SheepNews();
-//            sheepNews.setSheepName("东北羊");
-//            sheepNews.setSheepPrice("30.5");
-//            mList.add(sheepNews);
-//        }
-//        mList.add(new EndInfo());
-
-    }
-
-
-    /**
-     * 服务类型
-     */
-    private void initServiceTypeRecyclerView() {
-//        GridLayoutManager layoutManager=new GridLayoutManager(mContext, 5);
-//        mServiceTypeRecycler.setLayoutManager(layoutManager);
-//        MultiFunctionAdapter adapter=new MultiFunctionAdapter(mContext,mServiceTypeRecycler);
-//        mServiceTypeRecycler.setAdapter(adapter);
-//        adapter.setFragment(this);
-//        mList.clear();
-//        for (int i = 0; i < UserType.getServiceTypeName().size(); i++) {
-//            ServiceTypeInfo typeInfo=new ServiceTypeInfo();
-//            typeInfo.setName(UserType.getServiceTypeName().get(i));
-//            typeInfo.setIcon(UserType.getUserTypeIcon().get(i));
-//            typeInfo.setType(UserType.getUserType().get(i));
-//            mList.add(typeInfo);
-//        }
-//        adapter.addAll(mList);
-    }
-
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -189,22 +141,16 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
     @Override
     public void onDetach() {
         super.onDetach();
-//        mRecyclerView.stop();
-//        mRecyclerView=null;
     }
 
     @Override
     public void onPause() {
         super.onPause();
-//        mRecyclerView.stop();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-//        if (mRecyclerView!=null){
-//            mRecyclerView.start();
-//        }
     }
 
     @Override
