@@ -547,6 +547,10 @@ public class Util {
         return permissionsList;
     }
 
+    public static String getDownloadApkFile(String apkName) {
+        return PathUtils.getAPKFilePath() + "/" + apkName;
+    }
+
     //高亮显示字符串里包含的关键字列表的字符
     public static void setSearchKeyWordHighlight(TextView textView, List<String> keyWordList, String strContent) {
         if (textView == null) {

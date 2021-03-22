@@ -2,6 +2,7 @@ package com.meishe.yangquan.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +11,38 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
 import com.meishe.libbase.SlidingTabLayout;
+import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
+import com.meishe.yangquan.bean.IndustryInfo;
+import com.meishe.yangquan.bean.IndustryResult;
 import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceMessageResult;
 import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.SheepNewsResult;
+import com.meishe.yangquan.bean.VersionInfo;
+import com.meishe.yangquan.bean.VersionInfoResult;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.inter.OnResponseListener;
+import com.meishe.yangquan.updateversion.UpdateStatus;
+import com.meishe.yangquan.updateversion.UpdateVersionUtil;
+import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 /**
  * 首页
@@ -103,14 +122,11 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
         mSlidingTabLayout.setViewPager(mViewPager);
 
          getUserDataFromServer();
+
+         getVersionData();
     }
 
-    /**
-     * 获取用户数据
-     */
-    private void getUserDataFromServer() {
 
-    }
 
 
     private void initTabTitle() {
@@ -132,6 +148,30 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
         mFragmentList.add(homeIndustryInformation);
     }
 
+
+    /**
+     * 获取版本信息
+     */
+    private void getVersionData() {
+//        UpdateVersionUtil.checkVersion(App.getContext(), new UpdateVersionUtil.UpdateListener() {
+//            @Override
+//            public void onUpdateReturned(int updateStatus, VersionInfo versionInfo) {
+//                if(updateStatus != UpdateStatus.NO){
+//                    if(mContext == null){
+//                        return;
+//                    }
+//                    UpdateVersionUtil.showDialog(mContext, versionInfo);
+//                }
+//            }
+//        });
+    }
+
+    /**
+     * 获取用户数据
+     */
+    private void getUserDataFromServer() {
+
+    }
 
     @Override
     public void onAttach(Context context) {

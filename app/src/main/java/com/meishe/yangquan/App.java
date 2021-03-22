@@ -7,7 +7,6 @@ import android.graphics.Typeface;
 
 import com.bumptech.glide.request.target.ViewTarget;
 import com.umeng.commonsdk.UMConfigure;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import cn.jpush.android.api.JPushInterface;
 
@@ -27,10 +26,6 @@ public class App extends Application {
         app=this;
         mContext = getApplicationContext();
 
-        OkHttpUtils.getInstance()
-                .init(this)
-                .debug(true, "okHttp")
-                .timeout(20 * 1000);
 
         ViewTarget.setTagId(R.id.tag_glide);
 

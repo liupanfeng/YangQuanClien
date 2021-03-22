@@ -7,7 +7,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 2
-        versionName "1.1"
+        versionName "1.0.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters "armeabi-v7a"
@@ -27,6 +27,21 @@ android {
         abortOnError false
     }
 
+
+    //对生成的apk进行一些简单的配置
+    applicationVariants.all { variant ->
+        variant.outputs.all { output ->
+            def buildName = "yangquan"
+            def type = variant.buildType.name
+            def releaseApkName = buildName + '_' + type + "_" + versionName + '_' + releaseTime() + '.apk'
+            outputFileName = releaseApkName
+        }
+    }
+
+}
+
+static def releaseTime() {
+    return new Date().format("yyyy-MM-dd--HH-mm-ss", TimeZone.getTimeZone("GMT+8"))
 }
 
 dependencies {
@@ -79,10 +94,10 @@ dependencies {
     implementation 'com.amap.api:location:latest.integration'
 
     /*版本更新*/
-    implementation 'com.qianwen:update-app:3.5.2'
-
-
-    implementation 'com.qianwen:okhttp-utils:3.8.0'
-
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+//    implementation 'com.qianwen:update-app:3.5.2'
+//
+//
+//    implementation 'com.qianwen:okhttp-utils:3.8.0'
+//
+//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 }

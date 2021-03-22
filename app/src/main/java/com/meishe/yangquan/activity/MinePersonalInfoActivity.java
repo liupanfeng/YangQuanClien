@@ -119,6 +119,9 @@ public class MinePersonalInfoActivity extends BaseActivity {
 
     private PoiItem mPoiItem = null;
     private ModifyUserSexFragment mModifyUserSexInfoFragment;
+    private View rl_id_card;
+    private View rl_driver;
+    private View rl_driver_license;
 
     @Override
     protected int initRootView() {
@@ -142,6 +145,14 @@ public class MinePersonalInfoActivity extends BaseActivity {
         mContainer = findViewById(R.id.container);
 
         mIvPersonalMinePhoto = findViewById(R.id.iv_personal_mine_photo);
+
+        /*身份证*/
+        rl_id_card = findViewById(R.id.rl_id_card);
+        /*驾驶证*/
+        rl_driver = findViewById(R.id.rl_driver);
+        /*行驶证*/
+        rl_driver_license = findViewById(R.id.rl_driver_license);
+
     }
 
 
@@ -183,6 +194,9 @@ public class MinePersonalInfoActivity extends BaseActivity {
 
         mIvPersonalMinePhoto.setOnClickListener(this);
         mBtnRight.setOnClickListener(this);
+        rl_id_card.setOnClickListener(this);
+        rl_driver.setOnClickListener(this);
+        rl_driver_license.setOnClickListener(this);
 
 
         mEtNickname.setOnTouchListener(new View.OnTouchListener() {
@@ -304,6 +318,15 @@ public class MinePersonalInfoActivity extends BaseActivity {
                 break;
             case R.id.btn_right:
                 updateUserInfo();
+                break;
+            case R.id.rl_id_card:
+                AppManager.getInstance().jumpActivity(mContext,MineIdCardActivity.class);
+                break;
+            case R.id.rl_driver:
+                AppManager.getInstance().jumpActivity(mContext,MineDriverActivity.class);
+                break;
+            case R.id.rl_driver_license:
+                AppManager.getInstance().jumpActivity(mContext,MineDriverLicenseActivity.class);
                 break;
         }
     }
