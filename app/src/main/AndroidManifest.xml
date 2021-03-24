@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle"
         tools:replace="android:appComponentFactory">
-        <activity android:name=".activity.MineDriverLicenseActivity"></activity>
+        <activity android:name=".activity.BaseCaptureActivity"></activity>
+        <activity android:name=".activity.MineDriverLicenseActivity" />
         <activity android:name=".activity.MineDriverActivity" />
         <activity android:name=".activity.MineIdCardActivity" />
         <activity android:name=".activity.TestActivity" />

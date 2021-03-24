@@ -5,10 +5,11 @@ public class Constants {
 
     //评论
     public static final String COMMENT_CONTENT = "commentContent";
+
     /*图片压缩宽度*/
-    public static final float COMPRESS_WIDTH = 360;
+    public static final float COMPRESS_WIDTH = 480;
     /*图片压缩高度*/
-    public static final float COMPRESS_HEIGHT = 360;
+    public static final float COMPRESS_HEIGHT = 480;
 
     public static final String LOGIN_TYPE = "login.type";
 

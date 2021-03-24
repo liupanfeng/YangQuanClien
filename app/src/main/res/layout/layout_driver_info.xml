@@ -22,7 +22,7 @@
         android:layout_height="wrap_content">
 
         <RelativeLayout
-            android:id="@+id/rl_bu_capture_card_positive"
+            android:id="@+id/rl_driver_positive"
             android:layout_marginLeft="@dimen/dp25"
             android:layout_marginTop="@dimen/dp20"
             android:background="@mipmap/ic_bu_shopping_picture_upload_bg"
@@ -37,7 +37,6 @@
                 android:layout_height="wrap_content">
 
                 <ImageView
-                    android:id="@+id/iv_driver_positive"
                     android:layout_width="@dimen/dp26"
                     android:layout_height="@dimen/dp24"
                     android:layout_gravity="center_horizontal"
@@ -62,7 +61,7 @@
             android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:text="驾驶证正面照"
-            android:layout_below="@+id/rl_bu_capture_card_positive"
+            android:layout_below="@+id/rl_driver_positive"
             android:textColor="#ff656565"
             android:gravity="center_horizontal"
             android:layout_marginTop="@dimen/dp10"
@@ -72,12 +71,12 @@
 
 
         <com.meishe.yangquan.view.RoundAngleImageView
-            android:id="@+id/iv_bu_capture_card_positive"
+            android:id="@+id/iv_driver_positive"
             android:scaleType="fitXY"
             app:roundHeight="@dimen/dp10"
             app:roundWidth="@dimen/dp10"
             android:layout_marginTop="@dimen/dp20"
-            android:layout_toRightOf="@+id/rl_bu_capture_card_positive"
+            android:layout_toRightOf="@+id/rl_driver_positive"
             android:layout_marginLeft="@dimen/dp17"
             android:layout_width="@dimen/dp170"
             android:layout_height="108dp"/>
