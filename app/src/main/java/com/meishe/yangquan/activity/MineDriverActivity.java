@@ -187,7 +187,6 @@ public class MineDriverActivity extends BaseCaptureActivity {
         param.put("uploadMode", uploadMode + "");
         param.put("order", "1");
 
-
         OkHttpManager.getInstance().postUploadSingleImage(HttpUrl.HOME_PAGE_COMMON_FILE_UPLOAD, new BaseCallBack<UploadFileResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
