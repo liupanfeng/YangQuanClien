@@ -25,7 +25,7 @@ public class PathUtils {
     private static final String rootDir = "yangquan" +  File.separator;
     private static final String ExtralDataPath =  rootDir + "cover" + File.separator;
 
-    private static final String APK_DIRECTORY = rootDir + "jdy_apk";
+    private static final String APK_DIRECTORY = rootDir + "yangquan_apk";
     private static final String Compile_ForUpload = rootDir + "compile" + File.separator;
     private static final String LOCAL_TOPIC_DIR = "localTopic" + File.separator;
     //相册视频路径
@@ -89,36 +89,6 @@ public class PathUtils {
         return dstFileDir.getAbsolutePath();
     }
 
-    //获取完整分享下载视频路径,拍同款音频下载路径
-    public static String getShareDownloadVideoPath(String srcUrl){
-        if (TextUtils.isEmpty(srcUrl)){
-            return null;
-        }
-        int lastIndex = srcUrl.lastIndexOf('.');
-        String suffixType = srcUrl.substring(lastIndex);
-        String shareDownloadDir = PathUtils.getShareVideoDirectory();
-        if(shareDownloadDir == null){
-            return null;
-        }
-        return shareDownloadDir + File.separator + Util.stringToMD5(srcUrl) + suffixType;
-    }
-
-    //获取完整广告下载视频路径
-    public static String getADDownloadPath(String srcUrl){
-        if (TextUtils.isEmpty(srcUrl)){
-            return null;
-        }
-        int lastIndex = srcUrl.lastIndexOf('/');
-        if (lastIndex >= srcUrl.length() - 1) {
-            return null;
-        }
-        String filename = srcUrl.substring(lastIndex + 1);
-        String adDownloadDir = PathUtils.getADMediaDirectory();
-        if(adDownloadDir == null){
-            return null;
-        }
-        return adDownloadDir + File.separator + filename;
-    }
 
     //判断广告文件是否已经下载
     public static boolean hasADDownload (String fileName) {

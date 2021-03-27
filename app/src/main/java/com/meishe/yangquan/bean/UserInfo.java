@@ -45,7 +45,7 @@ public class UserInfo {
 
     private String idCardFrontUrl;                  //身份证正面信息
 
-    private Integer idCardReverseUrl;               //身份证反面信息
+    private String idCardReverseUrl;               //身份证反面信息
 
     private String driveCardFrontUrl;               //驾驶本正面地址
 
@@ -111,11 +111,11 @@ public class UserInfo {
         this.idCardFrontUrl = idCardFrontUrl;
     }
 
-    public Integer getIdCardReverseUrl() {
+    public String getIdCardReverseUrl() {
         return idCardReverseUrl;
     }
 
-    public void setIdCardReverseUrl(Integer idCardReverseUrl) {
+    public void setIdCardReverseUrl(String idCardReverseUrl) {
         this.idCardReverseUrl = idCardReverseUrl;
     }
 

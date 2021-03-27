@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meishe.yangquan.activity.MineDriverActivity">
+
+    <include layout="@layout/custom_title" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5" />
+
+     <include layout="@layout/layout_driver_info"/>
+
+</LinearLayout>

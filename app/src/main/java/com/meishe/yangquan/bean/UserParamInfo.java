@@ -17,7 +17,7 @@ public class UserParamInfo {
     //  身份证正面的文件id
     private Integer idCardFrontFileId;
     //身份证反面的文件id
-    private int idCardReverseFileId;
+    private Integer idCardReverseFileId;
 
     //驾驶证正面的文件id
     private Integer driveCardFrontFileId;
@@ -73,11 +73,11 @@ public class UserParamInfo {
         this.idCardFrontFileId = idCardFrontFileId;
     }
 
-    public int getIdCardReverseFileId() {
+    public Integer getIdCardReverseFileId() {
         return idCardReverseFileId;
     }
 
-    public void setIdCardReverseFileId(int idCardReverseFileId) {
+    public void setIdCardReverseFileId(Integer idCardReverseFileId) {
         this.idCardReverseFileId = idCardReverseFileId;
     }
 
