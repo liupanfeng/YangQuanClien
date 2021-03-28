@@ -99,10 +99,10 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         mFragmentList.clear();
         mTitleList.clear();
 
-        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_RECOMMEND);
-        mFragmentList.add(feedFoodsListFragment);
+//        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_RECOMMEND);
+//        mFragmentList.add(feedFoodsListFragment);
 
-        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_MULTIPLE);
+        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_MULTIPLE);
         mFragmentList.add(feedFoodsListFragment);
 
         feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_SALES);
@@ -111,7 +111,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_PRICE);
         mFragmentList.add(feedFoodsListFragment);
 
-        mTitleList.add("推荐");
+//        mTitleList.add("推荐");
         mTitleList.add("综合");
         mTitleList.add("销量");
         mTitleList.add("价格");
