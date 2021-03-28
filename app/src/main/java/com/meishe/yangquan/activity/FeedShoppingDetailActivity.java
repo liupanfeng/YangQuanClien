@@ -102,6 +102,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
 //        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_RECOMMEND);
 //        mFragmentList.add(feedFoodsListFragment);
 
+
         FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_MULTIPLE);
         mFragmentList.add(feedFoodsListFragment);
 
