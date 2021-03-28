@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <!--distance、corners这里分别为5dp、10dp，具体可以自定-->
+    <!--可以变更具体的偏移方向以使其向不同方向立体-->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:top="@dimen/distance"
+    android:left="@dimen/distance">
+    <shape>
+        <solid android:color="#779E9E9E"/>
+
+        <corners android:radius="@dimen/corners"/>
+    </shape>
+</item>
+
+<item
+    android:bottom="@dimen/distance"
+    android:right="@dimen/distance">
+    <shape>
+        <solid android:color="@color/mainColor"/>
+
+        <corners android:radius="@dimen/corners"/>
+    </shape>
+</item>
+</layer-list>

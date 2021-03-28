@@ -1,15 +1,20 @@
 package com.meishe.yangquan.activity;
 
+import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfoResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 
@@ -118,6 +123,23 @@ public class MineBreedingArchivesActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        mAdapter.setOnItemClickListener(new BaseRecyclerAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position, BaseInfo baseInfo) {
+                if (baseInfo instanceof MineBreedingArchivesInfo){
+                    int id = ((MineBreedingArchivesInfo) baseInfo).getId();
+                    int currentCulturalQuantity = ((MineBreedingArchivesInfo) baseInfo).getCurrentCulturalQuantity();
+                    long initDate = ((MineBreedingArchivesInfo) baseInfo).getInitDate();
+
+                    Bundle bundle=new Bundle();
+                    bundle.putInt(Constants.TYPE_KEY_BATCH_ID,id);
+                    bundle.putInt(Constants.TYPE_KEY_SHEEP_SURPLUS, currentCulturalQuantity);
+                    bundle.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initDate);
+                    AppManager.getInstance().jumpActivity(mContext,MineBreedingArchivesDetailActivity.class,bundle);
+                }
             }
         });
     }

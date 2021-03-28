@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:bottom="@dimen/distance"
+    android:right="@dimen/distance">
+    <shape>
+        <solid android:color="@android:color/transparent"/>
+
+        <corners android:radius="@dimen/corners"/>
+    </shape>
+</item>
+
+<item
+    android:top="@dimen/distance"
+    android:left="@dimen/distance">
+    <shape>
+        <solid android:color="@color/half_main_color"/>
+
+        <corners android:radius="@dimen/corners"/>
+    </shape>
+</item>
+</layer-list>

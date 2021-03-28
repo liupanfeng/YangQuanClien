@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.AboutActivity;
 import com.meishe.yangquan.activity.BusinessOpportunityActivity;
+import com.meishe.yangquan.activity.CommonRecyclerActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.FeedGoodsDetailActivity;
 import com.meishe.yangquan.activity.FeedShoppingDetailActivity;
@@ -25,7 +26,6 @@ import com.meishe.yangquan.activity.MineCallBackActivity;
 import com.meishe.yangquan.activity.MineFeedGoldActivity;
 import com.meishe.yangquan.activity.MineMyCollectionActivity;
 import com.meishe.yangquan.activity.MineMyFocusActivity;
-import com.meishe.yangquan.activity.MineMyMessageActivity;
 import com.meishe.yangquan.activity.MineMyPointsActivity;
 import com.meishe.yangquan.activity.MinePayPasswordActivity;
 import com.meishe.yangquan.activity.MinePersonalInfoActivity;
@@ -365,7 +365,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineFeedGoldActivity.class);
                     break;
                 case "我的消息":
-                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyMessageActivity.class);
+//                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyMessageActivity.class);
+                    CommonRecyclerActivity.newCommonRecyclerActivity(mContext,Constants.TYPE_COMMON_MY_MESSAGE,0);
                     break;
                 case "我的积分":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyPointsActivity.class);

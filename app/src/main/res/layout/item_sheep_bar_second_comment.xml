@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp36">
+        <com.meishe.yangquan.view.RoundAngleImageView
+            android:id="@+id/iv_sheep_bar_photo"
+            android:layout_width="@dimen/dp36"
+            android:layout_height="@dimen/dp36"
+            android:layout_marginLeft="@dimen/dp13"
+            android:background="@mipmap/ic_default_photo"
+            app:roundWidth="@dimen/dp18"
+            app:roundHeight="@dimen/dp18"
+            />
+
+        <TextView
+            android:id="@+id/tv_sheep_bar_nickname"
+            android:layout_toRightOf="@+id/iv_sheep_bar_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="用户5302"
+            android:layout_marginLeft="@dimen/dp8"
+            android:layout_toLeftOf="@+id/ll_sheep_bar_focus"
+            android:layout_marginRight="@dimen/dp20"
+            android:singleLine="true"
+            android:ellipsize="end"
+            android:textColor="#ff2f3742"
+            android:textSize="14sp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_sheep_bar_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/iv_sheep_bar_photo"
+            android:layout_below="@+id/tv_sheep_bar_nickname"
+            android:layout_marginLeft="@dimen/dp8"
+            android:text="一天前"
+            android:textColor="#ff9da8b5"
+            android:textSize="12sp"
+            />
+
+
+        <TextView
+            android:id="@+id/tv_sheep_bar_prised"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="13"
+            android:textColor="#ff9da8b5"
+            android:textSize="13sp"
+            android:layout_marginRight="@dimen/dp20"
+            android:layout_centerVertical="true"
+            android:drawableLeft="@mipmap/ic_heart_unselected"
+            android:drawablePadding="@dimen/dp8"
+            />
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_sheep_bar_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="发布标题"
+        android:layout_marginLeft="@dimen/dp56"
+        android:layout_marginRight="@dimen/dp36"
+        android:layout_marginTop="@dimen/dp8"
+        android:maxLines="3"
+        android:ellipsize="end"
+        android:textColor="#ff303030"
+        android:textSize="13sp"
+        />
+
+
+</LinearLayout>

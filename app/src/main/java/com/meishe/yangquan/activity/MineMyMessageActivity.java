@@ -26,7 +26,9 @@ import okhttp3.Response;
 
 /**
  * 我的-我的消息
+ * 这个页面暂时不用了
  */
+@Deprecated
 public class MineMyMessageActivity extends BaseActivity {
 
 

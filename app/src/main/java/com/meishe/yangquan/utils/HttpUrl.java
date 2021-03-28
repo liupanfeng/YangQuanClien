@@ -4,6 +4,8 @@ public class HttpUrl {
 
     public static final String URL = "http://59.110.142.42:80/";
 
+//    public static final String URL = "http://c5afe621f519.ngrok.io/";
+
 //    public static final String URL = "http://192.168.10.14:8080/";
 
 
@@ -316,5 +318,7 @@ public class HttpUrl {
 
     /*（商户）订单列表 */
     public static final String BU_HOME_ORDER_LIST = URL + "app/owner/order/list";
+
+
 
 }

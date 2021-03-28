@@ -7,7 +7,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
-import com.meishe.yangquan.fragment.BUHomeGoodsFragment;
 import com.meishe.yangquan.fragment.BUHomeGoodsOrderFragment;
 import com.meishe.yangquan.utils.Constants;
 
@@ -44,10 +43,10 @@ public class BUHomeOrderManagerActivity extends BaseActivity {
         mTitleList.add("待发货");
         mTitleList.add("已发货");
         mTitleList.add("已完成");
-        mFragmentList.add(BUHomeGoodsOrderFragment.onInstance(Constants.TYPE_ORDER_WAIT_PAY_TYPE));
-        mFragmentList.add(BUHomeGoodsOrderFragment.onInstance(Constants.TYPE_ORDER_WAIT_SEND_TYPE));
-        mFragmentList.add(BUHomeGoodsOrderFragment.onInstance(Constants.TYPE_ORDER_ALREADY_SEND_TYPE));
-        mFragmentList.add(BUHomeGoodsOrderFragment.onInstance(Constants.TYPE_ORDER_FINISH_TYPE));
+//        mFragmentList.add(BUHomeGoodsOrderFragment.onInstance(Constants.TYPE_COMMON_ORDER_WAIT_PAY_TYPE));
+//        mFragmentList.add(BUHomeGoodsOrderFragment.onInstance(Constants.TYPE_COMMON_ORDER_WAIT_SEND_TYPE));
+//        mFragmentList.add(BUHomeGoodsOrderFragment.onInstance(Constants.TYPE_COMMON_ORDER_ALREADY_SEND_TYPE));
+//        mFragmentList.add(BUHomeGoodsOrderFragment.onInstance(Constants.TYPE_COMMON_ORDER_FINISH_TYPE));
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(), mFragmentList, mTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);

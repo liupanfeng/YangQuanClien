@@ -55,23 +55,29 @@ public class MineOrderActivity extends BaseActivity {
         mSlidingTabLayout.setCurrentTab(mSelectIndex);
     }
 
-
+    /**
+     * 0 全部
+     * 1 待付款
+     * 2 待收货
+     * 3 完成
+     * 4 退货
+     */
     private void initTabLayout() {
         mFragmentList.clear();
         mTitleList.clear();
-        CommonListFragment allFragment= CommonListFragment.newInstance(mType);
+        CommonListFragment allFragment= CommonListFragment.newInstance(true,mType,0);
         mFragmentList.add(allFragment);
 
-        CommonListFragment waitPayFragment= CommonListFragment.newInstance(mType);
+        CommonListFragment waitPayFragment= CommonListFragment.newInstance(true,mType,1);
         mFragmentList.add(waitPayFragment);
 
-        CommonListFragment waitReceive= CommonListFragment.newInstance(mType);
+        CommonListFragment waitReceive= CommonListFragment.newInstance(true,mType,2);
         mFragmentList.add(waitReceive);
 
-        CommonListFragment waitComment= CommonListFragment.newInstance(mType);
+        CommonListFragment waitComment= CommonListFragment.newInstance(true,mType,3);
         mFragmentList.add(waitComment);
 
-        CommonListFragment waitRefund= CommonListFragment.newInstance(mType);
+        CommonListFragment waitRefund= CommonListFragment.newInstance(true,mType,4);
         mFragmentList.add(waitRefund);
 
         mTitleList.add("全部");
@@ -80,7 +86,7 @@ public class MineOrderActivity extends BaseActivity {
         mTitleList.add("待评价");
         mTitleList.add("退款");
 
-        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(0);
         mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(),mFragmentList,mTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);
     }

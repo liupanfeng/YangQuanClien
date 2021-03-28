@@ -84,25 +84,25 @@ public class MineOrderListHolder extends BaseViewHolder {
 //            }
 
             int state = ((MineOrderInfo) info).getType();
-            if (state== Constants.TYPE_ORDER_WAIT_PAY_TYPE){
+            if (state== Constants.TYPE_COMMON_ORDER_WAIT_PAY_TYPE){
                 //待付
                 tv_bu_order_right_state.setText("待付");
                 tv_time_cancel_order.setVisibility(View.VISIBLE);
                 btn_left_function.setText("取消订单");
                 btn_right_function.setText("去支付");
-            }else if (state== Constants.TYPE_ORDER_WAIT_SEND_TYPE){
+            }else if (state== Constants.TYPE_COMMON_ORDER_WAIT_SEND_TYPE){
                 //待收货
                 tv_bu_order_right_state.setText("待收货");
                 tv_time_cancel_order.setVisibility(View.GONE);
                 btn_left_function.setText("申请退款");
                 btn_right_function.setText("确认收货");
-            }else if (state== Constants.TYPE_ORDER_ALREADY_SEND_TYPE){
+            }else if (state== Constants.TYPE_COMMON_ORDER_ALREADY_SEND_TYPE){
                 //已完成
                 tv_bu_order_right_state.setText("已完成");
                 tv_time_cancel_order.setVisibility(View.GONE);
                 btn_left_function.setText("再次购买");
                 btn_right_function.setText("评价");
-            }else if (state== Constants.TYPE_ORDER_FINISH_TYPE){
+            }else if (state== Constants.TYPE_COMMON_ORDER_FINISH_TYPE){
                 //退款
                 tv_bu_order_right_state.setText("退款");
                 tv_time_cancel_order.setVisibility(View.GONE);

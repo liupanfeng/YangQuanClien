@@ -91,8 +91,13 @@ public class SheepBarDetailActivity extends BaseActivity {
     private View backLayout;
 
     private boolean mIsReply = false;
+    /*是否是回复的二级评论*/
+    private boolean mIsSecondReply=false;
     /*评论id*/
     private int mCommentId;
+
+    /*二级评论id*/
+    private int mSecondCommentId;
 
     @Override
     protected int initRootView() {
@@ -233,6 +238,7 @@ public class SheepBarDetailActivity extends BaseActivity {
                             et_say_your_idea.setHint("回复@" + ((SheepBarCommentInfo) baseInfo).getNickname());
                             mCommentId = ((SheepBarCommentInfo) baseInfo).getId();
                             mIsReply = true;
+                            mIsSecondReply=false;
                         }
 
 //                        CommentBottomSheetDialogFragment fragment = new CommentBottomSheetDialogFragment();
@@ -397,9 +403,16 @@ public class SheepBarDetailActivity extends BaseActivity {
         int parentId = 0;    //如果是回复的评论，这个是一级评论的id   这个不是必填项目
         if (mIsReply) {
             //评论
-            objectType = 2;
-            objectId = mCommentId;
-//            parentId = mCommentId;
+            if (mIsSecondReply){ //回复的二级评论
+                objectType = 2;
+                objectId = mSecondCommentId;
+                parentId = mCommentId;
+            }else{
+                objectType = 2;
+                objectId = mCommentId;
+                parentId = mCommentId;
+            }
+
         } else {
             //帖子
             objectType = 1;
@@ -657,8 +670,10 @@ public class SheepBarDetailActivity extends BaseActivity {
             if (baseInfo instanceof SheepBarCommentSecondaryInfo){
                 KeyboardUtils.showSoftInput(et_say_your_idea);
                 et_say_your_idea.setHint("回复@" + ((SheepBarCommentSecondaryInfo) baseInfo).getNickname());
-                mCommentId = ((SheepBarCommentSecondaryInfo) baseInfo).getId();
+                mSecondCommentId = ((SheepBarCommentSecondaryInfo) baseInfo).getId();
                 mIsReply = true;
+                mIsSecondReply=true;
+                mCommentId=((SheepBarCommentSecondaryInfo) baseInfo).getCommonId();
             }
         }
     }

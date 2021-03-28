@@ -14,6 +14,7 @@ import com.meishe.yangquan.bean.MineMyFocusInfo;
 import com.meishe.yangquan.bean.MineMyFocusInfoResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.fragment.BUHomeGoodsRefundFragment;
+import com.meishe.yangquan.fragment.CommonListFragment;
 import com.meishe.yangquan.fragment.MineFeedGoldFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -70,8 +71,12 @@ public class MineFeedGoldActivity extends BaseActivity {
         mTitleList = new ArrayList<>();
         mTitleList.add("收入");
         mTitleList.add("支出");
-        mFragmentList.add(MineFeedGoldFragment.onInstance(Constants.TYPE_FEED_GOLD_IN_TYPE));
-        mFragmentList.add(MineFeedGoldFragment.onInstance(Constants.TYPE_FEED_GOLD_OUT_TYPE));
+//        mFragmentList.add(MineFeedGoldFragment.onInstance(Constants.TYPE_FEED_GOLD_IN_TYPE));
+//        mFragmentList.add(MineFeedGoldFragment.onInstance(Constants.TYPE_FEED_GOLD_OUT_TYPE));
+        mFragmentList.add(CommonListFragment.
+                newInstance(true,Constants.TYPE_COMMON_FEED_GOLD_TYPE,Constants.TYPE_FEED_GOLD_IN_TYPE));
+        mFragmentList.add(CommonListFragment.
+                newInstance(true,Constants.TYPE_COMMON_FEED_GOLD_TYPE,Constants.TYPE_FEED_GOLD_OUT_TYPE));
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(), mFragmentList, mTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);

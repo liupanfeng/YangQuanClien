@@ -46,6 +46,9 @@ public class SheepBarCommentSecondaryInfo extends BaseInfo {
 
     private int praiseAmount;
 
+    /*这个字段不是服务端返回的，是主动添加的，这是一级评论的id*/
+    private int commonId;
+
     public int getId() {
         return id;
     }
@@ -140,5 +143,13 @@ public class SheepBarCommentSecondaryInfo extends BaseInfo {
 
     public void setPraiseAmount(int praiseAmount) {
         this.praiseAmount = praiseAmount;
+    }
+
+    public int getCommonId() {
+        return commonId;
+    }
+
+    public void setCommonId(int commonId) {
+        this.commonId = commonId;
     }
 }

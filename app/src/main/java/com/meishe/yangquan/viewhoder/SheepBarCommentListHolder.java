@@ -1,6 +1,7 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -120,7 +121,6 @@ public class SheepBarCommentListHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(Context context, BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof SheepBarCommentInfo) {
-
             String iconUrl = ((SheepBarCommentInfo) info).getIconUrl();
             if (iconUrl != null) {
                 Glide.with(context)
@@ -131,7 +131,7 @@ public class SheepBarCommentListHolder extends BaseViewHolder {
 
             }
 
-            tv_sheep_bar_nickname.setText("@" + ((SheepBarCommentInfo) info).getNickname());
+            tv_sheep_bar_nickname.setText(((SheepBarCommentInfo) info).getNickname());
             tv_sheep_bar_time.setText(FormatCurrentData.getTimeRange(((SheepBarCommentInfo) info).getInitDate()));
             tv_sheep_bar_content.setText(((SheepBarCommentInfo) info).getContent());
             tv_sheep_bar_prised.setCompoundDrawablesWithIntrinsicBounds(((SheepBarCommentInfo) info).isHasPraised() ? context.getResources().getDrawable(R.mipmap.ic_heart_selected):
@@ -166,7 +166,7 @@ public class SheepBarCommentListHolder extends BaseViewHolder {
      * @param commentId
      * @param onlySeeOwner
      */
-    private void getCommentDataFromServer(Context context, int messageid, int commentId, boolean onlySeeOwner) {
+    private void getCommentDataFromServer(Context context, int messageid, final int commentId, boolean onlySeeOwner) {
         String token = UserManager.getInstance(context).getToken();
         if (Util.checkNull(token)) {
             return;
@@ -176,7 +176,7 @@ public class SheepBarCommentListHolder extends BaseViewHolder {
         param.put("postId", messageid);
         param.put("onlySeeOwner", onlySeeOwner);
         param.put("parentId", commentId); //查二级子评论，这个是一级评论的id
-        param.put("orderType", "desc");
+        param.put("orderType", "asc");
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_BAR_COMMENT_LIST_LEVEL2, new BaseCallBack<SheepBarCommentSecondaryInfoResult>() {
             @Override
@@ -202,6 +202,13 @@ public class SheepBarCommentListHolder extends BaseViewHolder {
                 List<SheepBarCommentSecondaryInfo> datas = secondaryInfoResult.getData();
                 if (CommonUtils.isEmpty(datas)) {
                     return;
+                }
+
+                for (int i = 0; i <datas.size() ; i++) {
+                    SheepBarCommentSecondaryInfo sheepBarCommentSecondaryInfo = datas.get(i);
+                    if (sheepBarCommentSecondaryInfo!=null){
+                        sheepBarCommentSecondaryInfo.setCommonId(commentId);
+                    }
                 }
 
                 mChildAdapter.addAll(datas);

@@ -21,7 +21,6 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.MineOrderActivity;
 import com.meishe.yangquan.activity.SettingActivity;
-import com.meishe.yangquan.activity.TestActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.UserInfo;
@@ -224,31 +223,31 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         switch (v.getId()) {
             case R.id.rl_mine_pay:
                 Bundle bundle=new Bundle();
-                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_WAIT_PAY_TYPE);
-                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_WAIT_PAY_TYPE);
-                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
-                break;
-            case R.id.rl_mine_comment:
-                bundle=new Bundle();
-                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_ALREADY_SEND_TYPE);
-                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_ALREADY_SEND_TYPE);
+                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,1);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_receive:
-//                bundle=new Bundle();
-//                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
-//                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_WAIT_SEND_TYPE);
-//                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
+                bundle=new Bundle();
+                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,2);
+                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
 
 
-                AppManager.getInstance().jumpActivity(getActivity(), TestActivity.class);
+//                AppManager.getInstance().jumpActivity(getActivity(), TestActivity.class);
 
 
                 break;
+            case R.id.rl_mine_comment:
+                bundle=new Bundle();
+                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,3);
+                AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
+                break;
             case R.id.rl_mine_refund:
                 bundle=new Bundle();
-                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_ORDER_FINISH_TYPE);
-                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_ORDER_FINISH_TYPE);
+                bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,4);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.iv_mine_setting:

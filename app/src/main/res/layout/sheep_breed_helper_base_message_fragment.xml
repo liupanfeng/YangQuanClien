@@ -31,6 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/tv_title_top_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="建档填写"
@@ -62,6 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:id="@+id/tv_pick_up_top_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="建档填写"
@@ -328,6 +330,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
                     <TextView
+                        android:id="@+id/tv_title_bottom_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="出栏填写"
@@ -359,6 +362,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
                     <TextView
+                        android:id="@+id/tv_pick_up_bottom_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="出栏填写"

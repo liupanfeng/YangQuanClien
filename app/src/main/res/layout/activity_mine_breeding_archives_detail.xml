@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context="com.meishe.yangquan.activity.MineBreedingArchivesDetailActivity">
+
+    <include layout="@layout/custom_title"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp1"
+        android:background="#fff5f5f5"
+        />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tabBarSize"
+        android:background="@color/white"
+        app:tabIndicatorColor="@color/mainColor"
+        app:tabSelectedTextColor="@color/mainColor"
+        app:tabTextColor="#656565"
+        app:tabRippleColor="@color/transparent"
+        app:tabIndicatorHeight="1dp"
+        app:tabMode="fixed" />
+
+    <com.meishe.yangquan.view.MViewPager
+        android:id="@+id/viewpager"
+        android:layout_marginTop="@dimen/dp24"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

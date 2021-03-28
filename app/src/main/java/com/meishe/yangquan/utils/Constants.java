@@ -219,6 +219,8 @@ public class Constants {
     public static final String TYPE_KEY_BATCH_ID = "batch.id";
 
     public static final String TYPE_KEY_SHEEP_SURPLUS = "sheep.surplus";
+    /*页面类型：养殖助手还是养殖档案*/
+    public static final String TYPE_KEY_SHEEP_TYPE = "sheep.surplus.type";
 
     public static final String TYPE_KEY_SHEEP_INIT_TIME = "sheep.init.time";
 
@@ -249,8 +251,12 @@ public class Constants {
     /*饲料类型*/
     public static final String FEED_TYPE = "feed.type";
 
-    /*通过类型*/
+    /*通用类型*/
     public static final String COMMON_TYPE = "common.type";
+    /*通用类型*/
+    public static final String COMMON_SUB_TYPE = "common.sub.type";
+    /*通用类型*/
+    public static final String COMMON_LAZ_LOAD_TYPE = "common.laz.load.type";
 
     /*店铺id*/
     public static final String FEED_SHOPPING_IDTYPE = "feed.shopping.id.type";
@@ -301,16 +307,6 @@ public class Constants {
     /*商品等待发布*/
     public static final int TYPE_KEY_WAIT_PUBLISH_GOODS_TYPE = 2;
 
-    /*订单- 全部 */
-    public static final int TYPE_ORDER_ALL_TYPE = 0;
-    /*订单- 待付 */
-    public static final int TYPE_ORDER_WAIT_PAY_TYPE = 1;
-    /*订单-待发货*/
-    public static final int TYPE_ORDER_WAIT_SEND_TYPE = 2;
-    /*订单-已发货*/
-    public static final int TYPE_ORDER_ALREADY_SEND_TYPE = 3;
-    /*订单-已完成*/
-    public static final int TYPE_ORDER_FINISH_TYPE = 4;
 
 
     /*好评 */
@@ -324,6 +320,19 @@ public class Constants {
     public static final int TYPE_REFUND_ING_TYPE = 1;
     /*已完成*/
     public static final int TYPE_REFUND_FINISH_TYPE = 2;
+
+
+    //    /*用户版-我的-订单- 全部 */   注意这里的类型商版的也用到了，暂时不能删除
+    public static final int TYPE_COMMON_ORDER_ALL_TYPE = 2;
+    /*用户版-我的-订单- 待付 */
+    public static final int TYPE_COMMON_ORDER_WAIT_PAY_TYPE = 3;
+    /*用户版-我的-订单-待发货*/
+    public static final int TYPE_COMMON_ORDER_WAIT_SEND_TYPE = 4;
+    /*用户版-我的-订单- 已发货*/
+    public static final int TYPE_COMMON_ORDER_ALREADY_SEND_TYPE = 5;
+    /*用户版-我的-订单- 已完成*/
+    public static final int TYPE_COMMON_ORDER_FINISH_TYPE = 6;
+
 
 
     /*收入*/
@@ -348,6 +357,16 @@ public class Constants {
     public static final int TYPE_CAPTURE = 1;
     /*相册*/
     public static final int TYPE_ALBUM = 2;
+
+    /*我的-用户版-我的消息*/
+    public static final int TYPE_COMMON_MY_MESSAGE = 1;
+
+       /*用户版-我的-订单 */
+    public static final int TYPE_COMMON_MY_ORDER_TYPE = 2;
+
+    /*用户版-我的-饲料金*/
+    public static final int TYPE_COMMON_FEED_GOLD_TYPE = 3;
+
 
 
 }

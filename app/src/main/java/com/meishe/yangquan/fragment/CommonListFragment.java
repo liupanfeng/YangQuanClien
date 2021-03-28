@@ -1,27 +1,23 @@
 package com.meishe.yangquan.fragment;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.MineOrderInfoResult;
-import com.meishe.yangquan.http.BaseCallBack;
-import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.helper.DataHelper;
 import com.meishe.yangquan.utils.Constants;
-import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.ToastUtil;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
-import java.io.IOException;
-import java.util.HashMap;
-
-import okhttp3.Call;
-import okhttp3.Request;
-import okhttp3.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -29,14 +25,24 @@ import okhttp3.Response;
  * @CreateDate : 2021/3/19 21:08
  * @Description : 通用的列表fragment
  */
-public class CommonListFragment extends BaseRecyclerFragment {
+public class CommonListFragment extends BaseRecyclerFragment implements DataHelper.OnCallBackListener {
 
+    protected List<BaseInfo> mList = new ArrayList<>();
+
+    /*这个是请求那一类接口*/
     private int mType;
+    /*这个是请求数据的类型*/
+    private int mSubType;
+    /*是否懒加载，解决ViewPage的预加载问题*/
+    private boolean mLazLoad;
+    private View mNoDataView;
 
-    public static CommonListFragment newInstance(int type) {
+    public static CommonListFragment newInstance(boolean isNeedLazLoad,int type,int subType) {
         CommonListFragment commonListFragment = new CommonListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.COMMON_TYPE, type);
+        bundle.putInt(Constants.COMMON_SUB_TYPE, subType);
+        bundle.putBoolean(Constants.COMMON_LAZ_LOAD_TYPE, isNeedLazLoad);
         commonListFragment.setArguments(bundle);
         return commonListFragment;
     }
@@ -47,7 +53,9 @@ public class CommonListFragment extends BaseRecyclerFragment {
         super.onCreate(savedInstanceState);
         Bundle arguments = getArguments();
         if (arguments != null) {
-            mType = arguments.getInt(Constants.FEED_TYPE);
+            mType = arguments.getInt(Constants.COMMON_TYPE);
+            mSubType = arguments.getInt(Constants.COMMON_SUB_TYPE);
+            mLazLoad = arguments.getBoolean(Constants.COMMON_LAZ_LOAD_TYPE);
         }
     }
 
@@ -55,84 +63,110 @@ public class CommonListFragment extends BaseRecyclerFragment {
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view=inflater.inflate(R.layout.fragment_common_list_view,container,false);
-        mRecyclerView=view.findViewById(R.id.recyclerView);
+        mRecyclerView = view.findViewById(R.id.recycler);
+        mLoading = view.findViewById(R.id.loading);
+        mRefreshLayout = view.findViewById(R.id.refresh_layout);
+        mNoDataView = view.findViewById(R.id.ll_no_data);
         initRecyclerView();
         return view;
     }
 
     @Override
     protected void initData() {
-        getOrderData();
+        if (!mLazLoad){
+            getDataFromServer();
+        }
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+        if (mLazLoad){
+            getDataFromServer();
+        }
     }
 
     @Override
     protected void initListener() {
+        /*下拉刷新*/
+        mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
 
+            @Override
+            public void onRefresh(@NonNull RefreshLayout refreshLayout) {
+                mList.clear();
+                mPageNum = 1;
+                mIsLoadMore = false;
+                getDataFromServer();
+            }
+        });
+
+        mRefreshLayout.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
+                mIsLoadMore = true;
+                getDataFromServer();
+            }
+        });
     }
 
+    private void getDataFromServer() {
+        showLoading();
+        //全部订单
+        DataHelper.getInstance().setOnCallBackListener(this);
+        switch (mType){
+            case Constants.TYPE_COMMON_MY_ORDER_TYPE:
+                DataHelper.getInstance().getOrderData(mList,mSubType,mPageNum,mPageSize,
+                        mIsLoadFinish,mIsLoadMore);
+                break;
+            case Constants.TYPE_COMMON_MY_MESSAGE:
+                DataHelper.getInstance().getMyMessageData(mList,mSubType,mPageNum,mPageSize,
+                        mIsLoadFinish,mIsLoadMore);
+                break;
+            case Constants.TYPE_COMMON_FEED_GOLD_TYPE:
+                DataHelper.getInstance().getFeedGoldDataFromServer(mList,mSubType,mPageNum,mPageSize,
+                        mIsLoadFinish,mIsLoadMore);
+                break;
 
-    /**
-     * 获取订单数据
-     */
-    private void getOrderData() {
-
-        String token = getToken();
-        if (TextUtils.isEmpty(token)) {
-            return;
         }
-
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("listType",mType);
-        requestParam.put("pageNum",1);
-        requestParam.put("pageSize",30);
-
-        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_FEED_ORDER_LIST, new BaseCallBack<MineOrderInfoResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "接口异常");
-                    }
-                });
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, MineOrderInfoResult result) {
-                if (result != null && result.getCode() == 1) {
-
-                } else {
-                    ToastUtil.showToast(mContext, result.getMsg());
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "接口异常");
-                    }
-                });
-
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam, token);
-
     }
 
+
+    @Override
+    public void onShowNoData() {
+        hideUIState();
+        changeNoDataViewVisible(View.VISIBLE);
+    }
+
+    @Override
+    public void onSuccess() {
+        changeNoDataViewVisible(View.GONE);
+        hideUIState();
+    }
+
+    @Override
+    public void onSuccess(List<? extends BaseInfo> baseInfos,int pageSize,int pageNum) {
+        changeNoDataViewVisible(View.GONE);
+        hideUIState();
+        mPageNum=pageNum+1;
+        mList.addAll(mList.size(), baseInfos);
+        mAdapter.addAll(mList);
+    }
+
+
+    @Override
+    public void onFailure(Exception e) {
+        hideUIState();
+        changeNoDataViewVisible(View.VISIBLE);
+    }
+
+    @Override
+    public void onError(Exception e) {
+        hideUIState();
+        changeNoDataViewVisible(View.VISIBLE);
+    }
+
+
+    private void changeNoDataViewVisible(int visible){
+        mNoDataView.setVisibility(visible);
+    }
 }

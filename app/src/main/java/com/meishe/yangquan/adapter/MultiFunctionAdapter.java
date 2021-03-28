@@ -235,7 +235,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 break;
             /*羊吧二级评论列表*/
             case VIEW_COMMENT_LEVEL1_CHILD_LIST:
-                view = mLayoutInflater.inflate(R.layout.item_sheep_bar_comment, parent, false);
+                view = mLayoutInflater.inflate(R.layout.item_sheep_bar_second_comment, parent, false);
                 viewHolder = new SheepBarCommentSecondaryListHolder(view, this);
                 break;
             /*资讯详情页内容*/

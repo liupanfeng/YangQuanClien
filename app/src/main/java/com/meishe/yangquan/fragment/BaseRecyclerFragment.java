@@ -47,7 +47,7 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
     /*页码*/
     protected int mPageNum = 1;
     /*每页的数量*/
-    protected int mPageSize = 5;
+    protected int mPageSize = 12;
 
     protected List<Fragment> mFragmentList = new ArrayList<>();
     protected List<String> mTitleList = new ArrayList<>();

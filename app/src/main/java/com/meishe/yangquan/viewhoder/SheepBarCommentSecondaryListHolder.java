@@ -1,6 +1,7 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -95,9 +96,14 @@ public class SheepBarCommentSecondaryListHolder extends BaseViewHolder {
 
             }
 
-            tv_sheep_bar_nickname.setText("@"+((SheepBarCommentSecondaryInfo) info).getNickname());
+            tv_sheep_bar_nickname.setText(((SheepBarCommentSecondaryInfo) info).getNickname());
             tv_sheep_bar_time.setText(FormatCurrentData.getTimeRange(((SheepBarCommentSecondaryInfo) info).getInitDate()));
-            tv_sheep_bar_content.setText(((SheepBarCommentSecondaryInfo) info).getContent());
+            String replyNickname = ((SheepBarCommentSecondaryInfo) info).getReplyNickname();
+            if (!TextUtils.isEmpty(replyNickname)&&!"null".equals(replyNickname)){
+                tv_sheep_bar_content.setText("回复：@"+ replyNickname +" "+((SheepBarCommentSecondaryInfo) info).getContent());
+            }else{
+                tv_sheep_bar_content.setText(((SheepBarCommentSecondaryInfo) info).getContent());
+            }
             tv_sheep_bar_prised.setCompoundDrawablesWithIntrinsicBounds(((SheepBarCommentSecondaryInfo) info).isHasPraised() ? context.getResources().getDrawable(R.mipmap.ic_heart_selected):
                     context.getResources().getDrawable(R.mipmap.ic_heart_unselected),null,null,null);
             tv_sheep_bar_prised.setText(((SheepBarCommentSecondaryInfo) info).getPraiseAmount()+"");

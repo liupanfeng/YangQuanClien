@@ -27,10 +27,11 @@ public class MineFeedGoldHolder extends BaseViewHolder {
     /*养殖档案建立时间*/
     private TextView tv_time;
 
-
+    private View mItemView;
 
     public MineFeedGoldHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
+        mItemView=itemView;
         mAdapter = adapter;
         options = new RequestOptions();
         options.centerCrop();
@@ -48,6 +49,8 @@ public class MineFeedGoldHolder extends BaseViewHolder {
         if (info instanceof MineBreedingArchivesInfo) {
             tv_title.setText(((MineBreedingArchivesInfo) info).getTitle());
             tv_time.setText(FormatDateUtil.longToString(((MineBreedingArchivesInfo) info).getInitDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
+            mItemView.setOnClickListener(listener);
+            mItemView.setTag(info);
         }
 
     }

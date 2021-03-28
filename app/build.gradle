@@ -93,11 +93,8 @@ dependencies {
     //高德定位
     implementation 'com.amap.api:location:latest.integration'
 
-    /*版本更新*/
-//    implementation 'com.qianwen:update-app:3.5.2'
-//
-//
-//    implementation 'com.qianwen:okhttp-utils:3.8.0'
-//
-//    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    /*给按钮加阴影*//*
+    implementation 'com.dingmouren.paletteimageview:paletteimageview:1.0.0'
+*/
+
 }

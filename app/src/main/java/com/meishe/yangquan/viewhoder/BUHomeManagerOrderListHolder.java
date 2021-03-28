@@ -103,24 +103,24 @@ public class BUHomeManagerOrderListHolder extends BaseViewHolder {
 //            }
 
             int state = ((BUManagerOrderInfo) info).getState();
-            if (state== Constants.TYPE_ORDER_WAIT_PAY_TYPE){
+            if (state== Constants.TYPE_COMMON_ORDER_WAIT_PAY_TYPE){
                 //待付
                 rl_bu_order_wait_pay.setVisibility(View.VISIBLE);
                 rl_bu_order_wait_send.setVisibility(View.GONE);
                 tv_bu_order_right_state.setText("待付");
 
-            }else if (state== Constants.TYPE_ORDER_WAIT_SEND_TYPE){
+            }else if (state== Constants.TYPE_COMMON_ORDER_WAIT_SEND_TYPE){
                 //待发货
                 rl_bu_order_wait_pay.setVisibility(View.GONE);
                 rl_bu_order_wait_send.setVisibility(View.VISIBLE);
                 tv_bu_order_right_state.setText("待发货");
 
-            }else if (state== Constants.TYPE_ORDER_ALREADY_SEND_TYPE){
+            }else if (state== Constants.TYPE_COMMON_ORDER_ALREADY_SEND_TYPE){
                 //已发货
                 tv_bu_order_right_state.setText("已发货");
                 rl_bu_order_wait_pay.setVisibility(View.GONE);
                 rl_bu_order_wait_send.setVisibility(View.GONE);
-            }else if (state== Constants.TYPE_ORDER_FINISH_TYPE){
+            }else if (state== Constants.TYPE_COMMON_ORDER_FINISH_TYPE){
                 //完成
                 tv_bu_order_right_state.setText("完成");
                 rl_bu_order_wait_pay.setVisibility(View.GONE);
