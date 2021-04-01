@@ -108,6 +108,7 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
 //                mIvSheepBarMessage.setImageBitmap(tmpBitmap);
 //            }
 
+
             String iconUrl = ((SheepBarMessageInfo) info).getIconUrl();
             if (iconUrl != null) {
                 Glide.with(context)
