@@ -119,7 +119,7 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
             }
 
 
-            tv_sheep_bar_nickname.setText("@" + ((SheepBarMessageInfo) info).getNickname());
+            tv_sheep_bar_nickname.setText(((SheepBarMessageInfo) info).getNickname());
             tv_sheep_bar_time.setText(FormatCurrentData.getTimeRange(((SheepBarMessageInfo) info).getInitDate()));
             tv_sheep_bar_content.setText(((SheepBarMessageInfo) info).getContent());
             tv_sheep_bar_comment_number.setText(((SheepBarMessageInfo) info).getCommentAmount() + "");
