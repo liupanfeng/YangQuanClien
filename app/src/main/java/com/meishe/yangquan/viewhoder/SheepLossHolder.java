@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -117,6 +118,15 @@ public class SheepLossHolder extends BaseViewHolder {
                 }
             });
 
+            if (((SheepLossInfo) info).getType()==2){
+                tv_save.setVisibility(View.INVISIBLE);
+                et_amount.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+            }
 
             tv_save.setTag(info);
             tv_save.setOnClickListener(listener);

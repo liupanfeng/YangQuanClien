@@ -25,6 +25,9 @@ public class FodderInfo extends BaseInfo {
 
     private float totalPrice;
 
+    /*页面类型 1：养殖助手 2：养殖档案 */
+    private int type;
+
 
     public String getName() {
         return name;
@@ -72,5 +75,13 @@ public class FodderInfo extends BaseInfo {
 
     public void setTotalPrice(float totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

@@ -24,6 +24,8 @@ public class SheepVaccineInfo extends BaseInfo{
 
     private String recordContent;
 
+    /*用来区分显示类型：1养殖助手 2：养殖档案  养殖档案不需要显示 保存按钮 */
+    private int type;
 
     public int getId() {
         return id;
@@ -95,5 +97,13 @@ public class SheepVaccineInfo extends BaseInfo{
 
     public void setRecordContent(String recordContent) {
         this.recordContent = recordContent;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -141,8 +142,27 @@ public class SheepVaccinesHolder extends BaseViewHolder {
                 }
             });
 
-            tv_save.setTag(info);
-            tv_save.setOnClickListener(listener);
+            if (((SheepVaccineInfo) info).getType()==2){
+                tv_save.setVisibility(View.INVISIBLE);
+
+                et_input_price.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+
+                et_vaccine_content.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+
+            }else{
+                tv_save.setTag(info);
+                tv_save.setOnClickListener(listener);
+            }
 
         }
 

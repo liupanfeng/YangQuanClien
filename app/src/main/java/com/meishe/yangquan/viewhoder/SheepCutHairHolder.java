@@ -5,6 +5,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -66,6 +67,7 @@ public class SheepCutHairHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof SheepHairInfo) {
+            int type = ((SheepHairInfo) info).getType();
             String time = ((SheepHairInfo) info).getRecordDate();
             if (TextUtils.isEmpty(time)) {
                 tv_time.setText(FormatDateUtil.longToString(System.currentTimeMillis(),
@@ -116,8 +118,18 @@ public class SheepCutHairHolder extends BaseViewHolder {
                 }
             });
 
-            tv_save.setTag(info);
-            tv_save.setOnClickListener(listener);
+            if (type ==2){
+                tv_save.setVisibility(View.INVISIBLE);
+                et_total_price.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+            }else{
+                tv_save.setTag(info);
+                tv_save.setOnClickListener(listener);
+            }
 
 
         }

@@ -39,6 +39,8 @@ public class SheepHairInfo extends BaseInfo{
 
     private String recordContent;
 
+    private int type;
+
 
     public int getId() {
         return id;
@@ -110,5 +112,13 @@ public class SheepHairInfo extends BaseInfo{
 
     public void setRecordContent(String recordContent) {
         this.recordContent = recordContent;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

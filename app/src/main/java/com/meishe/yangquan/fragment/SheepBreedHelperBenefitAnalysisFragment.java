@@ -17,6 +17,7 @@ import com.meishe.yangquan.bean.SheepBenefitAnalysisInfo;
 import com.meishe.yangquan.bean.SheepBenefitAnalysisInfoResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -90,11 +91,14 @@ public class SheepBreedHelperBenefitAnalysisFragment extends BaseRecyclerFragmen
 
     private boolean mIsOnCreate;
 
+    /*页面类型 1:养殖助手 2：养殖档案*/
+    private int mType;
 
-    public static SheepBreedHelperBenefitAnalysisFragment newInstance(int batchId) {
+    public static SheepBreedHelperBenefitAnalysisFragment newInstance(int batchId, int type) {
         SheepBreedHelperBenefitAnalysisFragment helperBaseMessage = new SheepBreedHelperBenefitAnalysisFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(TYPE_KEY_BATCH_ID, batchId);
+        bundle.putInt(Constants.TYPE_KEY_SHEEP_TYPE, type);
         helperBaseMessage.setArguments(bundle);
         return helperBaseMessage;
     }
@@ -102,17 +106,18 @@ public class SheepBreedHelperBenefitAnalysisFragment extends BaseRecyclerFragmen
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mIsOnCreate=true;
+        mIsOnCreate = true;
         Bundle arguments = getArguments();
         if (arguments != null) {
             mBatchId = arguments.getInt(TYPE_KEY_BATCH_ID);
+            mType = arguments.getInt(Constants.TYPE_KEY_SHEEP_TYPE);
         }
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mIsOnCreate=false;
+        mIsOnCreate = false;
     }
 
     @Override
@@ -153,15 +158,22 @@ public class SheepBreedHelperBenefitAnalysisFragment extends BaseRecyclerFragmen
     @Override
     protected void initData() {
         closeBenefitAnalysis();
+        if (mType == 2) {
+            getBenefitAnalysisData();
+        }
     }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-        if (!mIsOnCreate){
+        if (!mIsOnCreate) {
             return;
         }
         if (getUserVisibleHint()) {
+            if (mType == 2) {
+                getBenefitAnalysisData();
+                return;
+            }
             String totalPrice = SharedPreferencesUtil.getInstance(mContext).getString("total_price_" + mBatchId);
             if (TextUtils.isEmpty(totalPrice)) {
                 showInputIncomingDialog();
@@ -178,7 +190,6 @@ public class SheepBreedHelperBenefitAnalysisFragment extends BaseRecyclerFragmen
             case R.id.rl_benefit_analysis_open:
                 showBenefitAnalysis();
                 break;
-
             case R.id.rl_benefit_analysis_close:
                 closeBenefitAnalysis();
                 break;

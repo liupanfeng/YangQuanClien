@@ -69,6 +69,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:id="@+id/ll_analysis_weight_container"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp33"
             android:layout_marginTop="@dimen/dp10"

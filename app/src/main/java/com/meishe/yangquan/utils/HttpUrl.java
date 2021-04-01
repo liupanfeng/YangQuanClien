@@ -169,6 +169,9 @@ public class HttpUrl {
     /*羊管家 获取入栏信息 */
     public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_IN_INFO = URL + "app/cultural/assistant/batch/in/info";
 
+    /*羊管家 获取入栏信息 */
+    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT_INFO = URL + "app/cultural/assistant/batch/out/list";
+
 
     /*羊助手出栏信息填写*/
     public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT = URL + "app/cultural/assistant/batch/out";

@@ -68,8 +68,8 @@ public class MineBreedingArchivesDetailActivity extends BaseActivity {
         mTitleList.add("效益分析");
 
         mFragmentList.add(SheepBreedHelperBaseMessage.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime,2));
-        mFragmentList.add(SheepBreedHelperProcessFragment.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime));
-        mFragmentList.add(SheepBreedHelperBenefitAnalysisFragment.newInstance(mBatchId));
+        mFragmentList.add(SheepBreedHelperProcessFragment.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime,2));
+        mFragmentList.add(SheepBreedHelperBenefitAnalysisFragment.newInstance(mBatchId,2));
 
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0, mContext, mFragmentList, mTitleList));
         mTabLayout.setupWithViewPager(mViewPager);

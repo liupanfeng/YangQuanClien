@@ -6,6 +6,7 @@ import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -46,7 +47,6 @@ import com.meishe.yangquan.utils.FormatCurrentData;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.ToastUtil;
-import com.meishe.yangquan.utils.Util;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -192,13 +192,19 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
     /*建议*/
     private TextView tv_sheep_food_advise;
 
+    /*页面类型 1:养殖助手 2：养殖档案*/
+    private int mPageType;
 
-    public static SheepBreedHelperProcessFragment newInstance(int batchId, int currentCulturalQuantity, long initTime) {
+    private View ll_analysis_weight_container;
+
+
+    public static SheepBreedHelperProcessFragment newInstance(int batchId, int currentCulturalQuantity, long initTime,int type) {
         SheepBreedHelperProcessFragment helperBaseMessage = new SheepBreedHelperProcessFragment();
         Bundle bundle = new Bundle();
         bundle.putInt(TYPE_KEY_BATCH_ID, batchId);
         bundle.putInt(Constants.TYPE_KEY_SHEEP_SURPLUS, currentCulturalQuantity);
         bundle.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initTime);
+        bundle.putInt(Constants.TYPE_KEY_SHEEP_TYPE, type);
         helperBaseMessage.setArguments(bundle);
         return helperBaseMessage;
     }
@@ -211,6 +217,7 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
             mBatchId = arguments.getInt(TYPE_KEY_BATCH_ID);
             mCurrentCulturalQuantity = arguments.getInt(Constants.TYPE_KEY_SHEEP_SURPLUS);
             mInitTime = arguments.getLong(Constants.TYPE_KEY_SHEEP_INIT_TIME);
+            mPageType = arguments.getInt(Constants.TYPE_KEY_SHEEP_TYPE);
         }
     }
 
@@ -224,6 +231,9 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
         mLlRecyclerFoodAnalysis = view.findViewById(R.id.recycler);
         mEtInputEstimateWeight = view.findViewById(R.id.et_input_estimate_weight);
         mTvFeedingDays = view.findViewById(R.id.tv_feeding_days);
+        /*上面估重view*/
+        ll_analysis_weight_container = view.findViewById(R.id.ll_analysis_weight_container);
+        /*保存按钮*/
         btn_food_analysis = view.findViewById(R.id.btn_food_analysis);
 
         tv_total_weight = view.findViewById(R.id.tv_total_weight);
@@ -266,9 +276,9 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
         mRlCutSheepHairOpen = view.findViewById(R.id.rl_cut_sheep_hair_open);
         mRlCutSheepHairClose = view.findViewById(R.id.rl_cut_sheep_hair_close);
         mLlCutSheepHairContent = view.findViewById(R.id.ll_cut_sheep_hair_content);
-        mLlCutSheepAdd = view.findViewById(R.id.ll_create_cut_hair);
         mRecyclerViewCutHair = view.findViewById(R.id.recycler_cut_hair);
         tv_hair_total_price = view.findViewById(R.id.tv_hair_total_price);
+        mLlCutSheepAdd = view.findViewById(R.id.ll_create_cut_hair);
         initHairRecyclerView();
 
         mRlLossRecordOpen = view.findViewById(R.id.rl_loss_record_open);
@@ -278,6 +288,22 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
         mLlLossAdd = view.findViewById(R.id.ll_create_loss);
         tv_loss_total_price = view.findViewById(R.id.tv_loss_total_price);
         initLossRecyclerView();
+
+        if(mPageType ==2){
+            mEtInputEstimateWeight.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+                    return true;
+                }
+            });
+
+            btn_food_analysis.setVisibility(View.GONE);
+            btn_help.setVisibility(View.GONE);
+            mLlVaccineAdd.setVisibility(View.GONE);
+            mLlCutSheepAdd.setVisibility(View.GONE);
+            mLlLossAdd.setVisibility(View.GONE);
+            ll_analysis_weight_container.setVisibility(View.GONE);
+        }
 
         if (mCurrentCulturalQuantity == 0) {
             String stringAmount = SharedPreferencesUtil.getInstance(mContext).getString("sheep_amount_" + mBatchId);
@@ -992,6 +1018,15 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
 //            totalSoda += weight * (mFoodAnalysisSodaMap.get(fodderId) == null ? 0 : mFoodAnalysisSodaMap.get(fodderId));
 
         }
+        if (!CommonUtils.isEmpty(fodders)){
+            for (int i = 0; i < fodders.size(); i++) {
+                FodderInfo fodderInfo = fodders.get(i);
+                if (fodderInfo==null){
+                    continue;
+                }
+                fodderInfo.setType(mPageType);
+            }
+        }
         mFoodAnalysisAdapter.addAll(fodders);
 
         //估重   喂养天数  合计  营养成分
@@ -1053,6 +1088,15 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
                     List<SheepLossInfo> data = result.getData();
                     mSheepLossInfoList.clear();
                     mSheepLossInfoList.addAll(data);
+                    if (!CommonUtils.isEmpty(mSheepLossInfoList)){
+                        for (int i = 0; i < mSheepLossInfoList.size(); i++) {
+                            SheepLossInfo sheepLossInfo = mSheepLossInfoList.get(i);
+                            if (sheepLossInfo==null){
+                                continue;
+                            }
+                            sheepLossInfo.setType(mPageType);
+                        }
+                    }
                     mSheepLossAdapter.addAll(mSheepLossInfoList);
                     doLossTotalPrice();
                 } else {
@@ -1121,6 +1165,15 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
                     List<SheepHairInfo> data = result.getData();
                     mSheepHairInfoList.clear();
                     mSheepHairInfoList.addAll(data);
+                    if (!CommonUtils.isEmpty(mSheepHairInfoList)){
+                        for (int i = 0; i < mSheepHairInfoList.size(); i++) {
+                            SheepHairInfo sheepHairInfo = mSheepHairInfoList.get(i);
+                            if (sheepHairInfo==null){
+                                continue;
+                            }
+                            sheepHairInfo.setType(mPageType);
+                        }
+                    }
                     mSheepHairAdapter.addAll(mSheepHairInfoList);
                     doCutHairTotalPrice();
                 } else {
@@ -1188,6 +1241,15 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
                     List<SheepVaccineInfo> data = result.getData();
                     mSheepVaccineInfoList.clear();
                     mSheepVaccineInfoList.addAll(data);
+                    if (!CommonUtils.isEmpty(mSheepVaccineInfoList)){
+                        for (int i = 0; i < mSheepVaccineInfoList.size() ; i++) {
+                            SheepVaccineInfo sheepVaccineInfo = mSheepVaccineInfoList.get(i);
+                            if (sheepVaccineInfo==null){
+                                continue;
+                            }
+                            sheepVaccineInfo.setType(mPageType);
+                        }
+                    }
                     mSheepVaccineAdapter.addAll(mSheepVaccineInfoList);
                     doVaccineTotalPrice();
                 } else {
@@ -1527,6 +1589,16 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
                     mSourceAnalysisInfos.clear();
                     /*营养记录*/
                     mSourceAnalysisInfos.addAll(data);
+
+                    if (!CommonUtils.isEmpty(mFoodAnalsisList)){
+                        for (int i = 0; i < mFoodAnalsisList.size(); i++) {
+                            FodderInfo fodderInfo = mFoodAnalsisList.get(i);
+                            if (fodderInfo==null){
+                                continue;
+                            }
+                            fodderInfo.setType(mPageType);
+                        }
+                    }
                     /*饲料记录*/
                     mFoodAnalysisAdapter.addAll(mFoodAnalsisList);
 
