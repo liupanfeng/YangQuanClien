@@ -37,6 +37,8 @@ public class SheepLossInfo extends BaseInfo {
     private String recordDate;
 
     private String recordContent;
+    /*页面类型 1：养殖助手 2：养殖档案*/
+    private int type;
 
 
     public int getId() {
@@ -110,5 +112,14 @@ public class SheepLossInfo extends BaseInfo {
     public void setRecordContent(String recordContent) {
         this.recordContent = recordContent;
     }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
+    }
+
 
 }

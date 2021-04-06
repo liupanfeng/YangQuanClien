@@ -22,6 +22,7 @@ import com.meishe.yangquan.activity.FeedShoppingDetailActivity;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
 import com.meishe.yangquan.activity.MineBreedingArchivesActivity;
+import com.meishe.yangquan.activity.MineBreedingArchivesDetailActivity;
 import com.meishe.yangquan.activity.MineCallBackActivity;
 import com.meishe.yangquan.activity.MineFeedGoldActivity;
 import com.meishe.yangquan.activity.MineMyCollectionActivity;
@@ -45,6 +46,7 @@ import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
+import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServerZan;
@@ -375,7 +377,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyFocusActivity.class);
                     break;
                 case "养殖档案":
-                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineBreedingArchivesActivity.class);
+//                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineBreedingArchivesActivity.class);
+                    CommonRecyclerActivity.newCommonRecyclerActivity(mContext,Constants.TYPE_COMMON_BREEDING_ARCHIVE_TYPE,0);
                     break;
                 case "我的收藏":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyCollectionActivity.class);
@@ -489,9 +492,19 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         } else if (info instanceof ServiceMessage) {
             Intent intent = new Intent(mContext, ServiceMessageListActivity.class);
             mContext.startActivity(intent);
+        } else if (info instanceof MineBreedingArchivesInfo){
+                int id = ((MineBreedingArchivesInfo) info).getId();
+                int currentCulturalQuantity = ((MineBreedingArchivesInfo) info).getCurrentCulturalQuantity();
+                long initDate = ((MineBreedingArchivesInfo) info).getInitDate();
+
+                Bundle bundle=new Bundle();
+                bundle.putInt(Constants.TYPE_KEY_BATCH_ID,id);
+                bundle.putInt(Constants.TYPE_KEY_SHEEP_SURPLUS, currentCulturalQuantity);
+                bundle.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initDate);
+                AppManager.getInstance().jumpActivity(mContext, MineBreedingArchivesDetailActivity.class,bundle);
+            }
         }
 
-    }
 
 
 

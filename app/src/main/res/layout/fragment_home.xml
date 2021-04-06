@@ -14,7 +14,7 @@
         tl:tl_indicator_width="@dimen/dp_px_60"
         tl:tl_tab_space_equal="true"
         tl:tl_textSelectColor="@color/mainColor"
-        tl:tl_textSize="@dimen/sp_px_39"
+        tl:tl_textSize="@dimen/sp_px_45"
         tl:tl_textUnselectedColor="@color/unselect_text_color" />
 
     <com.meishe.yangquan.view.MViewPager

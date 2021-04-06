@@ -34,6 +34,7 @@ import okhttp3.Response;
  * @CreateDate : 2021/3/3 15:32
  * @Description : 我的-收藏
  */
+@Deprecated
 public class MineCollectionFragment extends BaseRecyclerFragment {
 
     /*收藏状态 1 店铺  2 商品  */

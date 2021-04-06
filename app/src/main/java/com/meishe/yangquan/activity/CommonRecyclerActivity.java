@@ -65,6 +65,9 @@ public class CommonRecyclerActivity extends BaseActivity {
             case Constants.TYPE_COMMON_MY_MESSAGE:
                 title="我的消息";
                 break;
+            case Constants.TYPE_COMMON_BREEDING_ARCHIVE_TYPE:
+                title="养殖档案";
+                break;
         }
         mTvTitle.setText(title);
     }

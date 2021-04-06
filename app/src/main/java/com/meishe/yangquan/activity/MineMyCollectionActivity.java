@@ -9,8 +9,8 @@ import androidx.viewpager.widget.ViewPager;
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
+import com.meishe.yangquan.fragment.CommonListFragment;
 import com.meishe.yangquan.fragment.MineCollectionFragment;
-import com.meishe.yangquan.fragment.MineFeedGoldFragment;
 import com.meishe.yangquan.utils.Constants;
 
 import java.util.ArrayList;
@@ -50,8 +50,10 @@ public class MineMyCollectionActivity extends BaseActivity {
         mTitleList = new ArrayList<>();
         mTitleList.add("店铺");
         mTitleList.add("商品");
-        mFragmentList.add(MineCollectionFragment.onInstance(Constants.TYPE_MINE_COLLECT_SHOPPING));
-        mFragmentList.add(MineCollectionFragment.onInstance(Constants.TYPE_MINE_COLLECT_GOODS));
+//        mFragmentList.add(MineCollectionFragment.onInstance(Constants.TYPE_MINE_COLLECT_SHOPPING));
+//        mFragmentList.add(MineCollectionFragment.onInstance(Constants.TYPE_MINE_COLLECT_GOODS));
+        mFragmentList.add(CommonListFragment.newInstance(true,Constants.TYPE_COMMON_MINE_COLLECT_SHOPPING,1));
+        mFragmentList.add(CommonListFragment.newInstance(true,Constants.TYPE_COMMON_MINE_COLLECT_GOODS,2));
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(), mFragmentList, mTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);

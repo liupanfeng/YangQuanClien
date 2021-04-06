@@ -2,7 +2,6 @@ package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,7 +11,6 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MineCollectionInfo;
-import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.utils.Constants;
 
 /**
@@ -73,11 +71,11 @@ public class MineCollectionListHolder extends BaseViewHolder {
 //            }
 
             int state = ((MineCollectionInfo) info).getType();
-            if (state== Constants.TYPE_MINE_COLLECT_SHOPPING){
+            if (state== Constants.TYPE_COMMON_MINE_COLLECT_SHOPPING){
                 //店铺
                rl_mine_collection_shopping.setVisibility(View.VISIBLE);
                rl_mine_collect_goods.setVisibility(View.GONE);
-            }else if (state== Constants.TYPE_MINE_COLLECT_GOODS){
+            }else if (state== Constants.TYPE_COMMON_MINE_COLLECT_GOODS){
                 //商品
                 rl_mine_collection_shopping.setVisibility(View.GONE);
                 rl_mine_collect_goods.setVisibility(View.VISIBLE);

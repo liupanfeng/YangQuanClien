@@ -3,6 +3,7 @@ package com.meishe.yangquan.viewhoder;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -161,7 +162,20 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
                 }
             });
 
-
+            if (((FodderInfo) info).getType()==2){
+                et_input_single_price.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+                et_input_weight.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        return true;
+                    }
+                });
+            }
         }
 
     }

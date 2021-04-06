@@ -22,12 +22,15 @@ import androidx.annotation.RequiresApi;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.HouseKeeperEntryInformationInfo;
 import com.meishe.yangquan.bean.HouseKeeperEntryInformationInfoResult;
+import com.meishe.yangquan.bean.HouseKeeperOutInformationInfo;
+import com.meishe.yangquan.bean.HouseKeeperOutInformationInfoResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.SelectSheepSellTypeView;
 import com.meishe.yangquan.pop.SelectSheepTypeView;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
@@ -39,6 +42,7 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -104,7 +108,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
     private TextView tv_title_bottom_name;
     private TextView tv_pick_up_bottom_title;
 
-    /*页面类型*/
+    /*页面类型 1:养殖助手 2：养殖档案*/
     private int mType;
 
     /**
@@ -344,12 +348,14 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         hideOutPickUp();
 
         getSheepEntryInformation();
-
+        if (mType==2){
+            getSheepOutInformation();
+        }
     }
 
 
     /**
-     * 获取入栏信息
+     * 更新入栏UI
      *
      * @param data
      */
@@ -362,6 +368,32 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSelectSheepWeight.setText(data.getWeight() + "");
         mEtSelectSheepNumber.setText(data.getAmount() + "");
         mTvSheepTime.setText(FormatDateUtil.longToString(data.getInDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
+
+    }
+
+    /**
+     * 更新出栏UI
+     *
+     * @param data
+     */
+    private void updateOutUi(HouseKeeperOutInformationInfo data) {
+        if (data == null) {
+            return;
+        }
+//        mEtSelectSheepType.setText(data.getVariety());
+//        mEtSheepPrice.setText(data.getPrice() + "");
+//        mEtSelectSheepWeight.setText(data.getWeight() + "");
+//        mEtSelectSheepNumber.setText(data.getAmount() + "");
+//        mTvSheepTime.setText(FormatDateUtil.longToString(data.getInDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
+
+
+        mEtSellType.setText(data.getOutType());
+        mEtSellSheepPrice.setText(data.getPrice()+"");
+        mEtSellWeight.setText(data.getWeight()+"");
+        mEtSellSheepWeight.setText(data.getCavityWeight()+"");
+        mEtSellSheepNumber.setText(data.getAmount()+"");
+        mTvSellSheepSurplusNumber.setText(0+"");
+        mTvSellSheepTime.setText(FormatDateUtil.longToString(data.getOutDate(),FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
 
     }
 
@@ -487,6 +519,65 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
 
             }
         }, param, token);
+    }
+
+
+    /**
+     * 获取出栏信息
+     * 注意这个只在养殖档案才会有
+     */
+    private void getSheepOutInformation() {
+
+        String token = UserManager.getInstance(mContext).getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("batchId", mBatchId);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT_INFO,
+                new BaseCallBack<HouseKeeperOutInformationInfoResult>() {
+                    @Override
+                    protected void OnRequestBefore(Request request) {
+
+                    }
+
+                    @Override
+                    protected void onFailure(Call call, IOException e) {
+
+                    }
+
+                    @Override
+                    protected void onSuccess(Call call, Response response, HouseKeeperOutInformationInfoResult result) {
+                        if (result == null) {
+                            return;
+                        }
+                        if (result.getCode() != 1) {
+                            ToastUtil.showToast(mContext, "code:" + result.getCode() + "error:" + result.getMsg());
+                        } else {
+                            List<HouseKeeperOutInformationInfo> data = result.getData();
+                            if (!CommonUtils.isEmpty(data)){
+                                updateOutUi(data.get(0));
+                            }
+                        }
+                    }
+
+                    @Override
+                    protected void onResponse(Response response) {
+
+                    }
+
+                    @Override
+                    protected void onEror(Call call, int statusCode, Exception e) {
+
+                    }
+
+                    @Override
+                    protected void inProgress(int progress, long total, int id) {
+
+                    }
+                }, param, token);
     }
 
 

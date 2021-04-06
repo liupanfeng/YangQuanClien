@@ -117,8 +117,8 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
         mTitleList.add("效益分析");
 
         mFragmentList.add(SheepBreedHelperBaseMessage.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime,1));
-        mFragmentList.add(SheepBreedHelperProcessFragment.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime));
-        mFragmentList.add(SheepBreedHelperBenefitAnalysisFragment.newInstance(mBatchId));
+        mFragmentList.add(SheepBreedHelperProcessFragment.newInstance(mBatchId, mCurrentCulturalQuantity,mInitTime,1));
+        mFragmentList.add(SheepBreedHelperBenefitAnalysisFragment.newInstance(mBatchId,1));
 
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), 0, mContext, mFragmentList, mTitleList));
         mTabLayout.setupWithViewPager(mViewPager);

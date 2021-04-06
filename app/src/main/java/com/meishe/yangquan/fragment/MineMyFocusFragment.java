@@ -34,7 +34,10 @@ import okhttp3.Response;
  * @author liupanfeng
  * @desc 我的-我的关注-我的关注
  * @date 2020/12/11 11:28
+ *
+ * 这个🈶️CommonListFragment替代
  */
+@Deprecated
 public class MineMyFocusFragment extends BaseRecyclerFragment {
 
 

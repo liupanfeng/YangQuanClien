@@ -169,6 +169,9 @@ public class HttpUrl {
     /*羊管家 获取入栏信息 */
     public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_IN_INFO = URL + "app/cultural/assistant/batch/in/info";
 
+    /*羊管家 获取入栏信息 */
+    public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT_INFO = URL + "app/cultural/assistant/batch/out/list";
+
 
     /*羊助手出栏信息填写*/
     public static final String SHEEP_HOLDER_BASE_MESSAGE_BATCH_OUT = URL + "app/cultural/assistant/batch/out";
@@ -291,6 +294,9 @@ public class HttpUrl {
 
     /*用户驾驶信息是否完善*/
     public static final String SHEEP_APP_DRIVER_INFO = URL + "app/user/driver/info";
+
+    /*用户版-收藏用户列表*/
+    public static final String SHEEP_APP_COLLECTION_LIST = URL + "app/user/collection/list";
 
 
 

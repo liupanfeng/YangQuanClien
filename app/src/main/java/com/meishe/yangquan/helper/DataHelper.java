@@ -5,10 +5,18 @@ import android.text.TextUtils;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.FeedShoppingInfo;
+import com.meishe.yangquan.bean.FeedShoppingInfoResult;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfoResult;
+import com.meishe.yangquan.bean.MineCollectionInfo;
+import com.meishe.yangquan.bean.MineCollectionInfoResult;
 import com.meishe.yangquan.bean.MineFeedGoldInfo;
 import com.meishe.yangquan.bean.MineFeedGoldInfoResult;
+import com.meishe.yangquan.bean.MineMyFansInfo;
+import com.meishe.yangquan.bean.MineMyFansInfoResult;
+import com.meishe.yangquan.bean.MineMyFocusInfo;
+import com.meishe.yangquan.bean.MineMyFocusInfoResult;
 import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.bean.MineOrderInfoResult;
 import com.meishe.yangquan.bean.MineUserMessageInfo;
@@ -21,6 +29,7 @@ import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
+import com.meishe.yangquan.utils.Util;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -228,17 +237,17 @@ public class DataHelper {
         }, param, token);
     }
 
-
-    /**
-     * 获取养殖档案列表
-     */
-    private void getBreedingArchivesData() {
+    public void getBreedingArchivesData(final List<BaseInfo> list, int type,
+                                         final int pageSize, final int pageNumber,
+                                         boolean isLoadFinish, final boolean isLoadMore) {
         String token = getToken();
         if (TextUtils.isEmpty(token)) {
             return;
         }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("pageNum", pageNumber);
+        param.put("pageSize", pageSize);
 
-        HashMap<String, Object> requestParam = new HashMap<>();
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_BREEDING_ARCHIVE, new BaseCallBack<MineBreedingArchivesInfoResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -247,17 +256,18 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
             }
 
             @Override
             protected void onSuccess(Call call, Response response, MineBreedingArchivesInfoResult result) {
                 if (result != null && result.getCode() == 1) {
-                    List<MineBreedingArchivesInfo> data = result.getData();
-                    if (data == null) {
-                        return;
-                    }
+                    List<MineBreedingArchivesInfo> datas = result.getData();
+                    commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
                 } else {
-//                    ToastUtil.showToast(mContext, result.getMsg());
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
                 }
             }
 
@@ -268,6 +278,9 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
 
             }
 
@@ -275,8 +288,253 @@ public class DataHelper {
             protected void inProgress(int progress, long total, int id) {
 
             }
-        }, requestParam, token);
+        }, param, token);
     }
+
+
+    /**
+     * 用户版-我的-我的关注列表
+     */
+    public void getFocusData(final List<BaseInfo> list, int type,
+                              final int pageSize, final int pageNumber,
+                              boolean isLoadFinish, final boolean isLoadMore) {
+
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("pageNum", pageNumber);
+        param.put("pageSize", pageSize);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_FOCUS_LIST, new BaseCallBack<MineMyFocusInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, MineMyFocusInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    List<MineMyFocusInfo> datas = result.getData();
+                    commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+
+    }
+
+
+
+    /**
+     * 用户版-我的-我的粉丝列表
+     */
+    public void getFansData(final List<BaseInfo> list, int type,
+                             final int pageSize, final int pageNumber,
+                             boolean isLoadFinish, final boolean isLoadMore) {
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("pageNum", pageNumber);
+        param.put("pageSize", pageSize);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_FANS_LIST, new BaseCallBack<MineMyFansInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, MineMyFansInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    List<MineMyFansInfo> datas = result.getData();
+                    commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+
+    }
+
+
+
+    /**
+     *用户版-我的-收藏数据列表
+     * type 1:店铺  2：商品
+     */
+    public void getCollectionDataFromServer(final List<BaseInfo> list, int type,
+                                             final int pageSize, final int pageNumber,
+                                             boolean isLoadFinish, final boolean isLoadMore) {
+
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("pageNum", pageNumber);
+        param.put("pageSize", pageSize);
+        param.put("objectType", type);
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_COLLECTION_LIST, new BaseCallBack<MineCollectionInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, MineCollectionInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    List<MineCollectionInfo> datas = result.getData();
+                    commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+    /**
+     * 获取店铺列表信息
+     */
+    public void getShoppingData(final List<BaseInfo> list, int type,
+                                final int pageSize, final int pageNumber,
+                                boolean isLoadFinish, final boolean isLoadMore) {
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<>();
+        if (type==1){
+            param.put("mainCategory","饲料");
+        }else if (type==2){
+            param.put("mainCategory","玉米");
+        } else if (type==3){
+            param.put("mainCategory","五金电料");
+        }
+        param.put("pageSize",pageSize);
+        param.put("pageNum",pageNumber);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_SHOP_LIST, new BaseCallBack<FeedShoppingInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, FeedShoppingInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    List<FeedShoppingInfo> datas = result.getData();
+                    commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
 
     /**
      * 通用的数据返回处理
