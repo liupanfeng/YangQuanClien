@@ -37,6 +37,13 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     private boolean mLazLoad;
     private View mNoDataView;
 
+    /**
+     *
+     * @param isNeedLazLoad 是否需要懒加载
+     * @param type  页面类型
+     * @param subType   请求类型  如果不需要可以传0
+     * @return
+     */
     public static CommonListFragment newInstance(boolean isNeedLazLoad,int type,int subType) {
         CommonListFragment commonListFragment = new CommonListFragment();
         Bundle bundle = new Bundle();
@@ -82,6 +89,7 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     protected void lazyLoad() {
         super.lazyLoad();
         if (mLazLoad){
+            mIsLoadMore=false;
             getDataFromServer();
         }
     }
@@ -110,23 +118,54 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     }
 
     private void getDataFromServer() {
-        showLoading();
+//        showLoading();
         //全部订单
         DataHelper.getInstance().setOnCallBackListener(this);
         switch (mType){
             case Constants.TYPE_COMMON_MY_ORDER_TYPE:
-                DataHelper.getInstance().getOrderData(mList,mSubType,mPageNum,mPageSize,
+                DataHelper.getInstance().getOrderData(mList,mSubType,mPageSize,mPageNum,
                         mIsLoadFinish,mIsLoadMore);
                 break;
             case Constants.TYPE_COMMON_MY_MESSAGE:
-                DataHelper.getInstance().getMyMessageData(mList,mSubType,mPageNum,mPageSize,
+                DataHelper.getInstance().getMyMessageData(mList,mSubType,mPageSize,mPageNum,
                         mIsLoadFinish,mIsLoadMore);
                 break;
             case Constants.TYPE_COMMON_FEED_GOLD_TYPE:
-                DataHelper.getInstance().getFeedGoldDataFromServer(mList,mSubType,mPageNum,mPageSize,
+                DataHelper.getInstance().getFeedGoldDataFromServer(mList,mSubType,mPageSize,mPageNum,
                         mIsLoadFinish,mIsLoadMore);
                 break;
+            case Constants.TYPE_COMMON_BREEDING_ARCHIVE_TYPE:
+                DataHelper.getInstance().getBreedingArchivesData(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadFinish,mIsLoadMore);
+                break;
+            case Constants.TYPE_COMMON_MINE_MY_FOCUS:  //我的-我的关注
+                DataHelper.getInstance().getFocusData(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadFinish,mIsLoadMore);
+                break;
+            case Constants.TYPE_COMMON_MINE_MY_FANS:  //我的-我的粉丝
+                DataHelper.getInstance().getFansData(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadFinish,mIsLoadMore);
+                break;
+            case Constants.TYPE_COMMON_MINE_COLLECT_SHOPPING:
+                //收藏店铺
+            case Constants.TYPE_COMMON_MINE_COLLECT_GOODS:
+                //收藏商品
+                DataHelper.getInstance().getCollectionDataFromServer(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadFinish,mIsLoadMore);
 
+                break;
+            case Constants.TYPE_COMMON_FEED_FEED:
+                //饲料-饲料
+            case Constants.TYPE_COMMON_FEED_CORN:
+                //饲料-玉米
+            case Constants.TYPE_COMMON_FEED_TOOLS:
+                //饲料-工具
+                DataHelper.getInstance().getShoppingData(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadFinish,mIsLoadMore);
+
+                break;
+            default:
+                break;
         }
     }
 

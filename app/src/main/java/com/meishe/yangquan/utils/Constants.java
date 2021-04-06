@@ -340,10 +340,6 @@ public class Constants {
     /*支出*/
     public static final int TYPE_FEED_GOLD_OUT_TYPE = 2;
 
-    /*收藏-店铺*/
-    public static final int TYPE_MINE_COLLECT_SHOPPING = 1;
-    /*收藏-商品*/
-    public static final int TYPE_MINE_COLLECT_GOODS = 2;
 
     /*百度*/
     public static final int TYPE_MAP_BAIDU = 1;
@@ -366,6 +362,30 @@ public class Constants {
 
     /*用户版-我的-饲料金*/
     public static final int TYPE_COMMON_FEED_GOLD_TYPE = 3;
+    /*用户版-我的-养殖档案*/
+    public static final int TYPE_COMMON_BREEDING_ARCHIVE_TYPE = 4;
+    /*用户版-我的-我的关注*/
+    public static final int TYPE_COMMON_MINE_MY_FOCUS = 5;
+
+    /*用户版-我的-我的粉丝*/
+    public static final int TYPE_COMMON_MINE_MY_FANS = 6;
+
+
+    /*用户版-收藏-店铺*/
+    public static final int TYPE_COMMON_MINE_COLLECT_SHOPPING = 7;
+    /*用户版-收藏-商品*/
+    public static final int TYPE_COMMON_MINE_COLLECT_GOODS = 8;
+
+
+
+    /*用户版-饲料-饲料*/
+    public static final int TYPE_COMMON_FEED_FEED = 9;
+    /*用户版-饲料-玉米*/
+    public static final int TYPE_COMMON_FEED_CORN = 10;
+    /*用户版-饲料-工具*/
+    public static final int TYPE_COMMON_FEED_TOOLS = 11;
+
+
 
 
 

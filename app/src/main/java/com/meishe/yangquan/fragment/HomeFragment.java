@@ -120,7 +120,7 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new CommonFragmentAdapter(getChildFragmentManager(), mFragmentList, mTopTabTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);
-
+        mViewPager.setScroll(false);
          getUserDataFromServer();
 
          getVersionData();

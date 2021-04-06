@@ -28,8 +28,9 @@ import okhttp3.Response;
 
 /**
  * @author 86188
- * 我的-养殖档案页面
+ * 我的-养殖档案页面    这个页面又common 页面代替
  */
+@Deprecated
 public class MineBreedingArchivesActivity extends BaseActivity {
 
     private TextView mTvTitle;

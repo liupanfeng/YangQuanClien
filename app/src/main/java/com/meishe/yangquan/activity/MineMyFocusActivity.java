@@ -12,6 +12,7 @@ import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
+import com.meishe.yangquan.fragment.CommonListFragment;
 import com.meishe.yangquan.fragment.HomeListFragment;
 import com.meishe.yangquan.fragment.MineMyFansFragment;
 import com.meishe.yangquan.fragment.MineMyFocusFragment;
@@ -55,8 +56,13 @@ public class MineMyFocusActivity extends BaseActivity {
         mFragmentLists=new ArrayList<>();
         mTitleList=new ArrayList<>();
 
-        MineMyFocusFragment mineMyFocusFragment=new MineMyFocusFragment();
-        MineMyFansFragment mineMyFansFragment=new MineMyFansFragment();
+//        MineMyFocusFragment mineMyFocusFragment=new MineMyFocusFragment();
+//        MineMyFansFragment mineMyFansFragment=new MineMyFansFragment();
+        CommonListFragment mineMyFocusFragment=CommonListFragment.
+                newInstance(true,Constants.TYPE_COMMON_MINE_MY_FOCUS,0);
+        CommonListFragment mineMyFansFragment=CommonListFragment.
+                newInstance(true,Constants.TYPE_COMMON_MINE_MY_FANS,0);
+
         mFragmentLists.add(mineMyFocusFragment);
         mFragmentLists.add(mineMyFansFragment);
 

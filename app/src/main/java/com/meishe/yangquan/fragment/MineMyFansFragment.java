@@ -33,7 +33,9 @@ import okhttp3.Response;
  * @author liupanfeng
  * @desc 我的-我的关注-粉丝
  * @date 2020/12/11 11:30
+ *
  */
+@Deprecated
 public class MineMyFansFragment extends BaseRecyclerFragment {
 
 

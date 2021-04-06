@@ -12,6 +12,7 @@ import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.view.MViewPager;
 
 import java.util.ArrayList;
@@ -55,15 +56,22 @@ public class FeedFragment extends BaseRecyclerFragment {
         mFragmentList.clear();
         mTabContents.clear();
 
-        FeedContentListFragment feedFeedFragment = new FeedContentListFragment();
+//        FeedContentListFragment feedFeedFragment = new FeedContentListFragment();
+        CommonListFragment feedFeedFragment = CommonListFragment.newInstance(true,
+                Constants.TYPE_COMMON_FEED_FEED,1);
+
         mFragmentList.add(feedFeedFragment);
         mTabContents.add("饲料");
 
-        FeedCornFragment feedCornFragment = new FeedCornFragment();
+//        FeedCornFragment feedCornFragment = new FeedCornFragment();
+        CommonListFragment feedCornFragment = CommonListFragment.
+                newInstance(true,Constants.TYPE_COMMON_FEED_CORN,2);
         mFragmentList.add(feedCornFragment);
         mTabContents.add("玉米");
 
-        FeedToolsFragment feedToolsFragment = new FeedToolsFragment();
+//        FeedToolsFragment feedToolsFragment = new FeedToolsFragment();
+        CommonListFragment feedToolsFragment = CommonListFragment.newInstance(true,
+                Constants.TYPE_COMMON_FEED_TOOLS,3);
         mFragmentList.add(feedToolsFragment);
         mTabContents.add("工具");
 

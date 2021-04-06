@@ -295,6 +295,9 @@ public class HttpUrl {
     /*用户驾驶信息是否完善*/
     public static final String SHEEP_APP_DRIVER_INFO = URL + "app/user/driver/info";
 
+    /*用户版-收藏用户列表*/
+    public static final String SHEEP_APP_COLLECTION_LIST = URL + "app/user/collection/list";
+
 
 
     //////////////////////////////////////////商版//////////////////////////////////////////////
