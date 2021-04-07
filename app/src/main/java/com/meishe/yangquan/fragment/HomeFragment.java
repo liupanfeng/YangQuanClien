@@ -122,12 +122,16 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
         mSlidingTabLayout.setViewPager(mViewPager);
         mViewPager.setScroll(false);
          getUserDataFromServer();
-
          getVersionData();
     }
 
-
-
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+        if (mViewPager!=null){
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem());
+        }
+    }
 
     private void initTabTitle() {
         mTopTabTitleList.clear();

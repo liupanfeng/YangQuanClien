@@ -46,14 +46,7 @@ import static com.meishe.yangquan.utils.Constants.TAB_TYPE_SERVICE;
  * @date 2020/11/26 10:43
  */
 public class HomeServiceFragment extends BaseRecyclerFragment implements View.OnClickListener {
-    /*剪羊毛*/
-    public static final int TYPE_SERVICE_CUT_WOOL = 13;
-    /*打疫苗*/
-    public static final int TYPE_SERVICE_VACCINE = 14;
-    /*拉羊粪*/
-    public static final int TYPE_SERVICE_SHEEP_DUNG = 15;
-    /*找车辆*/
-    public static final int TYPE_SERVICE_LOOK_CAR = 16;
+
 
     /*剪羊毛*/
     private CustomButton mCutWool;
@@ -65,7 +58,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
     private CustomButton mLookCar;
 
 
-    private int mServiceType = TYPE_SERVICE_CUT_WOOL;
+    private int mServiceType = Constants.TYPE_SERVICE_CUT_WOOL;
 
     private View mIvPublishService;
     private HomeContentFragment mHomeContentFragment;
@@ -95,7 +88,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
             public void onClick(View view) {
 
 
-                if (mServiceType == TYPE_SERVICE_LOOK_CAR) {
+                if (mServiceType == Constants.TYPE_SERVICE_LOOK_CAR) {
                     checkDriverMessage();
                     return;
                 }
@@ -179,32 +172,44 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
 
     @Override
     protected void initData() {
+
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
         HomeContentFragment contentFragment = HomeContentFragment.newInstance(mServiceType, TAB_TYPE_SERVICE);
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, contentFragment).commit();
-
-        selectCutWool();
+        if (mServiceType==Constants.TYPE_SERVICE_CUT_WOOL){
+            selectCutWool();
+        }else if (mServiceType==Constants.TYPE_SERVICE_VACCINE){
+            selectVaccine();
+        }else if (mServiceType==Constants.TYPE_SERVICE_SHEEP_DUNG){
+            selectSheepDung();
+        }else if (mServiceType==Constants.TYPE_SERVICE_LOOK_CAR){
+            selectLookCar();
+        }
     }
-
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_cut_wool:
-                mServiceType = TYPE_SERVICE_CUT_WOOL;
+                mServiceType = Constants.TYPE_SERVICE_CUT_WOOL;
                 selectCutWool();
                 break;
             case R.id.btn_vaccine:
-                mServiceType = TYPE_SERVICE_VACCINE;
+                mServiceType = Constants.TYPE_SERVICE_VACCINE;
                 selectVaccine();
                 break;
             case R.id.btn_sheep_dung:
-                mServiceType = TYPE_SERVICE_SHEEP_DUNG;
+                mServiceType = Constants.TYPE_SERVICE_SHEEP_DUNG;
                 selectSheepDung();
                 break;
             case R.id.btn_look_car:
-                mServiceType = TYPE_SERVICE_LOOK_CAR;
+                mServiceType = Constants.TYPE_SERVICE_LOOK_CAR;
                 selectLookCar();
                 break;
 

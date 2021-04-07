@@ -14,9 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.divider.CustomItemDecoration;
 import com.meishe.yangquan.divider.RecycleViewDivider;
 import com.meishe.yangquan.helper.BackHandlerHelper;
 import com.meishe.yangquan.inter.FragmentBackHandler;
@@ -152,11 +154,11 @@ public abstract class BaseRecyclerFragment extends Fragment implements FragmentB
 
 
     protected void initRecyclerView(int itemDecor,int orientation) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, orientation, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false);
         mAdapter = new MultiFunctionAdapter(mContext, mRecyclerView);
-        mRecyclerView.addItemDecoration(new RecycleViewDivider(mAdapter,itemDecor,mContext,orientation));
-        mRecyclerView.setLayoutManager(layoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.addItemDecoration(new CustomItemDecoration(20,getResources().getColor(R.color.cute_pink)));
     }
 
 

@@ -58,16 +58,9 @@ import java.io.IOException;
 import java.util.HashMap;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_CUT_WOOL;
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_LOOK_CAR;
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG;
-import static com.meishe.yangquan.fragment.HomeServiceFragment.TYPE_SERVICE_VACCINE;
 
 /**
  * 服务发布页面
@@ -195,19 +188,19 @@ public class PublishServiceActivity extends BaseActivity {
     @Override
     public void initTitle() {
         switch (mServiceType) {
-            case TYPE_SERVICE_CUT_WOOL:
+            case Constants.TYPE_SERVICE_CUT_WOOL:
                 mTvTitle.setText("羊毛服务");
                 showCutHair();
                 break;
-            case TYPE_SERVICE_VACCINE:
+            case Constants.TYPE_SERVICE_VACCINE:
                 mTvTitle.setText("疫苗服务");
                 showCutHair();
                 break;
-            case TYPE_SERVICE_SHEEP_DUNG:
+            case Constants.TYPE_SERVICE_SHEEP_DUNG:
                 mTvTitle.setText("羊粪服务");
                 showSheepDung();
                 break;
-            case TYPE_SERVICE_LOOK_CAR:
+            case Constants.TYPE_SERVICE_LOOK_CAR:
                 mTvTitle.setText("车辆服务");
                 showFindCar();
                 break;
@@ -305,14 +298,14 @@ public class PublishServiceActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.btn_publish:
                 switch (mServiceType) {
-                    case TYPE_SERVICE_CUT_WOOL:
-                    case TYPE_SERVICE_VACCINE:
+                    case Constants.TYPE_SERVICE_CUT_WOOL:
+                    case Constants.TYPE_SERVICE_VACCINE:
                         publishCutSheepHair();
                         break;
-                    case TYPE_SERVICE_SHEEP_DUNG:
+                    case Constants.TYPE_SERVICE_SHEEP_DUNG:
                         publishSheepDung();
                         break;
-                    case TYPE_SERVICE_LOOK_CAR:
+                    case Constants.TYPE_SERVICE_LOOK_CAR:
                         publishSheepCar();
                         break;
                     default:
@@ -510,14 +503,14 @@ public class PublishServiceActivity extends BaseActivity {
                     return;
                 }
                 switch (mServiceType) {
-                    case TYPE_SERVICE_SHEEP_DUNG:
+                    case Constants.TYPE_SERVICE_SHEEP_DUNG:
                         publishSheepDungService(String.valueOf(data.getId()));
                         break;
-                    case TYPE_SERVICE_VACCINE:
-                    case TYPE_SERVICE_CUT_WOOL:
+                    case Constants.TYPE_SERVICE_VACCINE:
+                    case Constants.TYPE_SERVICE_CUT_WOOL:
                         publishService(String.valueOf(data.getId()));
                         break;
-                    case TYPE_SERVICE_LOOK_CAR:
+                    case Constants.TYPE_SERVICE_LOOK_CAR:
                         publishFindCarService(String.valueOf(data.getId()));
                         break;
                     default:

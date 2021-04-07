@@ -7,17 +7,11 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabLayout;
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
-import com.meishe.yangquan.adapter.ViewPagerAdapter;
 import com.meishe.yangquan.fragment.CommonListFragment;
-import com.meishe.yangquan.fragment.HomeListFragment;
-import com.meishe.yangquan.fragment.MineMyFansFragment;
-import com.meishe.yangquan.fragment.MineMyFocusFragment;
 import com.meishe.yangquan.utils.Constants;
-import com.meishe.yangquan.view.MViewPager;
 
 import java.util.ArrayList;
 import java.util.List;

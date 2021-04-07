@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/home_market_list_item_bg"
+    android:background="@color/white"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="196dp"
-        android:layout_margin="6dp"
+        android:layout_margin="@dimen/card_margin_size"
         app:cardBackgroundColor="@color/white"
-        app:cardElevation="3dp"
-        app:cardCornerRadius="4dp"
+        app:cardElevation="@dimen/card_elevation_size"
+        app:cardCornerRadius="@dimen/card_corner_radius_size"
         >
 
 

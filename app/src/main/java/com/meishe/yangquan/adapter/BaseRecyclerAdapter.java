@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,10 +60,13 @@ import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.pop.SelectMapTypeView;
 import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
+import com.meishe.yangquan.utils.LocationUtil;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
@@ -180,7 +184,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
     private List<BaseInfo> mList;
 
-    private int mSelectPosition=-1;
+    private int mSelectPosition = -1;
     /*嵌套的recyclerview 选中的数据结构*/
     private BaseInfo mChildRecyclerViewSelect;
 
@@ -293,11 +297,11 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
         } else if (info instanceof FeedShoppingInfo) {
             Bundle bundle = new Bundle();
-            bundle.putSerializable(Constants.FEED_SHOPPING_INFO,info);
+            bundle.putSerializable(Constants.FEED_SHOPPING_INFO, info);
             AppManager.getInstance().jumpActivity(mContext, FeedShoppingDetailActivity.class, bundle);
         } else if (info instanceof FeedGoodsInfo) {
             Bundle bundle = new Bundle();
-            bundle.putSerializable(Constants.FEED_GOODS_INFO,info);
+            bundle.putSerializable(Constants.FEED_GOODS_INFO, info);
             AppManager.getInstance().jumpActivity(mContext, FeedGoodsDetailActivity.class, bundle);
         } else if (info instanceof CommonPictureInfo) {
             if (((CommonPictureInfo) info).getType() == CommonPictureInfo.TYPE_ADD_PIC) {
@@ -315,7 +319,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             if (showBigPictureView != null) {
                 showBigPictureView.show();
             }
-        }else if (info instanceof BUPictureInfo) {
+        } else if (info instanceof BUPictureInfo) {
             if (((BUPictureInfo) info).getType() == CommonPictureInfo.TYPE_ADD_PIC) {
                 return;
             }
@@ -323,7 +327,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             if (showBigPictureView != null) {
                 showBigPictureView.show();
             }
-        }  else if (info instanceof MineTypeInfo) {
+        } else if (info instanceof MineTypeInfo) {
 //            boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             boolean isNeedLogin = true;
             switch (((MineTypeInfo) info).getName()) {
@@ -368,7 +372,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     break;
                 case "我的消息":
 //                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyMessageActivity.class);
-                    CommonRecyclerActivity.newCommonRecyclerActivity(mContext,Constants.TYPE_COMMON_MY_MESSAGE,0);
+                    CommonRecyclerActivity.newCommonRecyclerActivity(mContext, Constants.TYPE_COMMON_MY_MESSAGE, 0);
                     break;
                 case "我的积分":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyPointsActivity.class);
@@ -378,7 +382,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     break;
                 case "养殖档案":
 //                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineBreedingArchivesActivity.class);
-                    CommonRecyclerActivity.newCommonRecyclerActivity(mContext,Constants.TYPE_COMMON_BREEDING_ARCHIVE_TYPE,0);
+                    CommonRecyclerActivity.newCommonRecyclerActivity(mContext, Constants.TYPE_COMMON_BREEDING_ARCHIVE_TYPE, 0);
                     break;
                 case "我的收藏":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineMyCollectionActivity.class);
@@ -393,20 +397,72 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), MineCallBackActivity.class);
                     break;
             }
-        } else if (info instanceof ServiceInfo&&v.getId()==R.id.iv_find_car_call_phone_number) {
+        } else if (info instanceof ServiceInfo) {
             //首页服务
-            String phone = ((ServiceInfo) info).getPhone();
-            if (Util.checkNull(phone)) {
-                return;
+            if (v.getId() == R.id.iv_find_car_call_phone_number) { //拨打电话
+                String phone = ((ServiceInfo) info).getPhone();
+                if (Util.checkNull(phone)) {
+                    return;
+                }
+                Util.callPhone(mContext, phone);
+            } else if (v.getId() == R.id.iv_cover) { //查看大图
+                List<String> images = ((ServiceInfo) info).getImages();
+                if (CommonUtils.isEmpty(images)) {
+                    return;
+                }
+                String url = images.get(0);
+                if (TextUtils.isEmpty(url)) {
+                    return;
+                }
+                ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, url);
+                if (showBigPictureView != null) {
+                    showBigPictureView.show();
+                }
             }
-            Util.callPhone(mContext,phone);
-        } else if (info instanceof MarketInfo&&v.getId()==R.id.iv_market_phone) {
+
+        } else if (info instanceof MarketInfo) {
             //市场
-            String phone = ((MarketInfo) info).getPhone();
-            if (Util.checkNull(phone)) {
-                return;
+            if (v.getId() == R.id.iv_market_phone) {
+                String phone = ((MarketInfo) info).getPhone();
+                if (Util.checkNull(phone)) {
+                    return;
+                }
+                Util.callPhone(mContext, phone);
+            } else if (v.getId() == R.id.iv_cover) {
+                List<String> images = ((MarketInfo) info).getImages();
+                if (CommonUtils.isEmpty(images)) {
+                    return;
+                }
+                String url = images.get(0);
+                if (TextUtils.isEmpty(url)) {
+                    return;
+                }
+                ShowBigPictureView showBigPictureView = ShowBigPictureView.create(mContext, url);
+                if (showBigPictureView != null) {
+                    showBigPictureView.show();
+                }
+            } else if (v.getId() == R.id.tv_market_address) {
+                final String address = ((MarketInfo) info).getAddress();
+                if (!TextUtils.isEmpty(address)) {
+                    SelectMapTypeView selectMapTypeView = SelectMapTypeView.create(mContext, new SelectMapTypeView.OnAttachListener() {
+                        @Override
+                        public void onSelect(int type) {
+                            if (type == Constants.TYPE_MAP_BAIDU) {
+                                LocationUtil.openBaidu(mContext, address);
+                            } else if (type == Constants.TYPE_MAP_GAODE) {
+                                LocationUtil.openGaode(mContext, address);
+                            } else if (type == Constants.TYPE_MAP_TENGXUN) {
+
+                            }
+                        }
+                    });
+                    if (!selectMapTypeView.isShow()) {
+                        selectMapTypeView.show();
+                    }
+
+                }
             }
-            Util.callPhone(mContext,phone);
+
         } else if (info instanceof ServerCustomer) {
             boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             if (isNeedLogin) {
@@ -492,22 +548,18 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         } else if (info instanceof ServiceMessage) {
             Intent intent = new Intent(mContext, ServiceMessageListActivity.class);
             mContext.startActivity(intent);
-        } else if (info instanceof MineBreedingArchivesInfo){
-                int id = ((MineBreedingArchivesInfo) info).getId();
-                int currentCulturalQuantity = ((MineBreedingArchivesInfo) info).getCurrentCulturalQuantity();
-                long initDate = ((MineBreedingArchivesInfo) info).getInitDate();
+        } else if (info instanceof MineBreedingArchivesInfo) {
+            int id = ((MineBreedingArchivesInfo) info).getId();
+            int currentCulturalQuantity = ((MineBreedingArchivesInfo) info).getCurrentCulturalQuantity();
+            long initDate = ((MineBreedingArchivesInfo) info).getInitDate();
 
-                Bundle bundle=new Bundle();
-                bundle.putInt(Constants.TYPE_KEY_BATCH_ID,id);
-                bundle.putInt(Constants.TYPE_KEY_SHEEP_SURPLUS, currentCulturalQuantity);
-                bundle.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initDate);
-                AppManager.getInstance().jumpActivity(mContext, MineBreedingArchivesDetailActivity.class,bundle);
-            }
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constants.TYPE_KEY_BATCH_ID, id);
+            bundle.putInt(Constants.TYPE_KEY_SHEEP_SURPLUS, currentCulturalQuantity);
+            bundle.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initDate);
+            AppManager.getInstance().jumpActivity(mContext, MineBreedingArchivesDetailActivity.class, bundle);
         }
-
-
-
-
+    }
 
 
     private void showDialog(final long fromUserId, final String fromPhoneNumber, final long userId, final String content, String title, String diaContent, String sureText) {
@@ -775,8 +827,8 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
         return -1;
     }
 
-    public BaseInfo getSelectData(){
-       return getItem(mSelectPosition);
+    public BaseInfo getSelectData() {
+        return getItem(mSelectPosition);
     }
 
     public void updateListItem(int position, BaseInfo newInfo) {

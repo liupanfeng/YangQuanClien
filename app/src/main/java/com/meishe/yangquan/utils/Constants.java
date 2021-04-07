@@ -158,6 +158,17 @@ public class Constants {
     public static final int UPLOAD_FILE_MODE_18 = 18;
 
 
+    /*剪羊毛*/
+    public static final int TYPE_SERVICE_CUT_WOOL = 13;
+    /*打疫苗*/
+    public static final int TYPE_SERVICE_VACCINE = 14;
+    /*拉羊粪*/
+    public static final int TYPE_SERVICE_SHEEP_DUNG = 15;
+    /*找车辆*/
+    public static final int TYPE_SERVICE_LOOK_CAR = 16;
+
+
+
     /*tab 市场*/
     public static final int TAB_TYPE_MARKET = 1;
     /*tab 服务*/
@@ -384,6 +395,11 @@ public class Constants {
     public static final int TYPE_COMMON_FEED_CORN = 10;
     /*用户版-饲料-工具*/
     public static final int TYPE_COMMON_FEED_TOOLS = 11;
+
+    /*用户版-首页-市场*/
+    public static final int TYPE_COMMON_MARKET = 12;
+    /*用户版-首页-服务*/
+    public static final int TYPE_COMMON_SERVICE = 13;
 
 
 

@@ -9,14 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dp10"
+        android:layout_marginBottom="@dimen/dp10"
         android:scaleType="centerCrop"
         android:visibility="gone" />
 
-    <TextView
+    <com.meishe.yangquan.view.LetterSpacingTextView
         android:id="@+id/tv_industry_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
+        android:lineSpacingExtra="@dimen/line_space_size"
+        android:gravity="left"
+        android:layout_marginBottom="@dimen/dp10"
         android:textColor="@color/color_ff303030"
         android:layout_marginTop="@dimen/dp10" />
 

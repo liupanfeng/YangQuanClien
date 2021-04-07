@@ -66,13 +66,25 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
     @Override
     protected void initData() {
 
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
         HomeContentFragment contentFragment = HomeContentFragment.newInstance(mMarketType,TAB_TYPE_MARKET);
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, contentFragment).commit();
-        selectSellLittleSheep();
+        if (mMarketType==Constants.TYPE_MARKET_SELL_LITTLE_SHEEP){
+            selectSellLittleSheep();
+        }else if (mMarketType==Constants.TYPE_MARKET_BUY_LITTLE_SHEEP){
+            selectBuyLittleSheep();
+        }else if (mMarketType==Constants.TYPE_MARKET_SELL_BIG_SHEEP){
+            selectSellBigSheep();
+        }else if (mMarketType==Constants.TYPE_MARKET_BUY_BIG_SHEEP){
+            selectBuyBigSheep();
+        }
     }
-
 
     @Override
     public void onClick(View v) {

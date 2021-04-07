@@ -14,6 +14,7 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.fragment.HomeServiceFragment;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
@@ -129,8 +130,8 @@ public class HomeServiceListHolder extends BaseViewHolder {
         if (info instanceof ServiceInfo) {
             int serverType = ((ServiceInfo) info).getServerType();
             switch (serverType) {
-                case HomeServiceFragment.TYPE_SERVICE_CUT_WOOL:
-                case HomeServiceFragment.TYPE_SERVICE_VACCINE:
+                case Constants.TYPE_SERVICE_CUT_WOOL:
+                case Constants.TYPE_SERVICE_VACCINE:
                     rl_cut_sheep_hair.setVisibility(View.VISIBLE);
                     rl_cut_sheep_dung.setVisibility(View.GONE);
                     rl_find_car.setVisibility(View.GONE);
@@ -142,7 +143,7 @@ public class HomeServiceListHolder extends BaseViewHolder {
                     tv_team_desc.setText(teamDesc);
 
                     break;
-                case HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG:
+                case Constants.TYPE_SERVICE_SHEEP_DUNG:
                     rl_cut_sheep_hair.setVisibility(View.GONE);
                     rl_cut_sheep_dung.setVisibility(View.VISIBLE);
                     rl_find_car.setVisibility(View.GONE);
@@ -153,7 +154,7 @@ public class HomeServiceListHolder extends BaseViewHolder {
                     tv_sheep_dung_team_price.setText(((ServiceInfo) info).getPrice() + "元/车");
 
                     break;
-                case HomeServiceFragment.TYPE_SERVICE_LOOK_CAR:
+                case Constants.TYPE_SERVICE_LOOK_CAR:
                     rl_cut_sheep_hair.setVisibility(View.GONE);
                     rl_cut_sheep_dung.setVisibility(View.GONE);
                     rl_find_car.setVisibility(View.VISIBLE);

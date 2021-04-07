@@ -81,4 +81,12 @@ public class FeedFragment extends BaseRecyclerFragment {
         mSlidingTabLayout.setViewPager(mViewPager);
 
     }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+        if (mViewPager!=null){
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem());
+        }
+    }
 }
