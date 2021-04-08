@@ -7,7 +7,7 @@
     tools:context=".activity.HomeIndustryInformationDetailActivity">
     <include layout="@layout/custom_title" />
 
-
+    <include layout="@layout/line_no_margin"/>
     <!--<TextView-->
         <!--android:id="@+id/tv_industry_title"-->
         <!--android:layout_width="match_parent"-->

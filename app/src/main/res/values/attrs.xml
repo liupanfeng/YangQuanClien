@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <attr name="visible_tab_count" format="integer" />
+
     <declare-styleable name="CustomToolbar">
         <attr name="leftButtonIcon" format="reference" />
         <attr name="rightButtonIcon" format="reference" />
         <attr name="myTitle" format="string" />
     </declare-styleable>
 
+
+    <!--圆形图片-->
     <declare-styleable name="CustomRoundView">
         <attr name="corner_radius" />
     </declare-styleable>
 
-
-    <!--圆形图片-->
     <declare-styleable name="CircleImageView">
         <attr name="civ_border_width" format="dimension" />
         <attr name="civ_border_color" format="color" />
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
+
 
     <declare-styleable name="CropCircleView">
         <!--遮罩颜色-->
@@ -35,29 +38,26 @@
           <attr name="roundHeight" format="dimension" />  
             
     </declare-styleable>
-
-
-    <attr name="visible_tab_count" format="integer"/>
     <declare-styleable name="BannerLayoutStyle">
-        <attr name="selectedIndicatorColor" format="color|reference"/>
-        <attr name="unSelectedIndicatorColor" format="color|reference"/>
-        <attr name="titleBGColor" format="color|reference"/>
-        <attr name="titleColor" format="color|reference"/>
+        <attr name="selectedIndicatorColor" format="color|reference" />
+        <attr name="unSelectedIndicatorColor" format="color|reference" />
+        <attr name="titleBGColor" format="color|reference" />
+        <attr name="titleColor" format="color|reference" />
 
         <attr name="indicatorShape" format="enum">
-            <enum name="rect" value="0"/>
-            <enum name="oval" value="1"/>
+            <enum name="rect" value="0" />
+            <enum name="oval" value="1" />
         </attr>
-        <attr name="selectedIndicatorHeight" format="dimension|reference"/>
-        <attr name="selectedIndicatorWidth" format="dimension|reference"/>
-        <attr name="unSelectedIndicatorHeight" format="dimension|reference"/>
-        <attr name="unSelectedIndicatorWidth" format="dimension|reference"/>
-        <attr name="indicatorSpace" format="dimension|reference"/>
-        <attr name="indicatorMargin" format="dimension|reference"/>
-        <attr name="autoPlayDuration" format="integer|reference"/>
-        <attr name="scrollDuration" format="integer|reference"/>
-        <attr name="isAutoPlay" format="boolean"/>
-        <attr name="defaultImage" format="integer|reference"/>
+        <attr name="selectedIndicatorHeight" format="dimension|reference" />
+        <attr name="selectedIndicatorWidth" format="dimension|reference" />
+        <attr name="unSelectedIndicatorHeight" format="dimension|reference" />
+        <attr name="unSelectedIndicatorWidth" format="dimension|reference" />
+        <attr name="indicatorSpace" format="dimension|reference" />
+        <attr name="indicatorMargin" format="dimension|reference" />
+        <attr name="autoPlayDuration" format="integer|reference" />
+        <attr name="scrollDuration" format="integer|reference" />
+        <attr name="isAutoPlay" format="boolean" />
+        <attr name="defaultImage" format="integer|reference" />
 
     </declare-styleable>
      
@@ -86,21 +86,39 @@
 
     <declare-styleable name="PasswordEditText">
         <!--密码个数-->
-        <attr name="passwordNumber" format="integer"/>
+        <attr name="passwordNumber" format="integer" />
         <!--密码原点的半径-->
-        <attr name="passwordRadius" format="dimension"/>
+        <attr name="passwordRadius" format="dimension" />
         <!--密码原点的颜色-->
-        <attr name="passwordColor" format="color"/>
+        <attr name="passwordColor" format="color" />
         <!--分割线的颜色-->
-        <attr name="divisionLineColor" format="color"/>
+        <attr name="divisionLineColor" format="color" />
         <!--分割线的大小  指宽度-->
-        <attr name="divisionLineSize" format="dimension"/>
+        <attr name="divisionLineSize" format="dimension" />
         <!--背景边框的颜色-->
-        <attr name="bgColor" format="color"/>
+        <attr name="bgColor" format="color" />
         <!--背景边框的大小-->
-        <attr name="bgSize" format="dimension"/>
+        <attr name="bgSize" format="dimension" />
         <!--背景边框的圆角大小-->
-        <attr name="bgCorner" format="dimension"/>
+        <attr name="bgCorner" format="dimension" />
+
+    </declare-styleable>
+
+    <!--注意这里的name要和自定义View的名称一致，不然在xml布局中无法引用-->
+    <declare-styleable name="HorizontalExpandMenu">
+        <attr name="back_color" format="color"></attr>
+        <attr name="stroke_size" format="dimension"></attr>
+        <attr name="stroke_color" format="color"></attr>
+        <attr name="corner_radius" format="dimension"></attr>
+
+        <attr name="button_style">
+            <enum name="right" value="0"/>
+            <enum name="left" value="1"/>
+        </attr>
+        <attr name="button_icon_size" format="dimension"></attr>
+        <attr name="button_icon_stroke_width" format="dimension"></attr>
+        <attr name="expand_time" format="dimension"></attr>
+        <attr name="button_icon_color" format="color"></attr>
 
     </declare-styleable>
 

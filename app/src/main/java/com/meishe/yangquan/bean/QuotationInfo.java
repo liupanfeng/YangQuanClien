@@ -18,6 +18,8 @@ public class QuotationInfo extends BaseInfo{
 
     private float todayPrice;
 
+    private int type;
+
 
     public String getId() {
         return id;
@@ -57,5 +59,13 @@ public class QuotationInfo extends BaseInfo{
 
     public void setTodayPrice(float todayPrice) {
         this.todayPrice = todayPrice;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

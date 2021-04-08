@@ -16,6 +16,7 @@ import com.meishe.yangquan.utils.FormatDateUtil;
 /**
  * 我的商机
  */
+@Deprecated
 public class BusinessOpportunityListHolder extends BaseViewHolder {
 
     private TextView tv_opportunity_time;

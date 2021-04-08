@@ -10,15 +10,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
-import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.utils.Constants;
 
 /**
  * @Author : lpf
  * @CreateDate : 2021/1/26
- * @Description : 市场页面
+ * @Description : 市场和服务
  */
 
 public class HomeContentFragment extends BaseRecyclerFragment {
@@ -64,11 +62,30 @@ public class HomeContentFragment extends BaseRecyclerFragment {
     private void initTabLayout() {
         mFragmentList.clear();
         mTitleList.clear();
-        HomeListFragment homeMarketNewestFragment= HomeListFragment.newInstance(mType,Constants.TYPE_LIST_TYPE_NEWEST,mTabType);
-        mFragmentList.add(homeMarketNewestFragment);
+        if (mTabType==Constants.TAB_TYPE_MARKET){
 
-        HomeListFragment homeMarketComment= HomeListFragment.newInstance(mType,Constants.TYPE_LIST_TYPE_RECOMMEND,mTabType);
-        mFragmentList.add(homeMarketComment);
+//            HomeMarketListFragment homeMarketNewestFragment= HomeMarketListFragment.newInstance(mType,Constants.TYPE_LIST_TYPE_NEWEST,mTabType);
+//            mFragmentList.add(homeMarketNewestFragment);
+//
+//            HomeMarketListFragment homeMarketComment= HomeMarketListFragment.newInstance(mType,Constants.TYPE_LIST_TYPE_RECOMMEND,mTabType);
+//            mFragmentList.add(homeMarketComment);
+            CommonListFragment homeMarketNewestFragment= CommonListFragment.newInstance(true,Constants.TYPE_COMMON_MARKET,Constants.TYPE_LIST_TYPE_NEWEST,mType);
+            mFragmentList.add(homeMarketNewestFragment);
+
+            CommonListFragment homeMarketComment= CommonListFragment.newInstance(true,Constants.TYPE_COMMON_MARKET,Constants.TYPE_LIST_TYPE_RECOMMEND,mType);
+            mFragmentList.add(homeMarketComment);
+        }else{
+//            HomeServiceListFragment homeServiceNewestListFragment= HomeServiceListFragment.newInstance(mType,Constants.TYPE_LIST_TYPE_NEWEST,mTabType);
+//            mFragmentList.add(homeServiceNewestListFragment);
+//
+//            HomeServiceListFragment homeServiceListFragment= HomeServiceListFragment.newInstance(mType,Constants.TYPE_LIST_TYPE_RECOMMEND,mTabType);
+//            mFragmentList.add(homeServiceListFragment);
+            CommonListFragment homeServiceNewestListFragment= CommonListFragment.newInstance(true,Constants.TYPE_COMMON_SERVICE,Constants.TYPE_LIST_TYPE_NEWEST,mType);
+            mFragmentList.add(homeServiceNewestListFragment);
+
+            CommonListFragment homeServiceListFragment= CommonListFragment.newInstance(true,Constants.TYPE_COMMON_SERVICE,Constants.TYPE_LIST_TYPE_RECOMMEND,mType);
+            mFragmentList.add(homeServiceListFragment);
+        }
 
         mTitleList.add("最新");
         mTitleList.add("推荐");

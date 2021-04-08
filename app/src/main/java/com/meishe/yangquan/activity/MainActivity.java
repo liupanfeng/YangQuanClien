@@ -139,7 +139,7 @@ public class MainActivity extends BasePermissionActivity {
         for (TabInfo tabInfo : mTabList) {
             setupChildView(tabInfo);
         }
-        mViewPager.setOffscreenPageLimit(2);
+        mViewPager.setOffscreenPageLimit(4);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0, mContext, mFragmentList, mListTitle));
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabWithIcons(mTabList);
@@ -153,7 +153,22 @@ public class MainActivity extends BasePermissionActivity {
 
     @Override
     public void initListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                mViewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override

@@ -165,4 +165,15 @@
     <dimen name="corners">10dp</dimen>
 
 
+    <dimen name="card_elevation_size">4dp</dimen>
+    <dimen name="card_corner_radius_size">4dp</dimen>
+    <dimen name="card_margin_size">6dp</dimen>
+    <dimen name="line_space_size">4dp</dimen>
+    <dimen name="quotation_title_text_size">14sp</dimen>
+    <dimen name="quotation_custom_button_height_size">24dp</dimen>
+    <dimen name="quotation_custom_button_width_size">60dp</dimen>
+    <dimen name="quotation_custom_button_text_size">11sp</dimen>
+    <dimen name="custom_button_left_margin_size">20dp</dimen>
+
+
 </resources>

@@ -1,6 +1,7 @@
 package com.meishe.yangquan.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,6 +28,7 @@ import java.util.List;
  */
 public class CommonListFragment extends BaseRecyclerFragment implements DataHelper.OnCallBackListener {
 
+    private static final String TAG = "CommonListFragment" ;
     protected List<BaseInfo> mList = new ArrayList<>();
 
     /*这个是请求那一类接口*/
@@ -36,6 +38,8 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     /*是否懒加载，解决ViewPage的预加载问题*/
     private boolean mLazLoad;
     private View mNoDataView;
+    /*推荐还是最新*/
+    private int mListType;
 
     /**
      *
@@ -55,6 +59,26 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     }
 
 
+    /**
+     *
+     * @param isNeedLazLoad 是否需要懒加载
+     * @param type  页面类型
+     * @param subType   请求类型  如果不需要可以传0
+     * @param listType   请求类型  如果不需要可以传0
+     * @return
+     */
+    public static CommonListFragment newInstance(boolean isNeedLazLoad,int type,int listType,int subType) {
+        CommonListFragment commonListFragment = new CommonListFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt(Constants.COMMON_TYPE, type);
+        bundle.putInt(Constants.COMMON_SUB_TYPE, subType);
+        bundle.putInt(Constants.MARKET_LIST_TYPE, listType);
+        bundle.putBoolean(Constants.COMMON_LAZ_LOAD_TYPE, isNeedLazLoad);
+        commonListFragment.setArguments(bundle);
+        return commonListFragment;
+    }
+
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +86,7 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
         if (arguments != null) {
             mType = arguments.getInt(Constants.COMMON_TYPE);
             mSubType = arguments.getInt(Constants.COMMON_SUB_TYPE);
+            mListType = arguments.getInt(Constants.MARKET_LIST_TYPE);
             mLazLoad = arguments.getBoolean(Constants.COMMON_LAZ_LOAD_TYPE);
         }
     }
@@ -80,6 +105,7 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
 
     @Override
     protected void initData() {
+        Log.d(TAG,"initData mType="+mType);
         if (!mLazLoad){
             getDataFromServer();
         }
@@ -89,6 +115,7 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     protected void lazyLoad() {
         super.lazyLoad();
         if (mLazLoad){
+            Log.d(TAG,"lazyLoad mType="+mType);
             mIsLoadMore=false;
             getDataFromServer();
         }
@@ -164,6 +191,25 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                         mIsLoadFinish,mIsLoadMore);
 
                 break;
+
+            case Constants.TYPE_COMMON_MARKET:
+                //首页-市场
+                DataHelper.getInstance().getMarketDataFromServer(mList,mPageSize,mPageNum,
+                        mIsLoadFinish,mIsLoadMore,mListType,mSubType);
+
+                break;
+            case Constants.TYPE_COMMON_SERVICE:
+                //首页-服务
+                DataHelper.getInstance().getServiceDataFromServer(mList,mPageSize,mPageNum,
+                        mIsLoadFinish,mIsLoadMore,mListType,mSubType);
+
+                break;
+            case Constants.TYPE_COMMON_QUOTATION:
+                //首页-行情
+                DataHelper.getInstance().getQuotationDataFromServer(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadMore);
+
+                break;
             default:
                 break;
         }
@@ -207,5 +253,8 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
 
     private void changeNoDataViewVisible(int visible){
         mNoDataView.setVisibility(visible);
+        if (visible==View.VISIBLE){
+            mAdapter.addAll(null);
+        }
     }
 }

@@ -9,10 +9,10 @@
             android:layout_width="@dimen/dp12"
             android:layout_height="@dimen/dp18"
             android:layout_centerVertical="true"
-            android:padding="@dimen/dp5"
+            android:padding="@dimen/dp10"
             android:scaleType="fitXY"
             android:background="@mipmap/ic_title_back"
-            android:layout_marginLeft="@dimen/dp18" />
+            android:layout_marginLeft="@dimen/dp20" />
 
         <TextView
             android:id="@+id/tv_title"

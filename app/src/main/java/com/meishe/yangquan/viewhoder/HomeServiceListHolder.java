@@ -7,13 +7,12 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServiceInfo;
-import com.meishe.yangquan.fragment.HomeServiceFragment;
+import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
@@ -27,7 +26,6 @@ import java.util.List;
 public class HomeServiceListHolder extends BaseViewHolder {
 
 
-    private final RequestOptions options;
     /*圆头像*/
     private CircleImageView civ_photo_circle;
     /*昵称*/
@@ -81,9 +79,6 @@ public class HomeServiceListHolder extends BaseViewHolder {
         super(itemView);
         mAdapter = adapter;
 
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -129,8 +124,8 @@ public class HomeServiceListHolder extends BaseViewHolder {
         if (info instanceof ServiceInfo) {
             int serverType = ((ServiceInfo) info).getServerType();
             switch (serverType) {
-                case HomeServiceFragment.TYPE_SERVICE_CUT_WOOL:
-                case HomeServiceFragment.TYPE_SERVICE_VACCINE:
+                case Constants.TYPE_SERVICE_CUT_WOOL:
+                case Constants.TYPE_SERVICE_VACCINE:
                     rl_cut_sheep_hair.setVisibility(View.VISIBLE);
                     rl_cut_sheep_dung.setVisibility(View.GONE);
                     rl_find_car.setVisibility(View.GONE);
@@ -142,7 +137,7 @@ public class HomeServiceListHolder extends BaseViewHolder {
                     tv_team_desc.setText(teamDesc);
 
                     break;
-                case HomeServiceFragment.TYPE_SERVICE_SHEEP_DUNG:
+                case Constants.TYPE_SERVICE_SHEEP_DUNG:
                     rl_cut_sheep_hair.setVisibility(View.GONE);
                     rl_cut_sheep_dung.setVisibility(View.VISIBLE);
                     rl_find_car.setVisibility(View.GONE);
@@ -153,7 +148,7 @@ public class HomeServiceListHolder extends BaseViewHolder {
                     tv_sheep_dung_team_price.setText(((ServiceInfo) info).getPrice() + "元/车");
 
                     break;
-                case HomeServiceFragment.TYPE_SERVICE_LOOK_CAR:
+                case Constants.TYPE_SERVICE_LOOK_CAR:
                     rl_cut_sheep_hair.setVisibility(View.GONE);
                     rl_cut_sheep_dung.setVisibility(View.GONE);
                     rl_find_car.setVisibility(View.VISIBLE);
@@ -196,26 +191,12 @@ public class HomeServiceListHolder extends BaseViewHolder {
             List<String> images = ((ServiceInfo) info).getImages();
             if (images != null && images.size() > 0) {
                 String coverUrl = images.get(0);
-                Glide.with(context)
-                        .asBitmap()
-                        .load(coverUrl)
-                        .apply(options)
-                        .into(iv_market_cover);
-
+                GlideUtil.getInstance().loadUrl(coverUrl,iv_market_cover);
             }else {
-                Glide.with(context)
-                        .asBitmap()
-                        .load("")
-                        .apply(options)
-                        .into(iv_market_cover);
+                GlideUtil.getInstance().loadUrl("",iv_market_cover);
             }
 
-
-            Glide.with(context)
-                    .asBitmap()
-                    .load(((ServiceInfo) info).getIconUrl())
-                    .apply(options)
-                    .into(civ_photo_circle);
+            GlideUtil.getInstance().loadPhotoUrl(((ServiceInfo) info).getIconUrl(),civ_photo_circle);
 
             iv_call_phone_number.setTag(info);
             iv_call_phone_number.setOnClickListener(listener);

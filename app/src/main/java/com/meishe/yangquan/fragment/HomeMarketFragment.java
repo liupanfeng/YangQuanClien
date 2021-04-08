@@ -1,10 +1,13 @@
 package com.meishe.yangquan.fragment;
 
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,6 +16,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.PublishMarketActivity;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.view.HorizontalExpandMenu;
 import com.meishe.yangquan.wiget.CustomButton;
 
 import static com.meishe.yangquan.utils.Constants.TAB_TYPE_MARKET;
@@ -33,7 +37,8 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
     private int mMarketType = Constants.TYPE_MARKET_SELL_LITTLE_SHEEP;
     private View mIvPublishMarket;
     private HomeContentFragment mHomeContentFragment;
-
+    private TextView tv_market_content;
+    private HorizontalExpandMenu expand_menu;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -44,6 +49,10 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mBuyBigSheep = view.findViewById(R.id.btn_buy_big_sheep);
         mRecyclerView = view.findViewById(R.id.recycler);
         mIvPublishMarket = view.findViewById(R.id.iv_common_publish);
+        tv_market_content = view.findViewById(R.id.tv_market_content);
+        expand_menu = view.findViewById(R.id.expand_menu);
+        tv_market_content.setSelected(true);
+        tv_market_content.setAlpha(0);
         return view;
     }
 
@@ -61,18 +70,60 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
                 AppManager.getInstance().jumpActivity(getActivity(), PublishMarketActivity.class, bundle);
             }
         });
+
+        expand_menu.setOnExpandMenuListener(new HorizontalExpandMenu.OnExpandMenuListener() {
+            @Override
+            public void onExpand(boolean isExpand, int time) {
+                if (isExpand) {
+                    ValueAnimator objectAnimator = ObjectAnimator.ofFloat(1f, 0f);
+                    objectAnimator.setDuration(time);
+                    objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            float animatedValue = (float) animation.getAnimatedValue();
+                            tv_market_content.setAlpha(animatedValue);
+                        }
+                    });
+                    objectAnimator.start();
+                } else {
+                    ValueAnimator objectAnimator = ObjectAnimator.ofFloat(0f, 1f);
+                    objectAnimator.setDuration(time);
+                    objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            float animatedValue = (float) animation.getAnimatedValue();
+                            tv_market_content.setAlpha(animatedValue);
+                        }
+                    });
+                    objectAnimator.start();
+                }
+            }
+        });
+
     }
 
     @Override
     protected void initData() {
 
-        HomeContentFragment contentFragment = HomeContentFragment.newInstance(mMarketType,TAB_TYPE_MARKET);
+    }
+
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+        HomeContentFragment contentFragment = HomeContentFragment.newInstance(mMarketType, TAB_TYPE_MARKET);
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, contentFragment).commit();
-        selectSellLittleSheep();
+        if (mMarketType == Constants.TYPE_MARKET_SELL_LITTLE_SHEEP) {
+            selectSellLittleSheep();
+        } else if (mMarketType == Constants.TYPE_MARKET_BUY_LITTLE_SHEEP) {
+            selectBuyLittleSheep();
+        } else if (mMarketType == Constants.TYPE_MARKET_SELL_BIG_SHEEP) {
+            selectSellBigSheep();
+        } else if (mMarketType == Constants.TYPE_MARKET_BUY_BIG_SHEEP) {
+            selectBuyBigSheep();
+        }
     }
-
 
     @Override
     public void onClick(View v) {
@@ -98,7 +149,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         }
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        mHomeContentFragment = HomeContentFragment.newInstance(mMarketType,TAB_TYPE_MARKET);
+        mHomeContentFragment = HomeContentFragment.newInstance(mMarketType, TAB_TYPE_MARKET);
         fragmentTransaction.replace(R.id.container, mHomeContentFragment).commit();
     }
 
@@ -107,6 +158,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mBuyLittleSheep.setSelected(false);
         mSellBigSheep.setSelected(false);
         mBuyBigSheep.setSelected(false);
+        tv_market_content.setText(mSellLittleSheep.getText());
     }
 
     private void selectBuyLittleSheep() {
@@ -114,6 +166,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mBuyLittleSheep.setSelected(true);
         mSellBigSheep.setSelected(false);
         mBuyBigSheep.setSelected(false);
+        tv_market_content.setText(mBuyLittleSheep.getText());
     }
 
     private void selectSellBigSheep() {
@@ -121,6 +174,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mBuyLittleSheep.setSelected(false);
         mSellBigSheep.setSelected(true);
         mBuyBigSheep.setSelected(false);
+        tv_market_content.setText(mSellBigSheep.getText());
     }
 
     private void selectBuyBigSheep() {
@@ -128,6 +182,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mBuyLittleSheep.setSelected(false);
         mSellBigSheep.setSelected(false);
         mBuyBigSheep.setSelected(true);
+        tv_market_content.setText(mBuyBigSheep.getText());
     }
 
 }

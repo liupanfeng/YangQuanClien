@@ -20,6 +20,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.MineOrderActivity;
+import com.meishe.yangquan.activity.MinePersonalInfoActivity;
 import com.meishe.yangquan.activity.SettingActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.MineTypeInfo;
@@ -33,6 +34,7 @@ import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
+import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -94,7 +96,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             R.mipmap.ic_mine_system_message,
             R.mipmap.ic_mine_pay_password};
 
-    private RoundAngleImageView mIvMinePhoto;
+    private CircleImageView mIvMinePhoto;
 
     private TextView mTvNickname;
     /*待支付*/
@@ -107,6 +109,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
     private RelativeLayout mRlMineRefund;
     /*设置*/
     private ImageView mIvSetting;
+    private View rl_photo_container;
 
     public MineFragment() {
     }
@@ -151,6 +154,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         mTvNickname = view.findViewById(R.id.tv_mine_nickname);
         mIvSetting = view.findViewById(R.id.iv_mine_setting);
         mIvMinePhoto = view.findViewById(R.id.iv_mine_photo);
+        rl_photo_container = view.findViewById(R.id.rl_photo_container);
 
         return view;
     }
@@ -163,6 +167,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         mRlMineCommont.setOnClickListener(this);
         mRlMineRefund.setOnClickListener(this);
         mIvSetting.setOnClickListener(this);
+        rl_photo_container.setOnClickListener(this);
     }
 
     @Override
@@ -253,6 +258,10 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             case R.id.iv_mine_setting:
                 //设置
                 AppManager.getInstance().jumpActivity(getActivity(), SettingActivity.class);
+                break;
+
+            case R.id.rl_photo_container:
+                AppManager.getInstance().jumpActivity(getActivity(), MinePersonalInfoActivity.class);
                 break;
             default:
                 break;

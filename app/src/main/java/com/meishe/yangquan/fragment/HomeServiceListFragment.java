@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
@@ -24,6 +25,7 @@ import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.LocationUtil;
+import com.meishe.yangquan.utils.ScreenUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
@@ -42,17 +44,18 @@ import okhttp3.Response;
 /**
  * @Author : lpf
  * @CreateDate : 2021/1/26
- * @Description : 市场具体内容页面
+ * @Description :  服务列表页面
  */
-public class HomeListFragment extends BaseRecyclerFragment {
+@Deprecated
+public class HomeServiceListFragment extends BaseRecyclerFragment {
 
     private int mType;
     private int mListType;
     private int mTabType;
     protected List<BaseInfo> mList = new ArrayList<>();
 
-    public static HomeListFragment newInstance(int type, int listType, int tabType) {
-        HomeListFragment homeListFragment = new HomeListFragment();
+    public static HomeServiceListFragment newInstance(int type, int listType, int tabType) {
+        HomeServiceListFragment homeListFragment = new HomeServiceListFragment();
         Bundle arguments = new Bundle();
         arguments.putInt(Constants.MARKET_TYPE, type);
         arguments.putInt(Constants.MARKET_LIST_TYPE, listType);
@@ -79,6 +82,7 @@ public class HomeListFragment extends BaseRecyclerFragment {
         mLoading = view.findViewById(R.id.loading);
         mRefreshLayout = view.findViewById(R.id.refresh_layout);
         initRecyclerView();
+
         return view;
     }
 

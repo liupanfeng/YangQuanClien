@@ -15,6 +15,7 @@ import com.meishe.yangquan.bean.IndustryNewsClip;
 import com.meishe.yangquan.bean.IndustryNewsInfo;
 import com.meishe.yangquan.bean.section.QuotationNewsSection;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.view.LetterSpacingTextView;
 
 /**
  * @Author : lpf
@@ -65,7 +66,8 @@ public class QuotationNewsAdapter extends BaseSectionQuickAdapter<QuotationNewsS
         String clipType = industryNewsClip.getType();
         if ("text".equals(clipType)) {
             //内容
-            helper.getView(R.id.tv_industry_content).setVisibility(View.VISIBLE);
+            LetterSpacingTextView view = helper.getView(R.id.tv_industry_content);
+            view.setVisibility(View.VISIBLE);
             helper.getView(R.id.iv_industry_picture).setVisibility(View.GONE);
             helper.setText(R.id.tv_industry_content, (industryNewsClip.getContent()));
 

@@ -30,6 +30,7 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
+import com.meishe.yangquan.view.CircleImageView;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.io.IOException;
@@ -59,7 +60,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
 
     private TextView mLlTopMessage1;
     private TextView mLlTopMessage2;
-    private RoundAngleImageView mIvBarSheepPhoto;
+    private CircleImageView mIvBarSheepPhoto;
     private TextView mTvSheepBarNickname;
 
     private SlidingTabLayout mSlidingTabLayout;

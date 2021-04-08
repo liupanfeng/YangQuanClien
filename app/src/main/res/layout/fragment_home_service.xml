@@ -1,57 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp5"
-            android:layout_marginTop="@dimen/dp15"
-            android:layout_marginRight="@dimen/dp5"
-            android:orientation="horizontal">
+            android:layout_marginTop="@dimen/dp10"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:layout_height="wrap_content">
+                <com.meishe.yangquan.view.HorizontalExpandMenu
+                    android:id="@+id/expand_menu"
+                    android:layout_width="match_parent"
+                    android:layout_height="36dp"
+                    android:layout_marginLeft="@dimen/dp10"
+                    android:layout_marginRight="@dimen/dp10"
+                    app:stroke_color="@color/mainColor"
+                    app:button_icon_color="@color/mainColor"
+                    app:button_icon_stroke_width="@dimen/dp_px_1"
+                    app:button_style="right">
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:fillViewport="true"
+                        android:scrollbars="none">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
 
+                            <com.meishe.yangquan.wiget.CustomButton
+                                android:id="@+id/btn_cut_wool"
+                                android:layout_width="@dimen/quotation_custom_button_width_size"
+                                android:layout_height="@dimen/quotation_custom_button_height_size"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:layout_marginRight="@dimen/dp5"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="@dimen/quotation_custom_button_text_size"
+                                android:text="剪羊毛"
+                                />
+
+                            <com.meishe.yangquan.wiget.CustomButton
+                                android:id="@+id/btn_vaccine"
+                                android:layout_width="@dimen/quotation_custom_button_width_size"
+                                android:layout_height="@dimen/quotation_custom_button_height_size"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:layout_marginRight="@dimen/dp5"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="@dimen/quotation_custom_button_text_size"
+                                android:text="打疫苗"
+                                />
+
+                            <com.meishe.yangquan.wiget.CustomButton
+                                android:id="@+id/btn_sheep_dung"
+                                android:layout_width="@dimen/quotation_custom_button_width_size"
+                                android:layout_height="@dimen/quotation_custom_button_height_size"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:layout_marginRight="@dimen/dp5"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="@dimen/quotation_custom_button_text_size"
+                                android:text="拉羊粪"
+                                />
+
+                            <com.meishe.yangquan.wiget.CustomButton
+                                android:id="@+id/btn_look_car"
+                                android:layout_width="@dimen/quotation_custom_button_width_size"
+                                android:layout_height="@dimen/quotation_custom_button_height_size"
+                                android:layout_marginLeft="@dimen/dp5"
+                                android:layout_marginRight="@dimen/dp5"
+                                android:layout_gravity="center_vertical"
+                                android:textSize="@dimen/quotation_custom_button_text_size"
+                                android:text="找车辆"
+                                />
+
+                        </LinearLayout>
+                    </HorizontalScrollView>
+
+                </com.meishe.yangquan.view.HorizontalExpandMenu>
+            </LinearLayout>
             <com.meishe.yangquan.wiget.CustomButton
-                android:id="@+id/btn_cut_wool"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp35"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="剪羊毛"
-                android:textSize="@dimen/sp13" />
-
-            <com.meishe.yangquan.wiget.CustomButton
-                android:id="@+id/btn_vaccine"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp35"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="打疫苗"
-                android:textSize="@dimen/sp13" />
-
-            <com.meishe.yangquan.wiget.CustomButton
-                android:id="@+id/btn_sheep_dung"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp35"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="拉羊粪"
-                android:textSize="@dimen/sp13" />
-
-            <com.meishe.yangquan.wiget.CustomButton
-                android:id="@+id/btn_look_car"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/dp35"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:text="找车辆"
-                android:textSize="@dimen/sp13" />
-
-        </LinearLayout>
+                android:id="@+id/tv_service_content"
+                android:layout_width="@dimen/quotation_custom_button_width_size"
+                android:layout_height="@dimen/quotation_custom_button_height_size"
+                android:layout_centerVertical="true"
+                android:textSize="@dimen/quotation_custom_button_text_size"
+                android:layout_marginLeft="@dimen/custom_button_left_margin_size"
+                />
+        </RelativeLayout>
 
         <FrameLayout
             android:id="@+id/container"
