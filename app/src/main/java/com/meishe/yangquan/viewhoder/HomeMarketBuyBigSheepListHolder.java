@@ -9,8 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
@@ -20,6 +18,7 @@ import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.ScreenUtils;
 import com.meishe.yangquan.view.CircleImageView;
 
@@ -34,7 +33,6 @@ import java.util.List;
 public class HomeMarketBuyBigSheepListHolder extends BaseViewHolder {
 
 
-    private final RequestOptions options;
     /*圆头像*/
     private CircleImageView civ_photo_circle;
     /*昵称*/
@@ -66,9 +64,6 @@ public class HomeMarketBuyBigSheepListHolder extends BaseViewHolder {
         super(itemView);
         mAdapter = adapter;
 
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -122,26 +117,16 @@ public class HomeMarketBuyBigSheepListHolder extends BaseViewHolder {
                 tv_market_desc.setText(((MarketInfo) info).getDescription());
             }
             List<String> images = ((MarketInfo) info).getImages();
+            String coverUrl="";
             if (images != null && images.size() > 0) {
-                String coverUrl = images.get(0);
-                Glide.with(context)
-                        .asBitmap()
-                        .load(coverUrl)
-                        .apply(options)
-                        .into(iv_market_cover);
-            } else {
-                Glide.with(context)
-                        .asBitmap()
-                        .load("")
-                        .apply(options)
-                        .into(iv_market_cover);
-            }
-            Glide.with(context)
-                    .asBitmap()
-                    .load(((MarketInfo) info).getIconUrl())
-                    .apply(options)
-                    .into(civ_photo_circle);
+               coverUrl = images.get(0);
 
+            } else {
+                coverUrl="";
+            }
+
+            GlideUtil.getInstance().loadUrl(coverUrl,iv_market_cover);
+            GlideUtil.getInstance().loadPhotoUrl(((MarketInfo) info).getIconUrl(),civ_photo_circle);
             List<HomeMarketPictureInfo> list = new ArrayList<>();
             if (!CommonUtils.isEmpty(images) && images.size() > 1) {
                 for (int i = 1; i < images.size(); i++) {

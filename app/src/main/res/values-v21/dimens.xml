@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="distance">5</dimen>
-    <dimen name="corners">10</dimen>
-    <dimen name="card_elevation_size">4dp</dimen>
-    <dimen name="card_corner_radius_size">4dp</dimen>
-    <dimen name="card_margin_size">6dp</dimen>
-    <dimen name="line_space_size">4dp</dimen>
-</resources>

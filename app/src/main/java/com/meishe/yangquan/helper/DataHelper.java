@@ -23,6 +23,8 @@ import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.bean.MineOrderInfoResult;
 import com.meishe.yangquan.bean.MineUserMessageInfo;
 import com.meishe.yangquan.bean.MineUserMessageInfoResult;
+import com.meishe.yangquan.bean.QuotationInfo;
+import com.meishe.yangquan.bean.QuotationResult;
 import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceResult;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -625,6 +627,9 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
             }
 
             @Override
@@ -664,7 +669,64 @@ public class DataHelper {
     }
 
 
+    /**
+     * 用户版-首页-获取行情数据
+     */
+    public void getQuotationDataFromServer(final List<BaseInfo> list, final int type,
+                                           final int pageSize, final int pageNumber,
+                                           final boolean isLoadMore) {
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("typeId", type);
+        param.put("pageNum", pageNumber);
+        param.put("pageSize", pageSize);
+        String token = getToken();
+        OkHttpManager.getInstance().postRequest(HttpUrl.HOME_PAGE_GET_QUOTATION, new BaseCallBack<QuotationResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
 
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, QuotationResult result) {
+                if (result != null && result.getCode() == 1) {
+                    List<QuotationInfo> dataList = result.getData();
+                    if (!CommonUtils.isEmpty(dataList)){
+                        for (int i = 0; i < dataList.size(); i++) {
+                            QuotationInfo quotationInfo = dataList.get(i);
+                            if (quotationInfo==null){
+                                continue;
+                            }
+                            quotationInfo.setType(type);
+                        }
+                    }
+                    commonResponse(dataList, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
 
     /**
      * 通用的数据返回处理

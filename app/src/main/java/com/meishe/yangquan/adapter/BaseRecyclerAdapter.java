@@ -20,6 +20,7 @@ import com.meishe.yangquan.activity.CommonRecyclerActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.FeedGoodsDetailActivity;
 import com.meishe.yangquan.activity.FeedShoppingDetailActivity;
+import com.meishe.yangquan.activity.HomeQuotationHistoryActivity;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.activity.MessageCenterActivity;
 import com.meishe.yangquan.activity.MineBreedingArchivesActivity;
@@ -49,6 +50,7 @@ import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
+import com.meishe.yangquan.bean.QuotationInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServerZan;
 import com.meishe.yangquan.bean.ServerZanResult;
@@ -463,7 +465,12 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
                 }
             }
 
-        } else if (info instanceof ServerCustomer) {
+        } else if (info instanceof QuotationInfo) {
+            Bundle bundle = new Bundle();
+            bundle.putString(Constants.QUOTATION_ID, ((QuotationInfo) info).getId());
+            bundle.putInt(Constants.TYPE_QUOTATION, ((QuotationInfo) info).getType());
+            AppManager.getInstance().jumpActivity(mContext, HomeQuotationHistoryActivity.class, bundle);
+        }else if (info instanceof ServerCustomer) {
             boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             if (isNeedLogin) {
                 AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);

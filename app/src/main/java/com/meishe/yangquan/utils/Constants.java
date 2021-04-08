@@ -401,6 +401,9 @@ public class Constants {
     /*用户版-首页-服务*/
     public static final int TYPE_COMMON_SERVICE = 13;
 
+    /*用户版-首页-行情*/
+    public static final int TYPE_COMMON_QUOTATION = 14;
+
 
 
 

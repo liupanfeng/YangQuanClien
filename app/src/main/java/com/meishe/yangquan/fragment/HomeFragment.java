@@ -64,11 +64,11 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
     private SlidingTabLayout mSlidingTabLayout;
     private MViewPager mViewPager;
 
-    private int[]  mTopTabContent={R.string.top_tab_quotation,R.string.top_tab_market,R.string.top_tab_service,
+    private int[] mTopTabContent = {R.string.top_tab_quotation, R.string.top_tab_market, R.string.top_tab_service,
             R.string.top_tab_industry_information};
 
-    private List<Fragment> mFragmentList=new ArrayList<>();
-    private List<String> mTopTabTitleList=new ArrayList<>();
+    private List<Fragment> mFragmentList = new ArrayList<>();
+    private List<String> mTopTabTitleList = new ArrayList<>();
 
     public HomeFragment() {
     }
@@ -114,41 +114,41 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
     @Override
     protected void initData() {
 
-         initTabTitle();
-         initTabFragment();
-         //这里注意 如果是嵌套在 fragment里边 一定要使用getChildFragmentManager 这个方法获取FragmentManager 否则会出错
-        mViewPager.setOffscreenPageLimit(2);
+        initTabTitle();
+        initTabFragment();
+        //这里注意 如果是嵌套在 fragment里边 一定要使用getChildFragmentManager 这个方法获取FragmentManager 否则会出错
+        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(new CommonFragmentAdapter(getChildFragmentManager(), mFragmentList, mTopTabTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);
         mViewPager.setScroll(false);
-         getUserDataFromServer();
-         getVersionData();
+        getUserDataFromServer();
+        getVersionData();
     }
 
     @Override
     protected void lazyLoad() {
         super.lazyLoad();
-        if (mViewPager!=null){
+        if (mViewPager != null) {
             mViewPager.setCurrentItem(mViewPager.getCurrentItem());
         }
     }
 
     private void initTabTitle() {
         mTopTabTitleList.clear();
-        for (int title:mTopTabContent){
+        for (int title : mTopTabContent) {
             mTopTabTitleList.add(mContext.getString(title));
         }
     }
 
     private void initTabFragment() {
         mFragmentList.clear();
-        HomeQuotationFragment homeQuotationFragment=new HomeQuotationFragment();
+        HomeQuotationFragment homeQuotationFragment = new HomeQuotationFragment();
         mFragmentList.add(homeQuotationFragment);
-        HomeMarketFragment homeMarketFragment=new HomeMarketFragment();
+        HomeMarketFragment homeMarketFragment = new HomeMarketFragment();
         mFragmentList.add(homeMarketFragment);
-        HomeServiceFragment homeServiceFragment=new HomeServiceFragment();
+        HomeServiceFragment homeServiceFragment = new HomeServiceFragment();
         mFragmentList.add(homeServiceFragment);
-        HomeIndustryInformation homeIndustryInformation=new HomeIndustryInformation();
+        HomeIndustryInformation homeIndustryInformation = new HomeIndustryInformation();
         mFragmentList.add(homeIndustryInformation);
     }
 

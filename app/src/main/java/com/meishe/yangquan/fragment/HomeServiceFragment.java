@@ -2,6 +2,8 @@ package com.meishe.yangquan.fragment;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -9,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.fragment.app.FragmentManager;
@@ -28,6 +31,7 @@ import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.Util;
+import com.meishe.yangquan.view.HorizontalExpandMenu;
 import com.meishe.yangquan.wiget.CustomButton;
 
 import java.io.IOException;
@@ -63,6 +67,9 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
     private View mIvPublishService;
     private HomeContentFragment mHomeContentFragment;
 
+    private TextView tv_service_content;
+    private HorizontalExpandMenu expand_menu;
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_home_service, container, false);
@@ -73,6 +80,13 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
 
         mRecyclerView = view.findViewById(R.id.recycler);
         mIvPublishService = view.findViewById(R.id.iv_common_publish);
+
+        tv_service_content = view.findViewById(R.id.tv_service_content);
+        expand_menu = view.findViewById(R.id.expand_menu);
+        tv_service_content.setSelected(true);
+        tv_service_content.setAlpha(0);
+
+
         return view;
     }
 
@@ -99,6 +113,36 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
                 AppManager.getInstance().jumpActivity(getActivity(), PublishServiceActivity.class, bundle);
             }
         });
+
+        expand_menu.setOnExpandMenuListener(new HorizontalExpandMenu.OnExpandMenuListener() {
+            @Override
+            public void onExpand(boolean isExpand, int time) {
+                if (isExpand) {
+                    ValueAnimator objectAnimator = ObjectAnimator.ofFloat(1f, 0f);
+                    objectAnimator.setDuration(time);
+                    objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            float animatedValue = (float) animation.getAnimatedValue();
+                            tv_service_content.setAlpha(animatedValue);
+                        }
+                    });
+                    objectAnimator.start();
+                } else {
+                    ValueAnimator objectAnimator = ObjectAnimator.ofFloat(0f, 1f);
+                    objectAnimator.setDuration(time);
+                    objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                        @Override
+                        public void onAnimationUpdate(ValueAnimator animation) {
+                            float animatedValue = (float) animation.getAnimatedValue();
+                            tv_service_content.setAlpha(animatedValue);
+                        }
+                    });
+                    objectAnimator.start();
+                }
+            }
+        });
+
     }
 
     /**
@@ -182,13 +226,13 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         FragmentManager fragmentManager = getChildFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.container, contentFragment).commit();
-        if (mServiceType==Constants.TYPE_SERVICE_CUT_WOOL){
+        if (mServiceType == Constants.TYPE_SERVICE_CUT_WOOL) {
             selectCutWool();
-        }else if (mServiceType==Constants.TYPE_SERVICE_VACCINE){
+        } else if (mServiceType == Constants.TYPE_SERVICE_VACCINE) {
             selectVaccine();
-        }else if (mServiceType==Constants.TYPE_SERVICE_SHEEP_DUNG){
+        } else if (mServiceType == Constants.TYPE_SERVICE_SHEEP_DUNG) {
             selectSheepDung();
-        }else if (mServiceType==Constants.TYPE_SERVICE_LOOK_CAR){
+        } else if (mServiceType == Constants.TYPE_SERVICE_LOOK_CAR) {
             selectLookCar();
         }
     }
@@ -228,6 +272,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mVaccine.setSelected(false);
         mSheepDung.setSelected(false);
         mLookCar.setSelected(false);
+        tv_service_content.setText(mCutWool.getText());
     }
 
     private void selectVaccine() {
@@ -235,6 +280,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mVaccine.setSelected(true);
         mSheepDung.setSelected(false);
         mLookCar.setSelected(false);
+        tv_service_content.setText(mVaccine.getText());
     }
 
     private void selectSheepDung() {
@@ -242,6 +288,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mVaccine.setSelected(false);
         mSheepDung.setSelected(true);
         mLookCar.setSelected(false);
+        tv_service_content.setText(mSheepDung.getText());
     }
 
     private void selectLookCar() {
@@ -249,6 +296,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mVaccine.setSelected(false);
         mSheepDung.setSelected(false);
         mLookCar.setSelected(true);
+        tv_service_content.setText(mLookCar.getText());
     }
 
 

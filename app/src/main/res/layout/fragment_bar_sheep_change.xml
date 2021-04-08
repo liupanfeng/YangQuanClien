@@ -56,18 +56,18 @@
 
                     <RelativeLayout
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/dp55"
+                        android:layout_height="64dp"
                         android:layout_marginLeft="@dimen/dp15"
-                        android:layout_marginTop="@dimen/dp87"
+                        android:layout_marginTop="77dp"
                         android:orientation="horizontal">
 
-                        <com.meishe.yangquan.view.RoundAngleImageView
+                        <com.meishe.yangquan.view.CircleImageView
                             android:id="@+id/iv_bar_sheep_photo"
-                            android:layout_width="@dimen/dp55"
-                            android:layout_height="@dimen/dp55"
-                            android:background="@mipmap/ic_sheep_bar_default_photo"
-                            app:roundHeight="@dimen/dp27"
-                            app:roundWidth="@dimen/dp27" />
+                            android:layout_width="64dp"
+                            android:layout_height="64dp"
+                            android:background="@mipmap/ic_mine_photo_default"
+                            app:civ_border_color="@color/white"
+                            app:civ_border_width="3dp"/>
 
                         <TextView
                             android:id="@+id/tv_sheep_bar_nickname"

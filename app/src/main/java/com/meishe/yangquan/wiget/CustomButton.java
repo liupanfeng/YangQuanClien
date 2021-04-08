@@ -3,8 +3,10 @@ package com.meishe.yangquan.wiget;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
+import android.view.Gravity;
 
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.meishe.yangquan.R;
 
@@ -13,7 +15,7 @@ import com.meishe.yangquan.R;
  * @desc 自定义按钮 带有选中效果
  * @date 2020/11/28 13:38
  */
-public class CustomButton extends AppCompatButton {
+public class CustomButton extends AppCompatTextView {
 
     private Context mContext;
 
@@ -37,6 +39,7 @@ public class CustomButton extends AppCompatButton {
         this.mContext=context;
         this.setBackgroundResource(R.drawable.btn_unselected_bg);
         this.setTextColor(Color.parseColor("#656565"));
+        setGravity(Gravity.CENTER);
     }
 
     @Override

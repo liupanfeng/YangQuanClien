@@ -139,7 +139,7 @@ public class MainActivity extends BasePermissionActivity {
         for (TabInfo tabInfo : mTabList) {
             setupChildView(tabInfo);
         }
-        mViewPager.setOffscreenPageLimit(0);
+        mViewPager.setOffscreenPageLimit(4);
         mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0, mContext, mFragmentList, mListTitle));
         mTabLayout.setupWithViewPager(mViewPager);
         setupTabWithIcons(mTabList);
@@ -182,7 +182,7 @@ public class MainActivity extends BasePermissionActivity {
         mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
         mTabLayout.setTabMode(TabLayout.MODE_FIXED);
         mTabLayout.setTabTextColors(R.color.white, R.color.mainColor);
-         = (MViewPager) findViewById(R.id.viewpager);
+        mViewPager = (MViewPager) findViewById(R.id.viewpager);
 
     }
 

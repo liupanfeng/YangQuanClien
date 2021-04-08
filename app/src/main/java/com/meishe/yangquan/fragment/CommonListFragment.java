@@ -204,6 +204,12 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                         mIsLoadFinish,mIsLoadMore,mListType,mSubType);
 
                 break;
+            case Constants.TYPE_COMMON_QUOTATION:
+                //首页-行情
+                DataHelper.getInstance().getQuotationDataFromServer(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadMore);
+
+                break;
             default:
                 break;
         }
