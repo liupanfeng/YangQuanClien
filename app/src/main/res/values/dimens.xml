@@ -174,6 +174,8 @@
     <dimen name="quotation_custom_button_width_size">60dp</dimen>
     <dimen name="quotation_custom_button_text_size">11sp</dimen>
     <dimen name="custom_button_left_margin_size">20dp</dimen>
+    <dimen name="expand_menu_stroke_width_size">1dp</dimen>
+    <dimen name="expand_menu_stroke_size">3px</dimen>
 
 
 </resources>
