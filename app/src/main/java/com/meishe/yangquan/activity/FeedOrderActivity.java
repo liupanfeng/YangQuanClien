@@ -176,7 +176,7 @@ public class FeedOrderActivity extends BaseActivity {
         String json = gson.toJson(feedOrderParamInfo);
 
         HashMap<String, Object> param = new HashMap<>();
-//        param.put("info", json);
+        param.put("info", json);
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_FEED_ORDER_COMMIT, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {

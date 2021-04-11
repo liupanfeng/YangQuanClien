@@ -40,8 +40,9 @@ public class FeedShoppingCarActivity extends BaseActivity {
     private View rl_feed_operation;
 
     private Button btn_right;
-    /*是否是编辑状态*/
-    private boolean isEditorState;
+    /*状态 1是下单 2 是删除 */
+    private int isEditorState = 1;
+
     private ImageView iv_feed_shopping_car;
     /*删除*/
     private Button btn_feed_delete;
@@ -64,6 +65,7 @@ public class FeedShoppingCarActivity extends BaseActivity {
         btn_right.setText("编辑");
         btn_right.setVisibility(View.VISIBLE);
         mRecyclerView = findViewById(R.id.recycler);
+
         rl_feed_normal = findViewById(R.id.rl_feed_normal);
         rl_feed_operation = findViewById(R.id.rl_feed_operation);
         /*编辑状态*/
@@ -73,14 +75,16 @@ public class FeedShoppingCarActivity extends BaseActivity {
         iv_feed_shopping_car_normal = findViewById(R.id.iv_feed_shopping_car_normal);
         btn_feed_order = findViewById(R.id.btn_feed_commit_order);
 
+
         initRecyclerView();
     }
 
     @Override
     public void initData() {
-        isEditorState = false;
+        isEditorState = 1;
         rl_feed_operation.setVisibility(View.GONE);
-        rl_feed_normal.setVisibility(View.VISIBLE);
+        rl_feed_normal.setVisibility(View.GONE);
+
         getShoppingCarData();
     }
 
@@ -114,6 +118,47 @@ public class FeedShoppingCarActivity extends BaseActivity {
                 if (baseInfo instanceof FeedShoppingCarGoodsInfo) {
                     ((FeedShoppingCarGoodsInfo) baseInfo).setSelect(!((FeedShoppingCarGoodsInfo) baseInfo).isSelect());
                     mAdapter.notifyItemChanged(position);
+
+                    List<BaseInfo> data = mAdapter.getData();
+                    if (CommonUtils.isEmpty(data)) {
+                        return;
+                    }
+                    List<BaseInfo> list = new ArrayList<>();
+                    /*是否有没有被选择的商品*/
+                    boolean isHasNoSelect = false;
+                    for (int i = 0; i < data.size(); i++) {
+                        BaseInfo info = data.get(i);
+                        if (info instanceof FeedShoppingCarGoodsInfo && ((FeedShoppingCarGoodsInfo) info).isSelect()) {
+                            list.add(info);
+                        }else{
+                            isHasNoSelect=true;
+                        }
+                    }
+
+                    if (CommonUtils.isEmpty(list)) {
+                        //隐藏View
+                        rl_feed_operation.setVisibility(View.GONE);
+                        rl_feed_normal.setVisibility(View.GONE);
+                    } else {
+                        //展示View
+                        if (isEditorState == 1) {
+                            rl_feed_operation.setVisibility(View.GONE);
+                            rl_feed_normal.setVisibility(View.VISIBLE);
+
+                        } else {
+                            rl_feed_operation.setVisibility(View.VISIBLE);
+                            rl_feed_normal.setVisibility(View.GONE);
+                        }
+
+                        if (isHasNoSelect){
+                            iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle);
+                            iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle);
+                        }else{
+                            iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
+                            iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
+                        }
+                    }
+
                 }
             }
         });
@@ -123,12 +168,12 @@ public class FeedShoppingCarActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         List<BaseInfo> data = mAdapter.getData();
-        if (CommonUtils.isEmpty(data)){
+        if (CommonUtils.isEmpty(data)) {
             return;
         }
-        for (int i=0;i<data.size();i++){
+        for (int i = 0; i < data.size(); i++) {
             BaseInfo info = data.get(i);
-            if (info instanceof FeedShoppingCarGoodsInfo ){
+            if (info instanceof FeedShoppingCarGoodsInfo) {
                 ((FeedShoppingCarGoodsInfo) info).setNeedHideSelect(false);
             }
         }
@@ -142,16 +187,41 @@ public class FeedShoppingCarActivity extends BaseActivity {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_right) {
-            if (isSelectAll){
-                iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
-                iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
-            }else{
-                iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle);
-                iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle);
+
+            List<BaseInfo> data = mAdapter.getData();
+            if (CommonUtils.isEmpty(data)) {
+                return;
             }
-            if (isEditorState) {
+            List<BaseInfo> list = new ArrayList<>();
+            /*是否有没有被选择的商品*/
+            boolean isHasNoSelect = false;
+            for (int i = 0; i < data.size(); i++) {
+                BaseInfo info = data.get(i);
+                if (info instanceof FeedShoppingCarGoodsInfo && ((FeedShoppingCarGoodsInfo) info).isSelect()) {
+                    list.add(info);
+                }else{
+                    isHasNoSelect=true;
+                }
+            }
+
+            if (CommonUtils.isEmpty(list)) {
+                //隐藏View
+                rl_feed_operation.setVisibility(View.GONE);
+                rl_feed_normal.setVisibility(View.GONE);
+            } else {
+
+                if (isHasNoSelect){
+                    iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle);
+                    iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle);
+                }else{
+                    iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
+                    iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
+                }
+            }
+
+            if (isEditorState==2) {
                 btn_right.setText("编辑");
-                isEditorState = false;
+                isEditorState = 1;
                 rl_feed_operation.setVisibility(View.GONE);
                 rl_feed_normal.setVisibility(View.VISIBLE);
 
@@ -159,86 +229,85 @@ public class FeedShoppingCarActivity extends BaseActivity {
                 btn_right.setText("完成");
                 rl_feed_operation.setVisibility(View.VISIBLE);
                 rl_feed_normal.setVisibility(View.GONE);
-                isEditorState = true;
-
+                isEditorState = 2;
             }
-        }else if (view.getId()==R.id.iv_feed_shopping_car){
+        } else if (view.getId() == R.id.iv_feed_shopping_car) {
             doSelectButton();
-        }else if (view.getId()==R.id.iv_feed_shopping_car_normal){
+        } else if (view.getId() == R.id.iv_feed_shopping_car_normal) {
             doNormalSelectButton();
-        }else if (view.getId()==R.id.btn_feed_delete){
-            List<BaseInfo> data = mAdapter.getData();
-            if (CommonUtils.isEmpty(data)){
-                return;
-            }
-            boolean isFirst=true;
-            StringBuilder dataStr=new StringBuilder();
-            for (int i=0;i<data.size();i++){
-                BaseInfo info = data.get(i);
-                if (info instanceof FeedShoppingCarGoodsInfo &&((FeedShoppingCarGoodsInfo) info).isSelect()){
-                    if (isFirst){
-                        dataStr.append(((FeedShoppingCarGoodsInfo) info).getId()+"");
-                        isFirst=false;
-                    }else{
-                        dataStr.append(","+((FeedShoppingCarGoodsInfo) info).getId());
-                    }
-                }
-            }
-            deleteShoppingCarData(dataStr.toString());
-        }else if (view.getId()==R.id.btn_feed_commit_order){
+        } else if (view.getId() == R.id.btn_feed_delete) {
             List<BaseInfo> data = mAdapter.getData();
             if (CommonUtils.isEmpty(data)) {
                 return;
             }
-            List<BaseInfo> list=new ArrayList<>();
-            for (int i=0;i<data.size();i++){
+            boolean isFirst = true;
+            StringBuilder dataStr = new StringBuilder();
+            for (int i = 0; i < data.size(); i++) {
                 BaseInfo info = data.get(i);
-                if (info instanceof FeedShoppingCarGoodsInfo &&((FeedShoppingCarGoodsInfo) info).isSelect()){
-                    list.add( info);
+                if (info instanceof FeedShoppingCarGoodsInfo && ((FeedShoppingCarGoodsInfo) info).isSelect()) {
+                    if (isFirst) {
+                        dataStr.append(((FeedShoppingCarGoodsInfo) info).getId() + "");
+                        isFirst = false;
+                    } else {
+                        dataStr.append("," + ((FeedShoppingCarGoodsInfo) info).getId());
+                    }
+                }
+            }
+            deleteShoppingCarData(dataStr.toString());
+        } else if (view.getId() == R.id.btn_feed_commit_order) {
+            List<BaseInfo> data = mAdapter.getData();
+            if (CommonUtils.isEmpty(data)) {
+                return;
+            }
+            List<BaseInfo> list = new ArrayList<>();
+            for (int i = 0; i < data.size(); i++) {
+                BaseInfo info = data.get(i);
+                if (info instanceof FeedShoppingCarGoodsInfo && ((FeedShoppingCarGoodsInfo) info).isSelect()) {
+                    list.add(info);
                 }
             }
 
-            if (CommonUtils.isEmpty(list)){
+            if (CommonUtils.isEmpty(list)) {
                 ToastUtil.showToast("请选择商品再下单!");
                 return;
             }
             FeedGoodsManager.getInstance().setList(list);
-            AppManager.getInstance().jumpActivity(this,FeedOrderActivity.class);
+            AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class);
         }
     }
 
     private void doNormalSelectButton() {
-        if (isSelectAll){
+        if (isSelectAll) {
             iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle);
-            isSelectAll=false;
+            isSelectAll = false;
             List<BaseInfo> data = mAdapter.getData();
-            if (CommonUtils.isEmpty(data)){
+            if (CommonUtils.isEmpty(data)) {
                 return;
             }
-            for (int i=0;i<data.size();i++){
+            for (int i = 0; i < data.size(); i++) {
                 BaseInfo info = data.get(i);
-                if (info==null){
+                if (info == null) {
                     continue;
                 }
-                if (info instanceof FeedShoppingCarGoodsInfo){
+                if (info instanceof FeedShoppingCarGoodsInfo) {
                     ((FeedShoppingCarGoodsInfo) info).setSelect(false);
                 }
             }
             mAdapter.notifyDataSetChanged();
-        }else{
+        } else {
             iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
-            isSelectAll=true;
+            isSelectAll = true;
 
             List<BaseInfo> data = mAdapter.getData();
-            if (CommonUtils.isEmpty(data)){
+            if (CommonUtils.isEmpty(data)) {
                 return;
             }
-            for (int i=0;i<data.size();i++){
+            for (int i = 0; i < data.size(); i++) {
                 BaseInfo info = data.get(i);
-                if (info==null){
+                if (info == null) {
                     continue;
                 }
-                if (info instanceof FeedShoppingCarGoodsInfo){
+                if (info instanceof FeedShoppingCarGoodsInfo) {
                     ((FeedShoppingCarGoodsInfo) info).setSelect(true);
                 }
             }
@@ -247,37 +316,37 @@ public class FeedShoppingCarActivity extends BaseActivity {
     }
 
     private void doSelectButton() {
-        if (isSelectAll){
+        if (isSelectAll) {
             iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle);
-            isSelectAll=false;
+            isSelectAll = false;
             List<BaseInfo> data = mAdapter.getData();
-            if (CommonUtils.isEmpty(data)){
+            if (CommonUtils.isEmpty(data)) {
                 return;
             }
-            for (int i=0;i<data.size();i++){
+            for (int i = 0; i < data.size(); i++) {
                 BaseInfo info = data.get(i);
-                if (info==null){
+                if (info == null) {
                     continue;
                 }
-                if (info instanceof FeedShoppingCarGoodsInfo){
+                if (info instanceof FeedShoppingCarGoodsInfo) {
                     ((FeedShoppingCarGoodsInfo) info).setSelect(false);
                 }
             }
             mAdapter.notifyDataSetChanged();
-        }else{
+        } else {
             iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
-            isSelectAll=true;
+            isSelectAll = true;
 
             List<BaseInfo> data = mAdapter.getData();
-            if (CommonUtils.isEmpty(data)){
+            if (CommonUtils.isEmpty(data)) {
                 return;
             }
-            for (int i=0;i<data.size();i++){
+            for (int i = 0; i < data.size(); i++) {
                 BaseInfo info = data.get(i);
-                if (info==null){
+                if (info == null) {
                     continue;
                 }
-                if (info instanceof FeedShoppingCarGoodsInfo){
+                if (info instanceof FeedShoppingCarGoodsInfo) {
                     ((FeedShoppingCarGoodsInfo) info).setSelect(true);
                 }
             }
@@ -293,7 +362,7 @@ public class FeedShoppingCarActivity extends BaseActivity {
         HashMap<String, Object> param = new HashMap<>();
         String token = getToken();
         showLoading();
-        param.put("goodsId",goodsIds);
+        param.put("goodsId", goodsIds);
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_SHOPPING_CAR_REMOVE, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -318,15 +387,19 @@ public class FeedShoppingCarActivity extends BaseActivity {
                     return;
                 }
                 List<BaseInfo> data = mAdapter.getData();
-                if (CommonUtils.isEmpty(data)){
+                if (CommonUtils.isEmpty(data)) {
                     return;
                 }
-                for (int i=data.size()-1;i>=0;i--){
+                for (int i = data.size() - 1; i >= 0; i--) {
                     BaseInfo info = data.get(i);
-                    if (info instanceof FeedShoppingCarGoodsInfo &&((FeedShoppingCarGoodsInfo) info).isSelect()){
+                    if (info instanceof FeedShoppingCarGoodsInfo && ((FeedShoppingCarGoodsInfo) info).isSelect()) {
                         data.remove(info);
                     }
                 }
+
+                rl_feed_operation.setVisibility(View.GONE);
+                rl_feed_normal.setVisibility(View.GONE);
+
                 mAdapter.notifyDataSetChanged();
 
                 iv_feed_shopping_car_normal.setBackgroundResource(R.mipmap.ic_bu_home_circle);
@@ -360,7 +433,6 @@ public class FeedShoppingCarActivity extends BaseActivity {
             }
         }, param, token);
     }
-
 
 
     /**

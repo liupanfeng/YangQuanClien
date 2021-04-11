@@ -1,59 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="127dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/card_margin_size"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="@dimen/card_elevation_size_little"
+    app:cardCornerRadius="@dimen/card_corner_radius_size">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.meishe.yangquan.view.RoundAngleImageView
+                android:id="@+id/iv_feed_goods_cover"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                app:roundWidth="@dimen/dp8"
+                app:roundHeight="@dimen/dp8"
+                android:background="@mipmap/ic_feed_goods_cover"
+                android:layout_marginTop="@dimen/dp14"
+                android:layout_marginLeft="@dimen/dp15"
+                />
 
-    <com.meishe.yangquan.view.RoundAngleImageView
-        android:id="@+id/iv_feed_goods_cover"
-        android:layout_width="105dp"
-        android:layout_height="105dp"
-        app:roundWidth="@dimen/dp8"
-        app:roundHeight="@dimen/dp8"
-        android:background="@mipmap/ic_feed_goods_cover"
-        android:layout_marginTop="@dimen/dp14"
-        android:layout_marginLeft="@dimen/dp15"
-        />
 
-
-    <TextView
-        android:id="@+id/tv_feed_goods_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="羔羊促生长料，河北张家口专
+            <TextView
+                android:id="@+id/tv_feed_goods_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="羔羊促生长料，河北张家口专
 业饲养..."
-        android:layout_alignTop="@+id/iv_feed_goods_cover"
-        android:layout_toRightOf="@+id/iv_feed_goods_cover"
-        android:layout_marginLeft="@dimen/dp16"
-        android:textColor="#ff303030"
-        android:textSize="16sp"
-        />
+                android:layout_alignTop="@+id/iv_feed_goods_cover"
+                android:layout_toRightOf="@+id/iv_feed_goods_cover"
+                android:layout_marginLeft="@dimen/dp16"
+                android:textColor="#ff303030"
+                android:textSize="16sp"
+                />
 
 
-    <TextView
-        android:id="@+id/tv_feed_goods_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¥1200/斤"
-        android:layout_toRightOf="@+id/iv_feed_goods_cover"
-        android:layout_marginLeft="@dimen/dp16"
-        android:layout_alignBottom="@+id/iv_feed_goods_cover"
-        android:textColor="#ffff4500"
-        android:textSize="12sp"
-        />
+            <TextView
+                android:id="@+id/tv_feed_goods_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥1200/斤"
+                android:layout_toRightOf="@+id/iv_feed_goods_cover"
+                android:layout_marginLeft="@dimen/dp16"
+                android:layout_alignBottom="@+id/iv_feed_goods_cover"
+                android:textColor="#ffff4500"
+                android:textSize="12sp"
+                />
 
 
-    <TextView
-        android:id="@+id/tv_feed_goods_sales"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="销量1324"
-        android:layout_alignParentRight="true"
-        android:textColor="#ff656565"
-        android:textSize="12sp"
-        android:layout_alignBottom="@+id/iv_feed_goods_cover"
-        android:layout_marginRight="@dimen/dp20"
-        android:layout_alignParentEnd="true" />
+            <TextView
+                android:id="@+id/tv_feed_goods_sales"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="销量1324"
+                android:layout_alignParentRight="true"
+                android:textColor="#ff656565"
+                android:textSize="12sp"
+                android:layout_alignBottom="@+id/iv_feed_goods_cover"
+                android:layout_marginRight="@dimen/dp20"
+                android:layout_alignParentEnd="true" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 
-</RelativeLayout>

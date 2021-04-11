@@ -34,6 +34,7 @@ import okhttp3.Response;
  * @desc 饲料-饲料-商品列表
  * @date 2020/12/21 14:36
  */
+@Deprecated
 public class FeedGoodsListFragment extends BaseRecyclerFragment {
 
     /* 商品类别 ：推荐  综合 销量 价格 */

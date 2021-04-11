@@ -15,6 +15,7 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.MarketInfo;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.RatingBar;
 
 import java.math.BigDecimal;
@@ -26,7 +27,6 @@ import java.util.List;
  */
 public class FeedShoppingHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
     private View mItemView;
 
     /*店铺封面图*/
@@ -48,9 +48,7 @@ public class FeedShoppingHolder extends BaseViewHolder {
         super(itemView);
         mItemView = itemView;
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
+
     }
 
     @Override
@@ -79,17 +77,9 @@ public class FeedShoppingHolder extends BaseViewHolder {
             rb_feed_start.setSelectedNumber((int) score);
             String coverUrl = ((FeedShoppingInfo) info).getShopOutSideImageUrl();
             if (coverUrl != null ) {
-                Glide.with(context)
-                        .asBitmap()
-                        .load(coverUrl)
-                        .apply(options)
-                        .into(iv_feed_cover);
+                GlideUtil.getInstance().loadUrl(coverUrl,iv_feed_cover);
             } else {
-                Glide.with(context)
-                        .asBitmap()
-                        .load("")
-                        .apply(options)
-                        .into(iv_feed_cover);
+                GlideUtil.getInstance().loadUrl("",iv_feed_cover);
             }
 
             mItemView.setTag(info);

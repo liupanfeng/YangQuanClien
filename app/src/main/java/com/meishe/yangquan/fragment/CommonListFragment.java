@@ -63,8 +63,8 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
      *
      * @param isNeedLazLoad 是否需要懒加载
      * @param type  页面类型
-     * @param subType   请求类型  如果不需要可以传0
-     * @param listType   请求类型  如果不需要可以传0
+     * @param listType   请求类型  如果不需要可以传0   //listType 属于页面类型
+     * @param subType   请求类型  如果不需要可以传0     // 店铺属于商店id
      * @return
      */
     public static CommonListFragment newInstance(boolean isNeedLazLoad,int type,int listType,int subType) {
@@ -210,6 +210,11 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                         mIsLoadMore);
 
                 break;
+            case Constants.TYPE_COMMON_SHOPPING:
+                //饲料-商店-商品
+                DataHelper.getInstance().getShoppingGoodsData(mList,mPageSize,mPageNum,
+                        mIsLoadMore,mListType,mSubType);
+                break;
             default:
                 break;
         }
@@ -240,14 +245,25 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
 
     @Override
     public void onFailure(Exception e) {
-        hideUIState();
-        changeNoDataViewVisible(View.VISIBLE);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                hideUIState();
+                changeNoDataViewVisible(View.VISIBLE);
+            }
+        });
     }
 
     @Override
     public void onError(Exception e) {
-        hideUIState();
-        changeNoDataViewVisible(View.VISIBLE);
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                hideUIState();
+                changeNoDataViewVisible(View.VISIBLE);
+            }
+        });
+
     }
 
 

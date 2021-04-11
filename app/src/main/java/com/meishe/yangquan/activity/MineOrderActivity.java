@@ -12,6 +12,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.fragment.CommonListFragment;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.view.MViewPager;
 
 /**
  * 我的-订单页面
@@ -24,7 +25,7 @@ public class MineOrderActivity extends BaseActivity {
     private int mType;
 
     private SlidingTabLayout mSlidingTabLayout;
-    private ViewPager mViewPager;
+    private MViewPager mViewPager;
     private int mSelectIndex;
 
     @Override
@@ -38,6 +39,7 @@ public class MineOrderActivity extends BaseActivity {
         mIvBack = findViewById(R.id.iv_back);
         mSlidingTabLayout = findViewById(R.id.slidingTabLayout);
         mViewPager = findViewById(R.id.vp_pager);
+        mViewPager.setScroll(false);
     }
 
     @Override

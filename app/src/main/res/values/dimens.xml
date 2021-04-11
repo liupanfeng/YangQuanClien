@@ -165,7 +165,8 @@
     <dimen name="corners">10dp</dimen>
 
 
-    <dimen name="card_elevation_size">4dp</dimen>
+    <dimen name="card_elevation_size">2dp</dimen>
+    <dimen name="card_elevation_size_little">1dp</dimen>
     <dimen name="card_corner_radius_size">4dp</dimen>
     <dimen name="card_margin_size">6dp</dimen>
     <dimen name="line_space_size">4dp</dimen>
