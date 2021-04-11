@@ -43,6 +43,7 @@ public class FeedFragment extends BaseRecyclerFragment {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
         mSlidingTabLayout = view.findViewById(R.id.slidingTabLayout);
         mViewPager = view.findViewById(R.id.viewpager);
+        mViewPager.setScroll(false);
         return view;
     }
 
