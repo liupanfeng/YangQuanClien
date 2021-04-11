@@ -12,6 +12,7 @@ import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.fragment.CommonListFragment;
 import com.meishe.yangquan.fragment.MineCollectionFragment;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.view.MViewPager;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class MineMyCollectionActivity extends BaseActivity {
 
 
     private SlidingTabLayout mSlidingTabLayout;
-    private ViewPager mViewPager;
+    private MViewPager mViewPager;
 
     @Override
     protected int initRootView() {
@@ -57,7 +58,7 @@ public class MineMyCollectionActivity extends BaseActivity {
         mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(), mFragmentList, mTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);
-
+        mViewPager.setScroll(false);
     }
 
     @Override

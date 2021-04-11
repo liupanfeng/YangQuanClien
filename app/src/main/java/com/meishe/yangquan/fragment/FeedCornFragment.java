@@ -32,6 +32,7 @@ import okhttp3.Response;
  * @desc 饲料-玉米
  * @date 2020/12/21 14:36
  */
+@Deprecated
 public class FeedCornFragment extends BaseRecyclerFragment{
 
     @Override

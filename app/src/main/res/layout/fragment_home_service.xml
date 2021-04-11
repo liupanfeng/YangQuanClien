@@ -26,7 +26,8 @@
                     android:layout_marginRight="@dimen/dp10"
                     app:stroke_color="@color/mainColor"
                     app:button_icon_color="@color/mainColor"
-                    app:button_icon_stroke_width="@dimen/dp_px_1"
+                    app:button_icon_stroke_width="@dimen/expand_menu_stroke_width_size"
+                    app:stroke_size="@dimen/expand_menu_stroke_size"
                     app:button_style="right">
                     <HorizontalScrollView
                         android:layout_width="match_parent"

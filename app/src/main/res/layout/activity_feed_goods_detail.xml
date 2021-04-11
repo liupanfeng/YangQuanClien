@@ -296,14 +296,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <ImageView
+            <CheckBox
+                android:id="@+id/cb_select_goods"
                 android:layout_width="@dimen/dp16"
                 android:layout_height="@dimen/dp16"
+                android:layout_marginTop="@dimen/dp5"
                 android:layout_gravity="center_horizontal"
-                android:background="@mipmap/ic_feed_goods_collection"
+                android:button="@null"
+                android:background="@drawable/bg_feed_collect_selector"
                 />
 
             <TextView
+                android:id="@+id/tv_colect_goods"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"

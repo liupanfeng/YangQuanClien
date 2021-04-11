@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <dimen name="appBar">65dp</dimen>
     <dimen name="appLayoutSize">58dp</dimen>
     <dimen name="tabBarSize">48dp</dimen>
@@ -165,7 +165,9 @@
     <dimen name="corners">10dp</dimen>
 
 
-    <dimen name="card_elevation_size">4dp</dimen>
+    <dimen name="card_elevation_size">2dp</dimen>
+    <dimen name="card_elevation_size_little">1dp</dimen>
+
     <dimen name="card_corner_radius_size">4dp</dimen>
     <dimen name="card_margin_size">6dp</dimen>
     <dimen name="line_space_size">4dp</dimen>
@@ -174,6 +176,8 @@
     <dimen name="quotation_custom_button_width_size">60dp</dimen>
     <dimen name="quotation_custom_button_text_size">11sp</dimen>
     <dimen name="custom_button_left_margin_size">20dp</dimen>
+    <dimen name="expand_menu_stroke_width_size">1dp</dimen>
+    <dimen name="expand_menu_stroke_size">3px</dimen>
 
 
 </resources>

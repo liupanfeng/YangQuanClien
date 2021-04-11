@@ -300,6 +300,11 @@ public class HttpUrl {
 
 
 
+    /*用户版-收藏-店铺或者商品*/
+    public static final String SHEEP_APP_COLLECTION = URL + "app/user/collect";
+
+
+
     //////////////////////////////////////////商版//////////////////////////////////////////////
 
     /*入驻的商家*/

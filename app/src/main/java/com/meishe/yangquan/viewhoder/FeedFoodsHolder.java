@@ -15,6 +15,7 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.GlideUtil;
 
 import java.util.List;
 
@@ -25,7 +26,6 @@ import java.util.List;
  */
 public class FeedFoodsHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
     private View mItemView;
 
     /*商品封面*/
@@ -37,19 +37,11 @@ public class FeedFoodsHolder extends BaseViewHolder {
     /*商品销量*/
     private TextView tv_feed_goods_sales;
 
-    /*店铺地址*/
-    private TextView tv_shopping_address;
-    /*距离*/
-    private TextView tv_feed_distance;
-
 
     public FeedFoodsHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mItemView = itemView;
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -65,24 +57,15 @@ public class FeedFoodsHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof FeedGoodsInfo) {
-
             tv_feed_goods_title.setText(((FeedGoodsInfo) info).getTitle());
             tv_feed_goods_price.setText("¥"+((FeedGoodsInfo) info).getPrice()+"/斤");
             tv_feed_goods_sales.setText("销量"+((FeedGoodsInfo) info).getSellAmount());
             List<String> goodsImageUrls = ((FeedGoodsInfo) info).getGoodsImageUrls();
             if (!CommonUtils.isEmpty(goodsImageUrls)) {
                 String coverUrl=goodsImageUrls.get(0);
-                Glide.with(context)
-                        .asBitmap()
-                        .load(coverUrl)
-                        .apply(options)
-                        .into(iv_feed_goods_cover);
+                GlideUtil.getInstance().loadUrl(coverUrl,iv_feed_goods_cover);
             } else {
-                Glide.with(context)
-                        .asBitmap()
-                        .load("")
-                        .apply(options)
-                        .into(iv_feed_goods_cover);
+                GlideUtil.getInstance().loadUrl("",iv_feed_goods_cover);
             }
 
             mItemView.setTag(info);

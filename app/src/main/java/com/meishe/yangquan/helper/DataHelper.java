@@ -5,6 +5,8 @@ import android.text.TextUtils;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.FeedGoodsInfo;
+import com.meishe.yangquan.bean.FeedGoodsInfoListResult;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfoResult;
 import com.meishe.yangquan.bean.MarketInfo;
@@ -25,6 +27,7 @@ import com.meishe.yangquan.bean.MineUserMessageInfo;
 import com.meishe.yangquan.bean.MineUserMessageInfoResult;
 import com.meishe.yangquan.bean.QuotationInfo;
 import com.meishe.yangquan.bean.QuotationResult;
+import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceResult;
 import com.meishe.yangquan.http.BaseCallBack;
@@ -422,9 +425,9 @@ public class DataHelper {
      *用户版-我的-收藏数据列表
      * type 1:店铺  2：商品
      */
-    public void getCollectionDataFromServer(final List<BaseInfo> list, int type,
-                                             final int pageSize, final int pageNumber,
-                                             boolean isLoadFinish, final boolean isLoadMore) {
+    public void getCollectionDataFromServer(final List<BaseInfo> list, final int type,
+                                            final int pageSize, final int pageNumber,
+                                            boolean isLoadFinish, final boolean isLoadMore) {
 
         String token = getToken();
         if (TextUtils.isEmpty(token)) {
@@ -451,6 +454,21 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, MineCollectionInfoResult result) {
                 if (result != null && result.getCode() == 1) {
                     List<MineCollectionInfo> datas = result.getData();
+                    if (!CommonUtils.isEmpty(datas)){
+                        for (int i = 0; i < datas.size(); i++) {
+                            MineCollectionInfo mineCollectionInfo = datas.get(i);
+                            if (mineCollectionInfo==null){
+                                continue;
+                            }
+                            if (type==1){
+                                //店铺
+                                mineCollectionInfo.setType(Constants.TYPE_COMMON_MINE_COLLECT_SHOPPING);
+                            }else if (type==2){
+                                //商品
+                                mineCollectionInfo.setType(Constants.TYPE_COMMON_MINE_COLLECT_GOODS);
+                            }
+                        }
+                    }
                     commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -688,6 +706,9 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
             }
 
             @Override
@@ -727,6 +748,82 @@ public class DataHelper {
             }
         }, param, token);
     }
+
+
+    /**
+     * 获取饲料商品-列表信息
+     */
+    public void getShoppingGoodsData(final List<BaseInfo> list,
+                                final int pageSize, final int pageNumber,
+                                final boolean isLoadMore,int listType,final int shoppingId) {
+
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("shopId",shoppingId);
+        String orderByType="";
+        switch (listType){
+            case Constants.TYPE_FEED_FOODS_MULTIPLE:
+                 orderByType="mod_date";
+                break;
+            case Constants.TYPE_FEED_FOODS_SALES:
+
+                orderByType="sell_amount";
+                break;
+            case Constants.TYPE_FEED_FOODS_PRICE:
+
+                orderByType="price";
+                break;
+        }
+
+        param.put("orderBy",orderByType);
+        param.put("order","desc");
+        param.put("pageSize",pageSize);
+        param.put("pageNum",pageNumber);
+
+        String token = getToken();
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_GOODS_LIST, new BaseCallBack<FeedGoodsInfoListResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, FeedGoodsInfoListResult result) {
+                if (result != null && result.getCode() == 1) {
+                    List<FeedGoodsInfo> dataList = result.getData();
+                    commonResponse(dataList, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
 
     /**
      * 通用的数据返回处理

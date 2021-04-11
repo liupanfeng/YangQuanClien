@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="134dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="@dimen/card_margin_size"
+    app:cardBackgroundColor="@color/white"
+    app:cardElevation="@dimen/card_elevation_size_little"
+    app:cardCornerRadius="@dimen/card_corner_radius_size">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
     <com.meishe.yangquan.view.RoundAngleImageView
         android:id="@+id/iv_feed_cover"
@@ -106,3 +113,4 @@
         />
 
 </RelativeLayout>
+</androidx.cardview.widget.CardView>

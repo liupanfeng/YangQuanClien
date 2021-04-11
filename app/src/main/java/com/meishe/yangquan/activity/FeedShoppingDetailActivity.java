@@ -2,27 +2,39 @@ package com.meishe.yangquan.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+import okhttp3.Call;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.libbase.SlidingTabLayout;
+import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
-import com.meishe.yangquan.fragment.FeedGoodsListFragment;
+import com.meishe.yangquan.bean.ServerResult;
+import com.meishe.yangquan.fragment.CommonListFragment;
+import com.meishe.yangquan.http.BaseCallBack;
+import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BannerLayout;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -54,6 +66,9 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     /*联系商家*/
     private View ll_feed_goods_phone_call;
 
+    private CheckBox cb_select_shopping;
+    private TextView tv_colect_shopping;
+
     @Override
     protected int initRootView() {
         return R.layout.activity_feed_shopping_detail;
@@ -73,15 +88,17 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         ll_feed_goods_phone_call =  findViewById(R.id.ll_feed_goods_phone_call);
         ll_feed_goods_shopping_car =  findViewById(R.id.ll_feed_goods_shopping_car);
 
+        /*收藏*/
+        cb_select_shopping =  findViewById(R.id.cb_select_shopping);
+        tv_colect_shopping =  findViewById(R.id.tv_colect_shopping);
+
+
         banner =  findViewById(R.id.banner);
         banner.setIndicatorPosition(RelativeLayout.CENTER_HORIZONTAL);
     }
 
     @Override
     public void initData() {
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -102,14 +119,25 @@ public class FeedShoppingDetailActivity extends BaseActivity {
 //        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_RECOMMEND);
 //        mFragmentList.add(feedFoodsListFragment);
 
+//        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_MULTIPLE);
+//        mFragmentList.add(feedFoodsListFragment);
+//
+//        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_SALES);
+//        mFragmentList.add(feedFoodsListFragment);
+//
+//        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_PRICE);
+//        mFragmentList.add(feedFoodsListFragment);
 
-        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_MULTIPLE);
+        CommonListFragment feedFoodsListFragment = CommonListFragment.newInstance(true,Constants.TYPE_COMMON_SHOPPING,
+                Constants.TYPE_FEED_FOODS_MULTIPLE,mShoppingId);
         mFragmentList.add(feedFoodsListFragment);
 
-        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_SALES);
+        feedFoodsListFragment = CommonListFragment.newInstance(true,Constants.TYPE_COMMON_SHOPPING,
+                Constants.TYPE_FEED_FOODS_SALES,mShoppingId);
         mFragmentList.add(feedFoodsListFragment);
 
-        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_PRICE);
+        feedFoodsListFragment = CommonListFragment.newInstance(true,Constants.TYPE_COMMON_SHOPPING,
+                Constants.TYPE_FEED_FOODS_PRICE,mShoppingId);
         mFragmentList.add(feedFoodsListFragment);
 
 //        mTitleList.add("推荐");
@@ -177,10 +205,60 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,0);
             AppManager.getInstance().jumpActivity(mContext,MineOrderActivity.class,bundle);
         }else if (v.getId()==R.id.ll_feed_shopping_collection){
-            ToastUtil.showToast("店铺收藏");
+//            ToastUtil.showToast("店铺收藏");
+            doCollectShoppingOrGoods(mShoppingId);
         }else if (v.getId()==R.id.ll_feed_goods_phone_call){
             ToastUtil.showToast("联系商家");
 //            Util.callPhone(mContext,phone);
         }
     }
+
+    /**
+     * 收藏店铺
+     */
+    public void doCollectShoppingOrGoods(int shoppingId) {
+        String token = getToken();
+        if (TextUtils.isEmpty(token)) {
+            return;
+        }
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("objectId",shoppingId);
+        param.put("objectType",1);  //1是店铺 2是商品
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_COLLECTION, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    ToastUtil.showToast("店铺已收藏");
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+
 }

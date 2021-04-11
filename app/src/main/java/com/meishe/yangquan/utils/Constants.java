@@ -404,6 +404,9 @@ public class Constants {
     /*用户版-首页-行情*/
     public static final int TYPE_COMMON_QUOTATION = 14;
 
+    /*用户版-饲料-商店列表*/
+    public static final int TYPE_COMMON_SHOPPING = 15;
+
 
 
 
