@@ -42,6 +42,10 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
     private TextView tv_bu_mine_real_name;
     private View iv_bu_mine_setting;
 
+    public static BUMineFragment newInstance(){
+        return new BUMineFragment();
+    }
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view =inflater.inflate(R.layout.fragment_bu_mine,container,false);

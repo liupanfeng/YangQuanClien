@@ -79,6 +79,10 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
     private View ll_bu_comment_manager;
     private View ll_bu_refund_manager;
 
+    public static BUHomeFragment newInstance(){
+        return new BUHomeFragment();
+    }
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_bu_home, container, false);

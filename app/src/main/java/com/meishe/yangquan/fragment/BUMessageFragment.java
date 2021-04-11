@@ -23,6 +23,10 @@ public class BUMessageFragment extends BaseRecyclerFragment {
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
 
+    public static BUMessageFragment newInstance(){
+        return new BUMessageFragment();
+    }
+
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_bu_message, container, false);

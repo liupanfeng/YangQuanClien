@@ -10,13 +10,12 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
-import androidx.viewpager.widget.ViewPager;
+import androidx.fragment.app.Fragment;
 
-import com.google.android.material.tabs.TabLayout;
-import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.adapter.ViewPagerAdapter;
+import com.meishe.yangquan.adapter.FragmentTabAdapter;
 import com.meishe.yangquan.bean.TabInfo;
 import com.meishe.yangquan.fragment.BUHomeFragment;
 import com.meishe.yangquan.fragment.BUMessageFragment;
@@ -34,11 +33,9 @@ import com.meishe.yangquan.utils.PageId;
 import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BrandTextView;
-import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.PrivacyPolicyDialog;
 import com.umeng.analytics.MobclickAgent;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,26 +48,34 @@ public class MainActivity extends BasePermissionActivity {
 
     private static final String TAG = "MainActivity";
     private String url = "http://192.168.10.55:8080/YangQuan/servlet/ServletDemo03";
-    private List mFragmentList;
-    private List mListTitle;
-    private ViewPager mViewPager;
-    private TabLayout mTabLayout;
     private Context mContext;
-    private ArrayList<TabInfo> mTabList;
-    private int defaultTab;
     private PrivacyPolicyDialog privacyPolicyDialog;
+    /*1 是用户版 2 是商户版 */
     private int mLoginType;
-    private boolean isShowDownloadProgress=true;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        mContext = this;
-        defaultTab = 0;
-        initView();
-        initData();
-    }
+    //改版----突起
+    private ArrayList<Fragment> fragments;
+    private FragmentTabAdapter tabAdapter;
+    private TextView tvTabOne;
+    private TextView tvTabTwo;
+    private TextView tvTabThree;
+    private TextView tvTabFour;
+    private TextView tvTabFive;
+    private TextView tvTabSix;
+    private TextView tvTabSeven;
+    private TextView tvTabEight;
+
+
+    private ImageView ivTabOne;
+    private ImageView ivTabTwo;
+    private ImageView ivTabThree;
+    private ImageView ivTabFour;
+    private ImageView ivTabFive;
+
+    private ImageView ivTabSix;
+    private ImageView ivTabSeven;
+    private ImageView ivTabEight;
+
 
     @Override
     protected int initRootView() {
@@ -131,19 +136,80 @@ public class MainActivity extends BasePermissionActivity {
             checkPermissions();
         }
 
+        //////////////////改版//////////////////////
 
-        mFragmentList = new ArrayList<>();
-        mListTitle = new ArrayList<>();
-        mTabList = new ArrayList<>();
-        initTabList();
-        for (TabInfo tabInfo : mTabList) {
-            setupChildView(tabInfo);
+
+        if (mLoginType==1){
+
+            findViewById(R.id.ll_tab_one).setOnClickListener(this);
+            findViewById(R.id.ll_tab_one).setVisibility(View.VISIBLE);
+
+            findViewById(R.id.ll_tab_two).setOnClickListener(this);
+            findViewById(R.id.ll_tab_two).setVisibility(View.VISIBLE);
+
+            findViewById(R.id.ll_tab_three).setOnClickListener(this);
+            findViewById(R.id.ll_tab_three).setVisibility(View.VISIBLE);
+
+            findViewById(R.id.ll_tab_four).setOnClickListener(this);
+            findViewById(R.id.ll_tab_four).setVisibility(View.VISIBLE);
+
+            findViewById(R.id.ll_tab_five).setOnClickListener(this);
+            findViewById(R.id.ll_tab_five).setVisibility(View.VISIBLE);
+
+
+            tvTabOne = findViewById(R.id.tv_tab_one);
+            tvTabTwo = findViewById(R.id.tv_tab_two);
+            tvTabThree = findViewById(R.id.tv_tab_three);
+            tvTabFour = findViewById(R.id.tv_tab_four);
+            tvTabFive = findViewById(R.id.tv_tab_five);
+
+
+            ivTabOne = findViewById(R.id.iv_tab_one);
+            ivTabTwo = findViewById(R.id.iv_tab_two);
+            ivTabThree = findViewById(R.id.iv_tab_three);
+            ivTabFour = findViewById(R.id.iv_tab_four);
+            ivTabFive = findViewById(R.id.iv_tab_five);
+
+            tvTabOne.setTextColor(getResources().getColor(R.color.mainColor));
+            ivTabOne.setImageResource(R.mipmap.ic_tab_home_checked);
+
+            fragments = new ArrayList<>();
+            fragments.add(HomeFragment.newInstance("", ""));
+            fragments.add(FeedFragment.newInstance("", ""));
+            fragments.add(SheepHouseKeepFragment.newInstance("", ""));
+            fragments.add(SheepBarFragment.newInstance("", ""));
+            fragments.add( MineFragment.newInstance("", ""));
+            tabAdapter = new FragmentTabAdapter(this, fragments, R.id.fl_layout);
+
+        }else if (mLoginType==2){
+
+            findViewById(R.id.ll_tab_six).setOnClickListener(this);
+            findViewById(R.id.ll_tab_six).setVisibility(View.VISIBLE);
+
+            findViewById(R.id.ll_tab_seven).setOnClickListener(this);
+            findViewById(R.id.ll_tab_seven).setVisibility(View.VISIBLE);
+
+            findViewById(R.id.ll_tab_eight).setOnClickListener(this);
+            findViewById(R.id.ll_tab_eight).setVisibility(View.VISIBLE);
+
+            tvTabSix = findViewById(R.id.tv_tab_six);
+            tvTabSeven = findViewById(R.id.tv_tab_seven);
+            tvTabEight = findViewById(R.id.tv_tab_eight);
+
+
+            ivTabSix = findViewById(R.id.iv_tab_six);
+            ivTabSeven = findViewById(R.id.iv_tab_seven);
+            ivTabEight = findViewById(R.id.iv_tab_eight);
+
+            tvTabSix.setTextColor(getResources().getColor(R.color.mainColor));
+            ivTabSix.setImageResource(R.mipmap.ic_bu_home_select);
+
+            fragments = new ArrayList<>();
+            fragments.add(BUHomeFragment.newInstance());
+            fragments.add(BUMessageFragment.newInstance());
+            fragments.add(BUMineFragment.newInstance());
+            tabAdapter = new FragmentTabAdapter(this, fragments, R.id.fl_layout);
         }
-        mViewPager.setOffscreenPageLimit(4);
-        mViewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager(), 0, mContext, mFragmentList, mListTitle));
-        mTabLayout.setupWithViewPager(mViewPager);
-        setupTabWithIcons(mTabList);
-//        updateApp();
     }
 
     @Override
@@ -152,102 +218,104 @@ public class MainActivity extends BasePermissionActivity {
     }
 
     @Override
+    public void initView() {
+
+
+
+    }
+
+
+    @Override
     public void initListener() {
-        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        tabAdapter.setOnTabChangeListener(new FragmentTabAdapter.OnTabChangeListener() {
             @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                mViewPager.setCurrentItem(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
+            public void OnTabChanged(int index) {
+                if (mLoginType==1){
+                    performUser(index);
+                }else if (mLoginType==2){
+                    performBusiness(index);
+                }
             }
         });
+
+
+    }
+
+    /**
+     * 处理商户的View
+     * @param index
+     */
+    private void performBusiness(int index) {
+        tvTabSix.setTextColor(getResources().getColor(R.color.tab_color_normal));
+        tvTabSeven.setTextColor(getResources().getColor(R.color.tab_color_normal));
+        tvTabEight.setTextColor(getResources().getColor(R.color.tab_color_normal));
+
+        ivTabSix.setImageResource(R.mipmap.ic_bu_home_unselect);
+        ivTabSeven.setImageResource(R.mipmap.ic_bu_message_unselect);
+        ivTabEight.setImageResource(R.mipmap.ic_bu_mine_unselect);
+
+        switch (index) {
+            case 0:
+                tvTabSix.setTextColor(getResources().getColor(R.color.mainColor));
+                ivTabSix.setImageResource(R.mipmap.ic_bu_home_select);
+                break;
+            case 1:
+                tvTabSeven.setTextColor(getResources().getColor(R.color.mainColor));
+                ivTabSeven.setImageResource(R.mipmap.ic_bu_message_select);
+                break;
+            case 2:
+                tvTabEight.setTextColor(getResources().getColor(R.color.mainColor));
+                ivTabEight.setImageResource(R.mipmap.ic_bu_mine_select);
+                break;
+        }
+    }
+
+    /**
+     * 处理用户的View
+     * @param index
+     */
+    private void performUser(int index) {
+
+        tvTabOne.setTextColor(getResources().getColor(R.color.tab_color_normal));
+        tvTabTwo.setTextColor(getResources().getColor(R.color.tab_color_normal));
+        tvTabThree.setTextColor(getResources().getColor(R.color.tab_color_normal));
+        tvTabFour.setTextColor(getResources().getColor(R.color.tab_color_normal));
+        tvTabFive.setTextColor(getResources().getColor(R.color.tab_color_normal));
+
+        ivTabOne.setImageResource(R.mipmap.ic_tab_home_unchecked);
+        ivTabTwo.setImageResource(R.mipmap.ic_tab_feed_unchecked);
+        ivTabThree.setImageResource(R.mipmap.ic_tab_keeper_unchecked);
+        ivTabFour.setImageResource(R.mipmap.ic_tab_sheep_bar_unchecked);
+        ivTabFive.setImageResource(R.mipmap.ic_tab_mine_unchecked);
+
+
+        switch (index){
+            case 0:
+                tvTabOne.setTextColor(getResources().getColor(R.color.mainColor));
+                ivTabOne.setImageResource(R.mipmap.ic_tab_home_checked);
+                break;
+            case 1:
+                tvTabTwo.setTextColor(getResources().getColor(R.color.mainColor));
+                ivTabTwo.setImageResource(R.mipmap.ic_tab_feed_checked);
+                break;
+            case 2:
+                tvTabThree.setTextColor(getResources().getColor(R.color.mainColor));
+                ivTabThree.setImageResource(R.mipmap.ic_tab_keeper_checked);
+                break;
+            case 3:
+                tvTabFour.setTextColor(getResources().getColor(R.color.mainColor));
+                ivTabFour.setImageResource(R.mipmap.ic_tab_sheep_bar_checked);
+                break;
+            case 4:
+                tvTabFive.setTextColor(getResources().getColor(R.color.mainColor));
+                ivTabFive.setImageResource(R.mipmap.ic_tab_mine_checked);
+                break;
+        }
     }
 
     @Override
     public void release() {
 
-    }
-
-    @Override
-    public void initView() {
-        mTabLayout = findViewById(R.id.tab_layout);
-        mTabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
-        mTabLayout.setTabMode(TabLayout.MODE_FIXED);
-        mTabLayout.setTabTextColors(R.color.white, R.color.mainColor);
-        mViewPager = (MViewPager) findViewById(R.id.viewpager);
-
-    }
-
-    private void initTabList() {
-
-        if (mLoginType == Constants.TYPE_IDENTITY_PERSONAL) {
-
-            mTabList.add(new TabInfo(PageId.PAGE_HOME_PAGE,
-                    App.getInstance().getString(R.string.tab_home_page),
-                    R.drawable.bg_tab_home_page));
-
-            mTabList.add(new TabInfo(PageId.PAGE_FEED_PAGE,
-                    App.getInstance().getString(R.string.tab_feed_page),
-                    R.drawable.bg_tab_feed_page));
-
-            mTabList.add(new TabInfo(PageId.PAGE_SHEEP_HOUSE_KEEP,
-                    App.getInstance().getString(R.string.tab_sheep_house_keeper_page),
-                    R.drawable.bg_tab_sheep_house_keeper));
-
-            mTabList.add(new TabInfo(PageId.PAGE_SHEEP_BAR_PAGE,
-                    App.getInstance().getString(R.string.tab_sheep_bar_page),
-                    R.drawable.bg_tab_sheep_bar));
-
-            mTabList.add(new TabInfo(PageId.PAGE_MINE,
-                    App.getInstance().getString(R.string.tab_mine_page),
-                    R.drawable.bg_tab_mine));
-
-        } else if (mLoginType == Constants.TYPE_IDENTITY_BUSINESS) {
-
-            mTabList.add(new TabInfo(PageId.PAGE_BU_HOME,
-                    App.getInstance().getString(R.string.tab_bu_home),
-                    R.drawable.bg_tab_bu_home_page));
-
-            mTabList.add(new TabInfo(PageId.PAGE_BU_MESSAGE,
-                    App.getInstance().getString(R.string.tab_bu_message),
-                    R.drawable.bg_tab_bu_message_page));
-
-            mTabList.add(new TabInfo(PageId.PAGE_BU_MINE,
-                    App.getInstance().getString(R.string.tab_bu_mine),
-                    R.drawable.bg_tab_bu_mine_page));
-        }
-
-    }
-
-
-    private void setupTabWithIcons(List<TabInfo> tabList) {
-        if (tabList == null || tabList.size() == 0) return;
-        for (int i = 0; i < tabList.size(); i++) {
-            TabInfo tabInfo = tabList.get(i);
-            TabLayout.Tab tab = mTabLayout.getTabAt(i);
-            if (tabInfo == null || tab == null) continue;
-            tab.setCustomView(createTabView(tabInfo));
-        }
-        View view = mTabLayout.getTabAt(defaultTab).getCustomView();
-        view.setSelected(true);
-        view.requestLayout();
-    }
-
-    private View createTabView(TabInfo tabInfo) {
-        View view = getLayoutInflater().inflate(R.layout.layout_item_tab, null);
-        ImageView iv_icon = view.findViewById(R.id.resview_icon);
-        BrandTextView tv_name = view.findViewById(R.id.tv_name);
-        iv_icon.setImageResource(tabInfo.getIcon());
-        tv_name.setText(tabInfo.getTitle());
-        return view;
     }
 
 
@@ -399,7 +467,32 @@ public class MainActivity extends BasePermissionActivity {
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()){
+            case R.id.ll_tab_one:
+                tabAdapter.setCurrentFragment(0);
+                break;
+            case R.id.ll_tab_two:
+                tabAdapter.setCurrentFragment(1);
+                break;
+            case R.id.ll_tab_three:
+                tabAdapter.setCurrentFragment(2);
+                break;
+            case R.id.ll_tab_four:
+                tabAdapter.setCurrentFragment(3);
+                break;
+            case R.id.ll_tab_five:
+                tabAdapter.setCurrentFragment(4);
+                break;
+            case R.id.ll_tab_six:
+                tabAdapter.setCurrentFragment(0);
+                break;
+            case R.id.ll_tab_seven:
+                tabAdapter.setCurrentFragment(1);
+                break;
+            case R.id.ll_tab_eight:
+                tabAdapter.setCurrentFragment(2);
+                break;
+        }
     }
 
 
