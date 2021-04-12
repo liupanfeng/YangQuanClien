@@ -18,6 +18,7 @@ import com.meishe.yangquan.bean.MineMyFocusInfo;
 import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.UserManager;
 
 /**
@@ -26,8 +27,6 @@ import com.meishe.yangquan.utils.UserManager;
  * @author 86188
  */
 public class MineCallbackHolder extends BaseViewHolder {
-
-    private final RequestOptions options;
 
 
     /*反馈消息标题*/
@@ -43,9 +42,6 @@ public class MineCallbackHolder extends BaseViewHolder {
     public MineCallbackHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -62,7 +58,7 @@ public class MineCallbackHolder extends BaseViewHolder {
             UserInfo user = UserManager.getInstance(context).getUser();
             if (user!=null){
                 tv_system_message_title.setText(user.getNickname() + "");
-                Glide.with(context).asBitmap().apply(options).load(user.getIconUrl()).into(iv_callback_message);
+                GlideUtil.getInstance().loadPhotoUrl(user.getIconUrl(),iv_callback_message);
             }
             tv_time.setText(FormatDateUtil.longToString(((MineCallbackInfo) info).getInitDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
             tv_system_message_content.setText(((MineCallbackInfo) info).getContent());

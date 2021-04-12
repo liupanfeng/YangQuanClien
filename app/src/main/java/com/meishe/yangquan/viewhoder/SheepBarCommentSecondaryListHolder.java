@@ -23,6 +23,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.FormatCurrentData;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -88,12 +89,7 @@ public class SheepBarCommentSecondaryListHolder extends BaseViewHolder {
 
             String iconUrl = ((SheepBarCommentSecondaryInfo) info).getIconUrl();
             if (iconUrl != null) {
-                Glide.with(context)
-                        .asBitmap()
-                        .load(iconUrl)
-                        .apply(options)
-                        .into(mIvSheepBarPhoto);
-
+                GlideUtil.getInstance().loadPhotoUrl(iconUrl,mIvSheepBarPhoto);
             }
 
             tv_sheep_bar_nickname.setText(((SheepBarCommentSecondaryInfo) info).getNickname());

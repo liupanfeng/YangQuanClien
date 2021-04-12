@@ -13,6 +13,7 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.utils.CropViewUtils;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
@@ -51,14 +52,7 @@ public class SheepBarPictureListHolder extends BaseViewHolder {
 //                        tmpBitmap.getHeight(), matrix, true);
                 mIvSheepBarMessage.setImageBitmap(tmpBitmap);
             } else if (((CommonPictureInfo) info).getType() == CommonPictureInfo.TYPE_URL_PIC) {
-                RequestOptions options = new RequestOptions();
-                options.centerCrop();
-                options.placeholder(R.mipmap.ic_message_list_photo_default);
-                Glide.with(context)
-                        .asBitmap()
-                        .load(((CommonPictureInfo) info).getFilePath())
-                        .apply(options)
-                        .into(mIvSheepBarMessage);
+                GlideUtil.getInstance().loadPhotoUrl(((CommonPictureInfo) info).getFilePath(),mIvSheepBarMessage);
                 mIvSheepBarMessage.setTag(((CommonPictureInfo) info).getFilePath());
             }
         }

@@ -17,6 +17,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -74,17 +75,8 @@ public class MineIdCardActivity extends BaseCaptureActivity {
             String idCardFrontUrl = user.getIdCardFrontUrl();
             String idCardReverseUrl = user.getIdCardReverseUrl();
 
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(idCardFrontUrl)
-                    .apply(options)
-                    .into(iv_bu_capture_card_positive);
-
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(idCardReverseUrl)
-                    .apply(options)
-                    .into(iv_bu_capture_card_negative);
+            GlideUtil.getInstance().loadUrl(idCardFrontUrl,iv_bu_capture_card_positive);
+            GlideUtil.getInstance().loadUrl(idCardReverseUrl,iv_bu_capture_card_negative);
 
         }
     }
@@ -134,25 +126,15 @@ public class MineIdCardActivity extends BaseCaptureActivity {
     @Override
     protected void captureOrAlbumResult(String filePath) {
         hasChangeUserInfo();
-        RequestOptions options = new RequestOptions();
         if (mType == 1) {
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(filePath)
-                    .apply(options)
-                    .into(iv_bu_capture_card_positive);
-
+            GlideUtil.getInstance().loadUrl(filePath,iv_bu_capture_card_positive);
             File file = new File(filePath);
             if (!file.exists()) {
                 return;
             }
             uploadPicture(Constants.UPLOAD_FILE_MODE_2, file);
         } else if (mType == 2) {
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(filePath)
-                    .apply(options)
-                    .into(iv_bu_capture_card_negative);
+            GlideUtil.getInstance().loadUrl(filePath,iv_bu_capture_card_negative);
             File file = new File(filePath);
             if (!file.exists()) {
                 return;

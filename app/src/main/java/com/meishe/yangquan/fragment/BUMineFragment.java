@@ -19,6 +19,7 @@ import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.GlideUtil;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -81,14 +82,7 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
     private void initShoppingView(BUShoppingInfo buShoppingInfo) {
         tv_bu_mine_shopping_name.setText(buShoppingInfo.getName());
         tv_bu_mine_real_name.setText(buShoppingInfo.getOwnerName()+"的店铺");
-        RequestOptions options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_mine_photo_default);
-        Glide.with(mContext)
-                .asBitmap()
-                .load(buShoppingInfo.getShopInSideImageUrls().get(0))
-                .apply(options)
-                .into(iv_mine_photo);
+        GlideUtil.getInstance().loadUrl(buShoppingInfo.getShopInSideImageUrls().get(0),iv_mine_photo);
     }
 
     @Override

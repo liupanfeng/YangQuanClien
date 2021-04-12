@@ -46,6 +46,7 @@ import com.meishe.yangquan.pop.SelectCaptureTypeView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -163,14 +164,7 @@ public class MinePersonalInfoActivity extends BaseActivity {
 
             updateUserUI();
             String photoUrl = mUser.getIconUrl();
-            RequestOptions options = new RequestOptions();
-            options.circleCrop();
-            options.placeholder(R.mipmap.ic_default_photo);
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(photoUrl)
-                    .apply(options)
-                    .into(mIvPersonalMinePhoto);
+            GlideUtil.getInstance().loadPhotoUrl(photoUrl,mIvPersonalMinePhoto);
 
         } else {
             getUserInfo();

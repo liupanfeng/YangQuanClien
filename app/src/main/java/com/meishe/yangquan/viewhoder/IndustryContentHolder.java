@@ -17,6 +17,7 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.IndustryNewsClip;
 import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfo;
 import com.meishe.yangquan.utils.FormatCurrentData;
+import com.meishe.yangquan.utils.GlideUtil;
 
 /**
  * 资讯详情页面
@@ -62,12 +63,7 @@ public class IndustryContentHolder extends BaseViewHolder {
                 iv_industry_picture.setVisibility(View.VISIBLE);
                 String iconUrl = ((IndustryNewsClip) info).getContent();
                 if (iconUrl != null) {
-                    Glide.with(context)
-                            .asBitmap()
-                            .load(iconUrl)
-                            .apply(options)
-                            .into(iv_industry_picture);
-
+                    GlideUtil.getInstance().loadUrl(iconUrl,iv_industry_picture);
                 }
             }
 

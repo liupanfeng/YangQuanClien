@@ -17,6 +17,7 @@ import com.meishe.yangquan.bean.MineMyFansInfo;
 import com.meishe.yangquan.bean.MineMyFocusInfo;
 import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.GlideUtil;
 
 /**
  * 我的-我的关注
@@ -25,7 +26,6 @@ import com.meishe.yangquan.utils.FormatDateUtil;
  */
 public class MineMyFocusHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
 
     /*粉丝头像*/
     private ImageView iv_photo;
@@ -39,9 +39,6 @@ public class MineMyFocusHolder extends BaseViewHolder {
     public MineMyFocusHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -59,10 +56,7 @@ public class MineMyFocusHolder extends BaseViewHolder {
             ll_sheep_bar_focus.setTag(info);
             ll_sheep_bar_focus.setOnClickListener(listener);
 
-            Glide.with(context).asBitmap().
-                    load(((MineMyFocusInfo) info).getIconUrl())
-                    .apply(options)
-                    .into(iv_photo);
+            GlideUtil.getInstance().loadPhotoUrl(((MineMyFocusInfo) info).getIconUrl(),iv_photo);
         }
 
     }

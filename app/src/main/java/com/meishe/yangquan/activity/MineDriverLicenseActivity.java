@@ -17,6 +17,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -70,22 +71,12 @@ public class MineDriverLicenseActivity extends BaseCaptureActivity {
     public void initData() {
         UserInfo user = UserManager.getInstance(mContext).getUser();
         if (user != null) {
-            RequestOptions options = new RequestOptions();
             String runCardFrontUrl = user.getRunCardFrontUrl();
             String runCardReverseUrl = user.getRunCardReverseUrl();
 
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(runCardFrontUrl)
-                    .apply(options)
-                    .into(iv_driver_license_positive);
+            GlideUtil.getInstance().loadUrl(runCardFrontUrl,iv_driver_license_positive);
 
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(runCardReverseUrl)
-                    .apply(options)
-                    .into(iv_driver_license_negative);
-
+            GlideUtil.getInstance().loadUrl(runCardReverseUrl,iv_driver_license_negative);
         }
     }
 
@@ -134,13 +125,8 @@ public class MineDriverLicenseActivity extends BaseCaptureActivity {
     @Override
     protected void captureOrAlbumResult(String filePath) {
         hasChangeUserInfo();
-        RequestOptions options = new RequestOptions();
         if (mType == 1) {
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(filePath)
-                    .apply(options)
-                    .into(iv_driver_license_positive);
+            GlideUtil.getInstance().loadUrl(filePath,iv_driver_license_positive);
 
             File file = new File(filePath);
             if (!file.exists()) {
@@ -148,11 +134,7 @@ public class MineDriverLicenseActivity extends BaseCaptureActivity {
             }
             uploadPicture(Constants.UPLOAD_FILE_MODE_10, file);
         } else if (mType == 2) {
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(filePath)
-                    .apply(options)
-                    .into(iv_driver_license_negative);
+            GlideUtil.getInstance().loadUrl(filePath,iv_driver_license_negative);
             File file = new File(filePath);
             if (!file.exists()) {
                 return;

@@ -11,6 +11,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.meishe.libbase.pop.XPopup;
 import com.meishe.libbase.pop.core.CenterPopupView;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.ScreenUtils;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
@@ -59,14 +60,8 @@ public class ShowBigPictureView extends CenterPopupView {
         params.width = width;
         params.height = width;
 
-        RequestOptions options = new RequestOptions();
-        options.centerCrop();
-        Glide.with(this)
-                .asBitmap()
-                .load(mImagePath)
-                .apply(options)
-                .into(mIvShowPicture);
 
+        GlideUtil.getInstance().loadUrl(mImagePath,mIvShowPicture);
 
         mIvShowPicture.setOnClickListener(new OnClickListener() {
             @Override

@@ -19,15 +19,16 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
  * 信息列表holder
  */
+@Deprecated
 public class MessageListHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
     private Button mBtnMessageStartConnect;
     private TextView mTvMessageComment;
     private ImageView mIvMessageComment;
@@ -41,9 +42,6 @@ public class MessageListHolder extends BaseViewHolder {
     public MessageListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter=adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -63,11 +61,7 @@ public class MessageListHolder extends BaseViewHolder {
         if (info instanceof Message){
             Message message= (Message) info;
             String photoUrl=message.getPhotoUrl();
-            Glide.with(context)
-                    .asBitmap()
-                    .load(HttpUrl.URL_IMAGE+photoUrl)
-                    .apply(options)
-                    .into(mIvMessageTopPart);
+            GlideUtil.getInstance().loadUrl(HttpUrl.URL_IMAGE+photoUrl,mIvMessageTopPart);
             mTvMessageNickName.setText(message.getNickname());
             String desc=message.getContent();
             if (!TextUtils.isEmpty(desc)){
@@ -112,12 +106,7 @@ public class MessageListHolder extends BaseViewHolder {
 
 
             String contentUrl=message.getContentUrl();
-            Glide.with(context)
-                    .asBitmap()
-                    .load(HttpUrl.URL_IMAGE+contentUrl)
-                    .apply(options)
-                    .into(mIvMessage);
-
+            GlideUtil.getInstance().loadUrl(HttpUrl.URL_IMAGE+contentUrl,mIvMessage);
             mBtnMessageStartConnect.setOnClickListener(listener);
             mTvMessageComment.setOnClickListener(listener);
             mIvMessageComment.setOnClickListener(listener);

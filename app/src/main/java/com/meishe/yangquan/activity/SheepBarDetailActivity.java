@@ -33,6 +33,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.KeyboardUtils;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -150,15 +151,7 @@ public class SheepBarDetailActivity extends BaseActivity {
                 //设置用户头像
                 String iconUrl = mSheepBarMessageInfo.getIconUrl();
 
-                RequestOptions options = new RequestOptions();
-                options.centerCrop();
-                options.placeholder(R.mipmap.ic_message_list_photo_default);
-
-                Glide.with(mContext)
-                        .asBitmap()
-                        .load(iconUrl)
-                        .apply(options)
-                        .into(iv_sheep_bar_photo);
+                GlideUtil.getInstance().loadPhotoUrl(iconUrl,iv_sheep_bar_photo);
                 iv_sheep_bar_photo.setTag(iconUrl);
 
                 tv_sheep_bar_nickname.setText(mSheepBarMessageInfo.getNickname());

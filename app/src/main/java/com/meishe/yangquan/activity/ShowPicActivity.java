@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.RoundAngleImageView;
 import com.meishe.yangquan.wiget.CustomToolbar;
@@ -18,7 +19,6 @@ import com.meishe.yangquan.wiget.CustomToolbar;
 public class ShowPicActivity extends BaseActivity {
 
     private RoundAngleImageView iv_show_pic;
-    private RequestOptions options;
     protected CustomToolbar mToolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,16 +81,8 @@ public class ShowPicActivity extends BaseActivity {
     public void initData() {
         Intent intent=getIntent();
         if (intent!=null){
-            options = new RequestOptions();
-            options.centerCrop();
-            options.skipMemoryCache(true);
-            options.placeholder(R.mipmap.ic_message_list_photo_default);
             String imageUrl=intent.getStringExtra("imageUrl");
-            Glide.with(this)
-                    .asBitmap()
-                    .load(imageUrl)
-                    .apply(options)
-                    .into(iv_show_pic);
+            GlideUtil.getInstance().loadUrl(imageUrl,iv_show_pic);
 
         }
 

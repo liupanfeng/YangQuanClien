@@ -26,6 +26,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -114,15 +115,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
         if (user != null) {
             //更新头像
             String iconUrl = user.getIconUrl();
-            RequestOptions options = new RequestOptions();
-            options.centerCrop();
-            options.placeholder(R.mipmap.ic_message_list_photo_default);
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(iconUrl)
-                    .apply(options)
-                    .into(mIvBarSheepPhoto);
-
+            GlideUtil.getInstance().loadPhotoUrl(iconUrl,mIvBarSheepPhoto);
             //更新昵称
             mTvSheepBarNickname.setText(user.getNickname());
         }

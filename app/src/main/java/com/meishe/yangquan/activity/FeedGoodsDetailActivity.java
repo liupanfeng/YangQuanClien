@@ -22,6 +22,7 @@ import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.Util;
@@ -48,7 +49,6 @@ public class FeedGoodsDetailActivity extends BaseActivity {
     private BannerLayout banner;
     /*商品描述图片*/
     private ImageView iv_feed_goods_desc;
-    private RequestOptions options;
     /*联系商家*/
     private View ll_feed_goods_phone_call;
     /*收藏*/
@@ -81,9 +81,6 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
         Intent intent = getIntent();
         if (intent != null) {
             Bundle extras = intent.getExtras();
@@ -121,11 +118,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
         if (!CommonUtils.isEmpty(descriptionImageUrls)){
             String descUrl = descriptionImageUrls.get(0);
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(descUrl)
-                    .apply(options)
-                    .into(iv_feed_goods_desc);
+            GlideUtil.getInstance().loadUrl(descUrl,iv_feed_goods_desc);
         }
 
     }

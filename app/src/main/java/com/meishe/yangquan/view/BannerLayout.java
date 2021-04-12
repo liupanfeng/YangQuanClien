@@ -28,6 +28,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.utils.GlideUtil;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -378,11 +379,13 @@ public class BannerLayout extends RelativeLayout {
             }
         });
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        if (defaultImage != 0){
-            Glide.with(getContext()).load(url).into(imageView);
-        }else {
-            Glide.with(getContext()).load(url).into(imageView);
-        }
+//        if (defaultImage != 0){
+//            Glide.with(getContext()).load(url).into(imageView);
+//
+//        }else {
+//            Glide.with(getContext()).load(url).into(imageView);
+//        }
+        GlideUtil.getInstance().loadUrl(url,imageView);
         if (!TextUtils.isEmpty(title)||true) {
             TextView textView = new TextView(getContext());
             textView.setText(title);
@@ -413,6 +416,7 @@ public class BannerLayout extends RelativeLayout {
         });
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         Glide.with(getContext()).load(res).into(imageView);
+
         if (!TextUtils.isEmpty(title)) {
             TextView textView = new TextView(getContext());
             textView.setText(title);

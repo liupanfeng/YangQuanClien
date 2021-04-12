@@ -16,6 +16,7 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MineMyFansInfo;
 import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
@@ -59,10 +60,7 @@ public class MineMyFansHolder extends BaseViewHolder {
             ll_sheep_bar_focus.setTag(info);
             ll_sheep_bar_focus.setOnClickListener(listener);
 
-            Glide.with(context).asBitmap().
-                    load(((MineMyFansInfo) info).getIconUrl())
-                    .apply(options)
-                    .into(iv_photo);
+            GlideUtil.getInstance().loadPhotoUrl(((MineMyFansInfo) info).getIconUrl(),iv_photo);
         }
 
     }

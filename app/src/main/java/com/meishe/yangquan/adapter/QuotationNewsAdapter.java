@@ -15,6 +15,7 @@ import com.meishe.yangquan.bean.IndustryNewsClip;
 import com.meishe.yangquan.bean.IndustryNewsInfo;
 import com.meishe.yangquan.bean.section.QuotationNewsSection;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.LetterSpacingTextView;
 
 /**
@@ -76,12 +77,7 @@ public class QuotationNewsAdapter extends BaseSectionQuickAdapter<QuotationNewsS
             helper.getView(R.id.iv_industry_picture).setVisibility(View.VISIBLE);
             String iconUrl = industryNewsClip.getContent();
             if (iconUrl != null) {
-                Glide.with(mContext)
-                        .asBitmap()
-                        .load(iconUrl)
-                        .apply(mOptions)
-                        .into((ImageView) helper.getView(R.id.iv_industry_picture));
-
+                GlideUtil.getInstance().loadUrl(iconUrl,(ImageView) helper.getView(R.id.iv_industry_picture));
             }
         }
 

@@ -20,6 +20,7 @@ import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.FormatCurrentData;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.util.ArrayList;
@@ -32,7 +33,6 @@ import java.util.List;
  */
 public class SheepBarMessageListHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
     private View mItemView;
 
     /*资讯标题*/
@@ -66,9 +66,6 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
         super(itemView);
         mAdapter = adapter;
         mItemView = itemView;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -111,12 +108,7 @@ public class SheepBarMessageListHolder extends BaseViewHolder {
 
             String iconUrl = ((SheepBarMessageInfo) info).getIconUrl();
             if (iconUrl != null) {
-                Glide.with(context)
-                        .asBitmap()
-                        .load(iconUrl)
-                        .apply(options)
-                        .into(mIvSheepBarPhoto);
-
+                GlideUtil.getInstance().loadPhotoUrl(iconUrl,mIvSheepBarPhoto);
             }
 
 

@@ -20,6 +20,8 @@ import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
+import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.AddSubView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -76,14 +78,7 @@ public class FeedShoppingCarListHolder extends BaseViewHolder {
 
             List<String> goodsImageUrls = ((FeedShoppingCarGoodsInfo) info).getGoodsImageUrls();
             if (!CommonUtils.isEmpty(goodsImageUrls)) {
-                RequestOptions options = new RequestOptions();
-                options.centerCrop();
-                options.placeholder(R.mipmap.ic_message_list_photo_default);
-                Glide.with(context)
-                        .asBitmap()
-                        .load(goodsImageUrls.get(0))
-                        .apply(options)
-                        .into(riv_goods_cover);
+                GlideUtil.getInstance().loadUrl(goodsImageUrls.get(0),riv_goods_cover);
             }
 
             tv_shopping_name.setText(((FeedShoppingCarGoodsInfo) info).getShopName());

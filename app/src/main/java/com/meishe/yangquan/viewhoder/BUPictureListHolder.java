@@ -15,6 +15,7 @@ import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.utils.CropViewUtils;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
@@ -53,14 +54,7 @@ public class BUPictureListHolder extends BaseViewHolder {
 //                        tmpBitmap.getHeight(), matrix, true);
                 mIvBuPicture.setImageBitmap(tmpBitmap);
             } else if (((BUPictureInfo) info).getType() == CommonPictureInfo.TYPE_URL_PIC) {
-                RequestOptions options = new RequestOptions();
-                options.centerCrop();
-                options.placeholder(R.mipmap.ic_message_list_photo_default);
-                Glide.with(context)
-                        .asBitmap()
-                        .load(((BUPictureInfo) info).getFilePath())
-                        .apply(options)
-                        .into(mIvBuPicture);
+                GlideUtil.getInstance().loadUrl(((BUPictureInfo) info).getFilePath(),mIvBuPicture);
                 mIvBuPicture.setTag(((BUPictureInfo) info).getFilePath());
             }
         }

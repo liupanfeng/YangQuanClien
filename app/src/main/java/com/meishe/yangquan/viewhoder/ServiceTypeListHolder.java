@@ -17,6 +17,7 @@ import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServerZan;
 import com.meishe.yangquan.bean.User;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.LikesView;
@@ -24,9 +25,9 @@ import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.util.List;
 
+@Deprecated
 public class ServiceTypeListHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
     private Button mBtnOrder;                       //马上预约
     private RoundAngleImageView mIvServicePhoto;
     private TextView mTvServiceNickname;
@@ -38,9 +39,6 @@ public class ServiceTypeListHolder extends BaseViewHolder {
     public ServiceTypeListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -67,11 +65,7 @@ public class ServiceTypeListHolder extends BaseViewHolder {
             mTvServiceNickname.setText(serverCustomer.getNickname());
 
             String photoUrl = serverCustomer.getPhotoUrl();
-            Glide.with(context)
-                    .asBitmap()
-                    .load(HttpUrl.URL_IMAGE + photoUrl)
-                    .apply(options)
-                    .into(mIvServicePhoto);
+            GlideUtil.getInstance().loadUrl(HttpUrl.URL_IMAGE+photoUrl,mIvServicePhoto);
 
             mBtnOrder.setOnClickListener(listener);
             mBtnOrder.setTag(info);

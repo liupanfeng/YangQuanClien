@@ -12,6 +12,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
@@ -41,14 +42,7 @@ public class BUHomeAlreadyApplyShoppingListHolder extends BaseViewHolder {
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof BUShoppingUserInfo) {
                 tv_bu_nickname.setText(((BUShoppingUserInfo) info).getNickname());
-                RequestOptions options = new RequestOptions();
-                options.centerCrop();
-                options.placeholder(R.mipmap.ic_message_list_photo_default);
-                Glide.with(context)
-                        .asBitmap()
-                        .load(((BUShoppingUserInfo) info).getIconUrl())
-                        .apply(options)
-                        .into(mIvBuPhoto);
+            GlideUtil.getInstance().loadPhotoUrl(((BUShoppingUserInfo) info).getIconUrl(),mIvBuPhoto);
             }
 //        mIvBuPhoto.setTag(info);
 //        mIvBuPhoto.setOnClickListener(listener);

@@ -37,6 +37,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.SelectCaptureTypeView;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -161,21 +162,9 @@ public class PerfectInformationActivity extends BaseActivity {
 
             String photoUrl = mUser.getPhotoUrl();
             if (!TextUtils.isEmpty(photoUrl)) {
-                RequestOptions options = new RequestOptions();
-                options.circleCrop();
-                options.placeholder(R.mipmap.ic_photo_default);
-                Glide.with(mContext)
-                        .load(HttpUrl.URL_IMAGE + photoUrl)
-                        .apply(options)
-                        .into(mIvPhoto);
+                GlideUtil.getInstance().loadPhotoUrl(HttpUrl.URL_IMAGE + photoUrl,mIvPhoto);
             }else{
-                RequestOptions options = new RequestOptions();
-                options.circleCrop();
-                options.placeholder(R.mipmap.ic_photo_default);
-                Glide.with(mContext)
-                        .load("")
-                        .apply(options)
-                        .into(mIvPhoto);
+                GlideUtil.getInstance().loadPhotoUrl("",mIvPhoto);
             }
         }
     }

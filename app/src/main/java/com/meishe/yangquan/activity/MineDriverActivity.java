@@ -18,6 +18,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -75,21 +76,13 @@ public class MineDriverActivity extends BaseCaptureActivity {
     public void initData() {
         UserInfo user = UserManager.getInstance(mContext).getUser();
         if (user != null) {
-            RequestOptions options = new RequestOptions();
             String idCardFrontUrl = user.getDriveCardFrontUrl();
             String idCardReverseUrl = user.getDriveCardReverseUrl();
 
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(idCardFrontUrl)
-                    .apply(options)
-                    .into(iv_driver_positive);
+            GlideUtil.getInstance().loadUrl(idCardFrontUrl,iv_driver_positive);
 
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(idCardReverseUrl)
-                    .apply(options)
-                    .into(iv_driver_negative);
+
+            GlideUtil.getInstance().loadUrl(idCardReverseUrl,iv_driver_negative);
 
         }
     }
@@ -152,11 +145,7 @@ public class MineDriverActivity extends BaseCaptureActivity {
             }
             uploadPicture(Constants.UPLOAD_FILE_MODE_8, file);
         } else if (mType == 2) {
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(filePath)
-                    .apply(options)
-                    .into(iv_driver_negative);
+            GlideUtil.getInstance().loadUrl(filePath,iv_driver_negative);
             File file = new File(filePath);
             if (!file.exists()) {
                 return;

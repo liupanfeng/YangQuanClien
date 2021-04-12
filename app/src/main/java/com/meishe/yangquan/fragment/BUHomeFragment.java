@@ -29,6 +29,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.wiget.IosDialog;
@@ -399,14 +400,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         //更新店铺相关的一些信息
         if (data != null) {
             tv_bu_shop_name.setText(data.getName());
-            RequestOptions options = new RequestOptions();
-            options.centerCrop();
-            options.placeholder(R.mipmap.ic_message_list_photo_default);
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(data.getShopInSideImageUrls().get(0))
-                    .apply(options)
-                    .into(bu_photo);
+            GlideUtil.getInstance().loadPhotoUrl(data.getShopInSideImageUrls().get(0),bu_photo);
         }
 
         initShopData();

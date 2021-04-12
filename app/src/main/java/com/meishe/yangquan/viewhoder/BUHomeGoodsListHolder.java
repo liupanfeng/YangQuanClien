@@ -16,6 +16,7 @@ import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 import java.util.List;
@@ -68,14 +69,7 @@ public class BUHomeGoodsListHolder extends BaseViewHolder {
         if (info instanceof BUGoodsInfo) {
             List<String> goodsImageUrls = ((BUGoodsInfo) info).getGoodsImageUrls();
             if (!CommonUtils.isEmpty(goodsImageUrls)) {
-                RequestOptions options = new RequestOptions();
-                options.centerCrop();
-                options.placeholder(R.mipmap.ic_message_list_photo_default);
-                Glide.with(context)
-                        .asBitmap()
-                        .load(goodsImageUrls.get(0))
-                        .apply(options)
-                        .into(riv_bu_goods_cover);
+                GlideUtil.getInstance().loadUrl(goodsImageUrls.get(0),riv_bu_goods_cover);
             }
 
             tv_bu_goods_title.setText(((BUGoodsInfo) info).getTitle());

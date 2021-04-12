@@ -31,6 +31,7 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -195,14 +196,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
         if (user != null) {
             mTvNickname.setText(user.getNickname());
             String photoUrl = user.getIconUrl();
-            RequestOptions options = new RequestOptions();
-            options.circleCrop();
-            options.placeholder(R.mipmap.ic_default_photo);
-            Glide.with(mContext)
-                    .asBitmap()
-                    .load(photoUrl)
-                    .apply(options)
-                    .into(mIvMinePhoto);
+            GlideUtil.getInstance().loadUrl(photoUrl,mIvMinePhoto);
         }else{
             getUserInfo();
         }

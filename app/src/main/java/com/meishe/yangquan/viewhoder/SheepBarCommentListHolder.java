@@ -17,6 +17,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.MineUserMessageInfo;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.SheepBarCommentInfo;
 import com.meishe.yangquan.bean.SheepBarCommentInfoResult;
@@ -29,6 +30,7 @@ import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.FormatCurrentData;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -123,12 +125,7 @@ public class SheepBarCommentListHolder extends BaseViewHolder {
         if (info instanceof SheepBarCommentInfo) {
             String iconUrl = ((SheepBarCommentInfo) info).getIconUrl();
             if (iconUrl != null) {
-                Glide.with(context)
-                        .asBitmap()
-                        .load(iconUrl)
-                        .apply(options)
-                        .into(mIvSheepBarPhoto);
-
+                GlideUtil.getInstance().loadPhotoUrl(iconUrl,mIvSheepBarPhoto);
             }
 
             tv_sheep_bar_nickname.setText(((SheepBarCommentInfo) info).getNickname());

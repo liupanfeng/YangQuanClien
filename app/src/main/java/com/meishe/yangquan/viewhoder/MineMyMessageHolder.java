@@ -12,8 +12,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.MineMyFocusInfo;
 import com.meishe.yangquan.bean.MineUserMessageInfo;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.GlideUtil;
 
 /**
  * 我的-系统消息
@@ -22,7 +24,6 @@ import com.meishe.yangquan.utils.FormatDateUtil;
  */
 public class MineMyMessageHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
 
     /*系统消息标题*/
     private TextView tv_my_message_title;
@@ -39,9 +40,6 @@ public class MineMyMessageHolder extends BaseViewHolder {
     public MineMyMessageHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -58,7 +56,7 @@ public class MineMyMessageHolder extends BaseViewHolder {
             tv_my_message_title.setText(((MineUserMessageInfo) info).getNickname());
             tv_time.setText(FormatDateUtil.longToString(((MineUserMessageInfo) info).getInitDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
             tv_my_message_content.setText(((MineUserMessageInfo) info).getTitle());
-            Glide.with(context).asBitmap().apply(options).load(((MineUserMessageInfo) info).getIconUrl()).into(iv_my_message);
+            GlideUtil.getInstance().loadUrl(((MineUserMessageInfo) info).getIconUrl(),iv_my_message);
         }
 
     }
