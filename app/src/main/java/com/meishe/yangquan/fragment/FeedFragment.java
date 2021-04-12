@@ -30,6 +30,7 @@ public class FeedFragment extends BaseRecyclerFragment {
 
     private List<String> mTabContents = new ArrayList<>();
     private List<Fragment> mFragmentList = new ArrayList<>();
+    private SlidingTabLayout mSlidingTabLut;
 
     public static FeedFragment newInstance(String param1, String param2) {
         FeedFragment fragment = new FeedFragment();
@@ -41,7 +42,7 @@ public class FeedFragment extends BaseRecyclerFragment {
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_feed, container, false);
-        mSlidingTabLayout = view.findViewById(R.id.slidingTabLayout);
+        mSlidingTabLut = view.findViewById(R.id.slidingTabLayout);
         mViewPager = view.findViewById(R.id.viewpager);
         mViewPager.setScroll(false);
         return view;

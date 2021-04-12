@@ -43,11 +43,6 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
     /*日配比*/
     private TextView tv_total_price;
 
-    private Map<Integer, Float> weightMap = new HashMap<>();
-
-    private Map<Integer, Float> singlePriceMap = new HashMap<>();
-
-    private Map<Integer, Float> totalPriceMap = new HashMap<>();
 
 
     public BreedingArchivesFoodAnalysisHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
@@ -67,56 +62,40 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(Context context, final BaseInfo info, final int position, View.OnClickListener listener) {
         if (info instanceof FodderInfo) {
-
             tv_name.setText(((FodderInfo) info).getName());
             float percent = ((FodderInfo) info).getPercent();
-            int infoPosition = ((FodderInfo) info).getPosition();
             if (percent != 0) {
                 tv_percent.setText(percent + "");
             }
 
-//            float price = ((FodderInfo) info).getPrice();
-//            if (price != 0) {
-//                if (infoPosition<0){
-//                    et_input_single_price.setText(price + "");
-//                }else if (infoPosition==position){
-//                    et_input_single_price.setText(price + "");
-//                }
-//
-//            }
-//
-//            float totalPrice = ((FodderInfo) info).getTotalPrice();
-//            if (totalPrice != 0) {
-//                if (infoPosition<0){
-//                    tv_total_price.setText(totalPrice + "");
-//                }else if (infoPosition==position){
-//                    tv_total_price.setText(totalPrice + "");
-//                }
-//            }
-//
-//            float weight = ((FodderInfo) info).getWeight();
-//            if (weight != 0) {
-//                if (infoPosition<0){
-//                    et_input_weight.setText(weightMap.get(position) + "");
-//                }else if (infoPosition==position){
-//                    et_input_weight.setText(weightMap.get(position) + "");
-//                }
-//            }
 
-            if (singlePriceMap.get(position)!=null){
-                et_input_single_price.setText(singlePriceMap.get(position) + "");
+            if (et_input_single_price.getTag() instanceof TextWatcher) {
+                et_input_single_price.removeTextChangedListener((TextWatcher) et_input_single_price.getTag());
             }
 
-            if (totalPriceMap.get(position)!=null){
-                tv_total_price.setText(totalPriceMap.get(position)+"");
-            }
-
-            if (weightMap.get(position)!=null){
-                et_input_weight.setText(weightMap.get(position)+"");
+            if (et_input_weight.getTag() instanceof TextWatcher) {
+                et_input_weight.removeTextChangedListener((TextWatcher) et_input_weight.getTag());
             }
 
 
-            et_input_weight.addTextChangedListener(new TextWatcher() {
+            float price = ((FodderInfo) info).getPrice();
+            if (price != 0) {
+                et_input_single_price.setText(price + "");
+            }
+
+            float totalPrice = ((FodderInfo) info).getTotalPrice();
+            if (totalPrice != 0) {
+                tv_total_price.setText(totalPrice + "");
+            }
+
+            float weight = ((FodderInfo) info).getWeight();
+            if (weight != 0) {
+                et_input_weight.setText(weight + "");
+            }
+
+
+
+             TextWatcher weightTextWatcher = new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -124,46 +103,43 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+                }
+
+                @Override
+                public void afterTextChanged(Editable editable) {
                     try {
-                        int length = charSequence.length();
+                        int length = editable.length();
                         if (length > 0) {
-                            String inputWeight = charSequence.toString().trim();
+                            String inputWeight = editable.toString().trim();
                             Float weight = Float.valueOf(inputWeight);
                             ((FodderInfo) info).setWeight(weight);
-                            ((FodderInfo) info).setPosition(position);
 
-                            weightMap.put(position,weight);
                             float price = ((FodderInfo) info).getPrice();
                             if (price != 0) {
                                 tv_total_price.setText(price * weight + "");
                                 ((FodderInfo) info).setTotalPrice(price * weight);
 
-                                totalPriceMap.put(position,price * weight);
                             } else {
                                 tv_total_price.setText("");
                                 ((FodderInfo) info).setTotalPrice(0);
-                                totalPriceMap.put(position,0f);
                             }
                         } else {
-                            ((FodderInfo) info).setPosition(position);
                             tv_total_price.setText("");
                             ((FodderInfo) info).setWeight(0);
-                            weightMap.put(position,0f);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
                 }
-
-                @Override
-                public void afterTextChanged(Editable editable) {
-
-                }
-            });
+            };
 
 
-            et_input_single_price.addTextChangedListener(new TextWatcher() {
+            et_input_weight.addTextChangedListener(weightTextWatcher);
+            et_input_weight.setTag(weightTextWatcher);
+
+
+             TextWatcher singlePriceTextWatcher = new TextWatcher() {
                 @Override
                 public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -171,45 +147,42 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
 
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                    try {
-                        int length = charSequence.length();
-                        if (length > 0) {
-                            String singlePrice = charSequence.toString().trim();
-                            Float price = Float.valueOf(singlePrice);
-                            ((FodderInfo) info).setPrice(price);
-
-                            ((FodderInfo) info).setPosition(position);
-                            singlePriceMap.put(position,price);
-                            float weight = ((FodderInfo) info).getWeight();
-                            if (weight != 0) {
-                                tv_total_price.setText(price * weight + "");
-                                ((FodderInfo) info).setTotalPrice(price * weight);
-
-                                totalPriceMap.put(position,price * weight);
-                            } else {
-                                tv_total_price.setText("");
-                                ((FodderInfo) info).setTotalPrice(0);
-                                totalPriceMap.put(position,0f);
-                            }
-
-                        } else {
-
-                            ((FodderInfo) info).setPosition(position);
-                            tv_total_price.setText("");
-                            ((FodderInfo) info).setPrice(0);
-                            singlePriceMap.put(position,0f);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
                 }
 
                 @Override
                 public void afterTextChanged(Editable editable) {
+                    try {
+                        int length = editable.length();
+                        if (length > 0) {
+                            String singlePrice = editable.toString().trim();
+                            Float price = Float.valueOf(singlePrice);
+                            ((FodderInfo) info).setPrice(price);
 
+                            float weight = ((FodderInfo) info).getWeight();
+                            if (weight != 0) {
+                                tv_total_price.setText(price * weight + "");
+                                ((FodderInfo) info).setTotalPrice(price * weight);
+
+                            } else {
+                                tv_total_price.setText("");
+                                ((FodderInfo) info).setTotalPrice(0);
+                            }
+
+                        } else {
+
+                            tv_total_price.setText("");
+                            ((FodderInfo) info).setPrice(0);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-            });
+            };
+
+            et_input_single_price.addTextChangedListener(singlePriceTextWatcher);
+            et_input_single_price.setTag(singlePriceTextWatcher);
+
 
             if (((FodderInfo) info).getType() == 2) {
                 et_input_single_price.setOnTouchListener(new View.OnTouchListener() {

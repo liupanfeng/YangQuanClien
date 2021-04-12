@@ -167,6 +167,17 @@ public class AppManager {
         activity.startActivity(intent);
     }
 
+    /**
+     * 用于跳转
+     *  @param activity
+     * @param cls
+     */
+    public void jumpActivity(Context activity, Class<? extends Activity> cls,int flag) {
+        Intent intent = new Intent(activity, cls);
+        intent.setFlags(flag);
+        activity.startActivity(intent);
+    }
+
     public void jumpActivity(Activity activity, Class<? extends Activity> cls) {
         jumpActivity(activity,cls,null);
     }

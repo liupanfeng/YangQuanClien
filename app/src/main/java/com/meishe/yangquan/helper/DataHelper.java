@@ -1,5 +1,6 @@
 package com.meishe.yangquan.helper;
 
+import android.content.Intent;
 import android.text.TextUtils;
 
 import com.meishe.yangquan.App;
@@ -879,7 +880,7 @@ public class DataHelper {
         String token = UserManager.getInstance(App.getContext()).getToken();
         if (TextUtils.isEmpty(token)) {
             AppManager.getInstance().finishAllActivity();
-            AppManager.getInstance().jumpActivity(App.getContext(), LoginActivity.class);
+            AppManager.getInstance().jumpActivity(App.getContext(), LoginActivity.class, Intent.FLAG_ACTIVITY_NEW_TASK);
             return null;
         }
         return token;
