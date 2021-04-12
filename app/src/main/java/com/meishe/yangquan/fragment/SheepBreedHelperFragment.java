@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.SheepBreedHelperActivity;
 import com.meishe.yangquan.adapter.ViewPagerAdapter;
@@ -36,7 +37,7 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
     /*剩余出栏羊*/
     private int mCurrentCulturalQuantity;
     private TextView mTvTitle;
-    private TabLayout mTabLayout;
+    private SlidingTabLayout mTabLayout;
     private MViewPager mViewPager;
 
     private List<String> mTitleList = new ArrayList<>();
@@ -71,36 +72,13 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.sheep_breed_helper_fragment, container, false);
         mTvTitle = view.findViewById(R.id.tv_title);
-        mTabLayout = view.findViewById(R.id.tab_layout);
+        mTabLayout = view.findViewById(R.id.slidingTabLayout);
         mViewPager = view.findViewById(R.id.viewpager);
         return view;
     }
 
     @Override
     protected void initListener() {
-//        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//                if (position==2){
-//                    String totalPrice = SharedPreferencesUtil.getInstance(mContext).getString("" + mBatchId);
-//                    if (TextUtils.isEmpty(totalPrice)){
-//                        showInputIncomingDialog();
-//                    }else{
-//
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
     }
 
     @Override
@@ -121,7 +99,7 @@ public class SheepBreedHelperFragment extends BaseRecyclerFragment {
         mFragmentList.add(SheepBreedHelperBenefitAnalysisFragment.newInstance(mBatchId,1));
 
         mViewPager.setAdapter(new ViewPagerAdapter(getChildFragmentManager(), 0, mContext, mFragmentList, mTitleList));
-        mTabLayout.setupWithViewPager(mViewPager);
+        mTabLayout.setViewPager(mViewPager);
 
 
     }

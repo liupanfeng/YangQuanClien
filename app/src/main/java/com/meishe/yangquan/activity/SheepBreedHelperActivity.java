@@ -1,11 +1,9 @@
 package com.meishe.yangquan.activity;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
@@ -24,7 +22,6 @@ import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.IosDialog;
 
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +32,6 @@ import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_USER_INFO;
 
 /**
  * 羊管家-养殖助手
@@ -69,12 +65,6 @@ public class SheepBreedHelperActivity extends BaseActivity {
     @Override
     public void initData() {
         mBatchData.clear();
-//        if (SheepBreedHelper.getInstance(mContext).getTitleList() == null || SheepBreedHelper.getInstance(mContext).getTitleList().size() == 0) {
-//            showCreateDialog();
-//            return;
-//        }
-//        initTabLayout(SheepBreedHelper.getInstance(mContext).getTitleList());
-
         getDispatchFromServer();
     }
 
@@ -186,12 +176,12 @@ public class SheepBreedHelperActivity extends BaseActivity {
                 }
 
                 if (title.length() > 4) {
-                    ToastUtil.showToast(mContext, "档案名称最多四个字");
+                    ToastUtil.showToast(mContext, "档案名称最多4个字");
                     return;
                 }
 
-                if (title.length() < 2) {
-                    ToastUtil.showToast(mContext, "档案名称最少2个字");
+                if (title.length() < 1) {
+                    ToastUtil.showToast(mContext, "档案名称最少1个字");
                     return;
                 }
                 mIosDialog.hide();

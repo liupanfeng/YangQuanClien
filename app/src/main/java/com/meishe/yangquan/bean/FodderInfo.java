@@ -28,6 +28,8 @@ public class FodderInfo extends BaseInfo {
     /*页面类型 1：养殖助手 2：养殖档案 */
     private int type;
 
+    private int position=-1;
+
 
     public String getName() {
         return name;
@@ -83,5 +85,13 @@ public class FodderInfo extends BaseInfo {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

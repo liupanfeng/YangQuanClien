@@ -7,8 +7,6 @@
         android:id="@+id/rl_vaccine_record_open"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp38"
-        android:layout_marginLeft="@dimen/dp16"
-        android:layout_marginRight="@dimen/dp16"
         android:layout_marginTop="@dimen/dp20"
         android:background="@mipmap/ic_sheep_message_bg">
 

@@ -21,6 +21,9 @@ import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
 import com.meishe.yangquan.utils.FormatDateUtil;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * 养殖助手-饲料分析-饲料列表
  *
@@ -28,7 +31,6 @@ import com.meishe.yangquan.utils.FormatDateUtil;
  */
 public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
 
     /*饲料名称*/
     private TextView tv_name;
@@ -41,13 +43,16 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
     /*日配比*/
     private TextView tv_total_price;
 
+    private Map<Integer, Float> weightMap = new HashMap<>();
+
+    private Map<Integer, Float> singlePriceMap = new HashMap<>();
+
+    private Map<Integer, Float> totalPriceMap = new HashMap<>();
+
 
     public BreedingArchivesFoodAnalysisHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
@@ -60,29 +65,56 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bindViewHolder(Context context, final BaseInfo info, int position, View.OnClickListener listener) {
+    public void bindViewHolder(Context context, final BaseInfo info, final int position, View.OnClickListener listener) {
         if (info instanceof FodderInfo) {
 
             tv_name.setText(((FodderInfo) info).getName());
             float percent = ((FodderInfo) info).getPercent();
+            int infoPosition = ((FodderInfo) info).getPosition();
             if (percent != 0) {
                 tv_percent.setText(percent + "");
             }
 
-            float price = ((FodderInfo) info).getPrice();
-            if (price != 0) {
-                et_input_single_price.setText(price + "");
+//            float price = ((FodderInfo) info).getPrice();
+//            if (price != 0) {
+//                if (infoPosition<0){
+//                    et_input_single_price.setText(price + "");
+//                }else if (infoPosition==position){
+//                    et_input_single_price.setText(price + "");
+//                }
+//
+//            }
+//
+//            float totalPrice = ((FodderInfo) info).getTotalPrice();
+//            if (totalPrice != 0) {
+//                if (infoPosition<0){
+//                    tv_total_price.setText(totalPrice + "");
+//                }else if (infoPosition==position){
+//                    tv_total_price.setText(totalPrice + "");
+//                }
+//            }
+//
+//            float weight = ((FodderInfo) info).getWeight();
+//            if (weight != 0) {
+//                if (infoPosition<0){
+//                    et_input_weight.setText(weightMap.get(position) + "");
+//                }else if (infoPosition==position){
+//                    et_input_weight.setText(weightMap.get(position) + "");
+//                }
+//            }
+
+            if (singlePriceMap.get(position)!=null){
+                et_input_single_price.setText(singlePriceMap.get(position) + "");
             }
 
-             float totalPrice = ((FodderInfo) info).getTotalPrice();
-            if (totalPrice != 0) {
-                tv_total_price.setText(totalPrice + "");
+            if (totalPriceMap.get(position)!=null){
+                tv_total_price.setText(totalPriceMap.get(position)+"");
             }
 
-            float weight = ((FodderInfo) info).getWeight();
-            if (weight != 0) {
-                et_input_weight.setText(((FodderInfo) info).getWeight() + "");
+            if (weightMap.get(position)!=null){
+                et_input_weight.setText(weightMap.get(position)+"");
             }
+
 
             et_input_weight.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -98,17 +130,25 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
                             String inputWeight = charSequence.toString().trim();
                             Float weight = Float.valueOf(inputWeight);
                             ((FodderInfo) info).setWeight(weight);
+                            ((FodderInfo) info).setPosition(position);
+
+                            weightMap.put(position,weight);
                             float price = ((FodderInfo) info).getPrice();
                             if (price != 0) {
-                                tv_total_price.setText(price*weight+"");
-                                ((FodderInfo) info).setTotalPrice(price*weight);
-                            }else{
+                                tv_total_price.setText(price * weight + "");
+                                ((FodderInfo) info).setTotalPrice(price * weight);
+
+                                totalPriceMap.put(position,price * weight);
+                            } else {
                                 tv_total_price.setText("");
                                 ((FodderInfo) info).setTotalPrice(0);
+                                totalPriceMap.put(position,0f);
                             }
                         } else {
+                            ((FodderInfo) info).setPosition(position);
                             tv_total_price.setText("");
                             ((FodderInfo) info).setWeight(0);
+                            weightMap.put(position,0f);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -137,18 +177,27 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
                             String singlePrice = charSequence.toString().trim();
                             Float price = Float.valueOf(singlePrice);
                             ((FodderInfo) info).setPrice(price);
+
+                            ((FodderInfo) info).setPosition(position);
+                            singlePriceMap.put(position,price);
                             float weight = ((FodderInfo) info).getWeight();
-                            if (weight!=0){
-                                tv_total_price.setText(price*weight+"");
-                                ((FodderInfo) info).setTotalPrice(price*weight);
-                            }else{
+                            if (weight != 0) {
+                                tv_total_price.setText(price * weight + "");
+                                ((FodderInfo) info).setTotalPrice(price * weight);
+
+                                totalPriceMap.put(position,price * weight);
+                            } else {
                                 tv_total_price.setText("");
                                 ((FodderInfo) info).setTotalPrice(0);
+                                totalPriceMap.put(position,0f);
                             }
 
                         } else {
+
+                            ((FodderInfo) info).setPosition(position);
                             tv_total_price.setText("");
                             ((FodderInfo) info).setPrice(0);
+                            singlePriceMap.put(position,0f);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -162,7 +211,7 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
                 }
             });
 
-            if (((FodderInfo) info).getType()==2){
+            if (((FodderInfo) info).getType() == 2) {
                 et_input_single_price.setOnTouchListener(new View.OnTouchListener() {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {

@@ -52,7 +52,7 @@ public class SheepBarPictureListHolder extends BaseViewHolder {
 //                        tmpBitmap.getHeight(), matrix, true);
                 mIvSheepBarMessage.setImageBitmap(tmpBitmap);
             } else if (((CommonPictureInfo) info).getType() == CommonPictureInfo.TYPE_URL_PIC) {
-                GlideUtil.getInstance().loadPhotoUrl(((CommonPictureInfo) info).getFilePath(),mIvSheepBarMessage);
+                GlideUtil.getInstance().loadUrl(((CommonPictureInfo) info).getFilePath(),mIvSheepBarMessage);
                 mIvSheepBarMessage.setTag(((CommonPictureInfo) info).getFilePath());
             }
         }

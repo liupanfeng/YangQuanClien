@@ -199,9 +199,8 @@
                 android:textSize="@dimen/quotation_title_text_size" />
 
             <View
-                android:layout_width="0dp"
+                android:layout_width="40dp"
                 android:layout_height="18dp"
-                android:layout_weight="1"
                 android:layout_gravity="center_vertical"
                 android:gravity="left|center_vertical"/>
 

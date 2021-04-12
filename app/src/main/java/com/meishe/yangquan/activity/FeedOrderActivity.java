@@ -19,6 +19,7 @@ import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.IndustryNewsInfo;
 import com.meishe.yangquan.bean.IndustryNewsResult;
 import com.meishe.yangquan.bean.ServerResult;
+import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -27,6 +28,7 @@ import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 
 import java.io.IOException;
@@ -94,6 +96,11 @@ public class FeedOrderActivity extends BaseActivity {
                     ((FeedShoppingCarGoodsInfo) info).setNeedHideSelect(true);
                 }
             }
+        }
+        //设置默认的用户名电话等
+        UserInfo user = UserManager.getInstance(mContext).getUser();
+        if (user!=null){
+            tv_feed_order_real_name.setText(user.getNickname());
         }
 
         mAdapter.addAll(list);

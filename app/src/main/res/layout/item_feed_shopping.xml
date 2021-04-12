@@ -19,7 +19,6 @@
         app:roundWidth="@dimen/dp10"
         app:roundHeight="@dimen/dp10"
         android:layout_marginLeft="@dimen/dp15"
-        android:background="@mipmap/ic_feed_goods_cover"
         />
 
     <TextView

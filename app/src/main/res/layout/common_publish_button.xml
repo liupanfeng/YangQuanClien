@@ -1,29 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_common_publish"
         android:layout_width="47dp"
         android:layout_height="47dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_marginRight="@dimen/dp22"
         android:layout_marginBottom="@dimen/dp19"
-        android:background="@drawable/bg_publish_layer"
+        app:cardCornerRadius="@dimen/dp25"
+        app:cardElevation="4dp"
         >
+     <RelativeLayout
+         android:layout_width="47dp"
+         android:layout_height="47dp"
+         android:background="#40d344"
+         >
 
-        <Button
+        <ImageView
             android:id="@+id/iv_common_publish"
-            android:layout_width="@dimen/dp45"
-            android:layout_height="@dimen/dp45"
-            android:layout_marginTop="1.5dp"
-            android:layout_marginLeft="1dp"
+            android:layout_width="@dimen/dp16"
+            android:layout_height="@dimen/dp16"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/dp8"
             android:background="@mipmap/add_home_menu_bg" />
 
-    </LinearLayout>
-
+        <TextView
+            android:layout_below="@+id/iv_common_publish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp12"
+            android:text="发布"
+            android:layout_centerHorizontal="true"
+            />
+     </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 
 

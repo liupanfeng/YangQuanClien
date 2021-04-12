@@ -64,11 +64,11 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
 
     private int mServiceType = Constants.TYPE_SERVICE_CUT_WOOL;
 
-    private View mIvPublishService;
     private HomeContentFragment mHomeContentFragment;
 
     private TextView tv_service_content;
     private HorizontalExpandMenu expand_menu;
+    private View card_common_publish;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -79,8 +79,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mLookCar = view.findViewById(R.id.btn_look_car);
 
         mRecyclerView = view.findViewById(R.id.recycler);
-        mIvPublishService = view.findViewById(R.id.iv_common_publish);
-
+        card_common_publish = view.findViewById(R.id.card_common_publish);
         tv_service_content = view.findViewById(R.id.tv_service_content);
         expand_menu = view.findViewById(R.id.expand_menu);
         tv_service_content.setSelected(true);
@@ -96,7 +95,7 @@ public class HomeServiceFragment extends BaseRecyclerFragment implements View.On
         mVaccine.setOnClickListener(this);
         mSheepDung.setOnClickListener(this);
         mLookCar.setOnClickListener(this);
-        mIvPublishService.setOnClickListener(new View.OnClickListener() {
+        card_common_publish.setOnClickListener(new View.OnClickListener() {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {

@@ -51,7 +51,6 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
     /*最新*/
     private static final int TYPE_MARKET_LIST_TYPE_TOP = 0;
 
-    private View mIvPublishSheepBar;
 
     private LinearLayout mLlSignUp;
     /*置顶内容1*/
@@ -67,6 +66,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
     private SlidingTabLayout mSlidingTabLayout;
     private ViewPager mViewPager;
     private List<SheepBarMessageInfo> mTopDatas;
+    private View card_common_publish;
 
     public static SheepBarFragment newInstance(String param1, String param2) {
         SheepBarFragment fragment = new SheepBarFragment();
@@ -85,7 +85,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
         View view = inflater.inflate(R.layout.fragment_bar_sheep_change, container, false);
-        mIvPublishSheepBar = view.findViewById(R.id.iv_common_publish);
+        card_common_publish = view.findViewById(R.id.card_common_publish);
         mLlSignUp = view.findViewById(R.id.ll_sign_up);
         mLlTopMessageContainer1 = view.findViewById(R.id.ll_top_message_container_1);
         mLlTopMessageContainer2 = view.findViewById(R.id.ll_top_message_container_2);
@@ -101,7 +101,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
 
     @Override
     protected void initListener() {
-        mIvPublishSheepBar.setOnClickListener(this);
+        card_common_publish.setOnClickListener(this);
 
         mLlTopMessageContainer1.setOnClickListener(this);
 
@@ -150,7 +150,7 @@ public class SheepBarFragment extends BaseRecyclerFragment implements View.OnCli
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_common_publish:
+            case R.id.card_common_publish:
                 //发布羊吧
                 AppManager.getInstance().jumpActivity(getActivity(), PublishSheepBarActivity.class);
                 break;

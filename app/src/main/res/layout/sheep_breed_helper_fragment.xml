@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <TextView
@@ -12,17 +12,22 @@
         android:visibility="gone"
         android:layout_height="wrap_content"/>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/tabBarSize"
-        android:background="@color/white"
-        app:tabIndicatorColor="@color/mainColor"
-        app:tabSelectedTextColor="@color/mainColor"
-        app:tabTextColor="#656565"
-        app:tabRippleColor="@color/transparent"
-        app:tabIndicatorHeight="1dp"
-        app:tabMode="fixed" />
+
+    <com.meishe.libbase.SlidingTabLayout
+        android:id="@+id/slidingTabLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/dp_px_100"
+        android:layout_marginLeft="@dimen/dp_px_30"
+        android:layout_marginRight="@dimen/dp_px_30"
+        android:layout_marginTop="@dimen/dp20"
+        tl:tl_indicator_color="@color/mainColor"
+        android:layout_gravity="center_horizontal"
+        tl:tl_indicator_height="2dp"
+        tl:tl_indicator_width="16dp"
+        tl:tl_textSelectColor="@color/mainColor"
+        tl:tl_textSize="@dimen/sp_px_39"
+        tl:tl_textUnselectedColor="@color/unselect_text_color" />
+
 
     <com.meishe.yangquan.view.MViewPager
         android:id="@+id/viewpager"

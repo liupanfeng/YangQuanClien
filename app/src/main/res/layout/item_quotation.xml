@@ -61,14 +61,13 @@
 
         <TextView
             android:id="@+id/tv_to_history"
-            android:layout_width="0dp"
+            android:layout_width="40dp"
             android:layout_height="18dp"
-            android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:gravity="left|center_vertical"
-            android:text="进入行情 >"
+            android:text=">>>"
             android:textColor="#ff3ba786"
-            android:textSize="11sp" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 

@@ -95,8 +95,5 @@ dependencies {
     //高德定位
     implementation 'com.amap.api:location:latest.integration'
 
-    /*给按钮加阴影*//*
-    implementation 'com.dingmouren.paletteimageview:paletteimageview:1.0.0'
-*/
 
 }

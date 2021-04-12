@@ -35,10 +35,10 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
     private CustomButton mBuyBigSheep;
 
     private int mMarketType = Constants.TYPE_MARKET_SELL_LITTLE_SHEEP;
-    private View mIvPublishMarket;
     private HomeContentFragment mHomeContentFragment;
     private TextView tv_market_content;
     private HorizontalExpandMenu expand_menu;
+    private View card_common_publish;
 
     @Override
     protected View initView(LayoutInflater inflater, ViewGroup container) {
@@ -48,7 +48,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mSellBigSheep = view.findViewById(R.id.btn_sell_big_sheep);
         mBuyBigSheep = view.findViewById(R.id.btn_buy_big_sheep);
         mRecyclerView = view.findViewById(R.id.recycler);
-        mIvPublishMarket = view.findViewById(R.id.iv_common_publish);
+        card_common_publish = view.findViewById(R.id.card_common_publish);
         tv_market_content = view.findViewById(R.id.tv_market_content);
         expand_menu = view.findViewById(R.id.expand_menu);
         tv_market_content.setSelected(true);
@@ -62,7 +62,7 @@ public class HomeMarketFragment extends BaseRecyclerFragment implements View.OnC
         mBuyLittleSheep.setOnClickListener(this);
         mSellBigSheep.setOnClickListener(this);
         mBuyBigSheep.setOnClickListener(this);
-        mIvPublishMarket.setOnClickListener(new View.OnClickListener() {
+        card_common_publish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Bundle bundle = new Bundle();
