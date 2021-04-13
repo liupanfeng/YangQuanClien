@@ -183,7 +183,6 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
     protected boolean isNeedAutoScroll = false;
 
     private OnItemClickListener onItemClickListener;
-
     private List<BaseInfo> mList;
 
     private int mSelectPosition = -1;
