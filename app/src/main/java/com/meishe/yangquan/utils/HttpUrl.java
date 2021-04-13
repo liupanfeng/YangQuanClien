@@ -313,7 +313,7 @@ public class HttpUrl {
     /*（商户）保存、更新店铺信息*/
     public static final String BU_HOME_APPLY_SHOPPING_SANE = URL + "app/owner/shop/save";
 
-    /*（商户）获取店铺信息*/
+    /*（商户）获取店铺信息 申请的店铺的数据*/
     public static final String BU_HOME_APPLY_SHOPPING_INFO = URL + "app/owner/shop/info";
 
     /*（商户）获取商品信息*/
@@ -329,6 +329,9 @@ public class HttpUrl {
 
     /*（商户）订单列表 */
     public static final String BU_HOME_ORDER_LIST = URL + "app/owner/order/list";
+
+    /*（商户）店铺数据  店铺首页数据 */
+    public static final String BU_HOME_SHOPPING_DATA = URL + "app/owner/shop/data";
 
 
 

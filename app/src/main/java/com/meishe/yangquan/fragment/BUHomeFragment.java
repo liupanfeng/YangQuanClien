@@ -19,6 +19,8 @@ import com.meishe.yangquan.activity.BUHomeGoodsManagerActivity;
 import com.meishe.yangquan.activity.BUHomeOrderManagerActivity;
 import com.meishe.yangquan.activity.BUHomeRefundManagerActivity;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
+import com.meishe.yangquan.bean.BUHomeShoppingDataInfo;
+import com.meishe.yangquan.bean.BUHomeShoppingDataInfoResult;
 import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.bean.BUShoppingInfoResult;
@@ -79,6 +81,13 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
     private View ll_bu_order_manager;
     private View ll_bu_comment_manager;
     private View ll_bu_refund_manager;
+    private TextView tv_bu_good_comment;
+    private TextView tv_bu_middle_comment;
+    private TextView tv_bu_low_comment;
+    private TextView tv_bu_focus_count;
+    private TextView tv_bu_wait_pay;
+    private TextView tv_bu_wait_send_out_goods;
+    private TextView tv_bu_comment_count;
 
     public static BUHomeFragment newInstance(){
         return new BUHomeFragment();
@@ -103,6 +112,20 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         ll_bu_order_manager = view.findViewById(R.id.ll_bu_order_manager);
         ll_bu_comment_manager = view.findViewById(R.id.ll_bu_comment_manager);
         ll_bu_refund_manager = view.findViewById(R.id.ll_bu_refund_manager);
+        /*好评*/
+        tv_bu_good_comment = view.findViewById(R.id.tv_bu_good_comment);
+        /*中评*/
+        tv_bu_middle_comment = view.findViewById(R.id.tv_bu_middle_comment);
+        /*差评*/
+        tv_bu_low_comment = view.findViewById(R.id.tv_bu_low_comment);
+        /*关注我的数量*/
+        tv_bu_focus_count = view.findViewById(R.id.tv_bu_focus_count);
+        /*待付*/
+        tv_bu_wait_pay = view.findViewById(R.id.tv_bu_wait_pay);
+        /*待发货*/
+        tv_bu_wait_send_out_goods = view.findViewById(R.id.tv_bu_wait_send_out_goods);
+        /*评论数量*/
+        tv_bu_comment_count = view.findViewById(R.id.tv_bu_comment_count);
 
 
         initShoppingUserRecycler();
@@ -348,6 +371,73 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         }, param, token);
     }
 
+
+
+    /**
+     * 申请开店成功后，获取店铺首页数据(UI需要显示的数据)
+     */
+    public void getHomeShoppingData() {
+        HashMap<String, Object> param = new HashMap<>();
+        String token = getToken();
+        showLoading();
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_SHOPPING_DATA, new BaseCallBack<BUHomeShoppingDataInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoading();
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, BUHomeShoppingDataInfoResult result) {
+                hideLoading();
+                if (result.getCode() != 1) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+                BUHomeShoppingDataInfo data = result.getData();
+//                updateUI(data);
+                updateShoppingData(data);
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoading();
+                    }
+                });
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoading();
+                    }
+                });
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+
     /**
      * 根据请求到的店铺信息跟新UI
      *
@@ -372,7 +462,8 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
                     break;
                 case 1:
                     //审核通过
-                    updateShoppingData(data);
+//                    updateShoppingData(data);
+                    getHomeShoppingData();
                     break;
                 case -1:
                     //审核未通过
@@ -394,13 +485,15 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
      *
      * @param data
      */
-    private void updateShoppingData(BUShoppingInfo data) {
+    private void updateShoppingData(BUHomeShoppingDataInfo data) {
+        /*隐藏未开店铺的View*/
         mViewNoShop.setVisibility(View.GONE);
+        /*显示开店铺的数据*/
         mViewOpenShop.setVisibility(View.VISIBLE);
         //更新店铺相关的一些信息
         if (data != null) {
-            tv_bu_shop_name.setText(data.getName());
-            GlideUtil.getInstance().loadPhotoUrl(data.getShopInSideImageUrls().get(0),bu_photo);
+            tv_bu_shop_name.setText(data.getShopName());
+            GlideUtil.getInstance().loadPhotoUrl(data.getImageUrl() ,bu_photo);
         }
 
         initShopData();

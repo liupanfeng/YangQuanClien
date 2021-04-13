@@ -104,6 +104,7 @@
 
 
                     <TextView
+                        android:id="@+id/tv_bu_focus_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
@@ -127,6 +128,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_bu_wait_pay"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -152,6 +154,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_bu_wait_send_out_goods"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -178,6 +181,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tv_bu_comment_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
@@ -190,7 +194,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="5dp"
-                                android:text="评"
+                                android:text="评价"
                                 android:textColor="#ffffffff"
                                 android:textSize="13sp" />
 
