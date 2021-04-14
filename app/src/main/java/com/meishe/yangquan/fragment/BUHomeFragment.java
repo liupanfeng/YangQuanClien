@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Request;
@@ -88,8 +89,9 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
     private TextView tv_bu_wait_pay;
     private TextView tv_bu_wait_send_out_goods;
     private TextView tv_bu_comment_count;
+    private Map<String, Integer> mShoppingDataMap = new HashMap<>();
 
-    public static BUHomeFragment newInstance(){
+    public static BUHomeFragment newInstance() {
         return new BUHomeFragment();
     }
 
@@ -112,6 +114,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         ll_bu_order_manager = view.findViewById(R.id.ll_bu_order_manager);
         ll_bu_comment_manager = view.findViewById(R.id.ll_bu_comment_manager);
         ll_bu_refund_manager = view.findViewById(R.id.ll_bu_refund_manager);
+
         /*好评*/
         tv_bu_good_comment = view.findViewById(R.id.tv_bu_good_comment);
         /*中评*/
@@ -176,7 +179,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
             String shopData = mShopData[i];
             BUShopDataInfo buShopDataInfo = new BUShopDataInfo();
             buShopDataInfo.setName(shopData);
-            buShopDataInfo.setAmount(i);
+            buShopDataInfo.setAmount(mShoppingDataMap.get(shopData) == null ? 0 : mShoppingDataMap.get(shopData));
             buShopDataInfoArrayList.add(buShopDataInfo);
         }
         mGridAdapter.addAll(buShopDataInfoArrayList);
@@ -372,7 +375,6 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
     }
 
 
-
     /**
      * 申请开店成功后，获取店铺首页数据(UI需要显示的数据)
      */
@@ -437,7 +439,6 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
     }
 
 
-
     /**
      * 根据请求到的店铺信息跟新UI
      *
@@ -490,10 +491,41 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
         mViewNoShop.setVisibility(View.GONE);
         /*显示开店铺的数据*/
         mViewOpenShop.setVisibility(View.VISIBLE);
+//        "出售中", "待付", "待发货", "待评价", "退货中",
+//                "今日总访客", "今日订单数量", "今日成交额", "收藏我的", "累计订单数量", "累计成交额"
         //更新店铺相关的一些信息
         if (data != null) {
+            //更细顶部的View
             tv_bu_shop_name.setText(data.getShopName());
-            GlideUtil.getInstance().loadPhotoUrl(data.getImageUrl() ,bu_photo);
+            GlideUtil.getInstance().loadPhotoUrl(data.getImageUrl(), bu_photo);
+
+
+            tv_bu_good_comment.setText("好评 " + data.getGoodEvaluationCount());
+            tv_bu_middle_comment.setText("中评 " + data.getNormalEvaluationCount());
+            tv_bu_low_comment.setText("差评 " + data.getBadEvaluationCount());
+
+            tv_bu_focus_count.setText("关注我的 " + data.getShopCollectionCount());
+
+            tv_bu_wait_pay.setText("" + data.getGoodsCount());
+            tv_bu_wait_send_out_goods.setText("" + data.getReceivedOrderCount());
+            //评论数量
+            tv_bu_comment_count.setText("" + data.getReceivedOrderCount());
+
+
+            //初始化底部的数据，用于更新底部的view
+            mShoppingDataMap.clear();
+            mShoppingDataMap.put("出售中", data.getReceivedOrderCount());
+            mShoppingDataMap.put("待付", data.getReceivedOrderCount());
+//            mShoppingDataMap.put("待评价",data.get());   ?
+            mShoppingDataMap.put("退货中", data.getApplyBackGoodsOrderCount());
+//            mShoppingDataMap.put("今日总访客",data.get());  ?
+
+            mShoppingDataMap.put("今日订单数量", data.getTodayOrderCount());
+            mShoppingDataMap.put("今日成交额", data.getTodayPrice());
+            mShoppingDataMap.put("收藏我的", data.getGoodsCollectionCount());
+            mShoppingDataMap.put("累计订单数量", data.getTotalOrderCount());
+            mShoppingDataMap.put("累计订单数量", data.getTotalPrice());
+
         }
 
         initShopData();

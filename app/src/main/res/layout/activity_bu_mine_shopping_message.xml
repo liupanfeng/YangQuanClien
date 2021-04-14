@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,6 +20,17 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp8"
         android:background="#fff5f5f5" />
+
+        <com.meishe.yangquan.view.RoundAngleImageView
+            android:id="@+id/iv_personal_mine_photo"
+            android:layout_width="93dp"
+            android:layout_height="93dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/dp27"
+            android:scaleType="centerCrop"
+            app:roundHeight="47dp"
+            app:roundWidth="47dp" />
+
 
      <RelativeLayout
         android:id="@+id/rl_bu_shopping_name"
@@ -187,8 +199,7 @@
             android:textColor="#ff303030"
             android:textSize="13sp" />
 
-        <EditText
-            android:id="@+id/et_bu_shopping_front_picture"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -198,7 +209,7 @@
             android:drawableRight="@mipmap/right_arrow_normal"
             android:drawablePadding="6dp"
             android:gravity="end"
-            android:hint="点击上传（最多可上传1张）"
+            android:text="点击上传（最多可上传1张）"
             android:textColorHint="#ffc2c2c2"
             android:textSize="13sp" />
 
@@ -225,8 +236,7 @@
             android:textColor="#ff303030"
             android:textSize="13sp" />
 
-        <EditText
-            android:id="@+id/et_bu_shopping_inner_picture"
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -236,7 +246,7 @@
             android:drawableRight="@mipmap/right_arrow_normal"
             android:drawablePadding="6dp"
             android:gravity="end"
-            android:hint="点击上传（最多可上传4张）"
+            android:text="点击上传（最多可上传4张）"
             android:textColorHint="#ffc2c2c2"
             android:textSize="13sp" />
 

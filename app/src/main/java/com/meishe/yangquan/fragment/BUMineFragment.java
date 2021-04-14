@@ -16,10 +16,12 @@ import com.meishe.yangquan.activity.BUMineShoppingMessageActivity;
 import com.meishe.yangquan.activity.MineFeedGoldActivity;
 import com.meishe.yangquan.activity.SettingActivity;
 import com.meishe.yangquan.bean.BUShoppingInfo;
+import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.GlideUtil;
+import com.meishe.yangquan.utils.UserManager;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -42,6 +44,8 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
     /*真实名称*/
     private TextView tv_bu_mine_real_name;
     private View iv_bu_mine_setting;
+    /*头像部分的容器*/
+    private View rl_bu_photo_container;
 
     public static BUMineFragment newInstance(){
         return new BUMineFragment();
@@ -57,17 +61,16 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
         iv_bu_mine_setting = view.findViewById(R.id.iv_bu_mine_setting);
         tv_bu_mine_shopping_name = view.findViewById(R.id.tv_bu_mine_shopping_name);
         tv_bu_mine_real_name = view.findViewById(R.id.tv_bu_mine_real_name);
+        rl_bu_photo_container = view.findViewById(R.id.rl_bu_photo_container);
         return view;
     }
 
     @Override
     protected void initData() {
-
-    }
-
-    @Override
-    protected void lazyLoad() {
-        super.lazyLoad();
+        UserInfo user = UserManager.getInstance(getContext()).getUser();
+        if (user!=null){
+            GlideUtil.getInstance().loadPhotoUrl(user.getIconUrl(),iv_mine_photo);
+        }
         BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
         if (buShoppingInfo== null){
             return;
@@ -79,10 +82,14 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
         initShoppingView(buShoppingInfo);
     }
 
+    @Override
+    protected void lazyLoad() {
+        super.lazyLoad();
+    }
+
     private void initShoppingView(BUShoppingInfo buShoppingInfo) {
         tv_bu_mine_shopping_name.setText(buShoppingInfo.getName());
         tv_bu_mine_real_name.setText(buShoppingInfo.getOwnerName()+"的店铺");
-        GlideUtil.getInstance().loadUrl(buShoppingInfo.getShopInSideImageUrls().get(0),iv_mine_photo);
     }
 
     @Override
@@ -91,12 +98,14 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
         rl_bu_feed_gold.setOnClickListener(this);
         rl_bu_recommend.setOnClickListener(this);
         iv_bu_mine_setting.setOnClickListener(this);
+        rl_bu_photo_container.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.rl_bu_shopping_message:
+            case R.id.rl_bu_photo_container:
                 //店铺信息
                 AppManager.getInstance().jumpActivity(getActivity(), BUMineShoppingMessageActivity.class);
                 break;

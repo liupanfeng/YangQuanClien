@@ -45,7 +45,7 @@ public class BUHomeShoppingDataInfo extends BaseInfo{
     private int committedOrderCount;
     /*待付数量*/
     private int payedOrderCount;
-    /*收到订单的数量*/
+    /*收到订单的数量 -出售中*/
     private int  receivedOrderCount;
     /*退货数量*/
     private int  applyBackGoodsOrderCount;

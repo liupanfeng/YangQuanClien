@@ -161,7 +161,6 @@ public class MinePersonalInfoActivity extends BaseActivity {
     public void initData() {
         mUser = UserManager.getInstance(mContext).getUser();
         if (mUser != null) {
-
             updateUserUI();
             String photoUrl = mUser.getIconUrl();
             GlideUtil.getInstance().loadPhotoUrl(photoUrl,mIvPersonalMinePhoto);
