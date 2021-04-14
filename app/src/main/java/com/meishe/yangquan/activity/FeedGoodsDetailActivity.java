@@ -14,11 +14,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfoResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
+import com.meishe.yangquan.manager.FeedGoodsManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
@@ -29,6 +31,7 @@ import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BannerLayout;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -57,6 +60,8 @@ public class FeedGoodsDetailActivity extends BaseActivity {
     private CheckBox cb_select_goods;
 
     private TextView tv_colect_goods;
+    private View btn_feed_good_buy_now;
+    private FeedGoodsInfo feedGoodsInfo;
 
     @Override
     protected int initRootView() {
@@ -73,6 +78,8 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         ll_feed_goods_collection = findViewById(R.id.ll_feed_shopping_collection);
         cb_select_goods = findViewById(R.id.cb_select_goods);
         tv_colect_goods = findViewById(R.id.tv_colect_goods);
+        /*立即购买*/
+        btn_feed_good_buy_now = findViewById(R.id.btn_feed_good_buy_now);
 
 
         banner = findViewById(R.id.banner);
@@ -85,7 +92,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         if (intent != null) {
             Bundle extras = intent.getExtras();
             if (extras != null) {
-                FeedGoodsInfo feedGoodsInfo = (FeedGoodsInfo) extras.getSerializable(Constants.FEED_GOODS_INFO);
+                 feedGoodsInfo = (FeedGoodsInfo) extras.getSerializable(Constants.FEED_GOODS_INFO);
                 if (feedGoodsInfo != null) {
                     mGoodsId = feedGoodsInfo.getId();
                     updateUI(feedGoodsInfo);
@@ -200,6 +207,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         btn_feed_add_shopping_cart.setOnClickListener(this);
         ll_feed_goods_phone_call.setOnClickListener(this);
         ll_feed_goods_collection.setOnClickListener(this);
+        btn_feed_good_buy_now.setOnClickListener(this);
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -224,6 +232,11 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         }else if (v.getId()==R.id.ll_feed_shopping_collection){
 //            ToastUtil.showToast("收藏商品");
             doCollectShoppingOrGoods(mGoodsId);
+        } else if (v.getId()==R.id.btn_feed_good_buy_now){
+            List<BaseInfo> list =new ArrayList<>();
+            list.add(feedGoodsInfo);
+            FeedGoodsManager.getInstance().setList(list);
+            AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class);
         }
     }
 

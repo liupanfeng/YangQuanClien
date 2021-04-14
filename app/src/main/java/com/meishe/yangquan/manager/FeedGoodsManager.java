@@ -13,7 +13,7 @@ import java.util.List;
  */
 public class FeedGoodsManager {
 
-    private List<BaseInfo> list=new ArrayList<>();
+    private List<? extends BaseInfo> list=new ArrayList<>();
 
     private static final FeedGoodsManager ourInstance = new FeedGoodsManager();
 
@@ -24,11 +24,11 @@ public class FeedGoodsManager {
     private FeedGoodsManager() {
     }
 
-    public List<BaseInfo> getList() {
+    public List<? extends BaseInfo> getList() {
         return list;
     }
 
-    public void setList(List<BaseInfo> list) {
+    public void setList(List<? extends BaseInfo> list) {
         this.list = list;
     }
 }
