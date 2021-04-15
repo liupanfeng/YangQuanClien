@@ -45,6 +45,7 @@ import okhttp3.Response;
  * @CreateDate : 2021/3/3 15:32
  * @Description : 商版-商品订单管理 子碎片
  */
+@Deprecated
 public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
 
     /*订单状态 1 待付 2 待发货 3 已发货 4 已完成 */
@@ -81,17 +82,17 @@ public class BUHomeGoodsOrderFragment extends BaseRecyclerFragment {
     protected void initData() {
         List<BUManagerOrderInfo> datas=new ArrayList<>();
 
-        BUManagerOrderInfo buOrderInfo=new BUManagerOrderInfo();
-        buOrderInfo.setState(mType);
-        datas.add(buOrderInfo);
-
-        buOrderInfo=new BUManagerOrderInfo();
-        buOrderInfo.setState(mType);
-        datas.add(buOrderInfo);
-
-        buOrderInfo = new BUManagerOrderInfo();
-        buOrderInfo.setState(mType);
-        datas.add(buOrderInfo);
+//        BUManagerOrderInfo buOrderInfo=new BUManagerOrderInfo();
+//        buOrderInfo.setState(mType);
+//        datas.add(buOrderInfo);
+//
+//        buOrderInfo=new BUManagerOrderInfo();
+//        buOrderInfo.setState(mType);
+//        datas.add(buOrderInfo);
+//
+//        buOrderInfo = new BUManagerOrderInfo();
+//        buOrderInfo.setState(mType);
+//        datas.add(buOrderInfo);
 
         mAdapter.addAll(datas);
 

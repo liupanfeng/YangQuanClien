@@ -346,6 +346,20 @@ public class Constants {
 
 
 
+    /*订单管理这个几个type 跟请求参数有关 不能修改数值 */
+    /*商版-订单管理 - 待付 */
+    public static final int TYPE_COMMON_BU_ORDER_WAIT_PAY_TYPE = 0;
+    /*商版-订单管理 -待发货*/
+    public static final int TYPE_COMMON_BU_ORDER_WAIT_SEND_TYPE = 1;
+    /*商版-订单管理 - 已发货*/
+    public static final int TYPE_COMMON_BU_ORDER_ALREADY_SEND_TYPE = 2;
+    /*商版-订单管理 - 已完成*/
+    public static final int TYPE_COMMON_BU_ORDER_FINISH_TYPE = 3;
+
+
+
+
+
     /*收入*/
     public static final int TYPE_FEED_GOLD_IN_TYPE = 1;
     /*支出*/
@@ -406,6 +420,12 @@ public class Constants {
 
     /*用户版-饲料-商店列表*/
     public static final int TYPE_COMMON_SHOPPING = 15;
+
+
+    ///////////////////////////////////////////////商版//////////////////////////////////////////////////
+    public static final int TYPE_COMMON_BASE = 200;
+    /*商版-订单管理列表*/
+    public static final int TYPE_COMMON_BU_ORDER = TYPE_COMMON_BASE+1;
 
 
 

@@ -117,7 +117,6 @@ public class FeedShoppingCarActivity extends BaseActivity {
             public void onItemClick(View view, int position, BaseInfo baseInfo) {
                 if (baseInfo instanceof FeedShoppingCarGoodsInfo) {
                     ((FeedShoppingCarGoodsInfo) baseInfo).setSelect(!((FeedShoppingCarGoodsInfo) baseInfo).isSelect());
-                    mAdapter.notifyItemChanged(position);
 
                     List<BaseInfo> data = mAdapter.getData();
                     if (CommonUtils.isEmpty(data)) {
@@ -158,7 +157,7 @@ public class FeedShoppingCarActivity extends BaseActivity {
                             iv_feed_shopping_car.setBackgroundResource(R.mipmap.ic_bu_home_circle_select);
                         }
                     }
-
+                    mAdapter.notifyItemChanged(position);
                 }
             }
         });

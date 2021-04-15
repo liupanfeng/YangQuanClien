@@ -13,6 +13,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.helper.DataHelper;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.ToastUtil;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
@@ -215,6 +216,13 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                 DataHelper.getInstance().getShoppingGoodsData(mList,mPageSize,mPageNum,
                         mIsLoadMore,mListType,mSubType);
                 break;
+
+                //////////////////////////商版///////////////////////////////////////////
+            case Constants.TYPE_COMMON_BU_ORDER:
+                //饲料-商店-商品
+                DataHelper.getInstance().getGoodsDataFromServer(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadMore);
+                break;
             default:
                 break;
         }
@@ -229,6 +237,7 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
 
     @Override
     public void onSuccess() {
+        ToastUtil.showToast("暂无更多内容！");
         changeNoDataViewVisible(View.GONE);
         hideUIState();
     }

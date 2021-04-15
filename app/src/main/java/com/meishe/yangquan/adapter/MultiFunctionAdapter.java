@@ -15,6 +15,7 @@ import com.meishe.yangquan.bean.BUGoodsSubTypeInfo;
 import com.meishe.yangquan.bean.BUGoodsTypeInfo;
 import com.meishe.yangquan.bean.BUMeesageDataInfo;
 import com.meishe.yangquan.bean.BUManagerOrderInfo;
+import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BUManagerRefundInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
@@ -497,7 +498,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_BU_GOODS_TYPE_LIST;
         }else if (baseInfo instanceof BUGoodsSubTypeInfo) {
             return VIEW_BU_GOODS_SUB_TYPE_LIST;
-        }else if (baseInfo instanceof BUManagerOrderInfo) {
+        }else if (baseInfo instanceof BUOrderInfo) {
             return VIEW_BU_ORDER_LIST;
         }else if (baseInfo instanceof BUManagerCommentInfo) {
             return VIEW_BU_COMMENT_LIST;

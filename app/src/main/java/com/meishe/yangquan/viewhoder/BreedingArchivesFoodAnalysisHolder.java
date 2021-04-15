@@ -62,6 +62,7 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(Context context, final BaseInfo info, final int position, View.OnClickListener listener) {
         if (info instanceof FodderInfo) {
+            this.setIsRecyclable(false);
             tv_name.setText(((FodderInfo) info).getName());
             float percent = ((FodderInfo) info).getPercent();
             if (percent != 0) {

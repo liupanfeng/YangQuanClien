@@ -5,6 +5,11 @@ import android.text.TextUtils;
 
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.activity.LoginActivity;
+import com.meishe.yangquan.bean.BUGoodsInfo;
+import com.meishe.yangquan.bean.BUGoodsInfoResult;
+import com.meishe.yangquan.bean.BUManagerOrderInfo;
+import com.meishe.yangquan.bean.BUManagerOrderInfoResult;
+import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfoListResult;
@@ -826,6 +831,85 @@ public class DataHelper {
     }
 
 
+
+    ////////////////////////////////////////////下面是商版接口///////////////////////////////////////////////
+
+    /**
+     * 商版-获取订单列表数据
+     *一下是接口定义不能修改
+     * 0 待支付
+     * 1 待发货
+     * 2 已发货
+     * 3 已完成
+     */
+    public void getGoodsDataFromServer(final List<BaseInfo> list, final int type,
+                                        final int pageSize, final int pageNumber,
+                                        final boolean isLoadMore) {
+
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("listType", type);
+        param.put("pageNum",pageNumber);
+        param.put("pageSize", pageSize);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_ORDER_LIST, new BaseCallBack<BUManagerOrderInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, BUManagerOrderInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    BUManagerOrderInfo dataList = result.getData();
+                    List<BUOrderInfo> elements=null;
+                    if (dataList!=null){
+                        elements = dataList.getElements();
+                    }
+                    if (!CommonUtils.isEmpty(elements)){
+                        for (int i = 0; i < elements.size(); i++) {
+                            BUOrderInfo buManagerOrderInfo = elements.get(i);
+                            if (buManagerOrderInfo==null){
+                                continue;
+                            }
+                            buManagerOrderInfo.setState(type);
+                        }
+                    }
+                    commonResponse(elements, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+
+
     /**
      * 通用的数据返回处理
      * @param datas
@@ -842,7 +926,6 @@ public class DataHelper {
             }
         }
         if (CommonUtils.isEmpty(datas) && isLoadMore && list.size() >0) {
-            ToastUtil.showToast("暂无更多内容！");
             if (mOnCallBackListener!=null){
                 mOnCallBackListener.onSuccess();
             }

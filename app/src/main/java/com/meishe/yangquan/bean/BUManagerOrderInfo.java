@@ -1,5 +1,7 @@
 package com.meishe.yangquan.bean;
 
+import java.util.List;
+
 /**
  *
  * @Author : LiuPanFeng
@@ -8,14 +10,25 @@ package com.meishe.yangquan.bean;
  */
 public class BUManagerOrderInfo extends BaseInfo{
 
-    /*订单状态*/
-    private int state;
+    private int count;
 
-    public int getState() {
-        return state;
+
+    private List<BUOrderInfo> elements;
+
+
+    public int getCount() {
+        return count;
     }
 
-    public void setState(int state) {
-        this.state = state;
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public List<BUOrderInfo> getElements() {
+        return elements;
+    }
+
+    public void setElements(List<BUOrderInfo> elements) {
+        this.elements = elements;
     }
 }

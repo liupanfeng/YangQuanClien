@@ -333,6 +333,9 @@ public class HttpUrl {
     /*（商户）店铺数据  店铺首页数据 */
     public static final String BU_HOME_SHOPPING_DATA = URL + "app/owner/shop/data";
 
+    /*（商户）退货列表 */
+    public static final String BU_HOME_BACK_GOODS_LIST = URL + "app/owner/order/backGoods/list";
+
 
 
 }

@@ -222,7 +222,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
     @Override
     public void onBindViewHolder(@NonNull BaseViewHolder holder, int position) {
-        holder.setIsRecyclable(false);
+        holder.setIsRecyclable(true);
         if (isNeedAutoScroll) {
             holder.bindViewHolder(mContext, mList.get(position % mList.size()), position, this);
         } else {
