@@ -18,7 +18,7 @@ public class Constants {
     /*商户*/
     public static final int TYPE_IDENTITY_BUSINESS = 2;
     /*列表选择*/
-    public static final String KEY_TAB_SELECT_INDEX ="select.index" ;
+    public static final String KEY_TAB_SELECT_INDEX = "select.index";
 
 
     public static String userId = "userId";
@@ -168,7 +168,6 @@ public class Constants {
     public static final int TYPE_SERVICE_LOOK_CAR = 16;
 
 
-
     /*tab 市场*/
     public static final int TAB_TYPE_MARKET = 1;
     /*tab 服务*/
@@ -256,9 +255,9 @@ public class Constants {
     /*商版评论消息*/
     public static final int BU_TYPE_MESSAGE_COMMENT = 2;
     /*商版退款消息*/
-    public static final int BU_TYPE_MESSAGE_REFUND= 3;
+    public static final int BU_TYPE_MESSAGE_REFUND = 3;
     /*商版其他消息*/
-    public static final int BU_TYPE_MESSAGE_OTHER= 4;
+    public static final int BU_TYPE_MESSAGE_OTHER = 4;
     /*饲料类型*/
     public static final String FEED_TYPE = "feed.type";
 
@@ -319,7 +318,6 @@ public class Constants {
     public static final int TYPE_KEY_WAIT_PUBLISH_GOODS_TYPE = 2;
 
 
-
     /*好评 */
     public static final int TYPE_COMMENT_GOOD_TYPE = 1;
     /*中评*/
@@ -327,10 +325,11 @@ public class Constants {
     /*差评*/
     public static final int TYPE_COMMENT_BAD_TYPE = 3;
 
+    //    /*用户版-退货管理- */   注意这里的类型商版的也用到了，暂时不能删除
     /*进行中*/
-    public static final int TYPE_REFUND_ING_TYPE = 1;
+    public static final int TYPE_REFUND_ING_TYPE = 0;
     /*已完成*/
-    public static final int TYPE_REFUND_FINISH_TYPE = 2;
+    public static final int TYPE_REFUND_FINISH_TYPE = 1;
 
 
     //    /*用户版-我的-订单- 全部 */   注意这里的类型商版的也用到了，暂时不能删除
@@ -345,7 +344,6 @@ public class Constants {
     public static final int TYPE_COMMON_ORDER_FINISH_TYPE = 6;
 
 
-
     /*订单管理这个几个type 跟请求参数有关 不能修改数值 */
     /*商版-订单管理 - 待付 */
     public static final int TYPE_COMMON_BU_ORDER_WAIT_PAY_TYPE = 0;
@@ -355,9 +353,6 @@ public class Constants {
     public static final int TYPE_COMMON_BU_ORDER_ALREADY_SEND_TYPE = 2;
     /*商版-订单管理 - 已完成*/
     public static final int TYPE_COMMON_BU_ORDER_FINISH_TYPE = 3;
-
-
-
 
 
     /*收入*/
@@ -382,7 +377,7 @@ public class Constants {
     /*我的-用户版-我的消息*/
     public static final int TYPE_COMMON_MY_MESSAGE = 1;
 
-       /*用户版-我的-订单 */
+    /*用户版-我的-订单 */
     public static final int TYPE_COMMON_MY_ORDER_TYPE = 2;
 
     /*用户版-我的-饲料金*/
@@ -400,7 +395,6 @@ public class Constants {
     public static final int TYPE_COMMON_MINE_COLLECT_SHOPPING = 7;
     /*用户版-收藏-商品*/
     public static final int TYPE_COMMON_MINE_COLLECT_GOODS = 8;
-
 
 
     /*用户版-饲料-饲料*/
@@ -425,10 +419,10 @@ public class Constants {
     ///////////////////////////////////////////////商版//////////////////////////////////////////////////
     public static final int TYPE_COMMON_BASE = 200;
     /*商版-订单管理列表*/
-    public static final int TYPE_COMMON_BU_ORDER = TYPE_COMMON_BASE+1;
+    public static final int TYPE_COMMON_BU_ORDER = TYPE_COMMON_BASE + 1;
 
-
-
+    /*商版-退货管理列表*/
+    public static final int TYPE_COMMON_BU_REFUND = TYPE_COMMON_BASE + 2;
 
 
 }

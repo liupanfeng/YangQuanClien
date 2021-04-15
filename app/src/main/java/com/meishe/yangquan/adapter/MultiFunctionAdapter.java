@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.bean.BUGoodsRefundListInfo;
 import com.meishe.yangquan.bean.BUManagerCommentInfo;
 import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsSubTypeInfo;
@@ -502,7 +503,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_BU_ORDER_LIST;
         }else if (baseInfo instanceof BUManagerCommentInfo) {
             return VIEW_BU_COMMENT_LIST;
-        }else if (baseInfo instanceof BUManagerRefundInfo) {
+        }else if (baseInfo instanceof BUGoodsRefundListInfo) {
             return VIEW_BU_REFUND_LIST;
         }else if (baseInfo instanceof MineFeedGoldInfo) {
             return VIEW_MINE_FEED_GOLD_LIST;

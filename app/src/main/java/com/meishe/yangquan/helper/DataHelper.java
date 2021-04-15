@@ -7,6 +7,9 @@ import com.meishe.yangquan.App;
 import com.meishe.yangquan.activity.LoginActivity;
 import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsInfoResult;
+import com.meishe.yangquan.bean.BUGoodsRefundInfo;
+import com.meishe.yangquan.bean.BUGoodsRefundInfoResult;
+import com.meishe.yangquan.bean.BUGoodsRefundListInfo;
 import com.meishe.yangquan.bean.BUManagerOrderInfo;
 import com.meishe.yangquan.bean.BUManagerOrderInfoResult;
 import com.meishe.yangquan.bean.BUOrderInfo;
@@ -907,6 +910,78 @@ public class DataHelper {
         }, param, token);
     }
 
+
+
+    /**
+     * 商版-获取退货列表数据
+     *一下是接口定义不能修改
+     * 0 退货中
+     * 1 已完成
+     */
+    public void getRefundDataFromServer(final List<BaseInfo> list, final int type,
+                                       final int pageSize, final int pageNumber,
+                                       final boolean isLoadMore) {
+
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("listType", type);
+        param.put("pageNum",pageNumber);
+        param.put("pageSize", pageSize);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_BACK_GOODS_LIST, new BaseCallBack<BUGoodsRefundInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, BUGoodsRefundInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    BUGoodsRefundInfo dataList = result.getData();
+                    List<BUGoodsRefundListInfo> elements=null;
+                    if (dataList!=null){
+                        elements = dataList.getElements();
+                    }
+                    if (!CommonUtils.isEmpty(elements)){
+                        for (int i = 0; i < elements.size(); i++) {
+                            BUGoodsRefundListInfo buGoodsRefundListInfo = elements.get(i);
+                            if (buGoodsRefundListInfo==null){
+                                continue;
+                            }
+                            buGoodsRefundListInfo.setState(type);
+                        }
+                    }
+                    commonResponse(elements, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
 
 
 

@@ -222,6 +222,10 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                 //饲料-商店-商品
                 DataHelper.getInstance().getGoodsDataFromServer(mList,mSubType,mPageSize,mPageNum,
                         mIsLoadMore);
+            case Constants.TYPE_COMMON_BU_REFUND:
+                //饲料-商店-商品
+                DataHelper.getInstance().getRefundDataFromServer(mList,mSubType,mPageSize,mPageNum,
+                        mIsLoadMore);
                 break;
             default:
                 break;

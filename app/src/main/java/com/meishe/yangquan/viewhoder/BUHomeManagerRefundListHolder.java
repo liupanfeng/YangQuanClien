@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
+import com.meishe.yangquan.bean.BUGoodsRefundListInfo;
 import com.meishe.yangquan.bean.BUManagerCommentInfo;
 import com.meishe.yangquan.bean.BUManagerRefundInfo;
 import com.meishe.yangquan.bean.BaseInfo;
@@ -64,7 +65,7 @@ public class BUHomeManagerRefundListHolder extends BaseViewHolder {
 
     @Override
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
-        if (info instanceof BUManagerRefundInfo) {
+        if (info instanceof BUGoodsRefundListInfo) {
 
 //            List<String> goodsImageUrls = ((BUGoodsInfo) info).getGoodsImageUrls();
 //            if (!CommonUtils.isEmpty(goodsImageUrls)) {

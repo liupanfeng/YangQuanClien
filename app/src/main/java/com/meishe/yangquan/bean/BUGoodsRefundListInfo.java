@@ -5,10 +5,11 @@ import java.util.List;
 /**
  *
  * @Author : LiuPanFeng
- * @CreateDate : 2021/4/15 15:08
- * @Description : 这个是订单管理里边嵌套的数据结构  BUManagerOrderInfo    BUGoodsRefundInfo(退货列表也是这个)
+ * @CreateDate : 2021/4/15 20:49
+ * @Description : 这是退货管理的内部数据 BUGoodsRefundInfo
  */
-public class BUOrderInfo extends BaseInfo{
+public class BUGoodsRefundListInfo extends BaseInfo {
+
 
     private int  orderId;
 
@@ -82,4 +83,5 @@ public class BUOrderInfo extends BaseInfo{
     public void setShopName(String shopName) {
         this.shopName = shopName;
     }
+
 }

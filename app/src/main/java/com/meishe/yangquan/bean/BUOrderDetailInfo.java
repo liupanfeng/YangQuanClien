@@ -31,5 +31,27 @@ public class BUOrderDetailInfo extends BaseInfo{
     private String shopName;
 
 
+    public List<BUOrderContents> getOrderContents() {
+        return orderContents;
+    }
 
+    public void setOrderContents(List<BUOrderContents> orderContents) {
+        this.orderContents = orderContents;
+    }
+
+    public int getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(int shopId) {
+        this.shopId = shopId;
+    }
+
+    public String getShopName() {
+        return shopName;
+    }
+
+    public void setShopName(String shopName) {
+        this.shopName = shopName;
+    }
 }
