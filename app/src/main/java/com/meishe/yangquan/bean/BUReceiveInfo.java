@@ -4,7 +4,7 @@ package com.meishe.yangquan.bean;
  *
  * @Author : LiuPanFeng
  * @CreateDate : 2021/4/15 15:16
- * @Description :
+ * @Description : 收货信息数据结构  注意这里用户版也在使用这个类
  */
 public class BUReceiveInfo {
 

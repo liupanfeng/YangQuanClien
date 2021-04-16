@@ -6,9 +6,9 @@ import java.util.List;
  *
  * @Author : LiuPanFeng
  * @CreateDate : 2021/4/15 16:26
- * @Description : 订单内容数据
+ * @Description : 订单内容数据   注意这个在用户版 商版都也使用
  */
-public class BUOrderContents {
+public class OrderContentsInfo {
 
  //    [
 //    {

@@ -13,6 +13,7 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 
 /**
  * 我的-订单列表
@@ -70,39 +71,26 @@ public class MineOrderListHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof MineOrderInfo) {
-
-//            List<String> goodsImageUrls = ((BUGoodsInfo) info).getGoodsImageUrls();
-//            if (!CommonUtils.isEmpty(goodsImageUrls)) {
-//                RequestOptions options = new RequestOptions();
-//                options.centerCrop();
-//                options.placeholder(R.mipmap.ic_message_list_photo_default);
-//                Glide.with(context)
-//                        .asBitmap()
-//                        .load(goodsImageUrls.get(0))
-//                        .apply(options)
-//                        .into(riv_bu_goods_cover);
-//            }
-
-            int state = ((MineOrderInfo) info).getType();
-            if (state== Constants.TYPE_COMMON_ORDER_WAIT_PAY_TYPE){
+            int state = ((MineOrderInfo) info).getOrderState();
+            if (state== Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE){
                 //待付
                 tv_bu_order_right_state.setText("待付");
                 tv_time_cancel_order.setVisibility(View.VISIBLE);
                 btn_left_function.setText("取消订单");
                 btn_right_function.setText("去支付");
-            }else if (state== Constants.TYPE_COMMON_ORDER_WAIT_SEND_TYPE){
+            }else if (state== Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE){
                 //待收货
                 tv_bu_order_right_state.setText("待收货");
                 tv_time_cancel_order.setVisibility(View.GONE);
                 btn_left_function.setText("申请退款");
                 btn_right_function.setText("确认收货");
-            }else if (state== Constants.TYPE_COMMON_ORDER_ALREADY_SEND_TYPE){
-                //已完成
+            }else if (state== Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE){
+                //评价
                 tv_bu_order_right_state.setText("已完成");
                 tv_time_cancel_order.setVisibility(View.GONE);
                 btn_left_function.setText("再次购买");
                 btn_right_function.setText("评价");
-            }else if (state== Constants.TYPE_COMMON_ORDER_FINISH_TYPE){
+            }else if (state== Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE){
                 //退款
                 tv_bu_order_right_state.setText("退款");
                 tv_time_cancel_order.setVisibility(View.GONE);
@@ -110,11 +98,21 @@ public class MineOrderListHolder extends BaseViewHolder {
                 btn_right_function.setText("退货进度");
             }
 
+            tv_shopping_name.setText(((MineOrderInfo) info).getOrders().get(0).getShopName());
+            GlideUtil.getInstance().loadUrl(((MineOrderInfo) info).getOrders().get(0).getOrderContents().get(0).getGoodsImageUrls().get(0),
+                    riv_bu_goods_cover);
+            tv_bu_good_title.setText(((MineOrderInfo) info).getOrders().get(0).getOrderContents().get(0).getGoodsTitle());
+            tv_bu_goods_amount.setText(((MineOrderInfo) info).getOrders().get(0).getOrderContents().get(0).getGoodsAmount()+"");
+
+            btn_left_function.setTag(info);
+            btn_left_function.setOnClickListener(listener);
+
+            btn_right_function.setTag(info);
+            btn_right_function.setOnClickListener(listener);
 
         }
 
-//        btn_bu_edit_goods.setTag(info);
-//        btn_bu_edit_goods.setOnClickListener(listener);
+
 
 
     }

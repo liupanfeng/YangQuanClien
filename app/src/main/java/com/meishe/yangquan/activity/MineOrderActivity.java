@@ -5,8 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import androidx.viewpager.widget.ViewPager;
-
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
@@ -67,19 +65,20 @@ public class MineOrderActivity extends BaseActivity {
     private void initTabLayout() {
         mFragmentList.clear();
         mTitleList.clear();
-        CommonListFragment allFragment= CommonListFragment.newInstance(true,mType,0);
+
+        CommonListFragment allFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE);
         mFragmentList.add(allFragment);
 
-        CommonListFragment waitPayFragment= CommonListFragment.newInstance(true,mType,1);
+        CommonListFragment waitPayFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE);
         mFragmentList.add(waitPayFragment);
 
-        CommonListFragment waitReceive= CommonListFragment.newInstance(true,mType,2);
+        CommonListFragment waitReceive= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE);
         mFragmentList.add(waitReceive);
 
-        CommonListFragment waitComment= CommonListFragment.newInstance(true,mType,3);
+        CommonListFragment waitComment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE);
         mFragmentList.add(waitComment);
 
-        CommonListFragment waitRefund= CommonListFragment.newInstance(true,mType,4);
+        CommonListFragment waitRefund= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE);
         mFragmentList.add(waitRefund);
 
         mTitleList.add("全部");

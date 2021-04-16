@@ -332,16 +332,16 @@ public class Constants {
     public static final int TYPE_REFUND_FINISH_TYPE = 1;
 
 
-    //    /*用户版-我的-订单- 全部 */   注意这里的类型商版的也用到了，暂时不能删除
-    public static final int TYPE_COMMON_ORDER_ALL_TYPE = 2;
+    // /*用户版-我的-订单- 全部 */  这里的数值跟请求参数相关不能更改
+    public static final int TYPE_LIST_TYPE_ORDER_ALL_TYPE = 0;
     /*用户版-我的-订单- 待付 */
-    public static final int TYPE_COMMON_ORDER_WAIT_PAY_TYPE = 3;
-    /*用户版-我的-订单-待发货*/
-    public static final int TYPE_COMMON_ORDER_WAIT_SEND_TYPE = 4;
-    /*用户版-我的-订单- 已发货*/
-    public static final int TYPE_COMMON_ORDER_ALREADY_SEND_TYPE = 5;
-    /*用户版-我的-订单- 已完成*/
-    public static final int TYPE_COMMON_ORDER_FINISH_TYPE = 6;
+    public static final int TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE = 1;
+    /*用户版-我的-订单-待收货*/
+    public static final int TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE = 2;
+    /*用户版-我的-订单- 待评价*/
+    public static final int TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE = 3;
+    /*用户版-我的-订单- 退款*/
+    public static final int TYPE_LIST_TYPE_ORDER_REFUND_TYPE = 4;
 
 
     /*订单管理这个几个type 跟请求参数有关 不能修改数值 */

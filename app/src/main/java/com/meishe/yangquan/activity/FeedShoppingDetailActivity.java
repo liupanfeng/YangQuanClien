@@ -202,7 +202,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         }else if (v.getId()==R.id.ll_feed_goods_order){
             Bundle bundle=new Bundle();
             bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
-            bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,0);
+            bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE);
             AppManager.getInstance().jumpActivity(mContext,MineOrderActivity.class,bundle);
         }else if (v.getId()==R.id.ll_feed_shopping_collection){
 //            ToastUtil.showToast("店铺收藏");

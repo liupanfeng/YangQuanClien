@@ -21,7 +21,7 @@ public class BUGoodsRefundListInfo extends BaseInfo {
 
     private BUReceiveInfo receiverInfo;
 
-    private List<BUOrderDetailInfo> orders;
+    private List<OrdersInfo> orders;
 
 
 
@@ -68,11 +68,11 @@ public class BUGoodsRefundListInfo extends BaseInfo {
         this.receiverInfo = receiverInfo;
     }
 
-    public List<BUOrderDetailInfo> getOrders() {
+    public List<OrdersInfo> getOrders() {
         return orders;
     }
 
-    public void setOrders(List<BUOrderDetailInfo> orders) {
+    public void setOrders(List<OrdersInfo> orders) {
         this.orders = orders;
     }
 

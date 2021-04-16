@@ -49,6 +49,7 @@ import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
+import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
 import com.meishe.yangquan.bean.ServerCustomer;
@@ -469,7 +470,43 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             bundle.putString(Constants.QUOTATION_ID, ((QuotationInfo) info).getId());
             bundle.putInt(Constants.TYPE_QUOTATION, ((QuotationInfo) info).getType());
             AppManager.getInstance().jumpActivity(mContext, HomeQuotationHistoryActivity.class, bundle);
-        }else if (info instanceof ServerCustomer) {
+        } else if (info instanceof MineOrderInfo) {
+            //订单状态
+            int orderState = ((MineOrderInfo) info).getOrderState();
+
+            //我的订单的点击响应
+            if (v.getId() == R.id.btn_left_function) {
+                if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
+                    //待付--取消订单
+                    ToastUtil.showToast("取消订单");
+
+
+                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE) {
+                    //待收货
+
+                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
+                    //评价
+
+                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
+                    //退款
+                }
+            } else if (v.getId() == R.id.btn_right_function) {
+                if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
+                    //待付--去支付
+                    ToastUtil.showToast("去支付");
+
+
+                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE) {
+                    //待收货
+
+                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
+                    //评价
+
+                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
+                    //退款
+                }
+            }
+        } else if (info instanceof ServerCustomer) {
             boolean isNeedLogin = UserManager.getInstance(mContext).isNeedLogin();
             if (isNeedLogin) {
                 AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);

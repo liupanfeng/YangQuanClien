@@ -304,6 +304,13 @@ public class HttpUrl {
     public static final String SHEEP_APP_COLLECTION = URL + "app/user/collect";
 
 
+    /*用户版-订单-支付订单*/
+    public static final String SHEEP_APP_USER_ORDER_PAY = URL + "app/user/order/pay";
+
+    /*用户版-订单-取消订单*/
+    public static final String SHEEP_APP_USER_ORDER_CANCEL = URL + "app/user/order/cancel";
+
+
 
     //////////////////////////////////////////商版//////////////////////////////////////////////
 

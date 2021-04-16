@@ -8,7 +8,7 @@ import java.util.List;
  * @CreateDate : 2021/4/15 16:23
  * @Description : 这个是订单的详情信息--属于BUOrderInfo 的一个内部属性
  */
-public class BUOrderDetailInfo extends BaseInfo{
+public class OrdersInfo extends BaseInfo{
 
 //      "orderContents": [
 //    {
@@ -24,18 +24,18 @@ public class BUOrderDetailInfo extends BaseInfo{
 //                                "shopId": 11,
 //                                "shopName": "葛堡村玉米店"
 
-    private List<BUOrderContents> orderContents;
+    private List<OrderContentsInfo> orderContents;
 
     private int shopId;
 
     private String shopName;
 
 
-    public List<BUOrderContents> getOrderContents() {
+    public List<OrderContentsInfo> getOrderContents() {
         return orderContents;
     }
 
-    public void setOrderContents(List<BUOrderContents> orderContents) {
+    public void setOrderContents(List<OrderContentsInfo> orderContents) {
         this.orderContents = orderContents;
     }
 
