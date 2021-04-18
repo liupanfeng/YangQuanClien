@@ -247,6 +247,11 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     }
 
     @Override
+    public void onSuccess(String content) {
+
+    }
+
+    @Override
     public void onSuccess(List<? extends BaseInfo> baseInfos,int pageSize,int pageNum) {
         changeNoDataViewVisible(View.GONE);
         hideUIState();

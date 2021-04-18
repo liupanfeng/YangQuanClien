@@ -29,7 +29,7 @@ public class MineOrderInfo extends BaseInfo{
 
     private float price;
 
-    private BUReceiveInfo receiverInfo;
+    private ReceiverInfo receiverInfo;
 
     private Object backGoodsOption;
 
@@ -60,11 +60,11 @@ public class MineOrderInfo extends BaseInfo{
         this.price = price;
     }
 
-    public BUReceiveInfo getReceiverInfo() {
+    public ReceiverInfo getReceiverInfo() {
         return receiverInfo;
     }
 
-    public void setReceiverInfo(BUReceiveInfo receiverInfo) {
+    public void setReceiverInfo(ReceiverInfo receiverInfo) {
         this.receiverInfo = receiverInfo;
     }
 

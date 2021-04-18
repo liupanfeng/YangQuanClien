@@ -82,6 +82,7 @@ public class FeedShoppingHolder extends BaseViewHolder {
                 GlideUtil.getInstance().loadUrl("",iv_feed_cover);
             }
 
+
             mItemView.setTag(info);
             mItemView.setOnClickListener(listener);
 

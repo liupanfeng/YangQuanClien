@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg_pop_bottom_select_map_view"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="360dp">
+
+    <include layout="@layout/layout_confirm_pay_view"/>
+
+    <include layout="@layout/layout_order_pay_view" />
+
+
+</LinearLayout>

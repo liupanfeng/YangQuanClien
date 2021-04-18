@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.google.gson.Gson;
+import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedAddressParamInfo;
@@ -18,12 +19,15 @@ import com.meishe.yangquan.bean.FeedReceiverAddressInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.IndustryNewsInfo;
 import com.meishe.yangquan.bean.IndustryNewsResult;
+import com.meishe.yangquan.bean.ReceiverInfo;
+import com.meishe.yangquan.bean.ReceiverInfoResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.FeedGoodsManager;
+import com.meishe.yangquan.pop.EditReceiveAddressView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.HttpUrl;
@@ -59,6 +63,7 @@ public class FeedOrderActivity extends BaseActivity {
 
     private View btn_feed_commit_order;
     private ArrayList<BaseInfo> list;
+
 
     @Override
     protected int initRootView() {
@@ -99,12 +104,19 @@ public class FeedOrderActivity extends BaseActivity {
         }
         //设置默认的用户名电话等
         UserInfo user = UserManager.getInstance(mContext).getUser();
-        if (user!=null){
+        if (user != null) {
             tv_feed_order_real_name.setText(user.getNickname());
         }
 
         mAdapter.addAll(list);
         updateTotalPrice();
+
+        ReceiverInfo receiverInfo = UserManager.getInstance(mContext).getReceiverInfo();
+        if (receiverInfo==null){
+            getLatestReceiverAddressInfo();
+        }else{
+            updateReceiverAddressUI(receiverInfo);
+        }
     }
 
     @Override
@@ -132,9 +144,10 @@ public class FeedOrderActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.iv_feed_address_edit) {
-            Bundle bundle = new Bundle();
-            AppManager.getInstance().jumpActivityForResult(this, FeedReceiveAddressActivity.class, bundle, 200);
-        }else if (v.getId()==R.id.btn_feed_commit_order){
+//            Bundle bundle = new Bundle();
+//            AppManager.getInstance().jumpActivityForResult(this, FeedReceiveAddressActivity.class, bundle, 200);
+            showAddAddressView(UserManager.getInstance(mContext).getReceiverInfo());
+        } else if (v.getId() == R.id.btn_feed_commit_order) {
             commitGoodsOrder();
         }
     }
@@ -147,10 +160,10 @@ public class FeedOrderActivity extends BaseActivity {
         if (Util.checkNull(token)) {
             return;
         }
-        FeedOrderParamInfo feedOrderParamInfo=new FeedOrderParamInfo();
+        FeedOrderParamInfo feedOrderParamInfo = new FeedOrderParamInfo();
         feedOrderParamInfo.setComeFrom("car");
 
-        FeedAddressParamInfo feedAddressParamInfo=new FeedAddressParamInfo();
+        FeedAddressParamInfo feedAddressParamInfo = new FeedAddressParamInfo();
 
 
         String name = tv_feed_order_real_name.getText().toString();
@@ -165,12 +178,12 @@ public class FeedOrderActivity extends BaseActivity {
 
         feedOrderParamInfo.setReceiverInfo(feedAddressParamInfo);
 
-        List<FeedGoodsParamInfo> goodsParamInfos=new ArrayList<>();
-        if (!CommonUtils.isEmpty(list)){
-            for (int i=0;i<list.size();i++){
+        List<FeedGoodsParamInfo> goodsParamInfos = new ArrayList<>();
+        if (!CommonUtils.isEmpty(list)) {
+            for (int i = 0; i < list.size(); i++) {
                 BaseInfo info = list.get(i);
-                if (info instanceof FeedShoppingCarGoodsInfo){
-                    FeedGoodsParamInfo feedGoodsParamInfo=new FeedGoodsParamInfo();
+                if (info instanceof FeedShoppingCarGoodsInfo) {
+                    FeedGoodsParamInfo feedGoodsParamInfo = new FeedGoodsParamInfo();
                     feedGoodsParamInfo.setGoodsId(((FeedShoppingCarGoodsInfo) info).getId());
                     feedGoodsParamInfo.setAmount(((FeedShoppingCarGoodsInfo) info).getSelectAmount());
                     goodsParamInfos.add(feedGoodsParamInfo);
@@ -179,7 +192,7 @@ public class FeedOrderActivity extends BaseActivity {
         }
 
         feedOrderParamInfo.setGoods(goodsParamInfos);
-        Gson gson=new Gson();
+        Gson gson = new Gson();
         String json = gson.toJson(feedOrderParamInfo);
 
         HashMap<String, Object> param = new HashMap<>();
@@ -221,7 +234,7 @@ public class FeedOrderActivity extends BaseActivity {
             protected void inProgress(int progress, long total, int id) {
 
             }
-        }, param, token,json);
+        }, param, token, json);
     }
 
     @Override
@@ -258,23 +271,88 @@ public class FeedOrderActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == 200) {
             if (data != null) {
-                Serializable result = data.getSerializableExtra("result");
-                if (result instanceof FeedReceiverAddressInfo) {
-                    updateReceiveUI((FeedReceiverAddressInfo) result);
-                }
+//                Serializable result = data.getSerializableExtra("result");
+//                if (result instanceof FeedReceiverAddressInfo) {
+//                    updateReceiveUI((FeedReceiverAddressInfo) result);
+//                }
             }
         }
     }
 
-    /**
-     * 更新收货UI
-     */
-    private void updateReceiveUI(FeedReceiverAddressInfo feedReceiverAddressInfo) {
 
-        tv_feed_order_real_name.setText(feedReceiverAddressInfo.getReceiverName());
-        tv_feed_order_address.setText(feedReceiverAddressInfo.getArea());
-        tv_feed_order_detail_address.setText(feedReceiverAddressInfo.getDetailAddress());
-        tv_feed_order_phone_number.setText(Util.formatNumber(feedReceiverAddressInfo.getReceiverPhone()));
+    /**
+     * 获取上次的收货地址
+     */
+    public void getLatestReceiverAddressInfo() {
+
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_RECEIVER_LATEST, new BaseCallBack<ReceiverInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ReceiverInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    ReceiverInfo receiverInfo = result.getData();
+                    UserManager.getInstance(mContext).setReceiverInfo(receiverInfo);
+                    if (receiverInfo == null) {
+                        showAddAddressView(null);
+                    } else {
+                        updateReceiverAddressUI(receiverInfo);
+                    }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+    private void updateReceiverAddressUI(ReceiverInfo receiverInfo) {
+        tv_feed_order_real_name.setText(receiverInfo.getName());
+        tv_feed_order_address.setText(receiverInfo.getArea());
+        tv_feed_order_detail_address.setText(receiverInfo.getAddress());
+        tv_feed_order_phone_number.setText(receiverInfo.getPhone());
+    }
+
+
+    public void showAddAddressView(ReceiverInfo receiverInfo) {
+        EditReceiveAddressView editReceiveAddressView = EditReceiveAddressView.create(mContext,
+                receiverInfo, new EditReceiveAddressView.OnReceiveAddressListener() {
+                    @Override
+                    public void onReceiveAddress(int type, BaseInfo baseInfo) {
+                        if (baseInfo instanceof ReceiverInfo){
+                            UserManager.getInstance(mContext).setReceiverInfo((ReceiverInfo) baseInfo);
+                            updateReceiverAddressUI((ReceiverInfo) baseInfo);
+                        }
+                    }
+                });
+        if (!editReceiveAddressView.isShow()) {
+            editReceiveAddressView.show();
+        }
 
     }
+
 }

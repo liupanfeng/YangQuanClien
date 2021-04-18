@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_confirm_order_pay"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="360dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp10"
+            android:text="确定支付"
+            android:textColor="#ff2f3742"
+            android:textSize="16sp"
+            android:layout_gravity="center_horizontal"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:background="#E5E5E5"
+            android:layout_marginTop="@dimen/dp10"
+            />
+
+        <TextView
+            android:id="@+id/tv_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp20"
+            android:textColor="#ff2f3742"
+            android:textSize="18sp"
+            android:text="饲料金：820"
+            android:layout_gravity="center_horizontal"
+            />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_width="280dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/bg_feed_gold"
+        android:textColor="@color/white"
+        android:text="立即支付"
+        />
+
+</RelativeLayout>

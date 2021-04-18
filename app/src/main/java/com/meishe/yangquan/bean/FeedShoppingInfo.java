@@ -112,6 +112,14 @@ public class FeedShoppingInfo extends BaseInfo {
     /*销量*/
     private int sellAmount;
 
+   /*是否关注了店铺*/
+    private boolean hasCollected;
+
+    private String shopPhone;
+
+
+
+
 
     public int getId() {
         return id;
@@ -407,5 +415,18 @@ public class FeedShoppingInfo extends BaseInfo {
 
     public void setSellAmount(int sellAmount) {
         this.sellAmount = sellAmount;
+    }
+
+
+    public boolean isHasCollected() {
+        return hasCollected;
+    }
+
+    public String getShopPhone() {
+        return shopPhone;
+    }
+
+    public void setShopPhone(String shopPhone) {
+        this.shopPhone = shopPhone;
     }
 }

@@ -15,7 +15,9 @@ import com.meishe.yangquan.utils.Constants;
  * @author liupanfeng
  * @desc 饲料-饲料
  * @date 2020/12/21 14:36
+ * 这个页面暂时不用
  */
+@Deprecated
 public class FeedFeedFragment extends BaseRecyclerFragment {
 
     private SlidingTabLayout mSlidingTabLayout;

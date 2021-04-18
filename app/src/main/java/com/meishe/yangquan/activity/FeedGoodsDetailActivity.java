@@ -4,6 +4,7 @@ package com.meishe.yangquan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ImageView;
@@ -56,12 +57,14 @@ public class FeedGoodsDetailActivity extends BaseActivity {
     private View ll_feed_goods_phone_call;
     /*收藏*/
     private View ll_feed_goods_collection;
-   /*收藏商品*/
-    private CheckBox cb_select_goods;
+    /*收藏商品*/
+    private ImageView iv_select_goods;
 
     private TextView tv_colect_goods;
     private View btn_feed_good_buy_now;
     private FeedGoodsInfo feedGoodsInfo;
+
+    private boolean mIsCollected;
 
     @Override
     protected int initRootView() {
@@ -76,7 +79,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         iv_feed_goods_desc = findViewById(R.id.iv_feed_goods_desc);
         ll_feed_goods_phone_call = findViewById(R.id.ll_feed_goods_phone_call);
         ll_feed_goods_collection = findViewById(R.id.ll_feed_shopping_collection);
-        cb_select_goods = findViewById(R.id.cb_select_goods);
+        iv_select_goods = findViewById(R.id.iv_select_goods);
         tv_colect_goods = findViewById(R.id.tv_colect_goods);
         /*立即购买*/
         btn_feed_good_buy_now = findViewById(R.id.btn_feed_good_buy_now);
@@ -92,7 +95,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         if (intent != null) {
             Bundle extras = intent.getExtras();
             if (extras != null) {
-                 feedGoodsInfo = (FeedGoodsInfo) extras.getSerializable(Constants.FEED_GOODS_INFO);
+                feedGoodsInfo = (FeedGoodsInfo) extras.getSerializable(Constants.FEED_GOODS_INFO);
                 if (feedGoodsInfo != null) {
                     mGoodsId = feedGoodsInfo.getId();
                     updateUI(feedGoodsInfo);
@@ -107,25 +110,34 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
     /**
      * 更新View
+     *
      * @param feedGoodsInfo
      */
     private void updateUI(FeedGoodsInfo feedGoodsInfo) {
         List<String> goodsImageUrls = feedGoodsInfo.getGoodsImageUrls();
+        if (feedGoodsInfo.isHasCollected()) {
+            iv_select_goods.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);
+        } else {
+            iv_select_goods.setBackgroundResource(R.mipmap.ic_feed_goods_collection);
+        }
+
+        mIsCollected = feedGoodsInfo.isHasCollected();
+
         final List<String> descriptionImageUrls = feedGoodsInfo.getDescriptionImageUrls();
-        if (!CommonUtils.isEmpty(goodsImageUrls)){
+        if (!CommonUtils.isEmpty(goodsImageUrls)) {
             banner.setViewUrls(mContext, goodsImageUrls, null);
             banner.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
                     String imagePath = descriptionImageUrls.get(position);
-                    Util.showBigPicture(mContext,imagePath);
+                    Util.showBigPicture(mContext, imagePath);
                 }
             });
         }
 
-        if (!CommonUtils.isEmpty(descriptionImageUrls)){
+        if (!CommonUtils.isEmpty(descriptionImageUrls)) {
             String descUrl = descriptionImageUrls.get(0);
-            GlideUtil.getInstance().loadUrl(descUrl,iv_feed_goods_desc);
+            GlideUtil.getInstance().loadUrl(descUrl, iv_feed_goods_desc);
         }
 
     }
@@ -223,26 +235,26 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.btn_feed_add_shopping_cart){
+        if (v.getId() == R.id.btn_feed_add_shopping_cart) {
             //加入购物车
             addShoppingCar();
-        }else if (v.getId()==R.id.ll_feed_goods_phone_call){
+        } else if (v.getId() == R.id.ll_feed_goods_phone_call) {
             ToastUtil.showToast("联系商家");
 //            Util.callPhone(mContext,phone);
-        }else if (v.getId()==R.id.ll_feed_shopping_collection){
+        } else if (v.getId() == R.id.ll_feed_shopping_collection) {
 //            ToastUtil.showToast("收藏商品");
             doCollectShoppingOrGoods(mGoodsId);
-        } else if (v.getId()==R.id.btn_feed_good_buy_now){
-            List<BaseInfo> list =new ArrayList<>();
+        } else if (v.getId() == R.id.btn_feed_good_buy_now) {
+            List<BaseInfo> list = new ArrayList<>();
             list.add(feedGoodsInfo);
             FeedGoodsManager.getInstance().setList(list);
             AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class);
         }
     }
 
-    public void addShoppingCar(){
+    public void addShoppingCar() {
         HashMap<String, Object> param = new HashMap<>();
-        param.put("goodsId",mGoodsId);
+        param.put("goodsId", mGoodsId);
 
         String token = getToken();
         showLoading();
@@ -269,7 +281,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
                 if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
-                }else{
+                } else {
                     ToastUtil.showToast(mContext, "已经添加到购物车请查看！");
                 }
             }
@@ -313,8 +325,8 @@ public class FeedGoodsDetailActivity extends BaseActivity {
             return;
         }
         HashMap<String, Object> param = new HashMap<>();
-        param.put("objectId",goodsId);
-        param.put("objectType",2);  //1是店铺 2是商品
+        param.put("objectId", goodsId);
+        param.put("objectType", 2);  //1是店铺 2是商品
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_COLLECTION, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -328,7 +340,12 @@ public class FeedGoodsDetailActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    ToastUtil.showToast("商品已收藏");
+                    mIsCollected = !mIsCollected;
+                    if (mIsCollected) {
+                        iv_select_goods.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);
+                    } else {
+                        iv_select_goods.setBackgroundResource(R.mipmap.ic_feed_goods_collection);
+                    }
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
                 }

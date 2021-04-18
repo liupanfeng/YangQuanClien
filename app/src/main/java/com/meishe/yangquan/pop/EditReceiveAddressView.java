@@ -16,6 +16,7 @@ import com.meishe.libbase.pop.core.CenterPopupView;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedReceiverAddressInfo;
+import com.meishe.yangquan.bean.ReceiverInfo;
 import com.meishe.yangquan.utils.ScreenUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.view.RoundAngleImageView;
@@ -29,7 +30,7 @@ public class EditReceiveAddressView extends CenterPopupView {
 
     private RoundAngleImageView mIvShowPicture;
     private Context mContext;
-    private FeedReceiverAddressInfo mBaseInfo;
+    private ReceiverInfo mBaseInfo;
     private TextView mTvTitle;
     private View mIvBack;
 
@@ -46,12 +47,12 @@ public class EditReceiveAddressView extends CenterPopupView {
     private int mType;
 
 
-    public static EditReceiveAddressView create(Context context, FeedReceiverAddressInfo baseInfo,OnReceiveAddressListener listener) {
+    public static EditReceiveAddressView create(Context context, ReceiverInfo baseInfo,OnReceiveAddressListener listener) {
         return (EditReceiveAddressView) new XPopup.Builder(context)
                 .asCustom(new EditReceiveAddressView(context, baseInfo).setOnReceiveAddressListener(listener));
     }
 
-    public EditReceiveAddressView(@NonNull Context context, FeedReceiverAddressInfo baseInfo) {
+    public EditReceiveAddressView(@NonNull Context context, ReceiverInfo baseInfo) {
         super(context);
         this.mBaseInfo = baseInfo;
         this.mContext = context;
@@ -82,12 +83,12 @@ public class EditReceiveAddressView extends CenterPopupView {
         }else{
             mTvTitle.setText("编辑收货地址");
             mType=2;
-            if (mBaseInfo instanceof FeedReceiverAddressInfo ){
-                String receiverName = ((FeedReceiverAddressInfo) mBaseInfo).getReceiverName();
+            if (mBaseInfo instanceof ReceiverInfo){
+                String receiverName = ((ReceiverInfo) mBaseInfo).getName();
                 et_feed_receive_name.setText(receiverName);
-                et_feed_input_receive_phone_number.setText(((FeedReceiverAddressInfo) mBaseInfo).getReceiverPhone());
-                et_feed_input_receive_area.setText(((FeedReceiverAddressInfo) mBaseInfo).getArea());
-                et_feed_input_detail_address.setText(((FeedReceiverAddressInfo) mBaseInfo).getDetailAddress());
+                et_feed_input_receive_phone_number.setText(((ReceiverInfo) mBaseInfo).getPhone());
+                et_feed_input_receive_area.setText(((ReceiverInfo) mBaseInfo).getArea());
+                et_feed_input_detail_address.setText(((ReceiverInfo) mBaseInfo).getAddress());
             }
         }
 
@@ -119,12 +120,12 @@ public class EditReceiveAddressView extends CenterPopupView {
                 }
 
                 if (mBaseInfo==null){
-                    mBaseInfo=new FeedReceiverAddressInfo();
+                    mBaseInfo=new ReceiverInfo();
                 }
-                mBaseInfo.setReceiverName(receiveName);
-                mBaseInfo.setReceiverPhone(phoneNumber);
+                mBaseInfo.setName(receiveName);
+                mBaseInfo.setPhone(phoneNumber);
                 mBaseInfo.setArea(area);
-                mBaseInfo.setDetailAddress(detailAddress);
+                mBaseInfo.setAddress(detailAddress);
 
                 if (mOnReceiveAddressListener!=null){
                     dismiss();

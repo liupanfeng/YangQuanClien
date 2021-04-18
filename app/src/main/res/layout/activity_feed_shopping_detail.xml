@@ -196,14 +196,14 @@
                 android:layout_weight="1"
                 android:layout_height="wrap_content">
 
-                <CheckBox
-                    android:id="@+id/cb_select_shopping"
+                <ImageView
+                    android:id="@+id/iv_select_shopping"
                     android:layout_width="@dimen/dp16"
                     android:layout_height="@dimen/dp16"
                     android:layout_marginTop="@dimen/dp5"
                     android:layout_gravity="center_horizontal"
                     android:button="@null"
-                    android:background="@drawable/bg_feed_collect_selector"
+                    android:background="@mipmap/ic_feed_goods_collection"
                     />
 
                 <TextView

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rl_order_pay_view"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="360dp">
+
+    <RelativeLayout
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp48">
+
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="@dimen/dp12"
+            android:layout_height="@dimen/dp18"
+            android:layout_centerVertical="true"
+            android:padding="@dimen/dp10"
+            android:scaleType="fitXY"
+            android:background="@mipmap/ic_title_back"
+            android:layout_marginLeft="@dimen/dp20" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="请输入支付密码"
+            android:textColor="#ff303030"
+            android:textSize="17sp" />
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="#E5E5E5"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_below="@+id/title"
+        />
+
+
+    <com.meishe.yangquan.wiget.pay.PasswordEditText
+        android:id="@+id/passwordEdt"
+        android:layout_marginLeft="@dimen/dp30"
+        android:layout_marginRight="@dimen/dp30"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/line"
+        android:layout_marginTop="@dimen/dp10"
+        app:bgColor="#3F434A"
+        app:bgCorner="1dp"
+        app:bgSize="1dp"
+        app:divisionLineColor="#3F434A"
+        app:divisionLineSize="1dp"
+        app:passwordColor="#3F434A"
+        app:passwordRadius="4dp"/>
+
+
+
+    <LinearLayout
+        android:id="@+id/ll_pay_password_view"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/costomer_keyboard"/>
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>

@@ -296,8 +296,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <CheckBox
-                android:id="@+id/cb_select_goods"
+            <ImageView
+                android:id="@+id/iv_select_goods"
                 android:layout_width="@dimen/dp16"
                 android:layout_height="@dimen/dp16"
                 android:layout_marginTop="@dimen/dp5"

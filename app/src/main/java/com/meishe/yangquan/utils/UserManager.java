@@ -3,11 +3,13 @@ package com.meishe.yangquan.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.meishe.yangquan.bean.ReceiverInfo;
 import com.meishe.yangquan.bean.UserInfo;
 
 public class UserManager {
     private static UserManager instance;
     private UserInfo user;
+    private ReceiverInfo mReceiverInfo;
     private String token = "";
     private Context mContext;
     private SharedPreferencesUtil sharedPreferencesUtil;
@@ -22,6 +24,7 @@ public class UserManager {
         }
         return instance;
     }
+
 
     private UserManager(Context context) {
         sharedPreferencesUtil = SharedPreferencesUtil.getInstance(context);
@@ -55,5 +58,14 @@ public class UserManager {
     public void setToken(String token) {
         this.token = token;
         sharedPreferencesUtil.putString("token", token);
+    }
+
+
+    public ReceiverInfo getReceiverInfo() {
+        return mReceiverInfo;
+    }
+
+    public void setReceiverInfo(ReceiverInfo receiverInfo) {
+        this.mReceiverInfo = receiverInfo;
     }
 }

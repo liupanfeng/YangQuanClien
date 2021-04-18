@@ -78,6 +78,12 @@ public class FeedGoodsInfo extends BaseInfo {
 
      private long modDate;
 
+    /*是否关注了店铺*/
+    private boolean hasCollected;
+
+    private String shopPhone;
+
+
 
     public int getId() {
         return id;
@@ -247,4 +253,20 @@ public class FeedGoodsInfo extends BaseInfo {
         this.modDate = modDate;
     }
 
+
+    public boolean isHasCollected() {
+        return hasCollected;
+    }
+
+    public void setHasCollected(boolean hasCollected) {
+        this.hasCollected = hasCollected;
+    }
+
+    public String getShopPhone() {
+        return shopPhone;
+    }
+
+    public void setShopPhone(String shopPhone) {
+        this.shopPhone = shopPhone;
+    }
 }

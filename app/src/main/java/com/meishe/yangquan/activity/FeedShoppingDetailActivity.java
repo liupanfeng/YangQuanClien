@@ -3,13 +3,16 @@ package com.meishe.yangquan.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
+
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -62,12 +65,14 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     private View iv_back;
     private View ll_feed_goods_order;
     /*收藏*/
-    private View ll_feed_goods_collection;
+    private View ll_feed_shopping_collection;
     /*联系商家*/
     private View ll_feed_goods_phone_call;
 
-    private CheckBox cb_select_shopping;
+    private ImageView iv_select_shopping;
     private TextView tv_colect_shopping;
+
+    private boolean mIsCollected;
 
     @Override
     protected int initRootView() {
@@ -76,24 +81,24 @@ public class FeedShoppingDetailActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        mSlidingTabLayout =  findViewById(R.id.slidingTabLayout);
-        mViewPager =  findViewById(R.id.vp_pager);
-        tv_feed_shopping_name =  findViewById(R.id.tv_feed_shopping_name);
-        tv_feed_shopping_fans =  findViewById(R.id.tv_feed_shopping_fans);
-        tv_feed_shopping_sign_name =  findViewById(R.id.tv_feed_shopping_sign_name);
-        iv_back =  findViewById(R.id.iv_back);
+        mSlidingTabLayout = findViewById(R.id.slidingTabLayout);
+        mViewPager = findViewById(R.id.vp_pager);
+        tv_feed_shopping_name = findViewById(R.id.tv_feed_shopping_name);
+        tv_feed_shopping_fans = findViewById(R.id.tv_feed_shopping_fans);
+        tv_feed_shopping_sign_name = findViewById(R.id.tv_feed_shopping_sign_name);
+        iv_back = findViewById(R.id.iv_back);
         /*底部按钮菜单*/
-        ll_feed_goods_order =  findViewById(R.id.ll_feed_goods_order);
-        ll_feed_goods_collection =  findViewById(R.id.ll_feed_shopping_collection);
-        ll_feed_goods_phone_call =  findViewById(R.id.ll_feed_goods_phone_call);
-        ll_feed_goods_shopping_car =  findViewById(R.id.ll_feed_goods_shopping_car);
+        ll_feed_goods_order = findViewById(R.id.ll_feed_goods_order);
+        ll_feed_shopping_collection = findViewById(R.id.ll_feed_shopping_collection);
+        ll_feed_goods_phone_call = findViewById(R.id.ll_feed_goods_phone_call);
+        ll_feed_goods_shopping_car = findViewById(R.id.ll_feed_goods_shopping_car);
 
         /*收藏*/
-        cb_select_shopping =  findViewById(R.id.cb_select_shopping);
-        tv_colect_shopping =  findViewById(R.id.tv_colect_shopping);
+        iv_select_shopping = findViewById(R.id.iv_select_shopping);
+        tv_colect_shopping = findViewById(R.id.tv_colect_shopping);
 
 
-        banner =  findViewById(R.id.banner);
+        banner = findViewById(R.id.banner);
         banner.setIndicatorPosition(RelativeLayout.CENTER_HORIZONTAL);
     }
 
@@ -106,7 +111,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             if (extras != null) {
                 FeedShoppingInfo feedInfo = (FeedShoppingInfo) extras.getSerializable(Constants.FEED_SHOPPING_INFO);
                 if (feedInfo != null) {
-                    mShoppingId=feedInfo.getId();
+                    mShoppingId = feedInfo.getId();
                     updateUI(feedInfo);
                 }
             }
@@ -128,16 +133,16 @@ public class FeedShoppingDetailActivity extends BaseActivity {
 //        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_PRICE);
 //        mFragmentList.add(feedFoodsListFragment);
 
-        CommonListFragment feedFoodsListFragment = CommonListFragment.newInstance(true,Constants.TYPE_COMMON_SHOPPING,
-                Constants.TYPE_FEED_FOODS_MULTIPLE,mShoppingId);
+        CommonListFragment feedFoodsListFragment = CommonListFragment.newInstance(true, Constants.TYPE_COMMON_SHOPPING,
+                Constants.TYPE_FEED_FOODS_MULTIPLE, mShoppingId);
         mFragmentList.add(feedFoodsListFragment);
 
-        feedFoodsListFragment = CommonListFragment.newInstance(true,Constants.TYPE_COMMON_SHOPPING,
-                Constants.TYPE_FEED_FOODS_SALES,mShoppingId);
+        feedFoodsListFragment = CommonListFragment.newInstance(true, Constants.TYPE_COMMON_SHOPPING,
+                Constants.TYPE_FEED_FOODS_SALES, mShoppingId);
         mFragmentList.add(feedFoodsListFragment);
 
-        feedFoodsListFragment = CommonListFragment.newInstance(true,Constants.TYPE_COMMON_SHOPPING,
-                Constants.TYPE_FEED_FOODS_PRICE,mShoppingId);
+        feedFoodsListFragment = CommonListFragment.newInstance(true, Constants.TYPE_COMMON_SHOPPING,
+                Constants.TYPE_FEED_FOODS_PRICE, mShoppingId);
         mFragmentList.add(feedFoodsListFragment);
 
 //        mTitleList.add("推荐");
@@ -157,15 +162,25 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     private void updateUI(FeedShoppingInfo feedInfo) {
         tv_feed_shopping_name.setText(feedInfo.getName());
 //        tv_feed_shopping_fans.setText(feedInfo.get);
-        tv_feed_shopping_sign_name.setText((feedInfo.getSign()==null||feedInfo.getSign().equals("null"))?"暂无签名":feedInfo.getSign());
+
+        if (feedInfo.isHasCollected()) {
+            iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);
+        } else {
+            iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection);
+        }
+
+        mIsCollected = feedInfo.isHasCollected();
+
+
+        tv_feed_shopping_sign_name.setText((feedInfo.getSign() == null || feedInfo.getSign().equals("null")) ? "暂无签名" : feedInfo.getSign());
         final List<String> shopInSideImageUrls = feedInfo.getShopInSideImageUrls();
-        if (!CommonUtils.isEmpty(shopInSideImageUrls)){
+        if (!CommonUtils.isEmpty(shopInSideImageUrls)) {
             banner.setViewUrls(mContext, shopInSideImageUrls, null);
             banner.setOnBannerItemClickListener(new BannerLayout.OnBannerItemClickListener() {
                 @Override
                 public void onItemClick(int position) {
                     String imagePath = shopInSideImageUrls.get(position);
-                    Util.showBigPicture(mContext,imagePath);
+                    Util.showBigPicture(mContext, imagePath);
                 }
             });
         }
@@ -180,7 +195,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     public void initListener() {
         ll_feed_goods_shopping_car.setOnClickListener(this);
         ll_feed_goods_order.setOnClickListener(this);
-        ll_feed_goods_collection.setOnClickListener(this);
+        ll_feed_shopping_collection.setOnClickListener(this);
         ll_feed_goods_phone_call.setOnClickListener(this);
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -188,6 +203,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
                 AppManager.getInstance().finishActivity();
             }
         });
+
     }
 
     @Override
@@ -197,17 +213,17 @@ public class FeedShoppingDetailActivity extends BaseActivity {
 
     @Override
     public void onClick(View v) {
-        if (v.getId()==R.id.ll_feed_goods_shopping_car){
-            AppManager.getInstance().jumpActivity(FeedShoppingDetailActivity.this,FeedShoppingCarActivity.class);
-        }else if (v.getId()==R.id.ll_feed_goods_order){
-            Bundle bundle=new Bundle();
-            bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
-            bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE);
-            AppManager.getInstance().jumpActivity(mContext,MineOrderActivity.class,bundle);
-        }else if (v.getId()==R.id.ll_feed_shopping_collection){
+        if (v.getId() == R.id.ll_feed_goods_shopping_car) {
+            AppManager.getInstance().jumpActivity(FeedShoppingDetailActivity.this, FeedShoppingCarActivity.class);
+        } else if (v.getId() == R.id.ll_feed_goods_order) {
+            Bundle bundle = new Bundle();
+            bundle.putInt(Constants.KEY_ORDER_STATE_TYPE, Constants.TYPE_COMMON_MY_ORDER_TYPE);
+            bundle.putInt(Constants.KEY_TAB_SELECT_INDEX, Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE);
+            AppManager.getInstance().jumpActivity(mContext, MineOrderActivity.class, bundle);
+        } else if (v.getId() == R.id.ll_feed_shopping_collection) {
 //            ToastUtil.showToast("店铺收藏");
             doCollectShoppingOrGoods(mShoppingId);
-        }else if (v.getId()==R.id.ll_feed_goods_phone_call){
+        } else if (v.getId() == R.id.ll_feed_goods_phone_call) {
             ToastUtil.showToast("联系商家");
 //            Util.callPhone(mContext,phone);
         }
@@ -222,8 +238,8 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             return;
         }
         HashMap<String, Object> param = new HashMap<>();
-        param.put("objectId",shoppingId);
-        param.put("objectType",1);  //1是店铺 2是商品
+        param.put("objectId", shoppingId);
+        param.put("objectType", 1);  //1是店铺 2是商品
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_COLLECTION, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -237,7 +253,12 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    ToastUtil.showToast("店铺已收藏");
+                    mIsCollected=!mIsCollected;
+                    if (mIsCollected) {
+                        iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);
+                    } else {
+                        iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection);
+                    }
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
                 }
@@ -258,7 +279,6 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             }
         }, param, token);
     }
-
 
 
 }

@@ -5,8 +5,6 @@ import android.text.TextUtils;
 
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.activity.LoginActivity;
-import com.meishe.yangquan.bean.BUGoodsInfo;
-import com.meishe.yangquan.bean.BUGoodsInfoResult;
 import com.meishe.yangquan.bean.BUGoodsRefundInfo;
 import com.meishe.yangquan.bean.BUGoodsRefundInfoResult;
 import com.meishe.yangquan.bean.BUGoodsRefundListInfo;
@@ -835,6 +833,10 @@ public class DataHelper {
 
 
 
+
+
+
+
     ////////////////////////////////////////////下面是商版接口///////////////////////////////////////////////
 
     /**
@@ -985,6 +987,228 @@ public class DataHelper {
 
 
 
+
+    /////////////////////////////////////用户版 跟CommonFragment 没有关系//////////////////////////////////
+
+
+    /**
+     * 用户版本-取消订单
+     */
+    public void doCancelOrder(int orderId,String option) {
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("orderId",orderId);
+        param.put("option",option);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_CANCEL, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    if (mOnCallBackListener!=null){
+                        mOnCallBackListener.onSuccess("订单已取消");
+                    }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+
+    /**
+     * 用户版本-支付订单
+     */
+    public void doPayOrder(int orderId,String paymentCode) {
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("orderId",orderId);
+        param.put("paymentCode",paymentCode);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_PAY, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    if (mOnCallBackListener!=null){
+                        mOnCallBackListener.onSuccess("订单支付成功");
+                    }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+    /**
+     * 用户版本-确认收货
+     */
+    public void confirmReceiveGoods(int orderId) {
+
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("orderId",orderId);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_RECEIVED, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    if (mOnCallBackListener!=null){
+                        mOnCallBackListener.onSuccess("已经确认收货！");
+                    }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+    /**
+     * 用户版本-申请退款
+     */
+    public void doApplyRefund(int orderId,String option) {
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("orderId",orderId);
+        param.put("option",option);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_BACHK_GOODS, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    if (mOnCallBackListener!=null){
+                        mOnCallBackListener.onSuccess("退货已经申请！");
+                    }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener!=null){
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+
     /**
      * 通用的数据返回处理
      * @param datas
@@ -1025,6 +1249,8 @@ public class DataHelper {
         void onShowNoData();
 
         void onSuccess();
+
+        void onSuccess(String content);
 
         void onSuccess(List<? extends BaseInfo> baseInfos,int pageSize,int pageNum);
 

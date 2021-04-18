@@ -14,8 +14,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 收货地址
+ * 用户版-收货地址-页面
+ * 由于设计图的原因这个页面暂时先不要
  */
+@Deprecated
 public class FeedReceiveAddressActivity extends BaseActivity {
 
 
@@ -60,15 +62,16 @@ public class FeedReceiveAddressActivity extends BaseActivity {
             @Override
             public void onItemClick(View view, final int position, BaseInfo baseInfo) {
                 if (view.getId() == R.id.iv_feed_address_edit && baseInfo instanceof FeedReceiverAddressInfo) {
-                    EditReceiveAddressView editReceiveAddressView = EditReceiveAddressView.create(mContext, (FeedReceiverAddressInfo) baseInfo, new EditReceiveAddressView.OnReceiveAddressListener() {
-                        @Override
-                        public void onReceiveAddress(int type, BaseInfo baseInfo) {
-                            mAdapter.notifyItemChanged(position);
-                        }
-                    });
-                    if (!editReceiveAddressView.isShow()) {
-                        editReceiveAddressView.show();
-                    }
+//                    EditReceiveAddressView editReceiveAddressView = EditReceiveAddressView.create(mContext,
+//                            (FeedReceiverAddressInfo) baseInfo, new EditReceiveAddressView.OnReceiveAddressListener() {
+//                        @Override
+//                        public void onReceiveAddress(int type, BaseInfo baseInfo) {
+//                            mAdapter.notifyItemChanged(position);
+//                        }
+//                    });
+//                    if (!editReceiveAddressView.isShow()) {
+//                        editReceiveAddressView.show();
+//                    }
                     return;
                 }
 

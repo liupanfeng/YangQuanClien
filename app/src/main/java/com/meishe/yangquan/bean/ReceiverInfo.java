@@ -6,7 +6,7 @@ package com.meishe.yangquan.bean;
  * @CreateDate : 2021/4/15 15:16
  * @Description : 收货信息数据结构  注意这里用户版也在使用这个类
  */
-public class BUReceiveInfo {
+public class ReceiverInfo extends BaseInfo{
 
 //      "address": "红星花园十六号楼七单元1808",
 //              "area": "北京市朝阳区十里铺街道",

@@ -18,7 +18,7 @@ public class BUOrderInfo extends BaseInfo{
 
     private String shopName;
 
-    private BUReceiveInfo receiverInfo;
+    private ReceiverInfo receiverInfo;
 
     private List<OrdersInfo> orders;
 
@@ -59,11 +59,11 @@ public class BUOrderInfo extends BaseInfo{
         this.price = price;
     }
 
-    public BUReceiveInfo getReceiverInfo() {
+    public ReceiverInfo getReceiverInfo() {
         return receiverInfo;
     }
 
-    public void setReceiverInfo(BUReceiveInfo receiverInfo) {
+    public void setReceiverInfo(ReceiverInfo receiverInfo) {
         this.receiverInfo = receiverInfo;
     }
 

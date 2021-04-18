@@ -311,6 +311,20 @@ public class HttpUrl {
     public static final String SHEEP_APP_USER_ORDER_CANCEL = URL + "app/user/order/cancel";
 
 
+    /*用户版-订单-确认收货*/
+    public static final String SHEEP_APP_USER_ORDER_RECEIVED = URL + "app/user/order/received";
+
+
+    /*用户版-订单-申请退货*/
+    public static final String SHEEP_APP_USER_ORDER_BACHK_GOODS = URL + "app/user/order/backGoods";
+
+
+    /*用户版-订单-申请退货*/
+    public static final String SHEEP_APP_USER_ORDER_RECEIVER_LATEST = URL + "app/user/receiverInfo/latest";
+
+
+
+
 
     //////////////////////////////////////////商版//////////////////////////////////////////////
 
