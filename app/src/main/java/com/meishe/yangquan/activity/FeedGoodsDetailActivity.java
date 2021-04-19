@@ -340,6 +340,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
+
                     mIsCollected = !mIsCollected;
                     if (mIsCollected) {
                         iv_select_goods.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);
