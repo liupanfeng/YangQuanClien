@@ -300,10 +300,12 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             bundle.putInt("type", ((ServiceTypeInfo) info).getType());
             AppManager.getInstance().jumpActivity(getFragment().getActivity(), ServiceTypeListActivity.class, bundle);
         } else if (info instanceof FeedShoppingInfo) {
+            UserManager.getInstance(mContext).setFeedShoppingInfo((FeedShoppingInfo) info);
             Bundle bundle = new Bundle();
-            bundle.putSerializable(Constants.FEED_SHOPPING_INFO, info);
+//            bundle.putSerializable(Constants.FEED_SHOPPING_INFO, info);
             AppManager.getInstance().jumpActivity(mContext, FeedShoppingDetailActivity.class, bundle);
         } else if (info instanceof FeedGoodsInfo) {
+            UserManager.getInstance(mContext).setFeedGoodsInfo((FeedGoodsInfo) info);
             Bundle bundle = new Bundle();
             bundle.putSerializable(Constants.FEED_GOODS_INFO, info);
             AppManager.getInstance().jumpActivity(mContext, FeedGoodsDetailActivity.class, bundle);
@@ -563,15 +565,7 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
             Intent intent = new Intent(mContext, ServiceMessageListActivity.class);
             mContext.startActivity(intent);
         } else if (info instanceof MineBreedingArchivesInfo) {
-            int id = ((MineBreedingArchivesInfo) info).getId();
-            int currentCulturalQuantity = ((MineBreedingArchivesInfo) info).getCurrentCulturalQuantity();
-            long initDate = ((MineBreedingArchivesInfo) info).getInitDate();
-
-            Bundle bundle = new Bundle();
-            bundle.putInt(Constants.TYPE_KEY_BATCH_ID, id);
-            bundle.putInt(Constants.TYPE_KEY_SHEEP_SURPLUS, currentCulturalQuantity);
-            bundle.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initDate);
-            AppManager.getInstance().jumpActivity(mContext, MineBreedingArchivesDetailActivity.class, bundle);
+            ButtonClickHelper.getInstance(mContext).doButtonClick(v,info,this);
         }
     }
 

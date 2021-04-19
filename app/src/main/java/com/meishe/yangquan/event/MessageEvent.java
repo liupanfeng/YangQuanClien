@@ -65,6 +65,9 @@ public class MessageEvent {
 
     private int mEventType;
 
+    /*这个字段用来放置请求参数，没必要的话不用使用*/
+    private int mListType;
+
     private BaseInfo mBaseInfo;
 
     private Object value;
@@ -122,6 +125,15 @@ public class MessageEvent {
 
     public void setValue(Object value) {
         this.value = value;
+    }
+
+    public int getListType() {
+        return mListType;
+    }
+
+    public MessageEvent setListType(int listType) {
+        this.mListType = listType;
+        return this;
     }
 
     /**

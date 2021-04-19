@@ -20,6 +20,9 @@ public class Constants {
     /*列表选择*/
     public static final String KEY_TAB_SELECT_INDEX = "select.index";
 
+    /*购买的类型 car 从购物车购买 goods直接购买*/
+    public static final String TYPE_BUY_TYPE = "type.buy.type";
+
 
     public static String userId = "userId";
 
@@ -373,6 +376,9 @@ public class Constants {
     public static final int TYPE_CAPTURE = 1;
     /*相册*/
     public static final int TYPE_ALBUM = 2;
+
+
+
 
     /*我的-用户版-我的消息*/
     public static final int TYPE_COMMON_MY_MESSAGE = 1;

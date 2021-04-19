@@ -20,7 +20,6 @@ import com.meishe.yangquan.utils.FormatDateUtil;
  */
 public class MineFeedGoldHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
 
     /*养殖档案标题*/
     private TextView tv_title;
@@ -28,20 +27,19 @@ public class MineFeedGoldHolder extends BaseViewHolder {
     private TextView tv_time;
 
     private View mItemView;
+    private View btn_delete;
 
     public MineFeedGoldHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mItemView=itemView;
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override
     protected void initViewHolder(View view, Object... obj) {
         tv_title = view.findViewById(R.id.tv_title);
         tv_time = view.findViewById(R.id.tv_time);
+        btn_delete = view.findViewById(R.id.btn_delete);
     }
 
     @Override
@@ -51,6 +49,10 @@ public class MineFeedGoldHolder extends BaseViewHolder {
             tv_time.setText(FormatDateUtil.longToString(((MineBreedingArchivesInfo) info).getInitDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
             mItemView.setOnClickListener(listener);
             mItemView.setTag(info);
+
+            btn_delete.setOnClickListener(listener);
+            btn_delete.setTag(info);
+
         }
 
     }

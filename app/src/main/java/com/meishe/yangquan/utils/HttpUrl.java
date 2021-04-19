@@ -319,8 +319,11 @@ public class HttpUrl {
     public static final String SHEEP_APP_USER_ORDER_BACHK_GOODS = URL + "app/user/order/backGoods";
 
 
-    /*用户版-订单-申请退货*/
+    /*用户版-订单-获取最新的收货地址*/
     public static final String SHEEP_APP_USER_ORDER_RECEIVER_LATEST = URL + "app/user/receiverInfo/latest";
+
+    /*用户版-我的-删除养殖档案*/
+    public static final String SHEEP_APP_USER_DELETE_CULTURAL_DELETE = URL + "app/user/cultural/delete";
 
 
 

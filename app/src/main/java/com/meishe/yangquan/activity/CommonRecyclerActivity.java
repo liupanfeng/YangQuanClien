@@ -16,6 +16,7 @@ import com.meishe.yangquan.utils.Constants;
 
 /**
  * 通用的列表 activity
+ * 养殖档案、
  */
 public class CommonRecyclerActivity extends BaseActivity {
 

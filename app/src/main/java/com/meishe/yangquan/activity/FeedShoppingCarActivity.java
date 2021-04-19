@@ -1,6 +1,7 @@
 package com.meishe.yangquan.activity;
 
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -17,6 +18,7 @@ import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.FeedGoodsManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 
@@ -271,7 +273,10 @@ public class FeedShoppingCarActivity extends BaseActivity {
                 return;
             }
             FeedGoodsManager.getInstance().setList(list);
-            AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString(Constants.TYPE_BUY_TYPE,"car");
+            AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class,bundle);
+            finish();
         }
     }
 

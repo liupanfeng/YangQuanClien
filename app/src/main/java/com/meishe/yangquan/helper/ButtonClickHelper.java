@@ -1,15 +1,21 @@
 package com.meishe.yangquan.helper;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.View;
 
-import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.MineBreedingArchivesDetailActivity;
+import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
+import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.pop.ConfirmOrderView;
 import com.meishe.yangquan.pop.SelectCancelOrderTypeView;
 import com.meishe.yangquan.pop.TipsCenterView;
+import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.ToastUtil;
 
@@ -25,6 +31,11 @@ public class ButtonClickHelper implements DataHelper.OnCallBackListener {
     private Context mContext;
 
     private static ButtonClickHelper instance;
+
+    private BaseRecyclerAdapter mAdapter;
+
+    private BaseInfo mBaseInfo;
+
 
     public static ButtonClickHelper getInstance(Context context) {
         if (instance == null) {
@@ -45,8 +56,9 @@ public class ButtonClickHelper implements DataHelper.OnCallBackListener {
      * @param v
      * @param info
      */
-    public void doButtonClick(View v, final BaseInfo info) {
-
+    public void doButtonClick(View v, final BaseInfo info, BaseRecyclerAdapter adapter){
+        mBaseInfo=info;
+        mAdapter=adapter;
         if (info instanceof MineOrderInfo) {
             //订单状态
             int orderState = ((MineOrderInfo) info).getOrderState();
@@ -126,7 +138,32 @@ public class ButtonClickHelper implements DataHelper.OnCallBackListener {
                     //退款
                 }
             }
+        }else if (info instanceof MineBreedingArchivesInfo){
+            if (v.getId()==R.id.btn_delete){
+                DataHelper.getInstance().deleteBreedingArchive(((MineBreedingArchivesInfo) info).getId());
+            }else{
+                int id = ((MineBreedingArchivesInfo) info).getId();
+                int currentCulturalQuantity = ((MineBreedingArchivesInfo) info).getCurrentCulturalQuantity();
+                long initDate = ((MineBreedingArchivesInfo) info).getInitDate();
+
+                Bundle bundle = new Bundle();
+                bundle.putInt(Constants.TYPE_KEY_BATCH_ID, id);
+                bundle.putInt(Constants.TYPE_KEY_SHEEP_SURPLUS, currentCulturalQuantity);
+                bundle.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initDate);
+                AppManager.getInstance().jumpActivity(mContext, MineBreedingArchivesDetailActivity.class, bundle);
+            }
         }
+    }
+
+
+    /**
+     * 统一处理点击事件
+     *
+     * @param v
+     * @param info
+     */
+    public void doButtonClick(View v, final BaseInfo info) {
+        doButtonClick(v,info,null);
     }
 
 
@@ -158,5 +195,17 @@ public class ButtonClickHelper implements DataHelper.OnCallBackListener {
     @Override
     public void onError(Exception e) {
         ToastUtil.showToast("网络异常");
+    }
+
+    @Override
+    public void onSuccessNeedDeleteItem() {
+        if (mAdapter!=null){
+            List<BaseInfo> data = mAdapter.getData();
+            if (!CommonUtils.isEmpty(data)){
+                int itemPosition = mAdapter.getItemPosition(mBaseInfo);
+                data.remove(mBaseInfo);
+                mAdapter.notifyItemRemoved(itemPosition);
+            }
+        }
     }
 }

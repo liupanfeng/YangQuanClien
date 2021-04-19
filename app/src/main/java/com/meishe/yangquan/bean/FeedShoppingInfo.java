@@ -117,6 +117,16 @@ public class FeedShoppingInfo extends BaseInfo {
 
     private String shopPhone;
 
+   /*  if (type == 1) {
+        param.put("mainCategory", "饲料");
+    } else if (type == 2) {
+        param.put("mainCategory", "玉米");
+    } else if (type == 3) {
+        param.put("mainCategory", "五金电料");
+    }*/
+    /*请求数据类型  饲料 玉米 五金电料  这里定义的规则不能变*/
+    private int type;
+
 
 
 
@@ -422,11 +432,23 @@ public class FeedShoppingInfo extends BaseInfo {
         return hasCollected;
     }
 
+    public void setHasCollected(boolean hasCollected) {
+        this.hasCollected = hasCollected;
+    }
+
     public String getShopPhone() {
         return shopPhone;
     }
 
     public void setShopPhone(String shopPhone) {
         this.shopPhone = shopPhone;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

@@ -280,4 +280,30 @@ public class FeedShoppingCarGoodsInfo extends BaseInfo {
     public void setSelectAmount(int selectAmount) {
         this.selectAmount = selectAmount;
     }
+
+    /**
+     * 数据类型转化FeedGoodsInfo ---》FeedShoppingCarGoodsInfo
+     * @param feedGoodsInfo
+     * @return
+     */
+    public static FeedShoppingCarGoodsInfo parseGoodsInfo(FeedGoodsInfo feedGoodsInfo) {
+        FeedShoppingCarGoodsInfo shoppingCarGoodsInfo=new FeedShoppingCarGoodsInfo();
+        shoppingCarGoodsInfo.setBrand(feedGoodsInfo.getBrand());
+        shoppingCarGoodsInfo.setId(feedGoodsInfo.getId());
+        shoppingCarGoodsInfo.setAddress(feedGoodsInfo.getAddress());
+        shoppingCarGoodsInfo.setDescription(feedGoodsInfo.getDescription());
+        shoppingCarGoodsInfo.setDescriptionImageFileIds(feedGoodsInfo.getDescriptionImageFileIds());
+        shoppingCarGoodsInfo.setDescriptionImageUrls(feedGoodsInfo.getDescriptionImageUrls());
+        shoppingCarGoodsInfo.setGoodsImageUrls(feedGoodsInfo.getGoodsImageUrls());
+        shoppingCarGoodsInfo.setFirstCategory(feedGoodsInfo.getFirstCategory());
+        shoppingCarGoodsInfo.setSelectAmount(1);
+        shoppingCarGoodsInfo.setStoreAmount(feedGoodsInfo.getStoreAmount());
+        shoppingCarGoodsInfo.setIsPublic(feedGoodsInfo.getIsPublic());
+        shoppingCarGoodsInfo.setPrice(feedGoodsInfo.getPrice());
+        shoppingCarGoodsInfo.setModDate(feedGoodsInfo.getModDate());
+        shoppingCarGoodsInfo.setPlace(feedGoodsInfo.getPlace());
+        return shoppingCarGoodsInfo;
+    }
+
+
 }

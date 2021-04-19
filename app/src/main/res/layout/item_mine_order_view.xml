@@ -120,6 +120,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="预计47小时53分后自动取消,请尽快支付"
+                android:visibility="gone"
                 android:textColor="#FA561E"
                 android:textSize="13sp"
                 />

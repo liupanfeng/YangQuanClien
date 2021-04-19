@@ -18,6 +18,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfoResult;
+import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -28,6 +29,7 @@ import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BannerLayout;
 
@@ -62,9 +64,9 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
     private TextView tv_colect_goods;
     private View btn_feed_good_buy_now;
+
     private FeedGoodsInfo feedGoodsInfo;
 
-    private boolean mIsCollected;
 
     @Override
     protected int initRootView() {
@@ -91,16 +93,17 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
-        Intent intent = getIntent();
-        if (intent != null) {
-            Bundle extras = intent.getExtras();
-            if (extras != null) {
-                feedGoodsInfo = (FeedGoodsInfo) extras.getSerializable(Constants.FEED_GOODS_INFO);
-                if (feedGoodsInfo != null) {
-                    mGoodsId = feedGoodsInfo.getId();
-                    updateUI(feedGoodsInfo);
-                }
-            }
+//        Intent intent = getIntent();
+//        if (intent != null) {
+//            Bundle extras = intent.getExtras();
+//            if (extras != null) {
+//            }
+//        }
+
+        feedGoodsInfo = UserManager.getInstance(mContext).getFeedGoodsInfo();
+        if (feedGoodsInfo != null) {
+            mGoodsId = feedGoodsInfo.getId();
+            updateUI(feedGoodsInfo);
         }
 
         if (mGoodsId > 0) {
@@ -121,7 +124,6 @@ public class FeedGoodsDetailActivity extends BaseActivity {
             iv_select_goods.setBackgroundResource(R.mipmap.ic_feed_goods_collection);
         }
 
-        mIsCollected = feedGoodsInfo.isHasCollected();
 
         final List<String> descriptionImageUrls = feedGoodsInfo.getDescriptionImageUrls();
         if (!CommonUtils.isEmpty(goodsImageUrls)) {
@@ -239,16 +241,21 @@ public class FeedGoodsDetailActivity extends BaseActivity {
             //加入购物车
             addShoppingCar();
         } else if (v.getId() == R.id.ll_feed_goods_phone_call) {
-            ToastUtil.showToast("联系商家");
-//            Util.callPhone(mContext,phone);
+            String shopPhone = feedGoodsInfo.getShopPhone();
+            if (TextUtils.isEmpty(shopPhone)){
+                return;
+            }
+            Util.callPhone(mContext, shopPhone);
         } else if (v.getId() == R.id.ll_feed_shopping_collection) {
-//            ToastUtil.showToast("收藏商品");
             doCollectShoppingOrGoods(mGoodsId);
         } else if (v.getId() == R.id.btn_feed_good_buy_now) {
             List<BaseInfo> list = new ArrayList<>();
-            list.add(feedGoodsInfo);
+            FeedShoppingCarGoodsInfo feedShoppingCarGoodsInfo=FeedShoppingCarGoodsInfo.parseGoodsInfo(feedGoodsInfo);
+            list.add(feedShoppingCarGoodsInfo);
             FeedGoodsManager.getInstance().setList(list);
-            AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class);
+            Bundle bundle=new Bundle();
+            bundle.putString(Constants.TYPE_BUY_TYPE,"goods");
+            AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class,bundle);
         }
     }
 
@@ -341,8 +348,9 @@ public class FeedGoodsDetailActivity extends BaseActivity {
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
 
-                    mIsCollected = !mIsCollected;
-                    if (mIsCollected) {
+                    feedGoodsInfo.setHasCollected(!feedGoodsInfo.isHasCollected());
+                    boolean hasCollected = feedGoodsInfo.isHasCollected();
+                    if (hasCollected) {
                         iv_select_goods.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);
                     } else {
                         iv_select_goods.setBackgroundResource(R.mipmap.ic_feed_goods_collection);

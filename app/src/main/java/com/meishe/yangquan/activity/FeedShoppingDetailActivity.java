@@ -24,6 +24,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.ServerResult;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.fragment.CommonListFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -32,8 +33,11 @@ import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.BannerLayout;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -72,7 +76,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     private ImageView iv_select_shopping;
     private TextView tv_colect_shopping;
 
-    private boolean mIsCollected;
+    private FeedShoppingInfo mFeedInfo;
 
     @Override
     protected int initRootView() {
@@ -105,18 +109,11 @@ public class FeedShoppingDetailActivity extends BaseActivity {
     @Override
     public void initData() {
 
-        Intent intent = getIntent();
-        if (intent != null) {
-            Bundle extras = intent.getExtras();
-            if (extras != null) {
-                FeedShoppingInfo feedInfo = (FeedShoppingInfo) extras.getSerializable(Constants.FEED_SHOPPING_INFO);
-                if (feedInfo != null) {
-                    mShoppingId = feedInfo.getId();
-                    updateUI(feedInfo);
-                }
-            }
+        mFeedInfo =  UserManager.getInstance(mContext).getFeedShoppingInfo();
+        if (mFeedInfo != null) {
+            mShoppingId = mFeedInfo.getId();
+            updateUI(mFeedInfo);
         }
-
 
         mFragmentList.clear();
         mTitleList.clear();
@@ -169,8 +166,6 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection);
         }
 
-        mIsCollected = feedInfo.isHasCollected();
-
 
         tv_feed_shopping_sign_name.setText((feedInfo.getSign() == null || feedInfo.getSign().equals("null")) ? "暂无签名" : feedInfo.getSign());
         final List<String> shopInSideImageUrls = feedInfo.getShopInSideImageUrls();
@@ -221,11 +216,13 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             bundle.putInt(Constants.KEY_TAB_SELECT_INDEX, Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE);
             AppManager.getInstance().jumpActivity(mContext, MineOrderActivity.class, bundle);
         } else if (v.getId() == R.id.ll_feed_shopping_collection) {
-//            ToastUtil.showToast("店铺收藏");
             doCollectShoppingOrGoods(mShoppingId);
         } else if (v.getId() == R.id.ll_feed_goods_phone_call) {
-            ToastUtil.showToast("联系商家");
-//            Util.callPhone(mContext,phone);
+            String shopPhone = mFeedInfo.getShopPhone();
+            if (TextUtils.isEmpty(shopPhone)){
+                return;
+            }
+            Util.callPhone(mContext,shopPhone);
         }
     }
 
@@ -253,12 +250,21 @@ public class FeedShoppingDetailActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    mIsCollected=!mIsCollected;
-                    if (mIsCollected) {
+                    mFeedInfo.setHasCollected(!mFeedInfo.isHasCollected());
+                    if (mFeedInfo.isHasCollected()) {
                         iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);
                     } else {
                         iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection);
                     }
+//                    int type = mFeedInfo.getType();
+//                    if (type == 1) {
+//                        EventBus.getDefault().post(new MessageEvent().setEventType(Constants.TYPE_COMMON_FEED_FEED).setListType(type));
+//                    } else if (type == 2) {
+//                        EventBus.getDefault().post(new MessageEvent().setEventType(Constants.TYPE_COMMON_FEED_CORN).setListType(type));
+//                    } else if (type == 3) {
+//                        EventBus.getDefault().post(new MessageEvent().setEventType(Constants.TYPE_COMMON_FEED_TOOLS).setListType(type));
+//                    }
+
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
                 }

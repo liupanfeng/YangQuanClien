@@ -2,17 +2,25 @@ package com.meishe.yangquan.activity;
 
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder;
+import com.bigkoo.pickerview.listener.OnOptionsSelectListener;
+import com.bigkoo.pickerview.view.OptionsPickerView;
 import com.google.gson.Gson;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.area.bean.JsonBean;
+import com.meishe.yangquan.area.helper.LocationSelectHelper;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedAddressParamInfo;
+import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedGoodsParamInfo;
 import com.meishe.yangquan.bean.FeedOrderParamInfo;
 import com.meishe.yangquan.bean.FeedReceiverAddressInfo;
@@ -30,6 +38,7 @@ import com.meishe.yangquan.manager.FeedGoodsManager;
 import com.meishe.yangquan.pop.EditReceiveAddressView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
@@ -63,6 +72,7 @@ public class FeedOrderActivity extends BaseActivity {
 
     private View btn_feed_commit_order;
     private ArrayList<BaseInfo> list;
+    private String mBuyType;
 
 
     @Override
@@ -89,6 +99,13 @@ public class FeedOrderActivity extends BaseActivity {
 
     @Override
     public void initData() {
+        Intent intent = getIntent();
+        if (intent!=null){
+            Bundle extras = intent.getExtras();
+            if (extras!=null){
+                mBuyType = extras.getString(Constants.TYPE_BUY_TYPE);
+            }
+        }
         list = new ArrayList<>();
         list.addAll(FeedGoodsManager.getInstance().getList());
         if (!CommonUtils.isEmpty(list)) {
@@ -146,11 +163,52 @@ public class FeedOrderActivity extends BaseActivity {
         if (v.getId() == R.id.iv_feed_address_edit) {
 //            Bundle bundle = new Bundle();
 //            AppManager.getInstance().jumpActivityForResult(this, FeedReceiveAddressActivity.class, bundle, 200);
-            showAddAddressView(UserManager.getInstance(mContext).getReceiverInfo());
+//            showAddAddressView(UserManager.getInstance(mContext).getReceiverInfo());
+            showPickerView();
         } else if (v.getId() == R.id.btn_feed_commit_order) {
             commitGoodsOrder();
         }
     }
+
+
+
+    private void showPickerView() {// 弹出选择器
+        final List<JsonBean> options1Items = LocationSelectHelper.getInstance().getOptions1Items();
+        final ArrayList<ArrayList<String>> options2Items = LocationSelectHelper.getInstance().getOptions2Items();
+        final ArrayList<ArrayList<ArrayList<String>>> options3Items = LocationSelectHelper.getInstance().getOptions3Items();
+        OptionsPickerView pvOptions = new OptionsPickerBuilder(this, new OnOptionsSelectListener() {
+            @Override
+            public void onOptionsSelect(int options1, int options2, int options3, View v) {
+                //返回的分别是三个级别的选中位置
+                String opt1tx = options1Items.size() > 0 ?
+                        options1Items.get(options1).getPickerViewText() : "";
+
+                String opt2tx = options2Items.size() > 0
+                        && options2Items.get(options1).size() > 0 ?
+                        options2Items.get(options1).get(options2) : "";
+
+                String opt3tx = options2Items.size() > 0
+                        && options3Items.get(options1).size() > 0
+                        && options3Items.get(options1).get(options2).size() > 0 ?
+                        options3Items.get(options1).get(options2).get(options3) : "";
+
+                String tx = opt1tx + opt2tx + opt3tx;
+                ToastUtil.showToast(tx);
+            }
+        })
+
+                .setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .build();
+
+        /*pvOptions.setPicker(options1Items);//一级选择器
+        pvOptions.setPicker(options1Items, options2Items);//二级选择器*/
+        pvOptions.setPicker(options1Items, options2Items, options3Items);//三级选择器
+        pvOptions.show();
+    }
+
 
     /**
      * 提交商品订单
@@ -161,7 +219,7 @@ public class FeedOrderActivity extends BaseActivity {
             return;
         }
         FeedOrderParamInfo feedOrderParamInfo = new FeedOrderParamInfo();
-        feedOrderParamInfo.setComeFrom("car");
+        feedOrderParamInfo.setComeFrom(mBuyType);
 
         FeedAddressParamInfo feedAddressParamInfo = new FeedAddressParamInfo();
 
@@ -259,6 +317,11 @@ public class FeedOrderActivity extends BaseActivity {
                     int selectAmount = ((FeedShoppingCarGoodsInfo) info).getSelectAmount();
                     totalPrice += price * selectAmount;
                 }
+                if (info instanceof FeedGoodsInfo) {
+                    float price = ((FeedGoodsInfo) info).getPrice();
+                    int selectAmount = ((FeedGoodsInfo) info).getSellAmount();
+                    totalPrice += price * selectAmount;
+                }
             }
         }
 
@@ -337,7 +400,10 @@ public class FeedOrderActivity extends BaseActivity {
         tv_feed_order_phone_number.setText(receiverInfo.getPhone());
     }
 
-
+    /**
+     * 展示修改地址的view
+     * @param receiverInfo
+     */
     public void showAddAddressView(ReceiverInfo receiverInfo) {
         EditReceiveAddressView editReceiveAddressView = EditReceiveAddressView.create(mContext,
                 receiverInfo, new EditReceiveAddressView.OnReceiveAddressListener() {

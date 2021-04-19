@@ -3,6 +3,8 @@ package com.meishe.yangquan.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.meishe.yangquan.bean.FeedGoodsInfo;
+import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.ReceiverInfo;
 import com.meishe.yangquan.bean.UserInfo;
 
@@ -10,6 +12,11 @@ public class UserManager {
     private static UserManager instance;
     private UserInfo user;
     private ReceiverInfo mReceiverInfo;
+    /*店铺数据，为了处理关注的更新做的这个处理*/
+    private FeedShoppingInfo feedShoppingInfo;
+    /*本来这些属性没必要保存这里，为了刷新收藏的问题，暂时这样处理*/
+    private FeedGoodsInfo feedGoodsInfo;
+
     private String token = "";
     private Context mContext;
     private SharedPreferencesUtil sharedPreferencesUtil;
@@ -67,5 +74,21 @@ public class UserManager {
 
     public void setReceiverInfo(ReceiverInfo receiverInfo) {
         this.mReceiverInfo = receiverInfo;
+    }
+
+    public FeedShoppingInfo getFeedShoppingInfo() {
+        return feedShoppingInfo;
+    }
+
+    public void setFeedShoppingInfo(FeedShoppingInfo feedShoppingInfo) {
+        this.feedShoppingInfo = feedShoppingInfo;
+    }
+
+    public FeedGoodsInfo getFeedGoodsInfo() {
+        return feedGoodsInfo;
+    }
+
+    public void setFeedGoodsInfo(FeedGoodsInfo feedGoodsInfo) {
+        this.feedGoodsInfo = feedGoodsInfo;
     }
 }

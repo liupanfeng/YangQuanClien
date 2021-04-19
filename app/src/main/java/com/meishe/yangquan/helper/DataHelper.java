@@ -37,6 +37,7 @@ import com.meishe.yangquan.bean.QuotationResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.ServiceInfo;
 import com.meishe.yangquan.bean.ServiceResult;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
@@ -46,6 +47,8 @@ import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -84,9 +87,9 @@ public class DataHelper {
         }
 
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("listType",type);
-        requestParam.put("pageNum",pageNumber);
-        requestParam.put("pageSize",pageSize);
+        requestParam.put("listType", type);
+        requestParam.put("pageNum", pageNumber);
+        requestParam.put("pageSize", pageSize);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_FEED_ORDER_LIST, new BaseCallBack<MineOrderInfoResult>() {
             @Override
@@ -96,9 +99,9 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                  if (mOnCallBackListener!=null){
-                      mOnCallBackListener.onFailure(e);
-                  }
+                if (mOnCallBackListener != null) {
+                    mOnCallBackListener.onFailure(e);
+                }
             }
 
             @Override
@@ -118,7 +121,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -130,7 +133,6 @@ public class DataHelper {
         }, requestParam, token);
 
     }
-
 
 
     /**
@@ -145,8 +147,8 @@ public class DataHelper {
             return;
         }
         HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("pageNum",pageNumber);
-        requestParam.put("pageSize",pageSize);
+        requestParam.put("pageNum", pageNumber);
+        requestParam.put("pageSize", pageSize);
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_USER_LIST, new BaseCallBack<MineUserMessageInfoResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -155,7 +157,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -164,7 +166,7 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, MineUserMessageInfoResult result) {
                 if (result != null && result.getCode() == 1) {
                     List<MineUserMessageInfo> datas = result.getData();
-                    commonResponse( datas, list, isLoadMore, pageSize, pageNumber);
+                    commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
                 }
@@ -177,7 +179,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -196,8 +198,8 @@ public class DataHelper {
      * type 这个类型表示收入还是支出
      */
     public void getFeedGoldDataFromServer(final List<BaseInfo> list, int type,
-                                              final int pageSize, final int pageNumber,
-                                              boolean isLoadFinish, final boolean isLoadMore) {
+                                          final int pageSize, final int pageNumber,
+                                          boolean isLoadFinish, final boolean isLoadMore) {
         String token = getToken();
         if (TextUtils.isEmpty(token)) {
             return;
@@ -205,9 +207,9 @@ public class DataHelper {
         HashMap<String, Object> param = new HashMap<>();
         param.put("pageNum", pageNumber);
         param.put("pageSize", pageSize);
-        if (type== Constants.TYPE_FEED_GOLD_IN_TYPE){
+        if (type == Constants.TYPE_FEED_GOLD_IN_TYPE) {
             param.put("type", "in");
-        }else if (type==Constants.TYPE_FEED_GOLD_OUT_TYPE){
+        } else if (type == Constants.TYPE_FEED_GOLD_OUT_TYPE) {
             param.put("type", "out");
         }
 
@@ -219,7 +221,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -227,7 +229,7 @@ public class DataHelper {
             @Override
             protected void onSuccess(Call call, Response response, MineFeedGoldInfoResult result) {
                 if (result != null && result.getCode() == 1) {
-                    List< MineFeedGoldInfo> datas = result.getData();
+                    List<MineFeedGoldInfo> datas = result.getData();
                     commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -241,7 +243,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -254,8 +256,8 @@ public class DataHelper {
     }
 
     public void getBreedingArchivesData(final List<BaseInfo> list, int type,
-                                         final int pageSize, final int pageNumber,
-                                         boolean isLoadFinish, final boolean isLoadMore) {
+                                        final int pageSize, final int pageNumber,
+                                        boolean isLoadFinish, final boolean isLoadMore) {
         String token = getToken();
         if (TextUtils.isEmpty(token)) {
             return;
@@ -272,7 +274,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -294,7 +296,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
 
@@ -312,8 +314,8 @@ public class DataHelper {
      * 用户版-我的-我的关注列表
      */
     public void getFocusData(final List<BaseInfo> list, int type,
-                              final int pageSize, final int pageNumber,
-                              boolean isLoadFinish, final boolean isLoadMore) {
+                             final int pageSize, final int pageNumber,
+                             boolean isLoadFinish, final boolean isLoadMore) {
 
         String token = getToken();
         if (TextUtils.isEmpty(token)) {
@@ -331,7 +333,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -353,7 +355,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -367,13 +369,12 @@ public class DataHelper {
     }
 
 
-
     /**
      * 用户版-我的-我的粉丝列表
      */
     public void getFansData(final List<BaseInfo> list, int type,
-                             final int pageSize, final int pageNumber,
-                             boolean isLoadFinish, final boolean isLoadMore) {
+                            final int pageSize, final int pageNumber,
+                            boolean isLoadFinish, final boolean isLoadMore) {
         String token = getToken();
         if (TextUtils.isEmpty(token)) {
             return;
@@ -390,7 +391,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -413,7 +414,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -427,9 +428,8 @@ public class DataHelper {
     }
 
 
-
     /**
-     *用户版-我的-收藏数据列表
+     * 用户版-我的-收藏数据列表
      * type 1:店铺  2：商品
      */
     public void getCollectionDataFromServer(final List<BaseInfo> list, final int type,
@@ -452,7 +452,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -461,16 +461,16 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, MineCollectionInfoResult result) {
                 if (result != null && result.getCode() == 1) {
                     List<MineCollectionInfo> datas = result.getData();
-                    if (!CommonUtils.isEmpty(datas)){
+                    if (!CommonUtils.isEmpty(datas)) {
                         for (int i = 0; i < datas.size(); i++) {
                             MineCollectionInfo mineCollectionInfo = datas.get(i);
-                            if (mineCollectionInfo==null){
+                            if (mineCollectionInfo == null) {
                                 continue;
                             }
-                            if (type==1){
+                            if (type == 1) {
                                 //店铺
                                 mineCollectionInfo.setType(Constants.TYPE_COMMON_MINE_COLLECT_SHOPPING);
-                            }else if (type==2){
+                            } else if (type == 2) {
                                 //商品
                                 mineCollectionInfo.setType(Constants.TYPE_COMMON_MINE_COLLECT_GOODS);
                             }
@@ -489,7 +489,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -505,7 +505,7 @@ public class DataHelper {
     /**
      * 获取店铺列表信息
      */
-    public void getShoppingData(final List<BaseInfo> list, int type,
+    public void getShoppingData(final List<BaseInfo> list, final int type,
                                 final int pageSize, final int pageNumber,
                                 boolean isLoadFinish, final boolean isLoadMore) {
         String token = getToken();
@@ -513,15 +513,15 @@ public class DataHelper {
             return;
         }
         HashMap<String, Object> param = new HashMap<>();
-        if (type==1){
-            param.put("mainCategory","饲料");
-        }else if (type==2){
-            param.put("mainCategory","玉米");
-        } else if (type==3){
-            param.put("mainCategory","五金电料");
+        if (type == 1) {
+            param.put("mainCategory", "饲料");
+        } else if (type == 2) {
+            param.put("mainCategory", "玉米");
+        } else if (type == 3) {
+            param.put("mainCategory", "五金电料");
         }
-        param.put("pageSize",pageSize);
-        param.put("pageNum",pageNumber);
+        param.put("pageSize", pageSize);
+        param.put("pageNum", pageNumber);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_SHOP_LIST, new BaseCallBack<FeedShoppingInfoResult>() {
             @Override
@@ -531,7 +531,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -540,6 +540,15 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, FeedShoppingInfoResult result) {
                 if (result != null && result.getCode() == 1) {
                     List<FeedShoppingInfo> dataList = result.getData();
+                    if (!CommonUtils.isEmpty(dataList)) {
+                        for (int i = 0; i < dataList.size(); i++) {
+                            FeedShoppingInfo feedShoppingInfo = dataList.get(i);
+                            if (feedShoppingInfo == null) {
+                                continue;
+                            }
+                            feedShoppingInfo.setType(type);
+                        }
+                    }
                     commonResponse(dataList, list, isLoadMore, pageSize, pageNumber);
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -553,7 +562,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -568,13 +577,14 @@ public class DataHelper {
 
     /**
      * 用户版-获取市场数据
+     *
      * @param listType 最新还是推荐
-     * @param typeId 请求的数据类型 出售羊苗 购买羊苗 等
+     * @param typeId   请求的数据类型 出售羊苗 购买羊苗 等
      */
     public void getMarketDataFromServer(final List<BaseInfo> list,
-                                         final int pageSize, final int pageNumber,
-                                         boolean isLoadFinish, final boolean isLoadMore,final int listType,final int typeId) {
-        String token=getToken();
+                                        final int pageSize, final int pageNumber,
+                                        boolean isLoadFinish, final boolean isLoadMore, final int listType, final int typeId) {
+        String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
         param.put("typeId", typeId);
         param.put("listType", listType);
@@ -589,7 +599,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -616,7 +626,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -631,12 +641,13 @@ public class DataHelper {
 
     /**
      * 用户版-首页-获取服务数据
+     *
      * @param listType 最新还是推荐
-     * @param typeId 请求的数据类型 剪羊毛  打疫苗 等
+     * @param typeId   请求的数据类型 剪羊毛  打疫苗 等
      */
     public void getServiceDataFromServer(final List<BaseInfo> list,
-                                          final int pageSize, final int pageNumber,
-                                          boolean isLoadFinish, final boolean isLoadMore,int listType,final int typeId) {
+                                         final int pageSize, final int pageNumber,
+                                         boolean isLoadFinish, final boolean isLoadMore, int listType, final int typeId) {
         HashMap<String, Object> param = new HashMap<>();
         param.put("typeId", typeId);
         param.put("listType", listType);
@@ -652,7 +663,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -671,7 +682,6 @@ public class DataHelper {
                 }
 
 
-
             }
 
             @Override
@@ -681,7 +691,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -713,7 +723,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -722,10 +732,10 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, QuotationResult result) {
                 if (result != null && result.getCode() == 1) {
                     List<QuotationInfo> dataList = result.getData();
-                    if (!CommonUtils.isEmpty(dataList)){
+                    if (!CommonUtils.isEmpty(dataList)) {
                         for (int i = 0; i < dataList.size(); i++) {
                             QuotationInfo quotationInfo = dataList.get(i);
-                            if (quotationInfo==null){
+                            if (quotationInfo == null) {
                                 continue;
                             }
                             quotationInfo.setType(type);
@@ -744,7 +754,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -761,30 +771,30 @@ public class DataHelper {
      * 获取饲料商品-列表信息
      */
     public void getShoppingGoodsData(final List<BaseInfo> list,
-                                final int pageSize, final int pageNumber,
-                                final boolean isLoadMore,int listType,final int shoppingId) {
+                                     final int pageSize, final int pageNumber,
+                                     final boolean isLoadMore, int listType, final int shoppingId) {
 
         HashMap<String, Object> param = new HashMap<>();
-        param.put("shopId",shoppingId);
-        String orderByType="";
-        switch (listType){
+        param.put("shopId", shoppingId);
+        String orderByType = "";
+        switch (listType) {
             case Constants.TYPE_FEED_FOODS_MULTIPLE:
-                 orderByType="mod_date";
+                orderByType = "mod_date";
                 break;
             case Constants.TYPE_FEED_FOODS_SALES:
 
-                orderByType="sell_amount";
+                orderByType = "sell_amount";
                 break;
             case Constants.TYPE_FEED_FOODS_PRICE:
 
-                orderByType="price";
+                orderByType = "price";
                 break;
         }
 
-        param.put("orderBy",orderByType);
-        param.put("order","desc");
-        param.put("pageSize",pageSize);
-        param.put("pageNum",pageNumber);
+        param.put("orderBy", orderByType);
+        param.put("order", "desc");
+        param.put("pageSize", pageSize);
+        param.put("pageNum", pageNumber);
 
         String token = getToken();
 
@@ -796,7 +806,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -819,7 +829,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -832,29 +842,24 @@ public class DataHelper {
     }
 
 
-
-
-
-
-
     ////////////////////////////////////////////下面是商版接口///////////////////////////////////////////////
 
     /**
      * 商版-获取订单列表数据
-     *一下是接口定义不能修改
+     * 一下是接口定义不能修改
      * 0 待支付
      * 1 待发货
      * 2 已发货
      * 3 已完成
      */
     public void getGoodsDataFromServer(final List<BaseInfo> list, final int type,
-                                        final int pageSize, final int pageNumber,
-                                        final boolean isLoadMore) {
+                                       final int pageSize, final int pageNumber,
+                                       final boolean isLoadMore) {
 
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
         param.put("listType", type);
-        param.put("pageNum",pageNumber);
+        param.put("pageNum", pageNumber);
         param.put("pageSize", pageSize);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_ORDER_LIST, new BaseCallBack<BUManagerOrderInfoResult>() {
@@ -865,7 +870,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -874,14 +879,14 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, BUManagerOrderInfoResult result) {
                 if (result != null && result.getCode() == 1) {
                     BUManagerOrderInfo dataList = result.getData();
-                    List<BUOrderInfo> elements=null;
-                    if (dataList!=null){
+                    List<BUOrderInfo> elements = null;
+                    if (dataList != null) {
                         elements = dataList.getElements();
                     }
-                    if (!CommonUtils.isEmpty(elements)){
+                    if (!CommonUtils.isEmpty(elements)) {
                         for (int i = 0; i < elements.size(); i++) {
                             BUOrderInfo buManagerOrderInfo = elements.get(i);
-                            if (buManagerOrderInfo==null){
+                            if (buManagerOrderInfo == null) {
                                 continue;
                             }
                             buManagerOrderInfo.setState(type);
@@ -900,7 +905,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -913,21 +918,20 @@ public class DataHelper {
     }
 
 
-
     /**
      * 商版-获取退货列表数据
-     *一下是接口定义不能修改
+     * 一下是接口定义不能修改
      * 0 退货中
      * 1 已完成
      */
     public void getRefundDataFromServer(final List<BaseInfo> list, final int type,
-                                       final int pageSize, final int pageNumber,
-                                       final boolean isLoadMore) {
+                                        final int pageSize, final int pageNumber,
+                                        final boolean isLoadMore) {
 
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
         param.put("listType", type);
-        param.put("pageNum",pageNumber);
+        param.put("pageNum", pageNumber);
         param.put("pageSize", pageSize);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_BACK_GOODS_LIST, new BaseCallBack<BUGoodsRefundInfoResult>() {
@@ -938,7 +942,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -947,14 +951,14 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, BUGoodsRefundInfoResult result) {
                 if (result != null && result.getCode() == 1) {
                     BUGoodsRefundInfo dataList = result.getData();
-                    List<BUGoodsRefundListInfo> elements=null;
-                    if (dataList!=null){
+                    List<BUGoodsRefundListInfo> elements = null;
+                    if (dataList != null) {
                         elements = dataList.getElements();
                     }
-                    if (!CommonUtils.isEmpty(elements)){
+                    if (!CommonUtils.isEmpty(elements)) {
                         for (int i = 0; i < elements.size(); i++) {
                             BUGoodsRefundListInfo buGoodsRefundListInfo = elements.get(i);
-                            if (buGoodsRefundListInfo==null){
+                            if (buGoodsRefundListInfo == null) {
                                 continue;
                             }
                             buGoodsRefundListInfo.setState(type);
@@ -973,7 +977,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -986,19 +990,17 @@ public class DataHelper {
     }
 
 
-
-
     /////////////////////////////////////用户版 跟CommonFragment 没有关系//////////////////////////////////
 
 
     /**
      * 用户版本-取消订单
      */
-    public void doCancelOrder(int orderId,String option) {
+    public void doCancelOrder(int orderId, String option) {
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
-        param.put("orderId",orderId);
-        param.put("option",option);
+        param.put("orderId", orderId);
+        param.put("option", option);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_CANCEL, new BaseCallBack<ServerResult>() {
             @Override
@@ -1008,7 +1010,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -1016,7 +1018,7 @@ public class DataHelper {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    if (mOnCallBackListener!=null){
+                    if (mOnCallBackListener != null) {
                         mOnCallBackListener.onSuccess("订单已取消");
                     }
                 } else {
@@ -1032,7 +1034,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -1045,15 +1047,14 @@ public class DataHelper {
     }
 
 
-
     /**
      * 用户版本-支付订单
      */
-    public void doPayOrder(int orderId,String paymentCode) {
+    public void doPayOrder(int orderId, String paymentCode) {
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
-        param.put("orderId",orderId);
-        param.put("paymentCode",paymentCode);
+        param.put("orderId", orderId);
+        param.put("paymentCode", paymentCode);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_PAY, new BaseCallBack<ServerResult>() {
             @Override
@@ -1063,7 +1064,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -1071,7 +1072,7 @@ public class DataHelper {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    if (mOnCallBackListener!=null){
+                    if (mOnCallBackListener != null) {
                         mOnCallBackListener.onSuccess("订单支付成功");
                     }
                 } else {
@@ -1087,7 +1088,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -1107,7 +1108,7 @@ public class DataHelper {
 
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
-        param.put("orderId",orderId);
+        param.put("orderId", orderId);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_RECEIVED, new BaseCallBack<ServerResult>() {
             @Override
@@ -1117,7 +1118,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -1125,7 +1126,7 @@ public class DataHelper {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    if (mOnCallBackListener!=null){
+                    if (mOnCallBackListener != null) {
                         mOnCallBackListener.onSuccess("已经确认收货！");
                     }
                 } else {
@@ -1141,7 +1142,7 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -1157,11 +1158,11 @@ public class DataHelper {
     /**
      * 用户版本-申请退款
      */
-    public void doApplyRefund(int orderId,String option) {
+    public void doApplyRefund(int orderId, String option) {
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
-        param.put("orderId",orderId);
-        param.put("option",option);
+        param.put("orderId", orderId);
+        param.put("option", option);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_BACHK_GOODS, new BaseCallBack<ServerResult>() {
             @Override
@@ -1171,7 +1172,7 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onFailure(e);
                 }
             }
@@ -1179,7 +1180,7 @@ public class DataHelper {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    if (mOnCallBackListener!=null){
+                    if (mOnCallBackListener != null) {
                         mOnCallBackListener.onSuccess("退货已经申请！");
                     }
                 } else {
@@ -1195,7 +1196,60 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener!=null){
+                if (mOnCallBackListener != null) {
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+    /**
+     * 用户版-删除养殖档案
+     * @param id 档案的id
+     */
+    public void deleteBreedingArchive(int id) {
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("id", id);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_DELETE_CULTURAL_DELETE, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener != null) {
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    if (mOnCallBackListener != null) {
+                        mOnCallBackListener.onSuccess("退货已经申请！");
+                    }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener != null) {
                     mOnCallBackListener.onError(e);
                 }
             }
@@ -1208,43 +1262,43 @@ public class DataHelper {
     }
 
 
-
     /**
      * 通用的数据返回处理
+     *
      * @param datas
      * @param list
      * @param isLoadMore
      * @param pageSize
      * @param pageNumber
      */
-    private void commonResponse( List<? extends BaseInfo> datas, List<BaseInfo> list, boolean isLoadMore, int pageSize, int pageNumber) {
-        if (CommonUtils.isEmpty(datas)&&list.size()==0){
-            if (mOnCallBackListener!=null){
+    private void commonResponse(List<? extends BaseInfo> datas, List<BaseInfo> list, boolean isLoadMore, int pageSize, int pageNumber) {
+        if (CommonUtils.isEmpty(datas) && list.size() == 0) {
+            if (mOnCallBackListener != null) {
                 mOnCallBackListener.onShowNoData();
                 return;
             }
         }
-        if (CommonUtils.isEmpty(datas) && isLoadMore && list.size() >0) {
-            if (mOnCallBackListener!=null){
+        if (CommonUtils.isEmpty(datas) && isLoadMore && list.size() > 0) {
+            if (mOnCallBackListener != null) {
                 mOnCallBackListener.onSuccess();
             }
             return;
         }
 
-        if (mOnCallBackListener!=null){
-            mOnCallBackListener.onSuccess(datas,pageSize,pageNumber);
+        if (mOnCallBackListener != null) {
+            mOnCallBackListener.onSuccess(datas, pageSize, pageNumber);
         }
     }
 
 
-
     private OnCallBackListener mOnCallBackListener;
 
-    public void setOnCallBackListener(OnCallBackListener onCallBackListener){
-        this.mOnCallBackListener=onCallBackListener;
+    public void setOnCallBackListener(OnCallBackListener onCallBackListener) {
+        this.mOnCallBackListener = onCallBackListener;
     }
 
-    public interface OnCallBackListener{
+
+    public interface OnCallBackListener {
 
         void onShowNoData();
 
@@ -1252,11 +1306,13 @@ public class DataHelper {
 
         void onSuccess(String content);
 
-        void onSuccess(List<? extends BaseInfo> baseInfos,int pageSize,int pageNum);
+        void onSuccess(List<? extends BaseInfo> baseInfos, int pageSize, int pageNum);
 
         void onFailure(Exception e);
 
         void onError(Exception e);
+
+        void onSuccessNeedDeleteItem();
 
     }
 

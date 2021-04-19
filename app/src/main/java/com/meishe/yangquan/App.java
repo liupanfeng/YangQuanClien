@@ -6,6 +6,7 @@ import android.graphics.Typeface;
 
 
 import com.bumptech.glide.request.target.ViewTarget;
+import com.meishe.yangquan.area.helper.LocationSelectHelper;
 import com.umeng.commonsdk.UMConfigure;
 
 import cn.jpush.android.api.JPushInterface;
@@ -39,6 +40,8 @@ public class App extends Application {
 //        PlatformConfig.setWeixin("wxc86baec54fc83b32", "bb1228fe238abe0bd962e5b4d50bf05e");
 //        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
 //        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");
+
+        LocationSelectHelper.getInstance().initJsonData();
     }
 
 
