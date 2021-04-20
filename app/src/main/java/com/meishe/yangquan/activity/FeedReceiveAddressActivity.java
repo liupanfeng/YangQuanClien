@@ -99,6 +99,11 @@ public class FeedReceiveAddressActivity extends BaseActivity {
                     mData.add(0, baseInfo);
                     mAdapter.addAll(mData);
                 }
+
+                @Override
+                public void onClickArea() {
+
+                }
             });
             if (!editReceiveAddressView.isShow()) {
                 editReceiveAddressView.show();

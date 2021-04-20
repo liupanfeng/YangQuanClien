@@ -514,9 +514,10 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
 
             //初始化底部的数据，用于更新底部的view
             mShoppingDataMap.clear();
-            mShoppingDataMap.put("出售中", data.getReceivedOrderCount());
-            mShoppingDataMap.put("待付", data.getReceivedOrderCount());
-//            mShoppingDataMap.put("待评价",data.get());   ?
+            mShoppingDataMap.put("出售中", data.getGoodsCount());
+            mShoppingDataMap.put("待付", data.getCommittedOrderCount());
+            mShoppingDataMap.put("待发货", data.getPayedOrderCount());
+            mShoppingDataMap.put("待评价",data.getReceivedOrderCount());
             mShoppingDataMap.put("退货中", data.getApplyBackGoodsOrderCount());
 //            mShoppingDataMap.put("今日总访客",data.get());  ?
 
@@ -524,7 +525,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
             mShoppingDataMap.put("今日成交额", data.getTodayPrice());
             mShoppingDataMap.put("收藏我的", data.getGoodsCollectionCount());
             mShoppingDataMap.put("累计订单数量", data.getTotalOrderCount());
-            mShoppingDataMap.put("累计订单数量", data.getTotalPrice());
+            mShoppingDataMap.put("累计成交额", data.getTotalPrice());
 
         }
 

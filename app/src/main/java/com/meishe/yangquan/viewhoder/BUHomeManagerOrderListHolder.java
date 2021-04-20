@@ -13,6 +13,7 @@ import com.meishe.yangquan.bean.BUManagerOrderInfo;
 import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.GlideUtil;
 
 /**
  * 商版-主页-订单管理-订单列表
@@ -65,6 +66,7 @@ public class BUHomeManagerOrderListHolder extends BaseViewHolder {
 
     @Override
     protected void initViewHolder(View view, Object... obj) {
+
         //comment view
         tv_bu_order_id = view.findViewById(R.id.tv_bu_order_id);
         tv_bu_order_right_state = view.findViewById(R.id.tv_bu_order_right_state);
@@ -91,17 +93,6 @@ public class BUHomeManagerOrderListHolder extends BaseViewHolder {
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof BUOrderInfo) {
 
-//            List<String> goodsImageUrls = ((BUGoodsInfo) info).getGoodsImageUrls();
-//            if (!CommonUtils.isEmpty(goodsImageUrls)) {
-//                RequestOptions options = new RequestOptions();
-//                options.centerCrop();
-//                options.placeholder(R.mipmap.ic_message_list_photo_default);
-//                Glide.with(context)
-//                        .asBitmap()
-//                        .load(goodsImageUrls.get(0))
-//                        .apply(options)
-//                        .into(riv_bu_goods_cover);
-//            }
 
             int state = ((BUOrderInfo) info).getState();
             if (state== Constants.TYPE_COMMON_BU_ORDER_WAIT_PAY_TYPE){
@@ -109,6 +100,8 @@ public class BUHomeManagerOrderListHolder extends BaseViewHolder {
                 rl_bu_order_wait_pay.setVisibility(View.VISIBLE);
                 rl_bu_order_wait_send.setVisibility(View.GONE);
                 tv_bu_order_right_state.setText("待付");
+
+
 
             }else if (state== Constants.TYPE_COMMON_BU_ORDER_WAIT_SEND_TYPE){
                 //待发货
@@ -127,6 +120,11 @@ public class BUHomeManagerOrderListHolder extends BaseViewHolder {
                 rl_bu_order_wait_pay.setVisibility(View.GONE);
                 rl_bu_order_wait_send.setVisibility(View.GONE);
             }
+
+
+            //通用数据赋值
+            tv_bu_order_id.setText("订单编号:"+((BUOrderInfo) info).getOrderId());
+            GlideUtil.getInstance().loadUrl(((BUOrderInfo) info).getOrders().get(0).getOrderContents().get(0).getGoodsImageUrls().get(0),riv_bu_goods_cover);
 
 
         }

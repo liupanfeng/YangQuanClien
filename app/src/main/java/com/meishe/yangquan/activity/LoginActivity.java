@@ -31,6 +31,7 @@ import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.CountDownTimerUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.Logger;
+import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
@@ -99,6 +100,7 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void initData() {
+
         String token = UserManager.getInstance(mContext).getToken();
         if (!TextUtils.isEmpty(token)) {
             AppManager.getInstance().jumpActivity(LoginActivity.this, MainActivity.class);

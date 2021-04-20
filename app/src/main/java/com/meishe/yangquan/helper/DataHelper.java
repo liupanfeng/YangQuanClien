@@ -852,13 +852,13 @@ public class DataHelper {
      * 2 已发货
      * 3 已完成
      */
-    public void getGoodsDataFromServer(final List<BaseInfo> list, final int type,
+    public void getGoodsDataFromServer(final List<BaseInfo> list, final int listType,
                                        final int pageSize, final int pageNumber,
                                        final boolean isLoadMore) {
 
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
-        param.put("listType", type);
+        param.put("listType", listType);
         param.put("pageNum", pageNumber);
         param.put("pageSize", pageSize);
 
@@ -889,7 +889,7 @@ public class DataHelper {
                             if (buManagerOrderInfo == null) {
                                 continue;
                             }
-                            buManagerOrderInfo.setState(type);
+                            buManagerOrderInfo.setState(listType);
                         }
                     }
                     commonResponse(elements, list, isLoadMore, pageSize, pageNumber);

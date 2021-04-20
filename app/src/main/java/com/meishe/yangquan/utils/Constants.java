@@ -3,6 +3,8 @@ package com.meishe.yangquan.utils;
 
 public class Constants {
 
+    public static final String FIRST_OPEN = "first_open";
+
     //评论
     public static final String COMMENT_CONTENT = "commentContent";
 

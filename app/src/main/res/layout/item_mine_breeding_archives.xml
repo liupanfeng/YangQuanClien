@@ -42,9 +42,10 @@
     <Button
         android:id="@+id/btn_delete"
         android:layout_width="68dp"
-        android:layout_height="34dp"
+        android:layout_height="26dp"
         android:background="@drawable/mine_gold_button_pay_bg"
         android:text="删除"
+        android:gravity="center"
         android:layout_marginRight="@dimen/dp14"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"

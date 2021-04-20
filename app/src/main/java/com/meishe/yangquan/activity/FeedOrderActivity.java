@@ -73,6 +73,7 @@ public class FeedOrderActivity extends BaseActivity {
     private View btn_feed_commit_order;
     private ArrayList<BaseInfo> list;
     private String mBuyType;
+    private EditReceiveAddressView mEditReceiveAddressView;
 
 
     @Override
@@ -164,7 +165,7 @@ public class FeedOrderActivity extends BaseActivity {
 //            Bundle bundle = new Bundle();
 //            AppManager.getInstance().jumpActivityForResult(this, FeedReceiveAddressActivity.class, bundle, 200);
 //            showAddAddressView(UserManager.getInstance(mContext).getReceiverInfo());
-            showPickerView();
+            showAddAddressView(UserManager.getInstance(mContext).getReceiverInfo());
         } else if (v.getId() == R.id.btn_feed_commit_order) {
             commitGoodsOrder();
         }
@@ -193,7 +194,8 @@ public class FeedOrderActivity extends BaseActivity {
                         options3Items.get(options1).get(options2).get(options3) : "";
 
                 String tx = opt1tx + opt2tx + opt3tx;
-                ToastUtil.showToast(tx);
+//                ToastUtil.showToast(tx);
+                mEditReceiveAddressView.setAreaContent(tx);
             }
         })
 
@@ -407,18 +409,28 @@ public class FeedOrderActivity extends BaseActivity {
      * @param receiverInfo
      */
     public void showAddAddressView(ReceiverInfo receiverInfo) {
-        EditReceiveAddressView editReceiveAddressView = EditReceiveAddressView.create(mContext,
-                receiverInfo, new EditReceiveAddressView.OnReceiveAddressListener() {
-                    @Override
-                    public void onReceiveAddress(int type, BaseInfo baseInfo) {
-                        if (baseInfo instanceof ReceiverInfo){
-                            UserManager.getInstance(mContext).setReceiverInfo((ReceiverInfo) baseInfo);
-                            updateReceiverAddressUI((ReceiverInfo) baseInfo);
+        if (mEditReceiveAddressView==null){
+            mEditReceiveAddressView = EditReceiveAddressView.create(mContext,
+                    receiverInfo, new EditReceiveAddressView.OnReceiveAddressListener() {
+                        @Override
+                        public void onReceiveAddress(int type, BaseInfo baseInfo) {
+                            if (baseInfo instanceof ReceiverInfo){
+                                UserManager.getInstance(mContext).setReceiverInfo((ReceiverInfo) baseInfo);
+                                updateReceiverAddressUI((ReceiverInfo) baseInfo);
+                            }
                         }
-                    }
-                });
-        if (!editReceiveAddressView.isShow()) {
-            editReceiveAddressView.show();
+
+                        @Override
+                        public void onClickArea() {
+                            if (Util.isFastDoubleClick()){
+                                return;
+                            }
+                            showPickerView();
+                        }
+                    });
+        }
+        if (!mEditReceiveAddressView.isShow()) {
+            mEditReceiveAddressView.show();
         }
 
     }

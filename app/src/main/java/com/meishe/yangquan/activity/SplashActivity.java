@@ -11,7 +11,9 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpRequestUtil;
+import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.umeng.analytics.MobclickAgent;
 
@@ -25,7 +27,19 @@ public class SplashActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         //隐藏顶部的状态栏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
         setContentView(R.layout.activity_splash);
+
+        boolean isFirstOpen = SharedPreferencesUtil.getInstance(SplashActivity.this).getBoolean(Constants.FIRST_OPEN,false);
+        // 如果是第一次启动，则先进入功能引导页
+        if (!isFirstOpen) {
+            Intent intent = new Intent(this, GuidePageActivity.class);
+            startActivity(intent);
+            overridePendingTransition( R.anim.fade_in, R.anim.fade_out);
+            finish();
+            return;
+        }
 
 //        HttpRequestUtil.getInstance(this).getADFromServer();
         String token=UserManager.getInstance(this).getToken();

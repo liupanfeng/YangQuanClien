@@ -16,6 +16,31 @@
 
     </style>
 
+
+    <style name="BaseAnimationTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/ff000000</item>
+        <item name="colorPrimaryDark">@color/ff000000</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!--activity的动画-->
+        <item name="android:windowAnimationStyle">@style/HoloThemeActivityAnimation</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <!--<item name="android:windowBackground">@android:color/transparent</item>-->
+
+    </style>
+
+
+    <!--Activity入场与退出动画-->
+    <style name="HoloThemeActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_left</item>
+        <!--<item name="android:activityOpenExitAnimation">@anim/slide_right</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/slide_left</item>-->
+        <item name="android:activityCloseExitAnimation">@anim/slide_right</item>
+    </style>
+
+
+
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <!--底部tab样式-->
@@ -46,7 +71,7 @@
 
 
     <style name="StartTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowBackground">@mipmap/ic_welcome</item>
+       <!-- <item name="android:windowBackground">@mipmap/ic_welcome</item>-->
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="windowActionBar">false</item>

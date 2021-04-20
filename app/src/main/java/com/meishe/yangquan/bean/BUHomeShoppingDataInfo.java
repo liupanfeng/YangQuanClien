@@ -10,20 +10,20 @@ public class BUHomeShoppingDataInfo extends BaseInfo{
 
 //    "shopName": "我的店铺4",
 //            "imageUrl": "http://localhost:9999/user_icon/2021-03/01/1614612608874.jpg",
-//            "goodEvaluationCount": 1,
-//            "badEvaluationCount": 0,
-//            "normalEvaluationCount": 1,
-//            "goodsCollectionCount": 0,
-//            "shopCollectionCount": 0,
-//            "goodsCount": 1,
-//            "committedOrderCount": 7,
-//            "payedOrderCount": 2,
-//            "receivedOrderCount": 0,
-//            "applyBackGoodsOrderCount": 1,
-//            "todayOrderCount": 0,
-//            "totalOrderCount": 13,
-//            "todayPrice": 0,
-//            "totalPrice": 0
+//            "goodEvaluationCount": 1,      好评
+//            "badEvaluationCount": 0,       差评
+//            "normalEvaluationCount": 1,   中评
+//            "goodsCollectionCount": 0,    商品收藏
+//            "shopCollectionCount": 0,     店铺收藏
+//            "goodsCount": 1,               出售中
+//            "committedOrderCount": 7,      提交订单数量
+//            "payedOrderCount": 2,          待付
+//            "receivedOrderCount": 0,       收到货物还没评价的数量
+//            "applyBackGoodsOrderCount": 1,  收到退货的数量
+//            "todayOrderCount": 0,           今日订单数量
+//            "totalOrderCount": 13,          总订单数量
+//            "todayPrice": 0,                今日成交额
+//            "totalPrice": 0                 累计成交额
     /*店铺名称*/
     private String shopName;
     /*头像*/

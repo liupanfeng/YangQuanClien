@@ -12,6 +12,7 @@ import android.content.ClipboardManager;
 import android.content.ComponentName;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.database.Cursor;
@@ -51,6 +52,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
@@ -109,6 +112,74 @@ public class Util {
         lastClickTime2 = time;
         return flag;
     }
+
+
+    /**
+     * Return the activity by context.
+     * 返回activity的上下文
+     * @param context The context. 上下文
+     * @return the activity by context. activity的上下文
+     */
+    public static Activity getActivityByContext(Context context) {
+        Activity activity = getActivityByContextInner(context);
+        if (!isActivityAlive(activity)) {
+            return null;
+        }
+        return activity;
+    }
+
+    public static boolean isActivityAlive(final Activity activity) {
+        return activity != null && !activity.isFinishing()
+                && (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1 || !activity.isDestroyed());
+    }
+
+
+
+    private static Activity getActivityByContextInner(Context context) {
+        if (context == null) {
+            return null;
+        }
+        List<Context> list = new ArrayList<>();
+        while (context instanceof ContextWrapper) {
+            if (context instanceof Activity) {
+                return (Activity) context;
+            }
+            Activity activity = getActivityFromDecorContext(context);
+            if (activity != null) {
+                return activity;
+            }
+            list.add(context);
+            context = ((ContextWrapper) context).getBaseContext();
+            if (context == null) {
+                return null;
+            }
+            if (list.contains(context)) {
+                // loop context
+                return null;
+            }
+        }
+        return null;
+    }
+
+
+
+    private static Activity getActivityFromDecorContext(Context context) {
+        if (context == null) {
+            return null;
+        }
+        if (context.getClass().getName().equals("com.android.internal.policy.DecorContext")) {
+            try {
+                Field mActivityContextField = context.getClass().getDeclaredField("mActivityContext");
+                mActivityContextField.setAccessible(true);
+                //noinspection ConstantConditions,unchecked
+                return ((WeakReference<Activity>) mActivityContextField.get(context)).get();
+            } catch (Exception ignore) {
+            }
+        }
+        return null;
+    }
+
+
 
 
     public static String getJson(Context context,String fileName) {

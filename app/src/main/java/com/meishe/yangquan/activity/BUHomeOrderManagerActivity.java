@@ -52,13 +52,13 @@ public class BUHomeOrderManagerActivity extends BaseActivity {
 
 
         mFragmentList.add(CommonListFragment.newInstance(true,Constants.TYPE_COMMON_BU_ORDER,
-                Constants.TYPE_COMMON_BU_ORDER_WAIT_PAY_TYPE));
+                Constants.TYPE_COMMON_BU_ORDER_WAIT_PAY_TYPE,0));
         mFragmentList.add(CommonListFragment.newInstance(true,Constants.TYPE_COMMON_BU_ORDER,
-                Constants.TYPE_COMMON_BU_ORDER_WAIT_SEND_TYPE));
+                Constants.TYPE_COMMON_BU_ORDER_WAIT_SEND_TYPE,0));
         mFragmentList.add(CommonListFragment.newInstance(true,Constants.TYPE_COMMON_BU_ORDER,
-                Constants.TYPE_COMMON_BU_ORDER_ALREADY_SEND_TYPE));
+                Constants.TYPE_COMMON_BU_ORDER_ALREADY_SEND_TYPE,0));
         mFragmentList.add(CommonListFragment.newInstance(true,Constants.TYPE_COMMON_BU_ORDER,
-                Constants.TYPE_COMMON_BU_ORDER_FINISH_TYPE));
+                Constants.TYPE_COMMON_BU_ORDER_FINISH_TYPE,0));
 
 
         mViewPager.setOffscreenPageLimit(2);

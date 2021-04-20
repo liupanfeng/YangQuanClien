@@ -2,6 +2,7 @@ package com.meishe.yangquan.pop;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -19,6 +20,7 @@ import com.meishe.yangquan.bean.FeedReceiverAddressInfo;
 import com.meishe.yangquan.bean.ReceiverInfo;
 import com.meishe.yangquan.utils.ScreenUtils;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
@@ -38,7 +40,7 @@ public class EditReceiveAddressView extends CenterPopupView {
     /*收货人电话*/
     private EditText et_feed_input_receive_phone_number;
     /*收货人所在区域*/
-    private EditText et_feed_input_receive_area;
+    private TextView tv_feed_input_receive_area;
     /*详细地址*/
     private EditText et_feed_input_detail_address;
     /*操作类型 1=添加  2修改*/
@@ -73,7 +75,7 @@ public class EditReceiveAddressView extends CenterPopupView {
 
         et_feed_receive_name = findViewById(R.id.et_feed_receive_name);
         et_feed_input_receive_phone_number = findViewById(R.id.et_feed_input_receive_phone_number);
-        et_feed_input_receive_area = findViewById(R.id.et_feed_input_receive_area);
+        tv_feed_input_receive_area = findViewById(R.id.tv_feed_input_receive_area);
         et_feed_input_detail_address = findViewById(R.id.et_feed_input_detail_address);
         btn_save_receive_address = findViewById(R.id.btn_save_receive_address);
 
@@ -87,7 +89,7 @@ public class EditReceiveAddressView extends CenterPopupView {
                 String receiverName = ((ReceiverInfo) mBaseInfo).getName();
                 et_feed_receive_name.setText(receiverName);
                 et_feed_input_receive_phone_number.setText(((ReceiverInfo) mBaseInfo).getPhone());
-                et_feed_input_receive_area.setText(((ReceiverInfo) mBaseInfo).getArea());
+                tv_feed_input_receive_area.setText(((ReceiverInfo) mBaseInfo).getArea());
                 et_feed_input_detail_address.setText(((ReceiverInfo) mBaseInfo).getAddress());
             }
         }
@@ -107,7 +109,7 @@ public class EditReceiveAddressView extends CenterPopupView {
                     return;
                 }
 
-                String area = et_feed_input_receive_area.getText().toString();
+                String area = tv_feed_input_receive_area.getText().toString();
                 if (TextUtils.isEmpty(area)){
                     ToastUtil.showToast("收货人所在区域还未填写");
                     return;
@@ -134,6 +136,26 @@ public class EditReceiveAddressView extends CenterPopupView {
             }
         });
 
+
+        tv_feed_input_receive_area.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (Util.isFastDoubleClick()){
+                    return;
+                }
+                if (mOnReceiveAddressListener!=null){
+                    mOnReceiveAddressListener.onClickArea();
+                }
+            }
+        });
+
+    }
+
+    public void setAreaContent(String area){
+        tv_feed_input_receive_area.setText(area);
+        if (mBaseInfo!=null){
+            mBaseInfo.setArea(area);
+        }
     }
 
     private OnReceiveAddressListener mOnReceiveAddressListener;
@@ -143,8 +165,11 @@ public class EditReceiveAddressView extends CenterPopupView {
         return this;
     }
 
-    public interface OnReceiveAddressListener{
+    public interface OnReceiveAddressListener {
         void onReceiveAddress(int type,BaseInfo baseInfo);
+
+        void onClickArea();
+
     }
 
 

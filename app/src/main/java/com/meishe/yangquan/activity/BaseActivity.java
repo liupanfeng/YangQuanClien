@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.BarUtils;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.CustomToolbar;
 import com.meishe.yangquan.wiget.MaterialProgress;
@@ -52,6 +53,7 @@ public abstract class BaseActivity extends FragmentActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         //把当前初始化的activity加入栈中
         AppManager.getInstance().addActivity(this);
+//        BarUtils.transparentStatusBar(this);
         //设置视图
         setContentView(initRootView());
         EventBus.getDefault().register(this);

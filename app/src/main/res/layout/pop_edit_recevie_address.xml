@@ -36,6 +36,7 @@
             android:gravity="end"
             android:hint="请填写收货人姓名"
             android:textColorHint="#ffc2c2c2"
+            android:textColor="@color/color_ff303030"
             android:textSize="13sp" />
 
         <View
@@ -72,6 +73,7 @@
             android:gravity="end"
             android:hint="请填写收货人手机号码"
             android:textColorHint="#ffc2c2c2"
+            android:textColor="@color/color_ff303030"
             android:textSize="13sp" />
 
         <View
@@ -95,8 +97,8 @@
             android:textColor="#ff303030"
             android:textSize="13sp" />
 
-        <EditText
-            android:id="@+id/et_feed_input_receive_area"
+        <TextView
+            android:id="@+id/tv_feed_input_receive_area"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -105,8 +107,8 @@
             android:background="@null"
             android:drawablePadding="6dp"
             android:gravity="end"
-            android:hint="省市区乡镇等"
-            android:textColorHint="#ffc2c2c2"
+            android:text="省市区乡镇等"
+            android:textColor="@color/color_ff303030"
             android:textSize="13sp" />
 
         <View
@@ -142,6 +144,7 @@
             android:gravity="end"
             android:hint="街道、门牌号等"
             android:textColorHint="#ffc2c2c2"
+            android:textColor="@color/color_ff303030"
             android:textSize="13sp" />
 
         <View

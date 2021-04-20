@@ -55,6 +55,7 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
      * @param type          页面类型
      * @param subType       请求类型  如果不需要可以传0
      * @return
+     * 注意这个方法没有ListType 如果需要listType不能用这个方法
      */
     public static CommonListFragment newInstance(boolean isNeedLazLoad, int type, int subType) {
         CommonListFragment commonListFragment = new CommonListFragment();
@@ -233,11 +234,11 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
 
             //////////////////////////商版///////////////////////////////////////////
             case Constants.TYPE_COMMON_BU_ORDER:
-                //饲料-商店-商品
-                DataHelper.getInstance().getGoodsDataFromServer(mList, mSubType, mPageSize, mPageNum,
+                //饲料-商店-订单管理
+                DataHelper.getInstance().getGoodsDataFromServer(mList, mListType, mPageSize, mPageNum,
                         mIsLoadMore);
             case Constants.TYPE_COMMON_BU_REFUND:
-                //饲料-商店-商品
+                //饲料-商店-退货管理
                 DataHelper.getInstance().getRefundDataFromServer(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadMore);
                 break;
