@@ -14,6 +14,7 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.helper.DataHelper;
+import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.NetworkUtil;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -251,7 +252,15 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     @Override
     public void onShowNoData() {
         hideUIState();
-        changeNoDataViewVisible(View.VISIBLE);
+        if (mAdapter==null){
+            changeNoDataViewVisible(View.VISIBLE);
+        }
+        if (mAdapter!=null && CommonUtils.isEmpty(mAdapter.getData())){
+            mList.clear();
+            mPageNum = 1;
+            mIsLoadMore = false;
+            changeNoDataViewVisible(View.VISIBLE);
+        }
     }
 
     @Override
@@ -300,8 +309,19 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     }
 
     @Override
-    public void onSuccessNeedDeleteItem() {
-
+    public void onSuccessNeedDeleteItem(BaseInfo baseInfo) {
+        if (mList!=null){
+            mList.remove(baseInfo);
+        }
+        if (mAdapter != null) {
+            List<BaseInfo> data = mAdapter.getData();
+            if (!CommonUtils.isEmpty(data)) {
+                int itemPosition = mAdapter.getItemPosition(baseInfo);
+                data.remove(baseInfo);
+                mAdapter.notifyItemRemoved(itemPosition);
+            }
+        }
+        onShowNoData();
     }
 
 
@@ -311,6 +331,8 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
             mAdapter.addAll(null);
         }
     }
+
+
 
 
     @Override

@@ -21,6 +21,7 @@ import java.util.List;
 /**
  * 无线循环消息详情页
  */
+@Deprecated
 public class ServiceMessageListActivity extends AppCompatActivity implements OnResponseListener {
 
     private RecyclerView mRecyclerView;

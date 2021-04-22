@@ -6,7 +6,7 @@ import java.util.List;
  *
  * @Author : LiuPanFeng
  * @CreateDate : 2021/3/9 17:53
- * @Description : 我的-订单数据结构
+ * @Description : 我的-订单数据结构 用户版
  */
 public class MineOrderInfo extends BaseInfo{
 

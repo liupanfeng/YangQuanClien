@@ -5,6 +5,7 @@ import java.util.Date;
 /**
  * 服务循环消息
  */
+@Deprecated
 public class ServiceMessage extends BaseInfo{
     private Integer id;
 

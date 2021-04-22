@@ -359,6 +359,8 @@ public class HttpUrl {
 
     /*（商户）退货列表 */
     public static final String BU_HOME_BACK_GOODS_LIST = URL + "app/owner/order/backGoods/list";
+    /*（商户）订单改价 */
+    public static final String BU_HOME_ORDER_CHANGE_PRICE = URL + "/app/owner/order/price/update";
 
 
 

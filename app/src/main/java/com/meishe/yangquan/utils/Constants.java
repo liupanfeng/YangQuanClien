@@ -337,16 +337,6 @@ public class Constants {
     public static final int TYPE_REFUND_FINISH_TYPE = 1;
 
 
-    // /*用户版-我的-订单- 全部 */  这里的数值跟请求参数相关不能更改
-    public static final int TYPE_LIST_TYPE_ORDER_ALL_TYPE = 0;
-    /*用户版-我的-订单- 待付 */
-    public static final int TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE = 1;
-    /*用户版-我的-订单-待收货*/
-    public static final int TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE = 2;
-    /*用户版-我的-订单- 待评价*/
-    public static final int TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE = 3;
-    /*用户版-我的-订单- 退款*/
-    public static final int TYPE_LIST_TYPE_ORDER_REFUND_TYPE = 4;
 
 
     /*订单管理这个几个type 跟请求参数有关 不能修改数值 */
@@ -387,6 +377,19 @@ public class Constants {
 
     /*用户版-我的-订单 */
     public static final int TYPE_COMMON_MY_ORDER_TYPE = 2;
+
+    // /*用户版-我的-订单- 全部 */  这里的数值跟请求参数相关不能更改-----------------------------------------------listType
+    public static final int TYPE_LIST_TYPE_ORDER_ALL_TYPE = 0;
+    /*用户版-我的-订单- 待付 */
+    public static final int TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE = 1;
+    /*用户版-我的-订单-待收货*/
+    public static final int TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE = 2;
+    /*用户版-我的-订单- 待评价*/
+    public static final int TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE = 3;
+    /*用户版-我的-订单- 退款*/
+    public static final int TYPE_LIST_TYPE_ORDER_REFUND_TYPE = 4;
+    // ------------------------------------------------------------------------------------
+
 
     /*用户版-我的-饲料金*/
     public static final int TYPE_COMMON_FEED_GOLD_TYPE = 3;

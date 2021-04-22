@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rl_middle_container_more_goods"
+    android:layout_marginLeft="@dimen/dp22"
+    android:layout_marginTop="@dimen/dp10"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="78dp">
+                        <com.meishe.yangquan.view.RoundAngleImageView
+                            android:id="@+id/riv_goods_cover_1"
+                            android:layout_width="78dp"
+                            android:layout_height="78dp"
+                            android:background="@mipmap/ic_bu_goods_cover"
+                            app:roundWidth="@dimen/dp3"
+                            app:roundHeight="@dimen/dp3"
+                            />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="78dp">
+                        <com.meishe.yangquan.view.RoundAngleImageView
+                            android:id="@+id/riv_goods_cover_2"
+                            android:layout_width="78dp"
+                            android:background="@mipmap/ic_bu_goods_cover"
+                            app:roundWidth="@dimen/dp3"
+                            app:roundHeight="@dimen/dp3"
+                            android:layout_centerHorizontal="true"
+                            android:layout_height="78dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_height="78dp">
+                        <com.meishe.yangquan.view.RoundAngleImageView
+                            android:id="@+id/riv_goods_cover_3"
+                            android:layout_width="78dp"
+                            android:background="@mipmap/ic_bu_goods_cover"
+                            app:roundWidth="@dimen/dp3"
+                            app:roundHeight="@dimen/dp3"
+                            android:layout_centerHorizontal="true"
+                            android:layout_height="78dp"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_weight="1"
+                    android:layout_width="0dp"
+                    android:layout_marginRight="@dimen/dp18"
+                    android:layout_height="78dp" >
+
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+
+                                <TextView
+                                    android:id="@+id/tv_goods_price_more"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="￥7000"
+                                    android:textColor="#ff303030"
+                                    android:textSize="13sp"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_goods_amount_more"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="4dp"
+                                    android:text="共3件"
+                                    android:textColor="#ff303030"
+                                    android:textSize="13sp"
+                                    />
+
+                        </LinearLayout>
+
+
+                </RelativeLayout>
+
+</LinearLayout>

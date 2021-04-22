@@ -63,10 +63,18 @@ public class MessageEvent {
      */
     public static final int MESSAGE_TYPE_FEED_GOODS_AMOUNT = MESSAGE_TYPE_BASE + 10;
 
+    /**
+     * 用户版-订单列表
+     */
+    public static final int MESSAGE_TYPE_ORDER_LIST = MESSAGE_TYPE_BASE + 11;
+
     private int mEventType;
 
     /*这个字段用来放置请求参数，没必要的话不用使用*/
     private int mListType;
+
+    /*这个字段用来放置请求参数，没必要的话不用使用*/
+    private int mSubType;
 
     private BaseInfo mBaseInfo;
 
@@ -133,6 +141,11 @@ public class MessageEvent {
 
     public MessageEvent setListType(int listType) {
         this.mListType = listType;
+        return this;
+    }
+
+    public MessageEvent setSubType(int subType) {
+        this.mSubType = subType;
         return this;
     }
 

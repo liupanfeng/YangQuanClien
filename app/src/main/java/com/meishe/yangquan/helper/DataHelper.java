@@ -46,9 +46,7 @@ import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
-import com.meishe.yangquan.utils.Util;
 
-import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -76,6 +74,11 @@ public class DataHelper {
 
     /**
      * 获取订单数据
+     * 0 全部
+     * 1 待付款
+     * 2 待收货
+     * 3 完成
+     * 4 退货
      */
     public void getOrderData(final List<BaseInfo> list, int type, final int pageSize, final int pageNumber, boolean isLoadFinish, final boolean isLoadMore) {
         if (!isLoadFinish) {
@@ -1010,16 +1013,16 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onFailure(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onFailure(e);
                 }
             }
 
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    if (mOnCallBackListener != null) {
-                        mOnCallBackListener.onSuccess("订单已取消");
+                    if (mOnClickItemCallBackListener != null) {
+                        mOnClickItemCallBackListener.onSuccess("订单已取消");
                     }
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -1034,8 +1037,8 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onError(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onError(e);
                 }
             }
 
@@ -1050,10 +1053,13 @@ public class DataHelper {
     /**
      * 用户版本-支付订单
      */
-    public void doPayOrder(int orderId, String paymentCode) {
+    public void doPayOrder(final MineOrderInfo mineOrderInfo, String paymentCode) {
+        if (mineOrderInfo==null){
+            return;
+        }
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
-        param.put("orderId", orderId);
+        param.put("orderId", mineOrderInfo.getOrderId());
         param.put("paymentCode", paymentCode);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_PAY, new BaseCallBack<ServerResult>() {
@@ -1064,16 +1070,20 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onFailure(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onFailure(e);
                 }
             }
 
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
+//                    if (mOnClickItemCallBackListener!=null){
+//                        mOnClickItemCallBackListener.onSuccessNeedDeleteItem();
+//                    }
                     if (mOnCallBackListener != null) {
-                        mOnCallBackListener.onSuccess("订单支付成功");
+                        //这里是为了更新UI
+                        mOnCallBackListener.onSuccessNeedDeleteItem(mineOrderInfo);
                     }
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -1088,8 +1098,8 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onError(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onError(e);
                 }
             }
 
@@ -1118,16 +1128,16 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onFailure(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onFailure(e);
                 }
             }
 
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    if (mOnCallBackListener != null) {
-                        mOnCallBackListener.onSuccess("已经确认收货！");
+                    if (mOnClickItemCallBackListener != null) {
+                        mOnClickItemCallBackListener.onSuccess("已经确认收货！");
                     }
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -1142,8 +1152,8 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onError(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onError(e);
                 }
             }
 
@@ -1172,16 +1182,16 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onFailure(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onFailure(e);
                 }
             }
 
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    if (mOnCallBackListener != null) {
-                        mOnCallBackListener.onSuccess("退货已经申请！");
+                    if (mOnClickItemCallBackListener != null) {
+                        mOnClickItemCallBackListener.onSuccess("退货已经申请！");
                     }
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -1196,8 +1206,8 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onError(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onError(e);
                 }
             }
 
@@ -1210,12 +1220,11 @@ public class DataHelper {
 
     /**
      * 用户版-删除养殖档案
-     * @param id 档案的id
      */
-    public void deleteBreedingArchive(int id) {
+    public void deleteBreedingArchive(final MineBreedingArchivesInfo mineBreedingArchivesInfo) {
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
-        param.put("id", id);
+        param.put("batchId", mineBreedingArchivesInfo.getId());
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_DELETE_CULTURAL_DELETE, new BaseCallBack<ServerResult>() {
             @Override
@@ -1225,8 +1234,8 @@ public class DataHelper {
 
             @Override
             protected void onFailure(Call call, IOException e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onFailure(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onFailure(e);
                 }
             }
 
@@ -1234,7 +1243,8 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
                     if (mOnCallBackListener != null) {
-                        mOnCallBackListener.onSuccess("退货已经申请！");
+                        //这里是为了更新UI
+                        mOnCallBackListener.onSuccessNeedDeleteItem(mineBreedingArchivesInfo);
                     }
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -1249,8 +1259,64 @@ public class DataHelper {
 
             @Override
             protected void onEror(Call call, int statusCode, Exception e) {
-                if (mOnCallBackListener != null) {
-                    mOnCallBackListener.onError(e);
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+    /////////////////////////////////////商户版 跟CommonFragment 没有关系//////////////////////////////////
+    /**
+     * 商户版-删除养殖档案
+     * @param buOrderInfo 订单数据结构
+     */
+    public void changeOrderPrice(final BUOrderInfo buOrderInfo) {
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("orderId", buOrderInfo.getOrderId());
+        param.put("price", buOrderInfo.getPrice());
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_ORDER_CHANGE_PRICE, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                   if (mOnClickItemCallBackListener!=null){
+                       mOnClickItemCallBackListener.onSuccessNeedUpdateItem(buOrderInfo);
+                   }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onError(e);
                 }
             }
 
@@ -1292,9 +1358,16 @@ public class DataHelper {
 
 
     private OnCallBackListener mOnCallBackListener;
+    /*这个是ButtonClick 对条目数据操作的监听*/
+    private OnClickItemCallBackListener mOnClickItemCallBackListener;
 
     public void setOnCallBackListener(OnCallBackListener onCallBackListener) {
         this.mOnCallBackListener = onCallBackListener;
+    }
+
+
+    public void setOnClickItemCallBackListener(OnClickItemCallBackListener onCallBackListener) {
+        this.mOnClickItemCallBackListener = onCallBackListener;
     }
 
 
@@ -1312,7 +1385,24 @@ public class DataHelper {
 
         void onError(Exception e);
 
-        void onSuccessNeedDeleteItem();
+        void onSuccessNeedDeleteItem(BaseInfo baseInfo);
+
+
+    }
+
+
+    public interface OnClickItemCallBackListener {
+
+        void onSuccess();
+
+        void onSuccess(String content);
+
+        void onFailure(Exception e);
+
+        void onError(Exception e);
+
+        /*需要更新Item的数据*/
+        void onSuccessNeedUpdateItem(BaseInfo baseInfo);
 
     }
 

@@ -28,7 +28,9 @@ public class ConfirmOrderView extends BottomPopupView implements PasswordEditTex
 
     private LinearLayout mKeyBoardView;
     private PasswordEditText mPasswordEditText;
-
+    private TextView mTvPrice;
+    private View confirmOrderPayView;
+    private View orderPayView;
 
 
     public ConfirmOrderView(@NonNull Context context,float feedGold) {
@@ -58,13 +60,13 @@ public class ConfirmOrderView extends BottomPopupView implements PasswordEditTex
     protected void onCreate() {
         super.onCreate();
 
-        final View confirmOrderPayView = findViewById(R.id.rl_confirm_order_pay);
-        final View orderPayView = findViewById(R.id.rl_order_pay_view);
+        confirmOrderPayView = findViewById(R.id.rl_confirm_order_pay);
+        orderPayView = findViewById(R.id.rl_order_pay_view);
         confirmOrderPayView.setVisibility(VISIBLE);
         orderPayView.setVisibility(GONE);
 
-        TextView content = findViewById(R.id.tv_content);
-        content.setText("饲料金："+mFeedGold);
+        mTvPrice= findViewById(R.id.tv_content);
+        mTvPrice.setText("饲料金："+mFeedGold);
 
 
         mKeyBoardView = findViewById(R.id.keyboard);
@@ -119,6 +121,20 @@ public class ConfirmOrderView extends BottomPopupView implements PasswordEditTex
             mAttachListener.onSelect(password);
             dismiss();
         }
+    }
+
+    public void show(final float price){
+        super.show();
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (mTvPrice!=null){
+                    confirmOrderPayView.setVisibility(VISIBLE);
+                    orderPayView.setVisibility(GONE);
+                    mTvPrice.setText("饲料金："+price);
+                }
+            }
+        },100);
     }
 
     @Override
