@@ -150,23 +150,25 @@ public class BUHomeManagerOrderListHolder extends BaseViewHolder {
             }
 
 
-            int state = ((BUOrderInfo) info).getState();
+            int state = ((BUOrderInfo) info).getType();
             if (state == Constants.TYPE_COMMON_BU_ORDER_WAIT_PAY_TYPE) {
                 //待付
                 tv_bu_order_right_state.setText("待付");
                 btn_bu_order_change_price.setText("改价");
-
+                rl_bu_order_wait_pay.setVisibility(View.VISIBLE);
             } else if (state == Constants.TYPE_COMMON_BU_ORDER_WAIT_SEND_TYPE) {
                 //待发货
                 tv_bu_order_right_state.setText("待发货");
                 btn_bu_order_change_price.setText("发货");
-
+                rl_bu_order_wait_pay.setVisibility(View.VISIBLE);
             } else if (state == Constants.TYPE_COMMON_BU_ORDER_ALREADY_SEND_TYPE) {
                 //已发货
-                tv_bu_order_right_state.setText("已发货");
+                tv_bu_order_right_state.setText("正在出库");
+                rl_bu_order_wait_pay.setVisibility(View.GONE);
             } else if (state == Constants.TYPE_COMMON_BU_ORDER_FINISH_TYPE) {
                 //完成
-                tv_bu_order_right_state.setText("完成");
+                tv_bu_order_right_state.setText("交易已完成");
+                rl_bu_order_wait_pay.setVisibility(View.GONE);
             }
 
 

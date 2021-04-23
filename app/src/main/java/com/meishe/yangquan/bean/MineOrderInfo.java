@@ -35,6 +35,9 @@ public class MineOrderInfo extends BaseInfo{
 
     private List<OrdersInfo> orders;
 
+    /*这个字段不是服务器返回的*/
+    private int type;
+
 
     public int getOrderId() {
         return orderId;
@@ -82,5 +85,14 @@ public class MineOrderInfo extends BaseInfo{
 
     public void setOrders(List<OrdersInfo> orders) {
         this.orders = orders;
+    }
+
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

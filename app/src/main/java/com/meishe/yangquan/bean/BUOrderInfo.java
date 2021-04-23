@@ -22,6 +22,10 @@ public class BUOrderInfo extends BaseInfo{
 
     private List<OrdersInfo> orders;
 
+    private int type;
+
+
+
 
 
     /*订单状态 这个目前是上层数据在用*/
@@ -81,5 +85,13 @@ public class BUOrderInfo extends BaseInfo{
 
     public void setShopName(String shopName) {
         this.shopName = shopName;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

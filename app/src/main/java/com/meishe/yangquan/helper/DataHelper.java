@@ -80,7 +80,7 @@ public class DataHelper {
      * 3 完成
      * 4 退货
      */
-    public void getOrderData(final List<BaseInfo> list, int type, final int pageSize, final int pageNumber, boolean isLoadFinish, final boolean isLoadMore) {
+    public void getOrderData(final List<BaseInfo> list, final int type, final int pageSize, final int pageNumber, boolean isLoadFinish, final boolean isLoadMore) {
         if (!isLoadFinish) {
             return;
         }
@@ -111,6 +111,16 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, MineOrderInfoResult result) {
                 if (result != null && result.getCode() == 1) {
                     List<MineOrderInfo> datas = result.getData();
+                    if (!CommonUtils.isEmpty(datas)){
+                        for (int i = 0; i < datas.size(); i++) {
+                            MineOrderInfo mineOrderInfo = datas.get(i);
+                            if (mineOrderInfo==null){
+                                continue;
+                            }
+                            mineOrderInfo.setType(type);
+                        }
+                    }
+
                     commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -892,7 +902,7 @@ public class DataHelper {
                             if (buManagerOrderInfo == null) {
                                 continue;
                             }
-                            buManagerOrderInfo.setState(listType);
+                            buManagerOrderInfo.setType(listType);
                         }
                     }
                     commonResponse(elements, list, isLoadMore, pageSize, pageNumber);
@@ -1114,11 +1124,11 @@ public class DataHelper {
     /**
      * 用户版本-确认收货
      */
-    public void confirmReceiveGoods(int orderId) {
+    public void confirmReceiveGoods(final MineOrderInfo mineOrderInfo) {
 
         String token = getToken();
         HashMap<String, Object> param = new HashMap<>();
-        param.put("orderId", orderId);
+        param.put("orderId", mineOrderInfo.getOrderId());
 
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_RECEIVED, new BaseCallBack<ServerResult>() {
             @Override
@@ -1136,8 +1146,8 @@ public class DataHelper {
             @Override
             protected void onSuccess(Call call, Response response, ServerResult result) {
                 if (result != null && result.getCode() == 1) {
-                    if (mOnClickItemCallBackListener != null) {
-                        mOnClickItemCallBackListener.onSuccess("已经确认收货！");
+                    if (mOnCallBackListener != null) {
+                        mOnCallBackListener.onSuccessNeedDeleteItem(mineOrderInfo);
                     }
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());
@@ -1326,6 +1336,62 @@ public class DataHelper {
             }
         }, param, token);
     }
+
+
+    /**
+     * 商版-发货
+     */
+    public void sendGoods(final BUOrderInfo buOrderInfo) {
+
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("orderId", buOrderInfo.getOrderId());
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_ORDER_SEND_GOODS, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    if (mOnCallBackListener != null) {
+                        mOnCallBackListener.onSuccessNeedDeleteItem(buOrderInfo);
+                    }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
 
 
     /**

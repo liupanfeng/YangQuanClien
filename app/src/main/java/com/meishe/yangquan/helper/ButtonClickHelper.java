@@ -5,13 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.FeedOrderActivity;
 import com.meishe.yangquan.activity.MineBreedingArchivesDetailActivity;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineOrderInfo;
+import com.meishe.yangquan.manager.FeedGoodsManager;
 import com.meishe.yangquan.pop.BUChangePriceCenterView;
 import com.meishe.yangquan.pop.ConfirmOrderView;
 import com.meishe.yangquan.pop.SelectCancelOrderTypeView;
@@ -21,6 +24,7 @@ import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -61,11 +65,11 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
         Context context = mAdapter.getContext();
         if (info instanceof MineOrderInfo) {
             //订单状态
+            int pageType = ((MineOrderInfo) info).getType();//页面类型
             int orderState = ((MineOrderInfo) info).getOrderState();
-
             //我的订单的点击响应
             if (v.getId() == R.id.btn_left_function) {
-                if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
+                if (pageType == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
                     //待付--取消订单
                     SelectCancelOrderTypeView selectCancelOrderTypeView = SelectCancelOrderTypeView.
                             create(context, "取消订单", new SelectCancelOrderTypeView.OnAttachListener() {
@@ -77,7 +81,7 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
                     if (!selectCancelOrderTypeView.isShow()) {
                         selectCancelOrderTypeView.show();
                     }
-                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE) {
+                } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE) {
                     //待收货 - 申请退款
 
                     SelectCancelOrderTypeView selectCancelOrderTypeView = SelectCancelOrderTypeView.
@@ -92,14 +96,14 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
                     }
 
 
-                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
+                } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
                     //评价
 
-                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
+                } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
                     //退款
                 }
             } else if (v.getId() == R.id.btn_right_function) {
-                if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
+                if (pageType == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
                     //待付--去支付
                     final ConfirmOrderView confirmOrderView = ConfirmOrderView.create(context, ((MineOrderInfo) info).getPrice(), new ConfirmOrderView.OnAttachListener() {
                         @Override
@@ -109,35 +113,81 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
                     });
                     confirmOrderView.show(((MineOrderInfo) info).getPrice());
 
-                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE) {
+                } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE) {
                     //待收货 -确认收货
+                    if (orderState==2){
+                        //未发货
+                        TipsCenterView tipsCenterView = TipsCenterView.create(context, "提示", "商品还没发货，请等待", new TipsCenterView.OnAttachListener() {
+                            @Override
+                            public void cancelClick() {
 
-                    TipsCenterView tipsCenterView = TipsCenterView.create(context, "确认收货", "商品没有问题，确认收货？", new TipsCenterView.OnAttachListener() {
-                        @Override
-                        public void cancelClick() {
+                            }
 
+                            @Override
+                            public void confirmClick(String content) {
+
+                            }
+                        });
+
+                        if (!tipsCenterView.isShow()) {
+                            tipsCenterView.show();
                         }
+                    }else if (orderState==3){
+                        //已发货
+                        TipsCenterView tipsCenterView = TipsCenterView.create(context, "确认收货", "商品没有问题，确认收货？", new TipsCenterView.OnAttachListener() {
+                            @Override
+                            public void cancelClick() {
 
-                        @Override
-                        public void confirmClick(String content) {
-                            DataHelper.getInstance().confirmReceiveGoods(((MineOrderInfo) info).getOrderId());
+                            }
+
+                            @Override
+                            public void confirmClick(String content) {
+                                DataHelper.getInstance().confirmReceiveGoods(((MineOrderInfo) info));
+                            }
+                        });
+
+                        if (!tipsCenterView.isShow()) {
+                            tipsCenterView.show();
                         }
-                    });
-
-                    if (!tipsCenterView.isShow()) {
-                        tipsCenterView.show();
                     }
 
-                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
-                    //评价
 
-                } else if (orderState == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
-                    //退款
+                } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
+                    //评价--评价
+                    ToastUtil.showToast("评价1");
+//                    List<BaseInfo> list = new ArrayList<>();
+//                    FeedShoppingCarGoodsInfo feedShoppingCarGoodsInfo=FeedShoppingCarGoodsInfo.parseGoodsInfo(info);
+//                    list.add(feedShoppingCarGoodsInfo);
+//                    FeedGoodsManager.getInstance().setList(list);
+//                    Bundle bundle=new Bundle();
+//                    bundle.putString(Constants.TYPE_BUY_TYPE,"goods");
+//                    AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class,bundle);
+
+                } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
+                    //退款--退货进度
+                    ToastUtil.showToast("退货进度");
+
                 }
             }
         } else if (info instanceof MineBreedingArchivesInfo) {
             if (v.getId() == R.id.btn_delete) {
-                DataHelper.getInstance().deleteBreedingArchive((MineBreedingArchivesInfo) info);
+                TipsCenterView tipsCenterView = TipsCenterView.create(context, "提示", "删除无法恢复，确定删除养殖档案？", new TipsCenterView.OnAttachListener() {
+                    @Override
+                    public void cancelClick() {
+
+                    }
+
+                    @Override
+                    public void confirmClick(String content) {
+                        DataHelper.getInstance().deleteBreedingArchive((MineBreedingArchivesInfo) info);
+                    }
+                });
+
+                if (!tipsCenterView.isShow()) {
+                    tipsCenterView.show();
+                }
+
+
             } else {
                 int id = ((MineBreedingArchivesInfo) info).getId();
                 int currentCulturalQuantity = ((MineBreedingArchivesInfo) info).getCurrentCulturalQuantity();
@@ -167,9 +217,25 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
 
             } else if (state == Constants.TYPE_COMMON_BU_ORDER_WAIT_SEND_TYPE) {
                 //待发货 ---发货
+                TipsCenterView tipsCenterView = TipsCenterView.create(context, "提示", "已核对买家信息，确认发货", new TipsCenterView.OnAttachListener() {
+                    @Override
+                    public void cancelClick() {
+
+                    }
+
+                    @Override
+                    public void confirmClick(String content) {
+                        DataHelper.getInstance().sendGoods(((BUOrderInfo) info));
+                    }
+                });
+
+                if (!tipsCenterView.isShow()) {
+                    tipsCenterView.show();
+                }
 
             } else if (state == Constants.TYPE_COMMON_BU_ORDER_ALREADY_SEND_TYPE) {
                 //已发货
+
 
             } else if (state == Constants.TYPE_COMMON_BU_ORDER_FINISH_TYPE) {
                 //完成

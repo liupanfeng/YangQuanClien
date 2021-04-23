@@ -114,9 +114,10 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
 
     @Override
     protected void initData() {
-        Log.d(TAG, "initData mType=" + mType);
+        Log.d(TAG, "lazyLoad mType=" + mType +" mSubType="+mSubType+" mListType="+mListType);
+        //全部订单
         if (!mLazLoad) {
-            getDataFromServer(mType,mSubType);
+            getDataFromServer();
         }
     }
 
@@ -124,9 +125,9 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     protected void lazyLoad() {
         super.lazyLoad();
         if (mLazLoad) {
-            Log.d(TAG, "lazyLoad mType=" + mType);
+            Log.d(TAG, "lazyLoad mType=" + mType +" mSubType="+mSubType+" mListType="+mListType);
             mIsLoadMore = false;
-            getDataFromServer(mType,mSubType);
+            getDataFromServer();
         }
     }
 
@@ -145,7 +146,7 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
             @Override
             public void onLoadMore(@NonNull RefreshLayout refreshLayout) {
                 mIsLoadMore = true;
-                getDataFromServer(mType,mSubType);
+                getDataFromServer();
             }
         });
     }
@@ -154,47 +155,46 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
         mList.clear();
         mPageNum = 1;
         mIsLoadMore = false;
-        getDataFromServer(mType,mSubType);
+        getDataFromServer();
     }
 
-    private void getDataFromServer(int type,int subType) {
+    private void getDataFromServer() {
         if (!NetworkUtil.checkedNetWork(mContext)){
             ToastUtil.showToast("网络不可用，请稍后再试！");
             hideUIState();
             return;
         }
-        //全部订单
         DataHelper.getInstance().setOnCallBackListener(this);
-        switch (type) {
+        switch (mType) {
             case Constants.TYPE_COMMON_MY_ORDER_TYPE:
-                DataHelper.getInstance().getOrderData(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getOrderData(mList, mListType, mPageSize, mPageNum,
                         mIsLoadFinish, mIsLoadMore);
                 break;
             case Constants.TYPE_COMMON_MY_MESSAGE:
-                DataHelper.getInstance().getMyMessageData(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getMyMessageData(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadFinish, mIsLoadMore);
                 break;
             case Constants.TYPE_COMMON_FEED_GOLD_TYPE:
-                DataHelper.getInstance().getFeedGoldDataFromServer(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getFeedGoldDataFromServer(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadFinish, mIsLoadMore);
                 break;
             case Constants.TYPE_COMMON_BREEDING_ARCHIVE_TYPE:
-                DataHelper.getInstance().getBreedingArchivesData(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getBreedingArchivesData(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadFinish, mIsLoadMore);
                 break;
             case Constants.TYPE_COMMON_MINE_MY_FOCUS:  //我的-我的关注
-                DataHelper.getInstance().getFocusData(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getFocusData(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadFinish, mIsLoadMore);
                 break;
             case Constants.TYPE_COMMON_MINE_MY_FANS:  //我的-我的粉丝
-                DataHelper.getInstance().getFansData(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getFansData(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadFinish, mIsLoadMore);
                 break;
             case Constants.TYPE_COMMON_MINE_COLLECT_SHOPPING:
                 //收藏店铺
             case Constants.TYPE_COMMON_MINE_COLLECT_GOODS:
                 //收藏商品
-                DataHelper.getInstance().getCollectionDataFromServer(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getCollectionDataFromServer(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadFinish, mIsLoadMore);
 
                 break;
@@ -204,7 +204,7 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                 //饲料-玉米
             case Constants.TYPE_COMMON_FEED_TOOLS:
                 //饲料-工具
-                DataHelper.getInstance().getShoppingData(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getShoppingData(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadFinish, mIsLoadMore);
 
                 break;
@@ -212,18 +212,18 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
             case Constants.TYPE_COMMON_MARKET:
                 //首页-市场
                 DataHelper.getInstance().getMarketDataFromServer(mList, mPageSize, mPageNum,
-                        mIsLoadFinish, mIsLoadMore, mListType, subType);
+                        mIsLoadFinish, mIsLoadMore, mListType, mSubType);
 
                 break;
             case Constants.TYPE_COMMON_SERVICE:
                 //首页-服务
                 DataHelper.getInstance().getServiceDataFromServer(mList, mPageSize, mPageNum,
-                        mIsLoadFinish, mIsLoadMore, mListType, subType);
+                        mIsLoadFinish, mIsLoadMore, mListType, mSubType);
 
                 break;
             case Constants.TYPE_COMMON_QUOTATION:
                 //首页-行情
-                DataHelper.getInstance().getQuotationDataFromServer(mList, subType, mPageSize, mPageNum,
+                DataHelper.getInstance().getQuotationDataFromServer(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadMore);
 
                 break;
@@ -357,6 +357,6 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
     public void onMessageEvent(MessageEvent event) {
         mType = event.getEventType();
         mSubType = event.getListType();
-        getDataFromServer(mType,mSubType);
+        getDataFromServer();
     }
 }

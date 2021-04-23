@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.meishe.yangquan.activity.MineRefundProgressActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="174dp"
+        android:background="@drawable/bg_mine_refund_progress">
+
+        <RelativeLayout
+            android:id="@+id/rl_title_container"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp48">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="@dimen/dp12"
+                android:layout_height="@dimen/dp18"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp20"
+                android:background="@mipmap/ic_back"
+                android:padding="@dimen/dp10"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="退货进度"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="103dp"
+            android:layout_marginLeft="@dimen/dp27"
+            android:text="订单编号：1333612345678"
+            android:textColor="#ffffffff"
+            android:textSize="13sp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp130"
+            android:text="取消进度：取消处理中"
+            android:textColor="#ffffffff"
+            android:textSize="13sp"
+            android:layout_marginLeft="@dimen/dp27"
+            />
+
+        <ImageView
+            android:layout_width="@dimen/dp60"
+            android:layout_height="@dimen/dp60"
+            android:background="@mipmap/ic_mine_refund_progress"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="@dimen/dp32"
+            android:layout_marginBottom="@dimen/dp15"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp8"
+        android:background="#fff5f5f5"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+</LinearLayout>

@@ -362,6 +362,9 @@ public class HttpUrl {
     /*（商户）订单改价 */
     public static final String BU_HOME_ORDER_CHANGE_PRICE = URL + "/app/owner/order/price/update";
 
+    /*（商户）订单改价 */
+    public static final String BU_HOME_ORDER_SEND_GOODS = URL + "app/owner/order/sendGoods";
+
 
 
 }

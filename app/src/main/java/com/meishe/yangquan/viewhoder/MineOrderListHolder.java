@@ -100,30 +100,34 @@ public class MineOrderListHolder extends BaseViewHolder {
     @Override
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof MineOrderInfo) {
-            int state = ((MineOrderInfo) info).getOrderState();
+            int state = ((MineOrderInfo) info).getType();
             if (state == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
                 //待付
                 tv_order_right_state.setText("待付");
 //                tv_time_cancel_order.setVisibility(View.VISIBLE);
                 btn_left_function.setText("取消订单");
+                btn_left_function.setVisibility(View.VISIBLE);
                 btn_right_function.setText("去支付");
             } else if (state == Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE) {
                 //待收货
                 tv_order_right_state.setText("待收货");
 //                tv_time_cancel_order.setVisibility(View.GONE);
                 btn_left_function.setText("申请退款");
+                btn_left_function.setVisibility(View.VISIBLE);
                 btn_right_function.setText("确认收货");
             } else if (state == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
                 //评价
                 tv_order_right_state.setText("已完成");
 //                tv_time_cancel_order.setVisibility(View.GONE);
                 btn_left_function.setText("再次购买");
+                btn_left_function.setVisibility(View.GONE);
                 btn_right_function.setText("评价");
             } else if (state == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
                 //退款
                 tv_order_right_state.setText("退款");
 //                tv_time_cancel_order.setVisibility(View.GONE);
                 btn_left_function.setText("再次购买");
+                btn_left_function.setVisibility(View.GONE);
                 btn_right_function.setText("退货进度");
             }
 

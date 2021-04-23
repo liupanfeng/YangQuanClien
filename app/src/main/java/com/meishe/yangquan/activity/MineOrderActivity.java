@@ -66,19 +66,19 @@ public class MineOrderActivity extends BaseActivity {
         mFragmentList.clear();
         mTitleList.clear();
 
-        CommonListFragment allFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE);
+        CommonListFragment allFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE,0);
         mFragmentList.add(allFragment);
 
-        CommonListFragment waitPayFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE);
+        CommonListFragment waitPayFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE,0);
         mFragmentList.add(waitPayFragment);
 
-        CommonListFragment waitReceive= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE);
+        CommonListFragment waitReceive= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE,0);
         mFragmentList.add(waitReceive);
 
-        CommonListFragment waitComment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE);
+        CommonListFragment waitComment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE,0);
         mFragmentList.add(waitComment);
 
-        CommonListFragment waitRefund= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE);
+        CommonListFragment waitRefund= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE,0);
         mFragmentList.add(waitRefund);
 
         mTitleList.add("全部");
@@ -87,7 +87,7 @@ public class MineOrderActivity extends BaseActivity {
         mTitleList.add("待评价");
         mTitleList.add("退款");
 
-        mViewPager.setOffscreenPageLimit(0);
+        mViewPager.setOffscreenPageLimit(2);
         mViewPager.setAdapter(new CommonFragmentAdapter(getSupportFragmentManager(),mFragmentList,mTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);
     }
