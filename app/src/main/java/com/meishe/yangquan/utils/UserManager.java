@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
+import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.bean.ReceiverInfo;
 import com.meishe.yangquan.bean.UserInfo;
 
@@ -16,6 +17,9 @@ public class UserManager {
     private FeedShoppingInfo feedShoppingInfo;
     /*本来这些属性没必要保存这里，为了刷新收藏的问题，暂时这样处理*/
     private FeedGoodsInfo feedGoodsInfo;
+
+    /*这个是为了处理订单评论*/
+    private MineOrderInfo mineOrderInfo;
 
     private String token = "";
     private Context mContext;
@@ -90,5 +94,14 @@ public class UserManager {
 
     public void setFeedGoodsInfo(FeedGoodsInfo feedGoodsInfo) {
         this.feedGoodsInfo = feedGoodsInfo;
+    }
+
+
+    public MineOrderInfo getMineOrderInfo() {
+        return mineOrderInfo;
+    }
+
+    public void setMineOrderInfo(MineOrderInfo mineOrderInfo) {
+        this.mineOrderInfo = mineOrderInfo;
     }
 }

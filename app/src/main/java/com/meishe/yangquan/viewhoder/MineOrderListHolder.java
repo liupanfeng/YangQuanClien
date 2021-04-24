@@ -133,7 +133,7 @@ public class MineOrderListHolder extends BaseViewHolder {
 
 
             //中间内容区域
-//            tv_shopping_name.setText(((MineOrderInfo) info).getOrders().get(0).getShopName());
+            tv_shopping_name.setText(((MineOrderInfo) info).getOrders().get(0).getShopName());
 //            GlideUtil.getInstance().loadUrl(((MineOrderInfo) info).getOrders().get(0).getOrderContents().get(0).getGoodsImageUrls().get(0),
 //                    riv_bu_goods_cover);
 //            tv_bu_good_title.setText(((MineOrderInfo) info).getOrders().get(0).getOrderContents().get(0).getGoodsTitle());
@@ -159,11 +159,13 @@ public class MineOrderListHolder extends BaseViewHolder {
                             if (orderContentsInfo == null) {
                                 continue;
                             }
-                            goodsCounts+=orderContentsInfo.getGoodsAmount();
+                            goodsCounts += orderContentsInfo.getGoodsAmount();
                             List<String> goodsImageUrls = orderContentsInfo.getGoodsImageUrls();
                             goodsTitle = orderContentsInfo.getGoodsTitle();
+
+
                             if (!CommonUtils.isEmpty(goodsImageUrls)) {
-                                coverList.add(goodsImageUrls.get(0));
+                                coverList.addAll(goodsImageUrls);
                             }
                         }
                     }
@@ -201,7 +203,7 @@ public class MineOrderListHolder extends BaseViewHolder {
 
         tv_good_title.setText(title);
         tv_goods_price.setText("" + price);
-        if (!CommonUtils.isEmpty(coverList)){
+        if (!CommonUtils.isEmpty(coverList)) {
             GlideUtil.getInstance().loadUrl(coverList.get(0), riv_goods_cover);
         }
     }
@@ -222,19 +224,19 @@ public class MineOrderListHolder extends BaseViewHolder {
         riv_goods_cover_3.setVisibility(View.GONE);
 
 
-        if (!CommonUtils.isEmpty(coverList)){
-            for (int i = 0; i < coverList.size() ; i++) {
+        if (!CommonUtils.isEmpty(coverList)) {
+            for (int i = 0; i < coverList.size(); i++) {
                 String coverUrl = coverList.get(i);
-                if (!TextUtils.isEmpty(coverUrl)){
-                    if (i==0){
+                if (!TextUtils.isEmpty(coverUrl)) {
+                    if (i == 0) {
                         riv_goods_cover_1.setVisibility(View.VISIBLE);
-                        GlideUtil.getInstance().loadUrl(coverUrl,riv_goods_cover_1);
-                    }else if (i==1){
+                        GlideUtil.getInstance().loadUrl(coverUrl, riv_goods_cover_1);
+                    } else if (i == 1) {
                         riv_goods_cover_2.setVisibility(View.VISIBLE);
-                        GlideUtil.getInstance().loadUrl(coverUrl,riv_goods_cover_2);
-                    }else if (i==2){
+                        GlideUtil.getInstance().loadUrl(coverUrl, riv_goods_cover_2);
+                    } else if (i == 2) {
                         riv_goods_cover_3.setVisibility(View.VISIBLE);
-                        GlideUtil.getInstance().loadUrl(coverUrl,riv_goods_cover_3);
+                        GlideUtil.getInstance().loadUrl(coverUrl, riv_goods_cover_3);
                     }
                 }
 

@@ -255,6 +255,7 @@ public class BUPublishGoodsActivity extends BaseActivity {
         buPictureInfo.setFilePath(String.valueOf(R.mipmap.ic_sheep_bar_add));
         buPictureInfo.setType(CommonPictureInfo.TYPE_ADD_PIC);
         mCoverPictureList.add(buPictureInfo);
+
         mAdapter.addAll(mCoverPictureList);
 
         mDescPictureList.add(buPictureInfo);

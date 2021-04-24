@@ -25,6 +25,9 @@ public class Constants {
     /*购买的类型 car 从购物车购买 goods直接购买*/
     public static final String TYPE_BUY_TYPE = "type.buy.type";
 
+    /*order id */
+    public static final String TYPE_ORDER_ID = "type.order.id";
+
 
     public static String userId = "userId";
 

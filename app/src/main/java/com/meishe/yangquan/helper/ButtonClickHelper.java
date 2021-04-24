@@ -5,27 +5,22 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.activity.FeedOrderActivity;
 import com.meishe.yangquan.activity.MineBreedingArchivesDetailActivity;
+import com.meishe.yangquan.activity.MineOrderCommentActivity;
+import com.meishe.yangquan.activity.MineRefundProgressActivity;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
-import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineOrderInfo;
-import com.meishe.yangquan.manager.FeedGoodsManager;
 import com.meishe.yangquan.pop.BUChangePriceCenterView;
 import com.meishe.yangquan.pop.ConfirmOrderView;
 import com.meishe.yangquan.pop.SelectCancelOrderTypeView;
 import com.meishe.yangquan.pop.TipsCenterView;
 import com.meishe.yangquan.utils.AppManager;
-import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.ToastUtil;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.meishe.yangquan.utils.UserManager;
 
 /**
  * @Author : lpf
@@ -154,18 +149,14 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
 
                 } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
                     //评价--评价
-                    ToastUtil.showToast("评价1");
-//                    List<BaseInfo> list = new ArrayList<>();
-//                    FeedShoppingCarGoodsInfo feedShoppingCarGoodsInfo=FeedShoppingCarGoodsInfo.parseGoodsInfo(info);
-//                    list.add(feedShoppingCarGoodsInfo);
-//                    FeedGoodsManager.getInstance().setList(list);
-//                    Bundle bundle=new Bundle();
-//                    bundle.putString(Constants.TYPE_BUY_TYPE,"goods");
-//                    AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class,bundle);
+                    UserManager.getInstance(mAdapter.getContext()).setMineOrderInfo((MineOrderInfo) info);
+                    AppManager.getInstance().jumpActivity(mAdapter.getContext(), MineOrderCommentActivity.class);
 
                 } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
                     //退款--退货进度
-                    ToastUtil.showToast("退货进度");
+                    Bundle bundle=new Bundle();
+                    bundle.putInt(Constants.TYPE_ORDER_ID,((MineOrderInfo) info).getOrderId());
+                    AppManager.getInstance().jumpActivity(mAdapter.getContext(), MineRefundProgressActivity.class,bundle);
 
                 }
             }

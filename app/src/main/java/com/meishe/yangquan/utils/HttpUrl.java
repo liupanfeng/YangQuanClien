@@ -325,6 +325,9 @@ public class HttpUrl {
     /*用户版-我的-删除养殖档案*/
     public static final String SHEEP_APP_USER_DELETE_CULTURAL_DELETE = URL + "app/user/cultural/delete";
 
+    /*用户版-我的-（用户）订单 取消/退货 进度*/
+    public static final String SHEEP_APP_USER_ORDER_PROGRESS = URL + "app/user/order/progress";
+
 
 
 

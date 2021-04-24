@@ -42,7 +42,9 @@ import com.meishe.yangquan.bean.MineCollectionInfo;
 import com.meishe.yangquan.bean.MineFeedGoldInfo;
 import com.meishe.yangquan.bean.MineMyFansInfo;
 import com.meishe.yangquan.bean.MineMyFocusInfo;
+import com.meishe.yangquan.bean.MineOrderCommentViewInfo;
 import com.meishe.yangquan.bean.MineOrderInfo;
+import com.meishe.yangquan.bean.MineRefundProgressInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.MineUserMessageInfo;
 import com.meishe.yangquan.bean.PointRecordInfo;
@@ -74,6 +76,7 @@ import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
 import com.meishe.yangquan.viewhoder.FeedReceiveAddressListHolder;
 import com.meishe.yangquan.viewhoder.FeedShoppingCarListHolder;
 import com.meishe.yangquan.viewhoder.MineCollectionListHolder;
+import com.meishe.yangquan.viewhoder.MineOrderCommentListHolder;
 import com.meishe.yangquan.viewhoder.MineOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
@@ -88,6 +91,7 @@ import com.meishe.yangquan.viewhoder.HomeMarketSellBigSheepListHolder;
 import com.meishe.yangquan.viewhoder.HomeMarketSellLittleSheepListHolder;
 import com.meishe.yangquan.viewhoder.MineCallbackHolder;
 import com.meishe.yangquan.viewhoder.MineFeedGoldHolder;
+import com.meishe.yangquan.viewhoder.MineRefundProgressListHolder;
 import com.meishe.yangquan.viewhoder.SheepCutHairHolder;
 import com.meishe.yangquan.viewhoder.HomeMarketPictureListHolder;
 import com.meishe.yangquan.viewhoder.IndustryContentHolder;
@@ -340,6 +344,17 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 viewHolder = new FeedReceiveAddressListHolder(view, this);
                 break;
 
+            /*我的-退货进度*/
+            case VIEW_MINE_REFUND_PROGRESS:
+                view = mLayoutInflater.inflate(R.layout.item_mine_refund_progress_view, parent, false);
+                viewHolder = new MineRefundProgressListHolder(view, this);
+                break;
+
+            /*我的-订单评论*/
+            case VIEW_MINE_COMMON_ORDER:
+                view = mLayoutInflater.inflate(R.layout.item_mine_order_comment_view, parent, false);
+                viewHolder = new MineOrderCommentListHolder(view, this);
+                break;
 
             /*商版-店铺数据*/
             case VIEW_BU_HOME_SHOPDATA_LIST:
@@ -515,7 +530,12 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_FEED_SHOPPING_CAR_LIST;
         }else if (baseInfo instanceof FeedReceiverAddressInfo) {
             return VIEW_FEED_RECEIVE_ADDRESS;
+        }else if (baseInfo instanceof MineRefundProgressInfo) {
+            return VIEW_MINE_REFUND_PROGRESS;
+        }else if (baseInfo instanceof MineOrderCommentViewInfo) {
+            return VIEW_MINE_COMMON_ORDER;
         }
+
         return super.getItemViewType(position);
     }
 

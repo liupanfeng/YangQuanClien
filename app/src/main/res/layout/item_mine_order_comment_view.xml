@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp50">
+
+        <com.meishe.yangquan.view.RoundAngleImageView
+            android:id="@+id/riv_goods_cover"
+            android:layout_width="@dimen/dp36"
+            android:layout_height="@dimen/dp36"
+            android:background="@mipmap/ic_bu_goods_cover"
+            app:roundWidth="@dimen/dp3"
+            app:roundHeight="@dimen/dp3"
+            android:layout_marginLeft="@dimen/dp16"
+            android:layout_gravity="center_vertical"
+            />
+
+        <TextView
+            android:id="@+id/tv_goods_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp16"
+            android:textColor="@color/color_ff303030"
+            android:textSize="@dimen/sp16"
+            android:layout_gravity="center_vertical"
+            />
+
+    </LinearLayout>
+
+    <include layout="@layout/line"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_height="@dimen/dp40">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp16"
+            android:text="商品评价"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/color_ff303030"
+            android:textSize="@dimen/sp16"
+            />
+
+
+        <com.meishe.yangquan.view.RatingBar
+            android:id="@+id/rb_feed_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            app:selectedNumber="3"
+            app:starDistance="6dp"
+            android:layout_marginLeft="@dimen/dp12"
+            app:starEmptyRes="@mipmap/ic_bu_star_normal"
+            app:starHalfRes="@mipmap/ic_bu_start_selected"
+            app:starIsFull="false"
+            app:starSelectedRes="@mipmap/ic_bu_start_selected"
+            />
+
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/dp10"
+        android:layout_height="@dimen/dp120"
+        android:background="#fff5f5f5">
+
+        <EditText
+            android:id="@+id/et_input"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp10"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="@dimen/dp10"
+            android:layout_marginBottom="3dp"
+            android:background="@null"
+            android:gravity="top"
+            android:textColor="@color/black"
+            android:textCursorDrawable="@drawable/cursor_color"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/tv_number_limit_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            android:text="100"
+            android:textColor="@color/black"
+            android:textSize="13sp" />
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+
+</LinearLayout>
