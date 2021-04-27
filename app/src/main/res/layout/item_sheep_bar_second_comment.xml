@@ -73,8 +73,6 @@
         android:layout_marginLeft="@dimen/dp56"
         android:layout_marginRight="@dimen/dp36"
         android:layout_marginTop="@dimen/dp8"
-        android:maxLines="3"
-        android:ellipsize="end"
         android:textColor="#ff303030"
         android:textSize="13sp"
         />

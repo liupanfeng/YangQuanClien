@@ -203,6 +203,10 @@ public class HttpUrl {
     /*羊管家 养殖助手-求助 */
     public static final String SHEEP_HOLDER_APPLY_HELP = URL + "app/cultural/assistant/help/apply";
 
+    /*我的-养殖助手-根据喂养天数获取配料记录 */
+    public static final String SHEEP_HOLDER_BATCH_FODDER_GET = URL + "app/cultural/assistant/batch/fodder/get";
+
+
 
     /*添加服务*/
     public static final String HOME_PAGE_ADD_SERVICE = URL + "app/service/add";
@@ -253,6 +257,9 @@ public class HttpUrl {
 
     /*我的-养殖档案列表*/
     public static final String SHEEP_MINE_BREEDING_ARCHIVE = URL + "app/user/cultural/archive/list";
+
+
+
 
 
     /*系统消息*/
@@ -328,6 +335,9 @@ public class HttpUrl {
     /*用户版-我的-（用户）订单 取消/退货 进度*/
     public static final String SHEEP_APP_USER_ORDER_PROGRESS = URL + "app/user/order/progress";
 
+    /*（用户）评价订单*/
+    public static final String SHEEP_APP_USER_ORDER_EVALUATE = URL + "app/user/order/evaluate";
+
 
 
 
@@ -368,6 +378,8 @@ public class HttpUrl {
     /*（商户）订单改价 */
     public static final String BU_HOME_ORDER_SEND_GOODS = URL + "app/owner/order/sendGoods";
 
+    /*（商户）评价列表 */
+    public static final String BU_HOME_ORDER_EVALUATION_LIST = URL + "app/owner/order/evaluation/list";
 
 
 }

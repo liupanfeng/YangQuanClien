@@ -19,7 +19,7 @@
      <RelativeLayout
          android:layout_width="47dp"
          android:layout_height="47dp"
-         android:background="#40d344"
+         android:background="@drawable/bg_common_main_gradual"
          >
 
         <ImageView

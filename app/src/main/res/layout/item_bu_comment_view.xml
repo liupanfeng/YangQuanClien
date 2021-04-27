@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <View
@@ -13,7 +15,6 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:layout_height="wrap_content">
 
     <TextView
@@ -40,67 +41,39 @@
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="@dimen/dp22" />
 
+    </RelativeLayout>
 
-    <com.meishe.yangquan.view.RoundAngleImageView
-        android:id="@+id/riv_bu_goods_cover"
-        android:layout_width="78dp"
-        android:background="@mipmap/ic_bu_goods_cover"
-        app:roundWidth="@dimen/dp3"
-        app:roundHeight="@dimen/dp3"
-        android:layout_below="@+id/tv_bu_order_id"
-        android:layout_marginLeft="@dimen/dp22"
-        android:layout_marginTop="@dimen/dp21"
-        android:layout_height="78dp"/>
 
-    <TextView
-        android:id="@+id/tv_bu_good_title"
-        android:layout_toRightOf="@+id/riv_bu_goods_cover"
-        android:layout_alignTop="@+id/riv_bu_goods_cover"
-        android:layout_marginLeft="@dimen/dp8"
-        android:layout_marginRight="@dimen/dp22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="英美尔犊牛精料_教槽料_牛拉骨架…"
-        android:singleLine="true"
-        android:ellipsize="end"
-        android:textColor="#ff303030"
-        android:textSize="13sp"
-        />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:layout_marginLeft="@dimen/dp22"
+            android:layout_marginRight="@dimen/dp22"
+            android:background="#E5E5E5"
+            android:layout_marginTop="@dimen/dp10"
+            />
 
-    <TextView
-        android:id="@+id/tv_bu_goods_price"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/riv_bu_goods_cover"
-        android:layout_marginLeft="@dimen/dp8"
-        android:layout_alignBottom="@+id/riv_bu_goods_cover"
-        android:text="70/桶  |"
-        android:textColor="#ff303030"
-        android:textSize="13sp"
-        />
 
-    <TextView
-        android:id="@+id/tv_bu_goods_amount"
-        android:layout_alignBottom="@+id/tv_bu_goods_price"
-        android:layout_toRightOf="@+id/tv_bu_goods_price"
-        android:layout_marginLeft="@dimen/dp8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="数量：3"
-        android:textColor="#ff303030"
-        android:textSize="13sp"
-        />
+        <include layout="@layout/common_one_goods_order_layout"
+            android:layout_below="@+id/tv_shopping_name"
+            tools:ignore="IncludeLayoutParam" />
 
-    <View
-        android:id="@+id/bu_line"
-        android:layout_width="match_parent"
-        android:layout_height="0.33dp"
-        android:layout_below="@+id/riv_bu_goods_cover"
-        android:layout_marginLeft="@dimen/dp22"
-        android:layout_marginRight="@dimen/dp22"
-        android:layout_marginTop="@dimen/dp22"
-        android:background="#E5E5E5"
-        />
+
+        <include
+            android:layout_below="@+id/tv_shopping_name"
+            layout="@layout/common_more_goods_order_layout"
+            tools:ignore="IncludeLayoutParam" />
+
+
+        <View
+            android:id="@+id/bu_line"
+            android:layout_width="match_parent"
+            android:layout_height="0.33dp"
+            android:layout_marginLeft="@dimen/dp22"
+            android:layout_marginRight="@dimen/dp22"
+            android:background="#E5E5E5"
+            android:layout_marginTop="@dimen/dp10"
+            />
 
 
     <RelativeLayout
@@ -115,7 +88,6 @@
             android:id="@+id/rb_bu_start"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:selectedNumber="3"
             app:starDistance="12dp"
             android:layout_marginTop="@dimen/dp5"
             android:layout_marginLeft="@dimen/dp22"
@@ -130,8 +102,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="差评"
+            android:visibility="gone"
             android:layout_toRightOf="@+id/rb_bu_start"
             android:layout_marginLeft="@dimen/dp10"
+            android:layout_centerVertical="true"
             android:textColor="#ff656565"
             android:textSize="12sp"
             />
@@ -158,7 +132,6 @@
             android:layout_marginBottom="@dimen/dp12"
             android:layout_marginLeft="@dimen/dp22"
             android:layout_marginRight="@dimen/dp12"
-            android:text="不错哦，继续提高质量"
             android:textColor="#ff303030"
             android:textSize="12sp"
             />
@@ -181,6 +154,5 @@
     </RelativeLayout>
 
 
-    </RelativeLayout>
 
 </LinearLayout>

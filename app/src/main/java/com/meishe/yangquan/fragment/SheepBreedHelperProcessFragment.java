@@ -458,6 +458,14 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
             }
         });
 
+        /*喂养天数点击*/
+        mTvFeedingDays.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFoodAnalysisDataByDay(3);
+            }
+        });
+
     }
 
 
@@ -653,6 +661,65 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
             }
         }, requestParam, token);
     }
+
+
+
+    /**
+     * 获取某一天的配料分析数据
+     */
+    private void getFoodAnalysisDataByDay(int day) {
+        String token = getToken();
+        HashMap<String, Object> requestParam = new HashMap<>();
+        requestParam.put("batchId", mBatchId);
+        requestParam.put("feedDays", day);
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_HOLDER_BATCH_FODDER_GET, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "服务异常");
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    ToastUtil.showToast(mContext, "获取数据成功");
+                } else {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ToastUtil.showToast(mContext, "服务异常");
+                    }
+                });
+
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+    }
+
 
 
     /**

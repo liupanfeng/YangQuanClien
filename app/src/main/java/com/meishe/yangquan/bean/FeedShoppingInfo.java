@@ -66,7 +66,7 @@ public class FeedShoppingInfo extends BaseInfo {
 
     private String sign;
 
-    private int shopScore;
+    private float shopScore;
 
     private int shopOutSideImageId;
 
@@ -203,11 +203,11 @@ public class FeedShoppingInfo extends BaseInfo {
         this.sign = sign;
     }
 
-    public int getShopScore() {
+    public float getShopScore() {
         return shopScore;
     }
 
-    public void setShopScore(int shopScore) {
+    public void setShopScore(float shopScore) {
         this.shopScore = shopScore;
     }
 

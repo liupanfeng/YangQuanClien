@@ -227,6 +227,10 @@ public class RatingBar extends View {
         return true;
     }
 
+    public void setOnStarChangeListener(OnStarChangeListener onStarChangeListener) {
+        this.mOnStarChangeListener = onStarChangeListener;
+    }
+
     //  回调监听（选中的数量，位置）
     public interface OnStarChangeListener {
         void OnStarChanged(float selectedNumber, int position);

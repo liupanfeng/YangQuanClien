@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:text="扫描二维码，您的朋友也可以下载羊圈"
+        android:text="扫描二维码，您的朋友也可以下载唐羊"
         android:textColor="#ff858585"
         android:textSize="12sp"
         android:visibility="gone" />

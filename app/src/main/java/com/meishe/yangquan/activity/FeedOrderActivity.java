@@ -259,6 +259,7 @@ public class FeedOrderActivity extends BaseActivity {
 
         HashMap<String, Object> param = new HashMap<>();
         param.put("info", json);
+
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_FEED_ORDER_COMMIT, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {

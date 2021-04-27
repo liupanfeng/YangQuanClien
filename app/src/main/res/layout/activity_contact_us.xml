@@ -39,7 +39,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="羊圈官方客服"
+                android:text="唐羊官方客服"
                 android:textColor="#ff383838"
                 android:textSize="15sp" />
 

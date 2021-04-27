@@ -325,13 +325,15 @@ public class Constants {
     /*商品等待发布*/
     public static final int TYPE_KEY_WAIT_PUBLISH_GOODS_TYPE = 2;
 
-
+    /*一下是商版接口定义的，不能随便修改*/
     /*好评 */
-    public static final int TYPE_COMMENT_GOOD_TYPE = 1;
+    public static final int TYPE_COMMENT_GOOD_TYPE = 0;
     /*中评*/
-    public static final int TYPE_COMMENT_MIDDLE_TYPE = 2;
+    public static final int TYPE_COMMENT_MIDDLE_TYPE = 1;
     /*差评*/
-    public static final int TYPE_COMMENT_BAD_TYPE = 3;
+    public static final int TYPE_COMMENT_BAD_TYPE = 2;
+
+
 
     //    /*用户版-退货管理- */   注意这里的类型商版的也用到了，暂时不能删除
     /*进行中*/
@@ -437,6 +439,9 @@ public class Constants {
 
     /*商版-退货管理列表*/
     public static final int TYPE_COMMON_BU_REFUND = TYPE_COMMON_BASE + 2;
+
+    /*商版-评价管理列表*/
+    public static final int TYPE_COMMON_BU_COMMENT_MANAGER = TYPE_COMMON_BASE + 3;
 
 
 }

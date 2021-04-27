@@ -127,6 +127,24 @@
                 android:textColor="@color/white"
                 android:layout_alignParentEnd="true" />
 
+
+            <TextView
+                android:id="@+id/tv_order_bottom_state"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#3BA786"
+                android:textSize="13sp"
+                android:visibility="gone"
+
+                android:layout_below="@+id/tv_time_cancel_order"
+                android:layout_marginRight="@dimen/dp22"
+                android:layout_marginTop="@dimen/dp9"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/dp10"
+                android:layout_alignParentEnd="true"
+                />
+
         </RelativeLayout>
 
     </LinearLayout>

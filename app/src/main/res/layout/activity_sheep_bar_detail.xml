@@ -143,16 +143,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/dp56"
                     android:layout_marginTop="@dimen/dp8"
-                    android:layout_marginRight="@dimen/dp36"
-                    android:ellipsize="end"
-                    android:maxLines="3"
-                    android:text="发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题发布标题发布标题发布标题
-发布标题发布标题"
                     android:textColor="#ff303030"
                     android:textSize="13sp" />
 

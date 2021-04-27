@@ -68,6 +68,14 @@ public class MessageEvent {
      */
     public static final int MESSAGE_TYPE_ORDER_LIST = MESSAGE_TYPE_BASE + 11;
 
+    /**
+     * 刷新通用列表
+     */
+    public static final int MESSAGE_TYPE_COMMON_LIST = MESSAGE_TYPE_BASE + 12;
+
+
+
+
     private int mEventType;
 
     /*这个字段用来放置请求参数，没必要的话不用使用*/

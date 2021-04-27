@@ -148,6 +148,10 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
 
 
                 } else if (pageType == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
+                    if (orderState==5){
+                        //已经评价过了，不能再次评价
+                        return;
+                    }
                     //评价--评价
                     UserManager.getInstance(mAdapter.getContext()).setMineOrderInfo((MineOrderInfo) info);
                     AppManager.getInstance().jumpActivity(mAdapter.getContext(), MineOrderCommentActivity.class);

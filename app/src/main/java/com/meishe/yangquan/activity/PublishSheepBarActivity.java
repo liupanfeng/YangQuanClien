@@ -11,7 +11,9 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,6 +29,7 @@ import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MenuItem;
+import com.meishe.yangquan.bean.MineOrderCommentViewInfo;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.bean.UploadFileInfo;
@@ -74,9 +77,13 @@ public class PublishSheepBarActivity extends BaseActivity {
     private static final int REQUEST_CAMERA_PERMISSION_CODE = 201;
     private File tempFile;
 
+
+    private static final int MAX_LENGTH = 150;
+
     private List<CommonPictureInfo> mData = new ArrayList<>();
     private Button mBtnPublish;
     private EditText mEtInputSheepBarMessage;
+    private TextView tv_number_limit_title;
 
     @Override
     protected int initRootView() {
@@ -90,6 +97,7 @@ public class PublishSheepBarActivity extends BaseActivity {
         mIvBack = findViewById(R.id.iv_back);
         mBtnPublish = findViewById(R.id.btn_publish);
         mEtInputSheepBarMessage = findViewById(R.id.et_input_sheep_bar_message);
+        tv_number_limit_title = findViewById(R.id.tv_number_limit_title);
         mLoading = findViewById(R.id.loading);
 
 
@@ -144,6 +152,35 @@ public class PublishSheepBarActivity extends BaseActivity {
                         showPictureSelectItem();
                     }
                 }
+            }
+        });
+
+
+        tv_number_limit_title.setText(MAX_LENGTH + "");
+
+        mEtInputSheepBarMessage.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                int length = s.length();
+                String str = s.toString();
+                if (length > MAX_LENGTH) {
+                    mEtInputSheepBarMessage.setText(str.substring(0, MAX_LENGTH));
+                    mEtInputSheepBarMessage.requestFocus();
+                    mEtInputSheepBarMessage.setSelection(mEtInputSheepBarMessage.getText().length());
+                } else {
+                    int i = MAX_LENGTH - length;
+                    tv_number_limit_title.setText(String.valueOf(i));
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
             }
         });
     }

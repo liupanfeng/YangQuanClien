@@ -111,7 +111,7 @@ public class UpdateVersionService extends Service {
                             mHandler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    mNotification.contentView.setTextViewText(R.id.msg, "正在下载：羊圈");
+                                    mNotification.contentView.setTextViewText(R.id.msg, "正在下载：唐羊");
                                     mNotification.contentView.setTextViewText(R.id.bartext,  progress + "%");
                                     mNotification.contentView.setProgressBar(R.id.progressBar, 100, progress, false);
                                     mNotificationManager.notify(mNotificationId, mNotification);

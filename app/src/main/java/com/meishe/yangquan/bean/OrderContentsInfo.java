@@ -22,6 +22,7 @@ public class OrderContentsInfo {
 //    }
 //                        ],
 
+
     private int goodsAmount;
 
     private int goodsId;
@@ -31,6 +32,11 @@ public class OrderContentsInfo {
     private String goodsSpecification;
 
     private String goodsTitle;
+
+    /*这个是评论专用的*/
+    private String description;
+
+    private float score;
 
 
     public int getGoodsAmount() {
@@ -71,5 +77,21 @@ public class OrderContentsInfo {
 
     public void setGoodsTitle(String goodsTitle) {
         this.goodsTitle = goodsTitle;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public float getScore() {
+        return score;
+    }
+
+    public void setScore(float score) {
+        this.score = score;
     }
 }

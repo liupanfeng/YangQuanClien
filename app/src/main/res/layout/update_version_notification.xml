@@ -34,7 +34,7 @@ android:layout_height="fill_parent" >
         >
         <TextView
             android:id="@+id/msg"
-            android:text="准备下载：羊圈"
+            android:text="准备下载：唐羊"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/mainColor"

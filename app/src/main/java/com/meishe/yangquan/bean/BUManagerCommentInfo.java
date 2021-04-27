@@ -1,5 +1,7 @@
 package com.meishe.yangquan.bean;
 
+import java.util.List;
+
 /**
  *
  * @Author : LiuPanFeng
@@ -8,15 +10,27 @@ package com.meishe.yangquan.bean;
  */
 public class BUManagerCommentInfo extends BaseInfo{
 
-    /*评论类型*/
-    private int type;
+    private int count;
 
-    public int getState() {
-        return type;
+    private List<BUManagerCommentChildInfo> elements;
+
+
+
+    public int getCount() {
+        return count;
     }
 
-    public void setState(int type) {
-        this.type = type;
+    public void setCount(int count) {
+        this.count = count;
     }
+
+    public List<BUManagerCommentChildInfo> getElements() {
+        return elements;
+    }
+
+    public void setElements(List<BUManagerCommentChildInfo> elements) {
+        this.elements = elements;
+    }
+
 
 }

@@ -67,7 +67,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dp16"
             android:layout_marginTop="@dimen/dp10"
-            android:text="关于羊圈"
+            android:text="关于唐羊"
             android:textColor="#ff656565"
             android:textSize="15sp"
             />

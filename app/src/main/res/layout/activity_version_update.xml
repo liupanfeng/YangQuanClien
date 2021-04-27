@@ -20,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10dp"
-        android:text="羊圈 1.0.0"
+        android:text="唐羊 1.0.0"
         android:textColor="#ff383838"
         android:textSize="18sp" />
 

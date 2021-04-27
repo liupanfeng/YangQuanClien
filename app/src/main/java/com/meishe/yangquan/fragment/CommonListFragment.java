@@ -243,6 +243,11 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                 DataHelper.getInstance().getRefundDataFromServer(mList, mSubType, mPageSize, mPageNum,
                         mIsLoadMore);
                 break;
+            case Constants.TYPE_COMMON_BU_COMMENT_MANAGER:
+                //饲料-商店-评价管理  注意区分是用的listType 还是sub
+                DataHelper.getInstance().getCommentDataFromServer(mList, mListType, mPageSize, mPageNum,
+                        mIsLoadMore);
+                break;
             default:
                 break;
         }
@@ -355,8 +360,11 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
      */
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onMessageEvent(MessageEvent event) {
-        mType = event.getEventType();
-        mSubType = event.getListType();
-        getDataFromServer();
+      if (event.getEventType()==MessageEvent.MESSAGE_TYPE_COMMON_LIST){
+          mList.clear();
+          DataHelper.getInstance().setOnCallBackListener(this);
+          DataHelper.getInstance().getOrderData(mList, mListType, mPageSize, mPageNum,
+                  mIsLoadFinish, mIsLoadMore);
+      }
     }
 }

@@ -64,7 +64,7 @@ public class AboutActivity extends BaseActivity {
 
     @Override
     public void initTitle() {
-        mTvTitle.setText("关于羊圈APP");
+        mTvTitle.setText("关于唐羊APP");
     }
 
     @Override

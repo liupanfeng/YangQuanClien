@@ -40,7 +40,7 @@ import okhttp3.Response;
  */
 public class BUHomeGoodsCommentFragment extends BaseRecyclerFragment {
 
-    /*平价类型 1 好评 2 中评 3 差评  */
+    /*类型 0 好评 1 中评 2 差评  这里是接口定义的不能随便修改*/
     private int mType;
     private IosDialog mIosDialog;
 
@@ -74,19 +74,19 @@ public class BUHomeGoodsCommentFragment extends BaseRecyclerFragment {
     protected void initData() {
         List<BUManagerCommentInfo> datas=new ArrayList<>();
 
-        BUManagerCommentInfo buOrderInfo=new BUManagerCommentInfo();
-        buOrderInfo.setState(mType);
-        datas.add(buOrderInfo);
-
-        buOrderInfo=new BUManagerCommentInfo();
-        buOrderInfo.setState(mType);
-        datas.add(buOrderInfo);
-
-        buOrderInfo = new BUManagerCommentInfo();
-        buOrderInfo.setState(mType);
-        datas.add(buOrderInfo);
-
-        mAdapter.addAll(datas);
+//        BUManagerCommentInfo buOrderInfo=new BUManagerCommentInfo();
+//        buOrderInfo.setState(mType);
+//        datas.add(buOrderInfo);
+//
+//        buOrderInfo=new BUManagerCommentInfo();
+//        buOrderInfo.setState(mType);
+//        datas.add(buOrderInfo);
+//
+//        buOrderInfo = new BUManagerCommentInfo();
+//        buOrderInfo.setState(mType);
+//        datas.add(buOrderInfo);
+//
+//        mAdapter.addAll(datas);
 
     }
 
@@ -100,22 +100,21 @@ public class BUHomeGoodsCommentFragment extends BaseRecyclerFragment {
 
     /**
      * 获取评论列表
+     * 0 好评
+     * 1中评
+     * 2差评
      */
     private void getCommentDataFromServer() {
         HashMap<String, Object> param = new HashMap<>();
         param.put("pageNum", 1);
         param.put("pageSize", 300);
-        if (mType == 2) {
-            param.put("isPublic", 0);
-        } else if (mType == 1) {
-            param.put("isPublic", 1);
-        }
+        param.put("listType", 300);
         String token = UserManager.getInstance(mContext).getToken();
         if (TextUtils.isEmpty(token)) {
             return;
         }
 //        showLoading();
-        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_GOODS_INFO, new BaseCallBack<BUGoodsInfoResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_ORDER_EVALUATION_LIST, new BaseCallBack<BUGoodsInfoResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 

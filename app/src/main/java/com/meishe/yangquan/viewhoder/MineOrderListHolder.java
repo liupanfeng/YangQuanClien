@@ -59,6 +59,8 @@ public class MineOrderListHolder extends BaseViewHolder {
     private ImageView riv_goods_cover_3;
     private TextView tv_goods_price_more;
     private TextView tv_goods_amount_more;
+    /*这个目前这个只用于*/
+    private TextView tv_order_bottom_state;
 
 
     public MineOrderListHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
@@ -94,6 +96,7 @@ public class MineOrderListHolder extends BaseViewHolder {
 //        tv_time_cancel_order = view.findViewById(R.id.tv_time_cancel_order);
         btn_left_function = view.findViewById(R.id.btn_left_function);
         btn_right_function = view.findViewById(R.id.btn_right_function);
+        tv_order_bottom_state = view.findViewById(R.id.tv_order_bottom_state);
 
     }
 
@@ -101,6 +104,7 @@ public class MineOrderListHolder extends BaseViewHolder {
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof MineOrderInfo) {
             int state = ((MineOrderInfo) info).getType();
+            tv_order_bottom_state.setVisibility(View.GONE);
             if (state == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
                 //待付
                 tv_order_right_state.setText("待付");
@@ -117,11 +121,24 @@ public class MineOrderListHolder extends BaseViewHolder {
                 btn_right_function.setText("确认收货");
             } else if (state == Constants.TYPE_LIST_TYPE_ORDER_WAIT_COMMENT_TYPE) {
                 //评价
-                tv_order_right_state.setText("已完成");
+                int orderState = ((MineOrderInfo) info).getOrderState();
+                if (orderState==4){
+                    tv_order_right_state.setText("已完成");
 //                tv_time_cancel_order.setVisibility(View.GONE);
-                btn_left_function.setText("再次购买");
-                btn_left_function.setVisibility(View.GONE);
-                btn_right_function.setText("评价");
+                    btn_left_function.setText("再次购买");
+                    btn_left_function.setVisibility(View.GONE);
+                    btn_right_function.setText("评价");
+                }else if (orderState==5){
+                    tv_order_right_state.setText("已完成");
+//                tv_time_cancel_order.setVisibility(View.GONE);
+                    btn_left_function.setText("再次购买");
+                    btn_left_function.setVisibility(View.GONE);
+                    btn_right_function.setVisibility(View.GONE);
+
+                    tv_order_bottom_state.setVisibility(View.VISIBLE);
+                    tv_order_bottom_state.setText("已评价");
+                }
+
             } else if (state == Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE) {
                 //退款
                 tv_order_right_state.setText("退款");

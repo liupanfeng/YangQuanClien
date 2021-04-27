@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BUGoodsRefundListInfo;
+import com.meishe.yangquan.bean.BUManagerCommentChildInfo;
 import com.meishe.yangquan.bean.BUManagerCommentInfo;
 import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsSubTypeInfo;
@@ -516,7 +517,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_BU_GOODS_SUB_TYPE_LIST;
         }else if (baseInfo instanceof BUOrderInfo) {
             return VIEW_BU_ORDER_LIST;
-        }else if (baseInfo instanceof BUManagerCommentInfo) {
+        }else if (baseInfo instanceof BUManagerCommentChildInfo) {
             return VIEW_BU_COMMENT_LIST;
         }else if (baseInfo instanceof BUGoodsRefundListInfo) {
             return VIEW_BU_REFUND_LIST;

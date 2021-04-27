@@ -1,5 +1,6 @@
 package com.meishe.yangquan.bean;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class MineOrderCommentViewInfo extends BaseInfo {
 
     private String description;
 
-    private List<String> fileIds;
+    private List<Integer> fileIds=new ArrayList<>();
 
 
 
@@ -47,11 +48,11 @@ public class MineOrderCommentViewInfo extends BaseInfo {
         this.description = description;
     }
 
-    public List<String> getFileIds() {
+    public List<Integer> getFileIds() {
         return fileIds;
     }
 
-    public void setFileIds(List<String> fileIds) {
+    public void setFileIds(List<Integer> fileIds) {
         this.fileIds = fileIds;
     }
 
