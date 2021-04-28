@@ -43,6 +43,7 @@ public class LineChartManager {
     //图例对象
     private Legend mLegend;
 
+
     public LineChartManager(Context context, LineChart lineChart) {
         this.mLineChart = lineChart;
         mContext = context;
