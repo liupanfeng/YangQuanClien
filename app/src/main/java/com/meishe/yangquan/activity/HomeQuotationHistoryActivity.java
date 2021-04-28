@@ -119,9 +119,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
                 break;
         }
         tv_chart_title.setText(type + "走势图");
-        initChartData();
         mLineChartManager = new LineChartManager(this, mLineChart);
-        mLineChartManager.showLineChart(xAxisValues, yAxisValues);
 
     }
 
@@ -226,7 +224,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
      * @param quotationId 行情id
      * @param type        seven 7天的数据   thirty：30天的数据
      */
-    private void getQuotationHistoryData(String quotationId, String type) {
+    private void getQuotationHistoryData(String quotationId, final String type) {
         String token = getToken();
         if (TextUtils.isEmpty(token)) {
             return;
@@ -260,6 +258,13 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
                     HistoryInfo data = result.getData();
                     if (data == null) {
                         return;
+                    }
+                    if (type == Constants.QUOTATION_TIME_TYPE_THIRTY){
+//                        mLineChart.setScaleX(3.5f);
+//                        mLineChart.set
+//                        mLineChart.setExtraBottomOffset(10f);
+                    }else if (type == Constants.QUOTATION_TIME_TYPE_SEVEN){
+//                        mLineChart.setScaleX(1.0f);
                     }
                     updateChartView(data);
                 } else {

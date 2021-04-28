@@ -107,7 +107,8 @@ public class LineChartManager {
 
         //设置可缩放,默认可缩放
 //        mLineChart.setScaleEnabled(true);
-        mLineChart.setScaleXEnabled(true);
+         mLineChart.setScaleXEnabled(true);
+//        mLineChart.setScaleEnabled(true);
         // mLineChart.setScaleYEnabled(true);
 
         //支持触控手势
