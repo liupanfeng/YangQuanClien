@@ -65,7 +65,8 @@ public class LineChartMarkView extends MarkerView {
 
         }
 
-        tvValue.setText("当前价:" + e.getY());
+//        tvValue.setText("当前价:" + e.getY());
+        tvValue.setText("" + e.getY());
         super.refreshContent(e, highlight);
     }
 

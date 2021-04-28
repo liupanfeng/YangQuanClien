@@ -111,15 +111,16 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
     /*页面类型 1:养殖助手 2：养殖档案*/
     private int mType;
 
+    private boolean isForbidEdit = false;
+
     /**
-     *
-     * @param batchId 批次id
+     * @param batchId                 批次id
      * @param currentCulturalQuantity 剩余数量
      * @param initTime
-     * @param type  1：养殖助手 2.养殖档案
+     * @param type                    1：养殖助手 2.养殖档案
      * @return
      */
-    public static SheepBreedHelperBaseMessage newInstance(int batchId, int currentCulturalQuantity, long initTime,int type) {
+    public static SheepBreedHelperBaseMessage newInstance(int batchId, int currentCulturalQuantity, long initTime, int type) {
         SheepBreedHelperBaseMessage helperBaseMessage = new SheepBreedHelperBaseMessage();
         Bundle bundle = new Bundle();
         bundle.putInt(Constants.TYPE_KEY_BATCH_ID, batchId);
@@ -171,13 +172,12 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mRlSellSheepWeight = view.findViewById(R.id.rl_sell_sheep_weight);
 
 
-
         tv_title_top_name = view.findViewById(R.id.tv_title_top_name);
         tv_pick_up_top_title = view.findViewById(R.id.tv_pick_up_top_title);
 
         tv_title_bottom_name = view.findViewById(R.id.tv_title_bottom_name);
         tv_pick_up_bottom_title = view.findViewById(R.id.tv_pick_up_bottom_title);
-        if (mType==2){
+        if (mType == 2) {
             //养殖档案
             tv_title_top_name.setText("建档数据");
             tv_pick_up_top_title.setText("建档数据");
@@ -212,7 +212,10 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSelectSheepType.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
+                    return true;
+                }
+                if (isForbidEdit==true){
                     return true;
                 }
                 if (mSelectSheepTypeView == null) {
@@ -233,7 +236,10 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSheepPrice.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
+                    return true;
+                }
+                if (isForbidEdit==true){
                     return true;
                 }
                 return false;
@@ -242,7 +248,10 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSelectSheepWeight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
+                    return true;
+                }
+                if (isForbidEdit==true){
                     return true;
                 }
                 return false;
@@ -251,7 +260,10 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSelectSheepNumber.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
+                    return true;
+                }
+                if (isForbidEdit==true){
                     return true;
                 }
                 return false;
@@ -262,7 +274,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSellType.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
                     return true;
                 }
                 if (mSelectSheepSellTypeView == null) {
@@ -288,7 +300,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSellSheepPrice.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
                     return true;
                 }
                 return false;
@@ -297,7 +309,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSellWeight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
                     return true;
                 }
                 return false;
@@ -306,7 +318,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSellSheepWeight.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
                     return true;
                 }
                 return false;
@@ -315,7 +327,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSellSheepNumber.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
                     return true;
                 }
                 return false;
@@ -324,13 +336,12 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mTvSellSheepSurplusNumber.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (mType==2){
+                if (mType == 2) {
                     return true;
                 }
                 return false;
             }
         });
-
 
 
         mEtSellSheepNumber.setOnTouchListener(new View.OnTouchListener() {
@@ -348,7 +359,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         hideOutPickUp();
 
         getSheepEntryInformation();
-        if (mType==2){
+        if (mType == 2) {
             getSheepOutInformation();
         }
     }
@@ -369,6 +380,18 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
         mEtSelectSheepNumber.setText(data.getAmount() + "");
         mTvSheepTime.setText(FormatDateUtil.longToString(data.getInDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
 
+        forbidEditEntry();
+
+    }
+
+    private void forbidEditEntry() {
+        mBtnBaseMessageSave.setVisibility(View.GONE);
+        mEtSelectSheepType.setClickable(false);
+        mEtSheepPrice.setClickable(false);
+        mTvSheepTime.setClickable(false);
+        mEtSelectSheepWeight.setClickable(false);
+        mEtSelectSheepNumber.setClickable(false);
+        isForbidEdit=true;
     }
 
     /**
@@ -388,12 +411,12 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
 
 
         mEtSellType.setText(data.getOutType());
-        mEtSellSheepPrice.setText(data.getPrice()+"");
-        mEtSellWeight.setText(data.getWeight()+"");
-        mEtSellSheepWeight.setText(data.getCavityWeight()+"");
-        mEtSellSheepNumber.setText(data.getAmount()+"");
-        mTvSellSheepSurplusNumber.setText(0+"");
-        mTvSellSheepTime.setText(FormatDateUtil.longToString(data.getOutDate(),FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
+        mEtSellSheepPrice.setText(data.getPrice() + "");
+        mEtSellWeight.setText(data.getWeight() + "");
+        mEtSellSheepWeight.setText(data.getCavityWeight() + "");
+        mEtSellSheepNumber.setText(data.getAmount() + "");
+        mTvSellSheepSurplusNumber.setText(0 + "");
+        mTvSellSheepTime.setText(FormatDateUtil.longToString(data.getOutDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
 
     }
 
@@ -420,15 +443,15 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
                 break;
             /*入栏时间*/
             case R.id.tv_sheep_time:
-                if (mType==2){
-                    return ;
+                if (mType == 2) {
+                    return;
                 }
                 showDataPicker(mTvSheepTime);
                 break;
             /*选择出栏时间*/
             case R.id.tv_sell_sheep_time:
-                if (mType==2){
-                    return ;
+                if (mType == 2) {
+                    return;
                 }
                 showDataPicker(mTvSellSheepTime);
                 break;
@@ -557,7 +580,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
                             ToastUtil.showToast(mContext, "code:" + result.getCode() + "error:" + result.getMsg());
                         } else {
                             List<HouseKeeperOutInformationInfo> data = result.getData();
-                            if (!CommonUtils.isEmpty(data)){
+                            if (!CommonUtils.isEmpty(data)) {
                                 updateOutUi(data.get(0));
                             }
                         }
@@ -642,7 +665,7 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void showDataPicker(final TextView textView) {
-        String strTime = mTvSheepTime.getText().toString().trim();
+        String strTime = textView.getText().toString().trim();
         if (!TextUtils.isEmpty(strTime)) {
             String[] split = strTime.split("-");
             if (split != null && split.length == 3) {
@@ -746,9 +769,10 @@ public class SheepBreedHelperBaseMessage extends BaseRecyclerFragment implements
                     return;
                 } else {
                     ToastUtil.showToast(mContext, "建档信息已保存");
+                    forbidEditEntry();
                     mTvSellSheepSurplusNumber.setText(mEtSelectSheepNumber.getText().toString());
                     mEtSellSheepNumber.setText(mEtSelectSheepNumber.getText().toString());
-                    SharedPreferencesUtil.getInstance(mContext).putString("sheep_amount_"+mBatchId,mEtSelectSheepNumber.getText().toString());
+                    SharedPreferencesUtil.getInstance(mContext).putString("sheep_amount_" + mBatchId, mEtSelectSheepNumber.getText().toString());
                     SharedPreferencesUtil.getInstance(mContext).putString(mBatchId + "", mEtSheepPrice.getText().toString().trim());
                 }
 

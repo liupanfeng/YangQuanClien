@@ -165,16 +165,16 @@ public class LineChartManager {
     private void setLeftAxis() {
         //启用该轴
         mLeftAxis.setEnabled(true);
-        // 保证Y轴从0开始，不然会上移一点
-        mLeftAxis.setAxisMinimum(0f);
-        // 设置y轴的刻度数,可以不设置，自动适应
-        //mLeftAxis.setLabelCount(10, false);
+//        // 保证Y轴从0开始，不然会上移一点
+//        mLeftAxis.setAxisMinimum(0f);
+//        // 设置y轴的刻度数,可以不设置，自动适应
+//        mLeftAxis.setLabelCount(10, false);
         //设置Y轴的值显示在外面
         mLeftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
         //设置坐标轴宽度
         //mLeftAxis.setAxisLineWidth(5f);
         //设置轴上最高位置在表中最高位置的顶部间距，占总轴的百分比。
-        //mLeftAxis.setSpaceTop(20f);
+       // mLeftAxis.setSpaceTop(20f);
 
         //设置Y轴网格线为虚线
         mLeftAxis.enableGridDashedLine(10f, 10f, 0f);

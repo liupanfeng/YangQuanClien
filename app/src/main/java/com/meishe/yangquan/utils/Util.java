@@ -57,6 +57,7 @@ import java.lang.reflect.Field;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -111,6 +112,12 @@ public class Util {
         }
         lastClickTime2 = time;
         return flag;
+    }
+
+    public static String getPercentValue( float similarity){
+        NumberFormat fmt = NumberFormat.getPercentInstance();
+        fmt.setMaximumFractionDigits(2);//最多两位百分小数，如25.23%
+        return fmt.format(similarity);
     }
 
 

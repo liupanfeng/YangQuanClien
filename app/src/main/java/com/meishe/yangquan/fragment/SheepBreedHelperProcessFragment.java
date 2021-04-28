@@ -362,8 +362,10 @@ public class SheepBreedHelperProcessFragment extends BaseRecyclerFragment implem
         mSheepHairInfoList.clear();
         mFoodRecordInfo = new FoodRecordInfo();
         try {
-            mTvFeedingDays.setText(FormatCurrentData.daysBetween(new Date(mInitTime), new Date(System.currentTimeMillis())) + "");
-            mFoodRecordInfo.setFeedDays(FormatCurrentData.daysBetween(new Date(mInitTime), new Date(System.currentTimeMillis())));
+            if (mInitTime!=0){
+                mTvFeedingDays.setText(FormatCurrentData.daysBetween(new Date(mInitTime), new Date(System.currentTimeMillis())) + "");
+                mFoodRecordInfo.setFeedDays(FormatCurrentData.daysBetween(new Date(mInitTime), new Date(System.currentTimeMillis())));
+            }
 
         } catch (ParseException e) {
             e.printStackTrace();

@@ -132,7 +132,7 @@ public class HomeServiceListHolder extends BaseViewHolder {
 
                     tv_service_name.setText(((ServiceInfo) info).getTeamName());
                     tv_person_number.setText(((ServiceInfo) info).getTeamHumanScale() + "人");
-                    tv_sheep_price.setText(((ServiceInfo) info).getPrice() + "元");
+                    tv_sheep_price.setText(((ServiceInfo) info).getPrice() + "元/只");
                     String teamDesc = ((ServiceInfo) info).getTeamDesc();
                     tv_team_desc.setText(teamDesc);
 

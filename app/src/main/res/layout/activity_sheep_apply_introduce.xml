@@ -49,8 +49,8 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="98dp"
-                android:layout_height="23dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="- 产品介绍 -"
                 android:textColor="#ff303030"
                 android:textSize="17sp"
@@ -59,29 +59,10 @@
                 />
 
             <TextView
+                android:id="@+id/tv_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" 肉羊养殖是唐县的又是产业，针对肉羊养殖发展\n
-“融资难”、“融资贵”、“放款慢”问题，农业银行\n
-以便捷化、普惠化为目标，充分发挥润牧农业产\n
-业化、组织化的优势，为养殖户与银行牵线搭桥\n
-引导产业扶持资金精准“滴灌”，为唐县广大肉羊\n
-养殖户提供“金羊贷”融资服务。“金羊贷”优化了\n
-申办流程和客户体验，资金使用成本低（省钱）\n
-申办贷便捷（放款快）、还贷灵活（循环贷）,让\n
-养殖户切实提高信贷获得感和幸福感。\n
-
-“金阳贷”贷款条件：\n
- 1.存栏1000只以上\n
- 2.唐羊具备上午条件\n
- 3.夫妻双方征信合格\n
- 4.担保人1名（需本人身份证复印件一份）\n
- 5.夫妻双方身份证复印件2份（正反面）\n
- 6.户口本复印件2份（户主+本人页）\n
- 7.夫妻双方结婚证复印件2份 （夫妻在同一户口本无需提供结婚证）\n
- 8.租地合同复印件2份\n
- 9.借款人名下农行卡复印件1份
-"
+                android:text="@string/apply_content_introduce_1"
                 android:textColor="#ff656565"
                 android:textSize="12sp"
                 android:layout_marginLeft="@dimen/dp22"
@@ -100,6 +81,7 @@
                 android:background="@drawable/btn_apply_service_bg"
                 android:layout_marginTop="@dimen/dp45"
                 android:text="申请"
+                android:visibility="gone"
                 android:textColor="@color/white"
                 />
 

@@ -15,6 +15,7 @@ import com.meishe.yangquan.bean.ServiceMessage;
 /**
  * 服务 无线循环消息
  */
+@Deprecated
 public class ServiceMessageHolder extends BaseViewHolder {
     private TextView mTvContent;
     public ServiceMessageHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {

@@ -109,7 +109,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
                 type = "羊苗";
                 break;
             case 6:
-                type = "成品羊";
+                type = "活羊";
                 break;
             case 7:
                 type = "羊腔";
@@ -118,7 +118,7 @@ public class HomeQuotationHistoryActivity extends BaseActivity {
                 type = "饲草";
                 break;
         }
-        tv_chart_title.setText(type + "均价走势图");
+        tv_chart_title.setText(type + "走势图");
         initChartData();
         mLineChartManager = new LineChartManager(this, mLineChart);
         mLineChartManager.showLineChart(xAxisValues, yAxisValues);

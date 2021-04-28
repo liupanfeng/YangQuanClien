@@ -9,9 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.SheepApplyIntroduceActivity;
 import com.meishe.yangquan.activity.SheepBreedHelperActivity;
 import com.meishe.yangquan.activity.SheepBreedServerActivity;
 import com.meishe.yangquan.utils.AppManager;
+import com.meishe.yangquan.utils.ToastUtil;
 
 /**
  * @author liupanfeng
@@ -25,6 +27,9 @@ public class SheepHouseKeepFragment extends BaseRecyclerFragment implements View
 
     private LinearLayout mLlBreedHelper;
     private LinearLayout mLlBreedServer;
+    private View tv_introduce_1;
+    private View tv_introduce_2;
+
 
     public static SheepHouseKeepFragment newInstance(String param1, String param2) {
         SheepHouseKeepFragment fragment = new SheepHouseKeepFragment();
@@ -53,6 +58,9 @@ public class SheepHouseKeepFragment extends BaseRecyclerFragment implements View
         mIvBack = view.findViewById(R.id.iv_back);
         mLlBreedHelper = view.findViewById(R.id.ll_breed_helper);
         mLlBreedServer = view.findViewById(R.id.ll_breed_server);
+        tv_introduce_1 = view.findViewById(R.id.tv_introduce_1);
+        tv_introduce_2 = view.findViewById(R.id.tv_introduce_2);
+
         initTitle();
         return view;
     }
@@ -66,6 +74,8 @@ public class SheepHouseKeepFragment extends BaseRecyclerFragment implements View
     protected void initListener() {
         mLlBreedHelper.setOnClickListener(this);
         mLlBreedServer.setOnClickListener(this);
+        tv_introduce_1.setOnClickListener(this);
+        tv_introduce_2.setOnClickListener(this);
     }
 
     @Override
@@ -81,6 +91,18 @@ public class SheepHouseKeepFragment extends BaseRecyclerFragment implements View
                 break;
             case R.id.ll_breed_server:
                 AppManager.getInstance().jumpActivity(getActivity(), SheepBreedServerActivity.class);
+                break;
+            case R.id.tv_introduce_1:
+                Bundle bundle = new Bundle();
+                bundle.putString("title", "养殖助手");
+                bundle.putString("content", getString(R.string.apply_content_introduce_1));
+                AppManager.getInstance().jumpActivity(getActivity(), SheepApplyIntroduceActivity.class, bundle);
+                break;
+            case R.id.tv_introduce_2:
+                bundle = new Bundle();
+                bundle.putString("title", "养殖服务");
+                bundle.putString("content", getString(R.string.apply_content_introduce_2));
+                AppManager.getInstance().jumpActivity(getActivity(), SheepApplyIntroduceActivity.class, bundle);
                 break;
             default:
                 break;

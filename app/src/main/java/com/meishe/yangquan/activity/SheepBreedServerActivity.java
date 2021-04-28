@@ -69,7 +69,7 @@ public class SheepBreedServerActivity extends BaseActivity {
                     ToastUtil.showToast("您有金融服务申请中，请等待……");
                     return;
                 }
-                AppManager.getInstance().jumpActivity(SheepBreedServerActivity.this, SheepApplyIntroduceActivity.class);
+                AppManager.getInstance().jumpActivity(SheepBreedServerActivity.this,SheepApplyServiceActivity.class);
             }
         });
         //我的业务

@@ -20,6 +20,7 @@ import com.meishe.yangquan.bean.HouseKeeperSourceAnalysisInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
 import com.meishe.yangquan.utils.FormatDateUtil;
+import com.meishe.yangquan.utils.Util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -66,7 +67,7 @@ public class BreedingArchivesFoodAnalysisHolder extends BaseViewHolder {
             tv_name.setText(((FodderInfo) info).getName());
             float percent = ((FodderInfo) info).getPercent();
             if (percent != 0) {
-                tv_percent.setText(percent + "");
+                tv_percent.setText( Util.getPercentValue(percent));
             }
 
 
