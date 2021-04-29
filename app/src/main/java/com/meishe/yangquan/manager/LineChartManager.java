@@ -145,6 +145,7 @@ public class LineChartManager {
         //设置文字颜色
         // mXAxis.setTextColor(Color.RED);
 
+
         //格式化x抽显示的值
          /* mXAxis.setValueFormatter(new IAxisValueFormatter() {
             @Override
