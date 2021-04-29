@@ -100,12 +100,14 @@ public class LineChartManager {
         //缩放现在只能在x轴和y轴上分别进行
         mLineChart.setPinchZoom(false);
 
+        mLineChart.setViewPortOffsets(120, 20, 60, 100);
+
         //设置动画效果
         mLineChart.animateXY(2000, 2000);
 
         //设置可缩放,默认可缩放
-        mLineChart.setScaleEnabled(true);
-        // mLineChart.setScaleXEnabled(true);
+//        mLineChart.setScaleEnabled(true);
+        mLineChart.setScaleXEnabled(true);
         // mLineChart.setScaleYEnabled(true);
 
         //支持触控手势
@@ -128,12 +130,17 @@ public class LineChartManager {
         mXAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
         //隐藏水平网格线
         //mXAxis.setGridColor(Color.TRANSPARENT);
-        mXAxis.setDrawGridLines(false);
+        mXAxis.setDrawGridLines(true);
+
+        mXAxis.setDrawLabels(true);
         //设置x抽的值每隔多少个显示
         mXAxis.setGranularity(1f);
 
         //设置x抽的值倾斜显示
-        //mXAxis.setLabelRotationAngle(-60);
+        mXAxis.setLabelRotationAngle(-60);
+
+//        mXAxis.setLabelCount(dataX.size(),true);
+
         //设置文字颜色
         // mXAxis.setTextColor(Color.RED);
 
@@ -175,7 +182,7 @@ public class LineChartManager {
         //设置坐标轴宽度
         //mLeftAxis.setAxisLineWidth(5f);
         //设置轴上最高位置在表中最高位置的顶部间距，占总轴的百分比。
-       // mLeftAxis.setSpaceTop(20f);
+        // mLeftAxis.setSpaceTop(20f);
 
         //设置Y轴网格线为虚线
         mLeftAxis.enableGridDashedLine(10f, 10f, 0f);
@@ -259,8 +266,8 @@ public class LineChartManager {
         //lineDataSet.setFormSize(15.f);
 
         //线模式为圆滑曲线（默认折线）
-        //lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
-        lineDataSet.setMode(LineDataSet.Mode.LINEAR);
+        lineDataSet.setMode(LineDataSet.Mode.HORIZONTAL_BEZIER);
+//        lineDataSet.setMode(LineDataSet.Mode.LINEAR);
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet);
