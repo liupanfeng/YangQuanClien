@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="147dp"
+        android:background="@mipmap/ic_splash_top"
+        android:layout_centerHorizontal="true"
+        />
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@mipmap/ic_splash_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/tv_bottom_content"
+        android:layout_marginBottom="@dimen/dp10"
+        />
+
+
+    <TextView
+        android:id="@+id/tv_bottom_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="肉羊全产业链数字信息服务平台"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="@dimen/dp20"
+        android:textColor="#ff333333"
+        android:textSize="13sp"
+        />
+
+</RelativeLayout>

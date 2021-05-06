@@ -71,7 +71,7 @@
 
 
     <style name="StartTheme" parent="Theme.AppCompat.Light.NoActionBar">
-       <!-- <item name="android:windowBackground">@mipmap/ic_welcome</item>-->
+       <!-- <item name="android:windowBackground">@layout/layout_splash</item>-->
         <item name="windowNoTitle">true</item>
         <item name="android:windowFullscreen">true</item>
         <item name="windowActionBar">false</item>

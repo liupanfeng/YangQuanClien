@@ -29,17 +29,17 @@ public class SplashActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
-        setContentView(R.layout.activity_splash);
+        setContentView(R.layout.layout_splash);
 
-        boolean isFirstOpen = SharedPreferencesUtil.getInstance(SplashActivity.this).getBoolean(Constants.FIRST_OPEN,false);
-        // 如果是第一次启动，则先进入功能引导页
-        if (!isFirstOpen) {
-            Intent intent = new Intent(this, GuidePageActivity.class);
-            startActivity(intent);
-            overridePendingTransition( R.anim.fade_in, R.anim.fade_out);
-            finish();
-            return;
-        }
+//        boolean isFirstOpen = SharedPreferencesUtil.getInstance(SplashActivity.this).getBoolean(Constants.FIRST_OPEN,false);
+//        // 如果是第一次启动，则先进入功能引导页
+//        if (!isFirstOpen) {
+//            Intent intent = new Intent(this, GuidePageActivity.class);
+//            startActivity(intent);
+//            overridePendingTransition( R.anim.fade_in, R.anim.fade_out);
+//            finish();
+//            return;
+//        }
 
 //        HttpRequestUtil.getInstance(this).getADFromServer();
         String token=UserManager.getInstance(this).getToken();
@@ -52,7 +52,7 @@ public class SplashActivity extends AppCompatActivity {
                 Intent intent=new Intent();
                 intent.setClass(SplashActivity.this, LoginActivity.class);
                 SplashActivity.this.startActivity(intent);
-                SplashActivity.this.overridePendingTransition( R.anim.fade_in, R.anim.fade_out);
+                SplashActivity.this.overridePendingTransition( R.anim.right_tran_in, R.anim.right_tran_out);
                 finish();
             }
         },1000);

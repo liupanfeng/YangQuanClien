@@ -69,7 +69,7 @@
             <LinearLayout
                 android:id="@+id/ll_tab_three"
                 android:layout_width="0dp"
-                android:layout_height="80dp"
+                android:layout_height="70dp"
                 android:layout_weight="1"
                 android:gravity="bottom|center_horizontal"
                 android:visibility="gone"
@@ -89,6 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
+                    android:visibility="gone"
                     android:paddingBottom="2dp"
                     android:text="@string/tab_sheep_house_keeper_page"/>
             </LinearLayout>

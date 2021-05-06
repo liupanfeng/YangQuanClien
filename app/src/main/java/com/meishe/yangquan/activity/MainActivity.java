@@ -284,7 +284,7 @@ public class MainActivity extends BasePermissionActivity {
 
         ivTabOne.setImageResource(R.mipmap.ic_tab_home_unchecked);
         ivTabTwo.setImageResource(R.mipmap.ic_tab_feed_unchecked);
-        ivTabThree.setImageResource(R.mipmap.ic_tab_keeper_unchecked);
+        ivTabThree.setImageResource(R.mipmap.ic_tab_keeper_checked);
         ivTabFour.setImageResource(R.mipmap.ic_tab_sheep_bar_unchecked);
         ivTabFive.setImageResource(R.mipmap.ic_tab_mine_unchecked);
 
