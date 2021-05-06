@@ -80,19 +80,15 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/bg_tab_sheep_house_keeper"/>
 
-                <View
-                    android:layout_width="0.1dp"
-                    android:layout_height="30dp"/>
-
 
                 <TextView
                     android:id="@+id/tv_tab_three"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:visibility="gone"
                     android:paddingBottom="2dp"
                     android:text="@string/tab_sheep_house_keeper_page"/>
+
             </LinearLayout>
 
             <LinearLayout
