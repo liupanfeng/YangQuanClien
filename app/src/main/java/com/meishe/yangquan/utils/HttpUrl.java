@@ -338,6 +338,9 @@ public class HttpUrl {
     /*（用户）评价订单*/
     public static final String SHEEP_APP_USER_ORDER_EVALUATE = URL + "app/user/order/evaluate";
 
+    /*（用户）商品评价列表 */
+    public static final String SHEEP_APP_USER_ORDER_EVALUATE_LIST = URL + "app/user/goods/evaluation/list";
+
 
 
 
