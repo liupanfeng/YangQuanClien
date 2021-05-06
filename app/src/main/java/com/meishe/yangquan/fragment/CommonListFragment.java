@@ -248,6 +248,11 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                 DataHelper.getInstance().getCommentDataFromServer(mList, mListType, mPageSize, mPageNum,
                         mIsLoadMore);
                 break;
+            case Constants.TYPE_COMMON_BU_MESSAGE_LIST:
+                //消息列表
+                DataHelper.getInstance().getOrderMessageData(mList, mSubType, mPageSize, mPageNum,
+                        mIsLoadMore);
+                break;
             default:
                 break;
         }

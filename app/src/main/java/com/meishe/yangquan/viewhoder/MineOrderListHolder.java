@@ -105,15 +105,83 @@ public class MineOrderListHolder extends BaseViewHolder {
         if (info instanceof MineOrderInfo) {
             int state = ((MineOrderInfo) info).getType();
             tv_order_bottom_state.setVisibility(View.GONE);
-            if (state == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
-                //待付
+
+//            DELETE(-1,"订单已删除"),
+//                    COMMITTED(1,"用户已提交-用户待支付"),
+//                    PAYED(2,"用户已支付-商家待发货"),
+//                    SEND_OUT(3,"商家已发货-用户待确认收货"),
+//                    RECEIVED(4,"用户已收货-用户待评价"),
+//                    EVALUATED(5,"用户已评价"),
+//
+//                    APPLY_CANCEL_ORDER(11,"用户申请取消订单-商家待确认"),
+//                    AGREE_CANCEL(12,"商家同意取消订单"),
+//                    REFUSE_CANCEL(13,"商家拒绝取消订单"),
+//
+//                    APPLY_BACK_GOODS(21,"用户申请退货-商家待确认"),
+//                    AGREE_BACK(22,"商家同意退货"),
+//                    //OWNER_RECEIVED(23,"商家已收到退货"),
+//                    OWNER_BACK_MONEY(24,"商家已退款"),
+//                    REFUSE_BACK(25,"商家拒绝退货"),
+//            ;
+
+            if (state == Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE) {
+                int orderState = ((MineOrderInfo) info).getOrderState();
+                switch (orderState){
+                    case 1:
+                        tv_order_right_state.setText("待付");
+                        btn_left_function.setText("取消订单");
+                        btn_left_function.setVisibility(View.VISIBLE);
+                        btn_right_function.setText("去支付");
+                        break;
+                    case 2:
+                    case 3:
+                        tv_order_right_state.setText("待收货");
+                        btn_left_function.setText("申请退款");
+                        btn_left_function.setVisibility(View.VISIBLE);
+                        btn_right_function.setText("确认收货");
+                        break;
+                    case 4:
+                        tv_order_right_state.setText("已完成");
+                        btn_left_function.setText("再次购买");
+                        btn_left_function.setVisibility(View.GONE);
+                        btn_right_function.setText("评价");
+                        break;
+                    case 5:
+                        tv_order_right_state.setText("已完成");
+                        btn_left_function.setText("再次购买");
+                        btn_left_function.setVisibility(View.GONE);
+                        btn_right_function.setVisibility(View.GONE);
+
+                        tv_order_bottom_state.setVisibility(View.VISIBLE);
+                        tv_order_bottom_state.setText("已评价");
+                        break;
+                    case 11:
+                        break;
+                    case 12:
+                        break;
+                    case 13:
+                        break;
+                    case 21:
+                    case 22:
+                    case 23:
+                    case 24:
+                    case 25:
+                        tv_order_right_state.setText("退款");
+                        btn_left_function.setText("再次购买");
+                        btn_left_function.setVisibility(View.GONE);
+                        btn_right_function.setText("退货进度");
+                        break;
+                }
+
+            } else if (state == Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE) {
+                //用户已提交-用户待支付
                 tv_order_right_state.setText("待付");
 //                tv_time_cancel_order.setVisibility(View.VISIBLE);
                 btn_left_function.setText("取消订单");
                 btn_left_function.setVisibility(View.VISIBLE);
                 btn_right_function.setText("去支付");
             } else if (state == Constants.TYPE_LIST_TYPE_ORDER_WAIT_RECEIVE_TYPE) {
-                //待收货
+                //用户已支付-商家待发货
                 tv_order_right_state.setText("待收货");
 //                tv_time_cancel_order.setVisibility(View.GONE);
                 btn_left_function.setText("申请退款");

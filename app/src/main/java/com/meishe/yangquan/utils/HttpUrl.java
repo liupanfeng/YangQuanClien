@@ -381,5 +381,8 @@ public class HttpUrl {
     /*（商户）评价列表 */
     public static final String BU_HOME_ORDER_EVALUATION_LIST = URL + "app/owner/order/evaluation/list";
 
+    /*（商户）消息列表 */
+    public static final String BU_HOME_ORDER_MESSAGE_LIST = URL + "app/owner/shop/message/list";
+
 
 }

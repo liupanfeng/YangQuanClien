@@ -41,17 +41,29 @@ public class BUMessageFragment extends BaseRecyclerFragment {
         mTitleList = new ArrayList<>();
 
 
-        BUMessageListFragment buMessageListFragment = BUMessageListFragment.newInstance(Constants.BU_TYPE_MESSAGE_ORDER);
-        mFragmentList.add(buMessageListFragment);
+//        BUMessageListFragment buMessageListFragment = BUMessageListFragment.newInstance(Constants.BU_TYPE_MESSAGE_ORDER);
+//        mFragmentList.add(buMessageListFragment);
+//
+//        buMessageListFragment = BUMessageListFragment.newInstance(Constants.BU_TYPE_MESSAGE_COMMENT);
+//        mFragmentList.add(buMessageListFragment);
+//
+//        buMessageListFragment = BUMessageListFragment.newInstance(Constants.BU_TYPE_MESSAGE_REFUND);
+//        mFragmentList.add(buMessageListFragment);
+//
+//        buMessageListFragment = BUMessageListFragment.newInstance(Constants.BU_TYPE_MESSAGE_OTHER);
+//        mFragmentList.add(buMessageListFragment);
 
-        buMessageListFragment = BUMessageListFragment.newInstance(Constants.BU_TYPE_MESSAGE_COMMENT);
-        mFragmentList.add(buMessageListFragment);
+        CommonListFragment commonListFragment=CommonListFragment.newInstance(true,Constants.TYPE_COMMON_BU_MESSAGE_LIST,Constants.BU_TYPE_MESSAGE_ORDER);
+        mFragmentList.add(commonListFragment);
 
-        buMessageListFragment = BUMessageListFragment.newInstance(Constants.BU_TYPE_MESSAGE_REFUND);
-        mFragmentList.add(buMessageListFragment);
+        commonListFragment=CommonListFragment.newInstance(true,Constants.TYPE_COMMON_BU_MESSAGE_LIST,Constants.BU_TYPE_MESSAGE_COMMENT);
+        mFragmentList.add(commonListFragment);
 
-        buMessageListFragment = BUMessageListFragment.newInstance(Constants.BU_TYPE_MESSAGE_OTHER);
-        mFragmentList.add(buMessageListFragment);
+        commonListFragment=CommonListFragment.newInstance(true,Constants.TYPE_COMMON_BU_MESSAGE_LIST,Constants.BU_TYPE_MESSAGE_REFUND);
+        mFragmentList.add(commonListFragment);
+
+        commonListFragment=CommonListFragment.newInstance(true,Constants.TYPE_COMMON_BU_MESSAGE_LIST,Constants.BU_TYPE_MESSAGE_OTHER);
+        mFragmentList.add(commonListFragment);
 
 
         mTitleList.add("订单消息");

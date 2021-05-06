@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.bean.BUMeesageDataInfo;
+import com.meishe.yangquan.bean.BUMessageDataInfo;
 import com.meishe.yangquan.divider.RecycleViewDivider;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.ScreenUtils;
@@ -28,7 +28,7 @@ public class BUMessageListFragment extends BaseRecyclerFragment {
     /*消息类型*/
     private int mType;
 
-    private List<BUMeesageDataInfo> mData;
+    private List<BUMessageDataInfo> mData;
 
     /**
      * @param type 消息类型
@@ -68,40 +68,40 @@ public class BUMessageListFragment extends BaseRecyclerFragment {
     @Override
     protected void initData() {
         mData=new ArrayList<>();
-        BUMeesageDataInfo buMeesageDataInfo=null;
+        BUMessageDataInfo buMeesageDataInfo=null;
         switch (mType){
             case Constants.BU_TYPE_MESSAGE_ORDER:
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
                 break;
             case Constants.BU_TYPE_MESSAGE_COMMENT:
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
                 break;
             case Constants.BU_TYPE_MESSAGE_REFUND:
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
                 break;
             case Constants.BU_TYPE_MESSAGE_OTHER:
-                buMeesageDataInfo=new BUMeesageDataInfo();
+                buMeesageDataInfo=new BUMessageDataInfo();
                 mData.add(buMeesageDataInfo);
                 break;
 

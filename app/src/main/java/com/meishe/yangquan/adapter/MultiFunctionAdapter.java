@@ -11,15 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BUGoodsRefundListInfo;
 import com.meishe.yangquan.bean.BUManagerCommentChildInfo;
-import com.meishe.yangquan.bean.BUManagerCommentInfo;
 import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsSubTypeInfo;
 import com.meishe.yangquan.bean.BUGoodsTypeInfo;
-import com.meishe.yangquan.bean.BUMeesageDataInfo;
-import com.meishe.yangquan.bean.BUManagerOrderInfo;
+import com.meishe.yangquan.bean.BUMessageDataInfo;
 import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BUPictureInfo;
-import com.meishe.yangquan.bean.BUManagerRefundInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BaseInfo;
@@ -28,7 +25,6 @@ import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedReceiverAddressInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
-import com.meishe.yangquan.bean.FeedShoppingCarInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.FodderInfo;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
@@ -97,7 +93,6 @@ import com.meishe.yangquan.viewhoder.SheepCutHairHolder;
 import com.meishe.yangquan.viewhoder.HomeMarketPictureListHolder;
 import com.meishe.yangquan.viewhoder.IndustryContentHolder;
 import com.meishe.yangquan.viewhoder.IndustryListHolder;
-import com.meishe.yangquan.viewhoder.HomeMarketListHolder;
 import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
 import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineBreedingArchivesHolder;
@@ -499,7 +494,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_CALLBACK_LIST;
         }else if (baseInfo instanceof MineUserMessageInfo) {
             return VIEW_MINE_USER_MESSAGE_LIST;
-        }else if (baseInfo instanceof BUMeesageDataInfo) {
+        }else if (baseInfo instanceof BUMessageDataInfo) {
             return VIEW_BU_MESSAGE_LIST;
         } else if (baseInfo instanceof FeedShoppingInfo) {
             return VIEW_FEED_SHOPPING_LIST;

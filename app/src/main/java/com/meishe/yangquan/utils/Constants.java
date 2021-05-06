@@ -443,5 +443,8 @@ public class Constants {
     /*商版-评价管理列表*/
     public static final int TYPE_COMMON_BU_COMMENT_MANAGER = TYPE_COMMON_BASE + 3;
 
+    /*商版-消息列表*/
+    public static final int TYPE_COMMON_BU_MESSAGE_LIST = TYPE_COMMON_BASE + 4;
+
 
 }

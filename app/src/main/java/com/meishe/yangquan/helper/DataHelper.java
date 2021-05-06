@@ -15,6 +15,8 @@ import com.meishe.yangquan.bean.BUManagerCommentInfo;
 import com.meishe.yangquan.bean.BUManagerCommentInfoResult;
 import com.meishe.yangquan.bean.BUManagerOrderInfo;
 import com.meishe.yangquan.bean.BUManagerOrderInfoResult;
+import com.meishe.yangquan.bean.BUMessageDataInfo;
+import com.meishe.yangquan.bean.BUMessageDataInfoResult;
 import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
@@ -1054,6 +1056,107 @@ public class DataHelper {
                         }
                         commonResponse(elements, list, isLoadMore, pageSize, pageNumber);
                     }
+//                    BUGoodsRefundInfo dataList = result.getData();
+//                    List<BUGoodsRefundListInfo> elements = null;
+//                    if (dataList != null) {
+//                        elements = dataList.getElements();
+//                    }
+//                    if (!CommonUtils.isEmpty(elements)) {
+//                        for (int i = 0; i < elements.size(); i++) {
+//                            BUGoodsRefundListInfo buGoodsRefundListInfo = elements.get(i);
+//                            if (buGoodsRefundListInfo == null) {
+//                                continue;
+//                            }
+//                            buGoodsRefundListInfo.setState(type);
+//                        }
+//                    }
+
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener != null) {
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+    /**
+     * 获取消息列表
+     * order 订单消息
+     * evaluate 评价消息
+     * back_goods 退款消息
+     * collect_shop 其他消息
+     *
+     */
+    public void getOrderMessageData(final List<BaseInfo> list, final int subType,
+                                         final int pageSize, final int pageNumber,
+                                         final boolean isLoadMore ) {
+
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("pageNum", pageNumber);
+        param.put("pageSize", pageSize);
+        String msgType="";
+        switch (subType){
+            case Constants.BU_TYPE_MESSAGE_ORDER:
+                msgType="order";
+                break;
+            case Constants.BU_TYPE_MESSAGE_COMMENT:
+                msgType="evaluate";
+                break;
+            case Constants.BU_TYPE_MESSAGE_REFUND:
+                msgType="back_goods";
+                break;
+            case Constants.BU_TYPE_MESSAGE_OTHER:
+                msgType="collect_shop";
+                break;
+
+        }
+
+        param.put("msgType", msgType);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_ORDER_MESSAGE_LIST, new BaseCallBack<BUMessageDataInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener != null) {
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, BUMessageDataInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+
+                    List<BUMessageDataInfo> data = result.getData();
+                    if (!CommonUtils.isEmpty(data)){
+                            for (int i = 0; i < data.size() ; i++) {
+                                BUMessageDataInfo buMessageDataInfo = data.get(i);
+                                if (buMessageDataInfo==null){
+                                    continue;
+                                }
+//                                buMessageDataInfo.setType(listType);
+                            }
+                        }
+                        commonResponse(data, list, isLoadMore, pageSize, pageNumber);
 //                    BUGoodsRefundInfo dataList = result.getData();
 //                    List<BUGoodsRefundListInfo> elements = null;
 //                    if (dataList != null) {
