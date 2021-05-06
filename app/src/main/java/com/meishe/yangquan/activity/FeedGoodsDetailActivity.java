@@ -1,21 +1,17 @@
 package com.meishe.yangquan.activity;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.FeedCommentInfoResult;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfoResult;
 import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
@@ -93,12 +89,6 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
     @Override
     public void initData() {
-//        Intent intent = getIntent();
-//        if (intent != null) {
-//            Bundle extras = intent.getExtras();
-//            if (extras != null) {
-//            }
-//        }
 
         feedGoodsInfo = UserManager.getInstance(mContext).getFeedGoodsInfo();
         if (feedGoodsInfo != null) {
@@ -107,7 +97,8 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         }
 
         if (mGoodsId > 0) {
-            getGoodsInfoFromServer();
+//            getGoodsInfoFromServer();
+            getCommonDataFromServer();
         }
     }
 
@@ -201,6 +192,51 @@ public class FeedGoodsDetailActivity extends BaseActivity {
                         hideLoading();
                     }
                 });
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+    /**
+     * 获取评论数据
+     */
+    private void getCommonDataFromServer() {
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("goodsId", mGoodsId);
+        param.put("pageNum", 1);
+        param.put("pageSize", 2);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_EVALUATE_LIST, new BaseCallBack<FeedCommentInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, FeedCommentInfoResult result) {
+                if (result.getCode() != 1) {
+                    ToastUtil.showToast(mContext, result.getMsg());
+                    return;
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
             }
 
             @Override
