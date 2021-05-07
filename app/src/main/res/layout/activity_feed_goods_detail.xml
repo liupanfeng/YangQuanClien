@@ -84,6 +84,7 @@
             />
 
         <RelativeLayout
+            android:id="@+id/rl_comment_container"
             android:layout_width="match_parent"
             android:layout_height="236dp">
 
@@ -134,7 +135,7 @@
                         android:layout_height="@dimen/dp28"/>
 
                     <TextView
-                        android:id="@+id/iv_feed_comment_nickname"
+                        android:id="@+id/tv_feed_comment_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="用户XXX"

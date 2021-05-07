@@ -22,6 +22,7 @@ import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.BusinessOpportunity;
 import com.meishe.yangquan.bean.Comment;
+import com.meishe.yangquan.bean.FeedCommentInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedReceiverAddressInfo;
 import com.meishe.yangquan.bean.FeedShoppingCarGoodsInfo;
@@ -70,6 +71,7 @@ import com.meishe.yangquan.viewhoder.BUHomeManagerOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeManagerRefundListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeShopViewHolder;
 import com.meishe.yangquan.viewhoder.BUMessageViewHolder;
+import com.meishe.yangquan.viewhoder.FeedCommentListHolder;
 import com.meishe.yangquan.viewhoder.FeedReceiveAddressListHolder;
 import com.meishe.yangquan.viewhoder.FeedShoppingCarListHolder;
 import com.meishe.yangquan.viewhoder.MineCollectionListHolder;
@@ -352,6 +354,14 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
                 viewHolder = new MineOrderCommentListHolder(view, this);
                 break;
 
+            /*商品详情 -订单评论*/
+           case VIEW_FEED_COMMON_ORDER:
+                view = mLayoutInflater.inflate(R.layout.item_feed_comment_view, parent, false);
+                viewHolder = new FeedCommentListHolder(view, this);
+                break;
+
+
+
             /*商版-店铺数据*/
             case VIEW_BU_HOME_SHOPDATA_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_bu_home_shop_view, parent, false);
@@ -530,6 +540,8 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_MINE_REFUND_PROGRESS;
         }else if (baseInfo instanceof MineOrderCommentViewInfo) {
             return VIEW_MINE_COMMON_ORDER;
+        }else if (baseInfo instanceof FeedCommentInfo.FeedCommentElementInfo) {
+            return VIEW_FEED_COMMON_ORDER;
         }
 
         return super.getItemViewType(position);

@@ -62,6 +62,15 @@ public class FeedGoodsDetailActivity extends BaseActivity {
     private View btn_feed_good_buy_now;
 
     private FeedGoodsInfo feedGoodsInfo;
+    private View rl_comment_1;
+    private View rl_comment_container;
+    private View tv_feed_goods_open_all;
+    private TextView tv_feed_goods_comment;
+    private ImageView iv_feed_comment_photo;
+    private TextView iv_feed_comment_nickname;
+    private TextView tv_feed_goods_time;
+    private TextView tv_feed_goods_comment_content;
+    private View rl_comment_2;
 
 
     @Override
@@ -81,6 +90,28 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         tv_colect_goods = findViewById(R.id.tv_colect_goods);
         /*立即购买*/
         btn_feed_good_buy_now = findViewById(R.id.btn_feed_good_buy_now);
+
+        /*两个评论*/
+        rl_comment_container = findViewById(R.id.rl_comment_container);
+
+        /*查看全部*/
+        tv_feed_goods_open_all = findViewById(R.id.tv_feed_goods_open_all);
+        /*商品评价*/
+        tv_feed_goods_comment = findViewById(R.id.tv_feed_goods_comment);
+
+
+
+        rl_comment_1 = findViewById(R.id.rl_comment_1);
+        iv_feed_comment_photo = findViewById(R.id.iv_feed_comment_photo);
+        iv_feed_comment_nickname = findViewById(R.id.tv_feed_comment_nickname);
+        tv_feed_goods_time = findViewById(R.id.tv_feed_goods_time);
+        /*评论内容*/
+        tv_feed_goods_comment_content = findViewById(R.id.tv_feed_goods_comment_content);
+
+        /*第二个评论*/
+        rl_comment_2 = findViewById(R.id.rl_comment_2);
+
+
 
 
         banner = findViewById(R.id.banner);

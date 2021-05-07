@@ -8,11 +8,11 @@ import java.util.List;
  * @CreateDate : 2021/5/6 18:41
  * @Description : 饲料-评论数据
  */
-public class FeedCommentInfo extends BaseInfo{
+public class FeedCommentInfo {
 
     private int count;
 
-    private List<Element> elements;
+    private List<FeedCommentElementInfo> elements;
 
     public int getCount() {
         return count;
@@ -22,16 +22,16 @@ public class FeedCommentInfo extends BaseInfo{
         this.count = count;
     }
 
-    public List<Element> getElements() {
+    public List<FeedCommentElementInfo> getElements() {
         return elements;
     }
 
-    public void setElements(List<Element> elements) {
+    public void setElements(List<FeedCommentElementInfo> elements) {
         this.elements = elements;
     }
 
 
-    private class Element{
+    public class FeedCommentElementInfo extends BaseInfo{
 //"id": 4,
 //        "orderId": 15,
 //        "goodsId": 3,

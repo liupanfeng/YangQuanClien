@@ -14,9 +14,6 @@ import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 
-/**
- * Created by ${gexinyu} on 2018/5/28.
- */
 
 public class ScreenUtils {
     private static final String TAG = ScreenUtils.class.getSimpleName();
