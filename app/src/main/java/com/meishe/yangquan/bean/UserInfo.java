@@ -63,6 +63,9 @@ public class UserInfo {
 
     private int currentCulturalQuantity = -1;           // 存栏量
 
+    /*是否已经设置过 支付密码*/
+    private boolean needInitPaymentCode;
+
     public String getNickname() {
         return nickname;
     }
@@ -181,5 +184,13 @@ public class UserInfo {
 
     public void setCurrentCulturalQuantity(int currentCulturalQuantity) {
         this.currentCulturalQuantity = currentCulturalQuantity;
+    }
+
+    public boolean isNeedInitPaymentCode() {
+        return needInitPaymentCode;
+    }
+
+    public void setNeedInitPaymentCode(boolean needInitPaymentCode) {
+        this.needInitPaymentCode = needInitPaymentCode;
     }
 }

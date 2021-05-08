@@ -34,6 +34,7 @@ import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.GlideUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.IosDialog;
 
 
@@ -343,6 +344,7 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
                     return;
                 }
                 BUShoppingInfo data = result.getData();
+                UserManager.getInstance(mContext).setBuShoppingInfo(data);
                 updateUI(data);
             }
 
@@ -519,7 +521,8 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
             mShoppingDataMap.put("待发货", data.getPayedOrderCount());
             mShoppingDataMap.put("待评价",data.getReceivedOrderCount());
             mShoppingDataMap.put("退货中", data.getApplyBackGoodsOrderCount());
-//            mShoppingDataMap.put("今日总访客",data.get());  ?
+
+            mShoppingDataMap.put("今日总访客",data.getVisitorAmount());
 
             mShoppingDataMap.put("今日订单数量", data.getTodayOrderCount());
             mShoppingDataMap.put("今日成交额", data.getTodayPrice());

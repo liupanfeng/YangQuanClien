@@ -124,12 +124,9 @@ public class FeedShoppingInfo extends BaseInfo {
     } else if (type == 3) {
         param.put("mainCategory", "五金电料");
     }*/
+
     /*请求数据类型  饲料 玉米 五金电料  这里定义的规则不能变*/
     private int type;
-
-
-
-
 
     public int getId() {
         return id;

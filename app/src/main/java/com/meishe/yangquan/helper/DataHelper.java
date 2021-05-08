@@ -2,6 +2,7 @@ package com.meishe.yangquan.helper;
 
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.View;
 
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.activity.LoginActivity;
@@ -19,6 +20,8 @@ import com.meishe.yangquan.bean.BUMessageDataInfo;
 import com.meishe.yangquan.bean.BUMessageDataInfoResult;
 import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.FeedCommentInfo;
+import com.meishe.yangquan.bean.FeedCommentInfoResult;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfoListResult;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
@@ -862,6 +865,63 @@ public class DataHelper {
     }
 
 
+    /**
+     * 获取评论数据
+     */
+    public void getCommonDataFromServer(final List<BaseInfo> list,
+                                         final int pageSize, final int pageNumber,
+                                         final boolean isLoadMore,  final int goodsId) {
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("goodsId", goodsId);
+        param.put("pageNum", pageNumber);
+        param.put("pageSize", pageSize);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_APP_USER_ORDER_EVALUATE_LIST, new BaseCallBack<FeedCommentInfoResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnCallBackListener != null) {
+                    mOnCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, FeedCommentInfoResult result) {
+                if (result != null && result.getCode() == 1) {
+                    FeedCommentInfo data = result.getData();
+                    List<FeedCommentInfo.FeedCommentElementInfo> elements = data.getElements();
+                    commonResponse(elements, list, isLoadMore, pageSize, pageNumber);
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnCallBackListener != null) {
+                    mOnCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
+
+
     ////////////////////////////////////////////下面是商版接口///////////////////////////////////////////////
 
     /**
@@ -1173,7 +1233,7 @@ public class DataHelper {
 //                    }
 
                 } else {
-                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                    commonResponse(null, list, isLoadMore, pageSize, pageNumber);
                 }
             }
 

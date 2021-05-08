@@ -387,5 +387,8 @@ public class HttpUrl {
     /*（商户）消息列表 */
     public static final String BU_HOME_ORDER_MESSAGE_LIST = URL + "app/owner/shop/message/list";
 
+    /*（商户）审核申请退货 */
+    public static final String BU_HOME_ORDER_AUTH_BACK_GOODS = URL + "app/owner/order/auth/backGoods";
+
 
 }

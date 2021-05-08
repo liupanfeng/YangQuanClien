@@ -9,12 +9,14 @@ import com.meishe.yangquan.activity.MineBreedingArchivesDetailActivity;
 import com.meishe.yangquan.activity.MineOrderCommentActivity;
 import com.meishe.yangquan.activity.MineRefundProgressActivity;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
+import com.meishe.yangquan.bean.BUGoodsRefundListInfo;
 import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BaseInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.pop.BUChangePriceCenterView;
 import com.meishe.yangquan.pop.ConfirmOrderView;
+import com.meishe.yangquan.pop.RefundCenterTipView;
 import com.meishe.yangquan.pop.SelectCancelOrderTypeView;
 import com.meishe.yangquan.pop.TipsCenterView;
 import com.meishe.yangquan.utils.AppManager;
@@ -164,7 +166,8 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
 
                 }
             }
-        } else if (info instanceof MineBreedingArchivesInfo) {
+        }
+        else if (info instanceof MineBreedingArchivesInfo) {
             if (v.getId() == R.id.btn_delete) {
                 TipsCenterView tipsCenterView = TipsCenterView.create(context, "提示", "删除无法恢复，确定删除养殖档案？", new TipsCenterView.OnAttachListener() {
                     @Override
@@ -194,7 +197,8 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
                 bundle.putLong(Constants.TYPE_KEY_SHEEP_INIT_TIME, initDate);
                 AppManager.getInstance().jumpActivity(context, MineBreedingArchivesDetailActivity.class, bundle);
             }
-        } else if (info instanceof BUOrderInfo) {
+        }
+        else if (info instanceof BUOrderInfo) {
             int state = ((BUOrderInfo) info).getState();
             if (state == Constants.TYPE_COMMON_BU_ORDER_WAIT_PAY_TYPE) {
                 //待付---改价
@@ -237,6 +241,32 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
 
             }
 
+        }
+        else if (info instanceof BUGoodsRefundListInfo) {
+            //商版-退货管理
+            int state = ((BUGoodsRefundListInfo) info).getState();
+            switch (state){
+                case Constants.TYPE_REFUND_ING_TYPE:
+//                    tv_bu_order_right_state.setText("退货中");
+//                    rl_bu_refund.setVisibility(View.VISIBLE);
+                    RefundCenterTipView.create(context, "退货审核", new RefundCenterTipView.OnAttachListener() {
+                        @Override
+                        public void cancelClick(String content) {
+
+                        }
+
+                        @Override
+                        public void confirmClick(String content) {
+
+                        }
+                    });
+                    break;
+                case Constants.TYPE_REFUND_FINISH_TYPE:
+//                    tv_bu_order_right_state.setText("已完成");
+//                    rl_bu_refund.setVisibility(View.GONE);
+
+                    break;
+            }
         }
     }
 

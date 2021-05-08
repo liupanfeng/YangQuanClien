@@ -67,19 +67,7 @@ public class BUHomeManagerRefundListHolder extends BaseViewHolder {
     public void bindViewHolder(final Context context, final BaseInfo info, int position, View.OnClickListener listener) {
         if (info instanceof BUGoodsRefundListInfo) {
 
-//            List<String> goodsImageUrls = ((BUGoodsInfo) info).getGoodsImageUrls();
-//            if (!CommonUtils.isEmpty(goodsImageUrls)) {
-//                RequestOptions options = new RequestOptions();
-//                options.centerCrop();
-//                options.placeholder(R.mipmap.ic_message_list_photo_default);
-//                Glide.with(context)
-//                        .asBitmap()
-//                        .load(goodsImageUrls.get(0))
-//                        .apply(options)
-//                        .into(riv_bu_goods_cover);
-//            }
-
-            int state = ((BUManagerRefundInfo) info).getState();
+            int state = ((BUGoodsRefundListInfo) info).getState();
             switch (state){
                 case Constants.TYPE_REFUND_ING_TYPE:
                     tv_bu_order_right_state.setText("退货中");

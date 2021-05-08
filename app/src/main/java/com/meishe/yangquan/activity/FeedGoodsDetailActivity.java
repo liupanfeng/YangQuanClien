@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BaseInfo;
+import com.meishe.yangquan.bean.FeedCommentInfo;
 import com.meishe.yangquan.bean.FeedCommentInfoResult;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfoResult;
@@ -72,6 +73,13 @@ public class FeedGoodsDetailActivity extends BaseActivity {
     private TextView tv_feed_goods_comment_content;
     private View rl_comment_2;
 
+    /*商品价格*/
+    private TextView tv_feed_goods_detail_price;
+    /*商品名称*/
+    private TextView tv_feed_goods_detail_name;
+    /*商品描述*/
+    private TextView tv_feed_goods_detail_desc;
+
 
     @Override
     protected int initRootView() {
@@ -82,7 +90,15 @@ public class FeedGoodsDetailActivity extends BaseActivity {
     public void initView() {
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
+
+        tv_feed_goods_detail_price = findViewById(R.id.tv_feed_goods_detail_price);
+        tv_feed_goods_detail_name = findViewById(R.id.tv_feed_goods_detail_name);
+        tv_feed_goods_detail_desc = findViewById(R.id.tv_feed_goods_detail_desc);
+
+
+
         btn_feed_add_shopping_cart = findViewById(R.id.btn_feed_add_shopping_cart);
+
         iv_feed_goods_desc = findViewById(R.id.iv_feed_goods_desc);
         ll_feed_goods_phone_call = findViewById(R.id.ll_feed_goods_phone_call);
         ll_feed_goods_collection = findViewById(R.id.ll_feed_shopping_collection);
@@ -93,25 +109,15 @@ public class FeedGoodsDetailActivity extends BaseActivity {
 
         /*两个评论*/
         rl_comment_container = findViewById(R.id.rl_comment_container);
+        rl_comment_container.setVisibility(View.GONE);
 
         /*查看全部*/
         tv_feed_goods_open_all = findViewById(R.id.tv_feed_goods_open_all);
         /*商品评价*/
         tv_feed_goods_comment = findViewById(R.id.tv_feed_goods_comment);
 
-
-
-        rl_comment_1 = findViewById(R.id.rl_comment_1);
-        iv_feed_comment_photo = findViewById(R.id.iv_feed_comment_photo);
-        iv_feed_comment_nickname = findViewById(R.id.tv_feed_comment_nickname);
-        tv_feed_goods_time = findViewById(R.id.tv_feed_goods_time);
-        /*评论内容*/
-        tv_feed_goods_comment_content = findViewById(R.id.tv_feed_goods_comment_content);
-
-        /*第二个评论*/
-        rl_comment_2 = findViewById(R.id.rl_comment_2);
-
-
+        mRecyclerView = findViewById(R.id.recyclerView);
+        initRecyclerView();
 
 
         banner = findViewById(R.id.banner);
@@ -163,6 +169,11 @@ public class FeedGoodsDetailActivity extends BaseActivity {
             String descUrl = descriptionImageUrls.get(0);
             GlideUtil.getInstance().loadUrl(descUrl, iv_feed_goods_desc);
         }
+
+
+        tv_feed_goods_detail_price.setText(feedGoodsInfo.getPrice()+"/"+feedGoodsInfo.getSpecification());
+        tv_feed_goods_detail_name.setText(feedGoodsInfo.getTitle());
+        tv_feed_goods_detail_desc.setText(feedGoodsInfo.getDescription());
 
     }
 
@@ -259,6 +270,20 @@ public class FeedGoodsDetailActivity extends BaseActivity {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
+                FeedCommentInfo data = result.getData();
+                if (data!=null){
+                    int count = data.getCount();
+                    if (count==0){
+                        rl_comment_container.setVisibility(View.GONE);
+                        return;
+                    }
+                    rl_comment_container.setVisibility(View.VISIBLE);
+                    tv_feed_goods_comment.setText(String.format("商品评价（%d）",data.getCount()));
+                    List<FeedCommentInfo.FeedCommentElementInfo> elements = data.getElements();
+                    mAdapter.addAll(elements);
+                }else{
+                    rl_comment_container.setVisibility(View.GONE);
+                }
             }
 
 
@@ -289,6 +314,7 @@ public class FeedGoodsDetailActivity extends BaseActivity {
         ll_feed_goods_phone_call.setOnClickListener(this);
         ll_feed_goods_collection.setOnClickListener(this);
         btn_feed_good_buy_now.setOnClickListener(this);
+        tv_feed_goods_open_all.setOnClickListener(this);
         mIvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -323,6 +349,8 @@ public class FeedGoodsDetailActivity extends BaseActivity {
             Bundle bundle=new Bundle();
             bundle.putString(Constants.TYPE_BUY_TYPE,"goods");
             AppManager.getInstance().jumpActivity(this, FeedOrderActivity.class,bundle);
+        } else if (v.getId()==R.id.tv_feed_goods_open_all){
+            CommonRecyclerActivity.newCommonRecyclerActivity(mContext,Constants.TYPE_COMMON_FEED_COMMENT,mGoodsId);
         }
     }
 

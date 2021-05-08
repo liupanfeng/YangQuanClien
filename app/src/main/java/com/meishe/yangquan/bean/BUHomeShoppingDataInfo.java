@@ -57,6 +57,8 @@ public class BUHomeShoppingDataInfo extends BaseInfo{
     private int todayPrice;
     /*累计成交额数量*/
     private int totalPrice;
+    /*总访客*/
+    private int visitorAmount;
 
 
     public String getShopName() {
@@ -185,5 +187,13 @@ public class BUHomeShoppingDataInfo extends BaseInfo{
 
     public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public int getVisitorAmount() {
+        return visitorAmount;
+    }
+
+    public void setVisitorAmount(int visitorAmount) {
+        this.visitorAmount = visitorAmount;
     }
 }

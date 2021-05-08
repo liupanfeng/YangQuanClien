@@ -233,6 +233,12 @@ public class CommonListFragment extends BaseRecyclerFragment implements DataHelp
                         mIsLoadMore, mListType, mSubType);
                 break;
 
+            case Constants.TYPE_COMMON_FEED_COMMENT:
+                //饲料-评论
+                DataHelper.getInstance().getCommonDataFromServer(mList, mPageSize, mPageNum,
+                        mIsLoadMore, mSubType);
+                break;
+
             //////////////////////////商版///////////////////////////////////////////
             case Constants.TYPE_COMMON_BU_ORDER:
                 //饲料-商店-订单管理

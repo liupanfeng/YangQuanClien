@@ -19,7 +19,7 @@
         android:background="@mipmap/ic_splash_logo"
         android:layout_centerHorizontal="true"
         android:layout_above="@+id/tv_bottom_content"
-        android:layout_marginBottom="@dimen/dp10"
+        android:layout_marginBottom="@dimen/dp16"
         />
 
 
@@ -30,7 +30,7 @@
         android:text="肉羊全产业链数字信息服务平台"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dp20"
+        android:layout_marginBottom="@dimen/dp44"
         android:textColor="#ff333333"
         android:textSize="13sp"
         />

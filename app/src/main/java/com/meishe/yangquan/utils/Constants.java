@@ -431,6 +431,9 @@ public class Constants {
     /*用户版-饲料-商店列表*/
     public static final int TYPE_COMMON_SHOPPING = 15;
 
+    /*用户版-饲料-评论列表*/
+    public static final int TYPE_COMMON_FEED_COMMENT = 16;
+
 
     ///////////////////////////////////////////////商版//////////////////////////////////////////////////
     public static final int TYPE_COMMON_BASE = 200;

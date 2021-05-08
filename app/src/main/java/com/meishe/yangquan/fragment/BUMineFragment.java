@@ -21,6 +21,7 @@ import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.GlideUtil;
+import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 
 import org.greenrobot.eventbus.EventBus;
@@ -106,6 +107,11 @@ public class BUMineFragment extends BaseRecyclerFragment implements View.OnClick
         switch (v.getId()){
             case R.id.rl_bu_shopping_message:
             case R.id.rl_bu_photo_container:
+                BUShoppingInfo buShoppingInfo = UserManager.getInstance(mContext).getBuShoppingInfo();
+                if (buShoppingInfo==null){
+                    ToastUtil.showToast("请先申请开店…");
+                    return;
+                }
                 //店铺信息
                 AppManager.getInstance().jumpActivity(getActivity(), BUMineShoppingMessageActivity.class);
                 break;

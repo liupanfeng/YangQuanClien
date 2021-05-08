@@ -48,8 +48,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:visibility="gone"
-            android:layout_height="236dp">
+            android:layout_height="86dp">
 
             <TextView
                 android:id="@+id/tv_feed_goods_detail_price"
@@ -69,9 +68,19 @@
                 android:layout_below="@+id/tv_feed_goods_detail_price"
                 android:layout_marginTop="@dimen/dp5"
                 android:layout_marginLeft="@dimen/dp18"
-                android:text="英美尔犊牛精料_教槽料_牛拉骨架饲料_牛全价_颗粒饲料"
                 android:textColor="#ff303030"
                 android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/tv_feed_goods_detail_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_feed_goods_detail_name"
+                android:layout_marginTop="@dimen/dp5"
+                android:layout_marginLeft="@dimen/dp18"
+                android:textColor="#ff303030"
+                android:textSize="14sp"
                 />
 
         </RelativeLayout>
@@ -86,7 +95,7 @@
         <RelativeLayout
             android:id="@+id/rl_comment_container"
             android:layout_width="match_parent"
-            android:layout_height="236dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tv_feed_goods_comment"
@@ -94,7 +103,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp13"
                 android:layout_marginLeft="@dimen/dp18"
-                android:text="商品评价（419）"
                 android:textColor="#ff303030"
                 android:textSize="16sp"
                 />
@@ -112,132 +120,14 @@
                 android:textSize="13sp"
                 android:layout_alignParentEnd="true" />
 
-            <RelativeLayout
-                android:id="@+id/rl_comment_1"
-                android:layout_below="@+id/tv_feed_goods_comment"
-                android:layout_marginTop="@dimen/dp10"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp80">
-
-                <RelativeLayout
-                    android:id="@+id/rl_feed_food_comment_top"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/dp28"
-                    android:orientation="horizontal"
-                    >
-                    <com.meishe.yangquan.view.RoundAngleImageView
-                        android:id="@+id/iv_feed_comment_photo"
-                        app:roundWidth="@dimen/dp14"
-                        app:roundHeight="@dimen/dp14"
-                        android:background="@mipmap/ic_default_photo"
-                        android:layout_marginLeft="@dimen/dp18"
-                        android:layout_width="@dimen/dp28"
-                        android:layout_height="@dimen/dp28"/>
-
-                    <TextView
-                        android:id="@+id/tv_feed_comment_nickname"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="用户XXX"
-                        android:layout_marginLeft="@dimen/dp8"
-                        android:layout_toRightOf="@+id/iv_feed_comment_photo"
-                        android:layout_centerVertical="true"
-                        android:textColor="@color/color_ff303030"
-                        android:textSize="13sp"
-                        />
 
 
-                    <TextView
-                        android:id="@+id/tv_feed_goods_time"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/dp18"
-                        android:layout_centerVertical="true"
-                        android:text="一个月前"
-                        android:textColor="@color/color_ff656565"
-                        android:textSize="@dimen/sp11"
-                        android:layout_alignParentEnd="true" />
-
-                </RelativeLayout>
-
-
-                <TextView
-                    android:id="@+id/tv_feed_goods_comment_content"
-                    android:layout_below="@+id/rl_feed_food_comment_top"
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_below="@+id/tv_feed_goods_comment"
                     android:layout_marginTop="@dimen/dp10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/dp18"
-                    android:text="物流太慢，饲料用着看看效果～"
-                    android:textColor="#ff303030"
-                    android:textSize="13sp"
-                    />
-
-            </RelativeLayout>
-
-            <RelativeLayout
-            android:id="@+id/rl_comment_2"
-            android:layout_below="@+id/rl_comment_1"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp80">
-
-            <RelativeLayout
-                android:id="@+id/rl_feed_food_comment_top_2"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/dp28"
-                android:orientation="horizontal"
-                >
-                <com.meishe.yangquan.view.RoundAngleImageView
-                    android:id="@+id/iv_feed_comment_photo_2"
-                    app:roundWidth="@dimen/dp14"
-                    app:roundHeight="@dimen/dp14"
-                    android:background="@mipmap/ic_default_photo"
-                    android:layout_marginLeft="@dimen/dp18"
-                    android:layout_width="@dimen/dp28"
-                    android:layout_height="@dimen/dp28"/>
-
-                <TextView
-                    android:id="@+id/iv_feed_comment_nickname_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="用户XXX"
-                    android:layout_marginLeft="@dimen/dp8"
-                    android:layout_toRightOf="@+id/iv_feed_comment_photo_2"
-                    android:layout_centerVertical="true"
-                    android:textColor="@color/color_ff303030"
-                    android:textSize="13sp"
-                    />
-
-
-                <TextView
-                    android:id="@+id/tv_feed_goods_time_2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/dp18"
-                    android:layout_centerVertical="true"
-                    android:text="一个月前"
-                    android:textColor="@color/color_ff656565"
-                    android:textSize="@dimen/sp11"
-                    android:layout_alignParentEnd="true" />
-
-            </RelativeLayout>
-
-
-            <TextView
-                android:id="@+id/tv_feed_goods_comment_content_2"
-                android:layout_below="@+id/rl_feed_food_comment_top_2"
-                android:layout_marginTop="@dimen/dp10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp18"
-                android:text="物流太慢，饲料用着看看效果～"
-                android:textColor="#ff303030"
-                android:textSize="13sp"
-                />
-
-        </RelativeLayout>
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
         </RelativeLayout>
 
@@ -345,9 +235,6 @@
             android:textColor="@color/white"
             android:layout_centerHorizontal="true"
             android:layout_alignParentEnd="true" />
-
-
-
 
 
     </RelativeLayout>

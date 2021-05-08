@@ -5,14 +5,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.ServerResult;
+import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;
+import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.pay.PasswordEditText;
 
 import java.io.IOException;
@@ -26,7 +29,7 @@ import okhttp3.Response;
  * @author 86188
  * 我的-支付密码
  */
-public class MinePayPasswordActivity extends BaseActivity implements PasswordEditText.PasswordFullListener {
+public class MinePayPasswordActivity extends BaseActivity  {
 
     private TextView mTvTitle;
     private ImageView mIvBack;
@@ -42,6 +45,22 @@ public class MinePayPasswordActivity extends BaseActivity implements PasswordEdi
     private String mSecondInputPassWorld;
 
     private int mInputIndex;
+    /*设置支付密码容器*/
+    private View rl_setting_pay_password;
+
+
+    /*是否已经设置过支付密码*/
+    private boolean mNeedInitPaymentCode;
+
+    /*验证支付密码*/
+    private RelativeLayout rl_verify_pay_password;
+    private PasswordEditText verify_passwordEdt;
+    private LinearLayout ll_verify_pay_password_view;
+    private TextView tv_verify_pay_feed_gold;
+    private LinearLayout verify_keyboard;
+
+    private String mOldPayWorld;
+
 
     @Override
     protected int initRootView() {
@@ -53,19 +72,45 @@ public class MinePayPasswordActivity extends BaseActivity implements PasswordEdi
         mTvTitle = findViewById(R.id.tv_title);
         mIvBack = findViewById(R.id.iv_back);
 
-        mKeyBoardView = findViewById(R.id.keyboard);
+
+        //验证支付密码
+        rl_verify_pay_password = findViewById(R.id.rl_verify_pay_password);
+        verify_passwordEdt = findViewById(R.id.verify_passwordEdt);
+        ll_verify_pay_password_view = findViewById(R.id.ll_verify_pay_password_view);
+        tv_verify_pay_feed_gold = findViewById(R.id.tv_verify_pay_feed_gold);
+        verify_keyboard = findViewById(R.id.verify_keyboard);
+
+        //设置支付密码
+        rl_setting_pay_password = findViewById(R.id.rl_setting_pay_password);
         mPasswordEditText = findViewById(R.id.passwordEdt);
         ll_pay_password_view = findViewById(R.id.ll_pay_password_view);
         tv_pay_feed_gold = findViewById(R.id.tv_pay_feed_gold);
+        mKeyBoardView = findViewById(R.id.keyboard);
 
     }
 
     @Override
     public void initData() {
+        UserInfo user = UserManager.getInstance(mContext).getUser();
+        if (user != null) {
+            mNeedInitPaymentCode = user.isNeedInitPaymentCode();
+        }
+//        mNeedInitPaymentCode=true;
+        if (mNeedInitPaymentCode){
+            //已经设置过支付密码 需要验证支付密码
+            rl_verify_pay_password.setVisibility(View.VISIBLE);
+            rl_setting_pay_password.setVisibility(View.GONE);
+        }else{
+            //未设置过支付密码  不需要验证支付密码
+            rl_verify_pay_password.setVisibility(View.GONE);
+            rl_setting_pay_password.setVisibility(View.VISIBLE);
+        }
         mFirstInputPassWorld = "";
         mSecondInputPassWorld = "";
         mInputIndex = 0;
         tv_pay_feed_gold.setText("请设置支付密码，用于饲料金支付");
+        tv_verify_pay_feed_gold.setText("输入当前支付密码，已身份验证");
+
     }
 
     @Override
@@ -75,8 +120,8 @@ public class MinePayPasswordActivity extends BaseActivity implements PasswordEdi
 
     @Override
     public void initListener() {
-        mPasswordEditText.setPasswordFullListener(this);
         setItemClickListener(mKeyBoardView);
+        setItemClickListener(verify_keyboard);
 
         mIvBack.setOnClickListener(new View.OnClickListener() {
 
@@ -85,6 +130,38 @@ public class MinePayPasswordActivity extends BaseActivity implements PasswordEdi
                 finish();
             }
         });
+
+        mPasswordEditText.setPasswordFullListener(new PasswordEditText.PasswordFullListener() {
+            @Override
+            public void passwordFull(String password) {
+                mInputIndex++;
+                if (mInputIndex == 1) {
+                    mFirstInputPassWorld = password;
+                    tv_pay_feed_gold.setText("请再次输入以确认");
+                } else if (mInputIndex == 2) {
+                    mSecondInputPassWorld = password;
+                    if (mSecondInputPassWorld.equals(mFirstInputPassWorld)) {
+                        setUserPassword(mSecondInputPassWorld);
+                        changeViewVisible(ll_pay_password_view, false);
+                    } else {
+                        mInputIndex = 1;
+                        tv_pay_feed_gold.setText("输入的密码不一致，请重新输入！");
+                    }
+                }
+            }
+        });
+
+        verify_passwordEdt.setPasswordFullListener(new PasswordEditText.PasswordFullListener() {
+            @Override
+            public void passwordFull(String password) {
+                 //记录验证密码
+                mOldPayWorld=password;
+                mNeedInitPaymentCode=false;
+                rl_verify_pay_password.setVisibility(View.GONE);
+                rl_setting_pay_password.setVisibility(View.VISIBLE);
+            }
+        });
+
         mPasswordEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,10 +181,19 @@ public class MinePayPasswordActivity extends BaseActivity implements PasswordEdi
     public void onClick(View v) {
         if (v instanceof TextView) {
             String number = ((TextView) v).getText().toString().trim();
-            mPasswordEditText.addPassword(number);
+            if (mNeedInitPaymentCode){
+                verify_passwordEdt.addPassword(number);
+            }else {
+                mPasswordEditText.addPassword(number);
+            }
+
         }
         if (v instanceof ImageView) {
-            mPasswordEditText.deletePassword();
+            if (mNeedInitPaymentCode){
+                verify_passwordEdt.deletePassword();
+            }else {
+                mPasswordEditText.deletePassword();
+            }
         }
     }
 
@@ -131,23 +217,6 @@ public class MinePayPasswordActivity extends BaseActivity implements PasswordEdi
     }
 
 
-    @Override
-    public void passwordFull(String password) {
-        mInputIndex++;
-        if (mInputIndex == 1) {
-            mFirstInputPassWorld = password;
-            tv_pay_feed_gold.setText("请再次输入以确认");
-        } else if (mInputIndex == 2) {
-            mSecondInputPassWorld = password;
-            if (mSecondInputPassWorld.equals(mFirstInputPassWorld)) {
-                setUserPassword(mSecondInputPassWorld);
-                changeViewVisible(ll_pay_password_view, false);
-            } else {
-                mInputIndex = 1;
-                tv_pay_feed_gold.setText("输入的密码不一致，请重新输入！");
-            }
-        }
-    }
 
     /**
      * 设置用户支付密码
@@ -160,8 +229,10 @@ public class MinePayPasswordActivity extends BaseActivity implements PasswordEdi
             return;
         }
 
+        //添加 oldCode，第一次直接传nul，之后传原来的密码
         HashMap<String, Object> requestParam = new HashMap<>();
         requestParam.put("paymentCode", passWorld);
+        requestParam.put("oldCode", mOldPayWorld);
         OkHttpManager.getInstance().postRequest(HttpUrl.SHEEP_MINE_SETTING_PASSWORD, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
@@ -185,6 +256,7 @@ public class MinePayPasswordActivity extends BaseActivity implements PasswordEdi
                     finish();
                 } else {
                     ToastUtil.showToast(mContext, result.getMsg());
+                    initData();
                 }
             }
 

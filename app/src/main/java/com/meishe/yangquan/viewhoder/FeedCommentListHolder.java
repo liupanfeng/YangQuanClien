@@ -42,7 +42,6 @@ public class FeedCommentListHolder extends BaseViewHolder {
         /*评论内容*/
         tv_feed_goods_comment_content = view.findViewById(R.id.tv_feed_goods_comment_content);
 
-
     }
 
     @Override
