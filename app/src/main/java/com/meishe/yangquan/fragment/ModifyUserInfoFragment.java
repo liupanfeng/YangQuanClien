@@ -341,11 +341,13 @@ public class ModifyUserInfoFragment extends BaseRecyclerFragment {
      */
     private void updateShoppingFromServer() {
         String token = getToken();
-        if (Util.checkNull(token)) {
-            return;
-        }
         BUShoppingInfo buShoppingInfo = ShoppingInfoManager.getInstance().getBuShoppingInfo();
         if (buShoppingInfo == null) {
+            return;
+        }
+        String content = mEtInput.getText().toString();
+        if (TextUtils.isEmpty(content)) {
+            ToastUtil.showToast("请输入设置内容");
             return;
         }
         showLoading();
@@ -353,17 +355,18 @@ public class ModifyUserInfoFragment extends BaseRecyclerFragment {
         param.put("id", buShoppingInfo.getId());
         switch (mModifyType){
             case Constants.USER_MODIFY_TYPE_SHOPPING_NAME:
-                param.put("name", buShoppingInfo.getName());
+                param.put("name",content);
                 break;
             case Constants.USER_MODIFY_TYPE_SHOPPING_MAIN:
-                param.put("mainCategory", buShoppingInfo.getMainCategory());
+                param.put("mainCategory", content);
                 break;
             case Constants.USER_MODIFY_TYPE_SHOPPING_SIGN:
-                param.put("sign", buShoppingInfo.getSign());
+                param.put("sign", content);
                 break;
         }
 
 //        param.put("address", buShoppingInfo.getAddress());
+        param.put("needAuth", false);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_APPLY_SHOPPING_SANE, new BaseCallBack<BUShoppingInfoResult>() {
             @Override

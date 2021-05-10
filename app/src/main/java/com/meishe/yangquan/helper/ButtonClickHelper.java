@@ -249,17 +249,24 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
                 case Constants.TYPE_REFUND_ING_TYPE:
 //                    tv_bu_order_right_state.setText("退货中");
 //                    rl_bu_refund.setVisibility(View.VISIBLE);
-                    RefundCenterTipView.create(context, "退货审核", new RefundCenterTipView.OnAttachListener() {
+                    RefundCenterTipView refundCenterTipView = RefundCenterTipView.create(context, "退货审核", new RefundCenterTipView.OnAttachListener() {
                         @Override
                         public void cancelClick(String content) {
+                            //不给退货
+                            DataHelper.getInstance().verifyRefundOrder(((BUGoodsRefundListInfo) info),content,-1);
 
                         }
 
                         @Override
                         public void confirmClick(String content) {
+                            //确定退货
+                            DataHelper.getInstance().verifyRefundOrder(((BUGoodsRefundListInfo) info),content,1);
 
                         }
                     });
+                    if (!refundCenterTipView.isShow()){
+                        refundCenterTipView.show();
+                    }
                     break;
                 case Constants.TYPE_REFUND_FINISH_TYPE:
 //                    tv_bu_order_right_state.setText("已完成");

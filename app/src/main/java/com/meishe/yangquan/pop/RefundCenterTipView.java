@@ -1,6 +1,7 @@
 package com.meishe.yangquan.pop;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import com.meishe.libbase.pop.XPopup;
 import com.meishe.libbase.pop.core.CenterPopupView;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.utils.ToastUtil;
 
 /**
  * @Author : lpf
@@ -59,6 +61,11 @@ public class RefundCenterTipView extends CenterPopupView {
             @Override
             public void onClick(View view) {
                 if (mAttachListener !=null ){
+                    String content = editText.getText().toString();
+                    if (TextUtils.isEmpty(content)){
+                        ToastUtil.showToast("审核内容不能为空");
+                        return;
+                    }
                     mAttachListener.cancelClick(editText.getText().toString());
                 }
                 dismiss();
@@ -69,6 +76,11 @@ public class RefundCenterTipView extends CenterPopupView {
         confirm.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
+                String content = editText.getText().toString();
+                if (TextUtils.isEmpty(content)){
+                    ToastUtil.showToast("审核内容不能为空");
+                    return;
+                }
                 if (mAttachListener != null){
                     mAttachListener.confirmClick(editText.getText().toString());
                 }

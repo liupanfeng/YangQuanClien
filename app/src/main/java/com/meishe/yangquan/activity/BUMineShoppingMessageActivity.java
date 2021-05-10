@@ -279,6 +279,7 @@ public class BUMineShoppingMessageActivity extends BaseActivity {
         HashMap<String, Object> param = new HashMap<>();
         param.put("id", buShoppingInfo.getId());
         param.put("address", buShoppingInfo.getAddress());
+        param.put("needAuth", false);
 
         OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_APPLY_SHOPPING_SANE, new BaseCallBack<BUShoppingInfoResult>() {
             @Override

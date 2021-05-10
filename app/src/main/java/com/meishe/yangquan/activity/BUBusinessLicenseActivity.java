@@ -483,6 +483,8 @@ public class BUBusinessLicenseActivity extends BaseActivity {
         param.put("businessScope", buShoppingInfo.getBusinessScope());
         param.put("businessPeriod", buShoppingInfo.getBusinessPeriod());
         param.put("businessCardImageId", buShoppingInfo.getBusinessCardImageId());
+        param.put("needAuth", true);
+
         OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_APPLY_SHOPPING_SANE, new BaseCallBack<ServerResult>() {
             @Override
             protected void OnRequestBefore(Request request) {

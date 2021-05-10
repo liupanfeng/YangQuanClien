@@ -1649,6 +1649,66 @@ public class DataHelper {
     }
 
 
+    /**
+     * 商版-退货审核
+     *
+     * @param buGoodsRefundListInfo
+     * @param option        原因
+     * @param authState   1 同意  -1 不同意
+     *
+     */
+    public void verifyRefundOrder(final BUGoodsRefundListInfo buGoodsRefundListInfo, String option, int authState) {
+
+        String token = getToken();
+        HashMap<String, Object> param = new HashMap<>();
+        param.put("orderId", buGoodsRefundListInfo.getOrderId());
+        param.put("option", option);
+        param.put("authState", authState);
+
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_ORDER_AUTH_BACK_GOODS, new BaseCallBack<ServerResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onFailure(e);
+                }
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, ServerResult result) {
+                if (result != null && result.getCode() == 1) {
+                    if (mOnCallBackListener != null) {
+                        mOnCallBackListener.onSuccessNeedDeleteItem(buGoodsRefundListInfo);
+                    }
+                } else {
+                    ToastUtil.showToast(App.getContext(), result.getMsg());
+                }
+            }
+
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (mOnClickItemCallBackListener != null) {
+                    mOnClickItemCallBackListener.onError(e);
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, param, token);
+    }
+
 
 
 
