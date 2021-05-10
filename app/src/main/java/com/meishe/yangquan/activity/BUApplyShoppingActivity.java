@@ -5,6 +5,7 @@ import android.view.View;
 
 import com.meishe.libbase.adpater.BaseViewHolder;
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.ToastUtil;
@@ -87,6 +88,16 @@ public class BUApplyShoppingActivity extends BaseActivity {
                 }else {
                     ToastUtil.showToast("请进行实名认证");
                 }
+                break;
+        }
+    }
+
+    @Override
+    protected void eventBusUpdateUI(MessageEvent event) {
+        super.eventBusUpdateUI(event);
+        switch (event.getEventType()){
+            case MessageEvent.MESSAGE_TYPE_BU_APPLY_SHOPPING_SUCCESS:
+                finish();
                 break;
         }
     }

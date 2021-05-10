@@ -60,6 +60,84 @@
                 android:layout_marginRight="@dimen/dp17"
                 android:background="@color/line_color" />
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/dp24"
+                    android:layout_marginLeft="@dimen/dp24"
+                    android:text="店铺签名"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+
+                <EditText
+                    android:id="@+id/et_bu_input_shopping_nickname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp25"
+                    android:layout_marginRight="@dimen/dp17"
+                    android:background="@null"
+                    android:hint="请输入店铺签名"
+                    android:textColor="#ffc2c2c2"
+                    android:textSize="13sp" />
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:background="@color/line_color" />
+
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="54dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/dp24"
+                    android:layout_marginLeft="@dimen/dp24"
+                    android:text="经营地址"
+                    android:textColor="#ff303030"
+                    android:textSize="13sp" />
+
+                <EditText
+                    android:id="@+id/et_bu_select_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="@dimen/dp25"
+                    android:layout_marginRight="@dimen/dp17"
+                    android:hint="请选择经营地址"
+                    android:background="@null"
+                    android:textColor="#ffc2c2c2"
+                    android:textSize="13sp"
+                    />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.6dp"
+                android:layout_marginLeft="@dimen/dp17"
+                android:layout_marginRight="@dimen/dp17"
+                android:background="@color/line_color" />
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -165,43 +243,6 @@
                     android:layout_toEndOf="@+id/tv_bu_shopping_type" />
 
             </LinearLayout>
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="0.6dp"
-                android:layout_marginLeft="@dimen/dp17"
-                android:layout_marginRight="@dimen/dp17"
-                android:background="@color/line_color" />
-
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="54dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/dp24"
-                    android:layout_marginLeft="@dimen/dp24"
-                    android:text="经营地址"
-                    android:textColor="#ff303030"
-                    android:textSize="13sp" />
-
-                <EditText
-                    android:id="@+id/et_bu_select_address"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp25"
-                    android:layout_marginRight="@dimen/dp17"
-                    android:hint="请选择经营地址"
-                    android:background="@null"
-                    android:textColor="#ffc2c2c2"
-                    android:textSize="13sp"
-                    />
-
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"
@@ -209,6 +250,8 @@
                 android:layout_marginLeft="@dimen/dp17"
                 android:layout_marginRight="@dimen/dp17"
                 android:background="@color/line_color" />
+
+
 
 
             <LinearLayout
@@ -260,36 +303,6 @@
                 android:background="@color/line_color" />
 
 
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="54dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginStart="@dimen/dp24"
-                    android:layout_marginLeft="@dimen/dp24"
-                    android:text="店铺签名"
-                    android:textColor="#ff303030"
-                    android:textSize="13sp" />
-
-
-                <EditText
-                    android:id="@+id/et_bu_input_shopping_nickname"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="@dimen/dp25"
-                    android:layout_marginRight="@dimen/dp17"
-                    android:background="@null"
-                    android:hint="请输入店铺签名"
-                    android:textColor="#ffc2c2c2"
-                    android:textSize="13sp" />
-
-
-            </LinearLayout>
 
 
             <View

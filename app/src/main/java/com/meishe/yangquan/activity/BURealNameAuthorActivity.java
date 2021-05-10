@@ -196,7 +196,7 @@ public class BURealNameAuthorActivity extends BaseActivity {
 
                 ShoppingInfoManager.getInstance().setRealNameWriteSuccess(true);
                 AppManager.getInstance().jumpActivity(this, BUBusinessLicenseActivity.class);
-
+                finish();
                 break;
             case R.id.iv_bu_capture_card_positive:
                 //查看大图
