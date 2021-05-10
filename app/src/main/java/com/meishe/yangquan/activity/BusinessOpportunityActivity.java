@@ -26,6 +26,7 @@ import okhttp3.Response;
 /**
  * 我的商机
  */
+@Deprecated
 public class BusinessOpportunityActivity extends BaseActivity {
 
     private User mUser;

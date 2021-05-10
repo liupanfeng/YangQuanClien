@@ -220,7 +220,7 @@ public class DataHelper {
      * 目前双端用的一个饲料金页面
      * type 这个类型表示收入还是支出
      */
-    public void getFeedGoldDataFromServer(final List<BaseInfo> list, int type,
+    public void getFeedGoldDataFromServer(final List<BaseInfo> list, final int type,
                                           final int pageSize, final int pageNumber,
                                           boolean isLoadFinish, final boolean isLoadMore) {
         String token = getToken();
@@ -253,6 +253,14 @@ public class DataHelper {
             protected void onSuccess(Call call, Response response, MineFeedGoldInfoResult result) {
                 if (result != null && result.getCode() == 1) {
                     List<MineFeedGoldInfo> datas = result.getData();
+                    if (!CommonUtils.isEmpty(datas)){
+                        for (int i = 0; i < datas.size(); i++) {
+                            MineFeedGoldInfo mineFeedGoldInfo = datas.get(i);
+                            if (mineFeedGoldInfo!=null){
+                                mineFeedGoldInfo.setType(type);
+                            }
+                        }
+                    }
                     commonResponse(datas, list, isLoadMore, pageSize, pageNumber);
                 } else {
                     ToastUtil.showToast(App.getContext(), result.getMsg());

@@ -20,6 +20,8 @@ public class MineFeedGoldInfo extends BaseInfo{
 
     private float gold;
 
+    private int type=-1;
+
 
     public long getInitDate() {
         return initDate;
@@ -51,5 +53,13 @@ public class MineFeedGoldInfo extends BaseInfo{
 
     public void setGold(float gold) {
         this.gold = gold;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 }

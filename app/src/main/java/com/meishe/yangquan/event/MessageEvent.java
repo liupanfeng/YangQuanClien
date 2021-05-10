@@ -74,6 +74,17 @@ public class MessageEvent {
     public static final int MESSAGE_TYPE_COMMON_LIST = MESSAGE_TYPE_BASE + 12;
 
 
+    /**
+     * 编辑商品成功
+     */
+    public static final int MESSAGE_TYPE_BU_EDIT_GOODS_SUCCESS = MESSAGE_TYPE_BASE + 13;
+
+    /**
+     * 申请开店成功
+     */
+    public static final int MESSAGE_TYPE_BU_APPLY_SHOPPING_SUCCESS = MESSAGE_TYPE_BASE + 14;
+
+
 
 
     private int mEventType;

@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.Nullable;
 
 import com.meishe.yangquan.R;
+import com.meishe.yangquan.activity.BUEditGoodsActivity;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUGoodsInfoResult;
@@ -19,6 +20,7 @@ import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.ShowBigPictureView;
+import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
@@ -157,6 +159,8 @@ public class BUHomeGoodsFragment extends BaseRecyclerFragment {
                     int isPublic = ((BUGoodsInfo) baseInfo).getIsPublic();
                     if (view.getId() == R.id.btn_bu_edit_goods) {
                         //编辑商品
+                        UserManager.getInstance(mContext).setBuGoodsInfo((BUGoodsInfo) baseInfo);
+                        AppManager.getInstance().jumpActivity(getActivity(), BUEditGoodsActivity.class);
                     } else if (view.getId() == R.id.btn_bu_shelves_goods) {
                         //上架商品 或者下架商品  根据商品是否已经上架
                         if (isPublic == 0) {
@@ -407,6 +411,12 @@ public class BUHomeGoodsFragment extends BaseRecyclerFragment {
         switch (eventType) {
             case MessageEvent.MESSAGE_TYPE_BU_PUBLISH_GOODS_SUCCESS:
                 getGoodsDataFromServer();
+                break;
+            case MessageEvent.MESSAGE_TYPE_BU_EDIT_GOODS_SUCCESS:
+                //编辑商品
+                if (mAdapter!=null){
+                    mAdapter.notifyDataSetChanged();
+                }
                 break;
         }
     }

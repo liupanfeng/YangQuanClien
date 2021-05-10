@@ -82,10 +82,13 @@ public class BUHomeGoodsListHolder extends BaseViewHolder {
                 btn_bu_shelves_goods.setText("上架");
                 btn_bu_delete_goods.setText("删除");
                 btn_bu_delete_goods.setVisibility(View.VISIBLE);
+
+                btn_bu_edit_goods.setVisibility(View.VISIBLE);
             }else if ((isPublic==1)){
                 btn_bu_shelves_goods.setText("下架");
 //                btn_bu_delete_goods.setText("分享");
                 btn_bu_delete_goods.setVisibility(View.INVISIBLE);
+                btn_bu_edit_goods.setVisibility(View.INVISIBLE);
             }
         }
 

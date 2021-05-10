@@ -215,7 +215,6 @@ public class LoginActivity extends BaseActivity {
                 mBtnLogin.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
                         userLogin();
                     }
                 },1500);
@@ -499,12 +498,13 @@ public class LoginActivity extends BaseActivity {
             @Override
             protected void onSuccess(Call call, Response response, LoginResult result) {
 //                mMaterialProgress.hide();
-                mBtnLogin.gotoNew();
                 if (result.getCode() != 1) {
+                    mBtnLogin.regainBackground();
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
                 if (result != null && result.getCode() == 1) {
+                    mBtnLogin.gotoNew();
                     LoginInfo loginInfo = result.getData();
                     if (loginInfo != null) {
 //                        UserManager.getInstance(mContext).setUser(user);

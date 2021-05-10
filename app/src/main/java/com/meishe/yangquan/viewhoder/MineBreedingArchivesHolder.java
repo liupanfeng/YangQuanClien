@@ -21,8 +21,6 @@ import com.meishe.yangquan.utils.FormatDateUtil;
  */
 public class MineBreedingArchivesHolder extends BaseViewHolder {
 
-    private final RequestOptions options;
-
     /*养殖档案标题*/
     private TextView tv_title;
     /*养殖档案建立时间*/
@@ -33,9 +31,6 @@ public class MineBreedingArchivesHolder extends BaseViewHolder {
     public MineBreedingArchivesHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
         super(itemView);
         mAdapter = adapter;
-        options = new RequestOptions();
-        options.centerCrop();
-        options.placeholder(R.mipmap.ic_message_list_photo_default);
     }
 
     @Override

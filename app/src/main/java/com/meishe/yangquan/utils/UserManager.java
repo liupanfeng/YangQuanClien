@@ -3,6 +3,7 @@ package com.meishe.yangquan.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.meishe.yangquan.bean.BUGoodsInfo;
 import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
@@ -24,6 +25,9 @@ public class UserManager {
 
     /*这个是为了处理是否开店用的*/
     private BUShoppingInfo buShoppingInfo;
+
+    /*商品编辑使用，其他地方谨慎使用*/
+    private BUGoodsInfo buGoodsInfo;
 
     private String token = "";
     private Context mContext;
@@ -116,5 +120,13 @@ public class UserManager {
 
     public void setBuShoppingInfo(BUShoppingInfo buShoppingInfo) {
         this.buShoppingInfo = buShoppingInfo;
+    }
+
+    public BUGoodsInfo getBuGoodsInfo() {
+        return buGoodsInfo;
+    }
+
+    public void setBuGoodsInfo(BUGoodsInfo buGoodsInfo) {
+        this.buGoodsInfo = buGoodsInfo;
     }
 }

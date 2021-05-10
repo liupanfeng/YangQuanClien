@@ -1,5 +1,6 @@
 package com.meishe.yangquan.fragment;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.BUApplyShoppingActivity;
 import com.meishe.yangquan.activity.BUHomeCommentManagerActivity;
@@ -26,7 +28,10 @@ import com.meishe.yangquan.bean.BUShoppingInfo;
 import com.meishe.yangquan.bean.BUShoppingInfoResult;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfoResult;
+import com.meishe.yangquan.bean.UserInfo;
+import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.divider.CustomGridItemDecoration;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
@@ -38,6 +43,10 @@ import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.wiget.IosDialog;
 
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -47,6 +56,8 @@ import java.util.Map;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.meishe.yangquan.event.MessageEvent.MESSAGE_TYPE_UPDATE_SHOPPING_INFO;
 
 
 /**
@@ -168,6 +179,10 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
 
     @Override
     protected void initData() {
+        UserInfo user = UserManager.getInstance(App.getContext()).getUser();
+        if (user == null) {
+            getUserInfo();
+        }
         getShoppingData();
     }
 
@@ -519,10 +534,10 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
             mShoppingDataMap.put("出售中", data.getGoodsCount());
             mShoppingDataMap.put("待付", data.getCommittedOrderCount());
             mShoppingDataMap.put("待发货", data.getPayedOrderCount());
-            mShoppingDataMap.put("待评价",data.getReceivedOrderCount());
+            mShoppingDataMap.put("待评价", data.getReceivedOrderCount());
             mShoppingDataMap.put("退货中", data.getApplyBackGoodsOrderCount());
 
-            mShoppingDataMap.put("今日总访客",data.getVisitorAmount());
+            mShoppingDataMap.put("今日总访客", data.getVisitorAmount());
 
             mShoppingDataMap.put("今日订单数量", data.getTodayOrderCount());
             mShoppingDataMap.put("今日成交额", data.getTodayPrice());
@@ -534,6 +549,95 @@ public class BUHomeFragment extends BaseRecyclerFragment implements View.OnClick
 
         initShopData();
     }
+
+
+    /**
+     * 获取用户信息
+     */
+    private void getUserInfo() {
+        showLoading();
+        String token = getToken();
+        HashMap<String, Object> requestParam = new HashMap<>();
+        OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_USER_INFO, new BaseCallBack<UserResult>() {
+            @Override
+            protected void OnRequestBefore(Request request) {
+
+            }
+
+            @Override
+            protected void onFailure(Call call, IOException e) {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        hideLoading();
+                    }
+                });
+            }
+
+            @Override
+            protected void onSuccess(Call call, Response response, UserResult result) {
+                hideLoading();
+                if (result != null) {
+                    UserInfo user = result.getData();
+                    if (user != null) {
+                        UserManager.getInstance(App.getContext()).setUser(user);
+                    }
+                }
+            }
+
+            @Override
+            protected void onResponse(Response response) {
+
+            }
+
+            @Override
+            protected void onEror(Call call, int statusCode, Exception e) {
+                if (e instanceof com.google.gson.JsonParseException) {
+                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
+                }
+            }
+
+            @Override
+            protected void inProgress(int progress, long total, int id) {
+
+            }
+        }, requestParam, token);
+
+    }
+
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        EventBus.getDefault().unregister(this); //解除注册
+    }
+
+
+    /**
+     * On message event.
+     * 消息事件
+     *
+     * @param event the event
+     */
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(MessageEvent event) {
+        int eventType = event.getEventType();
+        switch (eventType){
+            case MessageEvent.MESSAGE_TYPE_BU_APPLY_SHOPPING_SUCCESS:
+                //申请开店成功
+                BUShoppingInfo buShoppingInfo = UserManager.getInstance(mContext).getBuShoppingInfo();
+                updateUI(buShoppingInfo);
+                break;
+        }
+    }
+
+
 
 
 }

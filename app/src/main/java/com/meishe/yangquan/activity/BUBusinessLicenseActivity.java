@@ -28,10 +28,12 @@ import androidx.core.content.FileProvider;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BUShoppingInfo;
+import com.meishe.yangquan.bean.BUShoppingInfoResult;
 import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.UploadFileInfo;
 import com.meishe.yangquan.bean.UploadFileResult;
+import com.meishe.yangquan.event.MessageEvent;
 import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
@@ -41,11 +43,14 @@ import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
+import com.meishe.yangquan.utils.FormatDateUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.File;
 import java.io.IOException;
@@ -252,7 +257,7 @@ public class BUBusinessLicenseActivity extends BaseActivity {
      */
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void showDataPicker(final TextView textView) {
-        String strTime = textView.getText().toString().trim();
+        String strTime = FormatDateUtil.longToString(System.currentTimeMillis(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY);
         if (!TextUtils.isEmpty(strTime) && !strTime.equals("请选择营业执照到期时间")) {
             String[] split = strTime.split("-");
             if (split != null && split.length == 3) {
@@ -485,7 +490,7 @@ public class BUBusinessLicenseActivity extends BaseActivity {
         param.put("businessCardImageId", buShoppingInfo.getBusinessCardImageId());
         param.put("needAuth", true);
 
-        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_APPLY_SHOPPING_SANE, new BaseCallBack<ServerResult>() {
+        OkHttpManager.getInstance().postRequest(HttpUrl.BU_HOME_APPLY_SHOPPING_SANE, new BaseCallBack<BUShoppingInfoResult>() {
             @Override
             protected void OnRequestBefore(Request request) {
 
@@ -503,15 +508,22 @@ public class BUBusinessLicenseActivity extends BaseActivity {
 
 
             @Override
-            protected void onSuccess(Call call, Response response, ServerResult result) {
+            protected void onSuccess(Call call, Response response, BUShoppingInfoResult result) {
                 hideLoading();
                 if (result.getCode() != 1) {
                     ToastUtil.showToast(mContext, result.getMsg());
                     return;
                 }
-                ToastUtil.showToast(mContext, "申请成功，请等待…");
                 ShoppingInfoManager.getInstance().setApplyShoppingSuccess(true);
-                AppManager.getInstance().finishActivity(BUBusinessLicenseActivity.class);
+                BUShoppingInfo data = result.getData();
+                UserManager.getInstance(mContext).setBuShoppingInfo(data);
+
+                MessageEvent messageEvent = new MessageEvent();
+                messageEvent.setEventType(MessageEvent.MESSAGE_TYPE_BU_APPLY_SHOPPING_SUCCESS);
+                EventBus.getDefault().post(messageEvent);
+                ToastUtil.showToast("店铺申请成功，请等待审核！");
+                finish();
+
             }
 
             @Override

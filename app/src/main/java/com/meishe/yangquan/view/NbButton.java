@@ -113,7 +113,6 @@ public class NbButton extends AppCompatButton {
     }
     public void gotoNew(){
         isMorphing=false;
-
         arcValueAnimator.cancel();
         setVisibility(GONE);
 

@@ -199,7 +199,7 @@ public class ButtonClickHelper implements DataHelper.OnClickItemCallBackListener
             }
         }
         else if (info instanceof BUOrderInfo) {
-            int state = ((BUOrderInfo) info).getState();
+            int state = ((BUOrderInfo) info).getType();
             if (state == Constants.TYPE_COMMON_BU_ORDER_WAIT_PAY_TYPE) {
                 //待付---改价
                 BUChangePriceCenterView buChangePriceCenterView = BUChangePriceCenterView.create(mAdapter.getContext(), info, new BUChangePriceCenterView.OnChangePriceListener() {

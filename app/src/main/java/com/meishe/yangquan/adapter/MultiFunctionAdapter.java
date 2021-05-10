@@ -296,12 +296,12 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             /*我的-养殖档案*/
             case VIEW_MINE_BREEDING_ARCHIVE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_breeding_archives, parent, false);
-                viewHolder = new MineFeedGoldHolder(view, this);
+                viewHolder = new MineBreedingArchivesHolder(view, this);
                 break;
             /*我的-饲料金*/
             case VIEW_MINE_FEED_GOLD_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_feed_gold, parent, false);
-                viewHolder = new MineBreedingArchivesHolder(view, this);
+                viewHolder = new MineFeedGoldHolder(view, this);
                 break;
             /*我的-订单*/
             case VIEW_MINE_ORDER_LIST:
