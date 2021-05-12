@@ -3,150 +3,138 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/white"
+    android:layout_marginTop="@dimen/common_divide_size"
+   >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_shopping_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp22"
+            android:layout_marginTop="@dimen/dp12"
+            android:text="店铺名称"
+            android:drawableLeft="@mipmap/ic_mine_shopping_name"
+            android:drawablePadding="@dimen/dp5"
+            android:textColor="#ff303030"
+            android:textSize="13sp"
+            />
+
+        <TextView
+            android:id="@+id/tv_order_right_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/dp22"
+            android:layout_alignParentRight="true"
+            android:text="待付"
+            android:layout_marginTop="@dimen/dp12"
+            android:textColor="#3BA786"
+            android:textSize="13sp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/dp22" />
+    </RelativeLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
+        android:layout_height="0.33dp"
+        android:layout_marginLeft="@dimen/dp22"
+        android:layout_marginRight="@dimen/dp22"
+        android:background="#E5E5E5"
         android:layout_marginTop="@dimen/dp10"
         />
 
-    <LinearLayout
+
+    <include layout="@layout/common_one_goods_order_layout"
+        />
+
+
+    <include
+        layout="@layout/common_more_goods_order_layout"
+        />
+
+
+
+    <View
+        android:id="@+id/bu_line"
         android:layout_width="match_parent"
-        android:background="@color/white"
+        android:layout_height="0.33dp"
+        android:layout_marginLeft="@dimen/dp22"
+        android:layout_marginRight="@dimen/dp22"
+        android:background="#E5E5E5"
+        android:layout_marginTop="@dimen/dp10"
+        />
+
+
+    <RelativeLayout
+        android:layout_below="@+id/bu_line"
+        android:id="@+id/rl_bottom_function_view"
         android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <TextView
-                android:id="@+id/tv_shopping_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/dp22"
-                android:layout_marginTop="@dimen/dp12"
-                android:text="店铺名称"
-                android:drawableLeft="@mipmap/ic_mine_shopping_name"
-                android:drawablePadding="@dimen/dp5"
-                android:textColor="#ff303030"
-                android:textSize="13sp"
-                />
-
-            <TextView
-                android:id="@+id/tv_order_right_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/dp22"
-                android:layout_alignParentRight="true"
-                android:text="待付"
-                android:layout_marginTop="@dimen/dp12"
-                android:textColor="#3BA786"
-                android:textSize="13sp"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/dp22" />
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="0.33dp"
+        <TextView
+            android:id="@+id/tv_time_cancel_order"
             android:layout_marginLeft="@dimen/dp22"
-            android:layout_marginRight="@dimen/dp22"
-            android:background="#E5E5E5"
-            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp18"
+            android:layout_marginRight="@dimen/dp12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="预计47小时53分后自动取消,请尽快支付"
+            android:visibility="gone"
+            android:textColor="#FA561E"
+            android:textSize="13sp"
+            />
+
+        <Button
+            android:id="@+id/btn_left_function"
+            android:layout_width="74dp"
+            android:layout_below="@+id/tv_time_cancel_order"
+            android:layout_height="@dimen/dp26"
+            android:layout_marginTop="@dimen/dp9"
+            android:layout_toLeftOf="@+id/btn_right_function"
+            android:background="@drawable/mine_gold_button_pay_bg"
+            android:layout_marginBottom="@dimen/dp10"
+            android:text="取消订单"
+            android:layout_marginRight="@dimen/dp20"
+            android:textColor="@color/color_ff656565"
             />
 
 
-        <include layout="@layout/common_one_goods_order_layout"
-         />
-
-
-        <include
-            layout="@layout/common_more_goods_order_layout"
-           />
-
-
-
-        <View
-            android:id="@+id/bu_line"
-            android:layout_width="match_parent"
-            android:layout_height="0.33dp"
-            android:layout_marginLeft="@dimen/dp22"
+        <Button
+            android:id="@+id/btn_right_function"
+            android:layout_width="74dp"
+            android:layout_below="@+id/tv_time_cancel_order"
+            android:layout_height="@dimen/dp26"
             android:layout_marginRight="@dimen/dp22"
-            android:background="#E5E5E5"
-            android:layout_marginTop="@dimen/dp10"
+            android:layout_marginTop="@dimen/dp9"
+            android:background="@drawable/mine_gold_button_bg"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/dp10"
+            android:text="改价"
+            android:textColor="@color/white"
+            android:layout_alignParentEnd="true" />
+
+
+        <TextView
+            android:id="@+id/tv_order_bottom_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="#3BA786"
+            android:textSize="13sp"
+            android:visibility="gone"
+
+            android:layout_below="@+id/tv_time_cancel_order"
+            android:layout_marginRight="@dimen/dp22"
+            android:layout_marginTop="@dimen/dp9"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="@dimen/dp10"
+            android:layout_alignParentEnd="true"
             />
 
-
-        <RelativeLayout
-            android:layout_below="@+id/bu_line"
-            android:id="@+id/rl_bottom_function_view"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/tv_time_cancel_order"
-                android:layout_marginLeft="@dimen/dp22"
-                android:layout_marginTop="@dimen/dp18"
-                android:layout_marginRight="@dimen/dp12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="预计47小时53分后自动取消,请尽快支付"
-                android:visibility="gone"
-                android:textColor="#FA561E"
-                android:textSize="13sp"
-                />
-
-            <Button
-                android:id="@+id/btn_left_function"
-                android:layout_width="74dp"
-                android:layout_below="@+id/tv_time_cancel_order"
-                android:layout_height="@dimen/dp26"
-                android:layout_marginTop="@dimen/dp9"
-                android:layout_toLeftOf="@+id/btn_right_function"
-                android:background="@drawable/mine_gold_button_pay_bg"
-                android:layout_marginBottom="@dimen/dp10"
-                android:text="取消订单"
-                android:layout_marginRight="@dimen/dp20"
-                android:textColor="@color/color_ff656565"
-                />
-
-
-            <Button
-                android:id="@+id/btn_right_function"
-                android:layout_width="74dp"
-                android:layout_below="@+id/tv_time_cancel_order"
-                android:layout_height="@dimen/dp26"
-                android:layout_marginRight="@dimen/dp22"
-                android:layout_marginTop="@dimen/dp9"
-                android:background="@drawable/mine_gold_button_bg"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="@dimen/dp10"
-                android:text="改价"
-                android:textColor="@color/white"
-                android:layout_alignParentEnd="true" />
-
-
-            <TextView
-                android:id="@+id/tv_order_bottom_state"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textColor="#3BA786"
-                android:textSize="13sp"
-                android:visibility="gone"
-
-                android:layout_below="@+id/tv_time_cancel_order"
-                android:layout_marginRight="@dimen/dp22"
-                android:layout_marginTop="@dimen/dp9"
-                android:layout_alignParentRight="true"
-                android:layout_marginBottom="@dimen/dp10"
-                android:layout_alignParentEnd="true"
-                />
-
-        </RelativeLayout>
-
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

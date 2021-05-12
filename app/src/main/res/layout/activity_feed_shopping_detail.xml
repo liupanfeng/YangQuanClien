@@ -7,71 +7,81 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.meishe.yangquan.activity.FeedShoppingDetailActivity">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:background="@drawable/bg_feed_shopping_detail"
+        android:orientation="vertical"
         android:layout_height="280dp">
 
-        <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="9dp"
-            android:layout_height="@dimen/dp15"
-            android:background="@mipmap/ic_back"
-            android:layout_marginTop="@dimen/dp24"
-            android:layout_marginLeft="@dimen/dp18"
-            android:padding="@dimen/dp5"
-            />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp">
+
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="9dp"
+                android:layout_height="@dimen/dp15"
+                android:background="@mipmap/ic_back"
+                android:layout_marginLeft="@dimen/dp18"
+                android:padding="@dimen/dp10"
+                android:layout_centerVertical="true"
+                />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_toRightOf="@+id/iv_back"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/dp10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_feed_shopping_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    />
 
 
-        <TextView
-            android:id="@+id/tv_feed_shopping_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dp48"
-            android:layout_marginTop="@dimen/dp11"
-            android:text="XX商铺"
-            android:textColor="@color/white"
-            android:textSize="17sp"
-            />
+                <TextView
+                    android:id="@+id/tv_feed_shopping_fans"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/sp10"
+                    />
+            </LinearLayout>
 
 
-        <TextView
-            android:id="@+id/tv_feed_shopping_fans"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="粉丝：996"
-            android:textColor="@color/white"
-            android:layout_marginLeft="@dimen/dp48"
-            android:layout_marginTop="38dp"
-            android:textSize="@dimen/sp10"
-            />
+
+            <ImageView
+                android:layout_width="@dimen/dp11"
+                android:layout_height="@dimen/dp11"
+                android:background="@mipmap/ic_feed_shopping_sign"
+                android:layout_marginLeft="@dimen/dp18"
+                android:visibility="gone"
+                android:layout_marginTop="68dp"
+                />
 
 
-        <ImageView
-            android:layout_width="@dimen/dp11"
-            android:layout_height="@dimen/dp11"
-            android:background="@mipmap/ic_feed_shopping_sign"
-            android:layout_marginLeft="@dimen/dp18"
-            android:visibility="gone"
-            android:layout_marginTop="68dp"
-            />
+            <TextView
+                android:id="@+id/tv_feed_shopping_sign_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="店铺签名～"
+                android:visibility="gone"
+                android:layout_marginLeft="@dimen/dp34"
+                android:layout_marginTop="@dimen/dp65"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp11"
+                />
 
+        </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tv_feed_shopping_sign_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="店铺签名～"
-            android:visibility="gone"
-            android:layout_marginLeft="@dimen/dp34"
-            android:layout_marginTop="@dimen/dp65"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp11"
-            />
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="166dp"
-            android:layout_marginTop="67dp"
+            android:layout_height="match_parent"
             >
             <com.meishe.yangquan.view.BannerLayout
                 android:id="@+id/banner"
@@ -88,7 +98,7 @@
                 app:isAutoPlay="false"/>
         </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -117,6 +127,7 @@
             android:id="@+id/vp_pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/common_bg_color"
             android:layout_marginBottom="@dimen/dp48"
              />
 

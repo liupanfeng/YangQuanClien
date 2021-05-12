@@ -3,31 +3,32 @@
     android:layout_width="match_parent"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/common_bg_color"
     android:layout_height="match_parent">
 
     <include layout="@layout/custom_title"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp8"
-        android:background="#fff5f5f5"
-        />
+ <LinearLayout
+     android:background="@color/white"
+     android:layout_width="match_parent"
+     android:layout_height="wrap_content">
 
-    <com.meishe.libbase.SlidingTabLayout
-        android:id="@+id/slidingTabLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp45"
-        android:layout_marginLeft="@dimen/dp_px_30"
-        android:layout_marginRight="@dimen/dp_px_30"
-        android:layout_marginTop="@dimen/dp5"
-        tl:tl_indicator_color="@color/mainColor"
-        tl:tl_indicator_height="@dimen/dp_px_6"
-        tl:tl_indicator_width="@dimen/dp_px_30"
-        tl:tl_tab_space_equal="true"
-        tl:tl_textSelectColor="@color/mainColor"
-        tl:tl_textSize="@dimen/sp_px_39"
-        tl:tl_textUnselectedColor="@color/unselect_text_color" />
+     <com.meishe.libbase.SlidingTabLayout
+         android:id="@+id/slidingTabLayout"
+         android:layout_width="match_parent"
+         android:layout_height="@dimen/dp45"
+         android:layout_marginLeft="@dimen/dp_px_30"
+         android:layout_marginRight="@dimen/dp_px_30"
+         android:layout_marginTop="@dimen/dp5"
+         tl:tl_indicator_color="@color/mainColor"
+         tl:tl_indicator_height="@dimen/dp_px_6"
+         tl:tl_indicator_width="@dimen/dp_px_30"
+         tl:tl_tab_space_equal="true"
+         tl:tl_textSelectColor="@color/mainColor"
+         tl:tl_textSize="@dimen/sp_px_39"
+         tl:tl_textUnselectedColor="@color/unselect_text_color" />
+
+ </LinearLayout>
 
     <com.meishe.yangquan.view.MViewPager
         android:id="@+id/vp_pager"

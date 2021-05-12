@@ -25,7 +25,7 @@ public class MineBreedingArchivesHolder extends BaseViewHolder {
     private TextView tv_title;
     /*养殖档案建立时间*/
     private TextView tv_time;
-
+    private View btn_delete;
 
 
     public MineBreedingArchivesHolder(@NonNull View itemView, BaseRecyclerAdapter adapter) {
@@ -37,6 +37,7 @@ public class MineBreedingArchivesHolder extends BaseViewHolder {
     protected void initViewHolder(View view, Object... obj) {
         tv_title = view.findViewById(R.id.tv_title);
         tv_time = view.findViewById(R.id.tv_time);
+        btn_delete = view.findViewById(R.id.btn_delete);
     }
 
     @Override
@@ -44,6 +45,9 @@ public class MineBreedingArchivesHolder extends BaseViewHolder {
         if (info instanceof MineBreedingArchivesInfo) {
             tv_title.setText(((MineBreedingArchivesInfo) info).getTitle());
             tv_time.setText(FormatDateUtil.longToString(((MineBreedingArchivesInfo) info).getInitDate(), FormatDateUtil.FORMAT_TYPE_YEAR_MONTH_DAY));
+
+            btn_delete.setOnClickListener(listener);
+            btn_delete.setTag(info);
         }
 
     }

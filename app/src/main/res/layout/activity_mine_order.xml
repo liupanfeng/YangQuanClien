@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     xmlns:tl="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context="com.meishe.yangquan.activity.MineOrderActivity">
 
     <include layout="@layout/custom_title"/>
@@ -27,6 +28,7 @@
 
     <com.meishe.yangquan.view.MViewPager
         android:id="@+id/vp_pager"
+        android:background="@color/common_bg_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/dp10" />

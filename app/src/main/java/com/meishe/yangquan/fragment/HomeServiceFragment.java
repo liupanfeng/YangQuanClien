@@ -1,7 +1,5 @@
 package com.meishe.yangquan.fragment;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.os.Build;
@@ -10,7 +8,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
@@ -20,23 +17,17 @@ import androidx.fragment.app.FragmentTransaction;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.PublishServiceActivity;
 import com.meishe.yangquan.bean.HomeCheckDriverInfoResult;
-import com.meishe.yangquan.bean.Message;
-import com.meishe.yangquan.bean.MessageResult;
-import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.HomeTipDriverInfoView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.ToastUtil;
-import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.HorizontalExpandMenu;
 import com.meishe.yangquan.wiget.CustomButton;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Request;

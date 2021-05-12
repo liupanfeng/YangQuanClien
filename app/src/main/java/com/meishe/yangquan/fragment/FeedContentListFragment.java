@@ -38,6 +38,7 @@ import okhttp3.Response;
  * @desc 饲料-饲料-内容页面   精料 草料  豆粕 麻申
  * @date 2020/12/21 14:36
  */
+@Deprecated
 public class FeedContentListFragment extends BaseRecyclerFragment {
 
     private int mFeedType;

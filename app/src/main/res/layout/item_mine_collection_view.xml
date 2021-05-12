@@ -3,18 +3,14 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_marginBottom="@dimen/common_divide_size"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:layout_marginTop="@dimen/dp10"
-        />
 
     <RelativeLayout
         android:id="@+id/rl_mine_collect_goods"
         android:layout_width="match_parent"
-        android:background="@color/white"
         android:layout_height="wrap_content">
 
         <com.meishe.yangquan.view.RoundAngleImageView
@@ -26,6 +22,7 @@
             android:background="@mipmap/ic_feed_goods_cover"
             android:layout_marginTop="@dimen/dp14"
             android:layout_marginLeft="@dimen/dp15"
+            android:layout_marginBottom="@dimen/dp14"
             />
 
 
@@ -76,7 +73,6 @@
     <RelativeLayout
         android:id="@+id/rl_mine_collection_shopping"
         android:visibility="gone"
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -89,6 +85,8 @@
             app:roundHeight="@dimen/dp10"
             android:layout_marginLeft="@dimen/dp15"
             android:background="@mipmap/ic_feed_goods_cover"
+            android:layout_marginTop="@dimen/dp14"
+            android:layout_marginBottom="@dimen/dp14"
             />
 
         <TextView

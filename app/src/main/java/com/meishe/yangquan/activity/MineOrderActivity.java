@@ -66,8 +66,8 @@ public class MineOrderActivity extends BaseActivity {
         mFragmentList.clear();
         mTitleList.clear();
 
-        CommonListFragment allFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE,0);
-        mFragmentList.add(allFragment);
+//        CommonListFragment allFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE,0);
+//        mFragmentList.add(allFragment);
 
         CommonListFragment waitPayFragment= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_WAIT_PAY_TYPE,0);
         mFragmentList.add(waitPayFragment);
@@ -81,7 +81,7 @@ public class MineOrderActivity extends BaseActivity {
         CommonListFragment waitRefund= CommonListFragment.newInstance(true,mType,Constants.TYPE_LIST_TYPE_ORDER_REFUND_TYPE,0);
         mFragmentList.add(waitRefund);
 
-        mTitleList.add("全部");
+//        mTitleList.add("全部");
         mTitleList.add("待付款");
         mTitleList.add("待收货");
         mTitleList.add("待评价");

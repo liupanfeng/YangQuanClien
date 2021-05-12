@@ -2,14 +2,16 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/dp80"
-    android:layout_marginTop="@dimen/dp10">
+    android:background="@color/white"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/common_divide_size">
 
 
     <RelativeLayout
         android:id="@+id/rl_feed_food_comment_top"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp28"
+        android:layout_marginTop="@dimen/dp10"
         android:orientation="horizontal">
 
         <TextView
@@ -54,9 +56,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/rl_feed_food_comment_top"
         android:layout_marginLeft="@dimen/dp18"
+        android:layout_marginRight="@dimen/dp18"
         android:layout_marginTop="@dimen/dp10"
         android:text="物流太慢，饲料用着看看效果～"
         android:textColor="#ff303030"
+        android:layout_marginBottom="@dimen/dp10"
         android:textSize="13sp" />
 
 

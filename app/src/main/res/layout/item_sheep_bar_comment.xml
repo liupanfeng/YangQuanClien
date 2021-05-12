@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -82,5 +83,13 @@
         android:layout_marginLeft="@dimen/dp56"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.33dp"
+        android:background="#E5E5E5"
+        android:layout_marginTop="@dimen/common_divide_size"
+        />
+
 
 </LinearLayout>

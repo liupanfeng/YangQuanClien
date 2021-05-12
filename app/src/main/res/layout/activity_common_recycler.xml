@@ -9,13 +9,6 @@
     <include layout="@layout/custom_title"
         android:id="@+id/title"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/dp8"
-        android:background="#fff5f5f5"
-        android:layout_below="@+id/title"
-        />
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

@@ -5,9 +5,15 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+<LinearLayout
+    android:background="@color/white"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
     <com.meishe.libbase.SlidingTabLayout
         android:id="@+id/slidingTabLayout"
         android:layout_width="match_parent"
+        android:layout_marginBottom="5dp"
         android:layout_height="@dimen/dp_px_100"
         android:layout_below="@+id/ll_sign_up"
         android:layout_marginLeft="@dimen/dp_px_30"
@@ -21,8 +27,12 @@
         tl:tl_textSize="@dimen/sp_px_39"
         tl:tl_textUnselectedColor="@color/unselect_text_color" />
 
+</LinearLayout>
+
+
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_pager"
+        android:background="@color/common_bg_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
        />

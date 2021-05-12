@@ -14,6 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/NoTitleStyle"
         tools:replace="android:appComponentFactory">
+        <activity android:name=".activity.BUEditGoodsActivity"></activity>
         <activity android:name=".activity.MineOrderCommentActivity" />
         <activity android:name=".activity.MineRefundProgressActivity" />
         <activity

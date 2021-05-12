@@ -96,6 +96,7 @@
 
 
     <color name="ff000000">#000000</color>
+    <color name="common_bg_color">#fff5f5f5</color>
 
 
 </resources>

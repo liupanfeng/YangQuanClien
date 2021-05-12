@@ -165,8 +165,7 @@
     <dimen name="corners">10dp</dimen>
 
 
-    <dimen name="card_elevation_size">2dp</dimen>
-    <dimen name="card_elevation_size_little">1dp</dimen>
+    <dimen name="common_card_elevation_size">0.2dp</dimen>
 
     <dimen name="card_corner_radius_size">4dp</dimen>
     <dimen name="card_margin_size">6dp</dimen>
@@ -178,6 +177,7 @@
     <dimen name="custom_button_left_margin_size">20dp</dimen>
     <dimen name="expand_menu_stroke_width_size">1dp</dimen>
     <dimen name="expand_menu_stroke_size">3px</dimen>
+    <dimen name="common_divide_size">6dp</dimen>
 
 
 </resources>

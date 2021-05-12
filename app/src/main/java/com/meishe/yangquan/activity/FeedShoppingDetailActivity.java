@@ -158,7 +158,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
      */
     private void updateUI(FeedShoppingInfo feedInfo) {
         tv_feed_shopping_name.setText(feedInfo.getName());
-//        tv_feed_shopping_fans.setText(feedInfo.get);
+        tv_feed_shopping_fans.setText("粉丝：0");
 
         if (feedInfo.isHasCollected()) {
             iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);
@@ -213,7 +213,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         } else if (v.getId() == R.id.ll_feed_goods_order) {
             Bundle bundle = new Bundle();
             bundle.putInt(Constants.KEY_ORDER_STATE_TYPE, Constants.TYPE_COMMON_MY_ORDER_TYPE);
-            bundle.putInt(Constants.KEY_TAB_SELECT_INDEX, Constants.TYPE_LIST_TYPE_ORDER_ALL_TYPE);
+            bundle.putInt(Constants.KEY_TAB_SELECT_INDEX, 0);
             AppManager.getInstance().jumpActivity(mContext, MineOrderActivity.class, bundle);
         } else if (v.getId() == R.id.ll_feed_shopping_collection) {
             doCollectShoppingOrGoods(mShoppingId);
