@@ -33,10 +33,11 @@ public class App extends Application {
         JPushInterface.setDebugMode(true);
         JPushInterface.init(this);
 
-        //友盟初始化 Push推送业务的secret,没有为空
-        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
-        // 打开统计SDK调试模式
-        UMConfigure.setLogEnabled(true);
+//        //友盟初始化 Push推送业务的secret,没有为空
+//        UMConfigure.init(this, UMConfigure.DEVICE_TYPE_PHONE, null);
+//        // 打开统计SDK调试模式
+//        UMConfigure.setLogEnabled(true);
+
 //        PlatformConfig.setWeixin("wxc86baec54fc83b32", "bb1228fe238abe0bd962e5b4d50bf05e");
 //        PlatformConfig.setQQZone("100424468", "c7394704798a158208a74ab60104f0ba");
 //        PlatformConfig.setSinaWeibo("3921700954", "04b48b094faeb16683c32669824ebdad","http://sns.whalecloud.com");

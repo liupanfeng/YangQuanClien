@@ -88,14 +88,16 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
 //            R.mipmap.ic_mine_my_collection,
 //            R.mipmap.ic_mine_system_message,
 //            R.mipmap.ic_mine_pay_password};
-        private int[] mSettingIcon = {R.mipmap.ic_mine_personal_message,
-            R.mipmap.ic_mine_feed_gold, R.mipmap.ic_mine_my_focus,
-            R.mipmap.ic_mine_my_message,
-            R.mipmap.ic_mine_my_points,
-            R.mipmap.ic_mine_keep,
-            R.mipmap.ic_mine_my_collection,
-            R.mipmap.ic_mine_system_message,
-            R.mipmap.ic_mine_pay_password};
+        private int[] mSettingIcon = {
+                R.mipmap.ic_mine_personal_message,
+                R.mipmap.ic_mine_feed_gold,
+                R.mipmap.ic_mine_my_focus,
+                R.mipmap.ic_mine_my_message,
+                R.mipmap.ic_mine_my_points,
+                R.mipmap.ic_mine_keep,
+                R.mipmap.ic_mine_my_collection,
+                R.mipmap.ic_mine_system_message,
+                R.mipmap.ic_mine_pay_password};
 
     private CircleImageView mIvMinePhoto;
 
@@ -173,7 +175,7 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
 
     @Override
     protected void initData() {
-        GridLayoutManager manager = new GridLayoutManager(mContext, 3);
+        GridLayoutManager manager = new GridLayoutManager(mContext, 4);
         mRecyclerView.setLayoutManager(manager);
         MultiFunctionAdapter adapter = new MultiFunctionAdapter(mContext, mRecyclerView);
         mRecyclerView.setAdapter(adapter);
@@ -223,13 +225,13 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             case R.id.rl_mine_pay:
                 Bundle bundle=new Bundle();
                 bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
-                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,1);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,0);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_receive:
                 bundle=new Bundle();
                 bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
-                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,2);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,1);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
 
 
@@ -240,13 +242,13 @@ public class MineFragment extends BaseRecyclerFragment implements View.OnClickLi
             case R.id.rl_mine_comment:
                 bundle=new Bundle();
                 bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
-                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,3);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,2);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.rl_mine_refund:
                 bundle=new Bundle();
                 bundle.putInt(Constants.KEY_ORDER_STATE_TYPE,Constants.TYPE_COMMON_MY_ORDER_TYPE);
-                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,4);
+                bundle.putInt(Constants.KEY_TAB_SELECT_INDEX,3);
                 AppManager.getInstance().jumpActivity(getActivity(),MineOrderActivity.class,bundle);
                 break;
             case R.id.iv_mine_setting:

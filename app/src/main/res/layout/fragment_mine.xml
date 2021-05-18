@@ -80,8 +80,8 @@
 
                     <ImageView
                         android:id="@+id/iv_mine_pay"
-                        android:layout_width="@dimen/dp40"
-                        android:layout_height="@dimen/dp40"
+                        android:layout_width="@dimen/dp30"
+                        android:layout_height="@dimen/dp28"
                         android:layout_centerHorizontal="true"
                         android:background="@mipmap/ic_mine_pay" />
 
@@ -104,8 +104,8 @@
 
                     <ImageView
                         android:id="@+id/iv_mine_receive"
-                        android:layout_width="@dimen/dp40"
-                        android:layout_height="@dimen/dp40"
+                        android:layout_width="@dimen/dp30"
+                        android:layout_height="@dimen/dp28"
                         android:layout_centerHorizontal="true"
                         android:background="@mipmap/ic_mine_receiver" />
 
@@ -128,8 +128,8 @@
 
                     <ImageView
                         android:id="@+id/iv_mine_comment"
-                        android:layout_width="@dimen/dp40"
-                        android:layout_height="@dimen/dp40"
+                        android:layout_width="@dimen/dp30"
+                        android:layout_height="@dimen/dp28"
                         android:layout_centerHorizontal="true"
                         android:background="@mipmap/ic_mine_comment" />
 
@@ -152,10 +152,10 @@
 
                     <ImageView
                         android:id="@+id/iv_mine_refund"
-                        android:layout_width="@dimen/dp40"
-                        android:layout_height="@dimen/dp40"
+                        android:layout_width="@dimen/dp30"
+                        android:layout_height="@dimen/dp28"
                         android:layout_centerHorizontal="true"
-                        android:background="@mipmap/ic_mine_pay" />
+                        android:background="@mipmap/ic_mine_refund" />
 
                     <TextView
                         android:layout_width="wrap_content"
