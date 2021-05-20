@@ -96,7 +96,7 @@ public class MinePayPasswordActivity extends BaseActivity  {
             mNeedInitPaymentCode = user.isNeedInitPaymentCode();
         }
 //        mNeedInitPaymentCode=true;
-        if (mNeedInitPaymentCode){
+        if (!mNeedInitPaymentCode){
             //已经设置过支付密码 需要验证支付密码
             rl_verify_pay_password.setVisibility(View.VISIBLE);
             rl_setting_pay_password.setVisibility(View.GONE);
@@ -156,7 +156,7 @@ public class MinePayPasswordActivity extends BaseActivity  {
             public void passwordFull(String password) {
                  //记录验证密码
                 mOldPayWorld=password;
-                mNeedInitPaymentCode=false;
+                mNeedInitPaymentCode = true;
                 rl_verify_pay_password.setVisibility(View.GONE);
                 rl_setting_pay_password.setVisibility(View.VISIBLE);
             }
@@ -181,7 +181,7 @@ public class MinePayPasswordActivity extends BaseActivity  {
     public void onClick(View v) {
         if (v instanceof TextView) {
             String number = ((TextView) v).getText().toString().trim();
-            if (mNeedInitPaymentCode){
+            if (!mNeedInitPaymentCode){
                 verify_passwordEdt.addPassword(number);
             }else {
                 mPasswordEditText.addPassword(number);
@@ -189,7 +189,7 @@ public class MinePayPasswordActivity extends BaseActivity  {
 
         }
         if (v instanceof ImageView) {
-            if (mNeedInitPaymentCode){
+            if (!mNeedInitPaymentCode){
                 verify_passwordEdt.deletePassword();
             }else {
                 mPasswordEditText.deletePassword();

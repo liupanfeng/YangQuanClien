@@ -158,7 +158,7 @@ public class FeedShoppingDetailActivity extends BaseActivity {
      */
     private void updateUI(FeedShoppingInfo feedInfo) {
         tv_feed_shopping_name.setText(feedInfo.getName());
-        tv_feed_shopping_fans.setText("粉丝：0");
+        tv_feed_shopping_fans.setText("粉丝："+feedInfo.getFansCount());
 
         if (feedInfo.isHasCollected()) {
             iv_select_shopping.setBackgroundResource(R.mipmap.ic_feed_goods_collection_selected);

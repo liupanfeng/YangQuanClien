@@ -117,6 +117,8 @@ public class FeedShoppingInfo extends BaseInfo {
 
     private String shopPhone;
 
+    private int  fansCount;
+
    /*  if (type == 1) {
         param.put("mainCategory", "饲料");
     } else if (type == 2) {
@@ -447,5 +449,13 @@ public class FeedShoppingInfo extends BaseInfo {
 
     public void setType(int type) {
         this.type = type;
+    }
+
+    public int getFansCount() {
+        return fansCount;
+    }
+
+    public void setFansCount(int fansCount) {
+        this.fansCount = fansCount;
     }
 }
