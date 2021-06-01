@@ -24,6 +24,7 @@ public class FeedReceiveAddressActivity extends BaseActivity {
     private View btn_add_receive_address;
     private List<BaseInfo> mData = new ArrayList<>();
 
+
     @Override
     protected int initRootView() {
         return R.layout.activity_receive_address;
