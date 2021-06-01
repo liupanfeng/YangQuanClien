@@ -1,62 +1,30 @@
 package com.meishe.yangquan.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.tabs.TabLayout;
 import com.meishe.libbase.SlidingTabLayout;
-import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.adapter.ViewPagerAdapter;
-import com.meishe.yangquan.bean.IndustryInfo;
-import com.meishe.yangquan.bean.IndustryResult;
-import com.meishe.yangquan.bean.ServiceMessage;
-import com.meishe.yangquan.bean.ServiceMessageResult;
-import com.meishe.yangquan.bean.SheepNews;
-import com.meishe.yangquan.bean.SheepNewsResult;
-import com.meishe.yangquan.bean.VersionInfo;
-import com.meishe.yangquan.bean.VersionInfoResult;
-import com.meishe.yangquan.http.BaseCallBack;
-import com.meishe.yangquan.http.OkHttpManager;
-import com.meishe.yangquan.inter.OnResponseListener;
-import com.meishe.yangquan.updateversion.UpdateStatus;
-import com.meishe.yangquan.updateversion.UpdateVersionUtil;
-import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.utils.ToastUtil;
-import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.view.MViewPager;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * 首页
  *
  * @author 86188
  */
-public class HomeFragment extends BaseRecyclerFragment implements OnResponseListener {
+public class HomeFragment extends BaseRecyclerFragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private static final int PLUS_ONE_REQUEST_CODE = 0;
-    private String mParam1;
-    private String mParam2;
-    private static final int SERVICE_FLOW_MESSAGE = 1;
-    private static final int SERVICE_SHEEP_NEWS = 2;
     private MultiFunctionAdapter mServiceMessageAdapter;
     private MultiFunctionAdapter mSheepNewsAdapter;
     private MaterialProgress mp_loading;
@@ -121,7 +89,6 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
         mViewPager.setAdapter(new CommonFragmentAdapter(getChildFragmentManager(), mFragmentList, mTopTabTitleList));
         mSlidingTabLayout.setViewPager(mViewPager);
         mViewPager.setScroll(false);
-        getUserDataFromServer();
         getVersionData();
     }
 
@@ -170,81 +137,4 @@ public class HomeFragment extends BaseRecyclerFragment implements OnResponseList
 //        });
     }
 
-    /**
-     * 获取用户数据
-     */
-    private void getUserDataFromServer() {
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    public void onSuccess(Object object) {
-        if (mp_loading != null) {
-            mp_loading.hide();
-        }
-    }
-
-    @Override
-    public void onSuccess(int type, Object object) {
-        if (mp_loading != null) {
-            mp_loading.hide();
-        }
-
-        switch (type) {
-            case SERVICE_FLOW_MESSAGE:
-                if (object instanceof ServiceMessageResult) {
-                    List<ServiceMessage> messageList = ((ServiceMessageResult) object).getData();
-                    if (messageList != null && messageList.size() > 0) {
-                        mServiceMessageAdapter.setNeedAutoScroll(true);
-                        mServiceMessageAdapter.addAll(messageList);
-//                        mRecyclerView.start();
-                    }
-                }
-                break;
-            case SERVICE_SHEEP_NEWS:
-                if (object instanceof SheepNewsResult) {
-                    List<SheepNews> sheepNews = ((SheepNewsResult) object).getData();
-                    if (sheepNews != null && sheepNews.size() > 0) {
-                        sheepNews.get(0).setNeedShowLabel(true);
-                        mSheepNewsAdapter.addAll(sheepNews);
-                    }
-                }
-
-                break;
-        }
-    }
-
-    @Override
-    public void onError(Object obj) {
-        if (mp_loading != null) {
-            mp_loading.hide();
-        }
-    }
-
-    @Override
-    public void onError(int type, Object obj) {
-        if (mp_loading != null) {
-            mp_loading.hide();
-        }
-    }
 }

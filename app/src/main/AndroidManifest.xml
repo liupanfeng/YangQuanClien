@@ -158,9 +158,6 @@
             android:name=".activity.MainWebViewActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.ServiceMessageListActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.ShowPicActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -177,12 +174,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.VersionUpdateActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.BusinessOpportunityActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MessageCenterActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PerfectInformationActivity"

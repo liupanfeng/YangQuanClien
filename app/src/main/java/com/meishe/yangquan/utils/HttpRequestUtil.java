@@ -5,10 +5,7 @@ import android.util.Log;
 
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.ADOpenScreenResult;
 import com.meishe.yangquan.bean.MessageResult;
-import com.meishe.yangquan.bean.ServerCustomerResult;
-import com.meishe.yangquan.bean.ServiceMessageResult;
 import com.meishe.yangquan.bean.SheepNewsResult;
 import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.bean.UserResult;
@@ -23,10 +20,6 @@ import java.util.HashMap;
 import okhttp3.Call;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
 
 public class HttpRequestUtil {
 
@@ -145,140 +138,6 @@ public class HttpRequestUtil {
 
 
 
-    /**
-     * 获取开屏广告
-     */
-    public void getADFromServer() {
-        HashMap<String, Object> requestParam = new HashMap<>();
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_GET_AD, new BaseCallBack<ADOpenScreenResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, ADOpenScreenResult result) {
-                if (result != null || result.getStatus() == 200) {
-                    if (listener != null) {
-                        listener.onSuccess(result);
-                    }
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
-
-    /**
-     * 服务循环消息
-     * type 1 ：头部循环消息  2. 咨询消息
-     */
-    public void getServiceMessageFromServer(final int type) {
-
-        HashMap<String, Object> requestParam = new HashMap<>();
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_MESSAGE, new BaseCallBack<ServiceMessageResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, ServiceMessageResult result) {
-                if (result != null || result.getStatus() == 200) {
-                    if (listener != null) {
-                        listener.onSuccess(type, result);
-                    }
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-                if (e instanceof com.google.gson.JsonParseException) {
-                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
-                }
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
-
-
-    /**
-     * 服务列表消息
-     */
-    public void getServiceListFromServer(int userType) {
-
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("userType", userType);
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_LIST, new BaseCallBack<ServerCustomerResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, ServerCustomerResult result) {
-                if (result != null && result.getStatus() == 200) {
-                    if (listener != null) {
-                        listener.onSuccess(result);
-                    }
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-                if (e instanceof com.google.gson.JsonParseException) {
-                    ToastUtil.showToast(mContext, mContext.getString(R.string.data_analysis_error));
-                }
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
 
 
     /**

@@ -1,8 +1,6 @@
 package com.meishe.yangquan.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -15,16 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.activity.AboutActivity;
-import com.meishe.yangquan.activity.BusinessOpportunityActivity;
 import com.meishe.yangquan.activity.CommonRecyclerActivity;
 import com.meishe.yangquan.activity.ContactUsActivity;
 import com.meishe.yangquan.activity.FeedGoodsDetailActivity;
 import com.meishe.yangquan.activity.FeedShoppingDetailActivity;
 import com.meishe.yangquan.activity.HomeQuotationHistoryActivity;
 import com.meishe.yangquan.activity.LoginActivity;
-import com.meishe.yangquan.activity.MessageCenterActivity;
-import com.meishe.yangquan.activity.MineBreedingArchivesActivity;
-import com.meishe.yangquan.activity.MineBreedingArchivesDetailActivity;
 import com.meishe.yangquan.activity.MineCallBackActivity;
 import com.meishe.yangquan.activity.MineFeedGoldActivity;
 import com.meishe.yangquan.activity.MineMyCollectionActivity;
@@ -34,46 +28,29 @@ import com.meishe.yangquan.activity.MinePayPasswordActivity;
 import com.meishe.yangquan.activity.MinePersonalInfoActivity;
 import com.meishe.yangquan.activity.MineSystemMessageActivity;
 import com.meishe.yangquan.activity.PerfectInformationActivity;
-import com.meishe.yangquan.activity.ServiceMessageListActivity;
 import com.meishe.yangquan.activity.ServiceTypeListActivity;
 import com.meishe.yangquan.activity.VersionUpdateActivity;
-import com.meishe.yangquan.bean.BUOrderInfo;
 import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.BusinessOpportunity;
-import com.meishe.yangquan.bean.BusinessOpportunityResult;
 import com.meishe.yangquan.bean.EmptyInfo;
 import com.meishe.yangquan.bean.EndInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedShoppingInfo;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.MarketInfo;
-import com.meishe.yangquan.bean.Message;
-import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
-import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
-import com.meishe.yangquan.bean.ServerCustomer;
-import com.meishe.yangquan.bean.ServerZan;
-import com.meishe.yangquan.bean.ServerZanResult;
 import com.meishe.yangquan.bean.ServiceInfo;
-import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.CommonPictureInfo;
-import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.fragment.BaseRecyclerFragment;
 import com.meishe.yangquan.helper.ButtonClickHelper;
-import com.meishe.yangquan.helper.DataHelper;
-import com.meishe.yangquan.http.BaseCallBack;
-import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.SelectMapTypeView;
 import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
-import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.LocationUtil;
-import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
 import com.meishe.yangquan.view.ListLoadingView;
@@ -83,15 +60,8 @@ import com.meishe.yangquan.viewhoder.FooterHolder;
 import com.meishe.yangquan.wiget.IosDialog;
 import com.meishe.yangquan.wiget.MaterialProgress;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
-
-import okhttp3.Call;
-import okhttp3.Request;
-import okhttp3.Response;
 
 public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewHolder> implements View.OnClickListener {
 
@@ -355,20 +325,6 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 //                    ToastUtil.showToast(mContext,"研发中敬请期待");
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), PerfectInformationActivity.class);
                     break;
-                case "消息中心":
-                    if (isNeedLogin) {
-                        AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
-                        return;
-                    }
-                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), MessageCenterActivity.class);
-                    break;
-                case "我的商机":
-                    if (isNeedLogin) {
-                        AppManager.getInstance().jumpActivity(getFragment().getActivity(), LoginActivity.class);
-                        return;
-                    }
-                    AppManager.getInstance().jumpActivity(getFragment().getActivity(), BusinessOpportunityActivity.class);
-                    break;
                 case "版本更新":
                     AppManager.getInstance().jumpActivity(getFragment().getActivity(), VersionUpdateActivity.class);
                     break;
@@ -582,241 +538,6 @@ public abstract class BaseRecyclerAdapter extends RecyclerView.Adapter<BaseViewH
 
     }
 
-
-    private void showDialog(final long fromUserId, final String fromPhoneNumber, final long userId, final String content, String title, String diaContent, String sureText) {
-        mDialog = new IosDialog.DialogBuilder(mContext)
-                .setInputContent(diaContent)
-                .setTitle(title)
-                .setAsureText(sureText)
-                .setCancelText("取消")
-                .addListener(new IosDialog.OnButtonClickListener() {
-                    @Override
-                    public void onAsureClick() {
-                        getMaterialProgress().show();
-                        addBusinessOpportunity(fromUserId, fromPhoneNumber, userId, content);
-                        mDialog.dismiss();
-                    }
-
-                    @Override
-                    public void onCancelClick() {
-                        mDialog.dismiss();
-                    }
-                }).create();
-    }
-
-
-    private void addBusinessOpportunity(Long fromUserId, String fromPhoneNumber, Long toUserId, String content) {
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("fromUserId", fromUserId);
-        requestParam.put("fromPhoneNumber", fromPhoneNumber);
-        requestParam.put("toUserId", toUserId);
-        requestParam.put("content", content);
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_MINE_ADD_BUSIJNESS, new BaseCallBack<BusinessOpportunityResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                getFragment().getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "预约失败");
-                        getMaterialProgress().hide();
-                    }
-                });
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, BusinessOpportunityResult result) {
-                getMaterialProgress().hide();
-                if (response != null && response.code() == 200) {
-                    if (result == null && result.getStatus() != 200) {
-                        return;
-                    }
-                    BusinessOpportunity businessOpportunity = result.getData();
-                    if (businessOpportunity != null) {
-                        ToastUtil.showToast(mContext, "已成功预约");
-                    } else {
-                        ToastUtil.showToast(mContext, "预约失败");
-                    }
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-//                setNoDataVisible(View.VISIBLE);
-                getFragment().getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "预约失败");
-                        getMaterialProgress().hide();
-                    }
-                });
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
-
-    /**
-     * @param userId
-     * @param nickName
-     * @param photoUrl
-     */
-    private void addZan(Long userId, String nickName, String photoUrl, String serverId, final ServerCustomer serverCustomer) {
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("userId", userId);
-        requestParam.put("nickName", nickName);
-        requestParam.put("photoUrl", photoUrl);
-        requestParam.put("serverId", serverId);
-        OkHttpManager.getInstance().postRequest(HttpUrl.SERVICE_LIST_ADD_ZAN, new BaseCallBack<ServerZanResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                getFragment().getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "点赞失败");
-                        getMaterialProgress().hide();
-                    }
-                });
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, ServerZanResult result) {
-                getMaterialProgress().hide();
-                if (response != null && response.code() == 200) {
-                    if (result == null && result.getStatus() != 200) {
-                        return;
-                    }
-                    ServerZan serverZan = result.getData();
-                    if (serverZan != null) {
-                        ToastUtil.showToast(mContext, "点赞成功");
-                        serverCustomer.setIschecked(true);
-                        List<ServerZan> zans = serverCustomer.getZans();
-                        if (zans != null) {
-                            zans.add(serverZan);
-                        }
-                        notifyDataSetChanged();
-                    } else {
-                        ToastUtil.showToast(mContext, "点赞失败");
-                    }
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-//                setNoDataVisible(View.VISIBLE);
-                getFragment().getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "点赞失败");
-                        getMaterialProgress().hide();
-                    }
-                });
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
-
-
-    /**
-     * 取消点赞
-     */
-    private void deleteZan(long userId, final ServerCustomer serverCustomer) {
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("userId", userId);
-        OkHttpManager.getInstance().postRequest(HttpUrl.SERVICE_LIST_DELETE_ZAN, new BaseCallBack<ServerZanResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                getFragment().getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "取消赞失败");
-                        getMaterialProgress().hide();
-                    }
-                });
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, ServerZanResult result) {
-                getMaterialProgress().hide();
-                if (response != null && response.code() == 200) {
-                    if (result == null && result.getStatus() != 200) {
-                        return;
-                    }
-                    ServerZan serverZan = result.getData();
-                    if (serverZan != null) {
-                        List<ServerZan> zans = serverCustomer.getZans();
-                        if (zans != null) {
-                            Iterator<ServerZan> iterator = zans.iterator();
-                            while (iterator.hasNext()) {
-                                ServerZan zan = iterator.next();
-                                if (zan.getUserId().longValue() == serverZan.getUserId().longValue()) {
-                                    iterator.remove();
-                                    serverCustomer.setIschecked(false);
-                                    notifyDataSetChanged();
-                                }
-                            }
-                            for (ServerZan zan : zans) {
-
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-//                setNoDataVisible(View.VISIBLE);
-                getFragment().getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ToastUtil.showToast(mContext, "取消赞失败");
-                        getMaterialProgress().hide();
-                    }
-                });
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
 
 
     /**

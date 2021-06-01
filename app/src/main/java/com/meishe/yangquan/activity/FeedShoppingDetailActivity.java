@@ -118,17 +118,6 @@ public class FeedShoppingDetailActivity extends BaseActivity {
         mFragmentList.clear();
         mTitleList.clear();
 
-//        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_RECOMMEND);
-//        mFragmentList.add(feedFoodsListFragment);
-
-//        FeedGoodsListFragment feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_MULTIPLE);
-//        mFragmentList.add(feedFoodsListFragment);
-//
-//        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_SALES);
-//        mFragmentList.add(feedFoodsListFragment);
-//
-//        feedFoodsListFragment = FeedGoodsListFragment.newInstance(mShoppingId,Constants.TYPE_FEED_FOODS_PRICE);
-//        mFragmentList.add(feedFoodsListFragment);
 
         CommonListFragment feedFoodsListFragment = CommonListFragment.newInstance(true, Constants.TYPE_COMMON_SHOPPING,
                 Constants.TYPE_FEED_FOODS_MULTIPLE, mShoppingId);

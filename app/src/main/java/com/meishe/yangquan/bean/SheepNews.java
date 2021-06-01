@@ -1,6 +1,5 @@
 package com.meishe.yangquan.bean;
 
-import java.util.Date;
 
 @Deprecated
 public class SheepNews extends BaseInfo{

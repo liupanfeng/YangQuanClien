@@ -1,22 +1,15 @@
 package com.meishe.yangquan.viewhoder;
 
 import android.content.Context;
-import android.util.Base64;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.BaseRecyclerAdapter;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.QuotationInfo;
-import com.meishe.yangquan.utils.FormatCurrentData;
-import com.meishe.yangquan.utils.HttpUrl;
-import com.meishe.yangquan.view.RoundAngleImageView;
 
 /**
  * 行情列表

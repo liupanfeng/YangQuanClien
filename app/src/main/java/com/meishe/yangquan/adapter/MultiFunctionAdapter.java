@@ -20,8 +20,6 @@ import com.meishe.yangquan.bean.BUPictureInfo;
 import com.meishe.yangquan.bean.BUShopDataInfo;
 import com.meishe.yangquan.bean.BUShoppingUserInfo;
 import com.meishe.yangquan.bean.BaseInfo;
-import com.meishe.yangquan.bean.BusinessOpportunity;
-import com.meishe.yangquan.bean.Comment;
 import com.meishe.yangquan.bean.FeedCommentInfo;
 import com.meishe.yangquan.bean.FeedGoodsInfo;
 import com.meishe.yangquan.bean.FeedReceiverAddressInfo;
@@ -33,7 +31,6 @@ import com.meishe.yangquan.bean.IndustryInfo;
 import com.meishe.yangquan.bean.IndustryNewsClip;
 import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.MarketInfo;
-import com.meishe.yangquan.bean.Message;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineCallbackInfo;
 import com.meishe.yangquan.bean.MineCollectionInfo;
@@ -47,9 +44,7 @@ import com.meishe.yangquan.bean.MineTypeInfo;
 import com.meishe.yangquan.bean.MineUserMessageInfo;
 import com.meishe.yangquan.bean.PointRecordInfo;
 import com.meishe.yangquan.bean.QuotationInfo;
-import com.meishe.yangquan.bean.ServerCustomer;
 import com.meishe.yangquan.bean.ServiceInfo;
-import com.meishe.yangquan.bean.ServiceMessage;
 import com.meishe.yangquan.bean.ServiceTypeInfo;
 import com.meishe.yangquan.bean.SheepBarCommentInfo;
 import com.meishe.yangquan.bean.SheepBarCommentSecondaryInfo;
@@ -57,10 +52,8 @@ import com.meishe.yangquan.bean.SheepBarMessageInfo;
 import com.meishe.yangquan.bean.CommonPictureInfo;
 import com.meishe.yangquan.bean.SheepHairInfo;
 import com.meishe.yangquan.bean.SheepLossInfo;
-import com.meishe.yangquan.bean.SheepNews;
 import com.meishe.yangquan.bean.SheepVaccineInfo;
 import com.meishe.yangquan.bean.SystemMessageInfo;
-import com.meishe.yangquan.bean.SystemNotification;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.viewhoder.BUHomeAlreadyApplyShoppingListHolder;
 import com.meishe.yangquan.viewhoder.BUHomeManagerCommentListHolder;
@@ -80,8 +73,6 @@ import com.meishe.yangquan.viewhoder.MineOrderListHolder;
 import com.meishe.yangquan.viewhoder.BUPictureListHolder;
 import com.meishe.yangquan.viewhoder.BaseViewHolder;
 import com.meishe.yangquan.viewhoder.BreedingArchivesFoodAnalysisHolder;
-import com.meishe.yangquan.viewhoder.BusinessOpportunityListHolder;
-import com.meishe.yangquan.viewhoder.CommentListHolder;
 import com.meishe.yangquan.viewhoder.FeedFoodsHolder;
 import com.meishe.yangquan.viewhoder.FeedShoppingHolder;
 import com.meishe.yangquan.viewhoder.HomeMarketBuyBigSheepListHolder;
@@ -96,7 +87,6 @@ import com.meishe.yangquan.viewhoder.HomeMarketPictureListHolder;
 import com.meishe.yangquan.viewhoder.IndustryContentHolder;
 import com.meishe.yangquan.viewhoder.IndustryListHolder;
 import com.meishe.yangquan.viewhoder.MessageCenterListHolder;
-import com.meishe.yangquan.viewhoder.MessageListHolder;
 import com.meishe.yangquan.viewhoder.MineBreedingArchivesHolder;
 import com.meishe.yangquan.viewhoder.MineMyFansHolder;
 import com.meishe.yangquan.viewhoder.MineMyFocusHolder;
@@ -107,11 +97,8 @@ import com.meishe.yangquan.viewhoder.MineTypeHolder;
 import com.meishe.yangquan.viewhoder.QuotationListHolder;
 import com.meishe.yangquan.viewhoder.ServiceLabelHolder;
 import com.meishe.yangquan.viewhoder.HomeServiceListHolder;
-import com.meishe.yangquan.viewhoder.ServiceMessageListHolder;
 import com.meishe.yangquan.viewhoder.ServiceSheepNewsHolder;
-import com.meishe.yangquan.viewhoder.ServiceMessageHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
-import com.meishe.yangquan.viewhoder.ServiceTypeListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarCommentListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarCommentSecondaryListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarMessageListHolder;
@@ -131,31 +118,13 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
         View view = null;
         BaseViewHolder viewHolder = super.onCreateViewHolder(parent, viewType);
         switch (viewType) {
-            case VIEW_SERVICE_MESSAGE:
-                if (pageType == 1) {
-                    view = mLayoutInflater.inflate(R.layout.item_service_message, parent, false);
-                    viewHolder = new ServiceMessageHolder(view, this);
-                } else if (pageType == 2) {
-                    view = mLayoutInflater.inflate(R.layout.item_service_message_lsit, parent, false);
-                    viewHolder = new ServiceMessageListHolder(view, this);
-                }
-
-                break;
             case VIEW_SERVICE_TYPE:
                 view = mLayoutInflater.inflate(R.layout.item_service_type, parent, false);
                 viewHolder = new ServiceTypeHolder(view, this);
                 break;
-            case VIEW_SERVICE_TYPE_LIST:
-                view = mLayoutInflater.inflate(R.layout.item_service_type_list, parent, false);
-                viewHolder = new ServiceTypeListHolder(view, this);
-                break;
             case VIEW_MINE_TYPE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_type, parent, false);
                 viewHolder = new MineTypeHolder(view, this);
-                break;
-            case VIEW_MESSAGE_TYPE_LIST:
-                view = mLayoutInflater.inflate(R.layout.item_message_type_list, parent, false);
-                viewHolder = new MessageListHolder(view, this);
                 break;
             case VIEW_SERVICE_NEWS_TYPE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_service_news_type, parent, false);
@@ -168,14 +137,6 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             case VIEW_MESSAGE_CENTER_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_message_center, parent, false);
                 viewHolder = new MessageCenterListHolder(view, this);
-                break;
-            case VIEW_BUSINESS_CENTER_LIST:
-                view = mLayoutInflater.inflate(R.layout.item_business_opportunity, parent, false);
-                viewHolder = new BusinessOpportunityListHolder(view, this);
-                break;
-            case VIEW_COMMENT_LIST:
-                view = mLayoutInflater.inflate(R.layout.item_comment, parent, false);
-                viewHolder = new CommentListHolder(view, this);
                 break;
             /*行情列表*/
             case VIEW_QUOTATION_LIST:
@@ -429,26 +390,12 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
         } else {
             baseInfo = getItem(position);
         }
-        if (baseInfo instanceof ServiceMessage) {
-            return VIEW_SERVICE_MESSAGE;
-        } else if (baseInfo instanceof ServiceTypeInfo) {
+        if (baseInfo instanceof ServiceTypeInfo) {
             return VIEW_SERVICE_TYPE;
-        } else if (baseInfo instanceof ServerCustomer) {
-            return VIEW_SERVICE_TYPE_LIST;
-        } else if (baseInfo instanceof MineTypeInfo) {
+        }  else if (baseInfo instanceof MineTypeInfo) {
             return VIEW_MINE_TYPE_LIST;
-        } else if (baseInfo instanceof Message) {
-            return VIEW_MESSAGE_TYPE_LIST;
-        } else if (baseInfo instanceof SheepNews) {
-            return VIEW_SERVICE_NEWS_TYPE_LIST;
-        } else if (baseInfo instanceof Label) {
+        }  else if (baseInfo instanceof Label) {
             return VIEW_SERVICE_LABEL;
-        } else if (baseInfo instanceof SystemNotification) {
-            return VIEW_MESSAGE_CENTER_LIST;
-        } else if (baseInfo instanceof BusinessOpportunity) {
-            return VIEW_BUSINESS_CENTER_LIST;
-        } else if (baseInfo instanceof Comment) {
-            return VIEW_COMMENT_LIST;
         } else if (baseInfo instanceof QuotationInfo) {
             return VIEW_QUOTATION_LIST;
         } else if (baseInfo instanceof MarketInfo) {

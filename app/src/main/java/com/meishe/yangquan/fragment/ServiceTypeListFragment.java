@@ -10,8 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.MultiFunctionAdapter;
-import com.meishe.yangquan.bean.ServerCustomer;
-import com.meishe.yangquan.bean.ServerCustomerResult;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.HttpUrl;
@@ -86,75 +84,6 @@ public class ServiceTypeListFragment extends BaseRecyclerFragment {
         mAdapter.setMaterialProgress(mMpProgress);
         mRecyclerView.setAdapter(mAdapter);
 
-       getServiceListFromServer(mUserType);
-//        mList.clear();
-//        int index=12;
-//        for (int i = 0; i <index ; i++) {
-//            ServerCustomer serverCustomer=new ServerCustomer();
-//            serverCustomer.setAutograph("服务信息"+i);
-//            mList.add(serverCustomer);
-//        }
-//        adapter.addAll(mList);
     }
-
-
-    /**
-     * 服务列表消息
-     */
-    public  void  getServiceListFromServer(int userType){
-
-        HashMap<String, Object> requestParam = new HashMap<>();
-        requestParam.put("userType",userType);
-        OkHttpManager.getInstance().postRequest(HttpUrl.URL_SERVICE_LIST, new BaseCallBack<ServerCustomerResult>() {
-            @Override
-            protected void OnRequestBefore(Request request) {
-
-            }
-
-            @Override
-            protected void onFailure(Call call, IOException e) {
-                setNoDataVisible(View.VISIBLE);
-            }
-
-            @Override
-            protected void onSuccess(Call call, Response response, ServerCustomerResult result) {
-                if (response != null&&response.code()==200) {
-                    if (result==null&&result.getStatus()!=200){
-                        setNoDataVisible(View.VISIBLE);
-                        return;
-                    }
-                    List<ServerCustomer> list=result.getData();
-                    if (list!=null&&list.size()>0){
-                        mAdapter.addAll(list);
-                        setNoDataVisible(View.GONE);
-                    }else{
-                        setNoDataVisible(View.VISIBLE);
-                    }
-                }
-            }
-
-            @Override
-            protected void onResponse(Response response) {
-
-            }
-
-            @Override
-            protected void onEror(Call call, int statusCode, Exception e) {
-                setNoDataVisible(View.VISIBLE);
-            }
-
-            @Override
-            protected void inProgress(int progress, long total, int id) {
-
-            }
-        }, requestParam);
-    }
-
-    public void setNoDataVisible(int visible){
-        if (mNoDate!=null){
-            mNoDate.setVisibility(visible);
-        }
-    }
-
 
 }

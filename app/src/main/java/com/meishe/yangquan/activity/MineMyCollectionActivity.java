@@ -4,13 +4,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.viewpager.widget.ViewPager;
-
 import com.meishe.libbase.SlidingTabLayout;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.adapter.CommonFragmentAdapter;
 import com.meishe.yangquan.fragment.CommonListFragment;
-import com.meishe.yangquan.fragment.MineCollectionFragment;
 import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.view.MViewPager;
 
