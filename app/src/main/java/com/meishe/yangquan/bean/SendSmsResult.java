@@ -1,6 +1,5 @@
 package com.meishe.yangquan.bean;
 
-@Deprecated
 public class SendSmsResult {
 
     // 响应业务状态

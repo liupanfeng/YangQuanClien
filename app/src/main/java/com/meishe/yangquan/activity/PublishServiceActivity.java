@@ -30,27 +30,20 @@ import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.MenuItem;
-import com.meishe.yangquan.bean.MsgResult;
 import com.meishe.yangquan.bean.ServerResult;
 import com.meishe.yangquan.bean.UploadFileInfo;
 import com.meishe.yangquan.bean.UploadFileResult;
-import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.SelectCaptureTypeView;
 import com.meishe.yangquan.pop.SelectCarServiceTypeView;
 import com.meishe.yangquan.utils.BitmapUtils;
-import com.meishe.yangquan.utils.CommonUtils;
 import com.meishe.yangquan.utils.Constants;
-import com.meishe.yangquan.utils.CropViewUtils;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.PathUtils;
 import com.meishe.yangquan.utils.ToastUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.meishe.yangquan.utils.Util;
-import com.meishe.yangquan.wiget.CustomToolbar;
-import com.meishe.yangquan.wiget.MaterialProgress;
 import com.umeng.analytics.MobclickAgent;
 
 import java.io.File;

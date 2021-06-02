@@ -26,13 +26,9 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.User;
 import com.meishe.yangquan.bean.UserResult;
-import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.pop.SelectCaptureTypeView;

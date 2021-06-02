@@ -3,9 +3,6 @@ package com.meishe.yangquan.area.bean;
 
 import com.contrarywind.interfaces.IPickerViewData;
 
-/**
- * Created by Sai on 15/11/22.
- */
 public class ProvinceBean implements IPickerViewData {
     private long id;
     private String name;

@@ -1,9 +1,9 @@
 package com.meishe.yangquan.bean;
 
-import java.util.Date;
 
 /**
  * 系统通知，展现在我的消息里边 包含一些系统推送的消息
+ * 这个暂不删除 如果需要推送
  */
 @Deprecated
 public class SystemNotification extends BaseInfo{

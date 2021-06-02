@@ -136,13 +136,7 @@
             android:name=".activity.MineMyCollectionActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".activity.MineBreedingArchivesActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".activity.MineMyPointsActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.MineMyMessageActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.MineFeedGoldActivity"

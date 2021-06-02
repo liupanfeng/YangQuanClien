@@ -1,9 +1,7 @@
 package com.meishe.yangquan.bean;
 
-
-
 /**
- * push绑定设备id
+ * push绑定设备id 这个暂时先不用删除，如果加推送，这个还需要用
  */
 @Deprecated
 public class UpdateDeviceAliasResult {

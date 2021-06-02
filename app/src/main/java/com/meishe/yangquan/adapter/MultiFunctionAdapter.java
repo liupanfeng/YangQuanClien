@@ -29,7 +29,6 @@ import com.meishe.yangquan.bean.FodderInfo;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 import com.meishe.yangquan.bean.IndustryInfo;
 import com.meishe.yangquan.bean.IndustryNewsClip;
-import com.meishe.yangquan.bean.Label;
 import com.meishe.yangquan.bean.MarketInfo;
 import com.meishe.yangquan.bean.MineBreedingArchivesInfo;
 import com.meishe.yangquan.bean.MineCallbackInfo;
@@ -95,9 +94,7 @@ import com.meishe.yangquan.viewhoder.MineMyPointsHolder;
 import com.meishe.yangquan.viewhoder.MineSystemMessageHolder;
 import com.meishe.yangquan.viewhoder.MineTypeHolder;
 import com.meishe.yangquan.viewhoder.QuotationListHolder;
-import com.meishe.yangquan.viewhoder.ServiceLabelHolder;
 import com.meishe.yangquan.viewhoder.HomeServiceListHolder;
-import com.meishe.yangquan.viewhoder.ServiceSheepNewsHolder;
 import com.meishe.yangquan.viewhoder.ServiceTypeHolder;
 import com.meishe.yangquan.viewhoder.SheepBarCommentListHolder;
 import com.meishe.yangquan.viewhoder.SheepBarCommentSecondaryListHolder;
@@ -125,14 +122,6 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             case VIEW_MINE_TYPE_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_mine_type, parent, false);
                 viewHolder = new MineTypeHolder(view, this);
-                break;
-            case VIEW_SERVICE_NEWS_TYPE_LIST:
-                view = mLayoutInflater.inflate(R.layout.item_service_news_type, parent, false);
-                viewHolder = new ServiceSheepNewsHolder(view, this);
-                break;
-            case VIEW_SERVICE_LABEL:
-                view = mLayoutInflater.inflate(R.layout.item_label_server, parent, false);
-                viewHolder = new ServiceLabelHolder(view, this);
                 break;
             case VIEW_MESSAGE_CENTER_LIST:
                 view = mLayoutInflater.inflate(R.layout.item_message_center, parent, false);
@@ -394,9 +383,7 @@ public class MultiFunctionAdapter extends BaseRecyclerAdapter {
             return VIEW_SERVICE_TYPE;
         }  else if (baseInfo instanceof MineTypeInfo) {
             return VIEW_MINE_TYPE_LIST;
-        }  else if (baseInfo instanceof Label) {
-            return VIEW_SERVICE_LABEL;
-        } else if (baseInfo instanceof QuotationInfo) {
+        }  else if (baseInfo instanceof QuotationInfo) {
             return VIEW_QUOTATION_LIST;
         } else if (baseInfo instanceof MarketInfo) {
             int type = ((MarketInfo) baseInfo).getType();

@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * 用户版-收货地址-页面
- * 由于设计图的原因这个页面暂时先不要
+ * 由于设计图的原因这个页面  暂时先不要(先不要删)
  */
 @Deprecated
 public class FeedReceiveAddressActivity extends BaseActivity {

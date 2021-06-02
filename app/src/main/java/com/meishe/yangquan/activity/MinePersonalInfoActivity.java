@@ -18,25 +18,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
 import com.amap.api.services.core.PoiItem;
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.MenuItem;
 import com.meishe.yangquan.bean.UploadFileInfo;
 import com.meishe.yangquan.bean.UploadFileResult;
 import com.meishe.yangquan.bean.UserInfo;
 import com.meishe.yangquan.bean.UserParamInfo;
 import com.meishe.yangquan.bean.UserResult;
 import com.meishe.yangquan.event.MessageEvent;
-import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.fragment.ModifyUserInfoFragment;
 import com.meishe.yangquan.fragment.ModifyUserSexFragment;
 import com.meishe.yangquan.helper.BackHandlerHelper;

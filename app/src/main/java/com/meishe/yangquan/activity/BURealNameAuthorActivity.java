@@ -26,11 +26,8 @@ import androidx.core.content.FileProvider;
 
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.BUShoppingInfo;
-import com.meishe.yangquan.bean.MenuItem;
-import com.meishe.yangquan.fragment.BottomMenuFragment;
 import com.meishe.yangquan.manager.ShoppingInfoManager;
 import com.meishe.yangquan.pop.SelectCaptureTypeView;
-import com.meishe.yangquan.pop.ShowBigPictureView;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.BitmapUtils;
 import com.meishe.yangquan.utils.Constants;
