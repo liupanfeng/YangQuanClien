@@ -24,12 +24,6 @@ import com.meishe.yangquan.App;
 import java.lang.reflect.Field;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/08/02
- *     desc  : utils about keyboard
- * </pre>
  * 键盘工具类
  * Keyboard tool class
  */

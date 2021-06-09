@@ -31,7 +31,6 @@ public class PathUtils {
     //相册视频路径
     private static final String ALBUM_VIDEO_DIR = Environment.DIRECTORY_DCIM + File.separator + "Camera"+ File.separator + rootDir;
 
-    //分享下载视频根文件夹，包括分享到微博，微信，合拍下载的视频
     private static final String SHARE_VIDEO_DOWNLOAD_DIR = "videoShare" + File.separator;
     private static final String AD_MEDIA_DOWNLOAD_DIR = "mediaAD" + File.separator;
     private static final String SERI_DIR = "seri" + File.separator;

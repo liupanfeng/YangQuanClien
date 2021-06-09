@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import com.meishe.yangquan.App;
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.MineOrderInfo;
 import com.meishe.yangquan.bean.MineRefundProgressInfo;
 import com.meishe.yangquan.bean.MineRefundProgressInfoResult;
 import com.meishe.yangquan.http.BaseCallBack;

@@ -1,6 +1,5 @@
 package com.meishe.yangquan.utils;
 
-import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
@@ -8,7 +7,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.os.Build;
-import android.util.TypedValue;
 import android.view.Display;
 import android.view.KeyCharacterMap;
 import android.view.KeyEvent;
@@ -21,22 +19,12 @@ import android.view.WindowManager;
 import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.annotation.RequiresPermission;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.meishe.yangquan.App;
 
-import java.lang.reflect.Method;
-
-import static android.Manifest.permission.EXPAND_STATUS_BAR;
 
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/09/23
- *     desc  : utils about bar
- * </pre>
  * 状态栏工具类
  * Status bar tool class
  */

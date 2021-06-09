@@ -18,10 +18,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.meishe.yangquan.R;
 
 
-/**
- * Created by tong.zhang on 2017/12/1.
- */
-
 public class NbButton extends AppCompatButton {
 
     private int width;

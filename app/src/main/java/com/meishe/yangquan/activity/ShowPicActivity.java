@@ -6,13 +6,8 @@ import android.view.Display;
 import android.view.View;
 import android.widget.RelativeLayout;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.meishe.yangquan.R;
 import com.meishe.yangquan.utils.GlideUtil;
-import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.view.RoundAngleImageView;
 import com.meishe.yangquan.wiget.CustomToolbar;
 

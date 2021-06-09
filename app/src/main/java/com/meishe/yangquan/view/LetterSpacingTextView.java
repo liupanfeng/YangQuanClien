@@ -8,12 +8,10 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 /**
- * All rights Reserved, Designed By www.meishesdk.com
  *
  * @Author : LiuPanFeng
  * @CreateDate : 2021/4/7 18:59
  * @Description :
- * @Copyright : www.meishesdk.com Inc. All rights reserved.
  */
 public class LetterSpacingTextView extends androidx.appcompat.widget.AppCompatTextView {
 

@@ -18,7 +18,6 @@ import java.io.InputStream;
 public class CropViewUtils {
     private static final String TAG = CropViewUtils.class.getSimpleName();
 
-    /*******************************************************************************************************/
     /**
      * 对图片进行压缩，主要是为了解决控件显示过大图片占用内存造成OOM问题,一般压缩后的图片大小应该和用来展示它的控件大小相近.
      *

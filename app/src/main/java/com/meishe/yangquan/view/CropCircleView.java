@@ -36,9 +36,6 @@ import com.meishe.yangquan.utils.Util;
 import java.io.FileDescriptor;
 import java.io.InputStream;
 
-/***
- *   created by zhongrui on 2018/9/11
- */
 public class CropCircleView extends View {
 
 

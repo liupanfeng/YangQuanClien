@@ -9,12 +9,9 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.bean.HomeMarketPictureInfo;
 
 /**
- * All rights Reserved, Designed By www.meishesdk.com
- *
  * @Author : LiuPanFeng
  * @CreateDate : 2021/4/8 14:03
  * @Description :
- * @Copyright : www.meishesdk.com Inc. All rights reserved.
  */
 public class GlideUtil {
 

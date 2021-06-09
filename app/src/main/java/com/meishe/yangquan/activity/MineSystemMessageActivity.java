@@ -6,8 +6,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.bean.MinePointsInfo;
-import com.meishe.yangquan.bean.MinePointsInfoResult;
 import com.meishe.yangquan.bean.SystemMessageInfo;
 import com.meishe.yangquan.bean.SystemMessageInfoResult;
 import com.meishe.yangquan.http.BaseCallBack;

@@ -16,9 +16,6 @@ import com.meishe.yangquan.R;
 import com.meishe.yangquan.utils.AnimationUtil;
 
 
-/**
- * Created by lpf on 2016/9/6.
- */
 public class ListLoadingView extends LinearLayout {
 
     private static final int RIGHT_MARGIN = 5;

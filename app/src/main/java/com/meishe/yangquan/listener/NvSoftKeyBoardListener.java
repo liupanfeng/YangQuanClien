@@ -1,8 +1,5 @@
 package com.meishe.yangquan.listener;
 
-/**
- * Created by admin on 2018-7-18.
- */
 
 import android.graphics.Rect;
 import android.view.View;

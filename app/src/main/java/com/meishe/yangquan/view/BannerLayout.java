@@ -35,9 +35,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by lenovo on 2018/5/12.
+ * 左右滚动条
  */
-
 public class BannerLayout extends RelativeLayout {
 
     private ViewPager mViewPager; // 轮播容器

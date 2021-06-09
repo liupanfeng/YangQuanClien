@@ -1,7 +1,5 @@
 package com.meishe.yangquan.activity;
 
-import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -22,7 +20,6 @@ import com.meishe.yangquan.http.BaseCallBack;
 import com.meishe.yangquan.http.OkHttpManager;
 import com.meishe.yangquan.utils.AppManager;
 import com.meishe.yangquan.utils.CommonUtils;
-import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.EventBusUtil;
 import com.meishe.yangquan.utils.HttpUrl;
 import com.meishe.yangquan.utils.ToastUtil;

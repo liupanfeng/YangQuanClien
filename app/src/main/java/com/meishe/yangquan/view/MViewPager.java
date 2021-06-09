@@ -7,9 +7,6 @@ import android.view.MotionEvent;
 import androidx.viewpager.widget.ViewPager;
 
 
-/**
- * @author 86188
- */
 public class MViewPager extends ViewPager {
 
     private boolean noScroll = true;

@@ -11,9 +11,7 @@ import android.view.WindowManager;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.meishe.yangquan.R;
-import com.meishe.yangquan.utils.Constants;
 import com.meishe.yangquan.utils.HttpRequestUtil;
-import com.meishe.yangquan.utils.SharedPreferencesUtil;
 import com.meishe.yangquan.utils.UserManager;
 import com.umeng.analytics.MobclickAgent;
 

@@ -7,7 +7,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.List;
 
 /**
- * author : lhz
  * date   : 2020/10/20
  * desc   :共用的FragmentPagerAdapter
  * Common FragmentPagerAdapter

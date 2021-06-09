@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.meishe.yangquan.App;
 
-public class BrandTextView extends TextView {
+public class BrandTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     public BrandTextView(Context context, AttributeSet attrs) {
         super(context, attrs);

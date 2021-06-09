@@ -1,6 +1,5 @@
 package com.meishe.yangquan.utils;
 
-import android.graphics.Color;
 import android.os.CountDownTimer;
 import android.text.Spannable;
 import android.text.SpannableString;

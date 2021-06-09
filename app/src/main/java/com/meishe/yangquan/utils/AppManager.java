@@ -12,7 +12,6 @@ import static android.app.Activity.RESULT_OK;
 
 public class AppManager {
 
-//    private static List<BaseFragment>  fragments = new ArrayList<>();
     private static Stack<Activity> activityStack = new Stack<>();
     private volatile static AppManager instance = new AppManager();
 
@@ -40,19 +39,6 @@ public class AppManager {
         activityStack.add(activity);
     }
 
-//    public void addFragment(BaseFragment fragment){
-//        fragments.add(fragment);
-//    }
-//
-//    public List<BaseFragment> getFragments(){
-//        return fragments;
-//    }
-//
-//    public void removeFragment(BaseFragment fragment){
-//        if (fragment!=null && fragments!=null){
-//            fragments.remove(fragment);
-//        }
-//    }
 
     /**
      * 获取当前Activity（堆栈中最后一个压入的）
